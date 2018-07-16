@@ -2,13 +2,14 @@ package com.zqu.pa.entity;
 
 public class User {
 
-    private String user_id;
+    private String userID;
     private String password;
-    public String getUser_id() {
-        return user_id;
+    
+    public String getUserID() {
+        return userID;
     }
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
     public String getPassword() {
         return password;
