@@ -2,18 +2,19 @@ package com.zqu.pa.entity;
 
 public class User {
 
-    private String userID;
-    private String psw;
-    public String getUserID() {
-        return userID;
+    private String user_id;
+    private String password;
+    public String getUser_id() {
+        return user_id;
     }
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
-    public String getPsw() {
-        return psw;
+    public String getPassword() {
+        return password;
     }
-    public void setPsw(String psw) {
-        this.psw = psw;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
 }
