@@ -2,8 +2,11 @@ package com.zqu.pa.common;
 
 import java.io.Serializable;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+//import org.codehaus.jackson.annotate.JsonIgnore;
+//import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /*
  * pom.xml引入该jar就不会导包报错了
