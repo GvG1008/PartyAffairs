@@ -38,7 +38,7 @@
 					<div class="list" id="pn-list">
 						<table class="rtlist-table">
 							<tr v-for="r in party_news">
-								<td class="rtlist-name"><a href="#"><p :title="r.title">{{r.title}}</p></a></td>
+								<td class="rtlist-name"><a :href="'#'+r.id"><p :title="r.title">{{r.title}}</p></a></td>
 								<td class="rtlist-time"><p>{{r.date}}</p></td>
 							</tr>
 						</table>
@@ -50,7 +50,7 @@
 						<table class="rtlist-table">
 							<tr v-for="r in notice">
 								<td class="rtlist-name"><a :href="'#'+r.id"><p :title="r.title">{{r.title}}</p></a></td>
-								<td class="rtlist-time"><p>{{r.time}}</p></td>
+								<td class="rtlist-time"><p>{{r.date}}</p></td>
 							</tr>
 						</table>
 						<a class="more" href="#" target="_blank">更多内容>></a>
@@ -61,7 +61,7 @@
 						<table class="rtlist-table">
 							<tr v-for="r in public">
 								<td class="rtlist-name"><a :href="'#'+r.id"><p :title="r.title">{{r.title}}</p></a></td>
-								<td class="rtlist-time"><p>{{r.time}}</p></td>
+								<td class="rtlist-time"><p>{{r.date}}</p></td>
 							</tr>
 						</table>
 						<a class="more" href="#" target="_blank">更多内容>></a>
