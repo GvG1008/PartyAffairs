@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqu.pa.dao.exam.ExamInfoMapper">
+  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.exam.ExamInfo">
+    <id column="exam_id" jdbcType="INTEGER" property="examId" />
+    <result column="branch_id" jdbcType="INTEGER" property="branchId" />
+    <result column="exam_title" jdbcType="VARCHAR" property="examTitle" />
+    <result column="start_time" jdbcType="INTEGER" property="startTime" />
+    <result column="end_time" jdbcType="INTEGER" property="endTime" />
+    <result column="exam_period" jdbcType="INTEGER" property="examPeriod" />
+    <result column="single_quantity" jdbcType="INTEGER" property="singleQuantity" />
+    <result column="multiple_quantity" jdbcType="INTEGER" property="multipleQuantity" />
+    <result column="pass_score" jdbcType="INTEGER" property="passScore" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    exam_id, branch_id, exam_title, start_time, end_time, exam_period, single_quantity, 
+    multiple_quantity, pass_score, role_id
+  </sql>
+  <select id="selectByExample" parameterType="com.zqu.pa.entity.exam.ExamInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from exam_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from exam_info
+    where exam_id = #{examId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from exam_info
+    where exam_id = #{examId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zqu.pa.entity.exam.ExamInfoExample">
+    delete from exam_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zqu.pa.entity.exam.ExamInfo">
+    insert into exam_info (exam_id, branch_id, exam_title, 
+      start_time, end_time, exam_period, 
+      single_quantity, multiple_quantity, pass_score, 
+      role_id)
+    values (#{examId,jdbcType=INTEGER}, #{branchId,jdbcType=INTEGER}, #{examTitle,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=INTEGER}, #{endTime,jdbcType=INTEGER}, #{examPeriod,jdbcType=INTEGER}, 
+      #{singleQuantity,jdbcType=INTEGER}, #{multipleQuantity,jdbcType=INTEGER}, #{passScore,jdbcType=INTEGER}, 
+      #{roleId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zqu.pa.entity.exam.ExamInfo">
+    insert into exam_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="examId != null">
+        exam_id,
+      </if>
+      <if test="branchId != null">
+        branch_id,
+      </if>
+      <if test="examTitle != null">
+        exam_title,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="examPeriod != null">
+        exam_period,
+      </if>
+      <if test="singleQuantity != null">
+        single_quantity,
+      </if>
+      <if test="multipleQuantity != null">
+        multiple_quantity,
+      </if>
+      <if test="passScore != null">
+        pass_score,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="examId != null">
+        #{examId,jdbcType=INTEGER},
+      </if>
+      <if test="branchId != null">
+        #{branchId,jdbcType=INTEGER},
+      </if>
+      <if test="examTitle != null">
+        #{examTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=INTEGER},
+      </if>
+      <if test="examPeriod != null">
+        #{examPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="singleQuantity != null">
+        #{singleQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="multipleQuantity != null">
+        #{multipleQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="passScore != null">
+        #{passScore,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zqu.pa.entity.exam.ExamInfoExample" resultType="java.lang.Long">
+    select count(*) from exam_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update exam_info
+    <set>
+      <if test="record.examId != null">
+        exam_id = #{record.examId,jdbcType=INTEGER},
+      </if>
+      <if test="record.branchId != null">
+        branch_id = #{record.branchId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examTitle != null">
+        exam_title = #{record.examTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.examPeriod != null">
+        exam_period = #{record.examPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="record.singleQuantity != null">
+        single_quantity = #{record.singleQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.multipleQuantity != null">
+        multiple_quantity = #{record.multipleQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.passScore != null">
+        pass_score = #{record.passScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.roleId != null">
+        role_id = #{record.roleId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update exam_info
+    set exam_id = #{record.examId,jdbcType=INTEGER},
+      branch_id = #{record.branchId,jdbcType=INTEGER},
+      exam_title = #{record.examTitle,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=INTEGER},
+      end_time = #{record.endTime,jdbcType=INTEGER},
+      exam_period = #{record.examPeriod,jdbcType=INTEGER},
+      single_quantity = #{record.singleQuantity,jdbcType=INTEGER},
+      multiple_quantity = #{record.multipleQuantity,jdbcType=INTEGER},
+      pass_score = #{record.passScore,jdbcType=INTEGER},
+      role_id = #{record.roleId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zqu.pa.entity.exam.ExamInfo">
+    update exam_info
+    <set>
+      <if test="branchId != null">
+        branch_id = #{branchId,jdbcType=INTEGER},
+      </if>
+      <if test="examTitle != null">
+        exam_title = #{examTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=INTEGER},
+      </if>
+      <if test="examPeriod != null">
+        exam_period = #{examPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="singleQuantity != null">
+        single_quantity = #{singleQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="multipleQuantity != null">
+        multiple_quantity = #{multipleQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="passScore != null">
+        pass_score = #{passScore,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where exam_id = #{examId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zqu.pa.entity.exam.ExamInfo">
+    update exam_info
+    set branch_id = #{branchId,jdbcType=INTEGER},
+      exam_title = #{examTitle,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=INTEGER},
+      end_time = #{endTime,jdbcType=INTEGER},
+      exam_period = #{examPeriod,jdbcType=INTEGER},
+      single_quantity = #{singleQuantity,jdbcType=INTEGER},
+      multiple_quantity = #{multipleQuantity,jdbcType=INTEGER},
+      pass_score = #{passScore,jdbcType=INTEGER},
+      role_id = #{roleId,jdbcType=INTEGER}
+    where exam_id = #{examId,jdbcType=INTEGER}
+  </update>
+</mapper>
