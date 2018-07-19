@@ -2,7 +2,7 @@ package com.zqu.pa.service.userlogin;
 
 import java.util.List;
 
-import com.zqu.pa.entity.User;
+import com.zqu.pa.entity.userlogin.User;
 
 public interface UserService {
 

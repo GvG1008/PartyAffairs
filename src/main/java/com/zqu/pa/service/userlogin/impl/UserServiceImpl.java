@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.zqu.pa.common.UserLoginException;
 import com.zqu.pa.dao.userlogin.UserDao;
-import com.zqu.pa.entity.User;
+import com.zqu.pa.entity.userlogin.User;
 import com.zqu.pa.service.userlogin.UserService;
 
 @Service

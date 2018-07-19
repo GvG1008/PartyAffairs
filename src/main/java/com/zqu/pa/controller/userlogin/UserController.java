@@ -3,7 +3,6 @@ package com.zqu.pa.controller.userlogin;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.common.UserLoginException;
-import com.zqu.pa.entity.User;
+import com.zqu.pa.entity.userlogin.User;
 import com.zqu.pa.service.userlogin.UserService;
 
 @Controller
@@ -55,11 +54,10 @@ public class UserController {
     }
 
     /**
-     * 用户账户是否存在测试
+     * 登陆验证测试，没有登录成功则返回登陆页面
      * @param request
      * @return
      */
-
     @RequestMapping(value="/login.do",method=RequestMethod.GET)
     public String login(HttpServletRequest request)throws Exception {
         String message;

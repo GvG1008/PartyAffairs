@@ -2,7 +2,7 @@ package com.zqu.pa.dao.userlogin;
 
 import java.util.List;
 
-import com.zqu.pa.entity.User;
+import com.zqu.pa.entity.userlogin.User;
 
 public interface UserDao {
 

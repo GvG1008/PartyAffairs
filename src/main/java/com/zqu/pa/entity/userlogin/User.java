@@ -1,4 +1,4 @@
-package com.zqu.pa.entity;
+package com.zqu.pa.entity.userlogin;
 
 import org.springframework.stereotype.Component;
 

@@ -16,7 +16,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.zqu.pa.entity.User;
+import com.zqu.pa.entity.userlogin.User;
 import com.zqu.pa.service.userlogin.UserService;
 
 
