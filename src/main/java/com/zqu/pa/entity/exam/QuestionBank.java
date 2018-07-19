@@ -1,5 +1,8 @@
 package com.zqu.pa.entity.exam;
 
+import org.springframework.stereotype.Component;
+
+@Component("questionBank")
 public class QuestionBank {
     private Integer questionId;
 

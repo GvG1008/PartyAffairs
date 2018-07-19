@@ -27,4 +27,14 @@ public interface QuestionBankMapper {
     int updateByPrimaryKeySelective(QuestionBank record);
 
     int updateByPrimaryKey(QuestionBank record);
+    
+    /**
+     * 根据党支部随机查找题库对应数量的题目
+     * @param brandId  党支部ID
+     * @param quantity 题目数量
+     * @param type     题目类型（单选/多选）
+     * @return
+     */
+    List<QuestionBank> selectRand(@Param("branchId") Integer branchId, 
+            @Param("quantity") Integer quantity, @Param("type") Integer type);
 }

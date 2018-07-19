@@ -5,8 +5,8 @@
     <id column="exam_id" jdbcType="INTEGER" property="examId" />
     <result column="branch_id" jdbcType="INTEGER" property="branchId" />
     <result column="exam_title" jdbcType="VARCHAR" property="examTitle" />
-    <result column="start_time" jdbcType="INTEGER" property="startTime" />
-    <result column="end_time" jdbcType="INTEGER" property="endTime" />
+    <result column="start_time" jdbcType="BIGINT" property="startTime" />
+    <result column="end_time" jdbcType="BIGINT" property="endTime" />
     <result column="exam_period" jdbcType="INTEGER" property="examPeriod" />
     <result column="single_quantity" jdbcType="INTEGER" property="singleQuantity" />
     <result column="multiple_quantity" jdbcType="INTEGER" property="multipleQuantity" />
@@ -112,7 +112,7 @@
       single_quantity, multiple_quantity, pass_score, 
       role_id)
     values (#{examId,jdbcType=INTEGER}, #{branchId,jdbcType=INTEGER}, #{examTitle,jdbcType=VARCHAR}, 
-      #{startTime,jdbcType=INTEGER}, #{endTime,jdbcType=INTEGER}, #{examPeriod,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=BIGINT}, #{endTime,jdbcType=BIGINT}, #{examPeriod,jdbcType=INTEGER}, 
       #{singleQuantity,jdbcType=INTEGER}, #{multipleQuantity,jdbcType=INTEGER}, #{passScore,jdbcType=INTEGER}, 
       #{roleId,jdbcType=INTEGER})
   </insert>
@@ -161,10 +161,10 @@
         #{examTitle,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
-        #{startTime,jdbcType=INTEGER},
+        #{startTime,jdbcType=BIGINT},
       </if>
       <if test="endTime != null">
-        #{endTime,jdbcType=INTEGER},
+        #{endTime,jdbcType=BIGINT},
       </if>
       <if test="examPeriod != null">
         #{examPeriod,jdbcType=INTEGER},
@@ -202,10 +202,10 @@
         exam_title = #{record.examTitle,jdbcType=VARCHAR},
       </if>
       <if test="record.startTime != null">
-        start_time = #{record.startTime,jdbcType=INTEGER},
+        start_time = #{record.startTime,jdbcType=BIGINT},
       </if>
       <if test="record.endTime != null">
-        end_time = #{record.endTime,jdbcType=INTEGER},
+        end_time = #{record.endTime,jdbcType=BIGINT},
       </if>
       <if test="record.examPeriod != null">
         exam_period = #{record.examPeriod,jdbcType=INTEGER},
@@ -232,8 +232,8 @@
     set exam_id = #{record.examId,jdbcType=INTEGER},
       branch_id = #{record.branchId,jdbcType=INTEGER},
       exam_title = #{record.examTitle,jdbcType=VARCHAR},
-      start_time = #{record.startTime,jdbcType=INTEGER},
-      end_time = #{record.endTime,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=BIGINT},
+      end_time = #{record.endTime,jdbcType=BIGINT},
       exam_period = #{record.examPeriod,jdbcType=INTEGER},
       single_quantity = #{record.singleQuantity,jdbcType=INTEGER},
       multiple_quantity = #{record.multipleQuantity,jdbcType=INTEGER},
@@ -253,10 +253,10 @@
         exam_title = #{examTitle,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
-        start_time = #{startTime,jdbcType=INTEGER},
+        start_time = #{startTime,jdbcType=BIGINT},
       </if>
       <if test="endTime != null">
-        end_time = #{endTime,jdbcType=INTEGER},
+        end_time = #{endTime,jdbcType=BIGINT},
       </if>
       <if test="examPeriod != null">
         exam_period = #{examPeriod,jdbcType=INTEGER},
@@ -280,8 +280,8 @@
     update exam_info
     set branch_id = #{branchId,jdbcType=INTEGER},
       exam_title = #{examTitle,jdbcType=VARCHAR},
-      start_time = #{startTime,jdbcType=INTEGER},
-      end_time = #{endTime,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=BIGINT},
+      end_time = #{endTime,jdbcType=BIGINT},
       exam_period = #{examPeriod,jdbcType=INTEGER},
       single_quantity = #{singleQuantity,jdbcType=INTEGER},
       multiple_quantity = #{multipleQuantity,jdbcType=INTEGER},

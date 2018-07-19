@@ -90,6 +90,7 @@
 	<!-- 扫描包下JavaBean的注解 -->
 	<context:component-scan base-package="com.zqu.pa.entity" />
     <context:component-scan base-package="com.zqu.pa.common" />
+    <context:component-scan base-package="com.zqu.pa.vo" />
 
 	<!-- 配置上传文件解析器 -->
     <bean id="multipartResolver"

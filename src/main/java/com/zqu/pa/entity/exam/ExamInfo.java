@@ -1,5 +1,8 @@
 package com.zqu.pa.entity.exam;
 
+import org.springframework.stereotype.Component;
+
+@Component("examInfo")
 public class ExamInfo {
     private Integer examId;
 
@@ -7,9 +10,9 @@ public class ExamInfo {
 
     private String examTitle;
 
-    private Integer startTime;
+    private Long startTime;
 
-    private Integer endTime;
+    private Long endTime;
 
     private Integer examPeriod;
 
@@ -45,19 +48,19 @@ public class ExamInfo {
         this.examTitle = examTitle == null ? null : examTitle.trim();
     }
 
-    public Integer getStartTime() {
+    public Long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Integer startTime) {
+    public void setStartTime(Long startTime) {
         this.startTime = startTime;
     }
 
-    public Integer getEndTime() {
+    public Long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Integer endTime) {
+    public void setEndTime(Long endTime) {
         this.endTime = endTime;
     }
 

@@ -304,52 +304,52 @@ public class ExamInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeEqualTo(Integer value) {
+        public Criteria andStartTimeEqualTo(Long value) {
             addCriterion("start_time =", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeNotEqualTo(Integer value) {
+        public Criteria andStartTimeNotEqualTo(Long value) {
             addCriterion("start_time <>", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeGreaterThan(Integer value) {
+        public Criteria andStartTimeGreaterThan(Long value) {
             addCriterion("start_time >", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andStartTimeGreaterThanOrEqualTo(Long value) {
             addCriterion("start_time >=", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeLessThan(Integer value) {
+        public Criteria andStartTimeLessThan(Long value) {
             addCriterion("start_time <", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andStartTimeLessThanOrEqualTo(Long value) {
             addCriterion("start_time <=", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeIn(List<Integer> values) {
+        public Criteria andStartTimeIn(List<Long> values) {
             addCriterion("start_time in", values, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeNotIn(List<Integer> values) {
+        public Criteria andStartTimeNotIn(List<Long> values) {
             addCriterion("start_time not in", values, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeBetween(Integer value1, Integer value2) {
+        public Criteria andStartTimeBetween(Long value1, Long value2) {
             addCriterion("start_time between", value1, value2, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andStartTimeNotBetween(Long value1, Long value2) {
             addCriterion("start_time not between", value1, value2, "startTime");
             return (Criteria) this;
         }
@@ -364,52 +364,52 @@ public class ExamInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeEqualTo(Integer value) {
+        public Criteria andEndTimeEqualTo(Long value) {
             addCriterion("end_time =", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeNotEqualTo(Integer value) {
+        public Criteria andEndTimeNotEqualTo(Long value) {
             addCriterion("end_time <>", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeGreaterThan(Integer value) {
+        public Criteria andEndTimeGreaterThan(Long value) {
             addCriterion("end_time >", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andEndTimeGreaterThanOrEqualTo(Long value) {
             addCriterion("end_time >=", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeLessThan(Integer value) {
+        public Criteria andEndTimeLessThan(Long value) {
             addCriterion("end_time <", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andEndTimeLessThanOrEqualTo(Long value) {
             addCriterion("end_time <=", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeIn(List<Integer> values) {
+        public Criteria andEndTimeIn(List<Long> values) {
             addCriterion("end_time in", values, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeNotIn(List<Integer> values) {
+        public Criteria andEndTimeNotIn(List<Long> values) {
             addCriterion("end_time not in", values, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeBetween(Integer value1, Integer value2) {
+        public Criteria andEndTimeBetween(Long value1, Long value2) {
             addCriterion("end_time between", value1, value2, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andEndTimeNotBetween(Long value1, Long value2) {
             addCriterion("end_time not between", value1, value2, "endTime");
             return (Criteria) this;
         }

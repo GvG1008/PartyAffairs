@@ -27,4 +27,5 @@ public interface ChoiceMapper {
     int updateByPrimaryKeySelective(Choice record);
 
     int updateByPrimaryKey(Choice record);
+    
 }

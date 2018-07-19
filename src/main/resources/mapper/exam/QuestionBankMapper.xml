@@ -194,4 +194,11 @@
       question_type = #{questionType,jdbcType=INTEGER}
     where question_id = #{questionId,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectRand" resultMap="BaseResultMap">
+    select question_id, question_content
+    from question_bank
+    where branch_id = #{branchId} and question_type = #{type}
+    order by RAND() LIMIT #{quantity}
+  </select>
 </mapper>
