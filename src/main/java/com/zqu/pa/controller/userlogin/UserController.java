@@ -1,4 +1,4 @@
-package com.zqu.pa.controller;
+package com.zqu.pa.controller.userlogin;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.common.UserLoginException;
 import com.zqu.pa.entity.User;
-import com.zqu.pa.service.UserService;
+import com.zqu.pa.service.userlogin.UserService;
 
 @Controller
 public class UserController {

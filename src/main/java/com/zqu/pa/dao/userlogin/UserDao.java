@@ -1,4 +1,4 @@
-package com.zqu.pa.dao;
+package com.zqu.pa.dao.userlogin;
 
 import java.util.List;
 

@@ -17,7 +17,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.zqu.pa.entity.User;
-import com.zqu.pa.service.UserService;
+import com.zqu.pa.service.userlogin.UserService;
 
 
 public class UserRealm extends AuthorizingRealm{
