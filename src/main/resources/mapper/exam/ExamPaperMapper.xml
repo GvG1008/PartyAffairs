@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqu.pa.dao.exam.ExamPaperMapper">
+  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.exam.ExamPaper">
+    <id column="paper_id" jdbcType="INTEGER" property="paperId" />
+    <result column="exam_id" jdbcType="INTEGER" property="examId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="question_id" jdbcType="INTEGER" property="questionId" />
+    <result column="user_answer" jdbcType="INTEGER" property="userAnswer" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    paper_id, exam_id, user_id, question_id, user_answer
+  </sql>
+  <select id="selectByExample" parameterType="com.zqu.pa.entity.exam.ExamPaperExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from exam_paper
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from exam_paper
+    where paper_id = #{paperId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from exam_paper
+    where paper_id = #{paperId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zqu.pa.entity.exam.ExamPaperExample">
+    delete from exam_paper
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zqu.pa.entity.exam.ExamPaper">
+    insert into exam_paper (paper_id, exam_id, user_id, 
+      question_id, user_answer)
+    values (#{paperId,jdbcType=INTEGER}, #{examId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
+      #{questionId,jdbcType=INTEGER}, #{userAnswer,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zqu.pa.entity.exam.ExamPaper">
+    insert into exam_paper
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="paperId != null">
+        paper_id,
+      </if>
+      <if test="examId != null">
+        exam_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="questionId != null">
+        question_id,
+      </if>
+      <if test="userAnswer != null">
+        user_answer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="paperId != null">
+        #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="examId != null">
+        #{examId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="questionId != null">
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="userAnswer != null">
+        #{userAnswer,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zqu.pa.entity.exam.ExamPaperExample" resultType="java.lang.Long">
+    select count(*) from exam_paper
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update exam_paper
+    <set>
+      <if test="record.paperId != null">
+        paper_id = #{record.paperId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examId != null">
+        exam_id = #{record.examId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.questionId != null">
+        question_id = #{record.questionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userAnswer != null">
+        user_answer = #{record.userAnswer,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update exam_paper
+    set paper_id = #{record.paperId,jdbcType=INTEGER},
+      exam_id = #{record.examId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      question_id = #{record.questionId,jdbcType=INTEGER},
+      user_answer = #{record.userAnswer,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zqu.pa.entity.exam.ExamPaper">
+    update exam_paper
+    <set>
+      <if test="examId != null">
+        exam_id = #{examId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="questionId != null">
+        question_id = #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="userAnswer != null">
+        user_answer = #{userAnswer,jdbcType=INTEGER},
+      </if>
+    </set>
+    where paper_id = #{paperId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zqu.pa.entity.exam.ExamPaper">
+    update exam_paper
+    set exam_id = #{examId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=VARCHAR},
+      question_id = #{questionId,jdbcType=INTEGER},
+      user_answer = #{userAnswer,jdbcType=INTEGER}
+    where paper_id = #{paperId,jdbcType=INTEGER}
+  </update>
+</mapper>
