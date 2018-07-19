@@ -23,6 +23,10 @@ public class HomeListController {
     @Autowired
     NoticesService noticesService;
     
+    /**
+     * 返回主页所显示的新闻信息列表，7条
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/newslist")
     public ServerResponse<List<HomeList>> getNewsList(){
@@ -31,6 +35,10 @@ public class HomeListController {
         return ServerResponse.createBySuccess("成功信息", newslist);
     }
     
+    /**
+     * 返回主页所显示的通知公示信息列表，7条
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/noticeslist/public")
     public ServerResponse<List<HomeList>> getNoticesListPublic(){
@@ -39,6 +47,10 @@ public class HomeListController {
         return ServerResponse.createBySuccess("成功信息", newslist);
     }
     
+    /**
+     * 返回主页所显示的党内公示信息列表，7条
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/noticeslist/party")
     public ServerResponse<List<HomeList>> getNoticesListParty(){

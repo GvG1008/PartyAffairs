@@ -38,5 +38,6 @@ public interface NewsMapper {
     
 
     //以上为逆向工程生成
+    //根据数目，获取审核通过，仅有标题与日期的新闻列表，按日期排序
     List<HomeList> getHomeListLimit(@Param("limit") int limit);
 }

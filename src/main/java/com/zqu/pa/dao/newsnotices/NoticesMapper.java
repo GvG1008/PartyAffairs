@@ -37,5 +37,6 @@ public interface NoticesMapper {
     int updateByPrimaryKey(Notices record);
     
     //以上为逆向工程生成
+    //根据数目和公示类型号，获取审核通过，仅有标题与日期的公示列表，按日期排序
     List<HomeList> getHomeListLimit(@Param("limit") int limit,@Param("type") int type);
 }
