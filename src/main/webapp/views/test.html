@@ -1,0 +1,170 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>远程教育考试平台_在线考试</title>
+<link href="../statics/css/main.css" rel="stylesheet" type="text/css" />
+<link href="../statics/css/iconfont.css" rel="stylesheet" type="text/css" />
+<link href="../statics/css/test.css" rel="stylesheet" type="text/css" />
+
+<style>
+.hasBeenAnswer {
+	background: #5d9cec;
+	color:#fff;
+}
+
+</style>
+</head>
+
+<body>
+	<div class="main" id="app">
+		<!--nr start-->
+		<div class="test_main">
+			<div class="nr_left">
+				<div class="test">
+					<form>
+						<div class="test_title">
+							<p class="test_time">
+								<i class="icon iconfont">&#xe6fb;</i><b id="timer1" style="color:red"></b>
+							</p>
+							<font><input type="submit" name="test_jiaojuan" value="交卷" onclick="submit1();return false;"></font>
+						</div>
+						
+							<div class="test_content">
+								<div class="test_content_title">
+									<h2>单选题</h2>
+									<p>
+										<span>共</span><i class="content_lit">60</i><span>题，</span><span>合计</span><i class="content_fs">60</i><span>分</span>
+									</p>
+								</div>
+							</div>
+							<div class="test_content_nr">
+								<ul>
+				
+										<li v-for="(r,index) in RadioDatas" :id="generate('qu_0_',index)">
+											<div :id="generate('qu0',index)" style="display: none;">{{r.id}}</div>
+											<div class="test_content_nr_tt">
+												<i>{{index+1}}</i><span>(1分)</span><font>{{r.title}}</font>
+											</div>
+
+											<div class="test_content_nr_main">
+												<ul>
+														<li class="option" v-for="(t,cindex) in r.choice">
+															
+															<input type="radio" class="radioOrCheck" :name="generate('answer1',index)" :id="generateFor(index,cindex)" :value="cindex+1"  @click="radiochoice(index)"/>																					
+															<label :for="generateFor(index,cindex)">
+																<p class="ue" style="display: inline;">{{t.choice}}</p>
+															</label>
+															
+														</li>
+																				
+												</ul>
+											</div>
+										</li>
+		
+								</ul>
+							</div>
+						
+							<div class="test_content">
+								<div class="test_content_title">
+									<h2>多选题</h2>
+									<p>
+										<span>共</span><i class="content_lit">30</i><span>题，</span><span>合计</span><i class="content_fs">30</i><span>分</span>
+									</p>
+								</div>
+							</div>
+							<div class="test_content_nr">
+								<ul>
+									
+										<li v-for="(r,index) in CheckboxDatas" :id="generate('qu_1_',index)">
+											<div :id="generate('qu1',index)" style="display: none;">{{r.id}}</div>
+											<div class="test_content_nr_tt">
+												<i>{{index+1}}</i><span>(1分)</span><font>{{r.title}}</font>
+											</div>
+
+											<div class="test_content_nr_main">
+												<ul>
+													
+														<li class="option" v-for="(t,cindex) in r.choice">
+															<input type="checkbox" class="radioOrCheck" :name="generate('answer2',index)" :id="generateFor1(index,cindex)" :value="cindex+1"  @click="checkchoice(index)"/>
+															
+															<label :for="generateFor1(index,cindex)">
+																<p class="ue" style="display: inline;">{{t.choice}}</p>
+															</label>
+														</li>
+																											
+													
+												</ul>
+											</div>
+										</li>
+									
+								</ul>
+							</div>
+						
+					</form>
+				</div>
+
+			</div>
+			<div class="nr_right">
+				<div class="nr_rt_main">
+					<div class="rt_nr1">
+						<div class="rt_nr1_title">
+							<h1>
+								<i class="icon iconfont">&#xe692;</i>答题卡
+							</h1>
+							<p class="test_time">
+								<i class="icon iconfont">&#xe6fb;</i><b id="timer" style="color:red"></b>
+							</p>
+						</div>
+						
+							<div class="rt_content">
+								<div class="rt_content_tt">
+									<h2>单选题</h2>
+									<p>
+										<span>共</span><i class="content_lit">{{RadioCount}}</i><span>题</span>
+									</p>
+								</div>
+								<div class="rt_content_nr answerSheet">
+									<ul>
+										
+											<li v-for="index in RadioCount"><a :href="generate('#qu_0_',index-1)">{{index}}</a></li>									
+										
+									</ul>
+								</div>
+							</div>
+						
+							<div class="rt_content">
+								<div class="rt_content_tt">
+									<h2>多选题</h2>
+									<p>
+										<span>共</span><i class="content_lit">{{CheckboxCount}}</i><span>题</span>
+									</p>
+								</div>
+								<div class="rt_content_nr answerSheet">
+									<ul>
+										
+											<li v-for="index in CheckboxCount"><a :href="generate('#qu_1_',index-1)">{{index}}</a></li>
+										
+									</ul>
+								</div>
+							</div>
+						
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!--nr end-->
+		<div class="foot"></div>
+	</div>
+
+	<script src="../statics/js/jquery-1.11.3.min.js"></script>
+	<script src="../statics/js/jquery.easy-pie-chart.js"></script>
+	<script src="../statics/js/vue.js"></script>
+	<script src="../statics/js/test.js"></script>
+
+</body>
+
+</html>

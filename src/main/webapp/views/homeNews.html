@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--内容-->
+		<div class="top">
+			<div id="myCarousel" class="carousel slide">
+				<ol class="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+					<li data-target="#myCarousel" data-slide-to="3"></li>
+					<li data-target="#myCarousel" data-slide-to="4"></li>
+				</ol>
+				<div class="carousel-inner" id="FocusNews">
+					<div v-for="(r,index) in news" :class="generateClass(index)">
+						<a :href="'#'+r.id" target="_blank">
+							<img class="car-img" :src="r.image">
+							<div class="carousel-caption">{{r.title}}</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="top-right">
+				<div class="rt">
+					<table class="rt-table">
+						<tr>
+							<td id="party-news"><a><strong>党建要闻</strong></a></td>
+							<td id="notice-publicity"><a><strong>通知公示</strong></a></td>
+							<td id="party-publicity"><a><strong>党内公示</strong></a></td>
+						</tr>
+					</table>
+				</div>
+				<div id="PartyNews">
+					<div class="list" id="pn-list">
+						<table class="rtlist-table">
+							<tr v-for="r in party_news">
+								<td class="rtlist-name"><a href="#"><p :title="r.title">{{r.title}}</p></a></td>
+								<td class="rtlist-time"><p>{{r.date}}</p></td>
+							</tr>
+						</table>
+						<a class="more" href="#" target="_blank">更多内容>></a>
+					</div>
+				</div>
+				<div id="NoticePublicity">
+					<div class="list" id="np-list" style="display: none;">
+						<table class="rtlist-table">
+							<tr v-for="r in notice">
+								<td class="rtlist-name"><a :href="'#'+r.id"><p :title="r.title">{{r.title}}</p></a></td>
+								<td class="rtlist-time"><p>{{r.time}}</p></td>
+							</tr>
+						</table>
+						<a class="more" href="#" target="_blank">更多内容>></a>
+					</div>
+				</div>
+				<div id="PartyPublicity">
+					<div class="list" id="pp-list" style="display: none;">
+						<table class="rtlist-table">
+							<tr v-for="r in public">
+								<td class="rtlist-name"><a :href="'#'+r.id"><p :title="r.title">{{r.title}}</p></a></td>
+								<td class="rtlist-time"><p>{{r.time}}</p></td>
+							</tr>
+						</table>
+						<a class="more" href="#" target="_blank">更多内容>></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="middle">
+			<div class="middle-left" id="Learning">
+				<div class="list-head">
+					<p>
+						<strong>学习资料</strong>
+						<a class="more" href="#" target="_blank">更多内容>></a>
+					</p>
+				</div>
+				<table class="learn-list">
+					<tr v-for="(r,index) in learn" v-if="index % 2 == 1">
+						<td class="ll-name"><a :href="'#'+learn[index-1].id"><p :title="learn[index-1].title">{{learn[index-1].title}}</p></a></td>
+						<td class="ll-time"><p>{{learn[index-1].time}}</p></td>
+						<td class="ll-name"><a :href="'#'+learn[index].id"><p :title="learn[index].title">{{learn[index].title}}</p></a></td>
+						<td class="ll-time"><p>{{learn[index].time}}</p></td>
+					</tr>
+					<tr v-else-if="index == learn.length-1">
+						<td class="ll-name"><a :href="'#'+learn[index].id"><p :title="learn[index].title">{{learn[index].title}}</p></a></td>
+						<td class="ll-time"><p>{{learn[index].time}}</p></td>
+					</tr>
+				</table>
+			</div>
+			<div class="middle-right" id="Download">
+				<div class="list-head">
+					<p>
+						<strong>下载专区</strong>
+						<a class="more" href="#" target="_blank">更多内容>></a>
+					</p>
+				</div>
+				<table class="learn-list">
+					<tr v-for="r in download">
+						<td class="ll-name"><a href="'#'+r.id"><p :title="r.title">{{r.title}}</p></a></td>
+						<td class="ll-time"><p>{{r.time}}</p></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		<div class="bottom">
+			<div class="bottom-left">
+				<div class="list-head">
+					<p>
+						<strong>支部风采</strong>
+						<a class="more" href="#" target="_blank">更多内容>></a>
+					</p>
+				</div>
+				<div class="style-list" id="branch">
+					<p v-for="r in branch" @click="MienTo(r.id)">{{r.BranchName}}</p>
+				</div>
+			</div>
+			<div class="bottom-right" id="mien" >
+				<div class="pic1 pic" v-for="r in image" :style="'background-image: url('+r.image+');'"></div>
+				<!--<div class="pic2 pic" style="background-image: url(img/1-2.jpg);"></div>
+				<div class="pic3 pic" style="background-image: url(img/1-3.jpg);"></div>
+				<div class="pic4 pic" style="background-image: url(img/1-4.jpg);"></div>
+				<div class="pic5 pic" style="background-image: url(img/1-5.jpg);"></div>-->
+			</div>
+		</div>
+		<!--友情链接-->
+		<div class="link">
+			<ul class="link-ul">
+				<li class="link-li"><a class="link-a" href="#" target="_blank">友情链接</a></li>
+				<li class="link-li"><a class="link-a" href="#" target="_blank">友情链接</a></li>
+				<li class="link-li"><a class="link-a" href="#" target="_blank">友情链接</a></li>
+				<li class="link-li"><a class="link-a" href="#" target="_blank">友情链接</a></li>
+				<li class="link-li"><a class="link-a" href="#" target="_blank">友情链接</a></li>
+				<li class="link-li"><a class="link-a" href="#" target="_blank">友情链接</a></li>
+				<li class="link-li"><a class="link-a" href="#" target="_blank">友情链接</a></li>
+			</ul>
+		</div>
+		
+		<!--脚本-->
+		<link rel="stylesheet" href="../statics/css/bootstrap.min.css" />
+		<script type="text/javascript" src="../statics/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="../statics/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="../statics/js/vue.js" ></script>
+		<script type="text/javascript" src="../statics/js/homeNews.js" ></script>
+		<link rel="stylesheet" href="../statics/css/homeNews.css" />
+	</body>
+</html>

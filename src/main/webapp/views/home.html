@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>肇庆学院党务系统</title>
+	</head>
+	<body>
+		<!--头部-->
+		<header>
+			<div class="header">
+				<div class="school">
+					<img class="name" src="../statics/img/name.png" />
+				</div>
+				<div class="user">
+					<ul class="user-ul">
+						<input type="text" class="search" id="search" placeholder="站内搜索*" />
+						<button class="search-btn" id="search-btn">
+							<img src="../statics/img/搜索.png" />
+						</button>
+						<span class="user-a">欢迎，游客</span>
+						<li class="user-li"><span class="user-a" id="info">个人信息</span></li>
+						<li class="user-li"><a class="user-a" id="manager" href="#">管理端</a></li>
+						<li class="user-li">
+							<span class="user-a" id="message">消息</span>
+							<div class="message" id="dis-message"></div>
+						</li>
+						<li class="user-li"><span class="user-a" id="login">登录</span></li>
+						<li class="user-li"><span class="user-a" id="change">修改密码</span></li>
+						<li class="user-li"><span class="user-a" id="logout">注销</span></li>
+					</ul>
+				</div>
+			</div>
+			<aside class="info" id="ainfo" style="display: none;">
+				<ul class="info-ul">
+					<li class="info-li"><a class="info-a" id="file">党员档案</a></li>
+					<li class="info-li"><a class="info-a" id="collection">我的收藏</a></li>
+					<li class="info-li"><a class="info-a" id="feedback">我要反馈</a></li>
+					<li class="info-li"><a class="info-a" id="report">思想汇报</a></li>
+					<li class="info-li"><a class="info-a" id="learnrecord">历史学习记录</a></li>
+				</ul>
+			</aside>
+		</header>
+		
+		<div class="aside" id="laside" style="display: none;">
+        	<aside class="login" id="alogin">
+        		<p id="content-p"><strong>请输入您的账号和密码</strong></p>
+        		<input class="content-input" type="text" id="username" placeholder="账号*" /><br />
+        		<input class="content-input" type="password" id="password" placeholder="密码*" /><br />
+        		<input type="button" class="content-button" id="login-btn" value="登录"/>
+        		<input type="button" class="content-button" value="取消"/>
+        		<p class="forget" id="forget">忘记密码>></p>
+       	 	</aside>
+        </div>
+        
+        <div class="aside" id="caside" style="display: none;">
+        	<aside class="change" id="achange">
+        		<p id="content-p"><strong>修改密码</strong></p>
+        		<input class="content-input" type="password" id="oldpass" placeholder="旧密码*" /><br />
+        		<input class="content-input" type="password" id="newpass" placeholder="新密码*" /><br />
+        		<input class="content-input" type="password" id="repass" placeholder="确认密码*" /><br />
+        		<input type="button" class="content-button" id="change-btn" value="修改"/>
+        		<input type="button" class="content-button" value="取消"/>
+       	 	</aside>
+        </div>
+		
+		<!--导航-->
+		<div class="nav">
+			<ul class="nav-ul">
+				<li class="nav-li">
+					<div class="nav-a" id="news">
+						<p><img src="../statics/img/首页.png" /></p>	
+						<p class="a-span">首页</p>
+					</div>
+				</li>
+				<li class="nav-li">
+					<div class="nav-a" id="meeting">
+						<p><img src="../statics/img/会议.png" /></p>
+						<p class="a-span">三会一课</p>
+					</div>
+				</li>
+				<li class="nav-li">
+					<div class="nav-a">
+						<a id="learn-a" href="#">
+							<p><img src="../statics/img/考试.png" /></p>
+							<p class="a-span">e起学习</p>
+						</a>
+					</div>
+				</li>
+				<li class="nav-li">
+					<div class="nav-a">
+						<a id="test-a" href="#">
+							<p><img src="../statics/img/考试.png" /></p>
+							<p class="a-span">e起考试</p>
+						</a>
+					</div>
+				</li>
+				<li class="nav-li">
+					<div class="nav-a" id="party">
+						<p><img src="../statics/img/党.png" /></p>
+						<p class="a-span">e网党建</p>
+					</div>
+				</li>
+				<li class="nav-li">
+					<div class="nav-a" id="league">
+						<p><img src="../statics/img/团.png" /></p>
+						<p class="a-span">e网团建</p>
+					</div>
+				</li>
+				<li class="nav-li">
+					<div class="nav-a" id="organ">
+						<p><img src="../statics/img/组织.png" /></p>
+						<p class="a-span">组织建设</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<aside class="news" id="anews" style="display: none;">
+			<ul class="news-ul">
+				<li class="news-li"><a class="news-a" id="p-news">党建要闻</a></li>
+				<li class="news-li"><a class="news-a" id="n-publicity">通知公示</a></li>
+				<li class="news-li"><a class="news-a" id="p-publicity">党内公示</a></li>
+				<li class="news-li"><a class="news-a" id="p-download">下载专区</a></li>
+			</ul>
+		</aside>
+		<aside class="meeting" id="ameeting" style="display: none;">
+			<ul class="meeting-ul">
+				<li class="meeting-li"><a class="meeting-a" id="pb-meeting">党支部大会</a></li>
+				<li class="meeting-li"><a class="meeting-a" id="pc-meeting">党支委大会</a></li>
+				<li class="meeting-li"><a class="meeting-a" id="pg-meeting">党小组大会</a></li>
+			</ul>
+		</aside>
+		<aside class="party" id="aparty" style="display: none;">
+			<ul class="party-ul">
+				<li class="party-li"><a class="party-a" id="signup">活动报名</a></li>
+				<li class="party-li"><a class="party-a" id="album">活动相册</a></li>
+				<li class="party-li"><a class="party-a" id="development">支部发展</a></li>
+				<li class="party-li"><a class="party-a" id="forum">党员论坛</a></li>
+			</ul>
+		</aside>
+		<aside class="league" id="aleague" style="display: none;">
+			<ul class="league-ul">
+				<li class="league-li"><a class="league-a" id="g-style">团支部风采</a></li>
+			</ul>
+		</aside>
+		<aside class="organ" id="aorgan" style="display: none;">
+			<ul class="organ-ul">
+				<li class="organ-li"><a class="organ-a" id="c-architecture">院组织架构</a></li>
+				<li class="organ-li"><a class="organ-a" id="p-architecture">党支部组织架构</a></li>
+			</ul>
+		</aside>
+		
+		<!--正文-->
+		
+		<div class="frame" id="frame"></div>
+		
+		<!--脚部-->
+		<footer>
+			<p>Copyright@2018</p>
+		</footer>
+		
+		<!--脚本-->
+		<script type="text/javascript" src="../statics/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="../statics/js/home.js" ></script>
+		<link rel="stylesheet" href="../statics/css/home.css" />
+	</body>
+</html>

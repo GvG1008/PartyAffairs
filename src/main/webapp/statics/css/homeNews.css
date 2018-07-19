@@ -1,0 +1,285 @@
+body{
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.link{
+	position: relative;
+	top: 80px;
+}
+
+.link-ul{
+	width: 620px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.link-li{
+	text-align: center;
+	display:inline-block;
+	margin: 0 10px;
+}
+
+.link-a{
+	color: #37aaea;
+}
+
+.link-a:hover{
+	color: #145b7d;
+}
+
+.top{
+	width: 100%;
+	height: 405px;
+}
+
+.carousel{
+	float: left;
+	width: 720px;
+	height: 100%;
+}
+
+.item,
+.car-img{
+	height: 405px;
+}
+
+.carousel-caption{
+	height: 60px;
+	position: relative;
+	left: 0px;
+	top: -405px;
+	background-color: rgba(0,0,0,0.5);
+}
+
+.top-right{
+	float: right;
+	width: 480px;
+	height: 100%;
+}
+
+.rt{
+	width: 100%;
+	height: 70px;
+}
+
+.rt-table a{
+	cursor: pointer;
+}
+
+.rt-table a:hover{
+	text-decoration: none;
+}
+
+#notice-publicity,
+#party-news,
+#party-publicity{
+	border-bottom: 2px solid #426ab3;
+}
+
+.rt-table td{
+	padding: 16px 40px;
+}
+
+.rt-table strong{
+	color: #426ab3;
+	font-size: 19px;
+}
+
+.list{
+	height: 330px;
+}
+
+#party-news{
+	border-bottom-color: red;
+}
+
+.rtlist-table{
+	position: relative;
+	top: 20px;
+}
+
+.rtlist-table td{
+	font-size: 15px;
+	padding: 5px 0px;
+}
+
+.rtlist-table a,
+.learn-list a{
+	color: black;
+}
+
+.rtlist-table a:hover,
+.learn-list a:hover{
+	color: #37aaea;
+	text-decoration: none;
+}
+
+.rtlist-name{
+	position: relative;
+	left: 20px;
+}
+
+.rtlist-name p{
+	width: 370px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.rtlist-time{
+	position: relative;
+	left: 50px;
+}
+
+.more{
+	position: relative;
+	left: 400px;
+	top: 20px;
+}
+
+.middle{
+	position: relative;
+	top: 20px;
+	width: 100%;
+	height: 250px;
+}
+
+.middle-left{
+	float: left;
+	width: 780px;
+	height: 100%;
+}
+
+.list-head{
+	height: 60px;
+	border-bottom: 2px solid #2b4490;
+}
+
+.list-head p{
+	position: relative;
+	top: 20px;
+}
+
+.list-head strong{
+	color: #2b4490;
+	position: relative;
+	left: 30px;
+	font-size: 20px;
+}
+
+.list-head a{
+	float: right;
+	position: relative;
+	top: 10px;
+	left: -10px;
+}
+
+.learn-list{
+	position: relative;
+	top: 20px;
+}
+
+.learn-list td{
+	padding: 5px 20px;
+}
+
+.ll-name{
+	width: 300px;
+}
+
+.ll-time{
+	width: 100px;
+}
+
+.ll-name p{
+	width: 250px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.middle-right{
+	float: right;
+	width: 400px;
+	height: 100%;
+}
+
+.bottom{
+	position: relative;
+	top: 40px;
+	width: 100%;
+	height: 300px;
+}
+
+.bottom-left{
+	float: left;
+	width: 300px;
+	height: 100%;
+}
+
+.style-list{
+	width: 100%;
+	height: 220px;
+	position: relative;
+	top: 20px;
+}
+
+.style-list p{
+	padding: 3px 0px;
+	width: 100%;
+	text-align: center;
+	cursor: pointer;
+}
+
+.style-list p:hover{
+	color: #37aaea;
+	text-decoration: none;
+}
+
+.bottom-right{
+	float: right;
+	width: 900px;
+	height: 100%;
+	position: relative;
+	left: 20px;
+	overflow: hidden;
+}
+
+/*
+ * bottom-right轮播
+ */
+.pic {
+	background-size: 100% 100%;
+	width: 550px;
+	height: 300px;
+	cursor: pointer;
+	position: absolute;	
+}
+
+.pic1 {
+	left: 0px;
+	z-index: 1;
+}
+
+.pic2 {
+	left: 550px;
+	z-index: 2;
+}
+
+.pic3 {
+	left: 640px;
+	z-index: 3;
+}
+
+.pic4 {
+	left: 730px;
+	z-index: 4;
+}
+
+.pic5 {
+	left: 820px;
+	z-index: 5;
+}
