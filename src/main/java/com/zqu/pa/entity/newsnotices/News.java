@@ -7,7 +7,7 @@ public class News {
 
     private String title;
 
-    private String date;
+    private Date date;
 
     private String source;
 
@@ -16,6 +16,8 @@ public class News {
     private Integer state;
 
     private Date lastTime;
+
+    private Integer click;
 
     private String content;
 
@@ -35,12 +37,12 @@ public class News {
         this.title = title == null ? null : title.trim();
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date == null ? null : date.trim();
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getSource() {
@@ -73,6 +75,14 @@ public class News {
 
     public void setLastTime(Date lastTime) {
         this.lastTime = lastTime;
+    }
+
+    public Integer getClick() {
+        return click;
+    }
+
+    public void setClick(Integer click) {
+        this.click = click;
     }
 
     public String getContent() {

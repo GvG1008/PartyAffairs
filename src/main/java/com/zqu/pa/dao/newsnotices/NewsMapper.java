@@ -2,6 +2,8 @@ package com.zqu.pa.dao.newsnotices;
 
 import com.zqu.pa.entity.newsnotices.News;
 import com.zqu.pa.entity.newsnotices.NewsExample;
+import com.zqu.pa.vo.newsnotices.HomeList;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -33,4 +35,8 @@ public interface NewsMapper {
     int updateByPrimaryKeyWithBLOBs(News record);
 
     int updateByPrimaryKey(News record);
+    
+
+    //以上为逆向工程生成
+    List<HomeList> getHomeListLimit(@Param("limit") int limit);
 }

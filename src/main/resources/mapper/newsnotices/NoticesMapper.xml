@@ -4,11 +4,12 @@
   <resultMap id="BaseResultMap" type="com.zqu.pa.entity.newsnotices.Notices">
     <id column="notices_id" jdbcType="INTEGER" property="noticesId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="creator_id" jdbcType="VARCHAR" property="creatorId" />
     <result column="last_time" jdbcType="TIMESTAMP" property="lastTime" />
+    <result column="click" jdbcType="INTEGER" property="click" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zqu.pa.entity.newsnotices.Notices">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -72,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    notices_id, title, date, type, state, creator_id, last_time
+    notices_id, title, date, type, state, creator_id, last_time, click
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -128,10 +129,12 @@
   <insert id="insert" parameterType="com.zqu.pa.entity.newsnotices.Notices">
     insert into notices (notices_id, title, date, 
       type, state, creator_id, 
-      last_time, content)
-    values (#{noticesId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, 
+      last_time, click, content
+      )
+    values (#{noticesId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, 
       #{type,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{creatorId,jdbcType=VARCHAR}, 
-      #{lastTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+      #{lastTime,jdbcType=TIMESTAMP}, #{click,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.newsnotices.Notices">
     insert into notices
@@ -157,6 +160,9 @@
       <if test="lastTime != null">
         last_time,
       </if>
+      <if test="click != null">
+        click,
+      </if>
       <if test="content != null">
         content,
       </if>
@@ -169,7 +175,7 @@
         #{title,jdbcType=VARCHAR},
       </if>
       <if test="date != null">
-        #{date,jdbcType=VARCHAR},
+        #{date,jdbcType=TIMESTAMP},
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
@@ -182,6 +188,9 @@
       </if>
       <if test="lastTime != null">
         #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="click != null">
+        #{click,jdbcType=INTEGER},
       </if>
       <if test="content != null">
         #{content,jdbcType=LONGVARCHAR},
@@ -204,7 +213,7 @@
         title = #{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.date != null">
-        date = #{record.date,jdbcType=VARCHAR},
+        date = #{record.date,jdbcType=TIMESTAMP},
       </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
@@ -218,6 +227,9 @@
       <if test="record.lastTime != null">
         last_time = #{record.lastTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.click != null">
+        click = #{record.click,jdbcType=INTEGER},
+      </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
@@ -230,11 +242,12 @@
     update notices
     set notices_id = #{record.noticesId,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
-      date = #{record.date,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=TIMESTAMP},
       type = #{record.type,jdbcType=INTEGER},
       state = #{record.state,jdbcType=INTEGER},
       creator_id = #{record.creatorId,jdbcType=VARCHAR},
       last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      click = #{record.click,jdbcType=INTEGER},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -244,11 +257,12 @@
     update notices
     set notices_id = #{record.noticesId,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
-      date = #{record.date,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=TIMESTAMP},
       type = #{record.type,jdbcType=INTEGER},
       state = #{record.state,jdbcType=INTEGER},
       creator_id = #{record.creatorId,jdbcType=VARCHAR},
-      last_time = #{record.lastTime,jdbcType=TIMESTAMP}
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      click = #{record.click,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -260,7 +274,7 @@
         title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="date != null">
-        date = #{date,jdbcType=VARCHAR},
+        date = #{date,jdbcType=TIMESTAMP},
       </if>
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
@@ -274,6 +288,9 @@
       <if test="lastTime != null">
         last_time = #{lastTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="click != null">
+        click = #{click,jdbcType=INTEGER},
+      </if>
       <if test="content != null">
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -283,22 +300,34 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zqu.pa.entity.newsnotices.Notices">
     update notices
     set title = #{title,jdbcType=VARCHAR},
-      date = #{date,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP},
       type = #{type,jdbcType=INTEGER},
       state = #{state,jdbcType=INTEGER},
       creator_id = #{creatorId,jdbcType=VARCHAR},
       last_time = #{lastTime,jdbcType=TIMESTAMP},
+      click = #{click,jdbcType=INTEGER},
       content = #{content,jdbcType=LONGVARCHAR}
     where notices_id = #{noticesId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zqu.pa.entity.newsnotices.Notices">
     update notices
     set title = #{title,jdbcType=VARCHAR},
-      date = #{date,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP},
       type = #{type,jdbcType=INTEGER},
       state = #{state,jdbcType=INTEGER},
       creator_id = #{creatorId,jdbcType=VARCHAR},
-      last_time = #{lastTime,jdbcType=TIMESTAMP}
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
+      click = #{click,jdbcType=INTEGER}
     where notices_id = #{noticesId,jdbcType=INTEGER}
   </update>
+  
+    <!-- 以上为逆向工程 -->
+  <select id="getHomeListLimit" resultType="com.zqu.pa.vo.newsnotices.HomeList">
+    select  title , date 
+    from notices
+    where state = 1
+    and type = #{type}
+    order by date DESC
+    limit #{limit}
+  </select>
 </mapper>

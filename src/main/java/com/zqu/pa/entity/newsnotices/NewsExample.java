@@ -245,62 +245,52 @@ public class NewsExample {
             return (Criteria) this;
         }
 
-        public Criteria andDateEqualTo(String value) {
+        public Criteria andDateEqualTo(Date value) {
             addCriterion("date =", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andDateNotEqualTo(String value) {
+        public Criteria andDateNotEqualTo(Date value) {
             addCriterion("date <>", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andDateGreaterThan(String value) {
+        public Criteria andDateGreaterThan(Date value) {
             addCriterion("date >", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andDateGreaterThanOrEqualTo(String value) {
+        public Criteria andDateGreaterThanOrEqualTo(Date value) {
             addCriterion("date >=", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andDateLessThan(String value) {
+        public Criteria andDateLessThan(Date value) {
             addCriterion("date <", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andDateLessThanOrEqualTo(String value) {
+        public Criteria andDateLessThanOrEqualTo(Date value) {
             addCriterion("date <=", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andDateLike(String value) {
-            addCriterion("date like", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateNotLike(String value) {
-            addCriterion("date not like", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateIn(List<String> values) {
+        public Criteria andDateIn(List<Date> values) {
             addCriterion("date in", values, "date");
             return (Criteria) this;
         }
 
-        public Criteria andDateNotIn(List<String> values) {
+        public Criteria andDateNotIn(List<Date> values) {
             addCriterion("date not in", values, "date");
             return (Criteria) this;
         }
 
-        public Criteria andDateBetween(String value1, String value2) {
+        public Criteria andDateBetween(Date value1, Date value2) {
             addCriterion("date between", value1, value2, "date");
             return (Criteria) this;
         }
 
-        public Criteria andDateNotBetween(String value1, String value2) {
+        public Criteria andDateNotBetween(Date value1, Date value2) {
             addCriterion("date not between", value1, value2, "date");
             return (Criteria) this;
         }
@@ -562,6 +552,66 @@ public class NewsExample {
 
         public Criteria andLastTimeNotBetween(Date value1, Date value2) {
             addCriterion("last_time not between", value1, value2, "lastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickIsNull() {
+            addCriterion("click is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickIsNotNull() {
+            addCriterion("click is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickEqualTo(Integer value) {
+            addCriterion("click =", value, "click");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickNotEqualTo(Integer value) {
+            addCriterion("click <>", value, "click");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickGreaterThan(Integer value) {
+            addCriterion("click >", value, "click");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickGreaterThanOrEqualTo(Integer value) {
+            addCriterion("click >=", value, "click");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickLessThan(Integer value) {
+            addCriterion("click <", value, "click");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickLessThanOrEqualTo(Integer value) {
+            addCriterion("click <=", value, "click");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickIn(List<Integer> values) {
+            addCriterion("click in", values, "click");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickNotIn(List<Integer> values) {
+            addCriterion("click not in", values, "click");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickBetween(Integer value1, Integer value2) {
+            addCriterion("click between", value1, value2, "click");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickNotBetween(Integer value1, Integer value2) {
+            addCriterion("click not between", value1, value2, "click");
             return (Criteria) this;
         }
     }
