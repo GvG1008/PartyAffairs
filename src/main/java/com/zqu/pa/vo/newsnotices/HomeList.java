@@ -6,10 +6,20 @@ import com.zqu.pa.utils.DateToString;
 
 public class HomeList {
     
+    private Integer id;
+
     private String title;
     
     private String date;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
     public String getTitle() {
         return title;
     }

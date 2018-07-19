@@ -323,7 +323,7 @@
   
     <!-- 以上为逆向工程 -->
   <select id="getHomeListLimit" resultType="com.zqu.pa.vo.newsnotices.HomeList">
-    select  title , date 
+    select notices_id 'id' , title , date 
     from notices
     where state = 1
     and type = #{type}
