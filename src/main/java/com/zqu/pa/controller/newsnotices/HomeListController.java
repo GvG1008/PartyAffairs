@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zqu.pa.common.ServerResponse;
-import com.zqu.pa.entity.newsnotices.*;
 import com.zqu.pa.service.newsnotices.NewsService;
 import com.zqu.pa.service.newsnotices.NoticesService;
 import com.zqu.pa.vo.newsnotices.HomeList;

@@ -3,6 +3,7 @@ package com.zqu.pa.dao.newsnotices;
 import com.zqu.pa.entity.newsnotices.News;
 import com.zqu.pa.entity.newsnotices.NewsExample;
 import com.zqu.pa.vo.newsnotices.HomeList;
+import com.zqu.pa.vo.newsnotices.MenuList;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -39,4 +40,5 @@ public interface NewsMapper {
     //以上为逆向工程生成
     //根据数目，获取审核通过，仅有标题与日期的新闻列表，按日期排序
     List<HomeList> getHomeListLimit(@Param("limit") int limit);
+    List<MenuList> getMenuListLimit(@Param("index") int index , @Param("num") int num);
 }

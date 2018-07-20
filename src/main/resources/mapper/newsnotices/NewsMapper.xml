@@ -346,4 +346,11 @@
     order by date DESC
     limit #{limit}
   </select>
+  <select id="getMenuListLimit" resultType="com.zqu.pa.vo.newsnotices.MenuList">
+    select news_id 'id' , title , date
+    from news
+    where state = 1
+    order by date DESC
+    limit #{index},#{num}
+  </select>
 </mapper>
