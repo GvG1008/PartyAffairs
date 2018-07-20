@@ -209,4 +209,13 @@
       user_answer = #{userAnswer,jdbcType=VARCHAR}
     where paper_id = #{paperId,jdbcType=INTEGER}
   </update>
+  
+  <insert id="insertList" parameterType="List">
+    insert into exam_paper (exam_id, user_id, 
+      question_id, user_answer)
+    values 
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.examId},#{item.userId},#{item.questionId},#{item.userAnswer})
+    </foreach>
+  </insert>
 </mapper>

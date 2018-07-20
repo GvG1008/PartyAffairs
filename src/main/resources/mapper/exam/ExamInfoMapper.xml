@@ -289,4 +289,10 @@
       role_id = #{roleId,jdbcType=INTEGER}
     where exam_id = #{examId,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectPassScore" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select pass_score
+    from exam_info
+    where exam_id = #{examId,jdbcType=INTEGER}
+  </select>
 </mapper>

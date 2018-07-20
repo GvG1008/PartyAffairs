@@ -1,6 +1,7 @@
 package com.zqu.pa.controller.exam;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,19 +42,14 @@ public class ExamPaperController {
      * @param examId 考试ID
      * @param score  成绩
      * @param examPaper 试卷信息，前端只传入题目ID（questionId）和考生所选答案（userAnswer）
-     * @return 返回及格分数线和此门考试最高分数
+     * @return 返回及格分数线和目前考试最高分数
      */
     @ResponseBody
     @RequestMapping(value="/{examId}/{score}", method=RequestMethod.POST)
-    public ServerResponse<Paper> countScore(@PathVariable Integer examId, @PathVariable Integer score,
+    public ServerResponse paperScore(@PathVariable Integer examId, @PathVariable Integer score,
             @RequestBody List<ExamPaper> examPaper) {
         
-        System.out.println(score);
-     
-        for (int i = 0; i < examPaper.size(); i++) {
-            System.out.println(examPaper.get(i).getQuestionId());
-            System.out.println(examPaper.get(i).getUserAnswer());
-        }
-        return null;
+        Map<String, Integer> responseScore = examPaperService.updatePaperScore(examId, score, examPaper);
+        return ServerResponse.createBySuccess(responseScore);
     }
 }

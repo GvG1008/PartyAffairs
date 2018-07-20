@@ -1,5 +1,8 @@
 package com.zqu.pa.entity.exam;
 
+import org.springframework.stereotype.Component;
+
+@Component("examScoreKey")
 public class ExamScoreKey {
     private Integer examId;
 

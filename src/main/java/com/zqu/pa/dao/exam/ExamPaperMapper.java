@@ -27,4 +27,7 @@ public interface ExamPaperMapper {
     int updateByPrimaryKeySelective(ExamPaper record);
 
     int updateByPrimaryKey(ExamPaper record);
+    
+    //批量插入
+    int insertList(List<ExamPaper> examPaper);
 }

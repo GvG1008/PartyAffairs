@@ -1,20 +1,30 @@
 package com.zqu.pa.service.exam.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zqu.pa.dao.exam.AnswerMapper;
 import com.zqu.pa.dao.exam.ChoiceMapper;
 import com.zqu.pa.dao.exam.ExamInfoMapper;
+import com.zqu.pa.dao.exam.ExamPaperMapper;
+import com.zqu.pa.dao.exam.ExamScoreMapper;
 import com.zqu.pa.dao.exam.QuestionBankMapper;
 import com.zqu.pa.entity.exam.Answer;
 import com.zqu.pa.entity.exam.AnswerExample;
 import com.zqu.pa.entity.exam.Choice;
 import com.zqu.pa.entity.exam.ChoiceExample;
 import com.zqu.pa.entity.exam.ExamInfo;
+import com.zqu.pa.entity.exam.ExamPaper;
+import com.zqu.pa.entity.exam.ExamPaperExample;
+import com.zqu.pa.entity.exam.ExamScore;
+import com.zqu.pa.entity.exam.ExamScoreKey;
 import com.zqu.pa.entity.exam.QuestionBank;
 import com.zqu.pa.service.exam.ExamPaperService;
 import com.zqu.pa.vo.exam.Paper;
@@ -33,6 +43,12 @@ public class ExamPaperServiceImpl implements ExamPaperService {
     private ExamInfo examInfo;
     
     @Autowired
+    private ExamScoreKey examScoreKey;
+    
+    @Autowired
+    private ExamScore examScore;
+    
+    @Autowired
     private QuestionBankMapper questionBankMapper;
     
     @Autowired
@@ -43,6 +59,12 @@ public class ExamPaperServiceImpl implements ExamPaperService {
     
     @Autowired
     private AnswerMapper answerMapper;
+    
+    @Autowired
+    private ExamScoreMapper examScoreMapper;
+    
+    @Autowired
+    private ExamPaperMapper examPaperMapper;
     
     @Override
     public Paper getExamPaper(Integer examId) {
@@ -56,7 +78,10 @@ public class ExamPaperServiceImpl implements ExamPaperService {
         //多选题数量
         Integer multipleQuantity = examInfo.getMultipleQuantity();
         
-        paper.setExamPeriod(examInfo.getExamPeriod());
+        //将分钟转换为秒数
+        Integer examPeriod = examInfo.getExamPeriod();
+        examPeriod *= 60; 
+        paper.setExamPeriod(examPeriod);
         paper.setSingleQuantity(singleQuantity);
         paper.setMultipleQuantity(multipleQuantity);
 
@@ -125,11 +150,121 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 
     @Override
     public List<Answer> listAnswer(List<Integer> questionId) {
-        // TODO Auto-generated method stub
+
         AnswerExample example = new AnswerExample();
         example.createCriteria().andQuestionIdIn(questionId);
         List<Answer> answer = answerMapper.selectByExample(example);
         return answer;
+    }
+
+    @Transactional
+    @Override
+    public Map<String, Integer> updatePaperScore(Integer examId, Integer score, List<ExamPaper> examPaper) {
+
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        if (userId == null) {
+            
+        }
+        Map<String, Integer> responseScore = new HashMap<>();       
+        
+        //前端接收ExamPaper只有两个字段，将剩余字段补全
+        for(ExamPaper e : examPaper) {
+            e.setExamId(examId);
+            e.setUserId(userId);
+        }
+        Integer topScore = getPaperScore(examId, userId);
+        //查无成绩，说明第一次考试，保存成绩和试卷
+        if(topScore == null) {
+            topScore = score;      
+            if (insertExamPaper(examPaper) > 0) {
+                //System.out.println("插入试卷成功");
+            } else {
+                //TODO 插入试卷失败处理
+            }
+            if (insertExamScore(score, examId, userId) > 0) {
+                //System.out.println("插入成绩成功");
+            } else {
+              //TODO 插入成绩失败处理
+            }          
+        }
+        //本次考试高于历史考试最高分，更新最高成绩和对应试卷
+        //低于等于历史考试最高分，不更新成绩和试卷（即此次考试不保存）
+        else if (score > topScore) {
+            topScore = score;
+            if (updateExamPaper(examPaper, userId, examId) > 0) {
+                System.out.println("更新试卷成功");
+            } else {
+                //TODO 更新试卷失败处理
+            }
+            if (updateExamScore(score, examId, userId) > 0) {
+                System.out.println("更新成绩成功");
+            } else {
+                //TODO 更新成绩失败处理
+            }
+            topScore = score;
+        } 
+
+        //及格分数线
+        Integer passScore = getPassScore(examId);
+        responseScore.put("passScore", passScore);
+        responseScore.put("topScore", topScore);
+        return responseScore;
+    }
+
+    @Override
+    public Integer getPaperScore(Integer examId, String userId) {
+
+        examScoreKey.setExamId(examId);
+        examScoreKey.setUserId(userId);
+        examScore = examScoreMapper.selectByPrimaryKey(examScoreKey);
+        if (examScore == null)
+            return null;
+        return examScore.getScore();
+    }
+
+    @Override
+    public Integer insertExamPaper(List<ExamPaper> examPaper) {
+        
+        return examPaperMapper.insertList(examPaper);
+    }
+
+    @Override
+    public Integer insertExamScore(Integer score, Integer examId, String userId) {
+        
+        ExamScore es = new ExamScore();
+        es.setExamId(examId);
+        es.setScore(score);        
+        es.setUserId(userId);
+        return examScoreMapper.insertSelective(es);
+    }
+
+    @Override
+    public Integer getPassScore(Integer examId) {
+
+        return examInfoMapper.selectPassScore(examId);
+    }
+
+    @Transactional
+    @Override
+    public Integer updateExamPaper(List<ExamPaper> examPaper, String userId, Integer examId) {
+        
+        //删除原试卷
+        ExamPaperExample example = new ExamPaperExample();
+        example.createCriteria().andUserIdEqualTo(userId).andExamIdEqualTo(examId);
+        examPaperMapper.deleteByExample(example);
+        
+        //插入试卷
+        return insertExamPaper(examPaper);
+    }
+
+    @Override
+    public Integer updateExamScore(Integer score, Integer examId, String userId) {
+
+        ExamScore e = new ExamScore();
+        e.setExamId(examId);
+        e.setUserId(userId);
+        e.setScore(score);
+        return examScoreMapper.updateByPrimaryKeySelective(e);
     }
 
 }

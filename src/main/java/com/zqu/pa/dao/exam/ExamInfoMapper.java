@@ -27,4 +27,7 @@ public interface ExamInfoMapper {
     int updateByPrimaryKeySelective(ExamInfo record);
 
     int updateByPrimaryKey(ExamInfo record);
+    
+    //查询某场考试及格分数线
+    Integer selectPassScore(Integer examId);
 }
