@@ -614,6 +614,76 @@ public class NewsExample {
             addCriterion("click not between", value1, value2, "click");
             return (Criteria) this;
         }
+
+        public Criteria andCoverpathIsNull() {
+            addCriterion("coverpath is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverpathIsNotNull() {
+            addCriterion("coverpath is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverpathEqualTo(String value) {
+            addCriterion("coverpath =", value, "coverpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverpathNotEqualTo(String value) {
+            addCriterion("coverpath <>", value, "coverpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverpathGreaterThan(String value) {
+            addCriterion("coverpath >", value, "coverpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverpathGreaterThanOrEqualTo(String value) {
+            addCriterion("coverpath >=", value, "coverpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverpathLessThan(String value) {
+            addCriterion("coverpath <", value, "coverpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverpathLessThanOrEqualTo(String value) {
+            addCriterion("coverpath <=", value, "coverpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverpathLike(String value) {
+            addCriterion("coverpath like", value, "coverpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverpathNotLike(String value) {
+            addCriterion("coverpath not like", value, "coverpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverpathIn(List<String> values) {
+            addCriterion("coverpath in", values, "coverpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverpathNotIn(List<String> values) {
+            addCriterion("coverpath not in", values, "coverpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverpathBetween(String value1, String value2) {
+            addCriterion("coverpath between", value1, value2, "coverpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverpathNotBetween(String value1, String value2) {
+            addCriterion("coverpath not between", value1, value2, "coverpath");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -44,7 +44,10 @@ public class HomeListController {
     public ServerResponse<List<HomeList>> getNoticesListPublic(){
         
         List<HomeList> newslist = noticesService.getHomeNewsList(7,0);
-        return ServerResponse.createBySuccess("成功信息", newslist);
+        if(newslist!=null)
+            return ServerResponse.createBySuccess("success", newslist);
+        else
+            return ServerResponse.createByErrorMessage("error");
     }
     
     /**
@@ -56,6 +59,9 @@ public class HomeListController {
     public ServerResponse<List<HomeList>> getNoticesListParty(){
         
         List<HomeList> newslist = noticesService.getHomeNewsList(7,1);
-        return ServerResponse.createBySuccess("成功信息", newslist);
+        if(newslist!=null)
+            return ServerResponse.createBySuccess("success", newslist);
+        else
+            return ServerResponse.createByErrorMessage("error");
     }
 }

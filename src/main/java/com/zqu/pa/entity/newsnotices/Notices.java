@@ -19,6 +19,8 @@ public class Notices {
 
     private Integer click;
 
+    private String coverpath;
+
     private String content;
 
     public Integer getNoticesId() {
@@ -83,6 +85,14 @@ public class Notices {
 
     public void setClick(Integer click) {
         this.click = click;
+    }
+
+    public String getCoverpath() {
+        return coverpath;
+    }
+
+    public void setCoverpath(String coverpath) {
+        this.coverpath = coverpath == null ? null : coverpath.trim();
     }
 
     public String getContent() {
