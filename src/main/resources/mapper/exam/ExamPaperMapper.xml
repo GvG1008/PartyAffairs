@@ -6,7 +6,7 @@
     <result column="exam_id" jdbcType="INTEGER" property="examId" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="question_id" jdbcType="INTEGER" property="questionId" />
-    <result column="user_answer" jdbcType="INTEGER" property="userAnswer" />
+    <result column="user_answer" jdbcType="VARCHAR" property="userAnswer" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -104,7 +104,7 @@
     insert into exam_paper (paper_id, exam_id, user_id, 
       question_id, user_answer)
     values (#{paperId,jdbcType=INTEGER}, #{examId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
-      #{questionId,jdbcType=INTEGER}, #{userAnswer,jdbcType=INTEGER})
+      #{questionId,jdbcType=INTEGER}, #{userAnswer,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.exam.ExamPaper">
     insert into exam_paper
@@ -139,7 +139,7 @@
         #{questionId,jdbcType=INTEGER},
       </if>
       <if test="userAnswer != null">
-        #{userAnswer,jdbcType=INTEGER},
+        #{userAnswer,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -165,7 +165,7 @@
         question_id = #{record.questionId,jdbcType=INTEGER},
       </if>
       <if test="record.userAnswer != null">
-        user_answer = #{record.userAnswer,jdbcType=INTEGER},
+        user_answer = #{record.userAnswer,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -178,7 +178,7 @@
       exam_id = #{record.examId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=VARCHAR},
       question_id = #{record.questionId,jdbcType=INTEGER},
-      user_answer = #{record.userAnswer,jdbcType=INTEGER}
+      user_answer = #{record.userAnswer,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -196,7 +196,7 @@
         question_id = #{questionId,jdbcType=INTEGER},
       </if>
       <if test="userAnswer != null">
-        user_answer = #{userAnswer,jdbcType=INTEGER},
+        user_answer = #{userAnswer,jdbcType=VARCHAR},
       </if>
     </set>
     where paper_id = #{paperId,jdbcType=INTEGER}
@@ -206,7 +206,7 @@
     set exam_id = #{examId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=VARCHAR},
       question_id = #{questionId,jdbcType=INTEGER},
-      user_answer = #{userAnswer,jdbcType=INTEGER}
+      user_answer = #{userAnswer,jdbcType=VARCHAR}
     where paper_id = #{paperId,jdbcType=INTEGER}
   </update>
 </mapper>

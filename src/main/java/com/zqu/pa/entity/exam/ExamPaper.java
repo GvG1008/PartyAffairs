@@ -9,7 +9,7 @@ public class ExamPaper {
 
     private Integer questionId;
 
-    private Integer userAnswer;
+    private String userAnswer;
 
     public Integer getPaperId() {
         return paperId;
@@ -43,11 +43,11 @@ public class ExamPaper {
         this.questionId = questionId;
     }
 
-    public Integer getUserAnswer() {
+    public String getUserAnswer() {
         return userAnswer;
     }
 
-    public void setUserAnswer(Integer userAnswer) {
-        this.userAnswer = userAnswer;
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer == null ? null : userAnswer.trim();
     }
 }
