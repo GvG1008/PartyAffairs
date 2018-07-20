@@ -98,6 +98,7 @@ public class UserController {
             subject.login(token);
             Session session=subject.getSession();
             session.setAttribute("subject", subject);
+            session.setAttribute("userId", userId);
             return "yes";
         } catch (UnknownAccountException ua) {
             return "userId does not exist";
