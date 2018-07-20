@@ -146,10 +146,15 @@ var News = new Vue({
 		var self = this;
 		$.ajax({
 			type:"get",
-			url:"../statics/json/image2.json",
+			url:"../homelist/newslist",
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
-				self.news = result.news;
+				if(result.status==0){
+					self.news = result.data;
+				}else{
+					alert(result.msg);
+				}
+				
 			}
 		});
 	},

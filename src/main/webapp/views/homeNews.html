@@ -18,7 +18,7 @@
 				<div class="carousel-inner" id="FocusNews">
 					<div v-for="(r,index) in news" :class="generateClass(index)">
 						<a :href="'#'+r.id" target="_blank">
-							<img class="car-img" :src="r.image">
+							<img class="car-img" :src="'../'+r.coverpath">
 							<div class="carousel-caption">{{r.title}}</div>
 						</a>
 					</div>
