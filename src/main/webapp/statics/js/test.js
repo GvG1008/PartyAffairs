@@ -120,7 +120,7 @@ function submit1() {
 		}else{
 			app.datas.singleQuestion[t].correct = false;
 		}
-		var temp = {questionId : app.datas.singleQuestion[t].questionId, userAnswer : answer};
+		var temp = {questionId : app.datas.singleQuestion[t].questionId, userAnswer : answer.join(",")};
 		 jsonObj.push(temp);
 	}
 	//多选答案
@@ -141,18 +141,20 @@ function submit1() {
 		}else{
 			app.datas.singleQuestion[t].correct = false;
 		}
-		var temp = {questionId : app.datas.multipleQuestion[t].questionId, userAnswer : answer};
+		var temp = {questionId : app.datas.multipleQuestion[t].questionId, userAnswer : answer.join(",")};
 		jsonObj.push(temp);
 	}
 	
 	/*for(var p in jsonObj){//遍历json数组时，这么写p为索引，0,1	 
 		alert(jsonObj[p].questionId + " " + jsonObj[p].userAnswer);
 	}*/
-	
-	$.ajax({
+
+	var examPaper = jsonObj;
+	$.ajax({		
 		type : "post",// 请求方式
 		url : "../exampaper/"+examid+"/"+score,// 地址，就是json文件的请求路径
-		data : {"exampaper":jsonObj},
+		data : JSON.stringify(examPaper),//将examPaper转换为JSON字符串，后台以List<ExamPaper>接收
+		contentType : 'application/json;charset=utf-8',
 		dataType : "json",// 数据类型可以为 text xml json script jsonp
 		success : function(result) {// 返回的参数就是 action里面所有的有get和set方法的参数
 			

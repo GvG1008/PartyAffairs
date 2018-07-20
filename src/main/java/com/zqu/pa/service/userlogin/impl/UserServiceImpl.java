@@ -38,5 +38,11 @@ public class UserServiceImpl implements UserService {
         return userDao.getRolePermission(roleId);
     }
 
+    @Override
+    public String getUserRealName(String userId) {
+        
+        return userDao.getRealName(userId);
+    }
+
     
 }

@@ -98,11 +98,35 @@ public class UserController {
             subject.login(token);
             Session session=subject.getSession();
             session.setAttribute("subject", subject);
+            session.setAttribute("userId", userId);
             return "yes";
         } catch (UnknownAccountException ua) {
             return "userId does not exist";
         } catch (IncorrectCredentialsException ic) {
             return "userId or password is error";
         }
+    }
+    
+    /**
+     * 根据登录ID，在首页获取显示姓名，并保存
+     */
+    @ResponseBody
+    @RequestMapping("/loginInfo")
+    public ServerResponse<String> getUserRealName(){
+        String realName = null;
+        //获取当前session
+        Session session = SecurityUtils.getSubject().getSession();
+        //获取当前登录用户的userId
+        String userId=(String)session.getAttribute("userId");
+        //根据Id查询姓名
+        realName = userService.getUserRealName(userId);
+        
+        if(realName==null)
+            return ServerResponse.createBySuccess("#unknown");
+        else 
+            //将姓名存储进session
+            session.setAttribute("realName", realName);
+
+        return ServerResponse.createBySuccess(realName);
     }
 }

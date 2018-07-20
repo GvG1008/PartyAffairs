@@ -364,52 +364,62 @@ public class ExamPaperExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserAnswerEqualTo(Integer value) {
+        public Criteria andUserAnswerEqualTo(String value) {
             addCriterion("user_answer =", value, "userAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andUserAnswerNotEqualTo(Integer value) {
+        public Criteria andUserAnswerNotEqualTo(String value) {
             addCriterion("user_answer <>", value, "userAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andUserAnswerGreaterThan(Integer value) {
+        public Criteria andUserAnswerGreaterThan(String value) {
             addCriterion("user_answer >", value, "userAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andUserAnswerGreaterThanOrEqualTo(Integer value) {
+        public Criteria andUserAnswerGreaterThanOrEqualTo(String value) {
             addCriterion("user_answer >=", value, "userAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andUserAnswerLessThan(Integer value) {
+        public Criteria andUserAnswerLessThan(String value) {
             addCriterion("user_answer <", value, "userAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andUserAnswerLessThanOrEqualTo(Integer value) {
+        public Criteria andUserAnswerLessThanOrEqualTo(String value) {
             addCriterion("user_answer <=", value, "userAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andUserAnswerIn(List<Integer> values) {
+        public Criteria andUserAnswerLike(String value) {
+            addCriterion("user_answer like", value, "userAnswer");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserAnswerNotLike(String value) {
+            addCriterion("user_answer not like", value, "userAnswer");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserAnswerIn(List<String> values) {
             addCriterion("user_answer in", values, "userAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andUserAnswerNotIn(List<Integer> values) {
+        public Criteria andUserAnswerNotIn(List<String> values) {
             addCriterion("user_answer not in", values, "userAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andUserAnswerBetween(Integer value1, Integer value2) {
+        public Criteria andUserAnswerBetween(String value1, String value2) {
             addCriterion("user_answer between", value1, value2, "userAnswer");
             return (Criteria) this;
         }
 
-        public Criteria andUserAnswerNotBetween(Integer value1, Integer value2) {
+        public Criteria andUserAnswerNotBetween(String value1, String value2) {
             addCriterion("user_answer not between", value1, value2, "userAnswer");
             return (Criteria) this;
         }
