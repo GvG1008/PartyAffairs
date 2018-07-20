@@ -36,7 +36,7 @@
 								<div class="test_content_title">
 									<h2>单选题</h2>
 									<p>
-										<span>共</span><i class="content_lit">60</i><span>题，</span><span>合计</span><i class="content_fs">60</i><span>分</span>
+										<span>共</span><i class="content_lit">{{RadioCount}}</i><span>题，</span><span>合计</span><i class="content_fs">60</i><span>分</span>
 									</p>
 								</div>
 							</div>
@@ -44,9 +44,9 @@
 								<ul>
 				
 										<li v-for="(r,index) in RadioDatas" :id="generate('qu_0_',index)">
-											<div :id="generate('qu0',index)" style="display: none;">{{r.id}}</div>
+											<div :id="generate('qu0',index)" style="display: none;">{{r.questionId}}</div>
 											<div class="test_content_nr_tt">
-												<i>{{index+1}}</i><span>(1分)</span><font>{{r.title}}</font>
+												<i>{{index+1}}</i><span>(1分)</span><font>{{r.questionContent}}</font>
 											</div>
 
 											<div class="test_content_nr_main">
@@ -55,7 +55,7 @@
 															
 															<input type="radio" class="radioOrCheck" :name="generate('answer1',index)" :id="generateFor(index,cindex)" :value="cindex+1"  @click="radiochoice(index)"/>																					
 															<label :for="generateFor(index,cindex)">
-																<p class="ue" style="display: inline;">{{t.choice}}</p>
+																<p class="ue" style="display: inline;">{{r.choice[cindex]}}</p>
 															</label>
 															
 														</li>
@@ -71,7 +71,7 @@
 								<div class="test_content_title">
 									<h2>多选题</h2>
 									<p>
-										<span>共</span><i class="content_lit">30</i><span>题，</span><span>合计</span><i class="content_fs">30</i><span>分</span>
+										<span>共</span><i class="content_lit">{{CheckboxCount}}</i><span>题，</span><span>合计</span><i class="content_fs">30</i><span>分</span>
 									</p>
 								</div>
 							</div>
@@ -79,9 +79,9 @@
 								<ul>
 									
 										<li v-for="(r,index) in CheckboxDatas" :id="generate('qu_1_',index)">
-											<div :id="generate('qu1',index)" style="display: none;">{{r.id}}</div>
+											<div :id="generate('qu1',index)" style="display: none;">{{r.questionId}}</div>
 											<div class="test_content_nr_tt">
-												<i>{{index+1}}</i><span>(1分)</span><font>{{r.title}}</font>
+												<i>{{index+1}}</i><span>(1分)</span><font>{{r.questionContent}}</font>
 											</div>
 
 											<div class="test_content_nr_main">
@@ -91,7 +91,7 @@
 															<input type="checkbox" class="radioOrCheck" :name="generate('answer2',index)" :id="generateFor1(index,cindex)" :value="cindex+1"  @click="checkchoice(index)"/>
 															
 															<label :for="generateFor1(index,cindex)">
-																<p class="ue" style="display: inline;">{{t.choice}}</p>
+																<p class="ue" style="display: inline;">{{r.choice[cindex]}}</p>
 															</label>
 														</li>
 																											
