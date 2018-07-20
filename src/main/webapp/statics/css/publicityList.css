@@ -43,7 +43,7 @@
 }
 
 .publicity-title{
-	padding: 10px 0px 10px 20px;
+	padding: 15px 0px 5px 20px;
 }
 
 .list-table tr:hover{
@@ -58,6 +58,13 @@
 .publicity-title a:hover{
 	color: #37aaea;
 	text-decoration: none;
+}
+
+.publicity-title p{
+	width: 700px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .publicity-time{
