@@ -1,0 +1,87 @@
+.list-table{
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.list-table td{
+	font-size: 17px;
+}
+
+#list-title{
+	width: 100%;
+	font-weight: bolder;
+	font-size: 40px;
+	text-align: center;
+	font-family: kaiti;
+}
+
+.publicity-list{
+	position: relative;
+	top: 20px;
+	width: 85%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #FBFBFB;
+	padding: 24px 24px 20px 24px;
+    border: 0;
+	box-shadow: 2px 0 0 0 #d2d2d2,
+	-1px 0 0 0 #d2d2d2,
+	0 2px 0 0 #b6b6b6,
+	0 3px 0 0 #d2d2d2,
+	3px 0 0 0 #e6e6e6,
+	-2px 0 0 0 #e6e6e6,
+	0 4px 0 0 #e6e6e6,
+	0 -1px 0 0 #e6e6e6;
+	border-radius: 4px;
+}
+
+.list-header{
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 15px;
+}
+
+.publicity-title{
+	padding: 10px 0px 10px 20px;
+}
+
+.list-table tr:hover{
+	background-color: #F5F5F5;
+}
+
+.publicity-title a{
+	font-family: "新宋体";
+	color: black;
+}
+
+.publicity-title a:hover{
+	color: #37aaea;
+	text-decoration: none;
+}
+
+.publicity-time{
+	text-align: center;
+}
+
+.list-footer{
+	background: linear-gradient(#fff,#ebebeb) repeat scroll 0 0 transparent;
+	border-radius: 0 0 5px 5px;
+    border-top: 1px solid #d6d6d6;
+    padding: 15px 24px;
+    margin: 0 -24px;
+    height: 100px;
+    position: relative;
+    top: 20px;
+}
+
+.page{
+	margin-top: 20px;
+	width: 360px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#aimspage{
+	width: 50px;
+}
