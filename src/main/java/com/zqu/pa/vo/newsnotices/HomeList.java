@@ -11,6 +11,8 @@ public class HomeList {
     private String title;
     
     private String date;
+    
+    private String coverpath;
 
     public Integer getId() {
         return id;
@@ -36,5 +38,12 @@ public class HomeList {
         this.date = DateToString.getDateString("MM/dd", date);
     }
     
-    
+    public String getCoverpath() {
+        return coverpath;
+    }
+
+    public void setCoverpath(String coverpath) {
+        this.coverpath = coverpath;
+    }
+
 }

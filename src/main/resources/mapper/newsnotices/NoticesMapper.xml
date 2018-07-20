@@ -340,7 +340,7 @@
 
     <!-- 以上为逆向工程 -->
   <select id="getHomeListLimit" resultType="com.zqu.pa.vo.newsnotices.HomeList">
-    select notices_id 'id' , title , date 
+    select notices_id 'id' , title , date , coverpath
     from notices
     where state = 1
     and type = #{type}
