@@ -14,4 +14,12 @@ public interface UserService {
      * @return
      */
     List<String> getPermissionMenu(int roleId);
+    
+    /**
+     * 根据Id获取姓名
+     * @param userId
+     * @return
+     */
+    String getUserRealName(String userId);
+    
 }

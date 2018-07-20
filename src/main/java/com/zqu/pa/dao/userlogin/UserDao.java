@@ -16,4 +16,6 @@ public interface UserDao {
      * @return
      */
     List<String> getRolePermission(int roleId);
+
+    String getRealName(String userId);
 }

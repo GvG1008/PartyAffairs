@@ -13,4 +13,9 @@
 		LEFT JOIN permission_menu b ON a.permission = b.permission_id
 		where role_id = #{roleId}
 	</select>
+	<select id="getRealName" resultType="String" parameterType="String">
+	   select name
+	   from user_person_info
+	   where user_id = #{userId}
+	</select>
 </mapper>
