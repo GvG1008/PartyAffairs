@@ -14,6 +14,10 @@
 	background: #5d9cec;
 	color:#fff;
 }
+.errorAnswer{
+    background: #FF0000;
+    color:#fff;
+}
 
 </style>
 </head>
@@ -29,7 +33,7 @@
 							<p class="test_time">
 								<i class="icon iconfont">&#xe6fb;</i><b id="timer1" style="color:red"></b>
 							</p>
-							<font><input type="submit" name="test_jiaojuan" value="交卷" onclick="submit1();return false;"></font>
+							<font><input type="submit" name="test_jiaojuan" value="交卷" onclick="submit1();return false;" id="exam"></font>
 						</div>
 						
 							<div class="test_content">
@@ -159,6 +163,10 @@
 		<!--nr end-->
 		<div class="foot"></div>
 	</div>
+	<!--当前考试-->
+    <div id="current" style="display: none;">
+        
+    </div>
 
 	<script src="../statics/js/jquery-1.11.3.min.js"></script>
 	<script src="../statics/js/jquery.easy-pie-chart.js"></script>

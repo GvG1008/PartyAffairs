@@ -67,6 +67,7 @@ function CountDown() {
 	} else {
 		clearInterval(timer);
 		alert("时间到，结束!");
+		updataExam();
 	}
 }
 
@@ -98,7 +99,7 @@ function doCheckChoice(index) {
 	}
 }
 
-function submit1() {
+function submit1() {//提交试卷
 	var jsonObj = new Array();
 	var score = 0;
 	//单选答案
@@ -115,9 +116,12 @@ function submit1() {
 		app.datas.singleQuestion[t].userAnswer = answer;
 		var correctanswer = app.datas.singleQuestion[t].answer;
 		if(answer.sort().toString() == correctanswer.sort().toString()){
+			//alert("答案正确");
 			app.datas.singleQuestion[t].correct = true;
+			//alert(app.datas.singleQuestion[t].correct);
 			score += 1;
 		}else{
+			//alert("答案错误");
 			app.datas.singleQuestion[t].correct = false;
 		}
 		var temp = {questionId : app.datas.singleQuestion[t].questionId, userAnswer : answer.join(",")};
@@ -137,9 +141,9 @@ function submit1() {
 		var correctanswer = app.datas.multipleQuestion[t].answer;
 		if(answer.sort().toString() == correctanswer.sort().toString()){
 			score += 2;
-			app.datas.singleQuestion[t].correct = true;
+			app.datas.multipleQuestion[t].correct = true;
 		}else{
-			app.datas.singleQuestion[t].correct = false;
+			app.datas.multipleQuestion[t].correct = false;
 		}
 		var temp = {questionId : app.datas.multipleQuestion[t].questionId, userAnswer : answer.join(",")};
 		jsonObj.push(temp);
@@ -148,8 +152,8 @@ function submit1() {
 	/*for(var p in jsonObj){//遍历json数组时，这么写p为索引，0,1	 
 		alert(jsonObj[p].questionId + " " + jsonObj[p].userAnswer);
 	}*/
-
-	var examPaper = jsonObj;
+	updataExam();
+	/*var examPaper = jsonObj;
 	$.ajax({		
 		type : "post",// 请求方式
 		url : "../exampaper/"+examid+"/"+score,// 地址，就是json文件的请求路径
@@ -157,8 +161,52 @@ function submit1() {
 		contentType : 'application/json;charset=utf-8',
 		dataType : "json",// 数据类型可以为 text xml json script jsonp
 		success : function(result) {// 返回的参数就是 action里面所有的有get和set方法的参数
-			
+			updataExam();
 		}
-	});
+	});*/
+}
 
+//更新考试后的试卷
+function updataExam(){
+	//更新单选错误列表
+	var datas = app.datas.singleQuestion;
+	for(var t in datas){
+		//alert(t+"      "+datas[t].userAnswer+"    "+datas[t].correct);
+		var str = "answer1" + t;
+		var radio = document.getElementsByName(str);
+		for (var i = 0; i < radio.length; i++) {
+			if (radio[i].value  == datas[t].answer) {
+				//alert(radio[i].id);
+				radio[i].parentNode.style.background = "#50f161";	
+			}
+		}
+		if(datas[t].correct == false){
+			var examId = "qu_0_" + t;
+			var cardLi = $('a[href=#' + examId + ']'); // 根据题目ID找到对应答题卡
+			cardLi.removeClass('hasBeenAnswer');
+			cardLi.addClass('errorAnswer');
+		}
+	}
+	//更新多选错误列表
+	var datas1 = app.datas.multipleQuestion;
+	for(var t in datas1){
+		//alert(t+"      "+datas[t].userAnswer+"    "+datas[t].correct);
+		var str = "answer2" + t;
+		obj = document.getElementsByName(str);
+		var temp = datas1[t].answer;
+		//alert(temp);
+		for(var i=0;i<temp.length;i++)
+			for (k in obj) {
+				if (obj[k].value  == temp[i]) {
+					obj[k].parentNode.style.background = "#50f161";	
+				}			
+		}
+		if(datas1[t].correct == false){
+			var examId = "qu_1_" + t;
+			var cardLi = $('a[href=#' + examId + ']'); // 根据题目ID找到对应答题卡
+			cardLi.removeClass('hasBeenAnswer');
+			cardLi.addClass('errorAnswer');
+		}
+	}
+	$('#exam').val("退出");
 }
