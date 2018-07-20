@@ -3,8 +3,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>肇庆学院党务系统</title>
+		<script type="text/javascript" src="../statics/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="../statics/js/home.js" ></script>
 	</head>
 	<body>
+		<div class="loading"></div>
 		<!--头部-->
 		<header>
 			<div class="header">
@@ -68,8 +71,10 @@
 			<ul class="nav-ul">
 				<li class="nav-li">
 					<div class="nav-a" id="news">
-						<p><img src="../statics/img/首页.png" /></p>	
-						<p class="a-span">首页</p>
+						<a id="home-a" href="home.html">
+							<p><img src="../statics/img/首页.png" /></p>	
+							<p class="a-span">首页</p>
+						</a>
 					</div>
 				</li>
 				<li class="nav-li">
@@ -116,36 +121,36 @@
 		</div>
 		<aside class="news" id="anews" style="display: none;">
 			<ul class="news-ul">
-				<li class="news-li"><a class="news-a" id="p-news">党建要闻</a></li>
-				<li class="news-li"><a class="news-a" id="n-publicity">通知公示</a></li>
-				<li class="news-li"><a class="news-a" id="p-publicity">党内公示</a></li>
-				<li class="news-li"><a class="news-a" id="p-download">下载专区</a></li>
+				<a class="news-a" id="p-news" href="home.html?location=djyw"><li class="news-li">党建要闻</li></a>
+				<a class="news-a" id="n-publicity" href="home.html?location=tzgs"><li class="news-li">通知公示</li></a>
+				<a class="news-a" id="p-publicity" href="home.html?location=dngs"><li class="news-li">党内公示</li></a>
+				<a class="news-a" id="p-download" href="home.html?location=xzzq"><li class="news-li">下载专区</li></a>
 			</ul>
 		</aside>
 		<aside class="meeting" id="ameeting" style="display: none;">
 			<ul class="meeting-ul">
-				<li class="meeting-li"><a class="meeting-a" id="pb-meeting">党支部大会</a></li>
-				<li class="meeting-li"><a class="meeting-a" id="pc-meeting">党支委大会</a></li>
-				<li class="meeting-li"><a class="meeting-a" id="pg-meeting">党小组大会</a></li>
+				<a class="meeting-a" id="pb-meeting" href="#" target="_blank"><li class="meeting-li">党支部大会</li></a>
+				<a class="meeting-a" id="pc-meeting" href="#" target="_blank"><li class="meeting-li">党支委大会</li></a>
+				<a class="meeting-a" id="pg-meeting" href="#" target="_blank"><li class="meeting-li">党小组大会</li></a>
 			</ul>
 		</aside>
 		<aside class="party" id="aparty" style="display: none;">
 			<ul class="party-ul">
-				<li class="party-li"><a class="party-a" id="signup">活动报名</a></li>
-				<li class="party-li"><a class="party-a" id="album">活动相册</a></li>
-				<li class="party-li"><a class="party-a" id="development">支部发展</a></li>
-				<li class="party-li"><a class="party-a" id="forum">党员论坛</a></li>
+				<a class="party-a" id="signup" href="#" target="_blank"><li class="party-li">活动报名</li></a>
+				<a class="party-a" id="album" href="#" target="_blank"><li class="party-li">活动相册</li></a>
+				<a class="party-a" id="development" href="#" target="_blank"><li class="party-li">支部发展</li></a>
+				<a class="party-a" id="forum" href="#" target="_blank"><li class="party-li">党员论坛</li></a>
 			</ul>
 		</aside>
 		<aside class="league" id="aleague" style="display: none;">
 			<ul class="league-ul">
-				<li class="league-li"><a class="league-a" id="g-style">团支部风采</a></li>
+				<a class="league-a" id="g-style" href="#" target="_blank"><li class="league-li">团支部风采</li></a>
 			</ul>
 		</aside>
 		<aside class="organ" id="aorgan" style="display: none;">
 			<ul class="organ-ul">
-				<li class="organ-li"><a class="organ-a" id="c-architecture">院组织架构</a></li>
-				<li class="organ-li"><a class="organ-a" id="p-architecture">党支部组织架构</a></li>
+				<a class="organ-a" id="c-architecture" href="#" target="_blank"><li class="organ-li">学生党组织架构</li></a>
+				<a class="organ-a" id="p-architecture" href="#" target="_blank"><li class="organ-li">专业学生党支部组织架构</li></a>
 			</ul>
 		</aside>
 		
@@ -159,8 +164,8 @@
 		</footer>
 		
 		<!--脚本-->
-		<script type="text/javascript" src="../statics/js/jquery-3.3.1.min.js" ></script>
-		<script type="text/javascript" src="../statics/js/home.js" ></script>
+		<link rel="stylesheet" href="../statics/css/bootstrap.min.css" />
+		<script type="text/javascript" src="../statics/js/bootstrap.min.js" ></script>
 		<link rel="stylesheet" href="../statics/css/home.css" />
 	</body>
 </html>

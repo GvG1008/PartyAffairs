@@ -6,6 +6,14 @@ body{
 	padding: 0;
 }
 
+.loading{
+	z-index: 15;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+}
+
 header{
 	width: 100%;
 	height: 200px;
@@ -81,12 +89,13 @@ li{
 }
 
 .search{
+	position: relative;
+	left: 4px;
 	outline: none;
 	font-size: 15px;
 	height: 27px;
-	position: relative;
-	left: 5px;
-	top: 1px;
+	width: 150px;
+	line-height: 27px;
 	border: 0;
 	border-bottom-left-radius: 5px;
 	border-top-left-radius: 5px;
@@ -95,6 +104,7 @@ li{
 .search-btn{
 	outline: none;
 	height: 27px;
+	line-height: 27px;
 	border: 0;
 	border-bottom-right-radius: 5px;
 	border-top-right-radius: 5px;
@@ -145,11 +155,15 @@ li{
 .organ{
 	z-index: 10;
 	background-color: white;
-	width: 150px;
+	width: 130px;
 	box-shadow: 0 2px 4px rgba(0,0,0,.16);
     border-radius: 0 0 4px 4px;
 	position: absolute;
 	top: 290px;
+}
+
+.organ{
+	width: 170px;
 }
 
 .info{
@@ -201,7 +215,7 @@ footer{
 }
 
 .aside{
-	z-index:1;
+	z-index:12;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -222,7 +236,10 @@ footer{
 }
 
 #content-p{
+	font-size: 20px;
 	text-align: center;
+	position: relative;
+	top: 30px;
 }
 
 .content-input{
@@ -234,12 +251,14 @@ footer{
     margin: 10px 95px;
     width: 200px;
     height: 30px;
+    position: relative;
+    top: 30px;
 }
 
 .content-button{
 	color: white;
 	position: relative;
-	top: 20px;
+	top: 50px;
 	left: 120px;
 	background-color: #37aaea;
 	border: 1px solid #37aaea;
@@ -250,11 +269,11 @@ footer{
 }
 
 .forget{
-	cursor: default;
+	cursor: pointer;
 	font-size: 10px;
 	color: #37aaea;
 	position: relative;
-	top: 20px;
+	top: 60px;
 	left: 250px;
 }
 
@@ -289,7 +308,8 @@ footer{
 .meeting-a:hover,
 .organ-a:hover,
 #learn-a:hover,
-#test-a:hover{
+#test-a:hover,
+#home-a:hover{
 	text-decoration:none;
 	color: black;
 }

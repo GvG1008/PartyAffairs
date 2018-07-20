@@ -1,13 +1,26 @@
-$(document).ready(function(){ 
+/*
+ * 取路径参数
+ */
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return decodeURI(r[2]); return null; 
+}
+
+$(document).ready(function(){
 	/*
-	 * 加载首页
+	 * 跳转
 	 */
 	$(function(){
-		$("#frame").load("homeNews.html");
+		var name=getUrlParam('location');
+		if(name==null){
+			$("#frame").load("homeNews.html");
+		}
+		else if(name=="djyw"||name=="tzgs"||name=="dngs"||name=="xzzq"){
+			$("#frame").load("publicityList.html");
+		}
 		
-		var top = document.getElementById("search-btn").getBoundingClientRect().top;
-		top = top-10;
-		document.getElementById("search").style.top = top+"px";
+		$(".loading").fadeOut(500);
 	});
 	
 	/*
@@ -149,13 +162,6 @@ $(document).ready(function(){
 	$(".content-button").click(function(){
 		$("#laside").fadeOut(500);
 		$("#caside").fadeOut(500);
-	});
-	
-	/*
-	 * 跳转
-	 */
-	$("#party-news").click(function(){
-		$("#frame").load("news.html");
 	});
 	
 })
