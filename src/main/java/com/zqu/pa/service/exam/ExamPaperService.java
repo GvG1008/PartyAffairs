@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.zqu.pa.entity.exam.Answer;
 import com.zqu.pa.entity.exam.Choice;
+import com.zqu.pa.entity.exam.ExamInfoCategoryKey;
 import com.zqu.pa.entity.exam.ExamPaper;
 import com.zqu.pa.vo.exam.Paper;
 import com.zqu.pa.vo.exam.Question;
@@ -26,9 +27,16 @@ public interface ExamPaperService {
      * @param branchId 党支部ID
      * @param quantity 要取的题目数量
      * @param type     题目类型(0:单选；1:多选)
+     * @param category 分类对应的所有题目id
      * @return
      */
-    List<Question> getQuestion(Integer branchId, Integer quantity, Integer type);
+    List<Question> getQuestion(Integer branchId, Integer quantity, Integer type, List<Integer> listQuestionId);
+    
+    //查出此次考试对应的分类列表id
+    List<Integer> listExamCategory(Integer examId);
+    
+    //查出对应分类列表id下的所有question_id
+    List<Integer> listCategoryQuestionId(List<Integer> listCategory);
        
     //根据一个question_id集合查找对应所有选项
     List<Choice> listChoice(List<Integer> questionId);
@@ -59,6 +67,7 @@ public interface ExamPaperService {
     //获取考试及格分数线
     Integer getPassScore(Integer examId);
     
+    //XXX 可以对原试卷question_id和user_answer字段进行更行操作
     //更新保存考生此次试卷（先删除原先试卷，再执行插入操作）
     Integer updateExamPaper(List<ExamPaper> examPaper, String userId, Integer examId);
     

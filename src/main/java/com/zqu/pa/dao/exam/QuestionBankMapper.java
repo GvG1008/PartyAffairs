@@ -36,5 +36,6 @@ public interface QuestionBankMapper {
      * @return
      */
     List<QuestionBank> selectRand(@Param("branchId") Integer branchId, 
-            @Param("quantity") Integer quantity, @Param("type") Integer type);
+            @Param("quantity") Integer quantity, @Param("type") Integer type, 
+            @Param("questionId") List<Integer> questionId);
 }

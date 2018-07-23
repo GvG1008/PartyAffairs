@@ -12,20 +12,26 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zqu.pa.dao.exam.AnswerMapper;
 import com.zqu.pa.dao.exam.ChoiceMapper;
+import com.zqu.pa.dao.exam.ExamInfoCategoryMapper;
 import com.zqu.pa.dao.exam.ExamInfoMapper;
 import com.zqu.pa.dao.exam.ExamPaperMapper;
 import com.zqu.pa.dao.exam.ExamScoreMapper;
 import com.zqu.pa.dao.exam.QuestionBankMapper;
+import com.zqu.pa.dao.exam.QuestionExamCategoryMapper;
 import com.zqu.pa.entity.exam.Answer;
 import com.zqu.pa.entity.exam.AnswerExample;
 import com.zqu.pa.entity.exam.Choice;
 import com.zqu.pa.entity.exam.ChoiceExample;
 import com.zqu.pa.entity.exam.ExamInfo;
+import com.zqu.pa.entity.exam.ExamInfoCategoryExample;
+import com.zqu.pa.entity.exam.ExamInfoCategoryKey;
 import com.zqu.pa.entity.exam.ExamPaper;
 import com.zqu.pa.entity.exam.ExamPaperExample;
 import com.zqu.pa.entity.exam.ExamScore;
 import com.zqu.pa.entity.exam.ExamScoreKey;
 import com.zqu.pa.entity.exam.QuestionBank;
+import com.zqu.pa.entity.exam.QuestionExamCategoryExample;
+import com.zqu.pa.entity.exam.QuestionExamCategoryKey;
 import com.zqu.pa.service.exam.ExamPaperService;
 import com.zqu.pa.vo.exam.Paper;
 import com.zqu.pa.vo.exam.Question;
@@ -66,6 +72,12 @@ public class ExamPaperServiceImpl implements ExamPaperService {
     @Autowired
     private ExamPaperMapper examPaperMapper;
     
+    @Autowired
+    private ExamInfoCategoryMapper examInfoCategoryMapper;
+    
+    @Autowired
+    private QuestionExamCategoryMapper questionExamCategoryMapper;
+    
     @Override
     public Paper getExamPaper(Integer examId) {
         
@@ -84,25 +96,54 @@ public class ExamPaperServiceImpl implements ExamPaperService {
         paper.setExamPeriod(examPeriod);
         paper.setSingleQuantity(singleQuantity);
         paper.setMultipleQuantity(multipleQuantity);
-
+        
+        //此次考试对应的分类id
+        List<Integer> listCategory = listExamCategory(examId);
+        //找出此次考试所有分类下的所有question_id
+        List<Integer> listQuestionId = listCategoryQuestionId(listCategory);
+        
         //type = 0:单选题
         //type = 1:多选题
         Integer type = 0;
-        paper.setSingleQuestion(getQuestion(branchId, singleQuantity, type));
+        paper.setSingleQuestion(getQuestion(branchId, singleQuantity, type, listQuestionId));
         type = 1;
-        paper.setMultipleQuestion(getQuestion(branchId, multipleQuantity, type));
+        paper.setMultipleQuestion(getQuestion(branchId, multipleQuantity, type, listQuestionId));
         
         return paper;
     }
+    
+    @Override
+    public List<Integer> listExamCategory(Integer examId) {
+        
+        ExamInfoCategoryExample example = new ExamInfoCategoryExample();
+        example.createCriteria().andExamIdEqualTo(examId);
+        List<ExamInfoCategoryKey> temp = examInfoCategoryMapper.selectByExample(example);
+        List<Integer> listCategory = new ArrayList<Integer>();
+        for (int i = 0; i < temp.size(); i++)
+            listCategory.add(temp.get(i).getCategoryId());
+        return listCategory;
+    }
+    
+    @Override
+    public List<Integer> listCategoryQuestionId(List<Integer> listCategory) {
+        
+        QuestionExamCategoryExample example = new QuestionExamCategoryExample();
+        example.createCriteria().andCategoryIdIn(listCategory);
+        List<QuestionExamCategoryKey> temp = questionExamCategoryMapper.selectByExample(example);
+        List<Integer> listQuestionId = new ArrayList<Integer>();
+        for (int i = 0; i < temp.size(); i++)
+            listQuestionId.add(temp.get(i).getQuestionId());
+        return listQuestionId;
+    }
 
     @Override
-    public List<Question> getQuestion(Integer branchId, Integer quantity, Integer type) {
+    public List<Question> getQuestion(Integer branchId, Integer quantity, Integer type, List<Integer> listQuestionId) {
 
         //TODO 错误检测，返回值为空时，题库数量不足，题目、选项、答案不一致
         
         List<Question> question = new ArrayList<Question>();
         //随机选择获得题库信息
-        List<QuestionBank> listQuestionBank = questionBankMapper.selectRand(branchId, quantity, type);
+        List<QuestionBank> listQuestionBank = questionBankMapper.selectRand(branchId, quantity, type, listQuestionId);
         //获取的题目ID集合
         List<Integer> listQuestionID = new ArrayList<Integer>();
         for (int i = 0; i < listQuestionBank.size(); i++)
