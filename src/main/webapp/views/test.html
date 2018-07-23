@@ -33,7 +33,8 @@
 							<p class="test_time">
 								<i class="icon iconfont">&#xe6fb;</i><b id="timer1" style="color:red"></b>
 							</p>
-							<font><input type="submit" name="test_jiaojuan" value="交卷" onclick="submit1();return false;" id="exam"></font>
+							<font v-if="submit==0"><input type="submit" name="test_jiaojuan" value="交卷" onclick="submit1();return false;" ></font>
+							<font v-else><input type="submit" name="test_jiaojuan" value="退出" ></font>
 						</div>
 						
 							<div class="test_content">

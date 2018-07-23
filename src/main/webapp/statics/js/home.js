@@ -168,3 +168,43 @@ $(document).ready(function(){
 	});
 	
 })
+var head = new Vue({
+	el : '#head',
+	data :{
+		"user":[],
+		"username":123,
+		"password":123
+	},
+	methods:{
+		Login : function(){
+			doLogin();
+		}
+	},
+	created: function(){
+		var self = this;
+		$.ajax({
+			type:"GET",
+			url: "../loginInfo", 
+			dataType: "json",
+			success: function(result) { 
+				self.user = result.data;
+			}			
+		})
+	}
+})
+function doLogin(){
+	$.ajax({
+		type:"post",
+		url:"../login",
+		data: {"userId":head.username,"password":head.password},
+		dataType: "json", // 数据类型可以为 text xml json script jsonp
+		success: function(result) { 
+			if(result.status==200){
+				alert(result.msg);
+			}else if(result.status==0){
+				alert(result.msg);
+				head.user = result.data;
+			}
+		}
+	});
+}

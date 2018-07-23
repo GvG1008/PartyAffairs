@@ -11,7 +11,7 @@
         	</div>
         	<div class="list-content">
         		<table class="list-table">
-					<tr>
+					<!-- <tr>
 						<td class="publicity-title"><a href="home.html?location=1" target="_blank"><p title="只要是活着的东西，就算是神我也杀给你看">只要是活着的东西，就算是神我也杀给你看</p></a></td>
 						<td class="publicity-time">07-17</td>
 					</tr>
@@ -22,7 +22,7 @@
 					<tr>
 						<td class="publicity-title"><a href="home.html" target="_blank"><p title="只要是活着的东西，就算是神我也杀给你看">只要是活着的东西，就算是神我也杀给你看</p></a></td>
 						<td class="publicity-time">07-17</td>
-					</tr>
+					</tr> -->
 					<tr v-for="r in datas">
 						<td class="publicity-title"><a :href="'#'+r.id" target="_blank"><p :title="r.title">{{r.title}}</p></a></td>
 						<td class="publicity-time">{{r.date}}</td>
