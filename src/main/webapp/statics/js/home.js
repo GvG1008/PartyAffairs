@@ -19,6 +19,9 @@ $(document).ready(function(){
 		else if(name=="djyw"||name=="tzgs"||name=="dngs"||name=="xzzq"){
 			$("#frame").load("publicityList.html");
 		}
+		else if(name=="1"){
+			$("#frame").load("publicity.html");
+		}
 		
 		$(".loading").fadeOut(500);
 	});
