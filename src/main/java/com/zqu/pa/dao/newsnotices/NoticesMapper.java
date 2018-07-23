@@ -42,4 +42,5 @@ public interface NoticesMapper {
     //根据数目和公示类型号，获取审核通过，仅有标题与日期的公示列表，按日期排序
     List<HomeList> getHomeListLimit(@Param("limit") int limit,@Param("type") int type);
     List<MenuList> getMenuListLimit(@Param("index")int index,@Param("num") int num,@Param("type") int type);
+    
 }

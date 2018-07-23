@@ -54,7 +54,20 @@ public class NoticesServiceImpl implements NoticesService{
     @Override
     public Notices getNoticesInfo(int notices_id, int type, int stateType) {
         Notices notices = new Notices();
+        //根据ID搜索公示
         notices = noticesDao.selectByPrimaryKey(notices_id);
-        return null;
+        
+        if(notices==null)
+            return null;
+        if(notices.getType()!=type)//搜索公示类型不对应，返回空
+            return null;
+        if(stateType==1&&notices.getState()!=1)//stateType区别前后台，前台不予显示未审核
+            return null;
+        else if(stateType==1&&notices.getState()==1) {
+            notices.setCoverpath(null);
+            notices.setCreatorId(null);
+            notices.setLastTime(null);
+        }
+        return notices;
     }
 }
