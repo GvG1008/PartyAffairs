@@ -91,7 +91,7 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping(value="/login",method=RequestMethod.POST)
-    public ServerResponse login(User from_user) {
+    public ServerResponse<UserBasicInfo> login(User from_user) {
         String userId = from_user.getUserId();
         String password = from_user.getPassword();
         Subject subject = SecurityUtils.getSubject(); 
@@ -101,15 +101,26 @@ public class UserController {
             Session session=subject.getSession();
             session.setAttribute("subject", subject);
             session.setAttribute("userId", userId);
-            return ServerResponse.createBySuccess();
+            
+            //获取个人信息
+            //根据ID获取用户信息
+            UserBasicInfo basicInfo = userService.getUserBasicInfo(userId);
+            if(basicInfo==null)
+                return ServerResponse.createByErrorMessage("获取个人信息失败");
+            else 
+                //将用户信息存储进session
+                session.setAttribute("basicInfo", basicInfo);
+            
+            return ServerResponse.createBySuccess("登录成功", basicInfo);
         } catch (UnknownAccountException ua) {
-            return ServerResponse.createByErrorCodeMessage(404, "userId does not exist");
+            return ServerResponse.createByErrorCodeMessage(200, "用户名不存在");
         } catch (IncorrectCredentialsException ic) {
-            return ServerResponse.createByErrorCodeMessage(500,"userId or password is error");
+            return ServerResponse.createByErrorCodeMessage(200,"用户名或密码错误");
         }
     }
     
     /**
+     * 保留测试
      * 根据登录ID，在首页获取用户基本信息，并保存
      */
     @ResponseBody
