@@ -69,6 +69,10 @@
 .rt_more_nr ul{padding:10px; text-align:left;}
 .rt_more_nr ul li{ display:inline-block; margin:5px; height:30px; width:30px; line-height:30px; text-align:center; border:1px solid #e4e4e4;}
 
+#warning{
+	border: 0;
+}
+
 .warning-word1{
 	color: red;
 	font-size: 30px;
