@@ -5,41 +5,35 @@
 		<title></title>
 	</head>
 	<body>
-		<div class="publicity-list">
+		<div class="publicity-list" id="list">
         	<div class="list-header">
         		<p id="list-title"></p>
         	</div>
         	<div class="list-content">
         		<table class="list-table">
-					<tr>
-						<td class="publicity-title"><a href="#" target="_blank"><p title="只要是活着的东西，就算是神我也杀给你看">只要是活着的东西，就算是神我也杀给你看</p></a></td>
-						<td class="publicity-time">07-17</td>
-					</tr>
-					<tr>
-						<td class="publicity-title"><a href="#" target="_blank"><p title="只要是活着的东西，就算是神我也杀给你看">只要是活着的东西，就算是神我也杀给你看</p></a></td>
-						<td class="publicity-time">07-17</td>
-					</tr>
-					<tr>
-						<td class="publicity-title"><a href="#" target="_blank"><p title="只要是活着的东西，就算是神我也杀给你看">只要是活着的东西，就算是神我也杀给你看</p></a></td>
-						<td class="publicity-time">07-17</td>
-					</tr>
+					<tr v-for="r in datas">
+						<td class="publicity-title"><a :href="'#'+r.id" target="_blank"><p :title="r.title">{{r.title}}</p></a></td>
+						<td class="publicity-time">{{r.date}}</td>
+					</tr>					
 				</table>
         	</div>
         	<div class="list-footer">
         		<div class="page">
-        			<button>首页</button>
-        			<button>上一页</button>
+        			<button @click="pageto(1)">首页</button>
+        			<button v-if="currentNum!=1" @click="pageto(currentNum-1)">上一页</button>
         			<p style="display: inline;">
-        				<span id="nowpage">1</span>/
-        				<span id="pagenum">25</span>
+        				<span id="nowpage">{{currentNum}}</span>/
+        				<span id="pagenum">{{totalPageNum}}</span>
         			</p>
-        			<button>下一页</button>
-        			<button>尾页</button>
-        			<button>转到</button>
-        			<input type="text" id="aimspage" />
+        			<button v-if="currentNum!=totalPageNum" @click="pageto(currentNum+1)">下一页</button>
+        			<button @click="pageto(totalPageNum)">尾页</button>
+        			<button @click="pageto(pagetoNum)">转到</button>
+        			<input type="text" id="aimspage" v-model="pagetoNum"/>
         		</div>
         	</div>
        	</div>
+       	<script type="text/javascript" src="../statics/js/jquery-3.3.1.min.js" ></script>
+       	<script src="../statics/js/vue.js"></script>
 		<script type="text/javascript" src="../statics/js/publicityList.js" ></script>
 		<link rel="stylesheet" href="../statics/css/publicityList.css" />
 	</body>
