@@ -8,7 +8,8 @@ var app = new Vue({
 		CheckboxDatas : [],
 		CheckboxCount : [],
 		LeftTime : [],
-		datas : []
+		datas : [],
+		submit : 0
 	},
 	created : function() {
 		var self = this;
@@ -66,7 +67,7 @@ function CountDown() {//时间倒计时
 		--maxtime;
 	} else {
 		clearInterval(timer);
-		alert("时间到，结束!");
+		alert("时间到，考试结束!");
 		updataExam();
 	}
 }
@@ -172,6 +173,7 @@ function submit1() {//提交试卷
 					}
 				}
 				updataExam();
+				clearInterval(timer);
 			}else{
 				alert(result.msg);
 			}
@@ -221,5 +223,5 @@ function updataExam(){
 			cardLi.addClass('errorAnswer');
 		}
 	}
-	$('#exam').val("退出");
+	app.submit = 1;
 }

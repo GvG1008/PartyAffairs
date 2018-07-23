@@ -26,7 +26,7 @@ $(function(){
 	}
 
 })
-
+var length = 3;//每页显示条数
 var list = new Vue({
 	el : '#list',
 	data: {
@@ -47,16 +47,16 @@ var list = new Vue({
 })
 function doPageto(currentNum){
 	if(typename == "djyw"){
-		typeusl = "../newsMenu/"+currentNum;
+		typeusl = "../newsMenu/"+currentNum+"/"+length;
 	}
 	else if(typename == "tzgs"){
-		typeusl = "../noticesMenu/public/"+currentNum;
+		typeusl = "../noticesMenu/public/"+currentNum+"/"+length;
 	}
 	else if(typename == "dngs"){
-		typeusl = "../noticesMenu/party/"+currentNum;
+		typeusl = "../noticesMenu/party/"+currentNum+"/"+length;
 	}
 	else if(typename == "xzzq"){
-		typeusl = "../newsMenu/"+currentNum;
+		typeusl = "../newsMenu/"+currentNum+"/"+length;
 	}
 	$.ajax({
 		type : "GET",// 请求方式

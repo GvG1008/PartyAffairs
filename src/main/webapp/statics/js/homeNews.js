@@ -137,6 +137,7 @@ var branch = new Vue({
 		}
 	}
 })
+var newslength = 5;
 var News = new Vue({
 	el: '#FocusNews',
 	data:{
@@ -146,7 +147,7 @@ var News = new Vue({
 		var self = this;
 		$.ajax({
 			type:"get",
-			url:"../homelist/newslist",
+			url:"../homelist/newslist/"+newslength,
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
 				if(result.status==0){
@@ -177,7 +178,7 @@ var PartyNews = new Vue({
 		var self = this;
 		$.ajax({
 			type:"get",
-			url:"../homelist/newslist",
+			url:"../homelist/newslist/"+newslength,
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
 				if(result.status==0)
@@ -198,7 +199,7 @@ var NoticePublicity = new Vue({
 		var self = this;
 		$.ajax({
 			type:"get",
-			url:"../homelist/noticeslist/public",
+			url:"../homelist/noticeslist/public/"+newslength,
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
 				if(result.status==0)
@@ -219,7 +220,7 @@ var PartyPublicity = new Vue({
 		var self = this;
 		$.ajax({
 			type:"get",
-			url:"../homelist/noticeslist/party",
+			url:"../homelist/noticeslist/party/"+newslength,
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
 				if(result.status==0)

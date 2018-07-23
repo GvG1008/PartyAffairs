@@ -3,14 +3,28 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>肇庆学院党务系统</title>
-		<script type="text/javascript" src="../statics/js/jquery-3.3.1.min.js" ></script>
-		<script type="text/javascript" src="../statics/js/home.js" ></script>
 	</head>
 	<body>
+	   <div  id="head">
 		<div class="loading"></div>
 		<!--头部-->
 		<header>
-			<div class="header">
+		    <div class="header" v-if="user==''">
+                <div class="school">
+                    <img class="name" src="../statics/img/name.png" />
+                </div>
+                <div class="user">
+                    <ul class="user-ul">
+                        <input type="text" class="search" id="search" placeholder="站内搜索*" />
+                        <button class="search-btn" id="search-btn">
+                            <img src="../statics/img/搜索.png" />
+                        </button>
+                        <span class="user-a">欢迎，游客</span>
+                        <li class="user-li"><span class="user-a" id="login">登录</span></li>                       
+                    </ul>
+                </div>
+            </div>
+			<div class="header" v-else>
 				<div class="school">
 					<img class="name" src="../statics/img/name.png" />
 				</div>
@@ -20,14 +34,13 @@
 						<button class="search-btn" id="search-btn">
 							<img src="../statics/img/搜索.png" />
 						</button>
-						<span class="user-a">欢迎，游客</span>
+						<span class="user-a">欢迎，{{user.realName}}</span>
 						<li class="user-li"><span class="user-a" id="info">个人信息</span></li>
 						<li class="user-li"><a class="user-a" id="manager" href="#">管理端</a></li>
 						<li class="user-li">
 							<span class="user-a" id="message">消息</span>
 							<div class="message" id="dis-message"></div>
 						</li>
-						<li class="user-li"><span class="user-a" id="login">登录</span></li>
 						<li class="user-li"><span class="user-a" id="change">修改密码</span></li>
 						<li class="user-li"><span class="user-a" id="logout">注销</span></li>
 					</ul>
@@ -47,9 +60,9 @@
 		<div class="aside" id="laside" style="display: none;">
         	<aside class="login" id="alogin">
         		<p id="content-p"><strong>请输入您的账号和密码</strong></p>
-        		<input class="content-input" type="text" id="username" placeholder="账号*" /><br />
-        		<input class="content-input" type="password" id="password" placeholder="密码*" /><br />
-        		<input type="button" class="content-button" id="login-btn" value="登录"/>
+        		<input class="content-input" type="text" id="username" placeholder="账号*" v-model="username"/><br />
+        		<input class="content-input" type="password" id="password" placeholder="密码*" v-model="password"/><br />
+        		<input type="button" class="content-button" id="login-btn" value="登录" @click="Login()"/>
         		<input type="button" class="content-button" value="取消"/>
         		<p class="forget" id="forget">忘记密码>></p>
        	 	</aside>
@@ -148,7 +161,7 @@
 				<a class="organ-a" id="p-architecture" href="#" target="_blank"><li class="organ-li">专业学生党支部组织架构</li></a>
 			</ul>
 		</aside>
-		
+		</div>
 		<!--正文-->
 		
 		<div class="frame" id="frame"></div>
@@ -158,9 +171,13 @@
 			<p>Copyright@2018</p>
 		</footer>
 		
+		
 		<!--脚本-->
 		<link rel="stylesheet" href="../statics/css/bootstrap.min.css" />
+		<script type="text/javascript" src="../statics/js/jquery-3.3.1.min.js" ></script>
 		<script type="text/javascript" src="../statics/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="../statics/js/vue.js" ></script>
+		<script type="text/javascript" src="../statics/js/home.js" ></script>
 		<link rel="stylesheet" href="../statics/css/home.css" />
 		<link rel="stylesheet" href="../statics/css/meetingList.css" />
 	</body>
