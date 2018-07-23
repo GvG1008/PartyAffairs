@@ -2,7 +2,7 @@ package com.zqu.pa.entity.exam;
 
 import org.springframework.stereotype.Component;
 
-@Component("examInfo")
+@Component
 public class ExamInfo {
     private Integer examId;
 
@@ -22,7 +22,7 @@ public class ExamInfo {
 
     private Integer passScore;
 
-    private Integer roleId;
+    private Integer finish;
 
     public Integer getExamId() {
         return examId;
@@ -96,11 +96,11 @@ public class ExamInfo {
         this.passScore = passScore;
     }
 
-    public Integer getRoleId() {
-        return roleId;
+    public Integer getFinish() {
+        return finish;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setFinish(Integer finish) {
+        this.finish = finish;
     }
 }

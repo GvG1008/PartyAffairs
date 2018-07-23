@@ -654,63 +654,63 @@ public class ExamInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdIsNull() {
-            addCriterion("role_id is null");
+        public Criteria andFinishIsNull() {
+            addCriterion("finish is null");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdIsNotNull() {
-            addCriterion("role_id is not null");
+        public Criteria andFinishIsNotNull() {
+            addCriterion("finish is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdEqualTo(Integer value) {
-            addCriterion("role_id =", value, "roleId");
+        public Criteria andFinishEqualTo(Integer value) {
+            addCriterion("finish =", value, "finish");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdNotEqualTo(Integer value) {
-            addCriterion("role_id <>", value, "roleId");
+        public Criteria andFinishNotEqualTo(Integer value) {
+            addCriterion("finish <>", value, "finish");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdGreaterThan(Integer value) {
-            addCriterion("role_id >", value, "roleId");
+        public Criteria andFinishGreaterThan(Integer value) {
+            addCriterion("finish >", value, "finish");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("role_id >=", value, "roleId");
+        public Criteria andFinishGreaterThanOrEqualTo(Integer value) {
+            addCriterion("finish >=", value, "finish");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdLessThan(Integer value) {
-            addCriterion("role_id <", value, "roleId");
+        public Criteria andFinishLessThan(Integer value) {
+            addCriterion("finish <", value, "finish");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdLessThanOrEqualTo(Integer value) {
-            addCriterion("role_id <=", value, "roleId");
+        public Criteria andFinishLessThanOrEqualTo(Integer value) {
+            addCriterion("finish <=", value, "finish");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdIn(List<Integer> values) {
-            addCriterion("role_id in", values, "roleId");
+        public Criteria andFinishIn(List<Integer> values) {
+            addCriterion("finish in", values, "finish");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdNotIn(List<Integer> values) {
-            addCriterion("role_id not in", values, "roleId");
+        public Criteria andFinishNotIn(List<Integer> values) {
+            addCriterion("finish not in", values, "finish");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdBetween(Integer value1, Integer value2) {
-            addCriterion("role_id between", value1, value2, "roleId");
+        public Criteria andFinishBetween(Integer value1, Integer value2) {
+            addCriterion("finish between", value1, value2, "finish");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("role_id not between", value1, value2, "roleId");
+        public Criteria andFinishNotBetween(Integer value1, Integer value2) {
+            addCriterion("finish not between", value1, value2, "finish");
             return (Criteria) this;
         }
     }

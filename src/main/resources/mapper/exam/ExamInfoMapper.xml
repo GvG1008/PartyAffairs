@@ -11,7 +11,7 @@
     <result column="single_quantity" jdbcType="INTEGER" property="singleQuantity" />
     <result column="multiple_quantity" jdbcType="INTEGER" property="multipleQuantity" />
     <result column="pass_score" jdbcType="INTEGER" property="passScore" />
-    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="finish" jdbcType="INTEGER" property="finish" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List">
     exam_id, branch_id, exam_title, start_time, end_time, exam_period, single_quantity, 
-    multiple_quantity, pass_score, role_id
+    multiple_quantity, pass_score, finish
   </sql>
   <select id="selectByExample" parameterType="com.zqu.pa.entity.exam.ExamInfoExample" resultMap="BaseResultMap">
     select
@@ -110,11 +110,11 @@
     insert into exam_info (exam_id, branch_id, exam_title, 
       start_time, end_time, exam_period, 
       single_quantity, multiple_quantity, pass_score, 
-      role_id)
+      finish)
     values (#{examId,jdbcType=INTEGER}, #{branchId,jdbcType=INTEGER}, #{examTitle,jdbcType=VARCHAR}, 
       #{startTime,jdbcType=BIGINT}, #{endTime,jdbcType=BIGINT}, #{examPeriod,jdbcType=INTEGER}, 
       #{singleQuantity,jdbcType=INTEGER}, #{multipleQuantity,jdbcType=INTEGER}, #{passScore,jdbcType=INTEGER}, 
-      #{roleId,jdbcType=INTEGER})
+      #{finish,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.exam.ExamInfo">
     insert into exam_info
@@ -146,8 +146,8 @@
       <if test="passScore != null">
         pass_score,
       </if>
-      <if test="roleId != null">
-        role_id,
+      <if test="finish != null">
+        finish,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -178,8 +178,8 @@
       <if test="passScore != null">
         #{passScore,jdbcType=INTEGER},
       </if>
-      <if test="roleId != null">
-        #{roleId,jdbcType=INTEGER},
+      <if test="finish != null">
+        #{finish,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -219,8 +219,8 @@
       <if test="record.passScore != null">
         pass_score = #{record.passScore,jdbcType=INTEGER},
       </if>
-      <if test="record.roleId != null">
-        role_id = #{record.roleId,jdbcType=INTEGER},
+      <if test="record.finish != null">
+        finish = #{record.finish,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -238,7 +238,7 @@
       single_quantity = #{record.singleQuantity,jdbcType=INTEGER},
       multiple_quantity = #{record.multipleQuantity,jdbcType=INTEGER},
       pass_score = #{record.passScore,jdbcType=INTEGER},
-      role_id = #{record.roleId,jdbcType=INTEGER}
+      finish = #{record.finish,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -270,8 +270,8 @@
       <if test="passScore != null">
         pass_score = #{passScore,jdbcType=INTEGER},
       </if>
-      <if test="roleId != null">
-        role_id = #{roleId,jdbcType=INTEGER},
+      <if test="finish != null">
+        finish = #{finish,jdbcType=INTEGER},
       </if>
     </set>
     where exam_id = #{examId,jdbcType=INTEGER}
@@ -286,7 +286,7 @@
       single_quantity = #{singleQuantity,jdbcType=INTEGER},
       multiple_quantity = #{multipleQuantity,jdbcType=INTEGER},
       pass_score = #{passScore,jdbcType=INTEGER},
-      role_id = #{roleId,jdbcType=INTEGER}
+      finish = #{finish,jdbcType=INTEGER}
     where exam_id = #{examId,jdbcType=INTEGER}
   </update>
   
