@@ -26,34 +26,34 @@ var app = new Vue({
 					maxtime = result.data.examPeriod;
 					self.CountDownTime();
 				} else {
-					alert(msg);
+					alert(result.msg);
 				}
 			}
 		});
 	},
 	methods : {
-		generateFor : function(index, t) {
+		generateFor : function(index, t) {//单选动态相连
 			return "0_answer_" + index + "_option_" + t;
 		},
-		generateFor1 : function(index, t) {
+		generateFor1 : function(index, t) {//多选动态相连
 			return "1_answer_" + index + "_option_" + t;
 		},
-		generate : function(id, index) {
+		generate : function(id, index) {//动态id
 			return id + index;
 		},
-		radiochoice : function(index) {
+		radiochoice : function(index) {//选择单选
 			doRadioChoice(index);
 		},
-		checkchoice : function(index) {
+		checkchoice : function(index) {//选择多选
 			doCheckChoice(index);
 		},
-		CountDownTime : function() {
+		CountDownTime : function() {//时间倒计时
 			timer = setInterval("CountDown()", 1000);
 		}
 	}
 })
 
-function CountDown() {
+function CountDown() {//时间倒计时
 	if (maxtime >= 0) {
 		minutes = Math.floor(maxtime / 60);
 		seconds = Math.floor(maxtime % 60);
@@ -152,8 +152,8 @@ function submit1() {//提交试卷
 	/*for(var p in jsonObj){//遍历json数组时，这么写p为索引，0,1	 
 		alert(jsonObj[p].questionId + " " + jsonObj[p].userAnswer);
 	}*/
-	updataExam();
-	/*var examPaper = jsonObj;
+	//updataExam();
+	var examPaper = jsonObj;
 	$.ajax({		
 		type : "post",// 请求方式
 		url : "../exampaper/"+examid+"/"+score,// 地址，就是json文件的请求路径
@@ -161,9 +161,22 @@ function submit1() {//提交试卷
 		contentType : 'application/json;charset=utf-8',
 		dataType : "json",// 数据类型可以为 text xml json script jsonp
 		success : function(result) {// 返回的参数就是 action里面所有的有get和set方法的参数
-			updataExam();
+			if(result.status==0){
+				if(result.data.passScore > score){
+					alert("很遗憾！此次考试不及格，再接再厉！\n本次考试成绩为："+score+"\n历史最高分数是："+result.data.topScore);
+				}else{
+					if(result.data.topScore>=score){
+						alert("恭喜你！此次考试及格！\n本次考试成绩为："+score+"\n历史最高分数是："+result.data.topScore+"\n不高于历史最高分数，不计入成绩！");
+					}else{
+						alert("恭喜你！此次考试及格！\n本次考试成绩为："+score+"\n历史最高分数是："+result.data.topScore+"\n高于历史最高分数，计入成绩！");
+					}
+				}
+				updataExam();
+			}else{
+				alert(result.msg);
+			}
 		}
-	});*/
+	});
 }
 
 //更新考试后的试卷
