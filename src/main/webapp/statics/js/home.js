@@ -13,14 +13,20 @@ $(document).ready(function(){
 	 */
 	$(function(){
 		var name=getUrlParam('location');
+		var id=getUrlParam('id');
 		if(name==null){
 			$("#frame").load("homeNews.html");
 		}
 		else if(name=="djyw"||name=="tzgs"||name=="dngs"||name=="xzzq"){
-			$("#frame").load("publicityList.html");
+			if(id==null){
+				$("#frame").load("publicityList.html");
+			}
+			else{
+				$("#frame").load("publicity.html");
+			}
 		}
-		else if(name=="1"){
-			$("#frame").load("publicity.html");
+		else if(name="meeting"){
+			$("#frame").load("meetingList.html");
 		}
 		
 		$(".loading").fadeOut(500);
@@ -75,22 +81,6 @@ $(document).ready(function(){
 	});
 	$("#aleague").mouseleave(function(){
 		$(".league").hide();
-	});
-	
-	$("#meeting").mouseenter(function(){
-		var left = document.getElementById("meeting").getBoundingClientRect().left;
-		var tleft = left+25;
-		document.getElementById("ameeting").style.left = tleft+"px";
-		$(".meeting").show();
-	});
-	$("#ameeting").mouseenter(function(){
-		$(".meeting").show();
-	});
-	$("#meeting").mouseleave(function(){
-		$(".meeting").hide();
-	});
-	$("#ameeting").mouseleave(function(){
-		$(".meeting").hide();
 	});
 	
 	$("#organ").mouseenter(function(){

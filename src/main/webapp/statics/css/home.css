@@ -309,7 +309,8 @@ footer{
 .organ-a:hover,
 #learn-a:hover,
 #test-a:hover,
-#home-a:hover{
+#home-a:hover,
+#meeting-a:hover{
 	text-decoration:none;
 	color: black;
 }
