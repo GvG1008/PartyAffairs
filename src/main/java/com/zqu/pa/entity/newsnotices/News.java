@@ -2,12 +2,14 @@ package com.zqu.pa.entity.newsnotices;
 
 import java.util.Date;
 
+import com.zqu.pa.utils.DateToString;
+
 public class News {
     private Integer newsId;
 
     private String title;
 
-    private Date date;
+    private String date;
 
     private String source;
 
@@ -15,7 +17,7 @@ public class News {
 
     private Integer state;
 
-    private Date lastTime;
+    private String lastTime;
 
     private Integer click;
 
@@ -39,12 +41,12 @@ public class News {
         this.title = title == null ? null : title.trim();
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.date = DateToString.getDateString("yyyy/MM/dd HH:mm:ss", date);
     }
 
     public String getSource() {
@@ -71,12 +73,12 @@ public class News {
         this.state = state;
     }
 
-    public Date getLastTime() {
+    public String getLastTime() {
         return lastTime;
     }
 
     public void setLastTime(Date lastTime) {
-        this.lastTime = lastTime;
+        this.lastTime = DateToString.getDateString("yyyy/MM/dd HH:mm:ss", lastTime);
     }
 
     public Integer getClick() {

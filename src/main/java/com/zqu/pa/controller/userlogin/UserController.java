@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.common.UserLoginException;
+import com.zqu.pa.entity.partybranch.PartyBranch;
 import com.zqu.pa.entity.userlogin.User;
 import com.zqu.pa.service.userlogin.UserService;
+import com.zqu.pa.vo.userInfo.UserBasicInfo;
 
 @Controller
 public class UserController {
@@ -89,7 +91,7 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping(value="/login",method=RequestMethod.POST)
-    public String login(User from_user) {
+    public ServerResponse login(User from_user) {
         String userId = from_user.getUserId();
         String password = from_user.getPassword();
         Subject subject = SecurityUtils.getSubject(); 
@@ -99,34 +101,33 @@ public class UserController {
             Session session=subject.getSession();
             session.setAttribute("subject", subject);
             session.setAttribute("userId", userId);
-            return "yes";
+            return ServerResponse.createBySuccess();
         } catch (UnknownAccountException ua) {
-            return "userId does not exist";
+            return ServerResponse.createByErrorCodeMessage(404, "userId does not exist");
         } catch (IncorrectCredentialsException ic) {
-            return "userId or password is error";
+            return ServerResponse.createByErrorCodeMessage(500,"userId or password is error");
         }
     }
     
     /**
-     * 根据登录ID，在首页获取显示姓名，并保存
+     * 根据登录ID，在首页获取用户基本信息，并保存
      */
     @ResponseBody
     @RequestMapping("/loginInfo")
-    public ServerResponse<String> getUserRealName(){
-        String realName = null;
+    public ServerResponse<UserBasicInfo> getUserRealName(){
+
         //获取当前session
         Session session = SecurityUtils.getSubject().getSession();
         //获取当前登录用户的userId
         String userId=(String)session.getAttribute("userId");
-        //根据Id查询姓名
-        realName = userService.getUserRealName(userId);
-        
-        if(realName==null)
-            return ServerResponse.createBySuccess("#unknown");
+        //根据ID获取用户信息
+        UserBasicInfo basicInfo = userService.getUserBasicInfo(userId);
+        if(basicInfo==null)
+            return ServerResponse.createByError();
         else 
-            //将姓名存储进session
-            session.setAttribute("realName", realName);
+            //将用户信息存储进session
+            session.setAttribute("basicInfo", basicInfo);
 
-        return ServerResponse.createBySuccess(realName);
+        return ServerResponse.createBySuccess(basicInfo);
     }
 }

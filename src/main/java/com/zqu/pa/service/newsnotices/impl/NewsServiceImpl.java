@@ -51,4 +51,32 @@ public class NewsServiceImpl implements NewsService {
         return info;
     }
 
+    @Override
+    public News getNewsInfo(int news_id, int type) {
+        
+        News news = new News();
+        news = newsDao.selectByPrimaryKey(news_id);
+        if(news==null)
+            return null;
+        //获取通过审核的
+        if(type==1) {
+            //若未通过审核，返回null
+            if(news.getState()==0)
+                return null;
+            else {
+                //查看该条新闻信息页面，此新闻click+1
+                News news2 = new News();
+                news2.setNewsId(news.getNewsId());
+                news2.setClick(news.getClick()+1);
+                if(newsDao.updateByPrimaryKeySelective(news2)==0)
+                    return null;
+                //显示在公众页面,删除多余信息
+                news.setCreatorId(null);
+                news.setLastTime(null);
+                news.setState(null);
+                news.setClick(news.getClick()+1);
+            }
+        }
+        return news;
+    }
 }

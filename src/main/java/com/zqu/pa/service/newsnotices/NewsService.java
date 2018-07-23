@@ -13,5 +13,8 @@ public interface NewsService {
     
     //根据页数和每页记录数，返回列表信息
     PageOfList getMenuInfo(int page, int num);
+
+    //根据id返回此新闻所有信息,
+    News getNewsInfo(int news_id, int type);
     
 }

@@ -9,6 +9,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface NewsMapper {
+
+    //*标记使用
     long countByExample(NewsExample example);
 
     int deleteByExample(NewsExample example);
@@ -23,6 +25,7 @@ public interface NewsMapper {
 
     List<News> selectByExample(NewsExample example);
 
+    //*标记使用
     News selectByPrimaryKey(Integer newsId);
 
     int updateByExampleSelective(@Param("record") News record, @Param("example") NewsExample example);
@@ -31,6 +34,7 @@ public interface NewsMapper {
 
     int updateByExample(@Param("record") News record, @Param("example") NewsExample example);
 
+    //*标记使用
     int updateByPrimaryKeySelective(News record);
 
     int updateByPrimaryKeyWithBLOBs(News record);

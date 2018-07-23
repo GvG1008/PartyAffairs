@@ -2,7 +2,10 @@ package com.zqu.pa.service.userlogin;
 
 import java.util.List;
 
+
+import com.zqu.pa.entity.partybranch.PartyBranch;
 import com.zqu.pa.entity.userlogin.User;
+import com.zqu.pa.vo.userInfo.UserBasicInfo;
 
 public interface UserService {
 
@@ -20,6 +23,10 @@ public interface UserService {
      * @param userId
      * @return
      */
-    String getUserRealName(String userId);
+/*    String getUserRealName(String userId);
     
+    PartyBranch getPartyBranch(String userId);
+    */
+    UserBasicInfo getUserBasicInfo(String userId);
+
 }

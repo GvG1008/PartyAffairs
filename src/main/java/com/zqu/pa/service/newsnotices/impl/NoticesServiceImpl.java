@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zqu.pa.dao.newsnotices.NoticesMapper;
+import com.zqu.pa.entity.newsnotices.Notices;
 import com.zqu.pa.entity.newsnotices.NoticesExample;
 import com.zqu.pa.entity.newsnotices.NoticesExample.Criteria;
 import com.zqu.pa.service.newsnotices.NoticesService;
@@ -48,5 +49,12 @@ public class NoticesServiceImpl implements NoticesService{
         info.setList(noticesDao.getMenuListLimit(index, num, type));
         
         return info;
+    }
+
+    @Override
+    public Notices getNoticesInfo(int notices_id, int type, int stateType) {
+        Notices notices = new Notices();
+        notices = noticesDao.selectByPrimaryKey(notices_id);
+        return null;
     }
 }

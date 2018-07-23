@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,26 +24,26 @@ public class HomeListController {
     NoticesService noticesService;
     
     /**
-     * 返回主页所显示的新闻信息列表，7条
+     * 返回主页所显示的新闻信息列表，num条
      * @return
      */
     @ResponseBody
-    @RequestMapping("/newslist")
-    public ServerResponse<List<HomeList>> getNewsList(){
+    @RequestMapping("/newslist/{num}")
+    public ServerResponse<List<HomeList>> getNewsList(@PathVariable int num){
         
-        List<HomeList> newslist = newsService.getHomeNewsList(7);
-        return ServerResponse.createBySuccess("成功信息", newslist);
+        List<HomeList> newslist = newsService.getHomeNewsList(num);
+        return ServerResponse.createBySuccess("success", newslist);
     }
     
     /**
-     * 返回主页所显示的通知公示信息列表，7条
+     * 返回主页所显示的通知公示信息列表，num条
      * @return
      */
     @ResponseBody
-    @RequestMapping("/noticeslist/public")
-    public ServerResponse<List<HomeList>> getNoticesListPublic(){
+    @RequestMapping("/noticeslist/public/{num}")
+    public ServerResponse<List<HomeList>> getNoticesListPublic(@PathVariable int num){
         
-        List<HomeList> newslist = noticesService.getHomeNewsList(7,0);
+        List<HomeList> newslist = noticesService.getHomeNewsList(num,0);
         if(newslist!=null)
             return ServerResponse.createBySuccess("success", newslist);
         else
@@ -50,14 +51,14 @@ public class HomeListController {
     }
     
     /**
-     * 返回主页所显示的党内公示信息列表，7条
+     * 返回主页所显示的党内公示信息列表，num条
      * @return
      */
     @ResponseBody
-    @RequestMapping("/noticeslist/party")
-    public ServerResponse<List<HomeList>> getNoticesListParty(){
+    @RequestMapping("/noticeslist/party/{num}")
+    public ServerResponse<List<HomeList>> getNoticesListParty(@PathVariable int num){
         
-        List<HomeList> newslist = noticesService.getHomeNewsList(7,1);
+        List<HomeList> newslist = noticesService.getHomeNewsList(num,1);
         if(newslist!=null)
             return ServerResponse.createBySuccess("success", newslist);
         else
