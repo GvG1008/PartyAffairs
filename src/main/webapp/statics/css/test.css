@@ -71,6 +71,7 @@
 
 .warning{
 	position: fixed;
+	z-index: -1;
 	top: 500px;
 	left: 1070px;
 }
