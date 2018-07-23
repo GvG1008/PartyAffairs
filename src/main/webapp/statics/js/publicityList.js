@@ -64,12 +64,11 @@ function doPageto(currentNum){
 		dataType : "json",// 数据类型可以为 text xml json script jsonp
 		success : function(result) {// 返回的参数就是 action里面所有的有get和set方法的参数
 			if (result.status == 0) {
-				alert(result.data.totalPageNum);
 				list.totalPageNum = result.data.totalPageNum;
 				list.currentNum = result.data.pageNum;
 				list.datas = result.data.list;
 			} else {
-				alert(msg);
+				alert(result.msg);
 			}
 		}
 	});
