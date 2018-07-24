@@ -48,9 +48,10 @@ body{
 
 .carousel-caption{
 	height: 60px;
+	width: 720px;
 	position: relative;
-	left: 0px;
-	top: -405px;
+	left: 0px !important;
+	top: 0px;
 	background-color: rgba(0,0,0,0.5);
 }
 
