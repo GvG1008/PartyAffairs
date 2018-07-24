@@ -35,6 +35,7 @@ import com.zqu.pa.entity.exam.QuestionExamCategoryKey;
 import com.zqu.pa.service.exam.ExamPaperService;
 import com.zqu.pa.vo.exam.Paper;
 import com.zqu.pa.vo.exam.Question;
+import com.zqu.pa.vo.userInfo.UserBasicInfo;
 
 @Service
 public class ExamPaperServiceImpl implements ExamPaperService {
@@ -202,7 +203,8 @@ public class ExamPaperServiceImpl implements ExamPaperService {
     @Override
     public Map<String, Integer> updatePaperScore(Integer examId, Integer score, List<ExamPaper> examPaper) {
 
-        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        String userId = basicInfo.getUserId();
         if (userId == null) {
             
         }
