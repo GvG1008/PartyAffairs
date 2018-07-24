@@ -35,6 +35,7 @@ var list = new Vue({
 		totalPageNum: [],
 		datas: [],
 		pagetoNum :[],
+		type: []
 	},
 	created : function() {
 		doPageto(1);
@@ -67,6 +68,7 @@ function doPageto(currentNum){
 				list.totalPageNum = result.data.totalPageNum;
 				list.currentNum = result.data.pageNum;
 				list.datas = result.data.list;
+				list.type = typename;
 			} else {
 				alert(result.msg);
 			}
