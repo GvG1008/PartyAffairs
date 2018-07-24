@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="../admin-statics/css/bootstrap/3.0.2/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+        <link href="../admin-statics/css/font-awesome/4.7.0/font-awesome.css" rel="stylesheet">
+        <!-- 标签页插件css -->
+        <link rel="stylesheet" href="../admin-statics/css/workbench/b.tabs.css" type="text/css">
+        <!-- 页面css -->
+        <link href="../admin-statics/css/workbench/style.css" rel="stylesheet"> 
+        
+        
+        <title>我的工作台</title>
+    </head>
+    
+    <body>
+        <!-- 头部  -->
+        <div class="top"></div>
+        <div class="header-main fixed navbar-fixed-top ">
+            <div class="header-left">
+                <img class="icon" src="../admin-statics/images/workbench/sidebar/workbench.png"/>
+                <span class="title">我的工作台</span></div>
+            <div class="header-right">
+                <div class="profile_detail"></div>
+                <div class="home"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- 头部  -->
+        <!-- 侧边栏-->
+        <nav class="main-menu">
+            <div class="all">
+            <div class="box menuSideBar">
+                    <ul class ="nav1 ">
+                        <li class="li1">
+                            <a href="#">
+                                <div class="card bg-01">
+                                <span class="card-content">党员管理
+                                <img class="menuicon" src="../admin-statics/images/workbench/sidebar/user-party.png"/>
+                              </span>
+                               </div>
+                            </a>
+                            <ul class="nav2  p1" id="menuSideBar">
+                                <li class="li2" mid="tab1" funurl="workbench/PartyMemberInfo_List.html">
+                                <a tabindex="-1" href="javascript:void(0);">党员档案</a></li>
+                                <li class="li2" mid="tab2" funurl="workbench/PartyMemberInfo_ApprovedList.html">
+                                <a tabindex="-1" href="javascript:void(0);">待审核信息</a></li>
+                             </ul>
+                        </li>
+                    </ul>
+                </div>
+                 <div class="box">
+                    <ul class ="nav1">
+                        <li class="li1">
+                            <a href="#">
+                                <div class="card bg-02" >
+                                <span class="card-content">文章管理
+                                <img class="menuicon" src="../admin-statics/images/workbench/sidebar/artical.png"/>
+                              </span>
+                               </div>
+                            </a>
+                            <ul class="nav2 p2" id="menuSideBar1">
+                                <li class="li2" mid="tab3" funurl="workbench/ArticlePublished.html">
+                                <a tabindex="-1" href="javascript:void(0);">文章发布</a></li>
+                                <li class="li2" mid="tab4" funurl="workbench/ArticleList.html">
+                                <a tabindex="-1" href="javascript:void(0);">所有文章</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <ul class ="nav1">
+                        <li class="li1">
+                            <a href="#">
+                                <div class="card bg-03" >
+                                <span class="card-content">学习管理
+                                <img class="menuicon" src="../admin-statics/images/workbench/sidebar/study.png"/>
+                              </span>
+                               </div>
+                            </a>
+                            <ul class="nav2 p3" id="menuSideBar2">
+                                <li class="li2" mid="tab5" funurl="${webroot}demo/manage/tabsPage5">
+                                <a tabindex="-1" href="javascript:void(0);">资料管理</a></li>
+                                <li class="li2" mid="tab6" funurl="${webroot}demo/manage/tabsPage6">
+                                <a tabindex="-1" href="javascript:void(0);">学习情况</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <ul class ="nav1">
+                        <li class="li1">
+                            <a href="#">
+                                <div class="card bg-04">
+                                <span class="card-content">考试管理
+                                <img class="menuicon" src="../admin-statics/images/workbench/sidebar/test.png"/>
+                              </span>
+                               </div>
+                            </a>
+                            <ul class="nav2 p4" id="menuSideBar3">
+                                <li class="li2" mid="tab7" funurl="${webroot}demo/manage/tabsPage7">
+                                <a tabindex="-1" href="javascript:void(0);">考卷信息</a></li>
+                                <li class="li2" mid="tab8" funurl="${webroot}demo/manage/tabsPage8">
+                                <a tabindex="-1" href="javascript:void(0);">待审核信息</a></li>
+                                <li class="li2" mid="tab9" funurl="${webroot}demo/manage/tabsPage9">
+                                <a tabindex="-1" href="javascript:void(0);">成绩查看</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <ul class ="nav1">
+                        <li class="li1">
+                            <a href="#">
+                                <div class="card bg-05" id="menuSideBar">
+                                <span class="card-content">会议管理 
+                                <img class="menuicon" src="../admin-statics/images/workbench/sidebar/meeting.png"/>
+                              </span>
+                               </div>
+                            </a>
+                            <ul class="nav2 p5" id="menuSideBar4">
+                                <li class="li2" mid="tab10" funurl="${webroot}demo/manage/tabsPage10">
+                                <a tabindex="-1" href="javascript:void(0);">所有会议</a></li>
+                                <li class="li2" mid="tab11" funurl="${webroot}demo/manage/tabsPage11">
+                                <a tabindex="-1" href="javascript:void(0);">待审核信息</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <ul class ="nav1" id="menuSideBar5">
+                        <li class="li1" mid="tab12" funurl="${webroot}demo/manage/tabsPage12">
+                            <a tabindex="-1" href="javascript:void(0);">
+                                <div class="card bg-06">
+                                <span class="card-content">投票管理
+                                <img class="menuicon" src="../admin-statics/images/workbench/sidebar/vote.png"/>
+                              </span>
+                               </div>
+                            </a>
+                          
+                        </li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <ul class ="nav1" id="menuSideBar6">
+                        <li class="li1" mid="tab13" funurl="${webroot}demo/manage/tabsPage13">
+                            <a tabindex="-1" href="javascript:void(0);">
+                                <div class="card bg-08">
+                                <span class="card-content">论坛管理
+                                <img class="menuicon" src="../admin-statics/images/workbench/sidebar/bbs.png"/>
+                              </span>
+                               </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box">
+                <div class="box">
+                    <ul class ="nav1" id="menuSideBar7">
+                        <li class="li1" mid="tab14" funurl="${webroot}demo/manage/tabsPage14">
+                            <a tabindex="-1" href="javascript:void(0);">
+                                <div class="card bg-09">
+                                <span class="card-content">支部活动
+                                <img class="menuicon" src="../admin-statics/images/workbench/sidebar/activity.png"/>
+                              </span>
+                               </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <ul class ="nav1">
+                        <li class="li1">
+                            <a href="#">
+                                <div class="card bg-10">
+                                <span class="card-content">组织架构
+                                <img class="menuicon" src="../admin-statics/images/workbench/sidebar/party.png"/>
+                              </span>
+                               </div>
+                            </a>
+                            <ul class="nav2 p10" id="menuSideBar8">
+                                <li class="li2" mid="tab15" funurl="${webroot}demo/manage/tabsPage15">
+                                <a tabindex="-1" href="javascript:void(0);">支部组织架构</a></li>
+                                <li class="li2" mid="tab16" funurl="${webroot}demo/manage/tabsPage16">
+                                <a tabindex="-1" href="javascript:void(0);">院组织架构</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <ul class ="nav1">
+                        <li class="li1">
+                            <a href="#">
+                                <div class="card bg-11">
+                                <span class="card-content">思想建设 
+                                <img class="menuicon" src="../admin-statics/images/workbench/sidebar/thought.png"/>
+                              </span>
+                               </div>
+                            </a>
+                            <ul class="nav2 p11" id="menuSideBar9">
+                                <li class="li2" mid="tab17" funurl="${webroot}demo/manage/tabsPage17">
+                                <a tabindex="-1" href="javascript:void(0);">思想反馈</a></li>
+                                <li class="li2" mid="tab18" funurl="${webroot}demo/manage/tabsPage18">
+                                <a tabindex="-1" href="javascript:void(0);">思想汇报</a></li>
+                             </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav> 
+        <!-- 侧边栏  -->
+        <!-- <div class="clearfix"></div>-->
+  
+        <!-- 标签页区域 -->
+        <div class="span10" id="mainFrameTabs">
+  
+		    <!-- Nav tabs -->
+		        <div class="tablayout">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active noclose noSort" style="flex-basis:75px">
+                    <a href="#bTabs_navTabsMainPage" data-toggle="tab"  title="首页">首页
+                     </a>
+                    
+                </ul>
+                <button type="button" class="allTabsCloseBtn" title="关闭全部选项卡" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fa fa-trash-o "></i></span>
+                </button>
+                </div>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="bTabs_navTabsMainPage">
+                        <iframe frameborder="0" scrolling="yes" style="width:100%;height:100%;border:0px;" src="workbench/MyWorkbench.html"></iframe>
+                    </div>
+                </div>
+  
+       </div>              
+           
+        <script type="text/javascript" src="../admin-statics/js/lib/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="../admin-statics/js/lib/jquery-ui/1.12.1/jquery-ui.min.js" ></script>
+        <script type="text/javascript" src="../admin-statics/js/extends/bootstrap/3.3.7/bootstrap.min.js"></script>
+        <!-- 标签页插件核心脚本 -->
+        <script type="text/javascript" src="../admin-statics/js/extends/b.tabs.js" ></script>
+        
+        <script type="text/javascript" src="../admin-statics/js/module/tabcontent.js" ></script>
+        <script type="text/javascript">
+           $(function(){
+        	   
+        	   
+           });
+        
+        </script>
+       
+        
+    </body>
+
+</html>

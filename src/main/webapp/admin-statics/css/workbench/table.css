@@ -1,0 +1,118 @@
+.clearfix:after {
+   content:""; 
+   display: block; 
+   clear:both; 
+}
+.container {
+    background: #fff;
+    float:left;
+    min-width:100%;
+}
+.header {
+    padding: 20px;
+    font-size: 22px;
+    color: #004d6f;
+    font-family: sans-serif;
+    font-weight: 800;
+    border-bottom-color: #69666685;
+    border-bottom: solid 0.5px #69666685;
+}
+button.button.alert {
+    margin: 0;
+}
+.toolbar {
+    margin: 20px 10px 30px 10px;
+}
+button.button.success, .info, .alert, .warning {
+    /* width: 65px; */
+    height: 30px;
+    font-size: 12px;
+    padding-bottom: 33px;
+}
+.operate {
+    display: flex;
+    justify-content: space-between;
+}
+.operate-left {
+    
+}
+.operate-right {
+    
+    display:flex;
+     margin-top:20px;
+}
+div.operate-right label {
+    display: flex;
+}
+.pm-input-group {
+    display: flex;
+    margin-right: 20px;
+   
+}
+span#page {
+    font-size: 14px;
+    width: 120px;
+    margin: auto 10px;
+}
+select.form-control {
+    margin-right: 10px;
+    height:30px
+}
+input.form-control {
+    width: 150px;
+    height: 30px;
+}
+button.fa.fa-search {
+    height: 30px;
+    border: transparent;
+    margin-left: -1px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+thead {
+    font-size: 14px;
+}
+.table thead th, .table tfoot th, .table thead td, .table tfoot td {
+    color: #989898;
+    text-align: center;
+}
+.table thead, .table tfoot {
+    border-bottom: 0.1px solid #e4e4e4;
+}
+body {
+    font-size: 0.9rem;
+    color: #808080;
+}
+table.table.table-hover {
+    text-align: center;
+}
+a.btn.btn-success, .btn-danger,.btn-warning{
+    height: 23px;
+    padding: 2px 8px;
+    padding-right: 9px;
+    font-size: 0.8rem;
+}
+i.fa.fa-pencil{
+    margin-right: 3px;
+}
+i.fa.fa-trash-o {
+	 margin-right: 3px;
+}
+ select,  .select {
+       -webkit-appearance: menulist-button;
+}
+.fy {
+    width: fit-content;
+    float: right;
+    margin-right: 60px;
+}
+span.pass {
+    background: url(../../images/workbench/content/whiteicon/Pass.png)no-repeat;
+    background-size: 16px;
+    width: 30px;
+    height: 10px;
+    padding: 0px 9px;
+}
+button.warning span.caption {
+    font-size: 12px;
+}

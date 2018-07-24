@@ -1,0 +1,118 @@
+body {
+    background: #f1f1f5;
+}
+.content {
+    margin: 50px auto;
+    width: fit-content;
+}
+.second {
+    display: grid;
+    margin: 5px 0px;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-column-gap: 5px;
+}
+.work {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin: auto 0;
+}
+.third {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+button.shortcut.rounded {
+    width: 10rem;
+    height: 8em;
+    padding: .8rem;
+}
+.shortcut .icon {
+    width: 1.9rem;
+    height: 1.9rem;
+    font-size: 1.9rem;
+}
+.shortcut .caption {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #fff;
+    font-weight: bolder;
+}
+span.chiniese {
+    font-size: 2.4em;
+    font-family: 幼圆;
+    font-weight: bolder;
+    text-align: right;
+    padding-right: 80px;
+}
+span.english {
+    text-align: right;
+    font-size: 1.5em;
+    font-family: cursive;
+    padding-right: 20px;
+}
+button.shortcut.rounded.userparty {
+    background: #de3b31;
+}
+button.shortcut.rounded.userparty:hover {
+    background: #e02821;
+}
+button.shortcut.rounded.article {
+    background: #f9644e;
+}
+button.shortcut.rounded.article:hover {
+    background: #f95239;
+}
+button.shortcut.rounded.study {
+    background: #ff940c;
+}
+button.shortcut.rounded.study:hover {
+    background: #f28500;
+}
+button.shortcut.rounded.test {
+    background: #b2cd1c;
+}
+button.shortcut.rounded.test:hover  {
+    background: #a8c01b;
+}
+button.shortcut.rounded.meeting {
+    background: #9c69ed;
+    margin-left: 1px;
+}
+button.shortcut.rounded.meeting:hover {
+    background: #884dea;
+    margin-left: 1px;
+}
+button.shortcut.rounded.vote:hover {
+    background: #eaaf15;
+}
+button.shortcut.rounded.vote {
+    background: #ebb424;
+}
+button.shortcut.rounded.bbs {
+    background: #3db869;
+}
+button.shortcut.rounded.bbs :hover{
+    background: #36a55c;
+}
+button.shortcut.rounded.activity {
+    background: #ff5379;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+button.shortcut.rounded.activity:hover {
+    background: #ff3764;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+button.shortcut.rounded.party:hover {
+    background: #1071a5;
+}
+button.shortcut.rounded.party {
+    background: #117ab3;
+}
+button.shortcut.rounded.thought {
+    background: #3988cc;
+}
+button.shortcut.rounded.thought:hover {
+    background: #317abd;
+}
