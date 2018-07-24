@@ -64,6 +64,13 @@ public class NoticesServiceImpl implements NoticesService{
         if(stateType==1&&notices.getState()!=1)//stateType区别前后台，前台不予显示未审核
             return null;
         else if(stateType==1&&notices.getState()==1) {
+            //查看该条公示信息页面，此公示click+1
+            Notices notices2 = new Notices();
+            notices2.setNoticesId(notices.getNoticesId());
+            notices2.setClick(notices.getClick()+1);
+            if(noticesDao.updateByPrimaryKeySelective(notices2)==0)
+                return null;
+            //前台查看，删除多余信息
             notices.setCoverpath(null);
             notices.setCreatorId(null);
             notices.setLastTime(null);

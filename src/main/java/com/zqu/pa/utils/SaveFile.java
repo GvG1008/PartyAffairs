@@ -26,7 +26,7 @@ public class SaveFile {
      * @param file
      * @return
      */
-    public static boolean SaveFile(String path ,String fileName, MultipartFile file) {
+    public static boolean SaveFile(String path ,String fileName, MultipartFile file, int width, int height) {
         FileOutputStream fileOutputStream = null;
         InputStream inputStream;
         try {
@@ -35,13 +35,16 @@ public class SaveFile {
             //上传
             IOUtils.copy(inputStream, fileOutputStream);
             
-            /*
+
             //如果上传图片后需要压缩成400x400的处理
-            if(type==1) {
-                if(IMGUtil.compressPic(new File(path,fileName), 400, 400, path+fileName))
+
+            if(width<=0||height<=0)//不需要处理
+                ;
+            else{
+                if(IMGUtil.compressPic(new File(path,fileName), width, height, path+fileName))
                     return true;
             }
-             */
+
             
         } catch (IOException e) {
             e.printStackTrace();
