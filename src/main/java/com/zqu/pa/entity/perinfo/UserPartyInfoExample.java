@@ -1,4 +1,4 @@
-package com.zqu.pa.entity.preinfo;
+package com.zqu.pa.entity.perinfo;
 
 import java.util.ArrayList;
 import java.util.List;

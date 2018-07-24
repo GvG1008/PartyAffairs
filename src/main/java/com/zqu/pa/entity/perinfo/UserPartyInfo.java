@@ -1,4 +1,4 @@
-package com.zqu.pa.entity.preinfo;
+package com.zqu.pa.entity.perinfo;
 
 public class UserPartyInfo {
     private String userId;

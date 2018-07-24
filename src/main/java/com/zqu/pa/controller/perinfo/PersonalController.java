@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zqu.pa.common.ServerResponse;
-import com.zqu.pa.entity.preinfo.UserPartyInfo;
-import com.zqu.pa.entity.preinfo.UserPersonInfo;
+import com.zqu.pa.entity.perinfo.UserPartyInfo;
+import com.zqu.pa.entity.perinfo.UserPersonInfo;
 
 @Controller
 @RequestMapping("/userinfo")

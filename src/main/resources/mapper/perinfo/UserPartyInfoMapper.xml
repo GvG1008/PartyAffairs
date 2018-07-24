@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zqu.pa.dao.preinfo.UserPartyInfoMapper">
-  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.preinfo.UserPartyInfo">
+<mapper namespace="com.zqu.pa.dao.perinfo.UserPartyInfoMapper">
+  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.perinfo.UserPartyInfo">
     <id column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="branch_id" jdbcType="INTEGER" property="branchId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -94,7 +94,7 @@
     time_applicationforparty, time_intoparty, time_positive, type_development, totot, 
     out_unit
   </sql>
-  <select id="selectByExample" parameterType="com.zqu.pa.entity.preinfo.UserPartyInfoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.zqu.pa.entity.perinfo.UserPartyInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -118,13 +118,13 @@
     delete from user_party_info
     where user_id = #{userId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.zqu.pa.entity.preinfo.UserPartyInfoExample">
+  <delete id="deleteByExample" parameterType="com.zqu.pa.entity.perinfo.UserPartyInfoExample">
     delete from user_party_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zqu.pa.entity.preinfo.UserPartyInfo">
+  <insert id="insert" parameterType="com.zqu.pa.entity.perinfo.UserPartyInfo">
     insert into user_party_info (user_id, branch_id, name, 
       name_former, sex, national, 
       native_place, birth_place, place_registered, 
@@ -144,7 +144,7 @@
       #{timeIntoparty,jdbcType=VARCHAR}, #{timePositive,jdbcType=VARCHAR}, #{typeDevelopment,jdbcType=VARCHAR}, 
       #{totot,jdbcType=VARCHAR}, #{outUnit,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zqu.pa.entity.preinfo.UserPartyInfo">
+  <insert id="insertSelective" parameterType="com.zqu.pa.entity.perinfo.UserPartyInfo">
     insert into user_party_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -307,7 +307,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zqu.pa.entity.preinfo.UserPartyInfoExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.zqu.pa.entity.perinfo.UserPartyInfoExample" resultType="java.lang.Long">
     select count(*) from user_party_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -431,7 +431,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zqu.pa.entity.preinfo.UserPartyInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.zqu.pa.entity.perinfo.UserPartyInfo">
     update user_party_info
     <set>
       <if test="branchId != null">
@@ -512,7 +512,7 @@
     </set>
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zqu.pa.entity.preinfo.UserPartyInfo">
+  <update id="updateByPrimaryKey" parameterType="com.zqu.pa.entity.perinfo.UserPartyInfo">
     update user_party_info
     set branch_id = #{branchId,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},

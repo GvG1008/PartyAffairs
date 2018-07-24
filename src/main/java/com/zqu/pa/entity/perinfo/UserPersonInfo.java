@@ -1,8 +1,6 @@
-package com.zqu.pa.entity.preinfo;
+package com.zqu.pa.entity.perinfo;
 
 import java.util.Date;
-
-import com.zqu.pa.utils.DateToString;
 
 public class UserPersonInfo {
     private String userId;
@@ -23,7 +21,7 @@ public class UserPersonInfo {
 
     private String createTime;
 
-    private String lastTime;
+    private Date lastTime;
 
     private Integer check;
 
@@ -103,12 +101,12 @@ public class UserPersonInfo {
         this.createTime = createTime == null ? null : createTime.trim();
     }
 
-    public String getLastTime() {
+    public Date getLastTime() {
         return lastTime;
     }
 
     public void setLastTime(Date lastTime) {
-        this.lastTime = DateToString.getDateString("yyyy/MM/dd HH:mm:ss", lastTime);
+        this.lastTime = lastTime;
     }
 
     public Integer getCheck() {

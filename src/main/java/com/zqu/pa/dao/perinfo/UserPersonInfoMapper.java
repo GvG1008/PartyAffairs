@@ -1,7 +1,7 @@
-package com.zqu.pa.dao.preinfo;
+package com.zqu.pa.dao.perinfo;
 
-import com.zqu.pa.entity.preinfo.UserPersonInfo;
-import com.zqu.pa.entity.preinfo.UserPersonInfoExample;
+import com.zqu.pa.entity.perinfo.UserPersonInfo;
+import com.zqu.pa.entity.perinfo.UserPersonInfoExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
