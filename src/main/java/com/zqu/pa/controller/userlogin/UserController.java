@@ -114,9 +114,9 @@ public class UserController {
             
             return ServerResponse.createBySuccess("登录成功", basicInfo);
         } catch (UnknownAccountException ua) {
-            return ServerResponse.createByErrorCodeMessage(200, "用户名不存在");
+            return ServerResponse.createByErrorMessage("用户名不存在");
         } catch (IncorrectCredentialsException ic) {
-            return ServerResponse.createByErrorCodeMessage(200,"用户名或密码错误");
+            return ServerResponse.createByErrorMessage("用户名或密码错误");
         }
     }
     

@@ -195,7 +195,7 @@ function doLogin(){
 		data: {"userId":head.username,"password":head.password},
 		dataType: "json", // 数据类型可以为 text xml json script jsonp
 		success: function(result) { 
-			if(result.status==200){
+			if(result.status==1){
 				alert(result.msg);
 			}else if(result.status==0){
 				alert(result.msg);
