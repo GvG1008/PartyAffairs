@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -34,7 +36,7 @@ public class FileServiceImpl implements IFileService {
         try {
             file.transferTo(targetFile);
             // 文件已经上传成功了
-            FTPUtil.uploadFile(Lists.newArrayList(targetFile));
+            FTPUtil.uploadFile("",Lists.newArrayList(targetFile));
             // 已经上传到ftp服务器上
             targetFile.delete();
         } catch (IOException e) {
@@ -42,6 +44,17 @@ public class FileServiceImpl implements IFileService {
             return null;
         }
         return targetFile.getName();
+    }
+
+    @Override
+    public void download(HttpServletResponse response, String filePath, String fileName) {
+        try {
+            FTPUtil.downloadFile(filePath, fileName, response);
+        } catch (IOException e) {
+            logger.error("下载文件异常", e);
+            return;
+        }
+        return;
     }
 
 }
