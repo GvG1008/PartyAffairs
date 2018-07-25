@@ -23,7 +23,7 @@ public class UserPersonInfo {
 
     private Date lastTime;
 
-    private Integer check;
+    private Integer checkState;
 
     private String createId;
 
@@ -109,12 +109,12 @@ public class UserPersonInfo {
         this.lastTime = lastTime;
     }
 
-    public Integer getCheck() {
-        return check;
+    public Integer getCheckState() {
+        return checkState;
     }
 
-    public void setCheck(Integer check) {
-        this.check = check;
+    public void setCheckState(Integer checkState) {
+        this.checkState = checkState;
     }
 
     public String getCreateId() {

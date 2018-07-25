@@ -795,63 +795,63 @@ public class UserPersonInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andCheckIsNull() {
-            addCriterion("check is null");
+        public Criteria andCheckStateIsNull() {
+            addCriterion("check_state is null");
             return (Criteria) this;
         }
 
-        public Criteria andCheckIsNotNull() {
-            addCriterion("check is not null");
+        public Criteria andCheckStateIsNotNull() {
+            addCriterion("check_state is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCheckEqualTo(Integer value) {
-            addCriterion("check =", value, "check");
+        public Criteria andCheckStateEqualTo(Integer value) {
+            addCriterion("check_state =", value, "checkState");
             return (Criteria) this;
         }
 
-        public Criteria andCheckNotEqualTo(Integer value) {
-            addCriterion("check <>", value, "check");
+        public Criteria andCheckStateNotEqualTo(Integer value) {
+            addCriterion("check_state <>", value, "checkState");
             return (Criteria) this;
         }
 
-        public Criteria andCheckGreaterThan(Integer value) {
-            addCriterion("check >", value, "check");
+        public Criteria andCheckStateGreaterThan(Integer value) {
+            addCriterion("check_state >", value, "checkState");
             return (Criteria) this;
         }
 
-        public Criteria andCheckGreaterThanOrEqualTo(Integer value) {
-            addCriterion("check >=", value, "check");
+        public Criteria andCheckStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("check_state >=", value, "checkState");
             return (Criteria) this;
         }
 
-        public Criteria andCheckLessThan(Integer value) {
-            addCriterion("check <", value, "check");
+        public Criteria andCheckStateLessThan(Integer value) {
+            addCriterion("check_state <", value, "checkState");
             return (Criteria) this;
         }
 
-        public Criteria andCheckLessThanOrEqualTo(Integer value) {
-            addCriterion("check <=", value, "check");
+        public Criteria andCheckStateLessThanOrEqualTo(Integer value) {
+            addCriterion("check_state <=", value, "checkState");
             return (Criteria) this;
         }
 
-        public Criteria andCheckIn(List<Integer> values) {
-            addCriterion("check in", values, "check");
+        public Criteria andCheckStateIn(List<Integer> values) {
+            addCriterion("check_state in", values, "checkState");
             return (Criteria) this;
         }
 
-        public Criteria andCheckNotIn(List<Integer> values) {
-            addCriterion("check not in", values, "check");
+        public Criteria andCheckStateNotIn(List<Integer> values) {
+            addCriterion("check_state not in", values, "checkState");
             return (Criteria) this;
         }
 
-        public Criteria andCheckBetween(Integer value1, Integer value2) {
-            addCriterion("check between", value1, value2, "check");
+        public Criteria andCheckStateBetween(Integer value1, Integer value2) {
+            addCriterion("check_state between", value1, value2, "checkState");
             return (Criteria) this;
         }
 
-        public Criteria andCheckNotBetween(Integer value1, Integer value2) {
-            addCriterion("check not between", value1, value2, "check");
+        public Criteria andCheckStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("check_state not between", value1, value2, "checkState");
             return (Criteria) this;
         }
 

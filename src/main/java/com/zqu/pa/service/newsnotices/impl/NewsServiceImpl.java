@@ -42,6 +42,8 @@ public class NewsServiceImpl implements NewsService {
         
         if(totalPageNum<page)
             page = totalPageNum;
+        else if(page<=0)
+            page = 1;
         info.setPageNum(page);
         
         //limit index,num  从第index+1条记录开始，num条记录

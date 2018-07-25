@@ -11,7 +11,7 @@ public class UserListInfo {
     //总共多少页
     private int totalPageNum;
     //列表信息
-    private List<UserListInfo> list;
+    private List<UserList> list;
     
     public int getPageNum() {
         return pageNum;
@@ -36,12 +36,12 @@ public class UserListInfo {
     public void setTotalPageNum(int totalPageNum) {
         this.totalPageNum = totalPageNum;
     }
-    
-    public List<UserListInfo> getList() {
+
+    public List<UserList> getList() {
         return list;
     }
-    
-    public void setList(List<UserListInfo> list) {
+
+    public void setList(List<UserList> list) {
         this.list = list;
     }
 }
