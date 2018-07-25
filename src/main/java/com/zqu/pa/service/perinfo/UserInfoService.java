@@ -18,8 +18,9 @@ public interface UserInfoService {
     //用户根据userId来修改党员信息
     int updateByUserParty(UserPartyInfo info);
 
-    //根据所属党支部返回用户信息列表，根据页数，每页记录返回相应信息
+    //根据所属党支部返回用户信息列表，根据页数，每页记录返回相应信息，是否通过审核
     //branchId==0表示查询所有党支部人员信息
-    UserListInfo getUserList(int branchId, int page, int num);
+    UserListInfo getUserList(int branchId, int page, int num, int checkState);
+
 
 }

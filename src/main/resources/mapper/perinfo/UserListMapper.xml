@@ -7,19 +7,22 @@
     from user_party_info pa
     LEFT JOIN user_person_info pe ON pa.user_id = pe.user_id
     where pe.check_state = #{checkState}
-    <if test="branchId">
+    <if test="branchId!=0">
         and pa.branch_id = #{branchId}
     </if>
   </select>
 
   <select id="getUserBasicList" resultType="com.zqu.pa.vo.perinfo.UserList">
     select upa.user_id 'userId' , upa.name 'realName' , upa.sex 'sex', upa.professional 'professional', 
-    upa.branch_id 'branchId', 
-        b.branch_name 'branchName', l.role_id 'roleId', r.role_name 'roleName'
+    upa.branch_id 'branchId', b.branch_name 'branchName', ul.role_id 'roleId', r.role_name 'roleName'
     from user_party_info upa
-    
+    LEFT JOIN partybranch b ON b.branch_id = upa.branch_id
+    LEFT JOIN user_login ul ON ul.user_id = upa.user_id
+    LEFT JOIN role r ON r.role_id = ul.role_id
+    LEFT JOIN user_person_info upe ON upe.user_id = upa.user_id
+    where upe.check_state = #{checkState}
     <if test="branchId!=0">
-        where b.branch_id = #{branchId}
+        and b.branch_id = #{branchId}
     </if>
     limit #{index},#{num}
   </select>

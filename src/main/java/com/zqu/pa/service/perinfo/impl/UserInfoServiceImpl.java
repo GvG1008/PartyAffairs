@@ -57,27 +57,32 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public UserListInfo getUserList(int branchId, int page, int num) {
+    public UserListInfo getUserList(int branchId, int page, int num, int checkState) {
         UserListInfo info = new UserListInfo();
 
-        //总记录数
-        int totalInfoNum = userListDao.countByBranch(branchId, 1);
+        //从数据库获取总记录数，checkState为是否审核
+        int totalInfoNum = userListDao.countByBranch(branchId, checkState);
         info.setTotalInfoNum(totalInfoNum);
-        //总页数
+        //计算总页数
         int totalPageNum = (int)(totalInfoNum+num-1)/num;
         info.setTotalPageNum(totalPageNum);
         
+        //若请求页数超出总页数，则搜索最后一页，<=0则第一页
         if(totalPageNum<page)
             page = totalPageNum;
         else if(page<=0)
             page = 1;
         info.setPageNum(page);
         
-        //limit index,num  从第index+1条记录开始，num条记录
+        //limit index,num  从第index+1条记录开始，num条记录，checkState为是否审核
         int index = (page-1)*num;
-        info.setList(userListDao.getUserBasicList(branchId, index, num));
+        try {
+            info.setList(userListDao.getUserBasicList(branchId, index, num,checkState));
+        }catch (Exception e) {
+            
+            e.printStackTrace();
+        }
         
         return info;
     }
-
 }

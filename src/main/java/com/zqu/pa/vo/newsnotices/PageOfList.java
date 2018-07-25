@@ -11,7 +11,7 @@ public class PageOfList {
     //总共多少页
     private int totalPageNum;
     //列表信息
-    private List<MenuList> list;
+    private List<HomeList> list;
 
     public int getPageNum() {
         return pageNum;
@@ -31,10 +31,10 @@ public class PageOfList {
     public void setTotalPageNum(int totalPageNum) {
         this.totalPageNum = totalPageNum;
     }
-    public List<MenuList> getList() {
+    public List<HomeList> getList() {
         return list;
     }
-    public void setList(List<MenuList> list) {
+    public void setList(List<HomeList> list) {
         this.list = list;
     }
 }
