@@ -92,7 +92,7 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping(value="/login",method=RequestMethod.POST)
-    public ServerResponse<UserBasicInfo> login(@RequestBody User from_user) {
+    public ServerResponse<UserBasicInfo> login(User from_user) {
         String userId = from_user.getUserId();
         String password = from_user.getPassword();
         Subject subject = SecurityUtils.getSubject(); 
