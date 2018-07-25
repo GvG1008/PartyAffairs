@@ -29,7 +29,7 @@ $(document).ready(function(){
 			$("#frame").load("meetingList.html");
 		}
 		else if(name=="test"){
-			$("#frame").load("testList.html");
+			$("#frame").load("examList.html");
 		}
 		
 		
