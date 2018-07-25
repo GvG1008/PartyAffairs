@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="test-list">
+        	<div class="tl-header">
+        		<div class="title">
+        			<h2>考试列表</h2>
+        		</div>
+        	</div>
+        	<div class="testing" id="examing">
+        		<table class="testing-table">
+        			<tr class="table-title">
+        				<td colspan="4">正在进行和还未开始的考试</td>
+        			</tr>
+        			<tr class="thead">
+        				<td>考试名称</td>
+        				<td>考试时间</td>
+        				<td>考试状态</td>
+        				<td>成绩</td>
+        			</tr>
+        			<tr class="tbody" v-for="r in examing">
+        				<td class="test-title"><a :href="r.examId">{{r.examTitle}}</a></td>
+        				
+        				<td>{{r.startTime}}至{{r.endTime}}</td>
+        				
+        				<td v-if="r.status==1">正在进行</td>
+        				<td v-else-if="r.status==0">还未开始</td>
+        				
+        				<td v-if="r.pass==-1">无</td>
+        				<td v-else>{{r.score}}</td>
+        			</tr>        		
+        		</table>
+        	</div>
+        	<div class="tested" id="examed">
+        		<table class="tested-table">
+        			<tr  class="table-title">
+        				<td colspan="4">历史考试</td>
+        			</tr>
+        			<tr class="thead">
+        				<td>考试名称</td>
+        				<td>考试时间</td>
+        				<td>考试状态</td>
+        				<td>成绩</td>
+        			</tr>
+        			<tr class="tbody" v-for="r in examed">
+                        <td class="test-title"><a :href="r.examId">{{r.examTitle}}</a></td>
+                        
+                        <td>{{r.startTime}}至{{r.endTime}}</td>
+                        
+                        <td v-if="r.pass==-1">未参加</td>
+                        <td v-else-if="r.pass==0">不及格</td>
+                        <td v-else>及格</td>
+                        
+                        <td v-if="r.pass==-1">无</td>
+                        <td v-else>{{r.score}}</td>
+                    </tr>  
+        		</table>
+        	</div>
+       	</div>
+       	
+       	<link rel="stylesheet" href="../statics/css/tsetList.css" />
+       	<script src="../statics/js/vue.js"></script>
+        <script src="../statics/js/examList.js"></script>
+	</body>
+</html>

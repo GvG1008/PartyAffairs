@@ -103,18 +103,90 @@ public class UserManageController {
         return ServerResponse.createBySuccessMessage("修改成功");
     }
     
+    /**
+     * 根据用户所属党支部
+     * 获取党员档案列表
+     * @param page 第几页
+     * @param num  每页多少条记录
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/userListByBranch/{pageNum}/{num}")
-    public ServerResponse<UserListInfo> getUserList(@PathVariable(value="pageNum") int page,@PathVariable(value="num") int num){
+    public ServerResponse<UserListInfo> getUserListByBranch(@PathVariable(value="pageNum") int page,@PathVariable(value="num") int num){
         
-        //获取当前session里的
+        //获取当前session里的当前用户所属党支部
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
         if(basicInfo==null||basicInfo.getBranchId()==0)
             return ServerResponse.createByErrorMessage("无法获取当前session信息");
         
         UserListInfo listInfo = new UserListInfo();
-        listInfo = userInfoService.getUserList(basicInfo.getBranchId(),page,num);
-        if(listInfo==null)
+        //第一个参数党支部id，第四个参数1表示已审核
+        listInfo = userInfoService.getUserList(basicInfo.getBranchId(),page,num,1);
+        
+        if(listInfo.getList()==null)
+            return ServerResponse.createByErrorMessage("获取列表信息失败！");
+        return ServerResponse.createBySuccess(listInfo);
+    }
+    
+    /**
+     * 获取所有党支部党员档案列表（更高权限）
+     * @param page 第几页
+     * @param num  每页记录数
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/userList/{pageNum}/{num}")
+    public ServerResponse<UserListInfo> getUserList(@PathVariable(value="pageNum") int page,@PathVariable(value="num") int num){
+        
+        UserListInfo listInfo = new UserListInfo();
+        //第一个参数0表示所有党支部，第四个参数1表示已审核
+        listInfo = userInfoService.getUserList(0,page,num,1);
+        
+        if(listInfo.getList()==null)
+            return ServerResponse.createByErrorMessage("获取列表信息失败！");
+        return ServerResponse.createBySuccess(listInfo);
+    }
+    
+    /**
+     * 根据用户所属党支部
+     * 获取待审核党员档案列表
+     * @param page 第几页
+     * @param num  每页多少条记录
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/userCheckListByBranch/{pageNum}/{num}")
+    public ServerResponse<UserListInfo> getUserCheckListByBranch(@PathVariable(value="pageNum") int page,@PathVariable(value="num") int num){
+        
+        //获取当前session里的当前用户所属党支部
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if(basicInfo==null||basicInfo.getBranchId()==0)
+            return ServerResponse.createByErrorMessage("无法获取当前session信息");
+        
+        UserListInfo listInfo = new UserListInfo();
+        //第一个参数党支部id，第四个参数0表示未审核
+        listInfo = userInfoService.getUserList(basicInfo.getBranchId(),page,num,0);
+        
+        if(listInfo.getList()==null)
+            return ServerResponse.createByErrorMessage("获取列表信息失败！");
+        return ServerResponse.createBySuccess(listInfo);
+    }
+    
+    /**
+     * 获取待审核的所有党支部党员档案列表（更高权限）
+     * @param page 第几页
+     * @param num  每页记录数
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/userCheckList/{pageNum}/{num}")
+    public ServerResponse<UserListInfo> getUserCheckList(@PathVariable(value="pageNum") int page,@PathVariable(value="num") int num){
+        
+        UserListInfo listInfo = new UserListInfo();
+        //第一个参数0表示所有党支部，第四个参数0表示未审核
+        listInfo = userInfoService.getUserList(0,page,num,0);
+
+        if(listInfo.getList()==null)
             return ServerResponse.createByErrorMessage("获取列表信息失败！");
         return ServerResponse.createBySuccess(listInfo);
     }

@@ -347,8 +347,8 @@
     order by date DESC
     limit #{limit}
   </select>
-  <select id="getMenuListLimit" resultType="com.zqu.pa.vo.newsnotices.MenuList">
-    select notices_id 'id' , title , date
+  <select id="getMenuListLimit" resultType="com.zqu.pa.vo.newsnotices.HomeList">
+    select notices_id 'id' , title , date , coverpath
     from notices
     where state = 1
     and type = #{type}

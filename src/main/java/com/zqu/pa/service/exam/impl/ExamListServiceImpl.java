@@ -68,6 +68,8 @@ public class ExamListServiceImpl implements ExamListService {
             Integer pass = isPass(e.getExamId(), userId, e.getPassScore());
             rel.setPass(pass);
             rel.setScore(getScore(e.getExamId(), userId));
+            rel.setStartTime(DateUtil.formatTime(e.getStartTime()));
+            rel.setEndTime(DateUtil.formatTime(e.getEndTime()));
             listResponseExamList.add(rel);         
         }       
         return listResponseExamList;
