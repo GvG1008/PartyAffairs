@@ -23,11 +23,16 @@ button.button.alert {
 .toolbar {
     margin: 20px 10px 30px 10px;
 }
-button.button.success, .info, .alert, .warning {
+a.btn.ts, .tp, .td, .tw {
     /* width: 65px; */
     height: 30px;
     font-size: 12px;
-    padding-bottom: 33px;
+    padding-top: 7px;
+}
+button.btn.tp{
+	 height: 30px;
+    font-size: 12px;
+    padding-top: 7px;
 }
 .operate {
     display: flex;
@@ -86,7 +91,7 @@ body {
 table.table.table-hover {
     text-align: center;
 }
-a.btn.btn-success, .btn-danger,.btn-warning{
+a.btn.os, .od,.ow{
     height: 23px;
     padding: 2px 8px;
     padding-right: 9px;

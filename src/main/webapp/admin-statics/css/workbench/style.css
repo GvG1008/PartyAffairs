@@ -13,12 +13,13 @@
 .fixed {
     /*position: fixed;*/
     top: 0;
-    width: 96%;
+    width: 100%;
 }
 .header-main {
     background: #fff;
     padding: 1em 6em;
     padding-bottom: 10px;
+    padding-right:0em;
     
 }
 .header-left {

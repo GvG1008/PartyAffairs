@@ -7,7 +7,6 @@
 <title>党员档案</title>
 <link href="../../admin-statics/css/bootstrap/3.0.2/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="../../admin-statics/css/font-awesome/4.7.0/font-awesome.css" rel="stylesheet">
-<link href="../../admin-statics/css/metroui/metro-all.css" rel="stylesheet" >
 <link href="../../admin-statics/css/workbench/table.css" rel="stylesheet" >
 </head>
 <body>
@@ -17,18 +16,18 @@
           <div class = "operate">
             <div class = "operate-left">
                 <div class="toolbar">
-				    <button class="button success">
+				    <a class="btn btn-success ts">
 					    <span class="glyphicon glyphicon-plus icon"></span>
 					    <span class="caption">录入</span>
-					</button>
-					<button class="button info">
+					</a>
+					<button type="button" class="btn btn-primary tp"  name="allcheck" id="allcheck">
                         <span class="fa fa-check-square-o icon"></span>
                         <span class="caption">全选</span>
                     </button>
-                    <button class="button alert">
+                    <a class="btn btn-danger td">
                         <span class="fa fa-trash-o icon"></span>
                         <span class="caption">删除</span>
-                    </button>
+                    </a>
 				</div>
             </div>
             <div class = "operate-right">
@@ -56,7 +55,7 @@
 			<table class="table table-hover">
 		      <thead>
 		        <tr>
-		          <th class="table-check"><input type="checkbox" class="tpl-table-fz-check"></th>
+		          <th class="table-check"><input type="checkbox"  name="all" id="all" onclick="checkAll()"></th>
                   <th class="table-id">ID</th>
                   <th class="table-name">姓名</th>
                   <th class="table-sex">性别</th>
@@ -68,7 +67,7 @@
 		      </thead>
 		      <tbody>
 		        <tr>
-		          <td><input type="checkbox"></td>
+		          <td><input type="checkbox" name="checkname[]"value="1"></td>
 		          <td>1</td>
 		          <td><a href="#">吴青峰</a></td>
 		          <td>女</td>
@@ -78,16 +77,16 @@
                   <td>
                     <div class="am-btn-toolbar">
                          <div class="am-btn-group am-btn-group-xs">
-                              <a class="btn btn-success" href="#">
+                              <a class="btn btn-success os" href="#">
                                 <i class="fa fa-pencil"></i> 编辑</a>
-                              <a class="btn btn-danger" href="#">
+                              <a class="btn btn-danger od" href="#">
                                 <i class="fa fa-trash-o"></i> 删除</a>
                          </div>
                     </div>
                   </td>
 		        </tr>
 		        <tr>
-		          <td><input type="checkbox"></td>
+		          <td><input type="checkbox"name="checkname[]"value="1"></td>
                   <td>1</td>
                   <td><a href="#">吴青峰</a></td>
                   <td>女</td>
@@ -97,16 +96,16 @@
                   <td>
                     <div class="am-btn-toolbar">
                          <div class="am-btn-group am-btn-group-xs">
-                              <a class="btn btn-success" href="#">
+                              <a class="btn btn-success os" href="#">
                                 <i class="fa fa-pencil"></i> 编辑</a>
-                              <a class="btn btn-danger" href="#">
+                              <a class="btn btn-danger od" href="#">
                                 <i class="fa fa-trash-o"></i> 删除</a>
                          </div>
                     </div>
                   </td>
 		        </tr>
 		        <tr>
-		          <td><input type="checkbox"></td>
+		          <td><input type="checkbox"name="checkname[]"value="1"></td>
                   <td>1</td>
                   <td><a href="#">吴青峰</a></td>
                   <td>女</td>
@@ -116,16 +115,16 @@
                   <td>
                     <div class="am-btn-toolbar">
                          <div class="am-btn-group am-btn-group-xs">
-                              <a class="btn btn-success" href="#">
+                               <a class="btn btn-success os" href="#">
                                 <i class="fa fa-pencil"></i> 编辑</a>
-                              <a class="btn btn-danger" href="#">
+                              <a class="btn btn-danger od" href="#">
                                 <i class="fa fa-trash-o"></i> 删除</a>
                          </div>
                     </div>
                   </td>
 		        </tr>
 		        <tr>
-                  <td><input type="checkbox"></td>
+                  <td><input type="checkbox"name="checkname[]"value="1"></td>
                   <td>1</td>
                   <td><a href="#">吴青峰</a></td>
                   <td>女</td>
@@ -135,16 +134,16 @@
                   <td>
                     <div class="am-btn-toolbar">
                          <div class="am-btn-group am-btn-group-xs">
-                              <a class="btn btn-success" href="#">
+                               <a class="btn btn-success os" href="#">
                                 <i class="fa fa-pencil"></i> 编辑</a>
-                              <a class="btn btn-danger" href="#">
+                              <a class="btn btn-danger od" href="#">
                                 <i class="fa fa-trash-o"></i> 删除</a>
                          </div>
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td><input type="checkbox"></td>
+                  <td><input type="checkbox"name="checkname[]"value="1"></td>
                   <td>1</td>
                   <td><a href="#">吴青峰</a></td>
                   <td>女</td>
@@ -154,16 +153,16 @@
                   <td>
                     <div class="am-btn-toolbar">
                          <div class="am-btn-group am-btn-group-xs">
-                              <a class="btn btn-success" href="#">
+                            <a class="btn btn-success os" href="#">
                                 <i class="fa fa-pencil"></i> 编辑</a>
-                              <a class="btn btn-danger" href="#">
+                              <a class="btn btn-danger od" href="#">
                                 <i class="fa fa-trash-o"></i> 删除</a>
                          </div>
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td><input type="checkbox"></td>
+                  <td><input type="checkbox"name="checkname[]"value="1"></td>
                   <td>1</td>
                   <td><a href="#">吴青峰</a></td>
                   <td>女</td>
@@ -173,16 +172,16 @@
                   <td>
                     <div class="am-btn-toolbar">
                          <div class="am-btn-group am-btn-group-xs">
-                              <a class="btn btn-success" href="#">
+                                <a class="btn btn-success os" href="#">
                                 <i class="fa fa-pencil"></i> 编辑</a>
-                              <a class="btn btn-danger" href="#">
+                              <a class="btn btn-danger od" href="#">
                                 <i class="fa fa-trash-o"></i> 删除</a>
                          </div>
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td><input type="checkbox"></td>
+                  <td><input type="checkbox"name="checkname[]"value="1"></td>
                   <td>1</td>
                   <td><a href="#">吴青峰</a></td>
                   <td>女</td>
@@ -192,16 +191,16 @@
                   <td>
                     <div class="am-btn-toolbar">
                          <div class="am-btn-group am-btn-group-xs">
-                              <a class="btn btn-success" href="#">
+                              <a class="btn btn-success os" href="#">
                                 <i class="fa fa-pencil"></i> 编辑</a>
-                              <a class="btn btn-danger" href="#">
+                              <a class="btn btn-danger od" href="#">
                                 <i class="fa fa-trash-o"></i> 删除</a>
                          </div>
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td><input type="checkbox"></td>
+                  <td><input type="checkbox"name="checkname[]"value="1"></td>
                   <td>1</td>
                   <td><a href="#">吴青峰</a></td>
                   <td>女</td>
@@ -211,16 +210,16 @@
                   <td>
                     <div class="am-btn-toolbar">
                          <div class="am-btn-group am-btn-group-xs">
-                              <a class="btn btn-success" href="#">
+                              <a class="btn btn-success os" href="#">
                                 <i class="fa fa-pencil"></i> 编辑</a>
-                              <a class="btn btn-danger" href="#">
+                              <a class="btn btn-danger od" href="#">
                                 <i class="fa fa-trash-o"></i> 删除</a>
                          </div>
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td><input type="checkbox"></td>
+                  <td><input type="checkbox"name="checkname[]"value="1"></td>
                   <td>1</td>
                   <td><a href="#">吴青峰</a></td>
                   <td>女</td>
@@ -230,16 +229,16 @@
                   <td>
                     <div class="am-btn-toolbar">
                          <div class="am-btn-group am-btn-group-xs">
-                              <a class="btn btn-success" href="#">
+                                <a class="btn btn-success os" href="#">
                                 <i class="fa fa-pencil"></i> 编辑</a>
-                              <a class="btn btn-danger" href="#">
+                              <a class="btn btn-danger od" href="#">
                                 <i class="fa fa-trash-o"></i> 删除</a>
                          </div>
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td><input type="checkbox"></td>
+                  <td><input type="checkbox"name="checkname[]"value="1"></td>
                   <td>1</td>
                   <td><a href="#">吴青峰</a></td>
                   <td>女</td>
@@ -249,9 +248,9 @@
                   <td>
                     <div class="am-btn-toolbar">
                          <div class="am-btn-group am-btn-group-xs">
-                              <a class="btn btn-success" href="#">
+                              <a class="btn btn-success os" href="#">
                                 <i class="fa fa-pencil"></i> 编辑</a>
-                              <a class="btn btn-danger" href="#">
+                              <a class="btn btn-danger od" href="#">
                                 <i class="fa fa-trash-o"></i> 删除</a>
                          </div>
                     </div>
@@ -276,6 +275,7 @@
      
         <script type="text/javascript" src="../../admin-statics/js/lib/jquery/1.12.4/jquery.min.js"></script>
         <script type="text/javascript" src="../../admin-statics/js/extends/bootstrap/3.3.7/bootstrap.min.js"></script>
-        
+        <script type="text/javascript" src="../../admin-statics/js/module/table.js"></script>
+       
 </body>
 </html>
