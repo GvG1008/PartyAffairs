@@ -261,3 +261,8 @@ button.navTabsCloseBtn {
     /* margin-top: -18px;
  */    left: 10px;
 }
+.bTabs div.tab-content {
+    height: 730px;
+    width:96%;
+    overflow-y: hidden;
+}

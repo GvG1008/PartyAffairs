@@ -1,7 +1,7 @@
 $(function(){
 	//计算内容区域高度
 	var calcHeight = function(){
-		$('#mainFrameTabs').height(580);
+		$('#mainFrameTabs').height(763);
 	};
 	//菜单点击
 	$('a',$('#menuSideBar')).on('click', function(e) {

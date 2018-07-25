@@ -116,3 +116,11 @@ span.pass {
 button.warning span.caption {
     font-size: 12px;
 }
+span.wait {
+    background: rgb(255, 167, 0);
+    padding: 4px;
+    border-radius: 7px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.09rem;
+}
