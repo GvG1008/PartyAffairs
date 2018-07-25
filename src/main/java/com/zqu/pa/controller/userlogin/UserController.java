@@ -11,6 +11,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -91,7 +92,7 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping(value="/login",method=RequestMethod.POST)
-    public ServerResponse<UserBasicInfo> login(User from_user) {
+    public ServerResponse<UserBasicInfo> login(@RequestBody User from_user) {
         String userId = from_user.getUserId();
         String password = from_user.getPassword();
         Subject subject = SecurityUtils.getSubject(); 
