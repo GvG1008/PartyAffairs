@@ -11,6 +11,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -113,9 +114,9 @@ public class UserController {
             
             return ServerResponse.createBySuccess("登录成功", basicInfo);
         } catch (UnknownAccountException ua) {
-            return ServerResponse.createByErrorCodeMessage(200, "用户名不存在");
+            return ServerResponse.createByErrorMessage("用户名不存在");
         } catch (IncorrectCredentialsException ic) {
-            return ServerResponse.createByErrorCodeMessage(200,"用户名或密码错误");
+            return ServerResponse.createByErrorMessage("用户名或密码错误");
         }
     }
     

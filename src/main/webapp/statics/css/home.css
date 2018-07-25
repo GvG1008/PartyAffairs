@@ -42,6 +42,7 @@ ul{
 	list-style-type:none;
 	margin: 0;
 	padding: 0;
+	margin-bottom: 0 !important;
 }
 
 li{
@@ -198,7 +199,7 @@ li{
 
 .frame{
 	position: relative;
-	top: 50px;
+	top: 70px;
 	width: 1210px;
 	margin-left: auto;
 	margin-right: auto;
@@ -215,7 +216,7 @@ footer{
 }
 
 .aside{
-	z-index:12;
+	z-index: 20;
 	position: absolute;
 	top: 0;
 	left: 0;

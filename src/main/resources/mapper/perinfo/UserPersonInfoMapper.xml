@@ -12,7 +12,7 @@
     <result column="birthday" jdbcType="VARCHAR" property="birthday" />
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
     <result column="last_time" jdbcType="TIMESTAMP" property="lastTime" />
-    <result column="check" jdbcType="INTEGER" property="check" />
+    <result column="check_state" jdbcType="INTEGER" property="checkState" />
     <result column="create_id" jdbcType="VARCHAR" property="createId" />
     <result column="check_id" jdbcType="VARCHAR" property="checkId" />
   </resultMap>
@@ -76,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List">
     user_id, name, sex, nickname, img_head, profile, email, birthday, create_time, last_time, 
-    check, create_id, check_id
+    check_state, create_id, check_id
   </sql>
   <select id="selectByExample" parameterType="com.zqu.pa.entity.perinfo.UserPersonInfoExample" resultMap="BaseResultMap">
     select
@@ -112,12 +112,12 @@
     insert into user_person_info (user_id, name, sex, 
       nickname, img_head, profile, 
       email, birthday, create_time, 
-      last_time, check, create_id, 
+      last_time, check_state, create_id, 
       check_id)
     values (#{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
       #{nickname,jdbcType=VARCHAR}, #{imgHead,jdbcType=VARCHAR}, #{profile,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
-      #{lastTime,jdbcType=TIMESTAMP}, #{check,jdbcType=INTEGER}, #{createId,jdbcType=VARCHAR}, 
+      #{lastTime,jdbcType=TIMESTAMP}, #{checkState,jdbcType=INTEGER}, #{createId,jdbcType=VARCHAR}, 
       #{checkId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.perinfo.UserPersonInfo">
@@ -153,8 +153,8 @@
       <if test="lastTime != null">
         last_time,
       </if>
-      <if test="check != null">
-        check,
+      <if test="checkState != null">
+        check_state,
       </if>
       <if test="createId != null">
         create_id,
@@ -194,8 +194,8 @@
       <if test="lastTime != null">
         #{lastTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="check != null">
-        #{check,jdbcType=INTEGER},
+      <if test="checkState != null">
+        #{checkState,jdbcType=INTEGER},
       </if>
       <if test="createId != null">
         #{createId,jdbcType=VARCHAR},
@@ -244,8 +244,8 @@
       <if test="record.lastTime != null">
         last_time = #{record.lastTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.check != null">
-        check = #{record.check,jdbcType=INTEGER},
+      <if test="record.checkState != null">
+        check_state = #{record.checkState,jdbcType=INTEGER},
       </if>
       <if test="record.createId != null">
         create_id = #{record.createId,jdbcType=VARCHAR},
@@ -270,7 +270,7 @@
       birthday = #{record.birthday,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=VARCHAR},
       last_time = #{record.lastTime,jdbcType=TIMESTAMP},
-      check = #{record.check,jdbcType=INTEGER},
+      check_state = #{record.checkState,jdbcType=INTEGER},
       create_id = #{record.createId,jdbcType=VARCHAR},
       check_id = #{record.checkId,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -307,8 +307,8 @@
       <if test="lastTime != null">
         last_time = #{lastTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="check != null">
-        check = #{check,jdbcType=INTEGER},
+      <if test="checkState != null">
+        check_state = #{checkState,jdbcType=INTEGER},
       </if>
       <if test="createId != null">
         create_id = #{createId,jdbcType=VARCHAR},
@@ -330,7 +330,7 @@
       birthday = #{birthday,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=VARCHAR},
       last_time = #{lastTime,jdbcType=TIMESTAMP},
-      check = #{check,jdbcType=INTEGER},
+      check_state = #{checkState,jdbcType=INTEGER},
       create_id = #{createId,jdbcType=VARCHAR},
       check_id = #{checkId,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=VARCHAR}

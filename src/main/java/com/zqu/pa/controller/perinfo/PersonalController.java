@@ -82,7 +82,7 @@ public class PersonalController {
         if(userId==null||info.getUserId()==null||!userId.equals(info.getUserId()))
             return ServerResponse.createByErrorMessage("操作失败");
         else {
-            info.setCheck(null);
+            info.setCheckState(null);
             info.setCheckId(null);
             info.setCreateId(null);
             info.setCreateTime(null);

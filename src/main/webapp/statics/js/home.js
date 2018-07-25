@@ -25,9 +25,13 @@ $(document).ready(function(){
 				$("#frame").load("publicity.html");
 			}
 		}
-		else if(name="meeting"){
+		else if(name=="meeting"){
 			$("#frame").load("meetingList.html");
 		}
+		else if(name=="test"){
+			$("#frame").load("testList.html");
+		}
+		
 		
 		$(".loading").fadeOut(500);
 	});
@@ -130,8 +134,9 @@ $(document).ready(function(){
 	$("#login").click(function(event){
 		var width = document.body.clientWidth;
 		var height = document.body.scrollHeight;
+		var aheight = document.body.clientHeight;
 		var left = (width-400)/2;
-		var top = (height-400)/2;
+		var top = (aheight-400)/2;
 		document.getElementById("alogin").style.left=left+"px";
 		document.getElementById("alogin").style.top=top+"px";
 		document.getElementById("laside").style.height=height+"px";
@@ -144,8 +149,9 @@ $(document).ready(function(){
 	$("#change").click(function(event){
 		var width = document.body.clientWidth;
 		var height = document.body.scrollHeight;
+		var aheight = document.body.clientHeight;
 		var left = (width-400)/2;
-		var top = (height-400)/2;
+		var top = (aheight-400)/2;
 		document.getElementById("achange").style.left=left+"px";
 		document.getElementById("achange").style.top=top+"px";
 		document.getElementById("caside").style.height=height+"px";
@@ -189,11 +195,12 @@ function doLogin(){
 		data: {"userId":head.username,"password":head.password},
 		dataType: "json", // 数据类型可以为 text xml json script jsonp
 		success: function(result) { 
-			if(result.status==200){
-				alert(result.msg);
-			}else if(result.status==0){
+			if(result.status==0){
 				alert(result.msg);
 				head.user = result.data;
+				location.reload();				
+			}else{
+				alert(result.msg);
 			}
 		}
 	});

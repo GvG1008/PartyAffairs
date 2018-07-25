@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zqu.pa.dao.perinfo.UserListMapper">
-  <select id="getUserBasicList" resultType="com.zqu.pa.vo.userInfo.UserBasicInfo">
-    select l.user_id 'userId' , u.name 'realName' ,u.branch_id 'branchId', 
+
+  <select id="countByBranch" resultType="int">
+    select count(*) 
+    from user_party_info pa
+    LEFT JOIN user_person_info pe ON pa.user_id = pe.user_id
+    where pe.check_state = #{checkState}
+    <if test="branchId">
+        and pa.branch_id = #{branchId}
+    </if>
+  </select>
+
+  <select id="getUserBasicList" resultType="com.zqu.pa.vo.perinfo.UserList">
+    select upa.user_id 'userId' , upa.name 'realName' , upa.sex 'sex', upa.professional 'professional', 
+    upa.branch_id 'branchId', 
         b.branch_name 'branchName', l.role_id 'roleId', r.role_name 'roleName'
-    from user_login l
-    LEFT JOIN user_party_info u ON l.user_id = u.user_id 
-    LEFT JOIN partybranch b ON b.branch_id = u.branch_id
-    LEFT JOIN role r ON r.role_id = l.role_id
+    from user_party_info upa
+    
     <if test="branchId!=0">
         where b.branch_id = #{branchId}
     </if>

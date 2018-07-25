@@ -1,0 +1,86 @@
+.test-list{
+	position: relative;
+	top: 20px;
+	width: 1020px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #FBFBFB;
+	padding: 24px 24px 70px 24px;
+    border: 0;
+	box-shadow: 2px 0 0 0 #d2d2d2,
+	-1px 0 0 0 #d2d2d2,
+	0 2px 0 0 #b6b6b6,
+	0 3px 0 0 #d2d2d2,
+	3px 0 0 0 #e6e6e6,
+	-2px 0 0 0 #e6e6e6,
+	0 4px 0 0 #e6e6e6,
+	0 -1px 0 0 #e6e6e6;
+	border-radius: 10px;
+}
+
+.tl-header{
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 15px;
+}
+
+.title h2{
+	font-family: kaiti;
+	text-align: center;
+}
+
+td{
+	cursor: default;
+}
+
+.testing{
+	display: inline;
+	padding: 0 30px;
+}
+
+.tested{
+	display: inline;
+	padding: 0 30px;
+}
+
+.testing-table,
+.tested-table{
+	display: inline;
+}
+
+.thead,
+.tbody{
+	border-bottom: 2px solid #ddd;
+}
+
+.table-title{
+	text-align: center;
+	font-size: 25px;
+	font-family: kaiti;
+	color: red;
+}
+
+.table-title td{
+	padding: 10px 0 20px;
+}
+
+.thead{
+	font-size: 18px;
+}
+
+.thead td,
+.tbody td{
+	padding: 15px 10px;
+}
+
+.test-title{
+	width: 160px;
+}
+
+.test-title a{
+	color: black;
+}
+
+.test-title a:hover{
+	color: red;
+	text-decoration: none;
+}
