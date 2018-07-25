@@ -33,7 +33,7 @@
       createtime, updatetime)
     values (#{videoId,jdbcType=INTEGER}, #{videoTitle,jdbcType=VARCHAR}, #{videoIntroduction,jdbcType=VARCHAR}, 
       #{coverImg,jdbcType=VARCHAR}, #{videoPath,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+      now(), now())
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.study.StudyVideo" >
     insert into study_video
@@ -108,12 +108,7 @@
       <if test="userId != null" >
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatetime != null" >
-        updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      </if>
+      updatetime = now()
     </set>
     where video_id = #{videoId,jdbcType=INTEGER}
   </update>
@@ -124,8 +119,7 @@
       cover_img = #{coverImg,jdbcType=VARCHAR},
       video_path = #{videoPath,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+      updatetime = now()
     where video_id = #{videoId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -27,9 +27,7 @@
       <if test="schedule != null" >
         schedule,
       </if>
-      <if test="updatetime != null" >
-        updatetime,
-      </if>
+      updatetime,
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="videoId != null" >
@@ -41,9 +39,7 @@
       <if test="schedule != null" >
         #{schedule,jdbcType=REAL},
       </if>
-      <if test="updatetime != null" >
-        #{updatetime,jdbcType=TIMESTAMP},
-      </if>
+      now(),
     </trim>
   </insert>
 </mapper>

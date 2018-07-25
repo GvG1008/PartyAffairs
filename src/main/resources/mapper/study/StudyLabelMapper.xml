@@ -25,8 +25,8 @@
   <insert id="insert" parameterType="com.zqu.pa.entity.study.StudyLabel" >
     insert into study_label (label_id, label_name, createtime, 
       updatetime)
-    values (#{labelId,jdbcType=INTEGER}, #{labelName,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{updatetime,jdbcType=TIMESTAMP})
+    values (#{labelId,jdbcType=INTEGER}, #{labelName,jdbcType=VARCHAR}, now(), 
+      now())
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.study.StudyLabel" >
     insert into study_label
@@ -65,20 +65,14 @@
       <if test="labelName != null" >
         label_name = #{labelName,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatetime != null" >
-        updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      </if>
+      updatetime = now()
     </set>
     where label_id = #{labelId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zqu.pa.entity.study.StudyLabel" >
     update study_label
     set label_name = #{labelName,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+      updatetime = now()
     where label_id = #{labelId,jdbcType=INTEGER}
   </update>
 </mapper>
