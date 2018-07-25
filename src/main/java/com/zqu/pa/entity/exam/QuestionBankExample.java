@@ -353,6 +353,186 @@ public class QuestionBankExample {
             addCriterion("question_type not between", value1, value2, "questionType");
             return (Criteria) this;
         }
+
+        public Criteria andReviewIsNull() {
+            addCriterion("review is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIsNotNull() {
+            addCriterion("review is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewEqualTo(Integer value) {
+            addCriterion("review =", value, "review");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewNotEqualTo(Integer value) {
+            addCriterion("review <>", value, "review");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewGreaterThan(Integer value) {
+            addCriterion("review >", value, "review");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewGreaterThanOrEqualTo(Integer value) {
+            addCriterion("review >=", value, "review");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewLessThan(Integer value) {
+            addCriterion("review <", value, "review");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewLessThanOrEqualTo(Integer value) {
+            addCriterion("review <=", value, "review");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIn(List<Integer> values) {
+            addCriterion("review in", values, "review");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewNotIn(List<Integer> values) {
+            addCriterion("review not in", values, "review");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewBetween(Integer value1, Integer value2) {
+            addCriterion("review between", value1, value2, "review");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewNotBetween(Integer value1, Integer value2) {
+            addCriterion("review not between", value1, value2, "review");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateIdIsNull() {
+            addCriterion("create_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateIdIsNotNull() {
+            addCriterion("create_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateIdEqualTo(Integer value) {
+            addCriterion("create_id =", value, "createId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateIdNotEqualTo(Integer value) {
+            addCriterion("create_id <>", value, "createId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateIdGreaterThan(Integer value) {
+            addCriterion("create_id >", value, "createId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("create_id >=", value, "createId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateIdLessThan(Integer value) {
+            addCriterion("create_id <", value, "createId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateIdLessThanOrEqualTo(Integer value) {
+            addCriterion("create_id <=", value, "createId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateIdIn(List<Integer> values) {
+            addCriterion("create_id in", values, "createId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateIdNotIn(List<Integer> values) {
+            addCriterion("create_id not in", values, "createId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateIdBetween(Integer value1, Integer value2) {
+            addCriterion("create_id between", value1, value2, "createId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("create_id not between", value1, value2, "createId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIdIsNull() {
+            addCriterion("review_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIdIsNotNull() {
+            addCriterion("review_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIdEqualTo(Integer value) {
+            addCriterion("review_id =", value, "reviewId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIdNotEqualTo(Integer value) {
+            addCriterion("review_id <>", value, "reviewId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIdGreaterThan(Integer value) {
+            addCriterion("review_id >", value, "reviewId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("review_id >=", value, "reviewId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIdLessThan(Integer value) {
+            addCriterion("review_id <", value, "reviewId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIdLessThanOrEqualTo(Integer value) {
+            addCriterion("review_id <=", value, "reviewId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIdIn(List<Integer> values) {
+            addCriterion("review_id in", values, "reviewId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIdNotIn(List<Integer> values) {
+            addCriterion("review_id not in", values, "reviewId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIdBetween(Integer value1, Integer value2) {
+            addCriterion("review_id between", value1, value2, "reviewId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("review_id not between", value1, value2, "reviewId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

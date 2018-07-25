@@ -12,6 +12,12 @@ public class QuestionBank {
 
     private Integer questionType;
 
+    private Integer review;
+
+    private Integer createId;
+
+    private Integer reviewId;
+
     public Integer getQuestionId() {
         return questionId;
     }
@@ -42,5 +48,29 @@ public class QuestionBank {
 
     public void setQuestionType(Integer questionType) {
         this.questionType = questionType;
+    }
+
+    public Integer getReview() {
+        return review;
+    }
+
+    public void setReview(Integer review) {
+        this.review = review;
+    }
+
+    public Integer getCreateId() {
+        return createId;
+    }
+
+    public void setCreateId(Integer createId) {
+        this.createId = createId;
+    }
+
+    public Integer getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(Integer reviewId) {
+        this.reviewId = reviewId;
     }
 }

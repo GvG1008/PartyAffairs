@@ -6,6 +6,9 @@
     <result column="branch_id" jdbcType="INTEGER" property="branchId" />
     <result column="question_content" jdbcType="VARCHAR" property="questionContent" />
     <result column="question_type" jdbcType="INTEGER" property="questionType" />
+    <result column="review" jdbcType="INTEGER" property="review" />
+    <result column="create_id" jdbcType="INTEGER" property="createId" />
+    <result column="review_id" jdbcType="INTEGER" property="reviewId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    question_id, branch_id, question_content, question_type
+    question_id, branch_id, question_content, question_type, review, create_id, review_id
   </sql>
   <select id="selectByExample" parameterType="com.zqu.pa.entity.exam.QuestionBankExample" resultMap="BaseResultMap">
     select
@@ -101,9 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.zqu.pa.entity.exam.QuestionBank">
     insert into question_bank (question_id, branch_id, question_content, 
-      question_type)
+      question_type, review, create_id, 
+      review_id)
     values (#{questionId,jdbcType=INTEGER}, #{branchId,jdbcType=INTEGER}, #{questionContent,jdbcType=VARCHAR}, 
-      #{questionType,jdbcType=INTEGER})
+      #{questionType,jdbcType=INTEGER}, #{review,jdbcType=INTEGER}, #{createId,jdbcType=INTEGER}, 
+      #{reviewId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.exam.QuestionBank">
     insert into question_bank
@@ -120,6 +125,15 @@
       <if test="questionType != null">
         question_type,
       </if>
+      <if test="review != null">
+        review,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="reviewId != null">
+        review_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="questionId != null">
@@ -133,6 +147,15 @@
       </if>
       <if test="questionType != null">
         #{questionType,jdbcType=INTEGER},
+      </if>
+      <if test="review != null">
+        #{review,jdbcType=INTEGER},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="reviewId != null">
+        #{reviewId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -157,6 +180,15 @@
       <if test="record.questionType != null">
         question_type = #{record.questionType,jdbcType=INTEGER},
       </if>
+      <if test="record.review != null">
+        review = #{record.review,jdbcType=INTEGER},
+      </if>
+      <if test="record.createId != null">
+        create_id = #{record.createId,jdbcType=INTEGER},
+      </if>
+      <if test="record.reviewId != null">
+        review_id = #{record.reviewId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -167,7 +199,10 @@
     set question_id = #{record.questionId,jdbcType=INTEGER},
       branch_id = #{record.branchId,jdbcType=INTEGER},
       question_content = #{record.questionContent,jdbcType=VARCHAR},
-      question_type = #{record.questionType,jdbcType=INTEGER}
+      question_type = #{record.questionType,jdbcType=INTEGER},
+      review = #{record.review,jdbcType=INTEGER},
+      create_id = #{record.createId,jdbcType=INTEGER},
+      review_id = #{record.reviewId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -184,6 +219,15 @@
       <if test="questionType != null">
         question_type = #{questionType,jdbcType=INTEGER},
       </if>
+      <if test="review != null">
+        review = #{review,jdbcType=INTEGER},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="reviewId != null">
+        review_id = #{reviewId,jdbcType=INTEGER},
+      </if>
     </set>
     where question_id = #{questionId,jdbcType=INTEGER}
   </update>
@@ -191,7 +235,10 @@
     update question_bank
     set branch_id = #{branchId,jdbcType=INTEGER},
       question_content = #{questionContent,jdbcType=VARCHAR},
-      question_type = #{questionType,jdbcType=INTEGER}
+      question_type = #{questionType,jdbcType=INTEGER},
+      review = #{review,jdbcType=INTEGER},
+      create_id = #{createId,jdbcType=INTEGER},
+      review_id = #{reviewId,jdbcType=INTEGER}
     where question_id = #{questionId,jdbcType=INTEGER}
   </update>
   
@@ -199,7 +246,7 @@
     select question_id, question_content
     from question_bank
     where branch_id = #{branchId} and question_type = #{type}
-    and question_id in
+    and review = 1 and question_id in
     <foreach collection="questionId" item="questionId" index="index" open="(" separator="," close=")">
       #{questionId}
     </foreach>
