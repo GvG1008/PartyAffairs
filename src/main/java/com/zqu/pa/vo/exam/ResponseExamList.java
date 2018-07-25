@@ -9,6 +9,10 @@ public class ResponseExamList {
     private Integer score;
     
     private Integer pass = -1;
+    
+    private String startTime;
+    
+    private String endTime;
 
     public Integer getExamId() {
         return examId;
@@ -40,6 +44,22 @@ public class ResponseExamList {
 
     public void setPass(Integer pass) {
         this.pass = pass;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
        
 }
