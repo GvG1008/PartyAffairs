@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zqu.pa.dao.study.StudyDocumentMapper" >
+  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.study.StudyDocument" >
+    <constructor >
+      <idArg column="document_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="document_title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="document_introduction" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cover_img" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="file_path" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="createtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="updatetime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    document_id, document_title, document_introduction, cover_img, file_path, user_id, 
+    createtime, updatetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from study_document
+    where document_id = #{documentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from study_document
+    where document_id = #{documentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zqu.pa.entity.study.StudyDocument" >
+    insert into study_document (document_id, document_title, document_introduction, 
+      cover_img, file_path, user_id, 
+      createtime, updatetime)
+    values (#{documentId,jdbcType=INTEGER}, #{documentTitle,jdbcType=VARCHAR}, #{documentIntroduction,jdbcType=VARCHAR}, 
+      #{coverImg,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zqu.pa.entity.study.StudyDocument" >
+    insert into study_document
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="documentId != null" >
+        document_id,
+      </if>
+      <if test="documentTitle != null" >
+        document_title,
+      </if>
+      <if test="documentIntroduction != null" >
+        document_introduction,
+      </if>
+      <if test="coverImg != null" >
+        cover_img,
+      </if>
+      <if test="filePath != null" >
+        file_path,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="documentId != null" >
+        #{documentId,jdbcType=INTEGER},
+      </if>
+      <if test="documentTitle != null" >
+        #{documentTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="documentIntroduction != null" >
+        #{documentIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImg != null" >
+        #{coverImg,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zqu.pa.entity.study.StudyDocument" >
+    update study_document
+    <set >
+      <if test="documentTitle != null" >
+        document_title = #{documentTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="documentIntroduction != null" >
+        document_introduction = #{documentIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImg != null" >
+        cover_img = #{coverImg,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where document_id = #{documentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zqu.pa.entity.study.StudyDocument" >
+    update study_document
+    set document_title = #{documentTitle,jdbcType=VARCHAR},
+      document_introduction = #{documentIntroduction,jdbcType=VARCHAR},
+      cover_img = #{coverImg,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where document_id = #{documentId,jdbcType=INTEGER}
+  </update>
+</mapper>

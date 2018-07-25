@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zqu.pa.dao.study.StudyDocumentLabelMapper" >
+  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.study.StudyDocumentLabel" >
+    <constructor >
+      <idArg column="orderBy" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="document_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="label_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orderBy, document_id, label_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from study_document_label
+    where orderBy = #{orderby,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from study_document_label
+    where orderBy = #{orderby,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zqu.pa.entity.study.StudyDocumentLabel" >
+    insert into study_document_label (orderBy, document_id, label_id
+      )
+    values (#{orderby,jdbcType=INTEGER}, #{documentId,jdbcType=INTEGER}, #{labelId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zqu.pa.entity.study.StudyDocumentLabel" >
+    insert into study_document_label
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderby != null" >
+        orderBy,
+      </if>
+      <if test="documentId != null" >
+        document_id,
+      </if>
+      <if test="labelId != null" >
+        label_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderby != null" >
+        #{orderby,jdbcType=INTEGER},
+      </if>
+      <if test="documentId != null" >
+        #{documentId,jdbcType=INTEGER},
+      </if>
+      <if test="labelId != null" >
+        #{labelId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zqu.pa.entity.study.StudyDocumentLabel" >
+    update study_document_label
+    <set >
+      <if test="documentId != null" >
+        document_id = #{documentId,jdbcType=INTEGER},
+      </if>
+      <if test="labelId != null" >
+        label_id = #{labelId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where orderBy = #{orderby,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zqu.pa.entity.study.StudyDocumentLabel" >
+    update study_document_label
+    set document_id = #{documentId,jdbcType=INTEGER},
+      label_id = #{labelId,jdbcType=INTEGER}
+    where orderBy = #{orderby,jdbcType=INTEGER}
+  </update>
+</mapper>
