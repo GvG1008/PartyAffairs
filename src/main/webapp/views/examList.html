@@ -18,21 +18,23 @@
         			</tr>
         			<tr class="thead">
         				<td>考试名称</td>
-        				<td>考试时间</td>
+        				<td>开始时间</td>
+        				<td>截止时间</td>
         				<td>考试状态</td>
         				<td>成绩</td>
         			</tr>
         			<tr class="tbody" v-for="r in examing">
         				<td class="test-title"><a :href="r.examId">{{r.examTitle}}</a></td>
         				
-        				<td>{{r.startTime}}至{{r.endTime}}</td>
+        				<td class="test-time">{{r.startTime}}</td>
+        				<td class="test-time">{{r.endTime}}</td>
         				
         				<td v-if="r.status==1">正在进行</td>
         				<td v-else-if="r.status==0">还未开始</td>
         				
         				<td v-if="r.pass==-1">无</td>
         				<td v-else>{{r.score}}</td>
-        			</tr>        		
+        			</tr>
         		</table>
         	</div>
         	<div class="tested" id="examed">
@@ -42,14 +44,17 @@
         			</tr>
         			<tr class="thead">
         				<td>考试名称</td>
-        				<td>考试时间</td>
+        				<td>开始时间</td>
+        				<td>截止时间</td>
         				<td>考试状态</td>
         				<td>成绩</td>
         			</tr>
+        			
         			<tr class="tbody" v-for="r in examed">
                         <td class="test-title"><a :href="r.examId">{{r.examTitle}}</a></td>
                         
-                        <td>{{r.startTime}}至{{r.endTime}}</td>
+                        <td class="test-time">{{r.startTime}}</td>
+        				<td class="test-time">{{r.endTime}}</td>
                         
                         <td v-if="r.pass==-1">未参加</td>
                         <td v-else-if="r.pass==0">不及格</td>
@@ -57,7 +62,7 @@
                         
                         <td v-if="r.pass==-1">无</td>
                         <td v-else>{{r.score}}</td>
-                    </tr>  
+                    </tr>
         		</table>
         	</div>
        	</div>
