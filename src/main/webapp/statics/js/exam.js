@@ -1,5 +1,11 @@
 var maxtime;
-var examid = 1;//TODO考试id
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return decodeURI(r[2]); return null; 
+}
+var examid=getUrlParam('id');//考试id
+
 var app = new Vue({
 	el : '#app',
 	data : {

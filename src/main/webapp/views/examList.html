@@ -24,7 +24,7 @@
         				<td>成绩</td>
         			</tr>
         			<tr class="tbody" v-for="r in examing">
-        				<td class="test-title"><a :href="r.examId">{{r.examTitle}}</a></td>
+        				<td class="test-title"><a :href="'examInfo.html?id='+r.examId">{{r.examTitle}}</a></td>
         				
         				<td class="test-time">{{r.startTime}}</td>
         				<td class="test-time">{{r.endTime}}</td>
@@ -51,7 +51,7 @@
         			</tr>
         			
         			<tr class="tbody" v-for="r in examed">
-                        <td class="test-title"><a :href="r.examId">{{r.examTitle}}</a></td>
+                        <td class="test-title">{{r.examTitle}}</td>
                         
                         <td class="test-time">{{r.startTime}}</td>
         				<td class="test-time">{{r.endTime}}</td>
