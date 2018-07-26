@@ -52,15 +52,21 @@
     <bean id="sessionIdGenerator"
         class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator" />
     <!-- 会话Cookie模板 关闭浏览器立即失效 -->
-    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-        <constructor-arg value="sid" />
-        <property name="httpOnly" value="true" />
-        <property name="maxAge" value="-1" />
+    <!--
+	    指定本系统SESSIONID, 默认为: JSESSIONID
+	    问题: 与SERVLET容器名冲突, 如JETTY, TOMCAT 等默认JSESSIONID,
+	    当跳出SHIRO SERVLET时如ERROR-PAGE容器会为JSESSIONID重新分配值导致登录会话丢失!
+    -->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">  
+        <constructor-arg name="name" value="ZQUPAId" />
+        <property name="httpOnly" value="true"/>  
+        <property name="maxAge" value="-1"/>  
     </bean>
     <!-- 会话DAO -->
     <bean id="sessionDAO"
         class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
         <property name="sessionIdGenerator" ref="sessionIdGenerator" />
+        <property name="activeSessionsCacheName" value="shiro-activeSessionCache"></property>
     </bean>
     <!-- 会话验证调度器，每30分钟执行一次验证 ，设定会话超时及保存 -->
     <bean name="sessionValidationScheduler"
@@ -72,25 +78,32 @@
     <bean id="sessionManager"
         class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
         <!-- 全局会话超时时间（单位毫秒），负秒表示永不超时 -->
-        <property name="globalSessionTimeout" value="-10000" />
+        <property name="globalSessionTimeout" value="3600000" />
         <property name="deleteInvalidSessions" value="true" />
         <property name="sessionValidationSchedulerEnabled" value="true" />
         <property name="sessionValidationScheduler" ref="sessionValidationScheduler" />
         <property name="sessionDAO" ref="sessionDAO" />
+        <property name="sessionIdCookieEnabled" value="true" />
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
     </bean>
- 
+
     <!-- 安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="userRealm" />
+        <!-- 注入session管理器 -->
         <property name="sessionManager" ref="sessionManager" />
         <!-- 注入缓存管理器 -->
-        <property name="cacheManager" ref="cacheManager"></property>
+<!--         <property name="cacheManager" ref="cacheManager"></property> -->
     </bean>
 
     <!-- 缓存管理器 -->
-    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-        <property name="cacheManagerConfigFile" value="classpath:shiro-ehcache.xml"/>
+<!--     <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManager" ref="ehCacheManager"/>
     </bean>
+    <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:shiro-ehcache.xml"/>
+        <property name="shared" value="true"></property>
+    </bean> -->
 
     <!-- 相当于调用SecurityUtils.setSecurityManager(securityManager) -->
     <bean
@@ -102,10 +115,18 @@
 
     <bean id="userRealm" class="com.zqu.pa.realm.UserRealm">
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
+<!--         <property name="cacheManager" ref="cacheManager"/> -->
+        <!--缓存开启-->
+        <property name="cachingEnabled" value="true" />
+        <!--身份认证-->
+        <property name="authenticationCachingEnabled" value="true" />
+        <property name="authenticationCacheName" value="authenticationCache" />
+        <!--权限认证-->
+        <property name="authorizationCachingEnabled" value="true" />
+        <property name="authorizationCacheName" value="authorizationCache" />
     </bean>
-    <!-- 凭证匹配器 -->
-    <bean id="credentialsMatcher"
-        class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+    <!-- 密码匹配规则 凭证匹配器 -->
+    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
         <property name="hashAlgorithmName" value="md5" />
         <property name="hashIterations" value="1" />
     </bean>
