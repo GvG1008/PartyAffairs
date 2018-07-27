@@ -30,9 +30,81 @@ $(document).ready(function(){
 			alert("请输入正确的手机号码!");
 		}
 		else{
-			alert("报名成功，请等待报名结果！");
+			activity.enroll();
 			location.reload();
 		}
 	})
 	
 })
+var activity = new Vue({
+	el :'#activity-list',
+	data :{
+		"list":[],
+		"info":[],
+		"phone":[]
+	},
+	created :function(){
+		
+	},
+	methods :{
+		getInfo :function(id){//获取活动报名详情
+			doGetInfo(id);
+		},
+		enroll :function(){//报名
+			doEnroll();
+		}
+	}
+})
+
+function doGetInfo(id){
+	$.ajax({
+		type:"GET",
+		url: "../activity/"+id, 
+		dataType: "json",
+		success: function(result) { 
+			if(result.status == 0)
+				activity.info = result.data;
+			else
+				alert(result.msg);
+		}	
+	})
+}
+
+function doEnroll(){
+	/*$.ajax({
+		type:"post",
+		url: "../activity", 
+		data:{
+			"phone":activity.phone,
+			"id":info.id
+		},
+		dataType: "json",
+		success: function(result) { 
+			if(result.status == 0)
+				alert("报名成功，请等待报名结果！");
+			else
+				alert(result.msg);
+		}	
+	})*/
+	alert("报名成功，请等待报名结果！");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
