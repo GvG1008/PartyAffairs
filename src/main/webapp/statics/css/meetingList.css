@@ -1,15 +1,15 @@
 fieldset {
-	padding: .35em .625em .75em;
-	margin: 0 50px;
-	border: 2px solid silver;
+	padding: .35em .625em .75em !important;
+	margin: 0 50px !important;
+	border: 2px solid silver !important;
 }
 
 legend {
-	color: red;
-	padding: .5em;
-	border: 0;
-	width: auto;
-	margin-bottom: 10px;
+	color: red !important;
+	padding: .5em !important;
+	border: 0 !important;
+	width: auto !important;
+	margin-bottom: 10px !important;
 }
 
 .meeting-list{

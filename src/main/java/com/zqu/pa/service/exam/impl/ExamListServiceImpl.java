@@ -30,8 +30,8 @@ public class ExamListServiceImpl implements ExamListService {
     @Autowired
     private ExamInfoMapper examInfoMapper;
     
-    @Autowired
-    private ExamInfo examInfo;
+    /*@Autowired
+    private ExamInfo examInfo;*/
     
     @Autowired
     private ExamRoleMapper examRoleMapper;    
@@ -82,6 +82,7 @@ public class ExamListServiceImpl implements ExamListService {
         Long time = new Date().getTime();
         ExamInfoExample example = new ExamInfoExample();
         example.createCriteria().andEndTimeLessThanOrEqualTo(time);
+        ExamInfo examInfo = new ExamInfo();
         examInfo.setFinish(-1);
         examInfoMapper.updateByExampleSelective(examInfo, example);
         
@@ -89,8 +90,9 @@ public class ExamListServiceImpl implements ExamListService {
         ExamInfoExample example1 = new ExamInfoExample();
         example1.createCriteria().andStartTimeLessThanOrEqualTo(time)
             .andEndTimeGreaterThanOrEqualTo(time);
-        examInfo.setFinish(1);
-        examInfoMapper.updateByExampleSelective(examInfo, example1);
+        ExamInfo examInfo1 = new ExamInfo();
+        examInfo1.setFinish(1);
+        examInfoMapper.updateByExampleSelective(examInfo1, example1);
         //finish默认为0，当前时间小于考试开始时间，考试未开始
     }
 

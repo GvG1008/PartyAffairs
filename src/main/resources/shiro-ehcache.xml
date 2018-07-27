@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ehcache name="shiroCache" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false">
+<ehcache name="shiro-activeSessionCache" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false">
     <!-- diskStore:缓存数据地址默认临时目录 -->
     <diskStore path="java.io.tmpdir"/>
     <defaultCache

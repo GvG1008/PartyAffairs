@@ -36,7 +36,7 @@
 						</button>
 						<span class="user-a">欢迎，{{user.realName}}</span>
 						<li class="user-li"><span class="user-a" id="info">个人信息</span></li>
-						<li class="user-li"><a class="user-a" id="manager" href="#">管理端</a></li>
+						<li class="user-li"><a class="user-a" id="manager" href="../admin-view/index.html">管理端</a></li>
 						<li class="user-li">
 							<span class="user-a" id="message">消息</span>
 							<div class="message" id="dis-message"></div>
@@ -48,11 +48,11 @@
 			</div>
 			<aside class="info" id="ainfo" style="display: none;">
 				<ul class="info-ul">
-					<li class="info-li"><a class="info-a" id="file">党员档案</a></li>
-					<li class="info-li"><a class="info-a" id="collection">我的收藏</a></li>
-					<li class="info-li"><a class="info-a" id="feedback">我要反馈</a></li>
-					<li class="info-li"><a class="info-a" id="report">思想汇报</a></li>
-					<li class="info-li"><a class="info-a" id="learnrecord">历史学习记录</a></li>
+					<li class="info-li"><a class="info-a" id="file" href="#">党员档案</a></li>
+					<li class="info-li"><a class="info-a" id="collection" href="#">我的收藏</a></li>
+					<li class="info-li"><a class="info-a" id="feedback" href="#">我要反馈</a></li>
+					<li class="info-li"><a class="info-a" id="report" href="#">思想汇报</a></li>
+					<li class="info-li"><a class="info-a" id="learnrecord" href="#">历史学习记录</a></li>
 				</ul>
 			</aside>
 		</header>
@@ -144,7 +144,7 @@
 		</aside>
 		<aside class="party" id="aparty" style="display: none;">
 			<ul class="party-ul">
-				<a class="party-a" id="signup" href="#" target="_blank"><li class="party-li">活动报名</li></a>
+				<a class="party-a" id="signup" href="home.html?location=activity" target="_blank"><li class="party-li">活动报名</li></a>
 				<a class="party-a" id="album" href="#" target="_blank"><li class="party-li">活动相册</li></a>
 				<a class="party-a" id="development" href="#" target="_blank"><li class="party-li">支部发展</li></a>
 				<a class="party-a" id="forum" href="#" target="_blank"><li class="party-li">党员论坛</li></a>
@@ -179,6 +179,5 @@
 		<script type="text/javascript" src="../statics/js/bootstrap.min.js" ></script>
 		<script type="text/javascript" src="../statics/js/vue.js" ></script>
 		<script type="text/javascript" src="../statics/js/home.js" ></script>
-		<link rel="stylesheet" href="../statics/css/meetingList.css" />
 	</body>
 </html>

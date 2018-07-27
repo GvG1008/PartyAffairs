@@ -33,7 +33,7 @@
       createtime, updatetime)
     values (#{documentId,jdbcType=INTEGER}, #{documentTitle,jdbcType=VARCHAR}, #{documentIntroduction,jdbcType=VARCHAR}, 
       #{coverImg,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+      now(), now())
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.study.StudyDocument" >
     insert into study_document
@@ -108,12 +108,7 @@
       <if test="userId != null" >
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatetime != null" >
-        updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      </if>
+      updatetime = now(),
     </set>
     where document_id = #{documentId,jdbcType=INTEGER}
   </update>
@@ -124,8 +119,7 @@
       cover_img = #{coverImg,jdbcType=VARCHAR},
       file_path = #{filePath,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+      updatetime = now()
     where document_id = #{documentId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -14,7 +14,7 @@
     insert into study_document_statistics (document_id, user_id, times, 
       createtime, updatetime)
     values (#{documentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{times,jdbcType=INTEGER}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+      now(), now())
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.study.StudyDocumentStatistics" >
     insert into study_document_statistics

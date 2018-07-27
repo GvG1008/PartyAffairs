@@ -23,7 +23,7 @@ import com.zqu.pa.utils.FTPSSMLoad;
 
 @Controller
 @RequestMapping("/study/")
-public class StudyController {
+public class TestController {
 
     @Autowired
     private IFileService iFileService;

@@ -31,6 +31,9 @@ $(document).ready(function(){
 		else if(name=="test"){
 			$("#frame").load("examList.html");
 		}
+		else if(name=="activity"){
+			$("#frame").load("activityList.html");
+		}
 		
 		
 		$(".loading").fadeOut(500);
