@@ -32,7 +32,12 @@ $(document).ready(function(){
 			$("#frame").load("examList.html");
 		}
 		else if(name=="activity"){
-			$("#frame").load("activityList.html");
+			if(id==null){
+				$("#frame").load("activityList.html");
+			}
+			else{
+				$("#frame").load("activity.html");
+			}
 		}
 		
 		
