@@ -1,0 +1,97 @@
+.activity-list{
+	position: relative;
+	top: 20px;
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #FBFBFB;
+	padding: 24px 24px 70px 24px;
+    border: 0;
+	box-shadow: 2px 0 0 0 #d2d2d2,
+	-1px 0 0 0 #d2d2d2,
+	0 2px 0 0 #b6b6b6,
+	0 3px 0 0 #d2d2d2,
+	3px 0 0 0 #e6e6e6,
+	-2px 0 0 0 #e6e6e6,
+	0 4px 0 0 #e6e6e6,
+	0 -1px 0 0 #e6e6e6;
+	border-radius: 4px;
+}
+
+.list-table td{
+	font-size: 16px;
+}
+
+.list-header{
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 15px;
+}
+
+.list-title{
+	width: 100%;
+	font-weight: bolder;
+	font-size: 40px;
+	text-align: center;
+	font-family: kaiti;
+}
+
+.list-table{
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.list-table tr:hover{
+	background-color: #F5F5F5;
+}
+
+.activity-title{
+	padding: 15px 0px 5px 20px;
+}
+
+.activity-title p{
+	font-family: "新宋体";
+	cursor: default;
+}
+
+.activity-table{
+	position: relative;
+	top: 20px;
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.activity-table td{
+	font-size: 15px;
+	padding: 6px 10px;
+}
+
+.info-btn,
+.sign-btn{
+	margin-left: 10px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.sign-up{
+	width: 500px;
+	height: 330px;
+	background-color: #F7FFFE;
+	border: 2px solid #01549B;
+	border-radius: 5px;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+.event-name{
+	width: 100px;
+}
+
+.sure-btn{
+	width: 100px;
+	margin-left: 30px;
+	margin-top: 10px;
+}
