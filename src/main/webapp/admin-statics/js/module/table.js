@@ -35,3 +35,11 @@ $(function () {
     });
 	 
 });
+$("tbody tr").on('click' , function(){
+	var check = $(this).find("input[type='checkbox']");
+	if ($(check).is(':checked')) {
+		$(check).prop('checked', false);
+	} else {
+		$(check).prop('checked', true);
+	}
+})

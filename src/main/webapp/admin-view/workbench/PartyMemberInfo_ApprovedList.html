@@ -7,7 +7,6 @@
 <title>待审核信息</title>
 <link href="../../admin-statics/css/bootstrap/3.0.2/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="../../admin-statics/css/font-awesome/4.7.0/font-awesome.css" rel="stylesheet">
-<!-- <link href="../../admin-statics/css/metroui/metro-all.css" rel="stylesheet" > -->
 <link href="../../admin-statics/css/workbench/table.css" rel="stylesheet" >
 </head>
 <body>
@@ -19,7 +18,8 @@
                 <div class="toolbar">
                    <a class="btn btn-warning tw" href="#">
                                 <span class="pass icon"></span>
-                                <span class="caption">审核通过</span></a> 
+                                <span class="caption" id="allpass">审核通过</span></a> 
+                                
                    <button type="button" class="btn btn-primary tp" name="allcheck" id="allcheck">
                         <span class="fa fa-check-square-o icon"></span>
                         <span class="caption">全选</span>
@@ -71,7 +71,7 @@
                <tr>
                   <td><input type="checkbox" name="checkname[]"value="1"></td>
                   <td>1</td>
-                  <td><a href="#">吴青峰</a></td>
+                  <td><a href="UserPartyProfile_Approved.html">吴青峰</a></td>
                   <td>女</td>
                   <td>软件工程</td>
                   <td>正式党员</td>
@@ -81,9 +81,9 @@
                   <td>
                     <div class="am-btn-toolbar">
                          <div class="am-btn-group am-btn-group-xs">
-                         <a class="btn btn-success os" href="#">
+                         <a class="btn btn-success os" href="UserPartyProfile.html">
                                 <i class="fa fa-pencil"></i> 编辑</a>
-                              <a class="btn btn-warning ow" href="#"  disabled="disabled">
+                              <a class="btn btn-warning ow" href="#" >
                                 <span class="pass icon"></span> 审核</a>
                               <a class="btn btn-danger od" href="#">
                                 <i class="fa fa-trash-o"></i> 删除</a>
