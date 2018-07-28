@@ -104,7 +104,7 @@ public class UserManageController {
     }
     
     /**
-     * 根据用户所属党支部
+     * 根据管理员所属党支部
      * 获取党员档案列表
      * @param page 第几页
      * @param num  每页多少条记录
@@ -148,7 +148,7 @@ public class UserManageController {
     }
     
     /**
-     * 根据用户所属党支部
+     * 根据管理员所属党支部
      * 获取待审核党员档案列表
      * @param page 第几页
      * @param num  每页多少条记录
@@ -189,5 +189,20 @@ public class UserManageController {
         if(listInfo.getList()==null)
             return ServerResponse.createByErrorMessage("获取列表信息失败！");
         return ServerResponse.createBySuccess(listInfo);
+    }
+    
+    @ResponseBody
+    @RequestMapping("/checkUserByBranch/{userId}")
+    public ServerResponse checkUser(@PathVariable(value="userId") String userId){
+        
+        //获取当前session里的当前用户所属党支部
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if(basicInfo==null||basicInfo.getBranchId()==0)
+            return ServerResponse.createByErrorMessage("无法获取当前session信息");
+        
+        //该管理员只可审核和自己相同的党支部人员
+        String Msg = userInfoService.checkUser(basicInfo.getBranchId(),userId);
+        
+        return ServerResponse.createBySuccessMessage(Msg);
     }
 }

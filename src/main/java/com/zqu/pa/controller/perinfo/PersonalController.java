@@ -82,6 +82,8 @@ public class PersonalController {
         if(userId==null||info.getUserId()==null||!userId.equals(info.getUserId()))
             return ServerResponse.createByErrorMessage("操作失败");
         else {
+            info.setGrade(null);
+            info.setClassName(null);
             info.setCheckState(null);
             info.setCheckId(null);
             info.setCreateId(null);

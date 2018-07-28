@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqu.pa.dao.perinfo.UserManageMapper">
+  <insert id="insertUserLoginInfo" parameterType="com.zqu.pa.vo.userInfo.UserLoginInfo">
+    insert into user_login 
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id ,
+      </if>
+      <if test="password != null">
+      password ,
+      </if>
+      <if test="roleId != 0">
+       role_id ,
+      </if>
+      <if test="state != 0">
+      state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR}, 
+      </if>
+      <if test="roleId != 0">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="state != 0">
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

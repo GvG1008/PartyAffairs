@@ -2,6 +2,8 @@ package com.zqu.pa.entity.perinfo;
 
 import java.util.Date;
 
+import com.zqu.pa.utils.DateToString;
+
 public class UserPersonInfo {
     private String userId;
 
@@ -10,6 +12,10 @@ public class UserPersonInfo {
     private String sex;
 
     private String nickname;
+
+    private String grade;
+
+    private String className;
 
     private String imgHead;
 
@@ -21,7 +27,7 @@ public class UserPersonInfo {
 
     private String createTime;
 
-    private Date lastTime;
+    private String lastTime;
 
     private Integer checkState;
 
@@ -59,6 +65,22 @@ public class UserPersonInfo {
 
     public void setNickname(String nickname) {
         this.nickname = nickname == null ? null : nickname.trim();
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade == null ? null : grade.trim();
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className == null ? null : className.trim();
     }
 
     public String getImgHead() {
@@ -101,12 +123,12 @@ public class UserPersonInfo {
         this.createTime = createTime == null ? null : createTime.trim();
     }
 
-    public Date getLastTime() {
+    public String getLastTime() {
         return lastTime;
     }
 
     public void setLastTime(Date lastTime) {
-        this.lastTime = lastTime;
+        this.lastTime = DateToString.getDateString("yyyy/MM/dd HH/mm/ss", lastTime);
     }
 
     public Integer getCheckState() {

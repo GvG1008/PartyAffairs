@@ -27,6 +27,8 @@ public class UserPartyInfo {
 
     private String birthDate;
 
+    private String politicalStatus;
+
     private String idCard;
 
     private String maritalStatus;
@@ -155,6 +157,14 @@ public class UserPartyInfo {
 
     public void setBirthDate(String birthDate) {
         this.birthDate = birthDate == null ? null : birthDate.trim();
+    }
+
+    public String getPoliticalStatus() {
+        return politicalStatus;
+    }
+
+    public void setPoliticalStatus(String politicalStatus) {
+        this.politicalStatus = politicalStatus == null ? null : politicalStatus.trim();
     }
 
     public String getIdCard() {

@@ -13,8 +13,9 @@
   </select>
 
   <select id="getUserBasicList" resultType="com.zqu.pa.vo.perinfo.UserList">
-    select upa.user_id 'userId' , upa.name 'realName' , upa.sex 'sex', upa.professional 'professional', 
-    upa.branch_id 'branchId', b.branch_name 'branchName', ul.role_id 'roleId', r.role_name 'roleName'
+    select upa.user_id 'userId' , upa.name 'realName' , upa.sex 'sex', upe.grade 'grade', 
+    upe.class_name 'className', upa.professional 'professional', upa.branch_id 'branchId', 
+    b.branch_name 'branchName', ul.role_id 'roleId', r.role_name 'roleName'
     from user_party_info upa
     LEFT JOIN partybranch b ON b.branch_id = upa.branch_id
     LEFT JOIN user_login ul ON ul.user_id = upa.user_id

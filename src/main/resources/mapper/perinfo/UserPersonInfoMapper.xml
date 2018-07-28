@@ -6,6 +6,8 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="sex" jdbcType="VARCHAR" property="sex" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="class_name" jdbcType="VARCHAR" property="className" />
     <result column="img_head" jdbcType="VARCHAR" property="imgHead" />
     <result column="profile" jdbcType="VARCHAR" property="profile" />
     <result column="email" jdbcType="VARCHAR" property="email" />
@@ -75,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, name, sex, nickname, img_head, profile, email, birthday, create_time, last_time, 
-    check_state, create_id, check_id
+    user_id, name, sex, nickname, grade, class_name, img_head, profile, email, birthday, 
+    create_time, last_time, check_state, create_id, check_id
   </sql>
   <select id="selectByExample" parameterType="com.zqu.pa.entity.perinfo.UserPersonInfoExample" resultMap="BaseResultMap">
     select
@@ -110,15 +112,17 @@
   </delete>
   <insert id="insert" parameterType="com.zqu.pa.entity.perinfo.UserPersonInfo">
     insert into user_person_info (user_id, name, sex, 
-      nickname, img_head, profile, 
-      email, birthday, create_time, 
-      last_time, check_state, create_id, 
-      check_id)
+      nickname, grade, class_name, 
+      img_head, profile, email, 
+      birthday, create_time, last_time, 
+      check_state, create_id, check_id
+      )
     values (#{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
-      #{nickname,jdbcType=VARCHAR}, #{imgHead,jdbcType=VARCHAR}, #{profile,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
-      #{lastTime,jdbcType=TIMESTAMP}, #{checkState,jdbcType=INTEGER}, #{createId,jdbcType=VARCHAR}, 
-      #{checkId,jdbcType=VARCHAR})
+      #{nickname,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, 
+      #{imgHead,jdbcType=VARCHAR}, #{profile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{lastTime,jdbcType=TIMESTAMP}, 
+      #{checkState,jdbcType=INTEGER}, #{createId,jdbcType=VARCHAR}, #{checkId,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.perinfo.UserPersonInfo">
     insert into user_person_info
@@ -134,6 +138,12 @@
       </if>
       <if test="nickname != null">
         nickname,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="className != null">
+        class_name,
       </if>
       <if test="imgHead != null">
         img_head,
@@ -175,6 +185,12 @@
       </if>
       <if test="nickname != null">
         #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null">
+        #{className,jdbcType=VARCHAR},
       </if>
       <if test="imgHead != null">
         #{imgHead,jdbcType=VARCHAR},
@@ -226,6 +242,12 @@
       <if test="record.nickname != null">
         nickname = #{record.nickname,jdbcType=VARCHAR},
       </if>
+      <if test="record.grade != null">
+        grade = #{record.grade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.className != null">
+        class_name = #{record.className,jdbcType=VARCHAR},
+      </if>
       <if test="record.imgHead != null">
         img_head = #{record.imgHead,jdbcType=VARCHAR},
       </if>
@@ -264,6 +286,8 @@
       name = #{record.name,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=VARCHAR},
       nickname = #{record.nickname,jdbcType=VARCHAR},
+      grade = #{record.grade,jdbcType=VARCHAR},
+      class_name = #{record.className,jdbcType=VARCHAR},
       img_head = #{record.imgHead,jdbcType=VARCHAR},
       profile = #{record.profile,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
@@ -288,6 +312,12 @@
       </if>
       <if test="nickname != null">
         nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null">
+        class_name = #{className,jdbcType=VARCHAR},
       </if>
       <if test="imgHead != null">
         img_head = #{imgHead,jdbcType=VARCHAR},
@@ -324,6 +354,8 @@
     set name = #{name,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      class_name = #{className,jdbcType=VARCHAR},
       img_head = #{imgHead,jdbcType=VARCHAR},
       profile = #{profile,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},

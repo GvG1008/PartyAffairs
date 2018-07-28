@@ -22,5 +22,7 @@ public interface UserInfoService {
     //branchId==0表示查询所有党支部人员信息
     UserListInfo getUserList(int branchId, int page, int num, int checkState);
 
+    //验证所属党支部是否相同，再根据其userId审核该用户
+    String checkUser(int branchId, String userId);
 
 }

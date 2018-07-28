@@ -1,9 +1,14 @@
 package com.zqu.pa.service.perinfo.impl;
 
+import org.apache.shiro.SecurityUtils;
 import org.mybatis.generator.codegen.mybatis3.model.ExampleGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.dao.perinfo.UserListMapper;
 import com.zqu.pa.dao.perinfo.UserPartyInfoMapper;
 import com.zqu.pa.dao.perinfo.UserPersonInfoMapper;
@@ -13,6 +18,7 @@ import com.zqu.pa.entity.perinfo.UserPartyInfoExample.Criteria;
 import com.zqu.pa.entity.perinfo.UserPersonInfo;
 import com.zqu.pa.service.perinfo.UserInfoService;
 import com.zqu.pa.vo.perinfo.UserListInfo;
+import com.zqu.pa.vo.userInfo.UserBasicInfo;
 
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
@@ -84,5 +90,21 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
         
         return info;
+    }
+
+    @Override
+    public String checkUser(int branchId, String userId) {
+        
+        //在个人信息表将审核状态置1，审核人ID填入，账号信息表状态置1
+        //先获取审核人ID
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if(basicInfo==null||basicInfo.getUserId()==null)
+            return "无法获取当前session信息用户ID";
+        String checkId = basicInfo.getUserId();
+        
+
+        
+        
+        return "审核成功!";
     }
 }

@@ -15,6 +15,7 @@
     <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="family_background" jdbcType="VARCHAR" property="familyBackground" />
     <result column="birth_date" jdbcType="VARCHAR" property="birthDate" />
+    <result column="political_status" jdbcType="VARCHAR" property="politicalStatus" />
     <result column="id_card" jdbcType="CHAR" property="idCard" />
     <result column="marital_status" jdbcType="VARCHAR" property="maritalStatus" />
     <result column="organization_unit" jdbcType="VARCHAR" property="organizationUnit" />
@@ -89,10 +90,10 @@
   </sql>
   <sql id="Base_Column_List">
     user_id, branch_id, name, name_former, sex, national, native_place, birth_place, 
-    place_registered, home_address, tel, family_background, birth_date, id_card, marital_status, 
-    organization_unit, personal_identity, educational_background, professional, graduate_school, 
-    time_applicationforparty, time_intoparty, time_positive, type_development, totot, 
-    out_unit
+    place_registered, home_address, tel, family_background, birth_date, political_status, 
+    id_card, marital_status, organization_unit, personal_identity, educational_background, 
+    professional, graduate_school, time_applicationforparty, time_intoparty, time_positive, 
+    type_development, totot, out_unit
   </sql>
   <select id="selectByExample" parameterType="com.zqu.pa.entity.perinfo.UserPartyInfoExample" resultMap="BaseResultMap">
     select
@@ -129,20 +130,22 @@
       name_former, sex, national, 
       native_place, birth_place, place_registered, 
       home_address, tel, family_background, 
-      birth_date, id_card, marital_status, 
-      organization_unit, personal_identity, educational_background, 
-      professional, graduate_school, time_applicationforparty, 
-      time_intoparty, time_positive, type_development, 
-      totot, out_unit)
+      birth_date, political_status, id_card, 
+      marital_status, organization_unit, personal_identity, 
+      educational_background, professional, graduate_school, 
+      time_applicationforparty, time_intoparty, 
+      time_positive, type_development, totot, 
+      out_unit)
     values (#{userId,jdbcType=VARCHAR}, #{branchId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
       #{nameFormer,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{national,jdbcType=VARCHAR}, 
       #{nativePlace,jdbcType=VARCHAR}, #{birthPlace,jdbcType=VARCHAR}, #{placeRegistered,jdbcType=VARCHAR}, 
       #{homeAddress,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{familyBackground,jdbcType=VARCHAR}, 
-      #{birthDate,jdbcType=VARCHAR}, #{idCard,jdbcType=CHAR}, #{maritalStatus,jdbcType=VARCHAR}, 
-      #{organizationUnit,jdbcType=VARCHAR}, #{personalIdentity,jdbcType=VARCHAR}, #{educationalBackground,jdbcType=VARCHAR}, 
-      #{professional,jdbcType=VARCHAR}, #{graduateSchool,jdbcType=VARCHAR}, #{timeApplicationforparty,jdbcType=VARCHAR}, 
-      #{timeIntoparty,jdbcType=VARCHAR}, #{timePositive,jdbcType=VARCHAR}, #{typeDevelopment,jdbcType=VARCHAR}, 
-      #{totot,jdbcType=VARCHAR}, #{outUnit,jdbcType=VARCHAR})
+      #{birthDate,jdbcType=VARCHAR}, #{politicalStatus,jdbcType=VARCHAR}, #{idCard,jdbcType=CHAR}, 
+      #{maritalStatus,jdbcType=VARCHAR}, #{organizationUnit,jdbcType=VARCHAR}, #{personalIdentity,jdbcType=VARCHAR}, 
+      #{educationalBackground,jdbcType=VARCHAR}, #{professional,jdbcType=VARCHAR}, #{graduateSchool,jdbcType=VARCHAR}, 
+      #{timeApplicationforparty,jdbcType=VARCHAR}, #{timeIntoparty,jdbcType=VARCHAR}, 
+      #{timePositive,jdbcType=VARCHAR}, #{typeDevelopment,jdbcType=VARCHAR}, #{totot,jdbcType=VARCHAR}, 
+      #{outUnit,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.perinfo.UserPartyInfo">
     insert into user_party_info
@@ -185,6 +188,9 @@
       </if>
       <if test="birthDate != null">
         birth_date,
+      </if>
+      <if test="politicalStatus != null">
+        political_status,
       </if>
       <if test="idCard != null">
         id_card,
@@ -265,6 +271,9 @@
       </if>
       <if test="birthDate != null">
         #{birthDate,jdbcType=VARCHAR},
+      </if>
+      <if test="politicalStatus != null">
+        #{politicalStatus,jdbcType=VARCHAR},
       </if>
       <if test="idCard != null">
         #{idCard,jdbcType=CHAR},
@@ -355,6 +364,9 @@
       <if test="record.birthDate != null">
         birth_date = #{record.birthDate,jdbcType=VARCHAR},
       </if>
+      <if test="record.politicalStatus != null">
+        political_status = #{record.politicalStatus,jdbcType=VARCHAR},
+      </if>
       <if test="record.idCard != null">
         id_card = #{record.idCard,jdbcType=CHAR},
       </if>
@@ -414,6 +426,7 @@
       tel = #{record.tel,jdbcType=VARCHAR},
       family_background = #{record.familyBackground,jdbcType=VARCHAR},
       birth_date = #{record.birthDate,jdbcType=VARCHAR},
+      political_status = #{record.politicalStatus,jdbcType=VARCHAR},
       id_card = #{record.idCard,jdbcType=CHAR},
       marital_status = #{record.maritalStatus,jdbcType=VARCHAR},
       organization_unit = #{record.organizationUnit,jdbcType=VARCHAR},
@@ -469,6 +482,9 @@
       </if>
       <if test="birthDate != null">
         birth_date = #{birthDate,jdbcType=VARCHAR},
+      </if>
+      <if test="politicalStatus != null">
+        political_status = #{politicalStatus,jdbcType=VARCHAR},
       </if>
       <if test="idCard != null">
         id_card = #{idCard,jdbcType=CHAR},
@@ -526,6 +542,7 @@
       tel = #{tel,jdbcType=VARCHAR},
       family_background = #{familyBackground,jdbcType=VARCHAR},
       birth_date = #{birthDate,jdbcType=VARCHAR},
+      political_status = #{politicalStatus,jdbcType=VARCHAR},
       id_card = #{idCard,jdbcType=CHAR},
       marital_status = #{maritalStatus,jdbcType=VARCHAR},
       organization_unit = #{organizationUnit,jdbcType=VARCHAR},

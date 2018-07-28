@@ -8,8 +8,12 @@ public class UserList {
     
     private String sex;
     
-    private String professional;
+    private String grade;
+
+    private String className;
     
+    private String professional;
+
     private int branchId;
     
     private String branchName;
@@ -40,6 +44,22 @@ public class UserList {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+    
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public String getProfessional() {

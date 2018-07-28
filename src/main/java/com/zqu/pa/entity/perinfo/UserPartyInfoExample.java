@@ -1004,6 +1004,76 @@ public class UserPartyInfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andPoliticalStatusIsNull() {
+            addCriterion("political_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoliticalStatusIsNotNull() {
+            addCriterion("political_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoliticalStatusEqualTo(String value) {
+            addCriterion("political_status =", value, "politicalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoliticalStatusNotEqualTo(String value) {
+            addCriterion("political_status <>", value, "politicalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoliticalStatusGreaterThan(String value) {
+            addCriterion("political_status >", value, "politicalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoliticalStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("political_status >=", value, "politicalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoliticalStatusLessThan(String value) {
+            addCriterion("political_status <", value, "politicalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoliticalStatusLessThanOrEqualTo(String value) {
+            addCriterion("political_status <=", value, "politicalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoliticalStatusLike(String value) {
+            addCriterion("political_status like", value, "politicalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoliticalStatusNotLike(String value) {
+            addCriterion("political_status not like", value, "politicalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoliticalStatusIn(List<String> values) {
+            addCriterion("political_status in", values, "politicalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoliticalStatusNotIn(List<String> values) {
+            addCriterion("political_status not in", values, "politicalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoliticalStatusBetween(String value1, String value2) {
+            addCriterion("political_status between", value1, value2, "politicalStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoliticalStatusNotBetween(String value1, String value2) {
+            addCriterion("political_status not between", value1, value2, "politicalStatus");
+            return (Criteria) this;
+        }
+
         public Criteria andIdCardIsNull() {
             addCriterion("id_card is null");
             return (Criteria) this;
