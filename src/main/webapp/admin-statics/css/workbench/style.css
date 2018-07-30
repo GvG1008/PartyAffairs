@@ -242,7 +242,7 @@ div#mainFrameTabs {
     /* z-index: -1; */
 }
 ul.nav.nav-tabs.ui-sortable {
-    width: 95%;
+    width: 98%;
     display:flex;
     flex-wrap: nowrap
 }

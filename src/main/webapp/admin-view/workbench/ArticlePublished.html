@@ -2,9 +2,62 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>文章发布</title>
+<link href="../../admin-statics/css/bootstrap/3.0.2/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<link href="../../admin-statics/css/font-awesome/4.7.0/font-awesome.css" rel="stylesheet">
+<link href="../../admin-statics/css/workbench/summernote.css" rel="stylesheet" >
+
+<link href="../../admin-statics/css/workbench/articlepublished.css" rel="stylesheet" >
+
 </head>
 <body>
-  文章发布
+    <div class=container>
+         <div class = "header">
+                            <a href="PartyMemberInfo_List.html">文章管理</a> > 文章发布</div>
+   
+         <form>
+            <!-- 工具栏  -->
+            <div class=toolbar>
+                 <a class="btn btn-default op" id="save" href="#">
+                                <i class="fa fa-hourglass op-icon"></i> 暂存</a>
+                 <a class="btn btn-default op" id="preview" href="#">
+                                <i class="fa fa-eye op-icon"></i> 预览</a>
+                 <a class="btn btn-default op" id="send" href="#">
+                                <i class="fa fa-paper-plane op-icon"></i> 发布</a>
+            </div>
+            <div class="clearfix"></div>
+    
+            <!-- 封面图   -->
+            <div class="coverimg" id="imgArea">
+                <img  src='' class="banner-pic" id="banner-pic" style="opacity:0;">
+	            <em class="icon-add " id="icon-add"></em>
+	            <span id="dragContainer" class="dragContainer hovertip">拖拽或点击添加封面图</span>
+	            <input type="file" name="" class="file-upload" id="file-upload" accept="image/jpeg, image/jpg, image/png">
+	        </div>
+	        <div class="content-area">
+	            <!-- 标题  -->
+	            <div class="textareawrap">
+	                <textarea type="text" class="title" id="title" placeholder="请填写标题" maxlength="32" autocomplete="off" onkeypress="loft.m.longpostpublish.g.handleEnter(this,event);" style="height:50px;" wrap="hard"></textarea>
+	            </div>
+                <!-- 编辑器  -->
+	            <div class="editorWrap">
+	                <div id="summernote"></div>
+	            </div>
+	        </div>
+         </form>
+   </div>
+   
+   <script type="text/javascript" src="../../admin-statics/js/lib/jquery/1.12.4/jquery.min.js"></script>
+   <script type="text/javascript" src="../../admin-statics/js/extends/bootstrap/3.3.7/bootstrap.min.js"></script>
+   <script type="text/javascript" src="../../admin-statics/js/extends/summernote.js"></script>
+   <script type="text/javascript" src="../../admin-statics/js/module/articlepublished.js"></script>
+   
+     <script>
+      $('#summernote').summernote({
+        placeholder: 'Hello bootstrap 4',
+        tabsize: 2,
+        height: 500
+      });
+    </script>  
 </body>
 </html>

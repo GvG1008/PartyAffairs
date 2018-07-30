@@ -1,0 +1,92 @@
+.clearfix:after {
+   content:""; 
+   display: block; 
+   clear:both; 
+}
+.container {
+    float:left;
+    min-width:100%;
+    background: #fff;
+    padding:0px;
+}
+.header {
+    padding: 20px;
+    font-size: 22px;
+    color: #004d6f;
+    font-family: sans-serif;
+    font-weight: 800;
+    border-bottom-color: #69666685;
+    border-bottom: solid 0.5px #69666685;
+    background: #fff;
+    padding-left: 50px;
+}
+body{
+    background: #f1f1f5;
+    height:100%;
+}
+.op-icon{
+	color:#979797;
+}
+.toolbar {
+    margin: 40px 20px 20px 40px;
+    float:right;
+}
+.coverimg {
+    position: relative;
+    z-index: 100;
+    display: block;
+    width: 630px;
+    height: 150px;
+    margin: 0;
+    background: none;
+    border: 1px solid #eee;
+    -webkit-border-radius: 6px;
+    
+    text-align: center;
+    margin: 0 auto;
+}
+.coverimg:hover{
+	background: #f6f6f6;
+    border-color: #f6f6f6;
+}
+input#file-upload {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0px;
+    height: 0;
+    opacity: 0;
+}
+.hovertip {
+    position: relative;
+    z-index: 20;
+    opacity: 0;
+    display: block;
+    width: 100%;
+    height: 90px;
+    line-height: 90px;
+    color: #ccc;
+    font-size: 18px;
+    text-align: center;
+    background: url(../../images/workbench/empty.png) 0 0 repeat;
+}
+.banner-pic {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    width: 630px;
+    min-height: 90px;
+    height: 90px;
+    cursor: default;
+}
+.icon-add {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 5;
+    width: 23px;
+    height: 22px;
+    margin: -11px 0 0 -11px;
+    background: url(../../images/workbench/addpic.png) 0 0 no-repeat;
+}
