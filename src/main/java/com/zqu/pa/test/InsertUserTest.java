@@ -91,7 +91,7 @@ public class InsertUserTest {
         UserPartyInfo userPartyInfo = new UserPartyInfo();
         UserPersonInfo userPersonInfo = new UserPersonInfo();
         
-        for(int i=14;i<=19;i++)
+        for(int i=20;i<=100;i++)
         {
             userId = "100"+String.valueOf(i);
             //MD5：盐+密码+次数
