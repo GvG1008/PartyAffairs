@@ -3,28 +3,62 @@
 <mapper namespace="com.zqu.pa.dao.perinfo.UserListMapper">
 
   <select id="countByBranch" resultType="int">
-    select count(*) 
-    from user_party_info pa
+    SELECT count(*) 
+    FROM user_party_info pa
     LEFT JOIN user_person_info pe ON pa.user_id = pe.user_id
-    where pe.check_state = #{checkState}
+    WHERE pe.check_state = #{checkState}
     <if test="branchId!=0">
-        and pa.branch_id = #{branchId}
+        AND pa.branch_id = #{branchId}
     </if>
   </select>
 
   <select id="getUserBasicList" resultType="com.zqu.pa.vo.perinfo.UserList">
-    select upa.user_id 'userId' , upa.name 'realName' , upa.sex 'sex', upe.grade 'grade', 
+    SELECT upa.user_id 'userId' , upa.name 'realName' , upa.sex 'sex', upe.grade 'grade', 
     upe.class_name 'className', upa.professional 'professional', upa.branch_id 'branchId', 
     b.branch_name 'branchName', ul.role_id 'roleId', r.role_name 'roleName'
-    from user_party_info upa
+    FROM user_party_info upa
     LEFT JOIN partybranch b ON b.branch_id = upa.branch_id
     LEFT JOIN user_login ul ON ul.user_id = upa.user_id
     LEFT JOIN role r ON r.role_id = ul.role_id
     LEFT JOIN user_person_info upe ON upe.user_id = upa.user_id
-    where upe.check_state = #{checkState}
+    WHERE upe.check_state = #{checkState}
+    <if test="branchId!=0">
+        AND b.branch_id = #{branchId}
+    </if>
+  </select>
+  
+    <select id="getUserCheckList" resultType="com.zqu.pa.vo.perinfo.UserCheckList">
+    SELECT upa.user_id 'userId' , upa.name 'realName' , upa.sex 'sex', upe.grade 'grade', 
+    upe.class_name 'className', upa.professional 'professional', upa.branch_id 'branchId', 
+    b.branch_name 'branchName', ul.role_id 'roleId', r.role_name 'roleName' , upe.create_id 'createId',
+    upee.name 'createName', upe.create_time 'createTime' 
+    FROM user_party_info upa
+    LEFT JOIN partybranch b ON b.branch_id = upa.branch_id
+    LEFT JOIN user_login ul ON ul.user_id = upa.user_id
+    LEFT JOIN role r ON r.role_id = ul.role_id
+    LEFT JOIN user_person_info upe ON upe.user_id = upa.user_id
+    LEFT JOIN user_person_info upee ON upee.user_id = upe.create_id
+    WHERE upe.check_state = 0
     <if test="branchId!=0">
         and b.branch_id = #{branchId}
     </if>
-    limit #{index},#{num}
+  </select>
+
+  <select id="getGradeList" resultType="String">
+	SELECT DISTINCT upe.grade
+	FROM user_party_info upa
+	LEFT JOIN user_person_info upe ON upa.user_id = upe.user_id 
+    <if test="branchId!=0">
+        WHERE upa.branch_id = #{branchId}
+    </if>
+  </select>
+  
+    <select id="getClassList" resultType="String">
+    SELECT DISTINCT upe.class_name
+    FROM user_party_info upa
+    LEFT JOIN user_person_info upe ON upa.user_id = upe.user_id 
+    <if test="branchId!=0">
+        WHERE upa.branch_id = #{branchId}
+    </if>
   </select>
 </mapper>

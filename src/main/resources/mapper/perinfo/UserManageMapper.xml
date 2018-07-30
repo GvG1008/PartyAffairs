@@ -32,4 +32,12 @@
       </if>
     </trim>
   </insert>
+  
+  <update id="changeUserState" >
+    UPDATE user_login
+    SET state = 1 
+    WHERE user_id = #{userId} 
+    AND state = 0
+  </update>
+
 </mapper>
