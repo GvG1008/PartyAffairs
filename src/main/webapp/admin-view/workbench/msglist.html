@@ -40,16 +40,16 @@
 					                    <td><center>{{message.realName}}</center></td>
 					                    <td><center>{{message.sex}}</center></td>
 					                    <td><center>{{message.branchName}}</center></td>
-					        			<td><center>{{message.普通党员}}</center></td>
+					        			<td><center>{{message.roleName}}</center></td>
 					        			<td><center>计算机学院党支部</center></td>
 					                    <td>
 					                    <center>
-						                    <button class="btn btn-success os btn-xs" type="button" data-toggle="tooltip"  title="编辑" id="btn_look" onclick="look(this);">
-							                    编辑<i class="fa fa-pencil" aria-hidden="true"></i>
-						                    </button>
+						                    <a class="btn btn-success os btn-xs" :href="'UserPartyProfile.html?id='+message.userId">
+                                                                                                                            编辑<i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
 						                    &nbsp;&nbsp;&nbsp;&nbsp;
 						                    <button class="btn btn-danger btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);">
-							                    删除<i class="fa fa-trash-o "></i>
+							                                                   删除<i class="fa fa-trash-o "></i>
 						                    </button>
 						                </center>
 					                    </td> 

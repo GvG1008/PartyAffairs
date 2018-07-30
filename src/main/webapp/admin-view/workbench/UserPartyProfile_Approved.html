@@ -17,15 +17,15 @@
 <body>
      <div class=container>
          <div class = "header">
-                            <a href="PartyMemberInfo_ApprovedList.html">待审核信息</a> > 待审核党员资料详情</div>
-         <form>
+                            <a href="PartyMemberInfo_ApprovedList.html">待审核信息</ a> > 待审核党员资料详情</div>
+         <form id="info" v-cloak>
             <div class="headimg">
                 <div class="img">
                 <a class="camera" href="#" data-toggle="modal" data-target="#myModal">
                 <img src="../../admin-statics/images/workbench/pic.png" class="img-circle" id="finalImg" >
                 <span class=" glyphicon glyphicon-camera"></span></a>
                 </div>
-                <span id="name">帅小柴</span>  
+                <span id="name">{{info.name}}</span>  
             </div>
                <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -40,16 +40,16 @@
                       </div>
                       <div class="modal-body">
                         <div class="tailoring-content-two">
-							<div class="tailoring-box-parcel">
-							     <img id="tailoringImg">
-							</div>
-							<div class="preview-box-parcel">
-							     <p>图片预览：</p>
-								<div class="square previewImg"></div>
-								<div class="circular previewImg"></div>
-							</div>
-						</div>
-						<div class="tailoring-content-three">
+                            <div class="tailoring-box-parcel">
+                                 <img id="tailoringImg">
+                            </div>
+                            <div class="preview-box-parcel">
+                                 <p>图片预览：</p>
+                                <div class="square previewImg"></div>
+                                <div class="circular previewImg"></div>
+                            </div>
+                        </div>
+                        <div class="tailoring-content-three">
                         <button type="button" class="l-btn cropper-reset-btn">复位</button>
                         <button type="button" class="l-btn cropper-rotate-btn">旋转</button>
                         <button type="button" class="l-btn cropper-scaleX-btn">换向</button>
@@ -70,41 +70,44 @@
                <div class="userinfo" id="i1">
                <div class="form-item yi">
                    <label class="labelname">姓名</label>
-                   <input class="form-control form-input" type="text" id="realname" name="realname" value="">
+                   <input class="form-control form-input" type="text" id="realname" name="realname" :value="info.name">
                    <label class="tip" id="realname-tip" ></label>
                </div>
                <div class="form-item ">
                    <label class="labelname">曾用名</label>
-                   <input class="form-control form-input" type="text">
-                   <label class="tip" style=“display:none”></label>
+                   <input class="form-control form-input" type="text" :value="info.nameFormer">
+                   <label class="tip" style="display: none"></label>
                </div>
                <div class="form-item">
                    <label class="labelname">性别</label>
-                   <select class="form-control">
+                   <select class="form-control" v-if="info.sex=='男'">
                         <option value="男" selected="selected">男</option>
                         <option value="女">女</option>
+                   </select>
+                    <select class="form-control" v-else>
+                        <option value="男">男</option>
+                        <option value="女" selected="selected">女</option>
                    </select>
                </div>
                <div class="form-item er">
                    <label class="labelname">民族</label>
                    <select class="form-control " name="mz" id="mz">
-                   <option value="">汉族</option>
+                   <option value="">{{info.national}}</option>
                    </select>
                </div>
                <div class="form-item san">
                    <label class="labelname" >身份证号</label>
-                   <input class="form-control form-input" type="text" id="idcard" name="idcard">
+                   <input class="form-control form-input" type="text" id="idcard" name="idcard" :value="info.idCard">
                    <label class="tip" id="idcard-tip" ></label>
                </div>
                <div class="form-item si">
                    <label class="labelname">出生日期</label>
-                   <input class="form-control birth" type="date">
-                   
+                   <input class="form-control birth" type="date" :value="info.birthDate">                  
                </div>
                <div class="form-item wu">
                    <label class="labelname">婚姻状况</label>
                    <select class="form-control " name="hy" id="hy">
-                   <option value="未婚" selected="selected">未婚</option>
+                   <option value="未婚">未婚</option>
                    <option value="已婚">已婚</option>
                    <option value="丧偶">丧偶</option>
                    <option value="离婚">离婚</option>
@@ -112,13 +115,13 @@
                </div>
                <div class="form-item liu">
                    <label class="labelname">家庭出身</label>
-                   <input class="form-control form-input" type="text" name="famiback" id="famiback">
+                   <input class="form-control form-input" type="text" name="famiback" id="famiback" :value="info.familyBackground">
                    <label class="tip" id="famiback-tip" ></label>
                </div>
                <div class="form-item qi">
                    <label class="labelname">个人身份</label>
                    <select class="form-control " name="sf" id="sf">
-                   <option value="units[0]">在岗职工</option>
+                   <option :value="info.personalIdentity">{{info.personalIdentity}}</option>
                    </select>
                </div>
                <div class="form-item ba">
@@ -159,8 +162,8 @@
                <div class="info-title"><span class="info-title-content">通讯信息</span></div>
                <div class="userinfo" id="i2">
                <div class="form-item yi">
-                   <label class="labelname">手机</label>
-                   <input class="form-control form-input" type="text" name="telephone" id="telephone">
+                   <label class="labelname">手机</label> 
+                   <input class="form-control form-input" type="text" name="telephone" id="telephone" :value="info.tel">
                    <label class="tip" id="telephone-tip"></label>
                </div>
                <div class="form-item zz">
@@ -173,7 +176,7 @@
                        <select class="form-control " name="area" id="xian">
                        </select>
                        <select class="form-control " name="town" id="zhen">
-	                   </select>
+                       </select>
                    </div>
                    
                     <input class="form-control form-input" type="text" name="detailadd" id="detailadd"
@@ -187,16 +190,16 @@
                <div class="form-item yi">
                    <label class="labelname">学历</label>
                    <select class="form-control " name="xl" id="xl">
-                   <option value="units[0]">本科</option>
+                   <option :value="info.educationalBackground">{{info.educationalBackground}}</option>
                    </select>
                </div>
                <div class="form-item ">
                    <label class="labelname" >专业</label>
-                   <input class="form-control form-input" type="text">
+                   <input class="form-control form-input" type="text" :value="info.professional">
                </div>
                <div class="form-item ">
                    <label class="labelname">毕业院校</label>
-                   <input class="form-control form-input" type="text" name="graduate" id="graduate">
+                   <input class="form-control form-input" type="text" name="graduate" id="graduate" :value="info.graduateSchool">
                    <label class="tip" id="graduate-tip" ></label>
                </div>
                </div>
@@ -212,40 +215,44 @@
                <div class="form-item yy2">
                    <label class="labelname">隶属党支部</label>
                    <select class="form-control " name="zb" id="zb">
-                    <option value="" selected="selected">软件工程专业党支部</option>
-                    <option value="">计算机科学与技术专业党支部</option>
-                    <option value="">网络工程专业党支部</option>
-                    <option value="">物联网工程专业党支部</option>
-                    <option value="">数据科学与大数据技术专业党支部</option>
+                    <option value="1">软件工程专业党支部</option>
+                    <option value="2">计算机科学与技术专业党支部</option>
+                    <option value="3">网络工程专业党支部</option>
+                    <option value="4">物联网工程专业党支部</option>
+                    <option value="5">数据科学与大数据技术专业党支部</option>
                    </select>
               </div>
               <div class="form-item yy3">
                    <label class="labelname">发展类型</label>
-                   <select class="form-control " name="fz" id="fz">
-                    <option value="" selected="selected">团员推优</option>
-                    <option value="">新入党</option>
+                   <select class="form-control " name="fz" id="fz" v-if="info.typeDevelopment=='团员推优'">
+                    <option value="团员推优" selected="selected">团员推优</option>
+                    <option value="新入党">新入党</option>
+                   </select>
+                   <select class="form-control " name="fz" id="fz" v-else>
+                    <option value="团员推优">团员推优</option>
+                    <option value="新入党"  selected="selected">新入党</option>
                    </select>
                </div>
                <div class="form-item yy4">
                    <label class="labelname">提交入党申请书时间</label>
-                   <input class="form-control birth" type="date" value=""/>
+                   <input class="form-control birth" type="date" :value="info.timeApplicationforparty"/>
                </div>
                <div class="form-item yy5">
                    <label class="labelname">入党时间</label>
-                   <input class="form-control birth" type="date" value=""/>
+                   <input class="form-control birth" type="date" :value="info.timeIntoparty"/>
                </div>
                <div class="form-item yy6">
                    <label class="labelname">转正时间</label>
-                   <input class="form-control birth" type="date" value=""/>
+                   <input class="form-control birth" type="date" :value="info.timePositive"/>
               </div>
             
                <div class="form-item yy7">
                    <label class="labelname" >转出组织单位</label>
-                   <input class="form-control form-input" type="text">
+                   <input class="form-control form-input" type="text" :value="info.totot">
                </div>
                <div class="form-item yy8">
                    <label class="labelname" >转出单位</label>
-                   <input class="form-control form-input" type="text">
+                   <input class="form-control form-input" type="text" :value="info.outUnit">
                </div>
                </div>
                <div class=operate>
@@ -268,7 +275,8 @@
         <script type="text/javascript" src="../../admin-statics/js/module/select.js"></script>
         <script type="text/javascript" src="../../admin-statics/js/module/valid.js"></script>
         <script type="text/javascript" src="../../admin-statics/js/extends/jquery.citys.js"></script>
-       
+        <script src="../../statics/js/vue.js"></script>
+        <script src="../../admin-statics/js/module/personal_info.js"> </script>
         <script type="text/javascript">
                 var $town = $('#address select[name="town"]');
                 var townFormat = function(info){
@@ -303,7 +311,6 @@
                 $('#hukou').citys({valueType:'name',province:'广东',city:'广州',area:'天河区'});
                 
             </script>
-             <script type="text/javascript">
-                </script>
+            
 </body>
 </html>
