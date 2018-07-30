@@ -1,0 +1,94 @@
+.personinfo{
+	position: relative;
+	top: 20px;
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #FBFBFB;
+	padding: 24px 24px 70px 24px;
+    border: 0;
+	box-shadow: 2px 0 0 0 #d2d2d2,
+	-1px 0 0 0 #d2d2d2,
+	0 2px 0 0 #b6b6b6,
+	0 3px 0 0 #d2d2d2,
+	3px 0 0 0 #e6e6e6,
+	-2px 0 0 0 #e6e6e6,
+	0 4px 0 0 #e6e6e6,
+	0 -1px 0 0 #e6e6e6;
+	border-radius: 10px;
+}
+
+.personinfo span{
+	cursor: default;
+}
+
+.info-header{
+    border-bottom: 1px solid #003FBC;
+    margin-bottom: 15px;
+}
+
+.title{
+	margin-bottom: 20px;
+}
+
+.title h3{
+	color: #003FBC;
+	font-family: kaiti;
+	text-align: center;
+}
+
+.personal-table td{
+	padding: 10px;
+}
+
+.personal-table textarea{
+	overflow: hidden;
+	resize: none;
+}
+
+.head-img{
+	padding: 20px 0px;
+}
+
+.personal-table{
+	font-size: 15px;
+	margin-bottom: 60px;
+}
+
+.party-table td{
+	padding: 10px;
+}
+
+.party-table{
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 15px;
+}
+
+.table-matter{
+	text-align: right;
+}
+
+.save-btn{
+	margin-top: 50px;
+	border-top: 1px solid #003FBC;
+	width: 100%;
+}
+
+#save-btn{
+	margin-top: 20px;
+	margin-left: 400px;
+	color: white;
+	font-size: 15px;
+	cursor: pointer;
+	padding: 10px 20px;
+	background-color: #09B4FF;
+	outline: none;
+	border: 0;
+	box-shadow: 3px 3px 0 0 #9cb8d8;
+	border-radius: 4px;
+}
+
+#save-btn:hover{
+	background-color: #0F6C8D;
+}

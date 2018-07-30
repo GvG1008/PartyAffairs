@@ -39,6 +39,9 @@ $(document).ready(function(){
 				$("#frame").load("activity.html");
 			}
 		}
+		else if(name=="info"){
+			$("#frame").load("personal.html");
+		}
 		
 		
 		$(".loading").fadeOut(500);
