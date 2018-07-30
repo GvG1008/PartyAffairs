@@ -13,6 +13,7 @@ import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.perinfo.UserPartyInfo;
 import com.zqu.pa.entity.perinfo.UserPersonInfo;
 import com.zqu.pa.service.perinfo.UserInfoService;
+import com.zqu.pa.vo.perinfo.GradeClassSortList;
 import com.zqu.pa.vo.perinfo.UserListInfo;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
 
@@ -104,7 +105,7 @@ public class UserManageController {
     }
     
     /**
-     * 根据管理员所属党支部
+     * 根据管理员所属党支部//0表示所有
      * 获取党员档案列表
      * @param page 第几页
      * @param num  每页多少条记录
@@ -116,7 +117,7 @@ public class UserManageController {
         
         //获取当前session里的当前用户所属党支部
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
-        if(basicInfo==null||basicInfo.getBranchId()==0)
+        if(basicInfo==null)
             return ServerResponse.createByErrorMessage("无法获取当前session信息");
         
         UserListInfo listInfo = new UserListInfo();
@@ -148,7 +149,7 @@ public class UserManageController {
     }
     
     /**
-     * 根据管理员所属党支部
+     * 根据管理员所属党支部//0表示所有
      * 获取待审核党员档案列表
      * @param page 第几页
      * @param num  每页多少条记录
@@ -160,7 +161,7 @@ public class UserManageController {
         
         //获取当前session里的当前用户所属党支部
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
-        if(basicInfo==null||basicInfo.getBranchId()==0)
+        if(basicInfo==null)
             return ServerResponse.createByErrorMessage("无法获取当前session信息");
         
         UserListInfo listInfo = new UserListInfo();
@@ -197,12 +198,29 @@ public class UserManageController {
         
         //获取当前session里的当前用户所属党支部
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
-        if(basicInfo==null||basicInfo.getBranchId()==0)
+        if(basicInfo==null)
             return ServerResponse.createByErrorMessage("无法获取当前session信息");
         
         //该管理员只可审核和自己相同的党支部人员
         String Msg = userInfoService.checkUser(basicInfo.getBranchId(),userId);
         
         return ServerResponse.createBySuccessMessage(Msg);
+    }
+    
+    @ResponseBody
+    @RequestMapping("/gradeList")
+    public ServerResponse<GradeClassSortList> getListByGrade() {
+        GradeClassSortList list = new GradeClassSortList();
+        
+        //获取当前session里的当前用户所属党支部
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if(basicInfo==null||basicInfo.getBranchId()==0)
+            return ServerResponse.createByErrorMessage("无法获取当前session信息");
+        //获取班级年级信息列表
+        
+        
+        if(list==null)
+            return ServerResponse.createByErrorMessage("获取年级班级信息失败!");
+        return ServerResponse.createBySuccess(list);
     }
 }

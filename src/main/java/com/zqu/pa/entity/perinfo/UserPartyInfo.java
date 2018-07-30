@@ -2,57 +2,57 @@ package com.zqu.pa.entity.perinfo;
 
 public class UserPartyInfo {
     private String userId;
-
+    //所属党支部
     private Integer branchId;
-
+    //姓名
     private String name;
-
+    //曾用名
     private String nameFormer;
-
+    //性别
     private String sex;
-
+    //民族
     private String national;
-
+    //籍贯
     private String nativePlace;
-
+    //出生地
     private String birthPlace;
-
+    //户口所在地
     private String placeRegistered;
-
+    //家庭住址
     private String homeAddress;
-
+    //手机号
     private String tel;
-
+    //家庭出身
     private String familyBackground;
-
+    //出生日期
     private String birthDate;
-
+    //政治面貌
     private String politicalStatus;
-
+    //身份证
     private String idCard;
-
+    //婚姻状况
     private String maritalStatus;
-
+    //组织所在单位
     private String organizationUnit;
-
+    //个人身份
     private String personalIdentity;
-
+    //学历
     private String educationalBackground;
-
+    //专业
     private String professional;
-
+    //毕业院校
     private String graduateSchool;
-
+    //提交入党申请书时间
     private String timeApplicationforparty;
-
+    //入党时间
     private String timeIntoparty;
-
+    //转正时间
     private String timePositive;
-
+    //发展类型
     private String typeDevelopment;
-
+    //转出组织单位
     private String totot;
-
+    //转出单位
     private String outUnit;
 
     public String getUserId() {

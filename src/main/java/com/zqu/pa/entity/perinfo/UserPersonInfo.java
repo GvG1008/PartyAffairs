@@ -6,27 +6,27 @@ import com.zqu.pa.utils.DateToString;
 
 public class UserPersonInfo {
     private String userId;
-
+    //姓名
     private String name;
-
+    //性别
     private String sex;
-
+    //昵称
     private String nickname;
-
+    //所属年级
     private String grade;
-
+    //所属班级
     private String className;
-
+    //头像路径
     private String imgHead;
-
+    //个人简介
     private String profile;
-
+    //邮箱
     private String email;
-
+    //生日
     private String birthday;
-
+    //创建时间
     private String createTime;
-
+    //最后登陆时间
     private String lastTime;
 
     private Integer checkState;
