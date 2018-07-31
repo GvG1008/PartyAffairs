@@ -22,9 +22,9 @@
         <property name="unauthorizedUrl" value="/views/error403.html" />
         <!-- 退出 -->
         <property name="filters">
-            <util:map>
+            <map>
                 <entry key="logout" value-ref="logoutFilter" />
-            </util:map>
+            </map>
         </property>
         <!-- 权限配置 -->
         <property name="filterChainDefinitions">
@@ -32,12 +32,12 @@
                 <!-- anon表示此地址不需要任何权限即可访问 -->
                 <!-- 对静态资源设置匿名访问 -->
                 <!-- 对验证码，匿名访问 -->
-                /**=anon
-                /views/testLogin.html=anon
+                /views/*=anon
                 /index=anon
                 /login=anon
                 <!-- 请求该地址，shiro去清除session -->
                 /doLogout=logout
+                /**=anon
                 <!--所有的请求(除去配置的静态资源请求或请求地址为anon的请求)都要通过登录验证,如果未登录则跳到/login -->
                 <!--  /**= authc -->
             </value>
@@ -45,7 +45,7 @@
     </bean>
     <!-- 退出过滤器 -->
     <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
-        <property name="redirectUrl" value="/index" />
+        <property name="redirectUrl" value="/views/home.html" />
     </bean>
  
     <!-- 会话ID生成器 -->

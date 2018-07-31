@@ -165,7 +165,6 @@ public class UserInfoServiceImpl implements UserInfoService {
             System.out.println("error check");
             throw new RuntimeException("账号状态异常");
         }
-
         return "审核成功!";
     }
 
@@ -183,6 +182,55 @@ public class UserInfoServiceImpl implements UserInfoService {
             return null;
         }
         return list;
+    }
+
+    @Transactional
+    @Override
+    public String checkUserByBatch(int branchId, List<String> userIds) {
+        if(userIds==null||userIds.size()==0)
+            return "审核失败!";
+
+        //1.验证党支部ID是否相同,0为所有党支部权限
+        if(branchId==0);
+        else {
+            //在当前userIds列表里查询党支部ID相同的userId列表
+            List<String> list = userManageDao.checkBranchByBatch(userIds, branchId);
+            if(list==null)
+                return "审核失败";
+            if(userIds.size()!=list.size())
+                return "审核存在所属党支部不同";
+        }
+        
+        //在个人信息表将审核状态置1，审核人ID填入，账号信息表状态置1
+        //2.先获取审核人ID
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if(basicInfo==null||basicInfo.getUserId()==null)
+            return "无法获取当前session信息用户ID";
+        String checkId = basicInfo.getUserId();
+        
+        //3.更新个人信息表审核状态
+        int result = 0;
+        try {
+            result = userManageDao.updateCheckUserByBatch(checkId, userIds);
+        }catch (Exception e) {
+            System.out.println("更新个人信息状态表失败");
+            e.printStackTrace();
+        }
+        System.out.println("更新个人信息状态表返回值：" + result);
+        if(result==0)
+            throw new RuntimeException();
+        
+        //4.更新账号表状态
+        try {
+            result = userManageDao.batchChangeUserState(userIds);    
+        }catch (Exception e) {
+            System.out.println("更新账号表状态失败");
+            e.printStackTrace();
+        }
+        System.out.println("更新账号表状态返回值：" + result);
+        if(result==0)
+            throw new RuntimeException();
+        return "审核成功!";
     }
 
 }

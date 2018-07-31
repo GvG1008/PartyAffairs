@@ -36,5 +36,6 @@ public interface UserInfoService {
     //根据所属党支部，返回选择年级和班级列表
     GradeClassSortList getGradeClass(int branchId);
 
-    //
+    //批量审核：验证所属党支部是否相同，再根据其userId审核该用户
+    String checkUserByBatch(int branchId, List<String> userIds);
 }

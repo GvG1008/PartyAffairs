@@ -33,11 +33,42 @@
     </trim>
   </insert>
   
+  <select id="checkBranchByBatch" resultType="String">
+    SELECT user_id
+    From user_party_info
+    WHERE user_id IN
+    <foreach collection="userIds" index="index" item="userId" separator="," open="(" close=")">
+      #{userId,jdbcType=VARCHAR}
+    </foreach>
+    AND branch_id = #{branchId,jdbcType=INTEGER}
+  </select>
+  
   <update id="changeUserState" >
     UPDATE user_login
     SET state = 1 
     WHERE user_id = #{userId} 
     AND state = 0
   </update>
-
+  
+  <update id="batchChangeUserState">
+    UPDATE user_login
+    SET state = 1 
+    WHERE user_id IN
+    <foreach collection="userIds" index="index" item="userId" separator="," open="(" close=")">
+      #{userId,jdbcType=VARCHAR}
+    </foreach>
+    AND state = 0
+  </update>
+  
+  <update id="updateCheckUserByBatch">
+    update user_person_info
+    SET
+      check_state = 1,
+      check_id = #{checkId,jdbcType=VARCHAR}
+    where user_id IN
+    <foreach collection="userIds" index="index" item="userId" separator="," open="(" close=")">
+      #{userId,jdbcType=VARCHAR}
+    </foreach>
+    AND check_state = 0
+  </update>
 </mapper>
