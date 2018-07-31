@@ -31,16 +31,16 @@ var publicity = new Vue({
 })
 function getDetails(){//获取详情
 	if(typename == "djyw"){
-		typeusl = "../news/"+id;
+		typeusl = "../../news/"+id;
 	}
 	else if(typename == "tzgs"){
-		typeusl = "../notices/public/"+id;
+		typeusl = "../../notices/public/"+id;
 	}
 	else if(typename == "dngs"){
-		typeusl = "../notices/party/"+id;
+		typeusl = "../../notices/party/"+id;
 	}
 	else if(typename == "xzzq"){
-		typeusl = "../news/"+id;
+		typeusl = "../../news/"+id;
 	}
 	$.ajax({
 		type : "GET",// 请求方式

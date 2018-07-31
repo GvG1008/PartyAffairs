@@ -14,9 +14,12 @@ new Vue({
 				async : false,
 				dataType: 'json',
 				success: function(result){
-					//alert(data.num);
- 					app.newMessages = result.data.list;
- 					app.num = result.data.totalInfoNum;
+					if (result.status == 0) {
+						app.newMessages = result.data.list;
+						app.num = result.data.totalInfoNum;
+					}else{
+						alert(result.msg);
+					}
 				}
 			});
 		},

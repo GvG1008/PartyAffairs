@@ -59,7 +59,7 @@ var activity = new Vue({
 function doGetInfo(id){
 	$.ajax({
 		type:"GET",
-		url: "../activity/"+id, 
+		url: "../../activity/"+id, 
 		dataType: "json",
 		success: function(result) { 
 			if(result.status == 0)

@@ -17,7 +17,7 @@ var info = new Vue({
 		var self = this;
 		$.ajax({
 			type:"GET",
-			url: "../examlist/"+id, 
+			url: "../../examlist/"+id, 
 			dataType: "json",
 			success: function(result) { 
 				if(result.status == 0)

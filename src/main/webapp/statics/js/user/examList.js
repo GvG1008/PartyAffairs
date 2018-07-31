@@ -10,7 +10,7 @@ var examing = new Vue({
 		var self = this;
 		$.ajax({
 			type:"GET",
-			url: "../examlist/unfinish", 
+			url: "../../examlist/unfinish", 
 			dataType: "json",
 			success: function(result) { 
 				if(result.status == 0)
@@ -31,7 +31,7 @@ var examed = new Vue({
 		var self = this;
 		$.ajax({
 			type:"GET",
-			url: "../examlist/finish", 
+			url: "../../examlist/finish", 
 			dataType: "json",
 			success: function(result) { 
 				if(result.status == 0)
