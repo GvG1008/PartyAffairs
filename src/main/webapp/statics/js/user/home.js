@@ -191,7 +191,7 @@ var head = new Vue({
 		var self = this;
 		$.ajax({
 			type:"GET",
-			url: "../../loginInfo", 
+			url: "../loginInfo", 
 			dataType: "json",
 			success: function(result) { 
 				self.user = result.data;
@@ -202,7 +202,7 @@ var head = new Vue({
 function doLogin(){
 	$.ajax({
 		type:"post",
-		url:"../../login",
+		url:"../login",
 		data: {"userId":head.username,"password":head.password},
 		dataType: "json", // 数据类型可以为 text xml json script jsonp
 		success: function(result) { 

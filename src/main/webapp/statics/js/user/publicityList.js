@@ -48,16 +48,16 @@ var list = new Vue({
 })
 function doPageto(currentNum){
 	if(typename == "djyw"){
-		typeusl = "../../newsMenu/"+currentNum+"/"+length;
+		typeusl = "../newsMenu/"+currentNum+"/"+length;
 	}
 	else if(typename == "tzgs"){
-		typeusl = "../../noticesMenu/public/"+currentNum+"/"+length;
+		typeusl = "../noticesMenu/public/"+currentNum+"/"+length;
 	}
 	else if(typename == "dngs"){
-		typeusl = "../../noticesMenu/party/"+currentNum+"/"+length;
+		typeusl = "../noticesMenu/party/"+currentNum+"/"+length;
 	}
 	else if(typename == "xzzq"){
-		typeusl = "../../newsMenu/"+currentNum+"/"+length;
+		typeusl = "../newsMenu/"+currentNum+"/"+length;
 	}
 	$.ajax({
 		type : "GET",// 请求方式

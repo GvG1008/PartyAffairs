@@ -105,7 +105,7 @@ var mien = new Vue({
 			var self = this;
 			$.ajax({
 				type: "GET", // 请求方式
-				url: "../../statics/json/image.json", // 地址，就是json文件的请求路径
+				url: "../statics/json/image.json", // 地址，就是json文件的请求路径
 				dataType: "json", // 数据类型可以为 text xml json script jsonp
 				success: function(result) { 
 					self.image = result.image;
@@ -124,7 +124,7 @@ var branch = new Vue({
 		var self = this;
 		$.ajax({
 			type:"GET",
-			url: "../../statics/json/branch.json", // 地址，就是json文件的请求路径
+			url: "../statics/json/branch.json", // 地址，就是json文件的请求路径
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
 				self.branch = result.branch;
@@ -147,7 +147,7 @@ var News = new Vue({
 		var self = this;
 		$.ajax({
 			type:"get",
-			url:"../../homelist/newslist/"+newslength,
+			url:"../homelist/newslist/"+newslength,
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
 				if(result.status==0){
@@ -178,7 +178,7 @@ var PartyNews = new Vue({
 		var self = this;
 		$.ajax({
 			type:"get",
-			url:"../../homelist/newslist/"+newslength,
+			url:"../homelist/newslist/"+newslength,
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
 				if(result.status==0)
@@ -199,7 +199,7 @@ var NoticePublicity = new Vue({
 		var self = this;
 		$.ajax({
 			type:"get",
-			url:"../../homelist/noticeslist/public/"+newslength,
+			url:"../homelist/noticeslist/public/"+newslength,
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
 				if(result.status==0)
@@ -220,7 +220,7 @@ var PartyPublicity = new Vue({
 		var self = this;
 		$.ajax({
 			type:"get",
-			url:"../../homelist/noticeslist/party/"+newslength,
+			url:"../homelist/noticeslist/party/"+newslength,
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
 				if(result.status==0)
@@ -241,7 +241,7 @@ var Learning = new Vue({
 		var self = this;
 		$.ajax({
 			type:"get",
-			url:"../../statics/json/image2.json",
+			url:"../statics/json/image2.json",
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
 				self.learn = result.news;
@@ -258,7 +258,7 @@ var Download = new Vue({
 		var self = this;
 		$.ajax({
 			type:"get",
-			url:"../../statics/json/image2.json",
+			url:"../statics/json/image2.json",
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
 				self.download = result.news;

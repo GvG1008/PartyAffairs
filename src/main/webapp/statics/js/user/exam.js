@@ -21,7 +21,7 @@ var app = new Vue({
 		var self = this;
 		$.ajax({
 			type : "GET",// 请求方式
-			url : "../../exampaper/"+examid,// 地址，就是json文件的请求路径
+			url : "../exampaper/"+examid,// 地址，就是json文件的请求路径
 			dataType : "json",// 数据类型可以为 text xml json script jsonp
 			success : function(result) {// 返回的参数就是 action里面所有的有get和set方法的参数
 				if (result.status == 0) {
@@ -163,7 +163,7 @@ function submit1() {//提交试卷
 	var examPaper = jsonObj;
 	$.ajax({		
 		type : "post",// 请求方式
-		url : "../../exampaper/"+examid+"/"+score,// 地址，就是json文件的请求路径
+		url : "../exampaper/"+examid+"/"+score,// 地址，就是json文件的请求路径
 		data : JSON.stringify(examPaper),//将examPaper转换为JSON字符串，后台以List<ExamPaper>接收
 		contentType : 'application/json;charset=utf-8',
 		dataType : "json",// 数据类型可以为 text xml json script jsonp
