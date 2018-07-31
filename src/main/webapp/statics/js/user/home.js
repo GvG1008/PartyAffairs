@@ -42,7 +42,9 @@ $(document).ready(function(){
 		else if(name=="info"){
 			$("#frame").load("personal.html");
 		}
-		
+		else if(name=="fb"||name=="rp"){
+			$("#frame").load("report.html");
+		}
 		
 		$(".loading").fadeOut(500);
 	});
