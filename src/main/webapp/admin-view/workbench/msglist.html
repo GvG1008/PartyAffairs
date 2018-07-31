@@ -41,7 +41,11 @@
 					                    <td><center>{{message.sex}}</center></td>
 					                    <td><center>{{message.branchName}}</center></td>
 					        			<td><center>{{message.roleName}}</center></td>
-					        			<td><center>计算机学院党支部</center></td>
+					        			<td v-if="message.branchId==1"><center>软件工程专业党支部</center></td>
+					        			<td v-else-if="message.branchId==2"><center>计算机科学与技术专业党支部</center></td>
+					        			<td v-else-if="message.branchId==3"><center>网络工程专业党支部</center></td>
+					        			<td v-else-if="message.branchId==4"><center>物联网工程专业党支部</center></td>
+					        			<td v-else-if="message.branchId==5"><center>数据科学与大数据技术专业党支部</center></td>
 					                    <td>
 					                    <center>
 						                    <a class="btn btn-success os btn-xs" :href="'UserPartyProfile.html?id='+message.userId">

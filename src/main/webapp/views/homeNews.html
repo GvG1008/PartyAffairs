@@ -57,7 +57,7 @@
 					</div>
 				</div>
 				<div id="PartyPublicity">
-					<div class="list" id="pp-list" style="display: none;">
+					<div class="list" id="pp-list" style="display: none;" v-if="public!=''">
 						<table class="rtlist-table">
 							<tr v-for="r in public">
 								<td class="rtlist-name"><a :href="'home.html?location=dngs&id='+r.id"><p :title="r.title">{{r.title}}</p></a></td>
@@ -66,6 +66,13 @@
 						</table>
 						<a class="more" href="home.html?location=dngs" target="_blank">更多内容>></a>
 					</div>
+					<div class="list" id="pp-list" style="display: none;" v-else">
+                        <table class="rtlist-table">
+                            <tr v-for="r in public">
+                                <td class="rtlist-name">登录后可查看</td>
+                            </tr>
+                        </table>                        
+                    </div>
 				</div>
 			</div>
 		</div>

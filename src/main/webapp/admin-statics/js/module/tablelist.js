@@ -1,8 +1,7 @@
 new Vue({
 		el : "#msg",
 	data: {
-		newMessages: [],
-		num:[]
+		newMessages: []
 	},
 	methods:{
 		loadNewMessages: function() {
@@ -10,13 +9,12 @@ new Vue({
 			var m = {};
 			$.ajax({
 				type:"get",
-				url: "../../userManage/userCheckList/1/100",
+				url: "../../userManage/userCheckList",
 				async : false,
 				dataType: 'json',
 				success: function(result){
 					if (result.status == 0) {
-						app.newMessages = result.data.list;
-						app.num = result.data.totalInfoNum;
+						app.newMessages = result.data;
 					}else{
 						alert(result.msg);
 					}
@@ -103,18 +101,22 @@ function deleteall(){
 	var str = "";
 	for(var i=1;i<all.length;i++){
 		if(all[i].checked)
-			str += all[i].value;
+			str = str+"&"+all[i].value;
 	}
-	alert(str);
+	var text="确定要删除所选账号吗?";
+	document.getElementById('show_msg').innerHTML=text;
+	$('.popup_de').addClass('bbox');
+	$('.popup_de .btn-danger').one('click',function(){
+		if(str!="")
+			doDelete(str);
+		else{
+			alert("请至少选择一个账号");
+			$('.popup_de').removeClass('bbox');
+		}		
+	})
 }
 function millisecondsToDateTime(ms){
 	return new Date(ms).toLocaleString();
-};
-function look(obj){
-	var tds = $(obj).parent().parent().parent().find('td');
-	var center = tds.eq(0).find('center');
-	var rid = center.eq(0).text();	
-	localStorage.rid = rid; 
 };
 function deletemsg(obj){
 	var tds = $(obj).parent().parent().parent().find('td');
@@ -124,22 +126,20 @@ function deletemsg(obj){
 	document.getElementById('show_msg').innerHTML=text;
 	$('.popup_de').addClass('bbox');
 	$('.popup_de .btn-danger').one('click',function(){
-		$.ajax({                            
-    		type:'GET',        
-            url:'receive_isDelete',   
-            data:{
-            	receiveID : rid
-            	}, 
-            dataType:'json',
-            success: function(data) {  
-    			alert(data.msg);
-    			header_app.loadNewMessages();
-    			sidebar_app.go('msglist.html','我的消息');
-            },  
-            error:function(){                                                  
-               alert("删除失败");    
-               $('.popup_de').removeClass('bbox');
-            } 
-       });
+		doDelete(rid);
 	})
+}
+function doDelete(data){
+	$.ajax({                            
+		type:'post',        
+        url:'../../userManage/deleteUserByBranch/'+data, 
+        dataType:'json',
+        success: function(result) {  
+			alert(result.msg);
+			location.reload();	
+        },
+        error :function(){
+        	alert("系统出错，删除失败！");
+        }
+   });
 }

@@ -10,13 +10,14 @@ new Vue({
 			var m = {};
 			$.ajax({
 				type:"get",
-				url: "../../userManage/userCheckList/1/100",
+				url: "../../userManage/userCheckList",
 				async : false,
 				dataType: 'json',
 				success: function(result){
-					//alert(data.num);
- 					app.newMessages = result.data.list;
- 					app.num = result.data.totalInfoNum;
+					if(result.status == 0)
+						app.newMessages = result.data;
+					else
+						alert(result.msg);
 				}
 			});
 		},
@@ -54,7 +55,7 @@ $(document).ready(function() {
         "bAutoWidth" : true, //是否自适应宽度  
         "aLengthMenu" : [5, 10, 20], //更改显示记录数选项 
         "iDisplayLength" : 5, //默认显示的记录数  
-        "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0,7 ] }],
+        "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0,9 ] }],
         "order": [[ 1, 'asc' ]],
         "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示
         "sDom": '<"row" <"col-sm-8" <"#add">> <"col-sm-4" <"row" <"col-sm-6" l> <"col-sm-6" f>>>>t<"row" <"col-sm-6" i> <"col-sm-6" p>>',
@@ -75,7 +76,7 @@ $(document).ready(function() {
         	$(this).find('input[type=checkbox]').removeAttr('checked');
 		}
     });   
-	var button = "<a class='btn btn-warning tw'><span class='fa fa-pencil-square-o'></span><span class='caption' id='allpass'>审核通过</span></a> &nbsp;&nbsp;&nbsp;&nbsp;"
+	var button = "<a class='btn btn-warning tw' onclick='passall()'><span class='fa fa-pencil-square-o'></span><span class='caption' id='allpass'>审核通过</span></a> &nbsp;&nbsp;&nbsp;&nbsp;"
 				+"<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'><span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
 				+"<a class='btn btn-danger td' onclick='deleteall()'><span class='fa fa-trash-o icon'></span><span class='caption'>删除</span></a>";
 	document.getElementById("add").innerHTML = button;
@@ -95,24 +96,28 @@ function checkall(){
 		all[i].checked=true;
 	}
 }
+function millisecondsToDateTime(ms){
+	return new Date(ms).toLocaleString();
+};
 function deleteall(){
 	var all = $('[name=all]:checkbox');
 	var str = "";
 	for(var i=1;i<all.length;i++){
 		if(all[i].checked)
-			str += all[i].value;
+			str = str+"&"+all[i].value;
 	}
-	alert(str);
+	var text="确定要删除所选账号吗?";
+	document.getElementById('show_msg').innerHTML=text;
+	$('.popup_de').addClass('bbox');
+	$('.popup_de .btn-danger').one('click',function(){
+		if(str!="")
+			doDelete(str);
+		else{
+			alert("请至少选择一个账号");
+			$('.popup_de').removeClass('bbox');
+		}
+	})
 }
-function millisecondsToDateTime(ms){
-	return new Date(ms).toLocaleString();
-};
-function look(obj){
-	var tds = $(obj).parent().parent().parent().find('td');
-	var center = tds.eq(0).find('center');
-	var rid = center.eq(0).text();	
-	localStorage.rid = rid; 
-};
 function deletemsg(obj){
 	var tds = $(obj).parent().parent().parent().find('td');
 	var center = tds.eq(1).find('center');
@@ -121,22 +126,64 @@ function deletemsg(obj){
 	document.getElementById('show_msg').innerHTML=text;
 	$('.popup_de').addClass('bbox');
 	$('.popup_de .btn-danger').one('click',function(){
-		$.ajax({                            
-    		type:'GET',        
-            url:'receive_isDelete',   
-            data:{
-            	receiveID : rid
-            	}, 
-            dataType:'json',
-            success: function(data) {  
-    			alert(data.msg);
-    			header_app.loadNewMessages();
-    			sidebar_app.go('msglist.html','我的消息');
-            },  
-            error:function(){                                                  
-               alert("删除失败");    
-               $('.popup_de').removeClass('bbox');
-            } 
-       });
+		doDelete(rid);
 	})
+}
+function passall(){
+	var all = $('[name=all]:checkbox');
+	var str = "";
+	for(var i=1;i<all.length;i++){
+		if(all[i].checked)
+			str = str+"&"+all[i].value;
+	}
+	var text="是否审核通过所选账号吗?";
+	document.getElementById('show_msg').innerHTML=text;
+	$('.popup_de').addClass('bbox');
+	$('.popup_de .btn-danger').one('click',function(){
+		if(str!="")
+			doPass(str);
+		else{
+			alert("请至少选择一个账号");
+			$('.popup_de').removeClass('bbox');
+		}
+	})
+}
+function pass(obj){
+	var tds = $(obj).parent().parent().parent().find('td');
+	var center = tds.eq(1).find('center');
+	var rid = center.eq(0).text();
+	var text="是否审核通过该账号吗?";
+	document.getElementById('show_msg').innerHTML=text;
+	$('.popup_de').addClass('bbox');
+	$('.popup_de .btn-danger').one('click',function(){
+		doPass(rid);
+	})
+}
+function doDelete(data){
+	$.ajax({                            
+		type:'post',        
+        url:'../../userManage/deleteUserByBranch/'+data, 
+        dataType:'json',
+        success: function(result) {  
+			alert(result.msg);
+			location.reload();	
+        },
+        error :function(){
+        	alert("系统出错，删除失败！");
+        }
+   });
+}
+function doPass(data){
+	$.ajax({                            
+		type:'post',        
+        url:'../../userManage/batchCheckUserByBranch/'+data,   
+        dataType:'json',
+        success: function(result) {  
+			alert(result.msg);
+			location.reload();	
+        },
+        error :function(){
+        	alert("系统出错，审核通过失败！");
+        }
+   });
 }
