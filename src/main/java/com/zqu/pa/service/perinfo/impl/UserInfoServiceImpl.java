@@ -7,6 +7,7 @@ import org.apache.shiro.SecurityUtils;
 import org.mybatis.generator.codegen.mybatis3.model.ExampleGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
@@ -121,6 +122,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         return list;
     }
 
+/*
     @Transactional
     @Override
     public String checkUser(int branchId, String userId) {
@@ -166,7 +168,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             throw new RuntimeException("账号状态异常");
         }
         return "审核成功!";
-    }
+    }*/
 
     
     @Override
@@ -186,7 +188,20 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Transactional
     @Override
-    public String checkUserByBatch(int branchId, List<String> userIds) {
+    public String checkUserByBatch(int branchId, String userId) {
+        //获取userId的list
+        List<String> userIds = new ArrayList<>();
+        int index = 0;
+        int i=0;
+        for( ; i<userId.length(); i++) {
+            if(userId.substring(i, i+1).equals("&")) {
+                userIds.add(userId.substring(index, i));
+                index = i+1;
+            }
+        }
+        if(i>index)
+            userIds.add(userId.substring(index, i));
+        
         if(userIds==null||userIds.size()==0)
             return "审核失败!";
 
@@ -216,9 +231,8 @@ public class UserInfoServiceImpl implements UserInfoService {
             System.out.println("更新个人信息状态表失败");
             e.printStackTrace();
         }
-        System.out.println("更新个人信息状态表返回值：" + result);
         if(result==0)
-            throw new RuntimeException();
+            throw new RuntimeException("更新个人信息状态表失败");
         
         //4.更新账号表状态
         try {
@@ -227,10 +241,73 @@ public class UserInfoServiceImpl implements UserInfoService {
             System.out.println("更新账号表状态失败");
             e.printStackTrace();
         }
-        System.out.println("更新账号表状态返回值：" + result);
         if(result==0)
-            throw new RuntimeException();
+            throw new RuntimeException("更新个人信息状态表失败");
         return "审核成功!";
     }
 
+    @Transactional
+    @Rollback(true)
+    @Override
+    public String deleteUser(int branchId, String userId) {
+        //获取userId的list
+        List<String> userIds = new ArrayList<>();
+        int index = 0;
+        int i=0;
+        for( ; i<userId.length(); i++) {
+            if(userId.substring(i, i+1).equals("&")) {
+                userIds.add(userId.substring(index, i));
+                index = i+1;
+            }
+        }
+        if(i>index)
+            userIds.add(userId.substring(index, i));
+        
+        if(userIds==null||userIds.size()==0)
+            return "删除失败!";
+        
+        //1.验证党支部ID是否相同,0为所有党支部权限
+        if(branchId==0);
+        else {
+            //在当前userIds列表里查询党支部ID相同的userId列表
+            List<String> list = userManageDao.checkBranchByBatch(userIds, branchId);
+            if(list==null)
+                return "删除失败!";
+            if(userIds.size()!=list.size())
+                return "无法删除不同党支部的人员";
+        }
+        
+        //2.删除账号信息表
+        int result = 0;
+        try {
+            result = userManageDao.deleteUserLogin(userIds);
+        }catch (Exception e) {
+            System.out.println("删除账号信息失败");
+            e.printStackTrace();
+        }
+        if(result==0)
+            throw new RuntimeException("删除账号信息失败");
+        
+        //3.删除个人信息表
+        try {
+            result = userManageDao.deleteUserPersonInfo(userIds);
+        }catch (Exception e) {
+            System.out.println("删除个人信息表失败");
+            e.printStackTrace();
+        }
+        if(result==0)
+            throw new RuntimeException("删除个人信息表失败");
+        
+        //4.删除党员信息表
+        try {
+            result = userManageDao.deleteUserPartyInfo(userIds);
+        }catch (Exception e) {
+            System.out.println("删除党员信息表失败");
+            e.printStackTrace();
+        }
+        if(result==0)
+            throw new RuntimeException("删除党员信息表失败");
+        
+        return "删除成功!";
+    }
 }

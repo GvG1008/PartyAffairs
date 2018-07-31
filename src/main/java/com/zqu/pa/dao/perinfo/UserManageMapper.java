@@ -19,4 +19,10 @@ public interface UserManageMapper {
     int batchChangeUserState(@Param("userIds")List<String> userIds);
     //批量更新个人信息表审核状态
     int updateCheckUserByBatch(@Param("checkId") String checkId,@Param("userIds")List<String> userIds);
+    //批量删除用户账号信息
+    int deleteUserLogin(@Param("userIds")List<String> userIds);
+    //批量删除用户个人信息
+    int deleteUserPersonInfo(@Param("userIds")List<String> userIds);
+    //批量删除用户党员信息
+    int deleteUserPartyInfo(@Param("userIds")List<String> userIds);
 }

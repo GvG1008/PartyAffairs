@@ -29,13 +29,16 @@ public interface UserInfoService {
 
     //根据所属党支部返回用户审核信息列表
     List<UserCheckList> getUserCheckList(int branchId);
-    
+/*    
     //验证所属党支部是否相同，再根据其userId审核该用户
     String checkUser(int branchId, String userId);
-
+*/
     //根据所属党支部，返回选择年级和班级列表
     GradeClassSortList getGradeClass(int branchId);
 
-    //批量审核：验证所属党支部是否相同，再根据其userId审核该用户
-    String checkUserByBatch(int branchId, List<String> userIds);
+    //批量审核(userId格式为userId1&userId2..)：验证所属党支部是否相同，再根据其userId审核用户
+    String checkUserByBatch(int branchId, String userId);
+
+    //批量删除(userId格式为userId1&userId2..)：验证所属党支部是否相同，再根据其userId删除用户
+    String deleteUser(int branchId, String userId);
 }

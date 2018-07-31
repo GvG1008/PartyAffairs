@@ -190,61 +190,51 @@ public class UserManageController {
     }
     
     /**
-     * 单一审核人员
+     * 批量审核人员
+     * userId字符串格式："userId1&userId2&userId3"..
      * @param userId
      * @return
      */
     @ResponseBody
-    @RequestMapping("/checkUserByBranch/{userId}")
-    public ServerResponse checkUser(@PathVariable(value="userId") String userId){
-        
+    @RequestMapping("/batchCheckUserByBranch/{userId}")
+    public ServerResponse checkUserByBatch(@PathVariable(value="userId") String userId){
+        if(userId==null)
+            return ServerResponse.createByErrorMessage("账号为空");
+        //获取当前session里的当前用户所属党支部
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if(basicInfo==null)
+            return ServerResponse.createByErrorMessage("无法获取当前session信息");
+
+        //除了branchId==0外,只能审核和自己相同的党支部人员
+        String Msg = userInfoService.checkUserByBatch(basicInfo.getBranchId(),userId);
+        if(!Msg.equals("审核成功!"))
+            return ServerResponse.createByErrorMessage(Msg);
+        return ServerResponse.createBySuccessMessage(Msg);
+    }
+
+    /**
+     * 批量删除人员
+     * userId字符串格式："userId1&userId2&userId3"..
+     * @param userId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/deleteUserByBranch/{userId}")
+    public ServerResponse deleteUserByBranch(@PathVariable(value="userId") String userId) {
+        if(userId==null)
+            return ServerResponse.createByErrorMessage("账号为空");
         //获取当前session里的当前用户所属党支部
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
         if(basicInfo==null)
             return ServerResponse.createByErrorMessage("无法获取当前session信息");
         
-        //除了branchId==0外,只能审核和自己相同的党支部人员
-        String Msg = userInfoService.checkUser(basicInfo.getBranchId(),userId);
-        if(!Msg.equals("审核成功!"))
+        //除了branchId==0外,只能删除和自己相同的党支部人员
+        String Msg = userInfoService.deleteUser(basicInfo.getBranchId(),userId);
+        if(!Msg.equals("删除成功!"))
             return ServerResponse.createByErrorMessage(Msg);
         return ServerResponse.createBySuccessMessage(Msg);
     }
     
-    /**
-     * 批量审核人员
-     * userIds字符串格式："userId1&userId2&userId3"..
-     * @param userIds
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping("/batchCheckUserByBranch/{userIds}")
-    public ServerResponse checkUserByBatch(@PathVariable(value="userIds") String userIds){
-        
-        //获取当前session里的当前用户所属党支部
-        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
-        if(basicInfo==null)
-            return ServerResponse.createByErrorMessage("无法获取当前session信息");
-        
-        //获取userId的list
-        List<String> list = new ArrayList<>();
-        int index = 0;
-        int i=0;
-        for( ; i<userIds.length() ; i++) {
-            if(userIds.substring(i, i+1).equals("&")) {
-                list.add(userIds.substring(index, i));
-                index = i+1;
-            }
-        }
-        if(i>index)
-            list.add(userIds.substring(index, i));
-
-        //除了branchId==0外,只能审核和自己相同的党支部人员
-        String Msg = userInfoService.checkUserByBatch(basicInfo.getBranchId(),list);
-        if(!Msg.equals("审核成功!"))
-            return ServerResponse.createByErrorMessage(Msg);
-        return ServerResponse.createBySuccessMessage(Msg);
-    }
-
     /**
      * 根据所属党支部获取年级班级列表(保留)
      * @return
