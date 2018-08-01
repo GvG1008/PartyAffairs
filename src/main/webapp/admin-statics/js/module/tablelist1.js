@@ -57,7 +57,6 @@ $(document).ready(function() {
         "iDisplayLength" : 5, //默认显示的记录数  
         "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0,9 ] }],
         "order": [[ 1, 'asc' ]],
-        "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示
         "sDom": '<"row" <"col-sm-8" <"#add">> <"col-sm-4" <"row" <"col-sm-6" l> <"col-sm-6" f>>>>t<"row" <"col-sm-6" i> <"col-sm-6" p>>',
         language: {
             search: "搜索:",

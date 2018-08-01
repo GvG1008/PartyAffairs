@@ -230,3 +230,6 @@ span.wait {
 span.icon {
     padding-right: 5px;
 }
+[v-cloak] {
+    display: none !important;
+}
