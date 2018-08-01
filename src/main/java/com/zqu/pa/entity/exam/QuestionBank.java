@@ -14,9 +14,9 @@ public class QuestionBank {
 
     private Integer review;
 
-    private Integer createId;
+    private String createId;
 
-    private Integer reviewId;
+    private String reviewId;
 
     public Integer getQuestionId() {
         return questionId;
@@ -58,19 +58,19 @@ public class QuestionBank {
         this.review = review;
     }
 
-    public Integer getCreateId() {
+    public String getCreateId() {
         return createId;
     }
 
-    public void setCreateId(Integer createId) {
-        this.createId = createId;
+    public void setCreateId(String createId) {
+        this.createId = createId == null ? null : createId.trim();
     }
 
-    public Integer getReviewId() {
+    public String getReviewId() {
         return reviewId;
     }
 
-    public void setReviewId(Integer reviewId) {
-        this.reviewId = reviewId;
+    public void setReviewId(String reviewId) {
+        this.reviewId = reviewId == null ? null : reviewId.trim();
     }
 }

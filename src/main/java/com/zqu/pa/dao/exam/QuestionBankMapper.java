@@ -38,4 +38,11 @@ public interface QuestionBankMapper {
     List<QuestionBank> selectRand(@Param("branchId") Integer branchId, 
             @Param("quantity") Integer quantity, @Param("type") Integer type, 
             @Param("questionId") List<Integer> questionId);
+    
+    /**
+     * 插入后要获取主键ID
+     * @param question
+     * @return
+     */
+    int inesertQuestion(QuestionBank question);
 }

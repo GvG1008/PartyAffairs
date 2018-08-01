@@ -424,52 +424,62 @@ public class QuestionBankExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreateIdEqualTo(Integer value) {
+        public Criteria andCreateIdEqualTo(String value) {
             addCriterion("create_id =", value, "createId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateIdNotEqualTo(Integer value) {
+        public Criteria andCreateIdNotEqualTo(String value) {
             addCriterion("create_id <>", value, "createId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateIdGreaterThan(Integer value) {
+        public Criteria andCreateIdGreaterThan(String value) {
             addCriterion("create_id >", value, "createId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andCreateIdGreaterThanOrEqualTo(String value) {
             addCriterion("create_id >=", value, "createId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateIdLessThan(Integer value) {
+        public Criteria andCreateIdLessThan(String value) {
             addCriterion("create_id <", value, "createId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateIdLessThanOrEqualTo(Integer value) {
+        public Criteria andCreateIdLessThanOrEqualTo(String value) {
             addCriterion("create_id <=", value, "createId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateIdIn(List<Integer> values) {
+        public Criteria andCreateIdLike(String value) {
+            addCriterion("create_id like", value, "createId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateIdNotLike(String value) {
+            addCriterion("create_id not like", value, "createId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateIdIn(List<String> values) {
             addCriterion("create_id in", values, "createId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateIdNotIn(List<Integer> values) {
+        public Criteria andCreateIdNotIn(List<String> values) {
             addCriterion("create_id not in", values, "createId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateIdBetween(Integer value1, Integer value2) {
+        public Criteria andCreateIdBetween(String value1, String value2) {
             addCriterion("create_id between", value1, value2, "createId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andCreateIdNotBetween(String value1, String value2) {
             addCriterion("create_id not between", value1, value2, "createId");
             return (Criteria) this;
         }
@@ -484,52 +494,62 @@ public class QuestionBankExample {
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdEqualTo(Integer value) {
+        public Criteria andReviewIdEqualTo(String value) {
             addCriterion("review_id =", value, "reviewId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdNotEqualTo(Integer value) {
+        public Criteria andReviewIdNotEqualTo(String value) {
             addCriterion("review_id <>", value, "reviewId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdGreaterThan(Integer value) {
+        public Criteria andReviewIdGreaterThan(String value) {
             addCriterion("review_id >", value, "reviewId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andReviewIdGreaterThanOrEqualTo(String value) {
             addCriterion("review_id >=", value, "reviewId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdLessThan(Integer value) {
+        public Criteria andReviewIdLessThan(String value) {
             addCriterion("review_id <", value, "reviewId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdLessThanOrEqualTo(Integer value) {
+        public Criteria andReviewIdLessThanOrEqualTo(String value) {
             addCriterion("review_id <=", value, "reviewId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdIn(List<Integer> values) {
+        public Criteria andReviewIdLike(String value) {
+            addCriterion("review_id like", value, "reviewId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIdNotLike(String value) {
+            addCriterion("review_id not like", value, "reviewId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReviewIdIn(List<String> values) {
             addCriterion("review_id in", values, "reviewId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdNotIn(List<Integer> values) {
+        public Criteria andReviewIdNotIn(List<String> values) {
             addCriterion("review_id not in", values, "reviewId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdBetween(Integer value1, Integer value2) {
+        public Criteria andReviewIdBetween(String value1, String value2) {
             addCriterion("review_id between", value1, value2, "reviewId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andReviewIdNotBetween(String value1, String value2) {
             addCriterion("review_id not between", value1, value2, "reviewId");
             return (Criteria) this;
         }

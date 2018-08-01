@@ -7,8 +7,8 @@
     <result column="question_content" jdbcType="VARCHAR" property="questionContent" />
     <result column="question_type" jdbcType="INTEGER" property="questionType" />
     <result column="review" jdbcType="INTEGER" property="review" />
-    <result column="create_id" jdbcType="INTEGER" property="createId" />
-    <result column="review_id" jdbcType="INTEGER" property="reviewId" />
+    <result column="create_id" jdbcType="VARCHAR" property="createId" />
+    <result column="review_id" jdbcType="VARCHAR" property="reviewId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -107,8 +107,8 @@
       question_type, review, create_id, 
       review_id)
     values (#{questionId,jdbcType=INTEGER}, #{branchId,jdbcType=INTEGER}, #{questionContent,jdbcType=VARCHAR}, 
-      #{questionType,jdbcType=INTEGER}, #{review,jdbcType=INTEGER}, #{createId,jdbcType=INTEGER}, 
-      #{reviewId,jdbcType=INTEGER})
+      #{questionType,jdbcType=INTEGER}, #{review,jdbcType=INTEGER}, #{createId,jdbcType=VARCHAR}, 
+      #{reviewId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.exam.QuestionBank">
     insert into question_bank
@@ -152,10 +152,10 @@
         #{review,jdbcType=INTEGER},
       </if>
       <if test="createId != null">
-        #{createId,jdbcType=INTEGER},
+        #{createId,jdbcType=VARCHAR},
       </if>
       <if test="reviewId != null">
-        #{reviewId,jdbcType=INTEGER},
+        #{reviewId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -184,10 +184,10 @@
         review = #{record.review,jdbcType=INTEGER},
       </if>
       <if test="record.createId != null">
-        create_id = #{record.createId,jdbcType=INTEGER},
+        create_id = #{record.createId,jdbcType=VARCHAR},
       </if>
       <if test="record.reviewId != null">
-        review_id = #{record.reviewId,jdbcType=INTEGER},
+        review_id = #{record.reviewId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -201,8 +201,8 @@
       question_content = #{record.questionContent,jdbcType=VARCHAR},
       question_type = #{record.questionType,jdbcType=INTEGER},
       review = #{record.review,jdbcType=INTEGER},
-      create_id = #{record.createId,jdbcType=INTEGER},
-      review_id = #{record.reviewId,jdbcType=INTEGER}
+      create_id = #{record.createId,jdbcType=VARCHAR},
+      review_id = #{record.reviewId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -223,10 +223,10 @@
         review = #{review,jdbcType=INTEGER},
       </if>
       <if test="createId != null">
-        create_id = #{createId,jdbcType=INTEGER},
+        create_id = #{createId,jdbcType=VARCHAR},
       </if>
       <if test="reviewId != null">
-        review_id = #{reviewId,jdbcType=INTEGER},
+        review_id = #{reviewId,jdbcType=VARCHAR},
       </if>
     </set>
     where question_id = #{questionId,jdbcType=INTEGER}
@@ -237,8 +237,8 @@
       question_content = #{questionContent,jdbcType=VARCHAR},
       question_type = #{questionType,jdbcType=INTEGER},
       review = #{review,jdbcType=INTEGER},
-      create_id = #{createId,jdbcType=INTEGER},
-      review_id = #{reviewId,jdbcType=INTEGER}
+      create_id = #{createId,jdbcType=VARCHAR},
+      review_id = #{reviewId,jdbcType=VARCHAR}
     where question_id = #{questionId,jdbcType=INTEGER}
   </update>
   
@@ -252,4 +252,12 @@
     </foreach>
     order by RAND() LIMIT #{quantity}
   </select>
+  
+  <insert id="inesertQuestion" useGeneratedKeys="true" keyProperty="questionId" 
+      parameterType="com.zqu.pa.entity.exam.QuestionBank">
+    insert into question_bank (branch_id, question_content, 
+      question_type, review, create_id)
+    values (#{branchId,jdbcType=INTEGER}, #{questionContent,jdbcType=VARCHAR}, 
+      #{questionType,jdbcType=INTEGER}, #{review,jdbcType=INTEGER}, #{createId,jdbcType=INTEGER})
+  </insert>
 </mapper>
