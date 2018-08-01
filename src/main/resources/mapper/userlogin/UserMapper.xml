@@ -28,11 +28,12 @@
 -->
 	<select id="getUserBasicInfo" resultType="com.zqu.pa.vo.userInfo.UserBasicInfo">
        select l.user_id 'userId' , u.name 'realName' ,u.branch_id 'branchId', 
-               b.branch_name 'branchName', l.role_id 'roleId', r.role_name 'roleName'
+               b.branch_name 'branchName', l.role_id 'roleId', r.role_name 'roleName' , pe.img_head 'imgHead'
        from user_login l
        LEFT JOIN user_party_info u ON l.user_id = u.user_id 
        LEFT JOIN partybranch b ON b.branch_id = u.branch_id
        LEFT JOIN role r ON r.role_id = l.role_id
+       LEFT JOIN user_person_info pe ON l.user_id = pe.user_id
        where l.user_id = #{userId}
 	</select>
 </mapper>

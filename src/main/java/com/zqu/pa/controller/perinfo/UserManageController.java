@@ -18,6 +18,7 @@ import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.perinfo.UserPartyInfo;
 import com.zqu.pa.entity.perinfo.UserPersonInfo;
 import com.zqu.pa.service.perinfo.UserInfoService;
+import com.zqu.pa.vo.perinfo.AllUserInfo;
 import com.zqu.pa.vo.perinfo.GradeClassSortList;
 import com.zqu.pa.vo.perinfo.UserCheckList;
 import com.zqu.pa.vo.perinfo.UserList;
@@ -237,9 +238,21 @@ public class UserManageController {
         return ServerResponse.createBySuccessMessage(Msg);
     }
     
-    
-    public ServerResponse inputUserInfo(HttpServletRequest request) {
-        return ServerResponse.createBySuccessMessage("");
+    @ResponseBody
+    @RequestMapping("/insertUser")
+    public ServerResponse insertUserInfo(AllUserInfo user) {
+        
+        String Msg;
+        try {
+            Msg = userInfoService.insertNewUser(user);
+        }catch (Exception e) {
+            return ServerResponse.createByErrorMessage("创建用户失败");
+        }
+        if(Msg==null)
+            return ServerResponse.createByErrorMessage("创建用户失败");
+        if(!Msg.equals("创建用户成功"))
+            return ServerResponse.createByErrorMessage(Msg);
+        return ServerResponse.createBySuccessMessage(Msg);
     }
     
     /**

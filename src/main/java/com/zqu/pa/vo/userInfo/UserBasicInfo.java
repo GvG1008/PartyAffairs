@@ -14,6 +14,8 @@ public class UserBasicInfo {
     
     private String roleName;
     
+    private String imgHead;
+    
     public String getUserId() {
         return userId;
     }
@@ -62,4 +64,12 @@ public class UserBasicInfo {
         this.roleName = roleName;
     }
 
+    public String getImgHead() {
+        return imgHead;
+    }
+
+    public void setImgHead(String imgHead) {
+        this.imgHead = imgHead;
+    }
+    
 }

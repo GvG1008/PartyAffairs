@@ -23,6 +23,7 @@ import com.zqu.pa.entity.perinfo.UserPartyInfoExample;
 import com.zqu.pa.entity.perinfo.UserPersonInfo;
 import com.zqu.pa.entity.perinfo.UserPersonInfoExample;
 import com.zqu.pa.service.perinfo.UserInfoService;
+import com.zqu.pa.vo.perinfo.AllUserInfo;
 import com.zqu.pa.vo.perinfo.GradeClassSortList;
 import com.zqu.pa.vo.perinfo.UserCheckList;
 import com.zqu.pa.vo.perinfo.UserList;
@@ -308,5 +309,18 @@ public class UserInfoServiceImpl implements UserInfoService {
             throw new RuntimeException("删除党员信息表失败");
         
         return "删除成功!";
+    }
+
+    @Transactional
+    @Override
+    public String insertNewUser(AllUserInfo user) {
+        
+        
+        
+        //获取当前用户userId
+        String createId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        if(createId==null)
+            return "无法获取当前session信息";
+        return null;
     }
 }

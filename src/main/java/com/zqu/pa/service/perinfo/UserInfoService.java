@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.zqu.pa.entity.perinfo.UserPartyInfo;
 import com.zqu.pa.entity.perinfo.UserPersonInfo;
+import com.zqu.pa.vo.perinfo.AllUserInfo;
 import com.zqu.pa.vo.perinfo.GradeClassSortList;
 import com.zqu.pa.vo.perinfo.UserCheckList;
 import com.zqu.pa.vo.perinfo.UserList;
@@ -41,4 +42,7 @@ public interface UserInfoService {
 
     //批量删除(userId格式为userId1&userId2..)：验证所属党支部是否相同，再根据其userId删除用户
     String deleteUser(int branchId, String userId);
+
+    //创建未审核的新用户
+    String insertNewUser(AllUserInfo user);
 }

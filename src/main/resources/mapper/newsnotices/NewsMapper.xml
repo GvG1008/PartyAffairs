@@ -128,13 +128,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.zqu.pa.entity.newsnotices.News">
-    insert into news (news_id, title, date, 
+    insert into news (title, date, 
       source, creator_id, state, 
-      last_time, click, coverpath, 
+      last_time, coverpath, 
       content)
-    values (#{newsId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, 
+    values (#{title,jdbcType=VARCHAR}, now() , 
       #{source,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
-      #{lastTime,jdbcType=TIMESTAMP}, #{click,jdbcType=INTEGER}, #{coverpath,jdbcType=VARCHAR}, 
+      now() ,  #{coverpath,jdbcType=VARCHAR}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.newsnotices.News">
