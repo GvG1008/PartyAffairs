@@ -1,9 +1,9 @@
 package com.zqu.pa.entity.exam;
 
 public class ExamCategory {
-    private Integer categoryId;
+    private Integer categoryId; //题库分类ID
 
-    private String categoryName;
+    private String categoryName; //题库分类名称
 
     public Integer getCategoryId() {
         return categoryId;
