@@ -34,8 +34,9 @@
             getApi = getApi||function(){};
         }
         var defaults = {
-            dataUrl:'http://passer-by.com/data_location/list.json',     //数据库地址
-            crossDomain: true,        //是否开启跨域
+            /*dataUrl:'http://passer-by.com/data_location/list.json',*/     //数据库地址
+        	dataUrl:'http://172.21.95.5:19091/list.json',
+        	crossDomain: true,        //是否开启跨域
             dataType:'json',          //数据库类型:'json'或'jsonp'
             provinceField:'province', //省份字段名
             cityField:'city',         //城市字段名

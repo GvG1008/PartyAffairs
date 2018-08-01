@@ -71,7 +71,7 @@ var renderer = {
 };
 
 var editor = renderer.create('<div class="note-editor note-frame panel"/>');
-var toolbar = renderer.create('<div class="note-toolbar-wrapper panel-default"><div class="note-toolbar panel-heading" role="toolbar"></div></div>');
+var toolbar = renderer.create('<div class="note-toolbar-wrapper panel-default" style="height:50px"><div class="note-toolbar panel-heading" role="toolbar"></div></div>');
 var editingArea = renderer.create('<div class="note-editing-area"/>');
 var codable = renderer.create('<textarea class="note-codable" role="textbox" aria-multiline="true"/>');
 var editable = renderer.create('<div class="note-editable" contentEditable="true" role="textbox" aria-multiline="true"/>');
@@ -7154,7 +7154,7 @@ $$1.summernote = $$1.extend($$1.summernote, {
             'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande',
             'Tahoma', 'Times New Roman', 'Verdana'
         ],
-        fontSizes: ['8', '9', '10', '11', '12', '14', '18', '24', '36'],
+        fontSizes: ['8', '9', '10', '11', '12', '14','16','18','20', '24','28','32', '36','48'],
         // pallete colors(n x n)
         colors: [
             ['#000000', '#424242', '#636363', '#9C9C94', '#CEC6CE', '#EFEFEF', '#F7F7F7', '#FFFFFF'],
