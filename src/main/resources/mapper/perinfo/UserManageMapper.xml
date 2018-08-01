@@ -41,6 +41,7 @@
       #{userId,jdbcType=VARCHAR}
     </foreach>
     AND branch_id = #{branchId,jdbcType=INTEGER}
+    AND is_delete = 0
   </select>
   
   <update id="changeUserState" >
@@ -70,10 +71,12 @@
       #{userId,jdbcType=VARCHAR}
     </foreach>
     AND check_state = 0
+    AND is_delete = 0
   </update>
   
   <delete id="deleteUserLogin">
-    DELETE FROM user_login
+    UPDATE user_login
+    SET state = -2
     WHERE user_id IN
     <foreach collection="userIds" index="index" item="userId" separator="," open="(" close=")">
       #{userId,jdbcType=VARCHAR}
@@ -81,7 +84,8 @@
   </delete>
   
   <delete id="deleteUserPersonInfo">
-    DELETE FROM user_person_info
+    UPDATE user_person_info
+    SET is_delete = 1
     WHERE user_id IN
     <foreach collection="userIds" index="index" item="userId" separator="," open="(" close=")">
       #{userId,jdbcType=VARCHAR}
@@ -89,7 +93,8 @@
   </delete>
   
   <delete id="deleteUserPartyInfo">
-    DELETE FROM user_party_info
+    UPDATE user_party_info
+    SET is_delete = 1
     WHERE user_id IN
     <foreach collection="userIds" index="index" item="userId" separator="," open="(" close=")">
       #{userId,jdbcType=VARCHAR}

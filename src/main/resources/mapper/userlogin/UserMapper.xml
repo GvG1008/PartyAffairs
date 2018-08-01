@@ -4,10 +4,10 @@
 	<select id="getUser" resultType="User">
 	   select * from user_login where state = 1 limit 1
 	</select>
-	<select id="getUserLogin" resultType="User" parameterType="String">
+	<select id="getUserLogin" resultType="User">
        select * from user_login where state = 1 and user_id = #{userId}
 	</select>
-	<select id="getRolePermission" resultType="String" parameterType="INT">
+	<select id="getRolePermission" resultType="String">
 		select permission_name
 		from role_permission a
 		LEFT JOIN permission_menu b ON a.permission = b.permission_id
@@ -26,7 +26,7 @@
 	   where u.user_id = #{userId}
 	</select> 
 -->
-	<select id="getUserBasicInfo" resultType="com.zqu.pa.vo.userInfo.UserBasicInfo" parameterType="String">
+	<select id="getUserBasicInfo" resultType="com.zqu.pa.vo.userInfo.UserBasicInfo">
        select l.user_id 'userId' , u.name 'realName' ,u.branch_id 'branchId', 
                b.branch_name 'branchName', l.role_id 'roleId', r.role_name 'roleName'
        from user_login l

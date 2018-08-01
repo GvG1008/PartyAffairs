@@ -247,7 +247,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Transactional
-    @Rollback(true)
     @Override
     public String deleteUser(int branchId, String userId) {
         //获取userId的list
@@ -277,7 +276,7 @@ public class UserInfoServiceImpl implements UserInfoService {
                 return "无法删除不同党支部的人员";
         }
         
-        //2.删除账号信息表
+        //2.逻辑删除账号信息表state置-2
         int result = 0;
         try {
             result = userManageDao.deleteUserLogin(userIds);
@@ -288,7 +287,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         if(result==0)
             throw new RuntimeException("删除账号信息失败");
         
-        //3.删除个人信息表
+        //3.逻辑删除个人信息表，is_delete字段置1
         try {
             result = userManageDao.deleteUserPersonInfo(userIds);
         }catch (Exception e) {
@@ -298,7 +297,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         if(result==0)
             throw new RuntimeException("删除个人信息表失败");
         
-        //4.删除党员信息表
+        //4.逻辑删除党员信息表，is_delete字段置1
         try {
             result = userManageDao.deleteUserPartyInfo(userIds);
         }catch (Exception e) {

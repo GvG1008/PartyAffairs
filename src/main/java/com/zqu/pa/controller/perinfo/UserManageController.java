@@ -3,6 +3,8 @@ package com.zqu.pa.controller.perinfo;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.SecurityUtils;
 import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -233,6 +235,11 @@ public class UserManageController {
         if(!Msg.equals("删除成功!"))
             return ServerResponse.createByErrorMessage(Msg);
         return ServerResponse.createBySuccessMessage(Msg);
+    }
+    
+    
+    public ServerResponse inputUserInfo(HttpServletRequest request) {
+        return ServerResponse.createBySuccessMessage("");
     }
     
     /**

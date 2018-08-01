@@ -54,7 +54,7 @@ public class UserPartyInfo {
     private String totot;
     //转出单位
     private String outUnit;
-
+    
     public String getUserId() {
         return userId;
     }

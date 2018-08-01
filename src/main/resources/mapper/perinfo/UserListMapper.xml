@@ -7,6 +7,7 @@
     FROM user_party_info pa
     LEFT JOIN user_person_info pe ON pa.user_id = pe.user_id
     WHERE pe.check_state = #{checkState}
+    AND pa.is_delete = 0
     <if test="branchId!=0">
         AND pa.branch_id = #{branchId}
     </if>
@@ -22,6 +23,7 @@
     LEFT JOIN role r ON r.role_id = ul.role_id
     LEFT JOIN user_person_info upe ON upe.user_id = upa.user_id
     WHERE upe.check_state = #{checkState}
+    AND upa.is_delete = 0
     <if test="branchId!=0">
         AND b.branch_id = #{branchId}
     </if>
@@ -39,17 +41,19 @@
     LEFT JOIN user_person_info upe ON upe.user_id = upa.user_id
     LEFT JOIN user_person_info upee ON upee.user_id = upe.create_id
     WHERE upe.check_state = 0
+    AND upa.is_delete = 0
     <if test="branchId!=0">
-        and b.branch_id = #{branchId}
+        AND b.branch_id = #{branchId}
     </if>
   </select>
 
   <select id="getGradeList" resultType="String">
 	SELECT DISTINCT upe.grade
 	FROM user_party_info upa
-	LEFT JOIN user_person_info upe ON upa.user_id = upe.user_id 
+	LEFT JOIN user_person_info upe ON upa.user_id = upe.user_id
+	WHERE upa.is_delete = 0
     <if test="branchId!=0">
-        WHERE upa.branch_id = #{branchId}
+        AND upa.branch_id = #{branchId}
     </if>
   </select>
   
@@ -57,8 +61,9 @@
     SELECT DISTINCT upe.class_name
     FROM user_party_info upa
     LEFT JOIN user_person_info upe ON upa.user_id = upe.user_id 
+    WHERE upa.is_delete = 0
     <if test="branchId!=0">
-        WHERE upa.branch_id = #{branchId}
+        AND upa.branch_id = #{branchId}
     </if>
   </select>
 </mapper>
