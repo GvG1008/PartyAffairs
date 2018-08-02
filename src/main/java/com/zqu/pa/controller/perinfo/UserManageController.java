@@ -19,7 +19,9 @@ import com.zqu.pa.entity.perinfo.UserPartyInfo;
 import com.zqu.pa.entity.perinfo.UserPersonInfo;
 import com.zqu.pa.service.perinfo.UserInfoService;
 import com.zqu.pa.vo.perinfo.AllUserInfo;
+import com.zqu.pa.vo.perinfo.Branch;
 import com.zqu.pa.vo.perinfo.GradeClassSortList;
+import com.zqu.pa.vo.perinfo.Role;
 import com.zqu.pa.vo.perinfo.UserCheckList;
 import com.zqu.pa.vo.perinfo.UserList;
 import com.zqu.pa.vo.perinfo.UserListInfo;
@@ -238,19 +240,24 @@ public class UserManageController {
         return ServerResponse.createBySuccessMessage(Msg);
     }
     
+    /**
+     * 新增用户所有信息
+     * @param user
+     * @return
+     */
     @ResponseBody
-    @RequestMapping("/insertUser")
+    @RequestMapping(value="/insertUser", method=RequestMethod.POST)
     public ServerResponse insertUserInfo(AllUserInfo user) {
         
         String Msg;
         try {
             Msg = userInfoService.insertNewUser(user);
         }catch (Exception e) {
-            return ServerResponse.createByErrorMessage("创建用户失败");
+            return ServerResponse.createByErrorMessage("创建用户出错!");
         }
         if(Msg==null)
-            return ServerResponse.createByErrorMessage("创建用户失败");
-        if(!Msg.equals("创建用户成功"))
+            return ServerResponse.createByErrorMessage("创建用户失败!");
+        if(!Msg.equals("创建用户成功!"))
             return ServerResponse.createByErrorMessage(Msg);
         return ServerResponse.createBySuccessMessage(Msg);
     }
@@ -274,6 +281,44 @@ public class UserManageController {
         
         if(list==null)
             return ServerResponse.createByErrorMessage("获取年级班级信息失败!");
+        return ServerResponse.createBySuccess(list);
+    }
+    
+    /**
+     * 获取党支部列表
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="/BranchList",method=RequestMethod.GET)
+    public ServerResponse<List<Branch>> getBranchList()   {
+        List<Branch> list;
+        try {
+            list = userInfoService.getBranchList();
+        }catch (Exception e) {
+            return ServerResponse.createByErrorMessage("获取Branch列表出错!");
+        }
+        
+        if(list==null)
+            return ServerResponse.createByErrorMessage("获取Branch列表失败!");
+        return ServerResponse.createBySuccess(list);
+    }
+    
+    /**
+     * 获取角色列表
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="/RoleList",method=RequestMethod.GET)
+    public ServerResponse<List<Role>> getRoleList()   {
+        List<Role> list;
+        try {
+            list = userInfoService.getRoleList();
+        }catch (Exception e) {
+            return ServerResponse.createByErrorMessage("获取Role列表出错!");
+        }
+        
+        if(list==null)
+            return ServerResponse.createByErrorMessage("获取Role列表为空!");
         return ServerResponse.createBySuccess(list);
     }
 }

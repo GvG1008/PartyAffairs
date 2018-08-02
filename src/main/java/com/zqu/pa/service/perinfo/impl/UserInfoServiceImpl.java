@@ -1,9 +1,11 @@
 package com.zqu.pa.service.perinfo.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.mybatis.generator.codegen.mybatis3.model.ExampleGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,12 +25,16 @@ import com.zqu.pa.entity.perinfo.UserPartyInfoExample;
 import com.zqu.pa.entity.perinfo.UserPersonInfo;
 import com.zqu.pa.entity.perinfo.UserPersonInfoExample;
 import com.zqu.pa.service.perinfo.UserInfoService;
+import com.zqu.pa.utils.DateToString;
 import com.zqu.pa.vo.perinfo.AllUserInfo;
+import com.zqu.pa.vo.perinfo.Branch;
 import com.zqu.pa.vo.perinfo.GradeClassSortList;
+import com.zqu.pa.vo.perinfo.Role;
 import com.zqu.pa.vo.perinfo.UserCheckList;
 import com.zqu.pa.vo.perinfo.UserList;
 import com.zqu.pa.vo.perinfo.UserListInfo;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
+import com.zqu.pa.vo.userInfo.UserLoginInfo;
 
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
@@ -314,13 +320,95 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Transactional
     @Override
     public String insertNewUser(AllUserInfo user) {
-        
-        
+
+        UserLoginInfo userLoginInfo = new UserLoginInfo();
+        UserPartyInfo userPartyInfo = new UserPartyInfo();
+        UserPersonInfo userPersonInfo = new UserPersonInfo();
         
         //获取当前用户userId
         String createId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
         if(createId==null)
             return "无法获取当前session信息";
-        return null;
+        
+        //注入账号信息表
+        userLoginInfo.setUserId(user.getUserId());
+        String password = user.getPassword();
+        if(password==null||password.equals("")) {
+            //密码初始为账号id
+            password = user.getUserId();
+        }
+        //MD5：盐+密码+次数
+        Md5Hash md5Hash = new Md5Hash(password,password,1);
+        password = md5Hash.toString();
+        userLoginInfo.setPassword(password);
+        userLoginInfo.setRoleId(user.getRoleId());
+        userLoginInfo.setState(0);
+        
+        //注入个人信息表
+        userPersonInfo.setUserId(user.getUserId());
+        userPersonInfo.setName(user.getName());
+        userPersonInfo.setNickname(null);
+        userPersonInfo.setClassName(user.getClassName());
+        userPersonInfo.setBirthday(null);//生日：xxxx/xx/xx
+        userPersonInfo.setGrade(user.getGrade());
+        userPersonInfo.setImgHead(null);//头像路径
+        userPersonInfo.setProfile(null);
+        userPersonInfo.setEmail(null);
+        userPersonInfo.setCreateId(createId);
+        userPersonInfo.setCreateTime(DateToString.getDateString("yyyy/MM/dd HH:mm:ss",new Date()));
+        userPersonInfo.setLastTime(new Date());
+        userPersonInfo.setCheckState(0);
+        userPersonInfo.setCheckId(null);
+        userPersonInfo.setSex(user.getSex());
+        
+        //注入党内信息表
+        userPartyInfo.setUserId(user.getUserId());
+        userPartyInfo.setBranchId(user.getBranchId());
+        userPartyInfo.setName(user.getName());
+        userPartyInfo.setNameFormer(user.getNameFormer());
+        userPartyInfo.setSex(user.getSex());
+        userPartyInfo.setNational(user.getNational());
+        userPartyInfo.setNativePlace(user.getNativePlace());
+        userPartyInfo.setBirthPlace(user.getBirthPlace());
+        userPartyInfo.setPlaceRegistered(user.getPlaceRegistered());
+        userPartyInfo.setHomeAddress(user.getHomeAddress());
+        userPartyInfo.setTel(user.getTel());
+        userPartyInfo.setFamilyBackground(user.getFamilyBackground());
+        userPartyInfo.setBirthDate(user.getBirthDate());
+        userPartyInfo.setPoliticalStatus(user.getPoliticalStatus());
+        userPartyInfo.setIdCard(user.getIdCard());
+        userPartyInfo.setMaritalStatus(user.getMaritalStatus());
+        userPartyInfo.setOrganizationUnit(user.getOrganizationUnit());
+        userPartyInfo.setPersonalIdentity(user.getPersonalIdentity());
+        userPartyInfo.setEducationalBackground(user.getEducationalBackground());
+        userPartyInfo.setProfessional(user.getProfessional());
+        userPartyInfo.setGraduateSchool(user.getGraduateSchool());
+        userPartyInfo.setTimeApplicationforparty(user.getTimeApplicationforparty());
+        userPartyInfo.setTimeIntoparty(user.getTimeIntoparty());
+        userPartyInfo.setTimePositive(user.getTimePositive());
+        userPartyInfo.setTypeDevelopment(user.getTypeDevelopment());
+        userPartyInfo.setTotot(user.getTotot());
+        userPartyInfo.setOutUnit(user.getOutUnit());
+        
+        int result1,result2,result3;
+        result1 = userManageDao.insertUserLoginInfo(userLoginInfo);
+        result2 = userPartyInfoDao.insert(userPartyInfo);
+        result3 = userPersonInfoDao.insert(userPersonInfo);
+        if(result1==0||result2==0||result3==0)
+            throw new RuntimeException("未添加新用户");
+        
+        return "创建用户成功!";
+    }
+
+    @Override
+    public List<Branch> getBranchList() {
+
+        return userListDao.getBranchList();
+    }
+
+    @Override
+    public List<Role> getRoleList() {
+        
+        return userListDao.getRoleList();
     }
 }

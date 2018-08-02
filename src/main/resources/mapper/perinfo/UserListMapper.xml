@@ -57,7 +57,7 @@
     </if>
   </select>
   
-    <select id="getClassList" resultType="String">
+  <select id="getClassList" resultType="String">
     SELECT DISTINCT upe.class_name
     FROM user_party_info upa
     LEFT JOIN user_person_info upe ON upa.user_id = upe.user_id 
@@ -65,5 +65,15 @@
     <if test="branchId!=0">
         AND upa.branch_id = #{branchId}
     </if>
+  </select>
+  
+  <select id="getBranchList" resultType="com.zqu.pa.vo.perinfo.Branch">
+    SELECT branch_id , branch_name
+    FROM partybranch
+  </select>
+  
+  <select id="getRoleList" resultType="com.zqu.pa.vo.perinfo.Role">
+    SELECT role_id , role_name
+    FROM role
   </select>
 </mapper>

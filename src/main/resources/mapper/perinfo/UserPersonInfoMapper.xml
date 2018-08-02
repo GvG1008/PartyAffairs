@@ -111,18 +111,40 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.zqu.pa.entity.perinfo.UserPersonInfo">
-    insert into user_person_info (user_id, name, sex, 
+    INSERT INTO user_person_info (user_id, name, sex, 
       nickname, grade, class_name, 
-      img_head, profile, email, 
+      img_head, email, 
       birthday, create_time, last_time, 
       check_state, create_id, check_id
       )
-    values (#{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+    SELECT 
+      #{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
       #{nickname,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, 
-      #{imgHead,jdbcType=VARCHAR}, #{profile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{imgHead,jdbcType=VARCHAR},  #{email,jdbcType=VARCHAR}, 
       #{birthday,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{lastTime,jdbcType=TIMESTAMP}, 
       #{checkState,jdbcType=INTEGER}, #{createId,jdbcType=VARCHAR}, #{checkId,jdbcType=VARCHAR}
-      )
+    FROM DUAL
+       WHERE NOT EXISTS (
+            SELECT * 
+            FROM user_person_info
+            WHERE user_id = #{userId,jdbcType=VARCHAR}
+            AND is_delete = 0
+       )
+    ON DUPLICATE KEY UPDATE
+      name = #{name,jdbcType=VARCHAR}, 
+      sex = #{sex,jdbcType=VARCHAR}, 
+      nickname = #{nickname,jdbcType=VARCHAR}, 
+      grade = #{grade,jdbcType=VARCHAR}, 
+      class_name = #{className,jdbcType=VARCHAR}, 
+      img_head = #{imgHead,jdbcType=VARCHAR}, 
+      email = #{email,jdbcType=VARCHAR}, 
+      birthday = #{birthday,jdbcType=VARCHAR}, 
+      create_time = #{createTime,jdbcType=VARCHAR}, 
+      last_time = #{lastTime,jdbcType=TIMESTAMP}, 
+      check_state = #{checkState,jdbcType=INTEGER}, 
+      create_id = #{createId,jdbcType=VARCHAR}, 
+      check_id = #{checkId,jdbcType=VARCHAR},
+      is_delete = 0
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.perinfo.UserPersonInfo">
     insert into user_person_info

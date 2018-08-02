@@ -3,34 +3,20 @@
 <mapper namespace="com.zqu.pa.dao.perinfo.UserManageMapper">
   <insert id="insertUserLoginInfo" parameterType="com.zqu.pa.vo.userInfo.UserLoginInfo">
     insert into user_login 
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id ,
-      </if>
-      <if test="password != null">
-      password ,
-      </if>
-      <if test="roleId != 0">
-       role_id ,
-      </if>
-      <if test="state != 0">
-      state,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
+        (user_id ,
+        password ,
+        role_id ,
+        state)
+    values(
         #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
         #{password,jdbcType=VARCHAR}, 
-      </if>
-      <if test="roleId != 0">
         #{roleId,jdbcType=INTEGER},
-      </if>
-      <if test="state != 0">
-        #{state,jdbcType=INTEGER},
-      </if>
-    </trim>
+        #{state,jdbcType=INTEGER}
+        )
+    ON DUPLICATE KEY UPDATE 
+    password = #{password,jdbcType=VARCHAR}, 
+    role_id = #{roleId,jdbcType=INTEGER},
+    state = 0
   </insert>
   
   <select id="checkBranchByBatch" resultType="String">

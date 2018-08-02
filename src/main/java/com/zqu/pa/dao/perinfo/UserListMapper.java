@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.zqu.pa.vo.perinfo.Branch;
+import com.zqu.pa.vo.perinfo.Role;
 import com.zqu.pa.vo.perinfo.UserCheckList;
 import com.zqu.pa.vo.perinfo.UserList;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
@@ -19,4 +21,9 @@ public interface UserListMapper {
     List<String> getGradeList(@Param("branchId") int branchId);
     //根据branchId来返回班级列表(保留)
     List<String> getClassList(@Param("branchId") int branchId);
+    
+    //返回Branch党支部列表
+    List<Branch> getBranchList();
+    //返回Role角色列表
+    List<Role> getRoleList();
 }

@@ -5,7 +5,9 @@ import java.util.List;
 import com.zqu.pa.entity.perinfo.UserPartyInfo;
 import com.zqu.pa.entity.perinfo.UserPersonInfo;
 import com.zqu.pa.vo.perinfo.AllUserInfo;
+import com.zqu.pa.vo.perinfo.Branch;
 import com.zqu.pa.vo.perinfo.GradeClassSortList;
+import com.zqu.pa.vo.perinfo.Role;
 import com.zqu.pa.vo.perinfo.UserCheckList;
 import com.zqu.pa.vo.perinfo.UserList;
 import com.zqu.pa.vo.perinfo.UserListInfo;
@@ -45,4 +47,10 @@ public interface UserInfoService {
 
     //创建未审核的新用户
     String insertNewUser(AllUserInfo user);
+    
+    //返回党支部列表
+    List<Branch> getBranchList();
+    
+    //返回角色列表
+    List<Role> getRoleList();
 }
