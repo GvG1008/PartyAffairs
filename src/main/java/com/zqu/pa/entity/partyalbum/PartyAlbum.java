@@ -1,19 +1,31 @@
 package com.zqu.pa.entity.partyalbum;
 
+import com.zqu.pa.utils.DateUtil;
+
 public class PartyAlbum {
-    private Long albumId;
+    private Long albumId; //相册ID
 
-    private Integer branchId;
+    private Integer branchId; //党支部ID
 
-    private String albumTitle;
+    private String albumTitle; //相册标题
 
-    private String coverImage;
+    private String coverImage; //封面图片地址
 
-    private String description;
+    private String description; //相册描述
 
-    private String userId;
+    private String userId; //创建者ID
 
-    private Long createDate;
+    private Long createDate; //相册创建时间戳
+    
+    private String stringCreateDate; //相册创建时间格式化字符串
+
+    public String getStringCreateDate() {
+        return stringCreateDate;
+    }
+
+    public void setStringCreateDate(String stringCreateDate) {
+        this.stringCreateDate = stringCreateDate;
+    }
 
     public Long getAlbumId() {
         return albumId;
