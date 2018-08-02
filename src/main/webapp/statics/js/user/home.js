@@ -45,6 +45,9 @@ $(document).ready(function(){
 		else if(name=="fb"||name=="rp"){
 			$("#frame").load("report.html");
 		}
+		else if(name=="learn"){
+			$("#frame").load("learn.html");
+		}
 		
 		$(".loading").fadeOut(500);
 	});
