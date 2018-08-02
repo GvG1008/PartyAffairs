@@ -40,4 +40,10 @@ public class StudyDocumentLabel {
     public void setLabelId(Integer labelId) {
         this.labelId = labelId;
     }
+
+    @Override
+    public String toString() {
+        return "StudyDocumentLabel [orderby=" + orderby + ", documentId=" + documentId + ", labelId=" + labelId + "]";
+    }
+    
 }

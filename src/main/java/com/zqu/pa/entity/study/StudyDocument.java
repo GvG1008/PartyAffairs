@@ -97,4 +97,13 @@ public class StudyDocument {
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
     }
+
+    @Override
+    public String toString() {
+        return "StudyDocument [documentId=" + documentId + ", documentTitle=" + documentTitle
+                + ", documentIntroduction=" + documentIntroduction + ", coverImg=" + coverImg + ", filePath=" + filePath
+                + ", userId=" + userId + ", createtime=" + createtime + ", updatetime=" + updatetime + "]";
+    }
+    
+    
 }

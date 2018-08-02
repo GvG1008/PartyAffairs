@@ -1,5 +1,7 @@
 package com.zqu.pa.dao.study;
 
+import java.util.List;
+
 import com.zqu.pa.entity.study.StudyDocument;
 
 public interface StudyDocumentMapper {
@@ -10,6 +12,10 @@ public interface StudyDocumentMapper {
     int insertSelective(StudyDocument record);
 
     StudyDocument selectByPrimaryKey(Integer documentId);
+    
+    List<StudyDocument> selectAll();
+    
+    int selectDocumentIdByFilePath(String filePath);
 
     int updateByPrimaryKeySelective(StudyDocument record);
 

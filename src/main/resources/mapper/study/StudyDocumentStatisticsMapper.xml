@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.zqu.pa.entity.study.StudyDocumentStatistics" >
     <constructor >
       <arg column="document_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="times" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="createtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="updatetime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
@@ -13,9 +13,13 @@
   <insert id="insert" parameterType="com.zqu.pa.entity.study.StudyDocumentStatistics" >
     insert into study_document_statistics (document_id, user_id, times, 
       createtime, updatetime)
-    values (#{documentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{times,jdbcType=INTEGER}, 
+    values (#{documentId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{times,jdbcType=INTEGER}, 
       now(), now())
   </insert>
+  <select id="selectByDocumentIdAndUserId" resultType="com.zqu.pa.entity.study.StudyDocumentStatistics" parameterType="com.zqu.pa.entity.study.StudyDocumentStatistics">
+    select * from study_document_statistics
+    where document_id = #{documentId,jdbcType=INTEGER} AND user_id = #{userId,jdbcType=VARCHAR}
+  </select>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.study.StudyDocumentStatistics" >
     insert into study_document_statistics
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -40,7 +44,7 @@
         #{documentId,jdbcType=INTEGER},
       </if>
       <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="times != null" >
         #{times,jdbcType=INTEGER},
@@ -53,4 +57,10 @@
       </if>
     </trim>
   </insert>
+  <update id="updateByDocumentIdAndUserId" parameterType="com.zqu.pa.entity.study.StudyDocumentStatistics" >
+    update study_document_statistics
+    set times = #{times,jdbcType=INTEGER},
+        updatetime = now()
+    where user_id = #{userId,jdbcType=VARCHAR} AND document_id = #{documentId,jdbcType=VARCHAR}
+  </update>
 </mapper>

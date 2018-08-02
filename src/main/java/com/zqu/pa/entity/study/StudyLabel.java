@@ -53,4 +53,12 @@ public class StudyLabel {
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
     }
+
+    @Override
+    public String toString() {
+        return "StudyLabel [labelId=" + labelId + ", labelName=" + labelName + ", createtime=" + createtime
+                + ", updatetime=" + updatetime + "]";
+    }
+    
+    
 }

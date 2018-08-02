@@ -23,6 +23,13 @@
     from study_document
     where document_id = #{documentId,jdbcType=INTEGER}
   </select>
+  <select id="selectDocumentIdByFilePath" resultType="int" parameterType="string">
+    select document_id from study_document
+    where file_path = #{filePath,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultType="com.zqu.pa.entity.study.StudyDocument">
+    select * from study_document order by document_id desc
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from study_document
     where document_id = #{documentId,jdbcType=INTEGER}
