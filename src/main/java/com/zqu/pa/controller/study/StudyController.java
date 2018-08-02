@@ -151,23 +151,13 @@ public class StudyController {
             sdm.setUserId(uid);
             studyDocumentMustList.add(sdm);
         }
-        /*
-         * JsonParser parser = new JsonParser(); JsonArray jsonArray =
-         * parser.parse(labels).getAsJsonArray(); Gson gson = new Gson();
-         * ArrayList<StudyDocumentLabel> studyDocumentLabelList = Lists.newArrayList();
-         * for (JsonElement bean : jsonArray) { LabelJsonBean labelJsonBean =
-         * gson.fromJson(bean, LabelJsonBean.class);
-         * System.out.println(labelJsonBean.getLabelId()); StudyDocumentLabel sdl = new
-         * StudyDocumentLabel(null, null, Integer.parseInt(labelJsonBean.getLabelId()));
-         * studyDocumentLabelList.add(sdl); }
-         */
         System.out.println(sd);
         System.out.println(studyDocumentLabelList);
         return iStudyService.uploadStudyDocument(sd, studyDocumentLabelList,studyDocumentMustList);
     }
 
     /**
-     * 获取全部文档学习资料
+     * 获取全部文档学习资料(上架)
      * 
      * @param session
      * @return
@@ -175,7 +165,7 @@ public class StudyController {
     @RequestMapping(value = "get_study_documents.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse getStudyDocuments(HttpSession session) {
-        return iStudyService.getStudyDocuments();
+        return iStudyService.getStudyDocumentsPuton();
     }
 
     /**
@@ -260,6 +250,6 @@ public class StudyController {
             svm.setUserId(uid);
             studyVideoMustList.add(svm);
         }
-        return iStudyService.uploadStudyDocument(sd, studyDocumentLabelList,studyDocumentMustList);
+        return null;
     }
 }

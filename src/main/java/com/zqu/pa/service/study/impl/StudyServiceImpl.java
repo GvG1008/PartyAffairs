@@ -111,8 +111,8 @@ public class StudyServiceImpl implements IStudyService {
     }
     
     @Override
-    public ServerResponse getStudyDocuments() {
-        List<StudyDocument> sdl = studyDocumentMapper.selectAll();
+    public ServerResponse getStudyDocumentsPuton() {
+        List<StudyDocument> sdl = studyDocumentMapper.selectPutOn();
         return ServerResponse.createBySuccess(sdl);
     }
 

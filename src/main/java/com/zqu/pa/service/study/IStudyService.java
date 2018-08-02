@@ -16,7 +16,7 @@ public interface IStudyService {
     public ServerResponse getLabels();
     public ServerResponse changeLabel(StudyLabel studyLabel);
     public ServerResponse uploadStudyDocument(StudyDocument sd,List<StudyDocumentLabel> sdls,List<StudyDocumentMust> sdms);
-    public ServerResponse getStudyDocuments();
+    public ServerResponse getStudyDocumentsPuton();
     public ServerResponse getStudyDocumentsByLabelId(List<Integer> idList);
     public ServerResponse getStudyDocumentMust(String userId);
     public ServerResponse statisticsDownload(String userId,String url);

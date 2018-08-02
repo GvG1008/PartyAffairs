@@ -15,6 +15,8 @@ public interface StudyDocumentMapper {
     
     List<StudyDocument> selectAll();
     
+    List<StudyDocument> selectPutOn();
+    
     int selectDocumentIdByFilePath(String filePath);
 
     int updateByPrimaryKeySelective(StudyDocument record);
