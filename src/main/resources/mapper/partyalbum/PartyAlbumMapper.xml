@@ -7,8 +7,10 @@
     <result column="album_title" jdbcType="VARCHAR" property="albumTitle" />
     <result column="cover_image" jdbcType="VARCHAR" property="coverImage" />
     <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="create_date" jdbcType="BIGINT" property="createDate" />
+    <result column="pageviews" jdbcType="INTEGER" property="pageviews" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    album_id, branch_id, album_title, cover_image, description, user_id, create_date
+    album_id, branch_id, album_title, cover_image, description, quantity, user_id, create_date, 
+    pageviews
   </sql>
   <select id="selectByExample" parameterType="com.zqu.pa.entity.partyalbum.PartyAlbumExample" resultMap="BaseResultMap">
     select
@@ -104,11 +107,13 @@
   </delete>
   <insert id="insert" parameterType="com.zqu.pa.entity.partyalbum.PartyAlbum">
     insert into party_album (album_id, branch_id, album_title, 
-      cover_image, description, user_id, 
-      create_date)
+      cover_image, description, quantity, 
+      user_id, create_date, pageviews
+      )
     values (#{albumId,jdbcType=BIGINT}, #{branchId,jdbcType=INTEGER}, #{albumTitle,jdbcType=VARCHAR}, 
-      #{coverImage,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=BIGINT})
+      #{coverImage,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{userId,jdbcType=VARCHAR}, #{createDate,jdbcType=BIGINT}, #{pageviews,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.partyalbum.PartyAlbum">
     insert into party_album
@@ -128,11 +133,17 @@
       <if test="description != null">
         description,
       </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
       <if test="userId != null">
         user_id,
       </if>
       <if test="createDate != null">
         create_date,
+      </if>
+      <if test="pageviews != null">
+        pageviews,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -151,11 +162,17 @@
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
       <if test="userId != null">
         #{userId,jdbcType=VARCHAR},
       </if>
       <if test="createDate != null">
         #{createDate,jdbcType=BIGINT},
+      </if>
+      <if test="pageviews != null">
+        #{pageviews,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -183,11 +200,17 @@
       <if test="record.description != null">
         description = #{record.description,jdbcType=VARCHAR},
       </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
       <if test="record.createDate != null">
         create_date = #{record.createDate,jdbcType=BIGINT},
+      </if>
+      <if test="record.pageviews != null">
+        pageviews = #{record.pageviews,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -201,8 +224,10 @@
       album_title = #{record.albumTitle,jdbcType=VARCHAR},
       cover_image = #{record.coverImage,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=VARCHAR},
-      create_date = #{record.createDate,jdbcType=BIGINT}
+      create_date = #{record.createDate,jdbcType=BIGINT},
+      pageviews = #{record.pageviews,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -222,11 +247,17 @@
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
       <if test="userId != null">
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="createDate != null">
         create_date = #{createDate,jdbcType=BIGINT},
+      </if>
+      <if test="pageviews != null">
+        pageviews = #{pageviews,jdbcType=INTEGER},
       </if>
     </set>
     where album_id = #{albumId,jdbcType=BIGINT}
@@ -237,8 +268,16 @@
       album_title = #{albumTitle,jdbcType=VARCHAR},
       cover_image = #{coverImage,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=BIGINT}
+      create_date = #{createDate,jdbcType=BIGINT},
+      pageviews = #{pageviews,jdbcType=INTEGER}
+    where album_id = #{albumId,jdbcType=BIGINT}
+  </update>
+  
+  <update id="addPageviews" parameterType="Long">
+    update party_album
+    set pageviews = pageviews + 1
     where album_id = #{albumId,jdbcType=BIGINT}
   </update>
 </mapper>

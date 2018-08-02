@@ -12,4 +12,7 @@ public interface PartyAlbumService {
     
     //根据相册ID获取某个相册下的所有图片
     List<PartyPicture> listAlbumPicture(Long albumId);
+    
+    //相册浏览量加1
+    void addPageviews(Long albumId);
 }

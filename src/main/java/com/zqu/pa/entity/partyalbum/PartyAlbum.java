@@ -1,7 +1,5 @@
 package com.zqu.pa.entity.partyalbum;
 
-import com.zqu.pa.utils.DateUtil;
-
 public class PartyAlbum {
     private Long albumId; //相册ID
 
@@ -12,10 +10,14 @@ public class PartyAlbum {
     private String coverImage; //封面图片地址
 
     private String description; //相册描述
+    
+    private Integer quantity; //相册图片数量
 
     private String userId; //创建者ID
 
     private Long createDate; //相册创建时间戳
+    
+    private Integer pageviews; //相册浏览量
     
     private String stringCreateDate; //相册创建时间格式化字符串
 
@@ -26,7 +28,7 @@ public class PartyAlbum {
     public void setStringCreateDate(String stringCreateDate) {
         this.stringCreateDate = stringCreateDate;
     }
-
+    
     public Long getAlbumId() {
         return albumId;
     }
@@ -67,6 +69,14 @@ public class PartyAlbum {
         this.description = description == null ? null : description.trim();
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
     public String getUserId() {
         return userId;
     }
@@ -81,5 +91,13 @@ public class PartyAlbum {
 
     public void setCreateDate(Long createDate) {
         this.createDate = createDate;
+    }
+
+    public Integer getPageviews() {
+        return pageviews;
+    }
+
+    public void setPageviews(Integer pageviews) {
+        this.pageviews = pageviews;
     }
 }

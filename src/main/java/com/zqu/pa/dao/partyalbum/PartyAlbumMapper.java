@@ -27,4 +27,7 @@ public interface PartyAlbumMapper {
     int updateByPrimaryKeySelective(PartyAlbum record);
 
     int updateByPrimaryKey(PartyAlbum record);
+    
+    //相册浏览量字段pageviews加1
+    int addPageviews(Long albumId);
 }

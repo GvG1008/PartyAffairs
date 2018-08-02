@@ -434,6 +434,66 @@ public class PartyAlbumExample {
             return (Criteria) this;
         }
 
+        public Criteria andQuantityIsNull() {
+            addCriterion("quantity is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuantityIsNotNull() {
+            addCriterion("quantity is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuantityEqualTo(Integer value) {
+            addCriterion("quantity =", value, "quantity");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuantityNotEqualTo(Integer value) {
+            addCriterion("quantity <>", value, "quantity");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuantityGreaterThan(Integer value) {
+            addCriterion("quantity >", value, "quantity");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuantityGreaterThanOrEqualTo(Integer value) {
+            addCriterion("quantity >=", value, "quantity");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuantityLessThan(Integer value) {
+            addCriterion("quantity <", value, "quantity");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuantityLessThanOrEqualTo(Integer value) {
+            addCriterion("quantity <=", value, "quantity");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuantityIn(List<Integer> values) {
+            addCriterion("quantity in", values, "quantity");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuantityNotIn(List<Integer> values) {
+            addCriterion("quantity not in", values, "quantity");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuantityBetween(Integer value1, Integer value2) {
+            addCriterion("quantity between", value1, value2, "quantity");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuantityNotBetween(Integer value1, Integer value2) {
+            addCriterion("quantity not between", value1, value2, "quantity");
+            return (Criteria) this;
+        }
+
         public Criteria andUserIdIsNull() {
             addCriterion("user_id is null");
             return (Criteria) this;
@@ -561,6 +621,66 @@ public class PartyAlbumExample {
 
         public Criteria andCreateDateNotBetween(Long value1, Long value2) {
             addCriterion("create_date not between", value1, value2, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsIsNull() {
+            addCriterion("pageviews is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsIsNotNull() {
+            addCriterion("pageviews is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsEqualTo(Integer value) {
+            addCriterion("pageviews =", value, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsNotEqualTo(Integer value) {
+            addCriterion("pageviews <>", value, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsGreaterThan(Integer value) {
+            addCriterion("pageviews >", value, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsGreaterThanOrEqualTo(Integer value) {
+            addCriterion("pageviews >=", value, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsLessThan(Integer value) {
+            addCriterion("pageviews <", value, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsLessThanOrEqualTo(Integer value) {
+            addCriterion("pageviews <=", value, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsIn(List<Integer> values) {
+            addCriterion("pageviews in", values, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsNotIn(List<Integer> values) {
+            addCriterion("pageviews not in", values, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsBetween(Integer value1, Integer value2) {
+            addCriterion("pageviews between", value1, value2, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsNotBetween(Integer value1, Integer value2) {
+            addCriterion("pageviews not between", value1, value2, "pageviews");
             return (Criteria) this;
         }
     }

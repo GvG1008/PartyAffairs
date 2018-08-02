@@ -55,8 +55,15 @@ public class PartyAlbumServiceImpl implements PartyAlbumService {
         if (listPicture == null || listPicture.size() == 0) {
             logger.info("相册ID：" + albumId + " 下无图片");
             return listPicture;
-        } 
+        }
+        addPageviews(albumId);
         return listPicture;
+    }
+
+    @Override
+    public void addPageviews(Long albumId) {
+        
+        partyAlbumMapper.addPageviews(albumId);
     }
 
 }
