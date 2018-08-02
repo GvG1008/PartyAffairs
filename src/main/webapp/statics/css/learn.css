@@ -27,12 +27,12 @@
 ul{
 	list-style-type: none;
 }
-			
-li {
+
+.learn li{
 	display: inline-block;
 }
 
-li {
+.dowebok li{
 	margin: 10px 0;
 }
 
