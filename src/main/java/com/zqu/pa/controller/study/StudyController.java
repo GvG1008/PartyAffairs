@@ -169,7 +169,7 @@ public class StudyController {
     }
 
     /**
-     * 根据标签id获取文档学习资料
+     * 根据标签id获取文档学习资料(上架)
      * 
      * @param labelId
      * @param session
@@ -187,7 +187,7 @@ public class StudyController {
         for (Integer labelid : hashSet) {
             idList.add(labelid);
         }
-        return iStudyService.getStudyDocumentsByLabelId(idList);
+        return iStudyService.getStudyDocumentsPutonByLabelId(idList);
     }
 
     /**
@@ -222,7 +222,18 @@ public class StudyController {
         return iStudyService.statisticsDownload(userId, downloadURL);
     }
     
-    
+    /**
+     * 上传视频学习资料
+     * @param file
+     * @param img
+     * @param request
+     * @param session
+     * @param title
+     * @param introduction
+     * @param labelId
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "upload_study_video.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse uploadStudyVideo(@RequestParam(value = "upload_file") MultipartFile file,

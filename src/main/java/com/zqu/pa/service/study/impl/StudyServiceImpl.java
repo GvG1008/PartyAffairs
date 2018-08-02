@@ -125,7 +125,11 @@ public class StudyServiceImpl implements IStudyService {
             sdl.add(studyDocumentMapper.selectByPrimaryKey(documentIds.get(i)));
         return ServerResponse.createBySuccess(sdl);
     }
-
+    @Override
+    public ServerResponse getStudyDocumentsPutonByLabelId(List<Integer> idList) {
+        List<StudyDocument> studyDocumentList = studyDocumentMapper.selectPutonByLabelId(idList);
+        return null;
+    }
     @Override
     public ServerResponse getStudyDocumentMust(String userId) {
         List<Integer> documentIdList = studyDocumentMustMapper.selectDocumentIdByUserId(userId);

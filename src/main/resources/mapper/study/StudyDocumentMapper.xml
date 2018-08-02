@@ -35,6 +35,15 @@
     WHERE document_id NOT IN(SELECT document_id FROM study_document_putoff)
     ORDER BY document_id DESC
   </select>
+  <select id="selectPutonByLabelId" resultType="com.zqu.pa.entity.study.StudyDocument" parameterType="java.util.List" >
+    SELECT * FROM study_document
+    WHERE document_id NOT IN(SELECT document_id FROM study_document_putoff) 
+    AND document_id IN (SELECT document_id FROM study_document_label WHERE label_id IN
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+    </foreach> 
+    ) ORDER BY document_id DESC
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from study_document
     where document_id = #{documentId,jdbcType=INTEGER}
