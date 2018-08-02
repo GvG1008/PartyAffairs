@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zqu.pa.dao.newsnotices.NoticesMapper;
+import com.zqu.pa.dao.newsnotices.PublicityListMapper;
 import com.zqu.pa.entity.newsnotices.Notices;
 import com.zqu.pa.entity.newsnotices.NoticesExample;
 import com.zqu.pa.entity.newsnotices.NoticesExample.Criteria;
@@ -19,9 +20,12 @@ public class NoticesServiceImpl implements NoticesService{
     @Autowired
     NoticesMapper noticesDao;
     
+    @Autowired
+    PublicityListMapper publicityListDao;
+
     @Override
     public List<HomeList> getHomeNewsList(int num, int type) {
-        return noticesDao.getHomeListLimit(num, type);
+        return publicityListDao.getNoticesHomeListLimit(num, type);
     }
 
     @Override
@@ -46,7 +50,7 @@ public class NoticesServiceImpl implements NoticesService{
         
         //limit index,num  从第index+1条记录开始，num条记录 搜索相应类型公示
         int index = (page-1)*num;
-        info.setList(noticesDao.getMenuListLimit(index, num, type));
+        info.setList(publicityListDao.getNoticesMenuListLimit(index, num, type));
         
         return info;
     }

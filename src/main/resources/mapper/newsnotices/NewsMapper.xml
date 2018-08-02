@@ -337,20 +337,4 @@
       coverpath = #{coverpath,jdbcType=VARCHAR}
     where news_id = #{newsId,jdbcType=INTEGER}
   </update>
-
-    <!-- 以上为逆向工程 -->
-  <select id="getHomeListLimit" resultType="com.zqu.pa.vo.newsnotices.HomeList">
-    select news_id 'id' , title , date , coverpath
-    from news
-    where state = 1
-    order by date DESC
-    limit #{limit}
-  </select>
-  <select id="getMenuListLimit" resultType="com.zqu.pa.vo.newsnotices.HomeList">
-    select news_id 'id' , title , date , coverpath
-    from news
-    where state = 1
-    order by date DESC
-    limit #{index},#{num}
-  </select>
 </mapper>

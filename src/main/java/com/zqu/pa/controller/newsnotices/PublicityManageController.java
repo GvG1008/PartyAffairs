@@ -1,5 +1,7 @@
 package com.zqu.pa.controller.newsnotices;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,7 @@ import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.newsnotices.News;
 import com.zqu.pa.entity.newsnotices.Notices;
 import com.zqu.pa.service.newsnotices.PublicityManageService;
+import com.zqu.pa.vo.newsnotices.PublicityInfo;
 
 @Controller
 @RequestMapping("/publicityManage")
@@ -94,4 +97,15 @@ public class PublicityManageController {
         return ServerResponse.createBySuccessMessage(Msg);
     }
     
+    @ResponseBody
+    @RequestMapping(value="/newsList")
+    public ServerResponse<List<PublicityInfo>> getNewsList() {
+        List<PublicityInfo> listInfo = null;
+        
+        //获取列表
+        
+        if(listInfo==null)
+            return ServerResponse.createByErrorMessage("获取列表信息失败！");
+        return ServerResponse.createBySuccess(listInfo);
+    }
 }

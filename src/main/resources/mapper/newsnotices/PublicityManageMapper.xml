@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqu.pa.dao.newsnotices.PublicityManageMapper">
+  <select id="getNewsManageList" resultType="com.zqu.pa.vo.newsnotices.PublicityInfo">
+    SELECT 
+        news_id 'id', title , date , source , creator_id 'creatorId' , state , last_time 'lastTime' , click , coverpath 
+    FROM 
+        news
+    WHERE
+        state = #{state}
+    ORDER BY
+        date Desc
+  </select>
+</mapper>
