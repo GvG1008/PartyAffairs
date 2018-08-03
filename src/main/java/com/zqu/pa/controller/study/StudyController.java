@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,8 +45,8 @@ public class StudyController {
     @Autowired
     private IStudyService iStudyService;
 
-    private String getUserid(HttpSession session) {
-        return (String)session.getAttribute("userId");
+    private String getUserid() {
+        return (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
     }
     private boolean isNeedLogin(HttpSession session) {
         String userId =  (String)session.getAttribute("userId");
@@ -132,7 +133,7 @@ public class StudyController {
             @RequestParam(value = "label_id") String[] labelId, @RequestParam(value = "user_id") String[] userId) {
         // TODO 判断是否登录，通过登录用户验证身份权限
         // TODO 校验参数的格式
-        String userID = this.getUserid(session);
+        String userID = this.getUserid();
         System.out.println(file.isEmpty() + " -- " + img.isEmpty());
         Map fileMap = FTPSSMLoad.upload(file, request, "/document/");
         Map imgMap = FTPSSMLoad.upload(img, request, "/document/");
@@ -198,7 +199,7 @@ public class StudyController {
     @RequestMapping(value = "get_study_documents_must.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse getStudyDocumentMust(HttpSession session) {
-        String userId = this.getUserid(session);
+        String userId = this.getUserid();
         return iStudyService.getStudyDocumentMust(userId);
     }
     
@@ -216,7 +217,7 @@ public class StudyController {
     public ServerResponse downDocument(HttpServletResponse response, HttpSession session, String path,
             String filename) {
         FTPSSMLoad.download(response, path, filename);
-        String userId = this.getUserid(session);
+        String userId = this.getUserid();
         System.out.println(userId);
         String downloadURL = Const.DOWN_INTERFACE + "path=" + path + "&filename=" + filename;
         return iStudyService.statisticsDownload(userId, downloadURL);
@@ -259,7 +260,7 @@ public class StudyController {
             @RequestParam(value = "label_id") String[] labelId, @RequestParam(value = "user_id") String[] userId) {
         // TODO 判断是否登录，通过登录用户验证身份权限
         // TODO 校验参数的格式
-        String userID = this.getUserid(session);
+        String userID = this.getUserid();
         System.out.println(file.isEmpty() + " -- " + img.isEmpty());
         Map fileMap = FTPSSMLoad.upload(file, request, "/video/");
         Map imgMap = FTPSSMLoad.upload(img, request, "/video/");
