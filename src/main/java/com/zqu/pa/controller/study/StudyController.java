@@ -31,6 +31,7 @@ import com.zqu.pa.entity.study.StudyVideoMust;
 import com.zqu.pa.service.study.IStudyService;
 import com.zqu.pa.utils.FTPSSMLoad;
 import com.zqu.pa.utils.StringExtend;
+import com.zqu.pa.vo.userInfo.UserBasicInfo;
 
 /**
  * 学习模块Controller
@@ -46,7 +47,9 @@ public class StudyController {
     private IStudyService iStudyService;
 
     private String getUserid() {
-        return (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        String userId = basicInfo.getUserId();
+        return userId;
     }
     private boolean isNeedLogin(HttpSession session) {
         String userId =  (String)session.getAttribute("userId");
