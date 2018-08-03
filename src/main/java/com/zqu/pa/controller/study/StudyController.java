@@ -221,6 +221,22 @@ public class StudyController {
         String downloadURL = Const.DOWN_INTERFACE + "path=" + path + "&filename=" + filename;
         return iStudyService.statisticsDownload(userId, downloadURL);
     }
+
+    @RequestMapping(value = "manage_get_study_documents.do", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse manageGetStudyDocuments(HttpSession session) {
+        return null;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     /**
      * 上传视频学习资料

@@ -128,7 +128,7 @@ public class StudyServiceImpl implements IStudyService {
     @Override
     public ServerResponse getStudyDocumentsPutonByLabelId(List<Integer> idList) {
         List<StudyDocument> studyDocumentList = studyDocumentMapper.selectPutonByLabelId(idList);
-        return null;
+        return ServerResponse.createBySuccess(studyDocumentList);
     }
     @Override
     public ServerResponse getStudyDocumentMust(String userId) {
