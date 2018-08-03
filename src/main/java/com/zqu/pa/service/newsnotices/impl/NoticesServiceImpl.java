@@ -74,6 +74,7 @@ public class NoticesServiceImpl implements NoticesService{
             notices2.setClick(notices.getClick()+1);
             if(noticesDao.updateByPrimaryKeySelective(notices2)==0)
                 return null;
+            notices.setClick(notices.getClick()+1);
             //前台查看，删除多余信息
             notices.setCoverpath(null);
             notices.setCreatorId(null);

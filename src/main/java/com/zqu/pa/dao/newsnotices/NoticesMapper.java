@@ -30,9 +30,9 @@ public interface NoticesMapper {
     int updateByExampleWithBLOBs(@Param("record") Notices record, @Param("example") NoticesExample example);
 
     int updateByExample(@Param("record") Notices record, @Param("example") NoticesExample example);
-
+    
     int updateByPrimaryKeySelective(Notices record);
-
+    
     int updateByPrimaryKeyWithBLOBs(Notices record);
 
     int updateByPrimaryKey(Notices record);

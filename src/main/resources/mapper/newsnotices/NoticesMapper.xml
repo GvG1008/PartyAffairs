@@ -310,6 +310,9 @@
       </if>
     </set>
     where notices_id = #{noticesId,jdbcType=INTEGER}
+    <if test="type != null">
+        AND type = #{type,jdbcType=INTEGER}
+    </if>
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zqu.pa.entity.newsnotices.Notices">
     update notices

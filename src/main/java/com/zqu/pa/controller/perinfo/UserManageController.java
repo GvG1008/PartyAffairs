@@ -212,7 +212,7 @@ public class UserManageController {
 
         //除了branchId==0外,只能审核和自己相同的党支部人员
         String Msg = userInfoService.checkUserByBatch(basicInfo.getBranchId(),userId);
-        if(!Msg.equals("审核成功!"))
+        if(Msg==null||!Msg.equals("审核成功!"))
             return ServerResponse.createByErrorMessage(Msg);
         return ServerResponse.createBySuccessMessage(Msg);
     }
@@ -235,7 +235,7 @@ public class UserManageController {
         
         //除了branchId==0外,只能删除和自己相同的党支部人员
         String Msg = userInfoService.deleteUser(basicInfo.getBranchId(),userId);
-        if(!Msg.equals("删除成功!"))
+        if(Msg==null||!Msg.equals("删除成功!"))
             return ServerResponse.createByErrorMessage(Msg);
         return ServerResponse.createBySuccessMessage(Msg);
     }

@@ -1,5 +1,9 @@
 package com.zqu.pa.vo.newsnotices;
 
+import java.util.Date;
+
+import com.zqu.pa.utils.DateToString;
+
 public class PublicityInfo {
     
     private int id;
@@ -40,8 +44,8 @@ public class PublicityInfo {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDate(Date date) {
+        this.date = DateToString.getDateString("yyyy/MM/dd HH:mm:ss", date);
     }
 
     public String getSource() {
@@ -72,8 +76,8 @@ public class PublicityInfo {
         return lastTime;
     }
 
-    public void setLastTime(String lastTime) {
-        this.lastTime = lastTime;
+    public void setLastTime(Date lastTime) {
+        this.lastTime = DateToString.getDateString("yyyy/MM/dd HH:mm:ss", lastTime);
     }
 
     public int getClick() {
