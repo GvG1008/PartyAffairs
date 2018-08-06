@@ -24,10 +24,9 @@ import com.zqu.pa.entity.study.StudyDocumentLabel;
 import com.zqu.pa.entity.study.StudyDocumentMust;
 import com.zqu.pa.entity.study.StudyDocumentStatistics;
 import com.zqu.pa.entity.study.StudyLabel;
-import com.zqu.pa.entity.study.StudyVideo;
-import com.zqu.pa.entity.study.StudyVideoLabel;
-import com.zqu.pa.entity.study.StudyVideoMust;
 import com.zqu.pa.service.study.IStudyService;
+import com.zqu.pa.utils.DateToString;
+import com.zqu.pa.vo.StudyDocumentVO1;
 
 @Service("iStudyService")
 public class StudyServiceImpl implements IStudyService {
@@ -49,9 +48,7 @@ public class StudyServiceImpl implements IStudyService {
     private StudyVideoLabelMapper studyVideoLabelMapper;
     @Autowired
     private StudyVideoMustMapper studyVideoMustMapper;
-    
-    
-    
+
     @Override
     public ServerResponse createLabel(String labelName) {
         StudyLabel studyLabel = new StudyLabel(null, labelName, null, null);
@@ -109,38 +106,84 @@ public class StudyServiceImpl implements IStudyService {
         }
         return ServerResponse.createByErrorMessage("上传文档资料失败");
     }
-    
+
     @Override
+    @Transactional
     public ServerResponse getStudyDocumentsPuton() {
         List<StudyDocument> sdl = studyDocumentMapper.selectPutOn();
-        return ServerResponse.createBySuccess(sdl);
+        int size = sdl.size();
+        List<StudyDocumentVO1> list = Lists.newArrayList();
+        for (int i = 0; i < size; i++) {
+            StudyDocument sd = sdl.get(i);
+            String updateTime = DateToString.getDateString("yyyy-MM-dd HH:mm:ss", sd.getUpdatetime());
+            String uploadUser = studyDocumentMapper.getUserNameByUserId(sd.getUserId());
+            int downloadTimes = studyDocumentStatisticsMapper.selectTimeSumByDocumentId(sd.getDocumentId());
+            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes);
+            list.add(sdvo1);
+        }
+        return ServerResponse.createBySuccess(list);
     }
 
     @Override
+    @Transactional
     public ServerResponse getStudyDocumentsByLabelId(List<Integer> idList) {
         List<Integer> documentIds = studyDocumentLabelMapper.selectDocumentIdByLabels(idList);
         List<StudyDocument> sdl = Lists.newArrayList();
-        int size = documentIds.size();
-        for (int i = 0; i < size; i++)
+        int size1 = documentIds.size();
+        for (int i = 0; i < size1; i++)
             sdl.add(studyDocumentMapper.selectByPrimaryKey(documentIds.get(i)));
-        return ServerResponse.createBySuccess(sdl);
+        int size = sdl.size();
+        List<StudyDocumentVO1> list = Lists.newArrayList();
+        for (int i = 0; i < size; i++) {
+            StudyDocument sd = sdl.get(i);
+            String updateTime = DateToString.getDateString("yyyy-MM-dd HH:mm:ss", sd.getUpdatetime());
+            String uploadUser = studyDocumentMapper.getUserNameByUserId(sd.getUserId());
+            int downloadTimes = studyDocumentStatisticsMapper.selectTimeSumByDocumentId(sd.getDocumentId());
+            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes);
+            list.add(sdvo1);
+        }
+        return ServerResponse.createBySuccess(list);
     }
+
     @Override
+    @Transactional
     public ServerResponse getStudyDocumentsPutonByLabelId(List<Integer> idList) {
-        List<StudyDocument> studyDocumentList = studyDocumentMapper.selectPutonByLabelId(idList);
-        return ServerResponse.createBySuccess(studyDocumentList);
+        List<StudyDocument> sdl = studyDocumentMapper.selectPutonByLabelId(idList);
+        int size = sdl.size();
+        List<StudyDocumentVO1> list = Lists.newArrayList();
+        for (int i = 0; i < size; i++) {
+            StudyDocument sd = sdl.get(i);
+            String updateTime = DateToString.getDateString("yyyy-MM-dd HH:mm:ss", sd.getUpdatetime());
+            String uploadUser = studyDocumentMapper.getUserNameByUserId(sd.getUserId());
+            int downloadTimes = studyDocumentStatisticsMapper.selectTimeSumByDocumentId(sd.getDocumentId());
+            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes);
+            list.add(sdvo1);
+        }
+        return ServerResponse.createBySuccess(list);
     }
+
     @Override
+    @Transactional
     public ServerResponse getStudyDocumentMust(String userId) {
         List<Integer> documentIdList = studyDocumentMustMapper.selectDocumentIdByUserId(userId);
-        List<StudyDocument> studyDocumentList = Lists.newArrayList();
-        int size = documentIdList.size();
-        for (int i = 0; i < size; i++) {
+        List<StudyDocument> sdl = Lists.newArrayList();
+        int size1 = documentIdList.size();
+        for (int i = 0; i < size1; i++) {
             int documentId = documentIdList.get(i);
             StudyDocument sd = studyDocumentMapper.selectByPrimaryKey(documentId);
-            studyDocumentList.add(sd);
+            sdl.add(sd);
         }
-        return ServerResponse.createBySuccess(studyDocumentList);
+        int size = sdl.size();
+        List<StudyDocumentVO1> list = Lists.newArrayList();
+        for (int i = 0; i < size; i++) {
+            StudyDocument sd = sdl.get(i);
+            String updateTime = DateToString.getDateString("yyyy-MM-dd HH:mm:ss", sd.getUpdatetime());
+            String uploadUser = studyDocumentMapper.getUserNameByUserId(sd.getUserId());
+            int downloadTimes = studyDocumentStatisticsMapper.selectTimeSumByDocumentId(sd.getDocumentId());
+            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes);
+            list.add(sdvo1);
+        }
+        return ServerResponse.createBySuccess(list);
     }
 
     @Override
@@ -149,12 +192,13 @@ public class StudyServiceImpl implements IStudyService {
         StudyDocumentStatistics studyDocumentStatistics = new StudyDocumentStatistics();
         studyDocumentStatistics.setDocumentId(documentId);
         studyDocumentStatistics.setUserId(userId);
-        StudyDocumentStatistics studyDocumentStatistics1 = studyDocumentStatisticsMapper.selectByDocumentIdAndUserId(studyDocumentStatistics);
-        if(studyDocumentStatistics1 == null) {
+        StudyDocumentStatistics studyDocumentStatistics1 = studyDocumentStatisticsMapper
+                .selectByDocumentIdAndUserId(studyDocumentStatistics);
+        if (studyDocumentStatistics1 == null) {
             studyDocumentStatistics.setTimes(1);
             studyDocumentStatisticsMapper.insert(studyDocumentStatistics);
-        }else {
-            int times = studyDocumentStatistics1.getTimes()+1;
+        } else {
+            int times = studyDocumentStatistics1.getTimes() + 1;
             studyDocumentStatistics.setTimes(times);
             studyDocumentStatisticsMapper.updateByDocumentIdAndUserId(studyDocumentStatistics);
         }

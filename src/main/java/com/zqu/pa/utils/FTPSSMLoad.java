@@ -22,9 +22,10 @@ public class FTPSSMLoad {
         String fileName = file.getOriginalFilename();
         Integer i = fileName.lastIndexOf(".") + 1;
         String fileExtensionName = fileName.substring(i);
-        String filePrefixName = fileName.substring(0, i-1);
-        Date d = new Date();
-        String uploadFileName = filePrefixName + DateToString.getDateString("yyyy-MM-dd", d) + UUID.randomUUID().toString() + "." + fileExtensionName;
+        //String filePrefixName = fileName.substring(0, i-1);
+        //Date d = new Date();
+        //String uploadFileName = filePrefixName + DateToString.getDateString("yyyy-MM-dd", d) + UUID.randomUUID().toString() + "." + fileExtensionName;
+        String uploadFileName = UUID.randomUUID().toString() + "." + fileExtensionName;
         File fileDir = new File(path);
         if (!fileDir.exists()) {
             fileDir.setWritable(true);

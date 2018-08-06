@@ -9,5 +9,7 @@ public interface StudyDocumentStatisticsMapper {
     
     int updateByDocumentIdAndUserId(StudyDocumentStatistics record);
     
+    int selectTimeSumByDocumentId(Integer documentId);
+    
     StudyDocumentStatistics selectByDocumentIdAndUserId(StudyDocumentStatistics record);
 }
