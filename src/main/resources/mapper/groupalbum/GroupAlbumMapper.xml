@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqu.pa.dao.groupalbum.GroupAlbumMapper">
+  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.groupalbum.GroupAlbum">
+    <id column="album_id" jdbcType="BIGINT" property="albumId" />
+    <result column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="album_title" jdbcType="VARCHAR" property="albumTitle" />
+    <result column="cover_image" jdbcType="VARCHAR" property="coverImage" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="create_date" jdbcType="BIGINT" property="createDate" />
+    <result column="pageviews" jdbcType="INTEGER" property="pageviews" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    album_id, group_id, album_title, cover_image, description, quantity, user_id, create_date, 
+    pageviews
+  </sql>
+  <select id="selectByExample" parameterType="com.zqu.pa.entity.groupalbum.GroupAlbumExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from group_album
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from group_album
+    where album_id = #{albumId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from group_album
+    where album_id = #{albumId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zqu.pa.entity.groupalbum.GroupAlbumExample">
+    delete from group_album
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zqu.pa.entity.groupalbum.GroupAlbum">
+    insert into group_album (album_id, group_id, album_title, 
+      cover_image, description, quantity, 
+      user_id, create_date, pageviews
+      )
+    values (#{albumId,jdbcType=BIGINT}, #{groupId,jdbcType=INTEGER}, #{albumTitle,jdbcType=VARCHAR}, 
+      #{coverImage,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{userId,jdbcType=VARCHAR}, #{createDate,jdbcType=BIGINT}, #{pageviews,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zqu.pa.entity.groupalbum.GroupAlbum">
+    insert into group_album
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="albumId != null">
+        album_id,
+      </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="albumTitle != null">
+        album_title,
+      </if>
+      <if test="coverImage != null">
+        cover_image,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="pageviews != null">
+        pageviews,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="albumId != null">
+        #{albumId,jdbcType=BIGINT},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="albumTitle != null">
+        #{albumTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImage != null">
+        #{coverImage,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=BIGINT},
+      </if>
+      <if test="pageviews != null">
+        #{pageviews,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zqu.pa.entity.groupalbum.GroupAlbumExample" resultType="java.lang.Long">
+    select count(*) from group_album
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update group_album
+    <set>
+      <if test="record.albumId != null">
+        album_id = #{record.albumId,jdbcType=BIGINT},
+      </if>
+      <if test="record.groupId != null">
+        group_id = #{record.groupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.albumTitle != null">
+        album_title = #{record.albumTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coverImage != null">
+        cover_image = #{record.coverImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=BIGINT},
+      </if>
+      <if test="record.pageviews != null">
+        pageviews = #{record.pageviews,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update group_album
+    set album_id = #{record.albumId,jdbcType=BIGINT},
+      group_id = #{record.groupId,jdbcType=INTEGER},
+      album_title = #{record.albumTitle,jdbcType=VARCHAR},
+      cover_image = #{record.coverImage,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=BIGINT},
+      pageviews = #{record.pageviews,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zqu.pa.entity.groupalbum.GroupAlbum">
+    update group_album
+    <set>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="albumTitle != null">
+        album_title = #{albumTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImage != null">
+        cover_image = #{coverImage,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=BIGINT},
+      </if>
+      <if test="pageviews != null">
+        pageviews = #{pageviews,jdbcType=INTEGER},
+      </if>
+    </set>
+    where album_id = #{albumId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zqu.pa.entity.groupalbum.GroupAlbum">
+    update group_album
+    set group_id = #{groupId,jdbcType=INTEGER},
+      album_title = #{albumTitle,jdbcType=VARCHAR},
+      cover_image = #{coverImage,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=BIGINT},
+      pageviews = #{pageviews,jdbcType=INTEGER}
+    where album_id = #{albumId,jdbcType=BIGINT}
+  </update>
+  
+  <update id="addPageviews" parameterType="Long">
+    update group_album
+    set pageviews = pageviews + 1
+    where album_id = #{albumId,jdbcType=BIGINT}
+  </update>
+</mapper>

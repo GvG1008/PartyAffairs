@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zqu.pa.dao.exam.ExamRoleMapper">
-  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.exam.ExamRoleKey">
-    <id column="exam_id" jdbcType="INTEGER" property="examId" />
-    <id column="role_id" jdbcType="INTEGER" property="roleId" />
+<mapper namespace="com.zqu.pa.dao.groupalbum.GroupBranchMapper">
+  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.groupalbum.GroupBranch">
+    <id column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -64,16 +65,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    exam_id, role_id
+    group_id, group_name, user_id
   </sql>
-  <select id="selectByExample" parameterType="com.zqu.pa.entity.exam.ExamRoleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.zqu.pa.entity.groupalbum.GroupBranchExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from exam_role
+    from group_branch
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -81,54 +82,70 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.zqu.pa.entity.exam.ExamRoleKey">
-    delete from exam_role
-    where exam_id = #{examId,jdbcType=INTEGER}
-      and role_id = #{roleId,jdbcType=INTEGER}
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from group_branch
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from group_branch
+    where group_id = #{groupId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.zqu.pa.entity.exam.ExamRoleExample">
-    delete from exam_role
+  <delete id="deleteByExample" parameterType="com.zqu.pa.entity.groupalbum.GroupBranchExample">
+    delete from group_branch
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zqu.pa.entity.exam.ExamRoleKey">
-    insert into exam_role (exam_id, role_id)
-    values (#{examId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.zqu.pa.entity.groupalbum.GroupBranch">
+    insert into group_branch (group_id, group_name, user_id
+      )
+    values (#{groupId,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.zqu.pa.entity.exam.ExamRoleKey">
-    insert into exam_role
+  <insert id="insertSelective" parameterType="com.zqu.pa.entity.groupalbum.GroupBranch">
+    insert into group_branch
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="examId != null">
-        exam_id,
+      <if test="groupId != null">
+        group_id,
       </if>
-      <if test="roleId != null">
-        role_id,
+      <if test="groupName != null">
+        group_name,
+      </if>
+      <if test="userId != null">
+        user_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="examId != null">
-        #{examId,jdbcType=INTEGER},
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
       </if>
-      <if test="roleId != null">
-        #{roleId,jdbcType=INTEGER},
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zqu.pa.entity.exam.ExamRoleExample" resultType="java.lang.Long">
-    select count(*) from exam_role
+  <select id="countByExample" parameterType="com.zqu.pa.entity.groupalbum.GroupBranchExample" resultType="java.lang.Long">
+    select count(*) from group_branch
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update exam_role
+    update group_branch
     <set>
-      <if test="record.examId != null">
-        exam_id = #{record.examId,jdbcType=INTEGER},
+      <if test="record.groupId != null">
+        group_id = #{record.groupId,jdbcType=INTEGER},
       </if>
-      <if test="record.roleId != null">
-        role_id = #{record.roleId,jdbcType=INTEGER},
+      <if test="record.groupName != null">
+        group_name = #{record.groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -136,11 +153,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update exam_role
-    set exam_id = #{record.examId,jdbcType=INTEGER},
-      role_id = #{record.roleId,jdbcType=INTEGER}
+    update group_branch
+    set group_id = #{record.groupId,jdbcType=INTEGER},
+      group_name = #{record.groupName,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zqu.pa.entity.groupalbum.GroupBranch">
+    update group_branch
+    <set>
+      <if test="groupName != null">
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zqu.pa.entity.groupalbum.GroupBranch">
+    update group_branch
+    set group_name = #{groupName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR}
+    where group_id = #{groupId,jdbcType=INTEGER}
   </update>
 </mapper>

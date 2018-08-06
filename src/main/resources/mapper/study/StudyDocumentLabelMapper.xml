@@ -17,6 +17,15 @@
     from study_document_label
     where orderBy = #{orderby,jdbcType=INTEGER}
   </select>
+  <select id="selectDocumentIdByLabels" resultType="java.lang.Integer" parameterType="java.util.List">
+    select distinct document_id 
+    from study_document_label
+    where label_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+    order by document_id desc
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from study_document_label
     where orderBy = #{orderby,jdbcType=INTEGER}

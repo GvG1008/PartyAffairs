@@ -14,8 +14,8 @@ public interface ExamListService {
     //根据当前时间，改变考试状态finish
     void setExamFinish();
     
-    //根据角色id获取考试id
-    List<Integer> listExamRole(int roleId);
+    //根据用户id获取考试id
+    List<Integer> listExamUser(String userId);
     
     //判断用户某次考试是否及格
     Integer isPass(Integer examId, String userId, Integer passScore);

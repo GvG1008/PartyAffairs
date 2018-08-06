@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zqu.pa.dao.newsnotices.NewsMapper;
+import com.zqu.pa.dao.newsnotices.PublicityListMapper;
 import com.zqu.pa.entity.newsnotices.News;
 import com.zqu.pa.entity.newsnotices.NewsExample;
 import com.zqu.pa.entity.newsnotices.NewsExample.Criteria;
@@ -19,10 +20,13 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     NewsMapper newsDao;
     
+    @Autowired
+    PublicityListMapper publicityListDao;
+    
     @Override
     public List<HomeList> getHomeNewsList(int num) {
         
-        return newsDao.getHomeListLimit(num);
+        return publicityListDao.getNewsHomeListLimit(num);
     }
 
     @Override
@@ -48,7 +52,7 @@ public class NewsServiceImpl implements NewsService {
         
         //limit index,num  从第index+1条记录开始，num条记录
         int index = (page-1)*num;
-        info.setList(newsDao.getMenuListLimit(index, num));
+        info.setList(publicityListDao.getNewsMenuListLimit(index, num));
         
         return info;
     }
@@ -72,11 +76,11 @@ public class NewsServiceImpl implements NewsService {
                 news2.setClick(news.getClick()+1);
                 if(newsDao.updateByPrimaryKeySelective(news2)==0)
                     return null;
+                news.setClick(news.getClick()+1);
                 //显示在公众页面,删除多余信息
                 news.setCreatorId(null);
                 news.setLastTime(null);
                 news.setState(null);
-                news.setClick(news.getClick()+1);
             }
         }
         return news;

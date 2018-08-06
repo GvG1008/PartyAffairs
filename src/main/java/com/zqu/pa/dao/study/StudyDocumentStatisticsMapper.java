@@ -6,4 +6,8 @@ public interface StudyDocumentStatisticsMapper {
     int insert(StudyDocumentStatistics record);
 
     int insertSelective(StudyDocumentStatistics record);
+    
+    int updateByDocumentIdAndUserId(StudyDocumentStatistics record);
+    
+    StudyDocumentStatistics selectByDocumentIdAndUserId(StudyDocumentStatistics record);
 }

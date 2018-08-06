@@ -126,7 +126,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.zqu.pa.entity.perinfo.UserPartyInfo">
-    insert into user_party_info (user_id, branch_id, name, 
+    INSERT INTO user_party_info (user_id, branch_id, name, 
       name_former, sex, national, 
       native_place, birth_place, place_registered, 
       home_address, tel, family_background, 
@@ -136,7 +136,8 @@
       time_applicationforparty, time_intoparty, 
       time_positive, type_development, totot, 
       out_unit)
-    values (#{userId,jdbcType=VARCHAR}, #{branchId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+    SELECT 
+      #{userId,jdbcType=VARCHAR}, #{branchId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
       #{nameFormer,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{national,jdbcType=VARCHAR}, 
       #{nativePlace,jdbcType=VARCHAR}, #{birthPlace,jdbcType=VARCHAR}, #{placeRegistered,jdbcType=VARCHAR}, 
       #{homeAddress,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{familyBackground,jdbcType=VARCHAR}, 
@@ -145,7 +146,42 @@
       #{educationalBackground,jdbcType=VARCHAR}, #{professional,jdbcType=VARCHAR}, #{graduateSchool,jdbcType=VARCHAR}, 
       #{timeApplicationforparty,jdbcType=VARCHAR}, #{timeIntoparty,jdbcType=VARCHAR}, 
       #{timePositive,jdbcType=VARCHAR}, #{typeDevelopment,jdbcType=VARCHAR}, #{totot,jdbcType=VARCHAR}, 
-      #{outUnit,jdbcType=VARCHAR})
+      #{outUnit,jdbcType=VARCHAR}
+    FROM DUAL
+    WHERE NOT EXISTS (
+        SELECT * 
+        FROM user_party_info
+        WHERE user_id = #{userId,jdbcType=VARCHAR}
+        AND is_delete = 0
+    )
+    ON DUPLICATE KEY UPDATE
+      branch_id = #{branchId,jdbcType=INTEGER}, 
+      name = #{name,jdbcType=VARCHAR}, 
+      name_former = #{nameFormer,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      national = #{national,jdbcType=VARCHAR}, 
+      native_place = #{nativePlace,jdbcType=VARCHAR}, 
+      birth_place = #{birthPlace,jdbcType=VARCHAR}, 
+      place_registered = #{placeRegistered,jdbcType=VARCHAR}, 
+      home_address = #{homeAddress,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR}, 
+      family_background = #{familyBackground,jdbcType=VARCHAR}, 
+      birth_date = #{birthDate,jdbcType=VARCHAR},
+      political_status = #{politicalStatus,jdbcType=VARCHAR}, 
+      id_card = #{idCard,jdbcType=CHAR}, 
+      marital_status = #{maritalStatus,jdbcType=VARCHAR}, 
+      organization_unit = #{organizationUnit,jdbcType=VARCHAR}, 
+      personal_identity = #{personalIdentity,jdbcType=VARCHAR}, 
+      educational_background = #{educationalBackground,jdbcType=VARCHAR}, 
+      professional = #{professional,jdbcType=VARCHAR},
+      graduate_school = #{graduateSchool,jdbcType=VARCHAR},
+      time_applicationforparty = #{timeApplicationforparty,jdbcType=VARCHAR}, 
+      time_intoparty = #{timeIntoparty,jdbcType=VARCHAR}, 
+      time_positive = #{timePositive,jdbcType=VARCHAR}, 
+      type_development = #{typeDevelopment,jdbcType=VARCHAR}, 
+      totot = #{totot,jdbcType=VARCHAR}, 
+      out_unit = #{outUnit,jdbcType=VARCHAR},
+      is_delete = 0
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.perinfo.UserPartyInfo">
     insert into user_party_info

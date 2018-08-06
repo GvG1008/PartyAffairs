@@ -5,7 +5,7 @@ import java.util.Date;
 public class StudyDocumentStatistics {
     private Integer documentId;
 
-    private Integer userId;
+    private String userId;
 
     private Integer times;
 
@@ -13,7 +13,7 @@ public class StudyDocumentStatistics {
 
     private Date updatetime;
 
-    public StudyDocumentStatistics(Integer documentId, Integer userId, Integer times, Date createtime, Date updatetime) {
+    public StudyDocumentStatistics(Integer documentId, String userId, Integer times, Date createtime, Date updatetime) {
         this.documentId = documentId;
         this.userId = userId;
         this.times = times;
@@ -33,11 +33,11 @@ public class StudyDocumentStatistics {
         this.documentId = documentId;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

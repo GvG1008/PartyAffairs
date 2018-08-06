@@ -310,6 +310,9 @@
       </if>
     </set>
     where notices_id = #{noticesId,jdbcType=INTEGER}
+    <if test="type != null">
+        AND type = #{type,jdbcType=INTEGER}
+    </if>
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zqu.pa.entity.newsnotices.Notices">
     update notices
@@ -336,22 +339,4 @@
       coverpath = #{coverpath,jdbcType=VARCHAR}
     where notices_id = #{noticesId,jdbcType=INTEGER}
   </update>
-
-    <!-- 以上为逆向工程 -->
-  <select id="getHomeListLimit" resultType="com.zqu.pa.vo.newsnotices.HomeList">
-    select notices_id 'id' , title , date , coverpath
-    from notices
-    where state = 1
-    and type = #{type}
-    order by date DESC
-    limit #{limit}
-  </select>
-  <select id="getMenuListLimit" resultType="com.zqu.pa.vo.newsnotices.HomeList">
-    select notices_id 'id' , title , date , coverpath
-    from notices
-    where state = 1
-    and type = #{type}
-    order by date DESC
-    limit #{index},#{num}
-  </select>
 </mapper>

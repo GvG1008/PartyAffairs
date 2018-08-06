@@ -35,10 +35,14 @@ public class FTPSSMLoad {
             file.transferTo(targetFile);
             FTPUtil.uploadFile(remotePath,Lists.newArrayList(targetFile));
             targetFile.delete();
-            String url = Const.FTP_PREFIX+remotePath+targetFile.getName();
+            //http://localhost:8080/PartyAffairs/study/download_document.do?path=/vodeo/&filename=1.jpg
+            String url = Const.DOWN_INTERFACE+"path="+remotePath+"&filename="+targetFile.getName();
+            String FTPurl = Const.FTP_PREFIX+remotePath+targetFile.getName();
             Map fileMap = Maps.newHashMap();
             fileMap.put("uri",targetFile.getName());
-            fileMap.put("url",url);
+            fileMap.put("download_url",url);
+            fileMap.put("ftp_url",url);
+            fileMap.put("http_url",Const.HTTP_PREFIX+remotePath+targetFile.getName());
             return fileMap;
         } catch (IOException e) {
             e.printStackTrace();
