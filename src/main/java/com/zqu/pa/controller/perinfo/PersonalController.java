@@ -1,17 +1,34 @@
 package com.zqu.pa.controller.perinfo;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.zqu.pa.common.Const;
 import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.perinfo.UserPartyInfo;
 import com.zqu.pa.entity.perinfo.UserPersonInfo;
 import com.zqu.pa.service.perinfo.UserInfoService;
+import com.zqu.pa.utils.DateToString;
+import com.zqu.pa.utils.FTPUtil;
+import com.zqu.pa.utils.IMGUtil;
 
 @Controller
 @RequestMapping("/userInfo")
@@ -124,5 +141,68 @@ public class PersonalController {
         if(userInfoService.updateByUserParty(info)==0)
             return ServerResponse.createByErrorMessage("修改党员信息失败");
         return ServerResponse.createBySuccessMessage("修改成功");
+    }
+    
+    /**
+     * 当前用户自己修改头像（保留）
+     * @param file
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="/updateImgHead", method = RequestMethod.POST)
+    public ServerResponse<String> updateImgHead(@RequestParam(value="imgHeadFile",required = false) MultipartFile file, HttpServletRequest request) {
+        if (file == null) return ServerResponse.createByErrorMessage("修改失败");
+        String path = request.getSession().getServletContext().getRealPath("upload");
+
+        String fileName = file.getOriginalFilename();
+        Integer i = fileName.lastIndexOf(".") + 1;
+        String fileExtensionName = fileName.substring(i);
+        String filePrefixName = fileName.substring(0, i-1);
+        Date d = new Date();
+        String uploadFileName = filePrefixName + DateToString.getDateString("yyyy-MM-dd", d) + UUID.randomUUID().toString() + "." + fileExtensionName;
+        File fileDir = new File(path);
+        if (!fileDir.exists()) {
+            fileDir.setWritable(true);
+            fileDir.mkdirs();
+        }
+        File targetFile = new File(path, uploadFileName);
+        try {
+            file.transferTo(targetFile);
+            //检验文件是否为图片
+            if(!this.checkIMG(targetFile))
+                return ServerResponse.createByErrorMessage("上传的不是图片文件");
+            
+            //压缩图片300x300
+            IMGUtil.compressPic(targetFile, 180, 180, path+"\\"+uploadFileName);
+            
+            //上传至FTP
+            targetFile = new File(path, uploadFileName);
+            FTPUtil.uploadFile("/userInfo/profilePhoto/",Lists.newArrayList(targetFile));
+            targetFile.delete();
+            
+            //修改数据库头像路径
+            String fullPath = Const.HTTP_PREFIX+"/userInfo/profilePhoto/"+uploadFileName;
+            if(userInfoService.updateImgHead(fullPath,null)==0)
+                return ServerResponse.createByErrorMessage("修改失败");
+            return ServerResponse.createBySuccess("修改头像成功", fullPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ServerResponse.createByErrorMessage("修改失败");
+        }
+    }
+    
+    /**
+     * 判断是否为图片
+     * @param file
+     * @return
+     */
+    public boolean checkIMG(File file){
+        try {
+            Image image = ImageIO.read(file);
+            return image != null;
+        } catch(IOException ex) {
+            return false;
+        }
     }
 }
