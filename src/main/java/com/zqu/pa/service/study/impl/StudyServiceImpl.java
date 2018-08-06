@@ -165,14 +165,7 @@ public class StudyServiceImpl implements IStudyService {
     @Override
     @Transactional
     public ServerResponse getStudyDocumentMust(String userId) {
-        List<Integer> documentIdList = studyDocumentMustMapper.selectDocumentIdByUserId(userId);
-        List<StudyDocument> sdl = Lists.newArrayList();
-        int size1 = documentIdList.size();
-        for (int i = 0; i < size1; i++) {
-            int documentId = documentIdList.get(i);
-            StudyDocument sd = studyDocumentMapper.selectByPrimaryKey(documentId);
-            sdl.add(sd);
-        }
+        List<StudyDocument> sdl = studyDocumentMapper.selectMustPutonByUserId(userId);
         int size = sdl.size();
         List<StudyDocumentVO1> list = Lists.newArrayList();
         for (int i = 0; i < size; i++) {

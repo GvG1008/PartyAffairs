@@ -15,6 +15,8 @@ public interface StudyDocumentMapper {
 
     StudyDocument selectByPrimaryKey(Integer documentId);
     
+    List<StudyDocument> selectMustPutonByUserId(String userId);
+    
     List<StudyDocument> selectAll();
     
     List<StudyDocument> selectPutOn();
