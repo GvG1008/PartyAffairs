@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zqu.pa.dao.exam.ExamRoleMapper">
-  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.exam.ExamRoleKey">
+<mapper namespace="com.zqu.pa.dao.exam.ExamUserMapper">
+  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.exam.ExamUserKey">
     <id column="exam_id" jdbcType="INTEGER" property="examId" />
-    <id column="role_id" jdbcType="INTEGER" property="roleId" />
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -64,16 +64,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    exam_id, role_id
+    exam_id, user_id
   </sql>
-  <select id="selectByExample" parameterType="com.zqu.pa.entity.exam.ExamRoleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.zqu.pa.entity.exam.ExamUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from exam_role
+    from exam_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -81,54 +81,54 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.zqu.pa.entity.exam.ExamRoleKey">
-    delete from exam_role
+  <delete id="deleteByPrimaryKey" parameterType="com.zqu.pa.entity.exam.ExamUserKey">
+    delete from exam_user
     where exam_id = #{examId,jdbcType=INTEGER}
-      and role_id = #{roleId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.zqu.pa.entity.exam.ExamRoleExample">
-    delete from exam_role
+  <delete id="deleteByExample" parameterType="com.zqu.pa.entity.exam.ExamUserExample">
+    delete from exam_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zqu.pa.entity.exam.ExamRoleKey">
-    insert into exam_role (exam_id, role_id)
-    values (#{examId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.zqu.pa.entity.exam.ExamUserKey">
+    insert into exam_user (exam_id, user_id)
+    values (#{examId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zqu.pa.entity.exam.ExamRoleKey">
-    insert into exam_role
+  <insert id="insertSelective" parameterType="com.zqu.pa.entity.exam.ExamUserKey">
+    insert into exam_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="examId != null">
         exam_id,
       </if>
-      <if test="roleId != null">
-        role_id,
+      <if test="userId != null">
+        user_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="examId != null">
         #{examId,jdbcType=INTEGER},
       </if>
-      <if test="roleId != null">
-        #{roleId,jdbcType=INTEGER},
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zqu.pa.entity.exam.ExamRoleExample" resultType="java.lang.Long">
-    select count(*) from exam_role
+  <select id="countByExample" parameterType="com.zqu.pa.entity.exam.ExamUserExample" resultType="java.lang.Long">
+    select count(*) from exam_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update exam_role
+    update exam_user
     <set>
       <if test="record.examId != null">
         exam_id = #{record.examId,jdbcType=INTEGER},
       </if>
-      <if test="record.roleId != null">
-        role_id = #{record.roleId,jdbcType=INTEGER},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -136,9 +136,9 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update exam_role
+    update exam_user
     set exam_id = #{record.examId,jdbcType=INTEGER},
-      role_id = #{record.roleId,jdbcType=INTEGER}
+      user_id = #{record.userId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

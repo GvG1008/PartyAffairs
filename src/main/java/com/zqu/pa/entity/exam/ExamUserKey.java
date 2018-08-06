@@ -1,9 +1,9 @@
 package com.zqu.pa.entity.exam;
 
-public class ExamRoleKey {
+public class ExamUserKey {
     private Integer examId;
 
-    private Integer roleId;
+    private String userId;
 
     public Integer getExamId() {
         return examId;
@@ -13,11 +13,11 @@ public class ExamRoleKey {
         this.examId = examId;
     }
 
-    public Integer getRoleId() {
-        return roleId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 }

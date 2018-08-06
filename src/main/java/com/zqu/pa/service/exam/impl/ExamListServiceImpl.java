@@ -9,15 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zqu.pa.dao.exam.ExamInfoMapper;
-import com.zqu.pa.dao.exam.ExamRoleMapper;
 import com.zqu.pa.dao.exam.ExamScoreMapper;
+import com.zqu.pa.dao.exam.ExamUserMapper;
 import com.zqu.pa.entity.exam.ExamInfo;
 import com.zqu.pa.entity.exam.ExamInfoExample;
-import com.zqu.pa.entity.exam.ExamRoleExample;
-import com.zqu.pa.entity.exam.ExamRoleKey;
 import com.zqu.pa.entity.exam.ExamScore;
 import com.zqu.pa.entity.exam.ExamScoreExample;
 import com.zqu.pa.entity.exam.ExamScoreKey;
+import com.zqu.pa.entity.exam.ExamUserExample;
+import com.zqu.pa.entity.exam.ExamUserKey;
 import com.zqu.pa.service.exam.ExamListService;
 import com.zqu.pa.utils.DateUtil;
 import com.zqu.pa.vo.exam.ResponseExamList;
@@ -34,7 +34,7 @@ public class ExamListServiceImpl implements ExamListService {
     private ExamInfo examInfo;*/
     
     @Autowired
-    private ExamRoleMapper examRoleMapper;    
+    private ExamUserMapper examUserMapper;    
     
     @Autowired
     private ExamScoreMapper examScoreMapper;
@@ -46,7 +46,7 @@ public class ExamListServiceImpl implements ExamListService {
         String userId = basicInfo.getUserId();
         int branchId = basicInfo.getBranchId();
         int roleId = basicInfo.getRoleId();
-        List<Integer> listExamId = listExamRole(roleId);
+        List<Integer> listExamId = listExamUser(userId);
         if (listExamId == null || listExamId.isEmpty())
             return null;
         
@@ -98,11 +98,11 @@ public class ExamListServiceImpl implements ExamListService {
     }
 
     @Override
-    public List<Integer> listExamRole(int roleId) {
+    public List<Integer> listExamUser(String userId) {
         
-        ExamRoleExample example = new ExamRoleExample();
-        example.createCriteria().andRoleIdEqualTo(roleId);       
-        List<ExamRoleKey> temp = examRoleMapper.selectByExample(example);
+        ExamUserExample example = new ExamUserExample();
+        example.createCriteria().andUserIdEqualTo(userId);       
+        List<ExamUserKey> temp = examUserMapper.selectByExample(example);
         if (temp == null || temp.isEmpty())
             return null;
         List<Integer> listExamId = new ArrayList<Integer>();
@@ -147,7 +147,7 @@ public class ExamListServiceImpl implements ExamListService {
         String userId = basicInfo.getUserId();
         int branchId = basicInfo.getBranchId();
         int roleId = basicInfo.getRoleId();
-        List<Integer> listExamId = listExamRole(roleId);
+        List<Integer> listExamId = listExamUser(userId);
         if (listExamId == null || listExamId.isEmpty())
             return null;
         //查出对应考试信息
