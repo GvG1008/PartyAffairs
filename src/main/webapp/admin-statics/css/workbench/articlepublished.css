@@ -211,3 +211,86 @@ input#file-upload {
 .note-editor.note-frame .note-editing-area .note-editable {
     padding: 20px 10px;
 }
+.articleposition {
+    display: flex;
+    flex-direction: column;
+    width:630px;
+    margin:0 auto;
+}
+button.btn.positionbtn {
+    background: #fff;
+}
+button#positionbtn {
+    text-align: left;
+    color: #999;
+    font-size: 18px;
+    padding: 5px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+label.plabel {
+    font-weight: 500;
+     margin-bottom:0;
+}
+label.position {
+    padding: 10px;
+    color: #999;
+    font-size: 16px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+     font-weight: 800;
+    
+}
+i.fa.fa-circle {
+    margin-right: 30px;
+}
+button.btn.positionbtn.pop {
+    float: right;
+}
+button#positionbtn:focus, button#position:hover {
+    outline: none;
+}
+button#positionbtn:hover span.addbtn {
+ background: url(../../images/workbench/greenplus.png)no-repeat;
+    background-size: 26px;
+}
+span.addbtn {
+    background: url(../../images/workbench/plus.png)no-repeat;
+    background-size: 26px;
+    height: 26px;
+    width: 26px;
+    float: right;
+    margin-right: 20px;
+}
+span.addbtn:hover{
+	background: url(../../images/workbench/greenplus.png)no-repeat;
+	background-size: 26px;
+}
+span.minusbtn {
+    background: url(../../images/workbench/minus.png)no-repeat;
+    background-size: 24px;
+    height: 24px;
+    width: 24px;
+    float: right;
+    margin: 0 17px;
+    cursor: pointer;
+}
+span.minusbtn:hover{
+	background: url(../../images/workbench/redminus.png)no-repeat;
+	background-size: 24px;
+}
+div#ppp {
+    display: grid;
+    margin:10px 0;
+}
+h4#pModalLabel {
+    font-weight: 600;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 2px;
+    margin: auto 0;
+}
+.modal-header>button>span {
+    height: 20px;
+    font-size: 35px;
+    margin: auto 0px;
+}
+

@@ -28,7 +28,7 @@
           <!--   <div class="clearfix"></div> -->
          </div>
   
-            <!-- Modal -->
+            <!-- 图片上传错误提示  Modal -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
@@ -68,6 +68,46 @@
 	            <div class="textareawrap">
 	                <textarea type="text" class="title" id="title" placeholder="请填写标题" maxlength="32" autocomplete="off" onkeypress="loft.m.longpostpublish.g.handleEnter(this,event);" style="height:50px;" wrap="hard"></textarea>
 	            </div>
+	            <!-- 文章投递  -->
+	            <div class="articleposition">
+	                <button type="button" class="btn positionbtn" id="positionbtn">
+	                   <label class="plabel">请选择文章投递位置</label>
+	                   <span class="addbtn"></span>
+	                </button>
+	               
+	               <div id="ppp">
+	               <!-- 数据载入时，span里加入投递位置即可 -->
+	               <label class="position">
+                      <i class="fa fa-circle"></i>当前站点    ——  <span class="ptext">通知公示</span>
+                      <span class="minusbtn"></span>
+                  </label>
+                   
+	               </div>
+	                
+                </div>
+                
+                <!-- 文章投递选择  Modal -->
+	            <div class="modal fade" id="pModal" tabindex="-1" role="dialog" aria-labelledby="pModalLabel">
+	              <div class="modal-dialog" role="document">
+	                <div class="modal-content">
+	                  <div class="modal-header">
+	                    <button type="button" class="close" id="modalclose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                    <h4 class="modal-title" id="pModalLabel">文章投递</h4>
+	                  </div>
+	                  <div class="modal-body">
+	                     <h5><b>请在以下网站栏目树下选择文章的投递位置（可多选）</b></h5>
+	                     <div id="treeview-checkable" class=""></div>
+	                     <h5><b>该文章可以投递至以下栏目位置进行发布：</b></h5>
+                         <div><ul id="checkable-output"></ul></div>
+	                  </div>
+	                  <div class="modal-footer">
+	                    <button type="button" id="modalbtn" class="btn btn-primary" data-dismiss="modal">确定</button>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+                
+                
                 <!-- 编辑器  -->
 	            <div class="editorWrap">
 	                <div id="summernote"></div>
@@ -79,7 +119,10 @@
    <script type="text/javascript" src="../../admin-statics/js/lib/jquery/1.12.4/jquery.min.js"></script>
    <script type="text/javascript" src="../../admin-statics/js/extends/bootstrap/3.3.7/bootstrap.min.js"></script>
    <script type="text/javascript" src="../../admin-statics/js/extends/summernote.js"></script>
+   <script type="text/javascript" src="../../admin-statics/js/extends/bootstrap-treeview.js"></script>
    <script type="text/javascript" src="../../admin-statics/js/module/articlepublished.js"></script>
+   
+   
 <!--    <script type="text/javascript">
      $("#preview").click(function(){
     	 var text=$('#summernote').summernote('code');
