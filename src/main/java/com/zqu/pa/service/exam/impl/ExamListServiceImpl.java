@@ -78,17 +78,18 @@ public class ExamListServiceImpl implements ExamListService {
     @Override
     public void setExamFinish() {
 
+        //当finish为-1，保持不变
         //当前时间大于考试结束时间，将finish字段置为-1
         Long time = new Date().getTime();
         ExamInfoExample example = new ExamInfoExample();
-        example.createCriteria().andEndTimeLessThanOrEqualTo(time);
+        example.createCriteria().andFinishNotEqualTo(-1).andEndTimeLessThanOrEqualTo(time);
         ExamInfo examInfo = new ExamInfo();
         examInfo.setFinish(-1);
         examInfoMapper.updateByExampleSelective(examInfo, example);
         
         //当前时间处于考试时间段内，考试正在进行将finish字段置为1
         ExamInfoExample example1 = new ExamInfoExample();
-        example1.createCriteria().andStartTimeLessThanOrEqualTo(time)
+        example1.createCriteria().andFinishNotEqualTo(-1).andStartTimeLessThanOrEqualTo(time)
             .andEndTimeGreaterThanOrEqualTo(time);
         ExamInfo examInfo1 = new ExamInfo();
         examInfo1.setFinish(1);
