@@ -48,6 +48,9 @@ $(document).ready(function(){
 		else if(name=="learn"){
 			$("#frame").load("learn.html");
 		}
+		else if(name=="coll"){
+			$("#frame").load("collection.html");
+		}
 		
 		$(".loading").fadeOut(500);
 	});

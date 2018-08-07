@@ -7,8 +7,8 @@ $(document).ready(function(){
 	$("#learn-search").click(function(){
 		var lable = document.getElementsByName("checkbox");
 		var type = document.getElementsByName("radio");
+		var claim = document.getElementsByName("radio1");
 		var lables = new Array();
-		var gtype;
 		var y=0;
 		
 		for(var i=0;i<lable.length;i++){
@@ -18,10 +18,16 @@ $(document).ready(function(){
 		}
 		for(var i=0;i<type.length;i++){
 			if(type[i].checked){
-				gtype = type[i].value;
+				var gtype = type[i].value;
+			}
+		}
+		for(var i=0;i<claim.length;i++){
+			if(claim[i].checked){
+				var gclaim = claim[i].value;
 			}
 		}
 		
+		alert(gclaim);
 		for(var i=0;i<lables.length;i++){
 			alert(lables[i]);
 		}
