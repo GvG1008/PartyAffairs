@@ -101,7 +101,6 @@ public class PartyAlbumServiceImpl implements PartyAlbumService {
         partyAlbum.setCreateDate(nTime);
         partyAlbum.setQuantity(files.length);
         partyAlbum.setUserId(userId);
-        //FIXME 上传第一张图片路径错误
         //HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
         //上传到FTP的路径
         String remotePath = "/partyalbum/" + nTime + "/";       

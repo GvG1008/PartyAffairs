@@ -73,7 +73,8 @@ public class PartyAlbumController {
      */
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ServerResponse createAlbum(PartyAlbum partyAlbum, @RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
+    public ServerResponse createAlbum(PartyAlbum partyAlbum, 
+            @RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
         
         ServerResponse result = null;
         try {
