@@ -110,6 +110,7 @@ public class FTPUtil {
     private boolean upload(String dir, List<File> fileList) throws IOException {
         boolean uploaded = true;
         FileInputStream fis = null;
+        String realdir = dir;
         // 连接FTP服务器
         if (connectServer(this.ip, this.port, this.user, this.pwd)) {
             try {
@@ -140,8 +141,9 @@ public class FTPUtil {
                         }
                     }
                 }
+                System.out.println("上传目录为："+realdir);
                 // 将目录切换至指定路径
-                ftpClient.changeWorkingDirectory(dir);
+                ftpClient.changeWorkingDirectory(realdir);
                 ftpClient.setBufferSize(1024);
                 ftpClient.setControlEncoding("UTF-8");
                 ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
