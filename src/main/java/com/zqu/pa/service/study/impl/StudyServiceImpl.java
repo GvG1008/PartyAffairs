@@ -118,10 +118,11 @@ public class StudyServiceImpl implements IStudyService {
         List<StudyDocumentVO1> list = Lists.newArrayList();
         for (int i = 0; i < size; i++) {
             StudyDocument sd = sdl.get(i);
-            String updateTime = DateToString.getDateString("yyyy-MM-dd HH:mm:ss", sd.getUpdatetime());
+            String updateTime = DateToString.getDateString("yyyy-MM-dd", sd.getUpdatetime());
             String uploadUser = studyDocumentMapper.getUserNameByUserId(sd.getUserId());
             int downloadTimes = studyDocumentStatisticsMapper.selectTimeSumByDocumentId(sd.getDocumentId());
-            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes);
+            List<StudyLabel> sls = studyLabelMapper.selectByDocumentId(sd.getDocumentId());
+            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes,sls);
             list.add(sdvo1);
         }
         return ServerResponse.createBySuccess(list);
@@ -135,10 +136,11 @@ public class StudyServiceImpl implements IStudyService {
         List<StudyDocumentVO1> list = Lists.newArrayList();
         for (int i = 0; i < size; i++) {
             StudyDocument sd = sdl.get(i);
-            String updateTime = DateToString.getDateString("yyyy-MM-dd HH:mm:ss", sd.getUpdatetime());
+            String updateTime = DateToString.getDateString("yyyy-MM-dd", sd.getUpdatetime());
             String uploadUser = studyDocumentMapper.getUserNameByUserId(sd.getUserId());
             int downloadTimes = studyDocumentStatisticsMapper.selectTimeSumByDocumentId(sd.getDocumentId());
-            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes);
+            List<StudyLabel> sls = studyLabelMapper.selectByDocumentId(sd.getDocumentId());
+            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes,sls);
             list.add(sdvo1);
         }
         return ServerResponse.createBySuccess(list);
@@ -156,10 +158,11 @@ public class StudyServiceImpl implements IStudyService {
         List<StudyDocumentVO1> list = Lists.newArrayList();
         for (int i = 0; i < size; i++) {
             StudyDocument sd = sdl.get(i);
-            String updateTime = DateToString.getDateString("yyyy-MM-dd HH:mm:ss", sd.getUpdatetime());
+            String updateTime = DateToString.getDateString("yyyy-MM-dd", sd.getUpdatetime());
             String uploadUser = studyDocumentMapper.getUserNameByUserId(sd.getUserId());
             int downloadTimes = studyDocumentStatisticsMapper.selectTimeSumByDocumentId(sd.getDocumentId());
-            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes);
+            List<StudyLabel> sls = studyLabelMapper.selectByDocumentId(sd.getDocumentId());
+            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes,sls);
             list.add(sdvo1);
         }
         return ServerResponse.createBySuccess(list);
@@ -173,10 +176,11 @@ public class StudyServiceImpl implements IStudyService {
         List<StudyDocumentVO1> list = Lists.newArrayList();
         for (int i = 0; i < size; i++) {
             StudyDocument sd = sdl.get(i);
-            String updateTime = DateToString.getDateString("yyyy-MM-dd HH:mm:ss", sd.getUpdatetime());
+            String updateTime = DateToString.getDateString("yyyy-MM-dd", sd.getUpdatetime());
             String uploadUser = studyDocumentMapper.getUserNameByUserId(sd.getUserId());
             int downloadTimes = studyDocumentStatisticsMapper.selectTimeSumByDocumentId(sd.getDocumentId());
-            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes);
+            List<StudyLabel> sls = studyLabelMapper.selectByDocumentId(sd.getDocumentId());
+            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes,sls);
             list.add(sdvo1);
         }
         return ServerResponse.createBySuccess(list);
@@ -190,10 +194,11 @@ public class StudyServiceImpl implements IStudyService {
         List<StudyDocumentVO1> list = Lists.newArrayList();
         for (int i = 0; i < size; i++) {
             StudyDocument sd = sdl.get(i);
-            String updateTime = DateToString.getDateString("yyyy-MM-dd HH:mm:ss", sd.getUpdatetime());
+            String updateTime = DateToString.getDateString("yyyy-MM-dd", sd.getUpdatetime());
             String uploadUser = studyDocumentMapper.getUserNameByUserId(sd.getUserId());
             int downloadTimes = studyDocumentStatisticsMapper.selectTimeSumByDocumentId(sd.getDocumentId());
-            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes);
+            List<StudyLabel> sls = studyLabelMapper.selectByDocumentId(sd.getDocumentId());
+            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes,sls);
             list.add(sdvo1);
         }
         return ServerResponse.createBySuccess(list);

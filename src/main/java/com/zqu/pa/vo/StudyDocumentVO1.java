@@ -1,5 +1,9 @@
 package com.zqu.pa.vo;
 
+import java.util.List;
+
+import com.zqu.pa.entity.study.StudyLabel;
+
 public class StudyDocumentVO1 {
     private Integer documentId;
     private String documentTitle;
@@ -9,11 +13,13 @@ public class StudyDocumentVO1 {
     private String updateTime;
     private String uploadUser;
     private Integer downloadTimes;
+    private List<StudyLabel> studyLabels;
     public StudyDocumentVO1() {
         super();
     }
     public StudyDocumentVO1(Integer documentId, String documentTitle, String documentIntroduction, String coverImg,
-            String filePath, String updateTime, String uploadUser, Integer downloadTimes) {
+            String filePath, String updateTime, String uploadUser, Integer downloadTimes,
+            List<StudyLabel> studyLabels) {
         super();
         this.documentId = documentId;
         this.documentTitle = documentTitle;
@@ -23,6 +29,7 @@ public class StudyDocumentVO1 {
         this.updateTime = updateTime;
         this.uploadUser = uploadUser;
         this.downloadTimes = downloadTimes;
+        this.studyLabels = studyLabels;
     }
     public Integer getDocumentId() {
         return documentId;
@@ -72,12 +79,18 @@ public class StudyDocumentVO1 {
     public void setDownloadTimes(Integer downloadTimes) {
         this.downloadTimes = downloadTimes;
     }
+    public List<StudyLabel> getStudyLabels() {
+        return studyLabels;
+    }
+    public void setStudyLabels(List<StudyLabel> studyLabels) {
+        this.studyLabels = studyLabels;
+    }
     @Override
     public String toString() {
         return "StudyDocumentVO1 [documentId=" + documentId + ", documentTitle=" + documentTitle
                 + ", documentIntroduction=" + documentIntroduction + ", coverImg=" + coverImg + ", filePath=" + filePath
                 + ", updateTime=" + updateTime + ", uploadUser=" + uploadUser + ", downloadTimes=" + downloadTimes
-                + "]";
+                + ", studyLabels=" + studyLabels + "]";
     }
     
 }
