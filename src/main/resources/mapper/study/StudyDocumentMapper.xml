@@ -44,6 +44,11 @@
     WHERE document_id NOT IN(SELECT document_id FROM study_document_putoff)
     ORDER BY document_id DESC
   </select>
+  <select id="selectPutOff" resultType="com.zqu.pa.entity.study.StudyDocument">
+    SELECT * FROM study_document
+    WHERE document_id IN(SELECT document_id FROM study_document_putoff)
+    ORDER BY document_id DESC
+  </select>
   <select id="selectPutonByLabelId" resultType="com.zqu.pa.entity.study.StudyDocument" parameterType="java.util.List" >
     SELECT * FROM study_document
     WHERE document_id NOT IN(SELECT document_id FROM study_document_putoff) 

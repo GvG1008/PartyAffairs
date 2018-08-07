@@ -24,6 +24,9 @@ import com.zqu.pa.entity.study.StudyDocumentLabel;
 import com.zqu.pa.entity.study.StudyDocumentMust;
 import com.zqu.pa.entity.study.StudyDocumentStatistics;
 import com.zqu.pa.entity.study.StudyLabel;
+import com.zqu.pa.entity.study.StudyVideo;
+import com.zqu.pa.entity.study.StudyVideoLabel;
+import com.zqu.pa.entity.study.StudyVideoMust;
 import com.zqu.pa.service.study.IStudyService;
 import com.zqu.pa.utils.DateToString;
 import com.zqu.pa.vo.StudyDocumentVO1;
@@ -48,7 +51,7 @@ public class StudyServiceImpl implements IStudyService {
     private StudyVideoLabelMapper studyVideoLabelMapper;
     @Autowired
     private StudyVideoMustMapper studyVideoMustMapper;
-
+    
     @Override
     public ServerResponse createLabel(String labelName) {
         StudyLabel studyLabel = new StudyLabel(null, labelName, null, null);
@@ -126,6 +129,23 @@ public class StudyServiceImpl implements IStudyService {
 
     @Override
     @Transactional
+    public ServerResponse getStudyDocumentsPutoff() {
+        List<StudyDocument> sdl = studyDocumentMapper.selectPutOff();
+        int size = sdl.size();
+        List<StudyDocumentVO1> list = Lists.newArrayList();
+        for (int i = 0; i < size; i++) {
+            StudyDocument sd = sdl.get(i);
+            String updateTime = DateToString.getDateString("yyyy-MM-dd HH:mm:ss", sd.getUpdatetime());
+            String uploadUser = studyDocumentMapper.getUserNameByUserId(sd.getUserId());
+            int downloadTimes = studyDocumentStatisticsMapper.selectTimeSumByDocumentId(sd.getDocumentId());
+            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes);
+            list.add(sdvo1);
+        }
+        return ServerResponse.createBySuccess(list);
+    }
+    
+    @Override
+    @Transactional
     public ServerResponse getStudyDocumentsByLabelId(List<Integer> idList) {
         List<Integer> documentIds = studyDocumentLabelMapper.selectDocumentIdByLabels(idList);
         List<StudyDocument> sdl = Lists.newArrayList();
@@ -198,4 +218,33 @@ public class StudyServiceImpl implements IStudyService {
         return ServerResponse.createBySuccess();
     }
 
+    @Override
+    @Transactional
+    public ServerResponse uploadStudyVideo(StudyVideo sv, List<StudyVideoLabel> svls,
+            List<StudyVideoMust> svms) {
+        // 添加视频记录
+        boolean r1 = studyVideoMapper.insert(sv) > 0;
+        // 获取视频id
+        int videoId = studyVideoMapper.selectVideoIdByVideoPath(sv.getVideoPath());
+        // 添加视频标签记录
+        boolean r2 = true;
+        for (StudyVideoLabel svl : svls) {
+            svl.setVideoId(videoId);
+            if (studyVideoLabelMapper.insert(svl) < 0)
+                r2 = false;
+        }
+        // 添加视频必学对象
+        boolean r3 = true;
+        for (StudyVideoMust svm : svms) {
+            svm.setVideoId(videoId);
+            if (studyVideoMustMapper.insert(svm) < 0)
+                r3 = false;
+        }
+        if (r1 && r2 && r3) {
+            return ServerResponse.createBySuccess("上传视频资料成功");
+        } else {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); // 手动开启事务回滚
+        }
+        return ServerResponse.createByErrorMessage("上传视频资料失败");
+    }
 }

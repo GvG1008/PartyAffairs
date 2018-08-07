@@ -20,6 +20,9 @@ public interface StudyDocumentMapper {
     List<StudyDocument> selectAll();
     
     List<StudyDocument> selectPutOn();
+
+    List<StudyDocument> selectPutOff();
+    
     
     List<StudyDocument> selectPutonByLabelId(List<Integer> idList);
     

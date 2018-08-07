@@ -2,6 +2,7 @@ package com.zqu.pa.controller.study;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -226,12 +227,6 @@ public class StudyController {
         return iStudyService.statisticsDownload(userId, downloadURL);
     }
 
-    @RequestMapping(value = "manage_get_study_documents.do", method = RequestMethod.POST)
-    @ResponseBody
-    public ServerResponse manageGetStudyDocuments(HttpSession session) {
-        return null;
-    }
-    
     
     
     
@@ -281,6 +276,6 @@ public class StudyController {
             svm.setUserId(uid);
             studyVideoMustList.add(svm);
         }
-        return null;
+        return iStudyService.uploadStudyVideo(sv, studyVideoLabelList, studyVideoMustList);
     }
 }
