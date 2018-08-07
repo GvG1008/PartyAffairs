@@ -51,6 +51,9 @@ $(document).ready(function(){
 		else if(name=="coll"){
 			$("#frame").load("collection.html");
 		}
+		else if(name=="video"){
+			$("#frame").load("videolearn.html");
+		}
 		
 		$(".loading").fadeOut(500);
 	});
