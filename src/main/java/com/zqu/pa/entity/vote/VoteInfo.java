@@ -22,6 +22,26 @@ public class VoteInfo {
     private Integer status; //状态 0：创建， 1：正在进行， -1：投票结束
 
     private Integer anonymity; //匿名（不使用）
+    
+    private String stringStartTime; //格式化后投票开始时间
+    
+    private String stringEndTime; //格式化后投票结束时间
+    
+    public String getStringStartTime() {
+        return stringStartTime;
+    }
+
+    public void setStringStartTime(String stringStartTime) {
+        this.stringStartTime = stringStartTime;
+    }
+
+    public String getStringEndTime() {
+        return stringEndTime;
+    }
+
+    public void setStringEndTime(String stringEndTime) {
+        this.stringEndTime = stringEndTime;
+    }
 
     public Long getVoteId() {
         return voteId;

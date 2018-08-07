@@ -16,10 +16,14 @@ import com.zqu.pa.dao.vote.VoteChoiceMapper;
 import com.zqu.pa.dao.vote.VoteInfoMapper;
 import com.zqu.pa.dao.vote.VoteUserMapper;
 import com.zqu.pa.entity.vote.VoteChoice;
+import com.zqu.pa.entity.vote.VoteChoiceExample;
 import com.zqu.pa.entity.vote.VoteInfo;
+import com.zqu.pa.entity.vote.VoteUserExample;
 import com.zqu.pa.entity.vote.VoteUserKey;
 import com.zqu.pa.service.vote.VoteInfoService;
+import com.zqu.pa.utils.DateUtil;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
+import com.zqu.pa.vo.vote.ResponseVoteInfo;
 
 @Service
 public class VoteInfoServiceImpl implements VoteInfoService {
@@ -104,4 +108,64 @@ public class VoteInfoServiceImpl implements VoteInfoService {
         }
     }
 
+    @Override
+    public ServerResponse<ResponseVoteInfo> getVote(Long voteId) {
+        
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if (basicInfo == null) {
+            logger.debug("用户未登录");
+            return ServerResponse.createByErrorMessage("用户未登录");
+        }    
+        String userId = basicInfo.getUserId();
+        
+        if(existVoteUser(voteId, userId) == 0) {
+            logger.debug("用户不能参与此投票");
+            return ServerResponse.createByError();
+        }
+        
+        VoteInfo voteInfo = getVoteInfo(voteId);
+        if (voteInfo == null) {
+            logger.debug("不存在此投票");
+            return ServerResponse.createByError();
+        }       
+        List<VoteChoice> listVoteChoice = listVoteChoice(voteId);
+        if (listVoteChoice == null || listVoteChoice.size() == 0) {
+            logger.debug("不存在投票选项");
+            return ServerResponse.createByError();
+        }
+        
+        ResponseVoteInfo responseVoteInfo = new ResponseVoteInfo();
+        voteInfo.setStringStartTime(DateUtil.formatTime(voteInfo.getStartTime()));
+        voteInfo.setStringEndTime(DateUtil.formatTime(voteInfo.getEndTime()));
+        responseVoteInfo.setVoteInfo(voteInfo);
+        responseVoteInfo.setChoice(listVoteChoice);
+        
+        return ServerResponse.createBySuccess(responseVoteInfo);
+    }
+
+    //查看用户是否存在投票参与人员表中
+    public int existVoteUser(Long voteId, String userId) {
+        
+        VoteUserExample example = new VoteUserExample();
+        example.createCriteria().andVoteIdEqualTo(voteId).andUserIdEqualTo(userId);
+        List<VoteUserKey> listVoteUser = voteUserMapper.selectByExample(example);
+        if (listVoteUser == null || listVoteUser.size() == 0)
+            return 0;
+        return 1;
+    }
+    
+    //获取投票信息
+    public VoteInfo getVoteInfo(Long voteId) {
+        
+        return voteInfoMapper.selectByPrimaryKey(voteId);
+    }
+    
+    //获取投票选项
+    public List<VoteChoice> listVoteChoice(Long voteId) {
+        
+        VoteChoiceExample example = new VoteChoiceExample();
+        example.createCriteria().andVoteIdEqualTo(voteId);
+        return voteChoiceMapper.selectByExample(example);
+    }
+    
 }
