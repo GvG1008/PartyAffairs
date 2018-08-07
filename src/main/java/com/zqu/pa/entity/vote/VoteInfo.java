@@ -1,27 +1,27 @@
 package com.zqu.pa.entity.vote;
 
 public class VoteInfo {
-    private Long voteId;
+    private Long voteId; //投票ID
 
-    private Integer type;
+    private Integer type; //投票类型 0：当选，1：多选， 2：排序
 
-    private String title;
+    private String title; //投票标题
 
-    private String description;
+    private String description; //投票补充信息（可选）
 
-    private Long startTime;
+    private Long startTime; //投票开始时间
 
-    private Long endTime;
+    private Long endTime; //投票截止时间
 
-    private Integer least;
+    private Integer least; //多选，最少选择几项
 
-    private Integer most;
+    private Integer most; //多选，最多选择几项
 
-    private String createId;
+    private String createId; //创建用户ID
 
-    private Integer status;
+    private Integer status; //状态 0：创建， 1：正在进行， -1：投票结束
 
-    private Integer anonymity;
+    private Integer anonymity; //匿名（不使用）
 
     public Long getVoteId() {
         return voteId;
