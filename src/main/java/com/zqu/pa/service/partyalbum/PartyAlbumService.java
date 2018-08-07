@@ -2,6 +2,11 @@ package com.zqu.pa.service.partyalbum;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.partyalbum.PartyAlbum;
 import com.zqu.pa.entity.partyalbum.PartyPicture;
 
@@ -15,4 +20,10 @@ public interface PartyAlbumService {
     
     //相册浏览量加1
     void addPageviews(Long albumId);
-}
+    
+    //创建一个党活动相册
+    ServerResponse createAlbum(PartyAlbum partyAlbum, MultipartFile[] files, HttpServletRequest request);
+    
+    //删除一个党活动相册
+    ServerResponse removeAlbum(Long albumId);
+ }
