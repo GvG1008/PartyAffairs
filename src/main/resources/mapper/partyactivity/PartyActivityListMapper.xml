@@ -11,4 +11,9 @@
     ORDER BY registration_end DESC
     LIMIT #{index},#{num}
   </select>
+  <select id="getActivityRoleList" resultType="Integer">
+   SELECT role_id
+   FROM party_activity_role
+   WHERE activity_id = #{activityId}
+  </select>
 </mapper>
