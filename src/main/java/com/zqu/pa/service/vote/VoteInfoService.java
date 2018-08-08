@@ -14,4 +14,7 @@ public interface VoteInfoService {
     
     //根据投票ID获取用户能参与的投票信息
     ServerResponse<ResponseVoteInfo> getVote(Long voteId);
+    
+    //获取投票信息
+    VoteInfo getVoteInfo(Long voteId);
 }

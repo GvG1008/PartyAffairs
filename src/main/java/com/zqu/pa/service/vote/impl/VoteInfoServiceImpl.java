@@ -154,7 +154,7 @@ public class VoteInfoServiceImpl implements VoteInfoService {
         return 1;
     }
     
-    //获取投票信息
+    @Override
     public VoteInfo getVoteInfo(Long voteId) {
         
         return voteInfoMapper.selectByPrimaryKey(voteId);
