@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqu.pa.dao.partyactivity.PartyActivityUserMapper">
+  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.partyactivity.PartyActivityUser">
+    <id column="activity_id" jdbcType="INTEGER" property="activityId" />
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="phone_num" jdbcType="VARCHAR" property="phoneNum" />
+    <result column="check_state" jdbcType="INTEGER" property="checkState" />
+    <result column="submit_time" jdbcType="TIMESTAMP" property="submitTime" />
+    <result column="check_id" jdbcType="VARCHAR" property="checkId" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    activity_id, user_id, phone_num, check_state, submit_time, check_id, check_time
+  </sql>
+  <select id="selectByExample" parameterType="com.zqu.pa.entity.partyactivity.PartyActivityUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from party_activity_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.zqu.pa.entity.partyactivity.PartyActivityUserKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from party_activity_user
+    where activity_id = #{activityId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zqu.pa.entity.partyactivity.PartyActivityUserKey">
+    delete from party_activity_user
+    where activity_id = #{activityId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zqu.pa.entity.partyactivity.PartyActivityUserExample">
+    delete from party_activity_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zqu.pa.entity.partyactivity.PartyActivityUser">
+    insert into party_activity_user (activity_id, user_id, phone_num, 
+      check_state, submit_time, check_id, 
+      check_time)
+    values (#{activityId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, 
+      #{checkState,jdbcType=INTEGER}, #{submitTime,jdbcType=TIMESTAMP}, #{checkId,jdbcType=VARCHAR}, 
+      #{checkTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zqu.pa.entity.partyactivity.PartyActivityUser">
+    insert into party_activity_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="activityId != null">
+        activity_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="phoneNum != null">
+        phone_num,
+      </if>
+      <if test="checkState != null">
+        check_state,
+      </if>
+      <if test="submitTime != null">
+        submit_time,
+      </if>
+      <if test="checkId != null">
+        check_id,
+      </if>
+      <if test="checkTime != null">
+        check_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="activityId != null">
+        #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null">
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="checkState != null">
+        #{checkState,jdbcType=INTEGER},
+      </if>
+      <if test="submitTime != null">
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkId != null">
+        #{checkId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zqu.pa.entity.partyactivity.PartyActivityUserExample" resultType="java.lang.Long">
+    select count(*) from party_activity_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update party_activity_user
+    <set>
+      <if test="record.activityId != null">
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNum != null">
+        phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkState != null">
+        check_state = #{record.checkState,jdbcType=INTEGER},
+      </if>
+      <if test="record.submitTime != null">
+        submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkId != null">
+        check_id = #{record.checkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkTime != null">
+        check_time = #{record.checkTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update party_activity_user
+    set activity_id = #{record.activityId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+      check_state = #{record.checkState,jdbcType=INTEGER},
+      submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      check_id = #{record.checkId,jdbcType=VARCHAR},
+      check_time = #{record.checkTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zqu.pa.entity.partyactivity.PartyActivityUser">
+    update party_activity_user
+    <set>
+      <if test="phoneNum != null">
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="checkState != null">
+        check_state = #{checkState,jdbcType=INTEGER},
+      </if>
+      <if test="submitTime != null">
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkId != null">
+        check_id = #{checkId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        check_time = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where activity_id = #{activityId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zqu.pa.entity.partyactivity.PartyActivityUser">
+    update party_activity_user
+    set phone_num = #{phoneNum,jdbcType=VARCHAR},
+      check_state = #{checkState,jdbcType=INTEGER},
+      submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      check_id = #{checkId,jdbcType=VARCHAR},
+      check_time = #{checkTime,jdbcType=TIMESTAMP}
+    where activity_id = #{activityId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

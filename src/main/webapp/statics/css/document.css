@@ -1,0 +1,49 @@
+.document{
+	position: relative;
+	top: 20px;
+	width: 85%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #FBFBFB;
+	padding: 24px 24px 50px 24px;
+    border: 0;
+	box-shadow: 2px 0 0 0 #d2d2d2,
+	-1px 0 0 0 #d2d2d2,
+	0 2px 0 0 #b6b6b6,
+	0 3px 0 0 #d2d2d2,
+	3px 0 0 0 #e6e6e6,
+	-2px 0 0 0 #e6e6e6,
+	0 4px 0 0 #e6e6e6,
+	0 -1px 0 0 #e6e6e6;
+	border-radius: 10px;
+}
+
+.document-title p{
+	font-weight: bolder;
+	color: red;
+	font-family: kaiti;
+	cursor: default;
+	font-size: 25px;
+	text-align: center;
+	padding: 15px 0px;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.document-content{
+	cursor: default;
+	width: 85%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	text-indent: 40px;
+	font-size: 17px;
+	line-height: 30px;
+}
+
+.document-matter a{
+	margin-left: 70px;
+	margin-top: 20px;
+}

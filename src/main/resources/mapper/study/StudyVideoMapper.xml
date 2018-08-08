@@ -23,6 +23,10 @@
     from study_video
     where video_id = #{videoId,jdbcType=INTEGER}
   </select>
+  <select id="selectVideoIdByVideoPath" resultType="int" parameterType="string">
+    select video_id from study_video
+    where video_path = #{videoPath,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from study_video
     where video_id = #{videoId,jdbcType=INTEGER}

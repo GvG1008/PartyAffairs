@@ -36,7 +36,7 @@ public class SaveFile {
             IOUtils.copy(inputStream, fileOutputStream);
             
 
-            //如果上传图片后需要压缩成400x400的处理
+            //如果上传图片后需要压缩成 width X height的处理
 
             if(width<=0||height<=0)//不需要处理
                 ;

@@ -1,6 +1,7 @@
 package com.zqu.pa.controller.study;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.common.collect.Maps;
 import com.zqu.pa.common.Const;
 import com.zqu.pa.common.ServerResponse;
+import com.zqu.pa.entity.partyalbum.PartyPicture;
 import com.zqu.pa.service.study.IFileService;
 import com.zqu.pa.utils.FTPSSMLoad;
 
@@ -59,5 +61,15 @@ public class TestController {
         //http://localhost:8080/PartyAffairs/study/downloadtest.do?path=/vodeo/&filename=1.jpg
         FTPSSMLoad.download(response, path, filename);
         return null;    
+    }
+    @RequestMapping("uploadfilestest.do")
+    @ResponseBody
+    public ServerResponse uploadfilestest(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
+        Long nTime = new Date().getTime();
+        String remotePath = "/kaluli/" + nTime + "/";       
+        for (int i = 0; i < files.length; i++) {
+            Map map = FTPSSMLoad.upload(files[i], request, remotePath);
+        }
+        return ServerResponse.createBySuccess();
     }
 }

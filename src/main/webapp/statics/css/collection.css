@@ -1,0 +1,80 @@
+.learn{
+	position: relative;
+	top: 20px;
+	width: 920px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #FBFBFB;
+	padding: 25px 25px 20px 25px;
+    border: 0;
+	box-shadow: 2px 0 0 0 #d2d2d2,
+	-1px 0 0 0 #d2d2d2,
+	0 2px 0 0 #b6b6b6,
+	0 3px 0 0 #d2d2d2,
+	3px 0 0 0 #e6e6e6,
+	-2px 0 0 0 #e6e6e6,
+	0 4px 0 0 #e6e6e6,
+	0 -1px 0 0 #e6e6e6;
+	border-radius: 4px;
+}
+
+.learn-lable{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.learn-lable h2{
+	text-align: center;
+}
+
+ul{
+	list-style-type: none;
+}
+
+.learn li{
+	display: inline-block;
+}
+
+.data-list{
+	background: #ebebeb;
+	border-radius: 0 0 5px 5px;
+    border-top: 2px solid #d6d6d6;
+    padding: 15px 24px 65px;
+    margin: 0 -25px -20px;
+    position: relative;
+}
+
+.data-list ul{
+	position: relative;
+	left: 20px;
+}
+
+.data-list li{
+	margin-top: 20px;
+	margin-right: 35px;
+	background-color: white;
+	padding: 25px 25px 15px;
+}
+
+.data-list a:hover{
+	text-decoration: none;
+}
+
+.data-img{
+	width: 200px;
+	height: 200px;
+	background-size: 100% 100%;
+}
+
+.data-des{
+	width: 150px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	margin-top: 10px;
+	color: black;
+	font-size: 17px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}

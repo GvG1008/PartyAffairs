@@ -20,6 +20,10 @@
     select * from study_document_statistics
     where document_id = #{documentId,jdbcType=INTEGER} AND user_id = #{userId,jdbcType=VARCHAR}
   </select>
+  <select id="selectTimeSumByDocumentId" resultType="int" parameterType="int">
+    select  COALESCE(SUM(times),0) from study_document_statistics
+    where document_id = #{documentId,jdbcType=INTEGER}
+  </select>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.study.StudyDocumentStatistics" >
     insert into study_document_statistics
     <trim prefix="(" suffix=")" suffixOverrides="," >

@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.zqu.pa.common.ServerResponse;
+import com.zqu.pa.common.UserInfoDefault;
 import com.zqu.pa.dao.perinfo.UserListMapper;
 import com.zqu.pa.dao.perinfo.UserManageMapper;
 import com.zqu.pa.dao.perinfo.UserPartyInfoMapper;
@@ -351,7 +352,14 @@ public class UserInfoServiceImpl implements UserInfoService {
         userPersonInfo.setClassName(user.getClassName());
         userPersonInfo.setBirthday(null);//生日：xxxx/xx/xx
         userPersonInfo.setGrade(user.getGrade());
-        userPersonInfo.setImgHead(null);//头像路径
+        if(user.getSex()==null)
+            userPersonInfo.setImgHead(null);//头像路径
+        else if(user.getSex().equals("男"))
+            userPersonInfo.setImgHead(UserInfoDefault.IMG_HEAD_MALE);//头像路径
+        else if(user.getSex().equals("女"))
+            userPersonInfo.setImgHead(UserInfoDefault.IMG_HEAD_FEMALE);//头像路径
+        else
+            userPersonInfo.setImgHead(null);//头像路径
         userPersonInfo.setProfile(null);
         userPersonInfo.setEmail(null);
         userPersonInfo.setCreateId(createId);
@@ -410,5 +418,20 @@ public class UserInfoServiceImpl implements UserInfoService {
     public List<Role> getRoleList() {
         
         return userListDao.getRoleList();
+    }
+
+    @Override
+    public int updateImgHead(String fullPath , String userId) {
+
+        //判断是否为修改当前用户头像
+        if(userId==null)
+            userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        if(userId==null)
+            return 0;
+        
+        UserPersonInfo info = new UserPersonInfo();
+        info.setUserId(userId);
+        info.setImgHead(fullPath);
+        return userPersonInfoDao.updateByPrimaryKeySelective(info);
     }
 }

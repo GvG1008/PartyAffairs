@@ -10,6 +10,8 @@ public interface StudyVideoMapper {
     int insertSelective(StudyVideo record);
 
     StudyVideo selectByPrimaryKey(Integer videoId);
+    
+    int selectVideoIdByVideoPath(String videoPath);
 
     int updateByPrimaryKeySelective(StudyVideo record);
 

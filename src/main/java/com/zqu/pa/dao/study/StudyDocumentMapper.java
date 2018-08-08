@@ -10,12 +10,19 @@ public interface StudyDocumentMapper {
     int insert(StudyDocument record);
 
     int insertSelective(StudyDocument record);
+    
+    String getUserNameByUserId(String userId);
 
     StudyDocument selectByPrimaryKey(Integer documentId);
+    
+    List<StudyDocument> selectMustPutonByUserId(String userId);
     
     List<StudyDocument> selectAll();
     
     List<StudyDocument> selectPutOn();
+
+    List<StudyDocument> selectPutOff();
+    
     
     List<StudyDocument> selectPutonByLabelId(List<Integer> idList);
     

@@ -53,4 +53,7 @@ public interface UserInfoService {
     
     //返回角色列表
     List<Role> getRoleList();
+
+    //更新头像
+    int updateImgHead(String fullPath, String userId);
 }

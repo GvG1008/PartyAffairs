@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqu.pa.dao.partyactivity.PartyActivityMapper">
+  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.partyactivity.PartyActivity">
+    <id column="activity_id" jdbcType="INTEGER" property="activityId" />
+    <result column="branch_id" jdbcType="INTEGER" property="branchId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="release_unit" jdbcType="VARCHAR" property="releaseUnit" />
+    <result column="coverpath" jdbcType="VARCHAR" property="coverpath" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_id" jdbcType="VARCHAR" property="createId" />
+    <result column="registration_start" jdbcType="BIGINT" property="registrationStart" />
+    <result column="registration_end" jdbcType="BIGINT" property="registrationEnd" />
+    <result column="activity_start" jdbcType="BIGINT" property="activityStart" />
+    <result column="activity_end" jdbcType="BIGINT" property="activityEnd" />
+    <result column="activity_result" jdbcType="VARCHAR" property="activityResult" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zqu.pa.entity.partyactivity.PartyActivity">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    activity_id, branch_id, name, num, address, release_unit, coverpath, create_time, 
+    create_id, registration_start, registration_end, activity_start, activity_end, activity_result, 
+    is_delete
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.zqu.pa.entity.partyactivity.PartyActivityExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from party_activity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.zqu.pa.entity.partyactivity.PartyActivityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from party_activity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from party_activity
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from party_activity
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zqu.pa.entity.partyactivity.PartyActivityExample">
+    delete from party_activity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zqu.pa.entity.partyactivity.PartyActivity">
+    insert into party_activity (activity_id, branch_id, name, 
+      num, address, release_unit, 
+      coverpath, create_time, create_id, 
+      registration_start, registration_end, activity_start, 
+      activity_end, activity_result, is_delete, 
+      content)
+    values (#{activityId,jdbcType=INTEGER}, #{branchId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{num,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{releaseUnit,jdbcType=VARCHAR}, 
+      #{coverpath,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=VARCHAR}, 
+      #{registrationStart,jdbcType=BIGINT}, #{registrationEnd,jdbcType=BIGINT}, #{activityStart,jdbcType=BIGINT}, 
+      #{activityEnd,jdbcType=BIGINT}, #{activityResult,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zqu.pa.entity.partyactivity.PartyActivity">
+    insert into party_activity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="activityId != null">
+        activity_id,
+      </if>
+      <if test="branchId != null">
+        branch_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="releaseUnit != null">
+        release_unit,
+      </if>
+      <if test="coverpath != null">
+        coverpath,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="registrationStart != null">
+        registration_start,
+      </if>
+      <if test="registrationEnd != null">
+        registration_end,
+      </if>
+      <if test="activityStart != null">
+        activity_start,
+      </if>
+      <if test="activityEnd != null">
+        activity_end,
+      </if>
+      <if test="activityResult != null">
+        activity_result,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="activityId != null">
+        #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="branchId != null">
+        #{branchId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseUnit != null">
+        #{releaseUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="coverpath != null">
+        #{coverpath,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationStart != null">
+        #{registrationStart,jdbcType=BIGINT},
+      </if>
+      <if test="registrationEnd != null">
+        #{registrationEnd,jdbcType=BIGINT},
+      </if>
+      <if test="activityStart != null">
+        #{activityStart,jdbcType=BIGINT},
+      </if>
+      <if test="activityEnd != null">
+        #{activityEnd,jdbcType=BIGINT},
+      </if>
+      <if test="activityResult != null">
+        #{activityResult,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zqu.pa.entity.partyactivity.PartyActivityExample" resultType="java.lang.Long">
+    select count(*) from party_activity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update party_activity
+    <set>
+      <if test="record.activityId != null">
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.branchId != null">
+        branch_id = #{record.branchId,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null">
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releaseUnit != null">
+        release_unit = #{record.releaseUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coverpath != null">
+        coverpath = #{record.coverpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createId != null">
+        create_id = #{record.createId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registrationStart != null">
+        registration_start = #{record.registrationStart,jdbcType=BIGINT},
+      </if>
+      <if test="record.registrationEnd != null">
+        registration_end = #{record.registrationEnd,jdbcType=BIGINT},
+      </if>
+      <if test="record.activityStart != null">
+        activity_start = #{record.activityStart,jdbcType=BIGINT},
+      </if>
+      <if test="record.activityEnd != null">
+        activity_end = #{record.activityEnd,jdbcType=BIGINT},
+      </if>
+      <if test="record.activityResult != null">
+        activity_result = #{record.activityResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null">
+        is_delete = #{record.isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update party_activity
+    set activity_id = #{record.activityId,jdbcType=INTEGER},
+      branch_id = #{record.branchId,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      num = #{record.num,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      release_unit = #{record.releaseUnit,jdbcType=VARCHAR},
+      coverpath = #{record.coverpath,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_id = #{record.createId,jdbcType=VARCHAR},
+      registration_start = #{record.registrationStart,jdbcType=BIGINT},
+      registration_end = #{record.registrationEnd,jdbcType=BIGINT},
+      activity_start = #{record.activityStart,jdbcType=BIGINT},
+      activity_end = #{record.activityEnd,jdbcType=BIGINT},
+      activity_result = #{record.activityResult,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update party_activity
+    set activity_id = #{record.activityId,jdbcType=INTEGER},
+      branch_id = #{record.branchId,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      num = #{record.num,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      release_unit = #{record.releaseUnit,jdbcType=VARCHAR},
+      coverpath = #{record.coverpath,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_id = #{record.createId,jdbcType=VARCHAR},
+      registration_start = #{record.registrationStart,jdbcType=BIGINT},
+      registration_end = #{record.registrationEnd,jdbcType=BIGINT},
+      activity_start = #{record.activityStart,jdbcType=BIGINT},
+      activity_end = #{record.activityEnd,jdbcType=BIGINT},
+      activity_result = #{record.activityResult,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zqu.pa.entity.partyactivity.PartyActivity">
+    update party_activity
+    <set>
+      <if test="branchId != null">
+        branch_id = #{branchId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseUnit != null">
+        release_unit = #{releaseUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="coverpath != null">
+        coverpath = #{coverpath,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationStart != null">
+        registration_start = #{registrationStart,jdbcType=BIGINT},
+      </if>
+      <if test="registrationEnd != null">
+        registration_end = #{registrationEnd,jdbcType=BIGINT},
+      </if>
+      <if test="activityStart != null">
+        activity_start = #{activityStart,jdbcType=BIGINT},
+      </if>
+      <if test="activityEnd != null">
+        activity_end = #{activityEnd,jdbcType=BIGINT},
+      </if>
+      <if test="activityResult != null">
+        activity_result = #{activityResult,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zqu.pa.entity.partyactivity.PartyActivity">
+    update party_activity
+    set branch_id = #{branchId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      release_unit = #{releaseUnit,jdbcType=VARCHAR},
+      coverpath = #{coverpath,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_id = #{createId,jdbcType=VARCHAR},
+      registration_start = #{registrationStart,jdbcType=BIGINT},
+      registration_end = #{registrationEnd,jdbcType=BIGINT},
+      activity_start = #{activityStart,jdbcType=BIGINT},
+      activity_end = #{activityEnd,jdbcType=BIGINT},
+      activity_result = #{activityResult,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zqu.pa.entity.partyactivity.PartyActivity">
+    update party_activity
+    set branch_id = #{branchId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      release_unit = #{releaseUnit,jdbcType=VARCHAR},
+      coverpath = #{coverpath,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_id = #{createId,jdbcType=VARCHAR},
+      registration_start = #{registrationStart,jdbcType=BIGINT},
+      registration_end = #{registrationEnd,jdbcType=BIGINT},
+      activity_start = #{activityStart,jdbcType=BIGINT},
+      activity_end = #{activityEnd,jdbcType=BIGINT},
+      activity_result = #{activityResult,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER}
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+</mapper>

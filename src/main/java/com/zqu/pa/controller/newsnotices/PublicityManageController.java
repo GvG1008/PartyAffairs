@@ -1,19 +1,36 @@
 package com.zqu.pa.controller.newsnotices;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.google.common.collect.Lists;
 import com.mysql.fabric.Server;
+import com.zqu.pa.common.Const;
 import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.newsnotices.News;
 import com.zqu.pa.entity.newsnotices.Notices;
 import com.zqu.pa.service.newsnotices.PublicityManageService;
+import com.zqu.pa.utils.DateToString;
+import com.zqu.pa.utils.FTPSSMLoad;
+import com.zqu.pa.utils.FTPUtil;
+import com.zqu.pa.utils.IMGUtil;
 import com.zqu.pa.vo.newsnotices.PublicityInfo;
 
 @Controller
@@ -24,13 +41,80 @@ public class PublicityManageController {
     PublicityManageService publicityManageService;
     
     /**
+     * 富文本框插入图片上传接口,返回访问图片路径
+     * @param file
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="/uploadIMG",method=RequestMethod.POST)
+    public ServerResponse uploadContentIMG(@RequestParam(value = "uploadIMG",required = false) MultipartFile file,HttpServletRequest request) {
+        if(file==null||file.isEmpty())
+            return ServerResponse.createByErrorMessage("上传图片为空");
+        String path = request.getSession().getServletContext().getRealPath("upload");
+        String fileName = file.getOriginalFilename();
+        Integer i = fileName.lastIndexOf(".") + 1;
+        String fileExtensionName = fileName.substring(i);
+        String filePrefixName = fileName.substring(0, i-1);
+        Date d = new Date();
+        String uploadFileName = filePrefixName + DateToString.getDateString("yyyy-MM-dd", d) + UUID.randomUUID().toString() + "." + fileExtensionName;
+        File fileDir = new File(path);
+        if (!fileDir.exists()) {
+            fileDir.setWritable(true);
+            fileDir.mkdirs();
+        }
+        File targetFile = new File(path, uploadFileName);
+        try {
+            file.transferTo(targetFile);
+            //检验文件是否为图片
+            if(!this.checkIMG(targetFile))
+                return ServerResponse.createByErrorMessage("上传文件不是图片文件");
+
+            //上传至FTP
+            targetFile = new File(path, uploadFileName);
+            FTPUtil.uploadFile("/newsnotices/content/img/",Lists.newArrayList(targetFile));
+            targetFile.delete();
+            
+            //返回访问路径
+            String fullPath = Const.HTTP_PREFIX+"/newsnotices/content/img/"+uploadFileName;
+            return ServerResponse.createBySuccess(fullPath);
+            
+        }catch  (IOException e) {
+            e.printStackTrace();
+            return ServerResponse.createByErrorMessage("修改失败");
+        }
+    }
+    
+    /**
      * 添加插入未审核的新闻
      * @param news
      * @return
      */
     @ResponseBody
     @RequestMapping(value="/insertNews",method=RequestMethod.POST)
-    public ServerResponse InsertNews(News news) {
+    public ServerResponse InsertNews(@RequestParam(value="coverpath",required = false) MultipartFile cover,
+            @RequestParam(value="title") String title, @RequestParam(value="source")String source, 
+            @RequestParam(value="content")String content,HttpServletRequest request) {
+
+        News news = new News();
+        if(title==null)
+            return ServerResponse.createByErrorMessage("标题不能为空");
+        news.setTitle(title);
+        news.setSource(source);
+        if(content==null)
+            return ServerResponse.createByErrorMessage("内容不能为空");
+        news.setContent(content);
+        
+        //封面图上传
+        if(!cover.isEmpty()) {
+            //判断是否为图片
+            //。。
+            //FTP上传
+            Map fileMap = FTPSSMLoad.upload(cover, request, "/newsnotices/cover/");
+            //存储路径
+            news.setCoverpath(fileMap.get("http_url").toString());
+        }else
+            news.setCoverpath(null);
         
         String Msg;
         try {
@@ -54,7 +138,28 @@ public class PublicityManageController {
      */
     @ResponseBody
     @RequestMapping(value="/insertPublicNotices",method=RequestMethod.POST)
-    public ServerResponse InsertPublicNotices(Notices notices) {
+    public ServerResponse InsertPublicNotices(@RequestParam(value="coverpath",required = false) MultipartFile cover,
+            @RequestParam(value="title") String title, @RequestParam(value="content")String content,
+            HttpServletRequest request) {
+        
+        Notices notices = new Notices();
+        if(title==null)
+            return ServerResponse.createByErrorMessage("标题不能为空");
+        notices.setTitle(title);
+        if(content==null)
+            return ServerResponse.createByErrorMessage("内容不能为空");
+        notices.setContent(content);
+        
+        //封面图上传
+        if(!cover.isEmpty()) {
+            //判断是否为图片
+            //。。
+            //FTP上传
+            Map fileMap = FTPSSMLoad.upload(cover, request, "/newsnotices/cover/");
+            //存储路径
+            notices.setCoverpath(fileMap.get("http_url").toString());
+        }else
+            notices.setCoverpath(null);
         
         String Msg;
         try {
@@ -80,7 +185,28 @@ public class PublicityManageController {
      */
     @ResponseBody
     @RequestMapping(value="/insertPartyNotices",method=RequestMethod.POST)
-    public ServerResponse InsertPartyNotices(Notices notices) {
+    public ServerResponse InsertPartyNotices(@RequestParam(value="coverpath",required = false) MultipartFile cover,
+            @RequestParam(value="title") String title, @RequestParam(value="content")String content,
+            HttpServletRequest request) {
+        
+        Notices notices = new Notices();
+        if(title==null)
+            return ServerResponse.createByErrorMessage("标题不能为空");
+        notices.setTitle(title);
+        if(content==null)
+            return ServerResponse.createByErrorMessage("内容不能为空");
+        notices.setContent(content);
+        
+        //封面图上传
+        if(!cover.isEmpty()) {
+            //判断是否为图片
+            //。。
+            //FTP上传
+            Map fileMap = FTPSSMLoad.upload(cover, request, "/newsnotices/cover/");
+            //存储路径
+            notices.setCoverpath(fileMap.get("http_url").toString());
+        }else
+            notices.setCoverpath(null);
         
         String Msg;
         try {
@@ -262,9 +388,38 @@ public class PublicityManageController {
      */
     @ResponseBody
     @RequestMapping("/updateNews")
-    public ServerResponse updateNews(News news) {
-        if(news.getNewsId()==0)
-            return ServerResponse.createByErrorMessage("操作失败");
+    public ServerResponse updateNews(@RequestParam(value="coverpath",required = false) MultipartFile cover,
+            @RequestParam(value="newsId")Integer newsId,
+            @RequestParam(value="title") String title, @RequestParam(value="source")String source, 
+            @RequestParam(value="content")String content,HttpServletRequest request) {
+        if(newsId==null)
+            return ServerResponse.createByErrorMessage("ID为空");
+        News news = new News();
+        //存储ID
+        news.setNewsId(newsId);
+        if(title==null)
+            return ServerResponse.createByErrorMessage("标题不能为空");
+        //存储标题
+        news.setTitle(title);
+        //存储新闻来源，默认存储时必然有值，若为空则置无
+        if(source==null||source.equals(""))
+            news.setSource("无");
+        else
+            news.setSource(source);
+        if(content==null)
+            return ServerResponse.createByErrorMessage("内容不能为空");
+        news.setContent(content);
+        
+        //修改封面图，上传图片
+        if(!cover.isEmpty()) {
+            //判断是否为图片
+            //。。
+            //FTP上传
+            Map fileMap = FTPSSMLoad.upload(cover, request, "/newsnotices/cover/");
+            //存储路径
+            news.setCoverpath(fileMap.get("http_url").toString());
+        }else
+            news.setCoverpath(null);
         
         if(publicityManageService.updateNews(news)==0)
             return ServerResponse.createByErrorMessage("修改新闻信息失败!");
@@ -278,9 +433,33 @@ public class PublicityManageController {
      */
     @ResponseBody
     @RequestMapping("/updateNotices/public")
-    public ServerResponse updatePublicNotices(Notices notices) {
-        if(notices.getNoticesId()==0)
-            return ServerResponse.createByErrorMessage("操作失败");
+    public ServerResponse updatePublicNotices(@RequestParam(value="coverpath",required = false) MultipartFile cover,
+            @RequestParam(value="noticesId")Integer noticesId,
+            @RequestParam(value="title") String title, @RequestParam(value="content")String content,
+            HttpServletRequest request) {
+        if(noticesId==null)
+            return ServerResponse.createByErrorMessage("ID为空");
+        Notices notices= new Notices();
+        //存储ID
+        notices.setNoticesId(noticesId);
+        if(title==null)
+            return ServerResponse.createByErrorMessage("标题不能为空");
+        //存储标题
+        notices.setTitle(title);
+        if(content==null)
+            return ServerResponse.createByErrorMessage("内容不能为空");
+        notices.setContent(content);
+        
+        //修改封面图，上传图片
+        if(!cover.isEmpty()) {
+            //判断是否为图片
+            //。。
+            //FTP上传
+            Map fileMap = FTPSSMLoad.upload(cover, request, "/newsnotices/cover/");
+            //存储路径
+            notices.setCoverpath(fileMap.get("http_url").toString());
+        }else
+            notices.setCoverpath(null);
         
         //0表示类型为通知
         if(publicityManageService.updateNotices(notices,0)==0)
@@ -295,9 +474,33 @@ public class PublicityManageController {
      */
     @ResponseBody
     @RequestMapping("/updateNotices/party")
-    public ServerResponse updatePartyNotices(Notices notices) {
-        if(notices.getNoticesId()==0)
-            return ServerResponse.createByErrorMessage("操作失败");
+    public ServerResponse updatePartyNotices(@RequestParam(value="coverpath",required = false) MultipartFile cover,
+            @RequestParam(value="noticesId")Integer noticesId,
+            @RequestParam(value="title") String title, @RequestParam(value="content")String content,
+            HttpServletRequest request) {
+        if(noticesId==null)
+            return ServerResponse.createByErrorMessage("ID为空");
+        Notices notices= new Notices();
+        //存储ID
+        notices.setNoticesId(noticesId);
+        if(title==null)
+            return ServerResponse.createByErrorMessage("标题不能为空");
+        //存储标题
+        notices.setTitle(title);
+        if(content==null)
+            return ServerResponse.createByErrorMessage("内容不能为空");
+        notices.setContent(content);
+        
+        //修改封面图，上传图片
+        if(!cover.isEmpty()) {
+            //判断是否为图片
+            //。。
+            //FTP上传
+            Map fileMap = FTPSSMLoad.upload(cover, request, "/newsnotices/cover/");
+            //存储路径
+            notices.setCoverpath(fileMap.get("http_url").toString());
+        }else
+            notices.setCoverpath(null);
         
         //1表示类型为党内
         if(publicityManageService.updateNotices(notices,1)==0)
@@ -305,6 +508,11 @@ public class PublicityManageController {
         return ServerResponse.createBySuccessMessage("修改党内公示信息成功!");
     }
     
+    /**
+     * 批量删除新闻
+     * @param newsId 一串newsId的字符串"newsId1&newsId2&newsId3.."
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/deleteNews/{newsId}")
     public ServerResponse deleteNews(@PathVariable String newsId) {
@@ -318,6 +526,11 @@ public class PublicityManageController {
         return ServerResponse.createBySuccessMessage(Msg);
     }
     
+    /**
+     * 批量删除通知公示
+     * @param noticesId 一串noticesId的字符串"noticesId1&noticesId2&noticesId3.."
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/deleteNotices/public/{noticesId}")
     public ServerResponse deletePublicNotices(@PathVariable String noticesId) {
@@ -330,6 +543,11 @@ public class PublicityManageController {
         return ServerResponse.createBySuccessMessage(Msg);
     }
     
+    /**
+     * 批量删除党内公示
+     * @param noticesId 一串noticesId的字符串"noticesId1&noticesId2&noticesId3.."
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/deleteNotices/party/{noticesId}")
     public ServerResponse deletePartyNotices(@PathVariable String noticesId) {
@@ -340,5 +558,19 @@ public class PublicityManageController {
         if(Msg.equals("删除失败!"))
             return ServerResponse.createByErrorMessage(Msg);
         return ServerResponse.createBySuccessMessage(Msg);
+    }
+    
+    /**
+     * 判断是否为图片
+     * @param file
+     * @return
+     */
+    public boolean checkIMG(File file){
+        try {
+            Image image = ImageIO.read(file);
+            return image != null;
+        } catch(IOException ex) {
+            return false;
+        }
     }
 }

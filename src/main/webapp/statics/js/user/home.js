@@ -48,6 +48,15 @@ $(document).ready(function(){
 		else if(name=="learn"){
 			$("#frame").load("learn.html");
 		}
+		else if(name=="coll"){
+			$("#frame").load("collection.html");
+		}
+		else if(name=="video"){
+			$("#frame").load("videolearn.html");
+		}
+		else if(name=="docu"){
+			$("#frame").load("documentlearn.html");
+		}
 		
 		$(".loading").fadeOut(500);
 	});
