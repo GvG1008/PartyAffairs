@@ -1,5 +1,7 @@
 package com.zqu.pa.dao.study;
 
+import java.util.List;
+
 import com.zqu.pa.entity.study.StudyVideo;
 
 public interface StudyVideoMapper {
@@ -10,6 +12,8 @@ public interface StudyVideoMapper {
     int insertSelective(StudyVideo record);
 
     StudyVideo selectByPrimaryKey(Integer videoId);
+    
+    List<StudyVideo> selectPuton();
     
     int selectVideoIdByVideoPath(String videoPath);
 

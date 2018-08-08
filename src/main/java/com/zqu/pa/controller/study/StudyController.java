@@ -2,7 +2,6 @@ package com.zqu.pa.controller.study;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -278,4 +277,27 @@ public class StudyController {
         }
         return iStudyService.uploadStudyVideo(sv, studyVideoLabelList, studyVideoMustList);
     }
+    
+    /**
+     * 获取全部视频学习资料(上架)
+     * 
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "get_study_videos.do", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse getStudyVideos(HttpSession session) {
+        return iStudyService.getStudyVideosPuton();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

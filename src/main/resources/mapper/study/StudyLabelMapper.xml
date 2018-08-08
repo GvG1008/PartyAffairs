@@ -26,6 +26,11 @@
     where label_id IN (select label_id from study_document_label where document_id = #{documentId,jdbcType=INTEGER})
     order by label_id
   </select>
+  <select id="selectByVideoId" resultType="com.zqu.pa.entity.study.StudyLabel" parameterType="java.lang.Integer">
+    select * from study_label
+    where label_id IN(select label_id from study_video_label where video_id = #{videoId,jdbcType=INTEGER})
+    order by label_id
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from study_label
     where label_id = #{labelId,jdbcType=INTEGER}

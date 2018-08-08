@@ -29,7 +29,8 @@ import com.zqu.pa.entity.study.StudyVideoLabel;
 import com.zqu.pa.entity.study.StudyVideoMust;
 import com.zqu.pa.service.study.IStudyService;
 import com.zqu.pa.utils.DateToString;
-import com.zqu.pa.vo.StudyDocumentVO1;
+import com.zqu.pa.vo.study.StudyDocumentVO1;
+import com.zqu.pa.vo.study.StudyVideoVO1;
 
 @Service("iStudyService")
 public class StudyServiceImpl implements IStudyService {
@@ -251,5 +252,22 @@ public class StudyServiceImpl implements IStudyService {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); // 手动开启事务回滚
         }
         return ServerResponse.createByErrorMessage("上传视频资料失败");
+    }
+    
+    @Override
+    @Transactional
+    public ServerResponse getStudyVideosPuton() {
+        List<StudyVideo> svl = studyVideoMapper.selectPuton();
+        int size = svl.size();
+        List<StudyVideoVO1> list = Lists.newArrayList();
+        for(int i=0;i<size;i++) {
+            StudyVideo sv = svl.get(i);
+            String updateTime = DateToString.getDateString("yyyy-MM-dd", sv.getUpdatetime());
+            String uploadUser = studyDocumentMapper.getUserNameByUserId(sv.getUserId());
+            List<StudyLabel> sls = studyLabelMapper.selectByVideoId(sv.getVideoId());
+            StudyVideoVO1 svvo1 = new StudyVideoVO1(sv.getVideoId(), sv.getVideoTitle(), sv.getVideoIntroduction(), sv.getCoverImg(), sv.getVideoPath(), uploadUser, updateTime, sls);
+            list.add(svvo1);
+        }
+        return ServerResponse.createBySuccess(list);
     }
 }

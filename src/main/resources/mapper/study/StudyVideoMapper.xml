@@ -23,6 +23,11 @@
     from study_video
     where video_id = #{videoId,jdbcType=INTEGER}
   </select>
+  <select id="selectPuton" resultType="com.zqu.pa.entity.study.StudyVideo">
+    select * from study_video
+    where video_id NOT IN(select video_id from study_video_putoff)
+    order by video_id
+  </select>
   <select id="selectVideoIdByVideoPath" resultType="int" parameterType="string">
     select video_id from study_video
     where video_path = #{videoPath,jdbcType=VARCHAR}
