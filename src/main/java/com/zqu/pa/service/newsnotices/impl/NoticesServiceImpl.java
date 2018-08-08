@@ -46,6 +46,8 @@ public class NoticesServiceImpl implements NoticesService{
         
         if(totalPageNum<page)
             page = totalPageNum;
+        if(page<=0)
+            page = 1;
         info.setPageNum(page);
         
         //limit index,num  从第index+1条记录开始，num条记录 搜索相应类型公示

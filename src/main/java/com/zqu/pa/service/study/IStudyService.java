@@ -22,6 +22,8 @@ public interface IStudyService {
     public ServerResponse getStudyDocumentsPutonByLabelId(List<Integer> idList);
     public ServerResponse getStudyDocumentMust(String userId);
     public ServerResponse statisticsDownload(String userId,String url);
-    public ServerResponse uploadStudyVideo(StudyVideo sv, List<StudyVideoLabel> svls, List<StudyVideoMust> svms);
     
+    
+    public ServerResponse uploadStudyVideo(StudyVideo sv, List<StudyVideoLabel> svls, List<StudyVideoMust> svms);
+    public ServerResponse getStudyVideosPuton();
 }

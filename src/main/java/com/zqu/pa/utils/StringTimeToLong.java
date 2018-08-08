@@ -3,7 +3,7 @@ package com.zqu.pa.utils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateTimeToLong {
+public class StringTimeToLong {
     /**
      * 转换时间日期格式字串为long型  
      * @param time 格式为：yyyy-MM-dd HH:mm:ss的时间日期类型

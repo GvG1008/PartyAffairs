@@ -1,4 +1,4 @@
-package com.zqu.pa.vo;
+package com.zqu.pa.vo.study;
 
 import java.util.List;
 

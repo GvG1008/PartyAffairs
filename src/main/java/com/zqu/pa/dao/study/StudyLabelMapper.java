@@ -16,6 +16,8 @@ public interface StudyLabelMapper {
     List<StudyLabel> selectAll();
     
     List<StudyLabel> selectByDocumentId(Integer documentId);
+    
+    List<StudyLabel> selectByVideoId(Integer videoId);
 
     int updateByPrimaryKeySelective(StudyLabel record);
 
