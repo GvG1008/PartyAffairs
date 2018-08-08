@@ -8,6 +8,7 @@
     <result column="num" jdbcType="INTEGER" property="num" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="release_unit" jdbcType="VARCHAR" property="releaseUnit" />
+    <result column="coverpath" jdbcType="VARCHAR" property="coverpath" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_id" jdbcType="VARCHAR" property="createId" />
     <result column="registration_start" jdbcType="BIGINT" property="registrationStart" />
@@ -79,8 +80,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    activity_id, branch_id, name, num, address, release_unit, create_time, create_id, 
-    registration_start, registration_end, activity_start, activity_end, activity_result, 
+    activity_id, branch_id, name, num, address, release_unit, coverpath, create_time, 
+    create_id, registration_start, registration_end, activity_start, activity_end, activity_result, 
     is_delete
   </sql>
   <sql id="Blob_Column_List">
@@ -137,16 +138,16 @@
   <insert id="insert" parameterType="com.zqu.pa.entity.partyactivity.PartyActivity">
     insert into party_activity (activity_id, branch_id, name, 
       num, address, release_unit, 
-      create_time, create_id, registration_start, 
-      registration_end, activity_start, activity_end, 
-      activity_result, is_delete, content
-      )
+      coverpath, create_time, create_id, 
+      registration_start, registration_end, activity_start, 
+      activity_end, activity_result, is_delete, 
+      content)
     values (#{activityId,jdbcType=INTEGER}, #{branchId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
       #{num,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{releaseUnit,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=VARCHAR}, #{registrationStart,jdbcType=BIGINT}, 
-      #{registrationEnd,jdbcType=BIGINT}, #{activityStart,jdbcType=BIGINT}, #{activityEnd,jdbcType=BIGINT}, 
-      #{activityResult,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
-      )
+      #{coverpath,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=VARCHAR}, 
+      #{registrationStart,jdbcType=BIGINT}, #{registrationEnd,jdbcType=BIGINT}, #{activityStart,jdbcType=BIGINT}, 
+      #{activityEnd,jdbcType=BIGINT}, #{activityResult,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, 
+      #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.partyactivity.PartyActivity">
     insert into party_activity
@@ -168,6 +169,9 @@
       </if>
       <if test="releaseUnit != null">
         release_unit,
+      </if>
+      <if test="coverpath != null">
+        coverpath,
       </if>
       <if test="createTime != null">
         create_time,
@@ -215,6 +219,9 @@
       </if>
       <if test="releaseUnit != null">
         #{releaseUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="coverpath != null">
+        #{coverpath,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -272,6 +279,9 @@
       <if test="record.releaseUnit != null">
         release_unit = #{record.releaseUnit,jdbcType=VARCHAR},
       </if>
+      <if test="record.coverpath != null">
+        coverpath = #{record.coverpath,jdbcType=VARCHAR},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -312,6 +322,7 @@
       num = #{record.num,jdbcType=INTEGER},
       address = #{record.address,jdbcType=VARCHAR},
       release_unit = #{record.releaseUnit,jdbcType=VARCHAR},
+      coverpath = #{record.coverpath,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_id = #{record.createId,jdbcType=VARCHAR},
       registration_start = #{record.registrationStart,jdbcType=BIGINT},
@@ -333,6 +344,7 @@
       num = #{record.num,jdbcType=INTEGER},
       address = #{record.address,jdbcType=VARCHAR},
       release_unit = #{record.releaseUnit,jdbcType=VARCHAR},
+      coverpath = #{record.coverpath,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_id = #{record.createId,jdbcType=VARCHAR},
       registration_start = #{record.registrationStart,jdbcType=BIGINT},
@@ -362,6 +374,9 @@
       </if>
       <if test="releaseUnit != null">
         release_unit = #{releaseUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="coverpath != null">
+        coverpath = #{coverpath,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -400,6 +415,7 @@
       num = #{num,jdbcType=INTEGER},
       address = #{address,jdbcType=VARCHAR},
       release_unit = #{releaseUnit,jdbcType=VARCHAR},
+      coverpath = #{coverpath,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_id = #{createId,jdbcType=VARCHAR},
       registration_start = #{registrationStart,jdbcType=BIGINT},
@@ -418,6 +434,7 @@
       num = #{num,jdbcType=INTEGER},
       address = #{address,jdbcType=VARCHAR},
       release_unit = #{releaseUnit,jdbcType=VARCHAR},
+      coverpath = #{coverpath,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_id = #{createId,jdbcType=VARCHAR},
       registration_start = #{registrationStart,jdbcType=BIGINT},

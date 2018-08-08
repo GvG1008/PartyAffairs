@@ -15,6 +15,8 @@ public class PartyActivity {
 
     private String releaseUnit; //活动发布单位
 
+    private String coverpath; //封面图保留字段
+
     private Date createTime; //创建时间
 
     private String createId; //创建人ID
@@ -79,6 +81,14 @@ public class PartyActivity {
 
     public void setReleaseUnit(String releaseUnit) {
         this.releaseUnit = releaseUnit == null ? null : releaseUnit.trim();
+    }
+
+    public String getCoverpath() {
+        return coverpath;
+    }
+
+    public void setCoverpath(String coverpath) {
+        this.coverpath = coverpath == null ? null : coverpath.trim();
     }
 
     public Date getCreateTime() {
