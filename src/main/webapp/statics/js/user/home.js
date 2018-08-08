@@ -54,6 +54,9 @@ $(document).ready(function(){
 		else if(name=="video"){
 			$("#frame").load("videolearn.html");
 		}
+		else if(name=="docu"){
+			$("#frame").load("documentlearn.html");
+		}
 		
 		$(".loading").fadeOut(500);
 	});
