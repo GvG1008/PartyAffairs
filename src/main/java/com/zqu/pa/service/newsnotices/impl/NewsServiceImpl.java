@@ -31,6 +31,9 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public PageOfList getMenuInfo(int page, int num) {
+        if(num==0)
+            return null;
+        
         PageOfList info = new PageOfList();
         
         NewsExample example = new NewsExample();
@@ -46,7 +49,7 @@ public class NewsServiceImpl implements NewsService {
         
         if(totalPageNum<page)
             page = totalPageNum;
-        else if(page<=0)
+        if(page<=0)
             page = 1;
         info.setPageNum(page);
         

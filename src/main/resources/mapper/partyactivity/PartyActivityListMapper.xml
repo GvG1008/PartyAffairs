@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqu.pa.dao.partyactivity.PartyActivityListMapper">
+  <select id="getActivityMenuListLimit" resultType="com.zqu.pa.vo.partyactivity.ActivityMenuList">
+    SELECT activity_id , name , num , release_unit , create_time , registration_end
+    FROM party_activity
+    WHERE is_delete != 1
+    <if test="branchId != 0">
+        AND branch_id = #{branchId}
+    </if>
+    ORDER BY registration_end DESC
+    LIMIT #{index},#{num}
+  </select>
+</mapper>

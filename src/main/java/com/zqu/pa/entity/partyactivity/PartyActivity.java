@@ -2,6 +2,8 @@ package com.zqu.pa.entity.partyactivity;
 
 import java.util.Date;
 
+import com.zqu.pa.utils.DateToString;
+
 public class PartyActivity {
     private Integer activityId; //活动ID
 
@@ -17,7 +19,7 @@ public class PartyActivity {
 
     private String coverpath; //封面图保留字段
 
-    private Date createTime; //创建时间
+    private String createTime; //创建时间
 
     private String createId; //创建人ID
 
@@ -91,12 +93,12 @@ public class PartyActivity {
         this.coverpath = coverpath == null ? null : coverpath.trim();
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+        this.createTime = DateToString.getDateString("yyyy/MM/dd hh:mm:ss", createTime);
     }
 
     public String getCreateId() {
