@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.collect.Maps;
@@ -22,6 +24,12 @@ public class UserActivityController {
     @Autowired
     UserActivityService userActivityService;
     
+    /**
+     * 用户获取相应活动列表
+     * @param page
+     * @param num
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/menu/{pageNum}/{num}")
     public ServerResponse<PageOfList> getMenuList(@PathVariable(value="pageNum") int page,
@@ -50,7 +58,7 @@ public class UserActivityController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("/apply/{activityId}")
+    @RequestMapping("/applyInfo/{activityId}")
     public ServerResponse applyActivity(@PathVariable(value="activityId") int activityId) {
         
         Map info = userActivityService.getApplyResult(activityId);
@@ -61,5 +69,23 @@ public class UserActivityController {
         
         //返回成功信息为未报名，当前可以报名
         return ServerResponse.createBySuccessMessage((String)info.get("Msg"));
+    }
+    
+    @ResponseBody
+    @RequestMapping(value="/apply",method=RequestMethod.POST)
+    public ServerResponse applyActivityInfo(@RequestParam(value="activityId")Integer activityId, 
+            @RequestParam(value="phoneNum")String phoneNum) {
+        if(activityId==null)
+            return ServerResponse.createByErrorMessage("活动ID不存在");
+        //判断手机号合法性
+        String reg = "^[0-9]+(.[0-9]+)?$";
+        if(phoneNum==null||!phoneNum.matches(reg))
+            return ServerResponse.createByErrorMessage("联系方式为空或格式非法");
+        
+        //
+        String Msg = userActivityService.applyActivity(activityId,phoneNum);
+        if(Msg==null||!Msg.equals("报名成功,等待审核结果"))
+            return ServerResponse.createByErrorMessage(Msg);
+        return ServerResponse.createBySuccessMessage(Msg);
     }
 }

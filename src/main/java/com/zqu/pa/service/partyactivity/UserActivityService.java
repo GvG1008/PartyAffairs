@@ -15,4 +15,7 @@ public interface UserActivityService {
     //获取当前用户是否报过名
     int getIsApply(int activityId, String userId);
 
+    //用户报名
+    String applyActivity(Integer activityId, String phoneNum);
+
 }

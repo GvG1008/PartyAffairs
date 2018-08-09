@@ -161,4 +161,28 @@ public class UserActivityServiceImpl implements UserActivityService {
         return -2;
     }
 
+    @Override
+    public String applyActivity(Integer activityId, String phoneNum) {
+        
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        if(userId==null)
+            return "无法获取session当前用户信息";
+        
+        //再次检测是否能报名
+        Map info = this.getApplyResult(activityId);
+        if((int)info.get("State")!=1)
+            return info.get("Msg").toString();
+        
+        PartyActivityUser applyInfo = new PartyActivityUser();
+        applyInfo.setUserId(userId);
+        applyInfo.setActivityId(activityId);
+        applyInfo.setPhoneNum(phoneNum);
+        applyInfo.setSubmitTime(new Date());
+        //报名添加
+        if(partyActivityUserDao.insertSelective(applyInfo)==0)
+            return "报名失败!";
+        
+        return "报名成功,等待审核结果";
+    }
+
 }
