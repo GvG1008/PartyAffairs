@@ -30,7 +30,7 @@ public class VoteResultController {
     @ResponseBody
     @RequestMapping(value = "/{voteId}/{abandon}", method = RequestMethod.POST)
     public ServerResponse recordVote(@PathVariable("voteId") Long voteId, 
-            @PathVariable("abandon") Integer abandon, @RequestBody List<Long> choice) {
+            @PathVariable("abandon") Integer abandon, @RequestBody(required = false) List<Long> choice) {
         
         ServerResponse result = null;
         try {

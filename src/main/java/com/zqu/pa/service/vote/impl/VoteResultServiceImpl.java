@@ -62,7 +62,10 @@ public class VoteResultServiceImpl implements VoteResultService {
         }
         Integer type = voteInfo.getType();
         
-        //TODO 判断choice是否为空或者选中结果不符合要求（无效票）
+        if (choice == null) {
+            logger.debug("用户选中选项为null");
+            return ServerResponse.createByError();
+        }
         //排序类型
         if (type == 2) {
             for (int i = 0; i < choice.size(); i++) {
