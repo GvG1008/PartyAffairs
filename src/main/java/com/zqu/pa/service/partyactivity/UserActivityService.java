@@ -1,8 +1,10 @@
 package com.zqu.pa.service.partyactivity;
 
+import java.util.List;
 import java.util.Map;
 
 import com.zqu.pa.vo.partyactivity.PageOfList;
+import com.zqu.pa.vo.partyactivity.UserApplyInfo;
 
 public interface UserActivityService {
 
@@ -18,4 +20,9 @@ public interface UserActivityService {
     //用户报名
     String applyActivity(Integer activityId, String phoneNum);
 
+    //获取用户所有的报名信息
+    List<UserApplyInfo> getUserApplyInfo(String userId);
+
+    //撤销报名申请
+    String deleteApply(Integer activityId, String userId);
 }

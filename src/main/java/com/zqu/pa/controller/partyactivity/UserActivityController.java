@@ -1,5 +1,6 @@
 package com.zqu.pa.controller.partyactivity;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
@@ -15,6 +16,7 @@ import com.google.common.collect.Maps;
 import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.service.partyactivity.UserActivityService;
 import com.zqu.pa.vo.partyactivity.PageOfList;
+import com.zqu.pa.vo.partyactivity.UserApplyInfo;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
 
 @Controller
@@ -71,6 +73,12 @@ public class UserActivityController {
         return ServerResponse.createBySuccessMessage((String)info.get("Msg"));
     }
     
+    /**
+     * 活动报名提交表单信息接口
+     * @param activityId
+     * @param phoneNum
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value="/apply",method=RequestMethod.POST)
     public ServerResponse applyActivityInfo(@RequestParam(value="activityId")Integer activityId, 
@@ -85,6 +93,42 @@ public class UserActivityController {
         //
         String Msg = userActivityService.applyActivity(activityId,phoneNum);
         if(Msg==null||!Msg.equals("报名成功,等待审核结果"))
+            return ServerResponse.createByErrorMessage(Msg);
+        return ServerResponse.createBySuccessMessage(Msg);
+    }
+    
+    /**
+     * 用户获取自己的所有报名状态信息，未分页
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/applyAllInfo")
+    public ServerResponse allApplyInfo() {
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        if(userId==null)
+            return ServerResponse.createByErrorMessage("无法获取当前session信息");
+        
+        List<UserApplyInfo> info = userActivityService.getUserApplyInfo(userId);
+        if(info==null||info.size()==0)
+            return ServerResponse.createByErrorMessage("暂无报名信息");
+        
+        return ServerResponse.createBySuccess("获取成功", info);
+    }
+    
+    /**
+     * 用户撤销报名信息，当活动满足allowDelete=1时可以进行该操作
+     * @param activityId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/deletApply/{activityId}")
+    public ServerResponse deleteApply(@PathVariable(value="activityId")Integer activityId) {
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        if(userId==null)
+            return ServerResponse.createByErrorMessage("无法获取当前session信息");
+        
+        String Msg = userActivityService.deleteApply(activityId,userId);
+        if(Msg==null||!Msg.equals("撤销报名成功!"))
             return ServerResponse.createByErrorMessage(Msg);
         return ServerResponse.createBySuccessMessage(Msg);
     }

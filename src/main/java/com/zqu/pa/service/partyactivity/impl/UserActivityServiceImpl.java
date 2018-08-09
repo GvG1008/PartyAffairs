@@ -17,9 +17,11 @@ import com.zqu.pa.entity.partyactivity.PartyActivity;
 import com.zqu.pa.entity.partyactivity.PartyActivityExample;
 import com.zqu.pa.entity.partyactivity.PartyActivityExample.Criteria;
 import com.zqu.pa.entity.partyactivity.PartyActivityUser;
+import com.zqu.pa.entity.partyactivity.PartyActivityUserExample;
 import com.zqu.pa.entity.partyactivity.PartyActivityUserKey;
 import com.zqu.pa.service.partyactivity.UserActivityService;
 import com.zqu.pa.vo.partyactivity.PageOfList;
+import com.zqu.pa.vo.partyactivity.UserApplyInfo;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
 
 @Service
@@ -185,4 +187,23 @@ public class UserActivityServiceImpl implements UserActivityService {
         return "报名成功,等待审核结果";
     }
 
+    @Override
+    public List<UserApplyInfo> getUserApplyInfo(String userId) {
+        
+        return partyActivityListDao.getUserAllApplyInfo(userId);
+    }
+
+    @Override
+    public String deleteApply(Integer activityId, String userId) {
+        PartyActivityUserExample example = new PartyActivityUserExample();
+        com.zqu.pa.entity.partyactivity.PartyActivityUserExample.Criteria criteria = example.createCriteria();
+        criteria.andActivityIdEqualTo(activityId);
+        criteria.andUserIdEqualTo(userId);
+        criteria.andCheckStateEqualTo(0);
+        //删除报名信息
+        if(partyActivityUserDao.deleteByExample(example)==0)
+            return "撤销失败，审核通过或报名信息不存在";
+        
+        return "撤销报名成功!";
+    }
 }
