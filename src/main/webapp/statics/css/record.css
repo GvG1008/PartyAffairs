@@ -1,0 +1,122 @@
+.record-list{
+	position: relative;
+	top: 20px;
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #FBFBFB;
+	padding: 25px 25px 20px 25px;
+    border: 0;
+	box-shadow: 2px 0 0 0 #d2d2d2,
+	-1px 0 0 0 #d2d2d2,
+	0 2px 0 0 #b6b6b6,
+	0 3px 0 0 #d2d2d2,
+	3px 0 0 0 #e6e6e6,
+	-2px 0 0 0 #e6e6e6,
+	0 4px 0 0 #e6e6e6,
+	0 -1px 0 0 #e6e6e6;
+	border-radius: 4px;
+}
+
+.list-header{
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 15px;
+}
+
+.list-header p{
+	width: 100%;
+	font-weight: bolder;
+	font-size: 40px;
+	text-align: center;
+	font-family: kaiti;
+}
+
+.rp-record,
+.le-record{
+	padding: 20px 50px;
+	height: 500px;
+	width: 475px;
+}
+
+.rp-record{
+	float: left;
+	border-right: 2px solid #e6e6e6;
+}
+
+.le-record{
+	margin-left: 475px;
+}
+
+.record-name{
+	height: 50px;
+	border-bottom: 1px solid #3365DA;
+}
+
+.record-name p{
+	color: #3365DA;
+	font-family: kaiti;
+	font-size: 22px;
+	font-weight: bolder;
+	position: relative;
+	left: 25px;
+	top: 5px;
+}
+
+.record-page{
+	height: 50px;
+	margin-top: 400px;
+}
+
+.record-page p{
+	margin-top: 20px;
+	text-align: right;
+}
+
+.record-page a{
+	margin-right: 20px;
+	cursor: pointer;
+}
+
+.list-footer{
+	background: linear-gradient(#fff,#ebebeb) repeat scroll 0 0 transparent;
+	border-radius: 0 0 5px 5px;
+    border-top: 1px solid #d6d6d6;
+    padding: 15px 24px;
+    margin: 0 -24px;
+    height: 100px;
+    position: relative;
+    top: 20px;
+}
+
+.list-footer p{
+	margin-top: 20px;
+	margin-right: 20px;
+	font-size: 20px;
+	color: red;
+	text-align: right;
+}
+
+.list-content table{
+	position: absolute;
+	margin-top: 20px;
+}
+
+.list-content td{
+	padding: 10px 0 0 10px;
+}
+
+.record-title{
+	width: 285px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.record-title a{
+	cursor: pointer;
+	color: black;
+}
+
+.record-title a:hover{
+	text-decoration: none;
+}

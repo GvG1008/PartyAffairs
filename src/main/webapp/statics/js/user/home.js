@@ -57,6 +57,9 @@ $(document).ready(function(){
 		else if(name=="docu"){
 			$("#frame").load("documentlearn.html");
 		}
+		else if(name=="record"){
+			$("#frame").load("record.html");
+		}
 		
 		$(".loading").fadeOut(500);
 	});
@@ -144,16 +147,6 @@ $(document).ready(function(){
 	});
 	
 	/*
-	 * 回车搜索
-	 */
-	$("#search").keydown(function(e){
-		var keyCode =window.event? e.keyCode:e.which;
-		if(keyCode == 13){
-			$("#search-btn").trigger("click");
-		}
-	});
-	
-	/*
 	 * 登录窗口
 	 */
 	$("#login").click(function(event){
@@ -199,6 +192,9 @@ var head = new Vue({
 	methods:{
 		Login : function(){
 			doLogin();
+		},
+		search(){
+			alert("hhh");
 		}
 	},
 	created: function(){

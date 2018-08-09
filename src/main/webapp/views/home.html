@@ -30,7 +30,7 @@
 				</div>
 				<div class="user">
 					<ul class="user-ul">
-						<input type="text" class="search" id="search" placeholder="站内搜索*" />
+						<input type="text" class="search" id="search" placeholder="站内搜索*" @keyup.enter="search" />
 						<button class="search-btn" id="search-btn">
 							<img src="../statics/img/搜索.png" />
 						</button>
@@ -52,7 +52,7 @@
 					<li class="info-li"><a class="info-a" id="collection" href="home.html?location=coll">我的收藏</a></li>
 					<li class="info-li"><a class="info-a" id="feedback" href="home.html?location=fb">我要反馈</a></li>
 					<li class="info-li"><a class="info-a" id="report" href="home.html?location=rp">思想汇报</a></li>
-					<li class="info-li"><a class="info-a" id="learnrecord" href="#">历史学习记录</a></li>
+					<li class="info-li"><a class="info-a" id="learnrecord" href="home.html?location=record">历史学习记录</a></li>
 				</ul>
 			</aside>
 		</header>
