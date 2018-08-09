@@ -2,11 +2,16 @@ package com.zqu.pa.controller.groupalbum;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.groupalbum.GroupAlbum;
@@ -26,7 +31,7 @@ public class GroupAlbumController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("/{groupId}")
+    @RequestMapping(value = "/{groupId}", method = RequestMethod.GET)
     public ServerResponse listAlbum(@PathVariable Integer groupId) {
         
         List<GroupAlbum> listAlbum = null;
@@ -45,7 +50,7 @@ public class GroupAlbumController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("/picture/{albumId}")
+    @RequestMapping(value = "/picture/{albumId}", method = RequestMethod.GET)
     public ServerResponse listAlbumPicture(@PathVariable Long albumId) {
         
         List<GroupPicture> listPicture = null;
@@ -56,5 +61,39 @@ public class GroupAlbumController {
             return ServerResponse.createByError();
         }
         return ServerResponse.createBySuccess(listPicture);
+    }
+    
+    /**
+     * 创建一个团活动相册，上传多个图片到FTP服务器
+     * @param groupAlbum 相册信息
+     * @param files 所有图片信息
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public ServerResponse createAlbum(GroupAlbum groupAlbum, 
+            @RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
+        
+        ServerResponse result = null;
+        try {
+            result = groupAlbumService.createAlbum(groupAlbum, files, request);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return ServerResponse.createByError();
+        }
+        return result;
+    }   
+    
+    /**
+     * 删除团活动相册
+     * @param albumId 相册ID
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/{albumId}", method = RequestMethod.DELETE)
+    public ServerResponse removeAlbum(@PathVariable Long albumId) {
+             
+        return groupAlbumService.removeAlbum(albumId);
     }
 }

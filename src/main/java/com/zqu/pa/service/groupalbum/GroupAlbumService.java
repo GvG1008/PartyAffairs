@@ -2,6 +2,11 @@ package com.zqu.pa.service.groupalbum;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.groupalbum.GroupAlbum;
 import com.zqu.pa.entity.groupalbum.GroupPicture;
 
@@ -15,4 +20,10 @@ public interface GroupAlbumService {
     
     //相册浏览量加1
     void addPageviews(Long albumId);
+    
+    //创建一个团活动相册
+    ServerResponse createAlbum(GroupAlbum groupAlbum, MultipartFile[] files, HttpServletRequest request);
+    
+    //删除一个团活动相册
+    ServerResponse removeAlbum(Long albumId);
 }

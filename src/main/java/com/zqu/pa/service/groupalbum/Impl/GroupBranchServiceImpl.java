@@ -23,4 +23,14 @@ public class GroupBranchServiceImpl implements GroupBranchService {
         return groupBranchMapper.selectByExample(example);
     }
 
+    @Override
+    public GroupBranch getGroupBranch(String userId) {
+        
+        GroupBranchExample example = new GroupBranchExample();
+        List<GroupBranch> list = groupBranchMapper.selectByExample(example);
+        if (list == null || list.size() == 0)
+            return null;
+        return list.get(0);
+    }
+
 }
