@@ -3,6 +3,7 @@ package com.zqu.pa.service.partyactivity;
 import java.util.List;
 import java.util.Map;
 
+import com.zqu.pa.vo.partyactivity.ActivityInfo;
 import com.zqu.pa.vo.partyactivity.PageOfList;
 import com.zqu.pa.vo.partyactivity.UserApplyInfo;
 
@@ -25,4 +26,10 @@ public interface UserActivityService {
 
     //撤销报名申请
     String deleteApply(Integer activityId, String userId);
+
+    //获取通过审核人数
+    int getActivityNum(int activityId);
+
+    //获取相应活动详细信息
+    ActivityInfo getActivityInfo(Integer activityId);
 }

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.collect.Maps;
 import com.zqu.pa.common.ServerResponse;
+import com.zqu.pa.entity.partyactivity.PartyActivity;
 import com.zqu.pa.service.partyactivity.UserActivityService;
+import com.zqu.pa.vo.partyactivity.ActivityInfo;
 import com.zqu.pa.vo.partyactivity.PageOfList;
 import com.zqu.pa.vo.partyactivity.UserApplyInfo;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
@@ -52,6 +54,23 @@ public class UserActivityController {
                 ||info.getPageNum()<=0)
             return ServerResponse.createByErrorMessage("获取失败");
         return ServerResponse.createBySuccess("获取活动列表成功", info);
+    }
+    
+    /**
+     * 用户查看活动详情，返回详细信息
+     * @param activityId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/info/{activityId}")
+    public ServerResponse getActivityInfo(@PathVariable(value="activityId")Integer activityId) {
+        if(activityId==null)
+            return ServerResponse.createByErrorMessage("活动ID为空");
+        
+        ActivityInfo info = userActivityService.getActivityInfo(activityId);
+        if(info==null)
+            return ServerResponse.createByErrorMessage("该活动信息不存在");
+        return ServerResponse.createBySuccess("获取活动详情成功", info);
     }
     
     /**

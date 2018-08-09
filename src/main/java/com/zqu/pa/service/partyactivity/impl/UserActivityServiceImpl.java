@@ -20,6 +20,7 @@ import com.zqu.pa.entity.partyactivity.PartyActivityUser;
 import com.zqu.pa.entity.partyactivity.PartyActivityUserExample;
 import com.zqu.pa.entity.partyactivity.PartyActivityUserKey;
 import com.zqu.pa.service.partyactivity.UserActivityService;
+import com.zqu.pa.vo.partyactivity.ActivityInfo;
 import com.zqu.pa.vo.partyactivity.PageOfList;
 import com.zqu.pa.vo.partyactivity.UserApplyInfo;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
@@ -205,5 +206,34 @@ public class UserActivityServiceImpl implements UserActivityService {
             return "撤销失败，审核通过或报名信息不存在";
         
         return "撤销报名成功!";
+    }
+
+    @Override
+    public int getActivityNum(int activityId) {
+        PartyActivityUserExample example = new PartyActivityUserExample();
+        com.zqu.pa.entity.partyactivity.PartyActivityUserExample.Criteria criteria = example.createCriteria();
+        criteria.andActivityIdEqualTo(activityId);
+        criteria.andCheckStateEqualTo(1);
+        return (int)partyActivityUserDao.countByExample(example);
+    }
+
+    @Override
+    public ActivityInfo getActivityInfo(Integer activityId) {
+        PartyActivity basic = partyActivityDao.selectByPrimaryKey(activityId);
+        if(basic.getIsDelete()==1)
+            return null;
+        ActivityInfo info = new ActivityInfo();
+        info.setActivityId(basic.getActivityId());
+        info.setName(basic.getName());
+        info.setContent(basic.getContent());
+        info.setNum(basic.getNum());
+        info.setAddress(basic.getAddress());
+        info.setUnit(basic.getReleaseUnit());
+        info.setRegistrationStart(basic.getRegistrationStart());
+        info.setRegistrationEnd(basic.getRegistrationEnd());
+        info.setActivityStart(basic.getActivityStart());
+        info.setActivityEnd(basic.getActivityEnd());
+        info.setAlreadyJoinNum(this.getActivityNum(activityId));//获取已经通过审核的人数
+        return info;
     }
 }
