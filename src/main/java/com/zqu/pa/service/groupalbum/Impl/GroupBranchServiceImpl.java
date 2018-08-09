@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.dao.groupalbum.GroupBranchMapper;
 import com.zqu.pa.entity.groupalbum.GroupBranch;
 import com.zqu.pa.entity.groupalbum.GroupBranchExample;
@@ -31,6 +32,28 @@ public class GroupBranchServiceImpl implements GroupBranchService {
         if (list == null || list.size() == 0)
             return null;
         return list.get(0);
+    }
+
+    @Override
+    public ServerResponse createGroupBranch(String groupName, String userId) {
+        
+        GroupBranch groupBranch = new GroupBranch();
+        groupBranch.setGroupName(groupName);
+        groupBranch.setUserId(userId);
+        int i = groupBranchMapper.insertSelective(groupBranch);
+        if (i > 0)
+            return ServerResponse.createBySuccess();
+        return ServerResponse.createByError();
+    }
+
+    @Override
+    public ServerResponse updateGroupBranch(Integer groupId, GroupBranch groupBranch) {
+        
+        groupBranch.setGroupId(groupId);
+        int i = groupBranchMapper.updateByPrimaryKeySelective(groupBranch);
+        if (i > 0)
+            return ServerResponse.createBySuccess();
+        return ServerResponse.createByError();
     }
 
 }
