@@ -17,7 +17,8 @@
    WHERE activity_id = #{activityId}
   </select>
   <select id="getUserAllApplyInfo" resultType="com.zqu.pa.vo.partyactivity.UserApplyInfo">
-    SELECT u.activity_id 'activityId', u.user_id 'userId' , u.phone_num 'phoneNum' , u.check_state 'checkState' , u.submit_time 'submitTime' , a.name
+    SELECT u.activity_id 'activityId', u.user_id 'userId' , u.phone_num 'phoneNum' , u.check_state 'checkState' , u.submit_time 'submitTime' ,
+           a.name, a.is_delete 'isDelete'
     FROM party_activity_user u
     LEFT JOIN party_activity  a ON a.activity_id = u.activity_id
     WHERE u.user_id = #{userId}

@@ -200,6 +200,13 @@ public class UserActivityServiceImpl implements UserActivityService {
         com.zqu.pa.entity.partyactivity.PartyActivityUserExample.Criteria criteria = example.createCriteria();
         criteria.andActivityIdEqualTo(activityId);
         criteria.andUserIdEqualTo(userId);
+        if(partyActivityDao.selectByPrimaryKey(activityId).getIsDelete()==1) { //查询活动是否已删除
+            if(partyActivityUserDao.deleteByExample(example)==0)
+                return "撤销报名失败";
+            else
+                return "撤销报名成功!";
+        }
+        
         criteria.andCheckStateEqualTo(0);
         //删除报名信息
         if(partyActivityUserDao.deleteByExample(example)==0)
