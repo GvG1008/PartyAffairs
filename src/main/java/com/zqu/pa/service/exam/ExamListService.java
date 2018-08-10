@@ -2,7 +2,9 @@ package com.zqu.pa.service.exam;
 
 import java.util.List;
 
+import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.exam.ExamInfo;
+import com.zqu.pa.entity.exam.ExamInfoReview;
 import com.zqu.pa.vo.exam.ResponseExamList;
 import com.zqu.pa.vo.exam.ResponseNowExamList;
 
@@ -26,9 +28,12 @@ public interface ExamListService {
     //获取正在进行中的考试列表
     List<ResponseNowExamList> getUnFinishExamList();
 
-    //将ExamInfo转换为ResponseNowExamList
-    ResponseNowExamList getResponseNowExamList(ExamInfo e, String userId);
+    //返回考试详情
+    ResponseNowExamList getResponseNowExamList(Integer examId);
     
     //根据examId获取考试信息ExamInfo
     ExamInfo getExamInfo(Integer examId);
+    
+    //根据examId获取考试审核表ExamInfoReview
+    ExamInfoReview getExamInfoReview(Integer examId);
 }

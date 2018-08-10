@@ -15,6 +15,26 @@ public class ResponseNowExamList extends ResponseExamList {
     private Integer singleQuantity;
 
     private Integer multipleQuantity;
+    
+    private Integer singleScore;
+    
+    private Integer multipleScore;
+
+    public Integer getSingleScore() {
+        return singleScore;
+    }
+
+    public void setSingleScore(Integer singleScore) {
+        this.singleScore = singleScore;
+    }
+
+    public Integer getMultipleScore() {
+        return multipleScore;
+    }
+
+    public void setMultipleScore(Integer multipleScore) {
+        this.multipleScore = multipleScore;
+    }
 
     public String getStartTime() {
         return startTime;

@@ -5,14 +5,19 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.dao.exam.ExamInfoMapper;
+import com.zqu.pa.dao.exam.ExamInfoReviewMapper;
 import com.zqu.pa.dao.exam.ExamScoreMapper;
 import com.zqu.pa.dao.exam.ExamUserMapper;
 import com.zqu.pa.entity.exam.ExamInfo;
 import com.zqu.pa.entity.exam.ExamInfoExample;
+import com.zqu.pa.entity.exam.ExamInfoReview;
 import com.zqu.pa.entity.exam.ExamScore;
 import com.zqu.pa.entity.exam.ExamScoreExample;
 import com.zqu.pa.entity.exam.ExamScoreKey;
@@ -27,6 +32,8 @@ import com.zqu.pa.vo.userInfo.UserBasicInfo;
 @Service
 public class ExamListServiceImpl implements ExamListService {
 
+    private Logger logger = LoggerFactory.getLogger(ExamListServiceImpl.class);
+    
     @Autowired
     private ExamInfoMapper examInfoMapper;
     
@@ -39,10 +46,17 @@ public class ExamListServiceImpl implements ExamListService {
     @Autowired
     private ExamScoreMapper examScoreMapper;
     
+    @Autowired
+    private ExamInfoReviewMapper examInfoReviewMapper;
+    
     @Override
     public List<ResponseExamList> getFinishExamList() {
         
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if (basicInfo == null) {
+            logger.debug("用户未登录");
+            return null;
+        }
         String userId = basicInfo.getUserId();
         int branchId = basicInfo.getBranchId();
         int roleId = basicInfo.getRoleId();
@@ -144,6 +158,10 @@ public class ExamListServiceImpl implements ExamListService {
     public List<ResponseNowExamList> getUnFinishExamList() {
         
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if (basicInfo == null) {
+            logger.debug("用户未登录");
+            return null;
+        }
         String userId = basicInfo.getUserId();
         int branchId = basicInfo.getBranchId();
         int roleId = basicInfo.getRoleId();
@@ -164,14 +182,27 @@ public class ExamListServiceImpl implements ExamListService {
         List<ResponseNowExamList> responseNowExamList = new ArrayList<ResponseNowExamList>();
         for (int i = 0; i < listExamInfo.size(); i++) {
             ExamInfo e = listExamInfo.get(i);
-            ResponseNowExamList rnel = getResponseNowExamList(e, userId);
+            ResponseNowExamList rnel = getResponseNowExamList(e.getExamId());
             responseNowExamList.add(rnel);            
         }
         return responseNowExamList;
     }
 
     @Override
-    public ResponseNowExamList getResponseNowExamList(ExamInfo e, String userId) {
+    public ResponseNowExamList getResponseNowExamList(Integer examId) {
+        
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if (basicInfo == null) {
+            logger.debug("用户未登录");
+            return null;
+        }
+        String userId = basicInfo.getUserId();
+        ExamInfo e = getExamInfo(examId);
+        if (e == null)
+            return null;
+        ExamInfoReview examInfoReview = getExamInfoReview(examId);
+        if (examInfoReview == null)
+            return null;
         
         ResponseNowExamList rnel = new ResponseNowExamList();
         rnel.setExamId(e.getExamId());
@@ -185,6 +216,9 @@ public class ExamListServiceImpl implements ExamListService {
         rnel.setEndTime(DateUtil.formatTime(e.getEndTime()));
         rnel.setScore(getScore(e.getExamId(), userId));
         rnel.setPass(isPass(e.getExamId(), userId, e.getPassScore()));
+        
+        rnel.setSingleScore(examInfoReview.getSingleScore());
+        rnel.setMultipleScore(examInfoReview.getMultipleScore());
         return rnel;
     }
 
@@ -194,7 +228,12 @@ public class ExamListServiceImpl implements ExamListService {
         ExamInfo e = examInfoMapper.selectByPrimaryKey(examId);
         return e;
     }
-    
-    
+
+    @Override
+    public ExamInfoReview getExamInfoReview(Integer examId) {
+        
+        ExamInfoReview examInfoReview = examInfoReviewMapper.selectByPrimaryKey(examId);
+        return examInfoReview;
+    }
 
 }

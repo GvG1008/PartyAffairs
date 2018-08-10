@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zqu.pa.common.ResponseCode;
@@ -24,8 +25,12 @@ public class ExamListController {
     @Autowired
     private ExamListService examListService;
     
+    /**
+     * 用户获取已结束考试列表
+     * @return
+     */
     @ResponseBody
-    @RequestMapping("/finish")
+    @RequestMapping(value = "/finish", method = RequestMethod.GET)
     public ServerResponse getFinishedExamList() {
         
         examListService.setExamFinish();
@@ -35,8 +40,12 @@ public class ExamListController {
         return ServerResponse.createBySuccess(list);
     }
     
+    /**
+     * 用户获取未完成考试列表
+     * @return
+     */
     @ResponseBody
-    @RequestMapping("/unfinish")
+    @RequestMapping(value = "/unfinish", method = RequestMethod.GET)
     public ServerResponse getUnFinishedExamList() {
         
         examListService.setExamFinish();
@@ -46,16 +55,21 @@ public class ExamListController {
         return ServerResponse.createBySuccess(list);
     }
     
+    /**
+     * 获取考试详细信息
+     * @param examId 考试ID
+     * @return
+     */
     @ResponseBody
-    @RequestMapping("/{examId}")
+    @RequestMapping(value = "/{examId}", method = RequestMethod.GET)
     public ServerResponse<ResponseNowExamList> getExamInfo(@PathVariable Integer examId) {
         
-        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
-        String userId = basicInfo.getUserId();
-        ExamInfo e = examListService.getExamInfo(examId);
-        if (e == null)
+        ResponseNowExamList rnel = null;
+        try {
+            rnel = examListService.getResponseNowExamList(examId);
+        } catch(Exception e) {
             return ServerResponse.createByError();
-        ResponseNowExamList rnel = examListService.getResponseNowExamList(e, userId);
+        }
         if (rnel == null)
             return ServerResponse.createByError();
         return ServerResponse.createBySuccess(rnel);
