@@ -31,13 +31,18 @@ public class ExamListController {
      */
     @ResponseBody
     @RequestMapping(value = "/finish", method = RequestMethod.GET)
-    public ServerResponse getFinishedExamList() {
+    public ServerResponse<List<ResponseExamList>> getFinishedExamList() {
         
+        //判断考试是否过期
         examListService.setExamFinish();
-        List<ResponseExamList> list = examListService.getFinishExamList();
-        if (list == null)
+        ServerResponse<List<ResponseExamList>> list = null;
+        try {
+            list = examListService.getFinishExamList();
+        } catch(Exception e) {
+            e.printStackTrace();
             return ServerResponse.createByError();
-        return ServerResponse.createBySuccess(list);
+        }
+        return list;
     }
     
     /**
@@ -46,13 +51,18 @@ public class ExamListController {
      */
     @ResponseBody
     @RequestMapping(value = "/unfinish", method = RequestMethod.GET)
-    public ServerResponse getUnFinishedExamList() {
+    public ServerResponse<List<ResponseNowExamList>> getUnFinishedExamList() {
         
+        //判断考试是否过期
         examListService.setExamFinish();
-        List<ResponseNowExamList> list = examListService.getUnFinishExamList();
-        if (list == null)
+        ServerResponse<List<ResponseNowExamList>> list = null;
+        try {
+            list = examListService.getUnFinishExamList();
+        } catch(Exception e) {
+            e.printStackTrace();
             return ServerResponse.createByError();
-        return ServerResponse.createBySuccess(list);
+        }
+        return list;       
     }
     
     /**

@@ -18,6 +18,7 @@ import com.zqu.pa.dao.exam.ExamUserMapper;
 import com.zqu.pa.entity.exam.ExamInfo;
 import com.zqu.pa.entity.exam.ExamInfoExample;
 import com.zqu.pa.entity.exam.ExamInfoReview;
+import com.zqu.pa.entity.exam.ExamInfoReviewExample;
 import com.zqu.pa.entity.exam.ExamScore;
 import com.zqu.pa.entity.exam.ExamScoreExample;
 import com.zqu.pa.entity.exam.ExamScoreKey;
@@ -50,19 +51,22 @@ public class ExamListServiceImpl implements ExamListService {
     private ExamInfoReviewMapper examInfoReviewMapper;
     
     @Override
-    public List<ResponseExamList> getFinishExamList() {
+    public ServerResponse<List<ResponseExamList>> getFinishExamList() {
         
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
         if (basicInfo == null) {
             logger.debug("用户未登录");
-            return null;
+            return ServerResponse.createByErrorMessage("用户未登录");
         }
         String userId = basicInfo.getUserId();
         int branchId = basicInfo.getBranchId();
         int roleId = basicInfo.getRoleId();
-        List<Integer> listExamId = listExamUser(userId);
+        List<Integer> listExamId1 = listExamUser(userId);
+        if (listExamId1 == null || listExamId1.isEmpty())
+            return ServerResponse.createBySuccess(new ArrayList<>());
+        List<Integer> listExamId = listReviewedExam(listExamId1);
         if (listExamId == null || listExamId.isEmpty())
-            return null;
+            return ServerResponse.createBySuccess(new ArrayList<>());
         
         //查出对应考试信息
         ExamInfoExample example = new ExamInfoExample();
@@ -86,7 +90,7 @@ public class ExamListServiceImpl implements ExamListService {
             rel.setEndTime(DateUtil.formatTime(e.getEndTime()));
             listResponseExamList.add(rel);         
         }       
-        return listResponseExamList;
+        return ServerResponse.createBySuccess(listResponseExamList);
     }
 
     @Override
@@ -155,19 +159,23 @@ public class ExamListServiceImpl implements ExamListService {
     }
 
     @Override
-    public List<ResponseNowExamList> getUnFinishExamList() {
+    public ServerResponse<List<ResponseNowExamList>> getUnFinishExamList() {
         
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
         if (basicInfo == null) {
             logger.debug("用户未登录");
-            return null;
+            return ServerResponse.createByErrorMessage("用户未登录");
         }
         String userId = basicInfo.getUserId();
         int branchId = basicInfo.getBranchId();
         int roleId = basicInfo.getRoleId();
-        List<Integer> listExamId = listExamUser(userId);
+        List<Integer> listExamId1 = listExamUser(userId);
+        if (listExamId1 == null || listExamId1.isEmpty())
+            return ServerResponse.createBySuccess(new ArrayList<>());
+        List<Integer> listExamId = listReviewedExam(listExamId1);
         if (listExamId == null || listExamId.isEmpty())
-            return null;
+            return ServerResponse.createBySuccess(new ArrayList<>());
+        
         //查出对应考试信息
         ExamInfoExample example = new ExamInfoExample();
         List<Integer> finish = new ArrayList<Integer>();
@@ -185,7 +193,7 @@ public class ExamListServiceImpl implements ExamListService {
             ResponseNowExamList rnel = getResponseNowExamList(e.getExamId());
             responseNowExamList.add(rnel);            
         }
-        return responseNowExamList;
+        return ServerResponse.createBySuccess(responseNowExamList);
     }
 
     @Override
@@ -234,6 +242,21 @@ public class ExamListServiceImpl implements ExamListService {
         
         ExamInfoReview examInfoReview = examInfoReviewMapper.selectByPrimaryKey(examId);
         return examInfoReview;
+    }
+
+    @Override
+    public List<Integer> listReviewedExam(List<Integer> listExamId) {
+        
+        ExamInfoReviewExample example = new ExamInfoReviewExample();
+        //审核通过
+        int review = 1;
+        example.createCriteria().andExamIdIn(listExamId).andReviewEqualTo(review);
+        List<ExamInfoReview> examInfoReview = examInfoReviewMapper.selectByExample(example);
+        List<Integer> list = new ArrayList<>();
+        for(ExamInfoReview eir : examInfoReview) {
+            list.add(eir.getExamId());
+        }
+        return list;
     }
 
 }
