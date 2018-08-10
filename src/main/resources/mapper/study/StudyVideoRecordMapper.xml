@@ -10,11 +10,17 @@
     </constructor>
   </resultMap>
   <insert id="insert" parameterType="com.zqu.pa.entity.study.StudyVideoRecord" >
-    insert into study_video_record (video_id, user_id, schedule, 
+    insert into study_video_record (video_id, user_id, `schedule`, 
       updatetime)
     values (#{videoId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{schedule,jdbcType=REAL}, 
-      #{updatetime,jdbcType=TIMESTAMP})
+      now())
   </insert>
+  <update id="update" parameterType="com.zqu.pa.entity.study.StudyVideoRecord" >
+    UPDATE study_video_record 
+    SET `schedule` = #{schedule,jdbcType=REAL},
+        updatetime = now()
+    WHERE video_id = #{videoId,jdbcType=INTEGER} AND user_id = #{userId,jdbcType=VARCHAR}
+  </update>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.study.StudyVideoRecord" >
     insert into study_video_record
     <trim prefix="(" suffix=")" suffixOverrides="," >
