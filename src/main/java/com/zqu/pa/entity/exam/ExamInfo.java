@@ -4,25 +4,25 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ExamInfo {
-    private Integer examId;
+    private Integer examId; //考试ID
 
-    private Integer branchId;
+    private Integer branchId; //党支部ID
 
-    private String examTitle;
+    private String examTitle; //考试标题
 
-    private Long startTime;
+    private Long startTime; //考试开始时间
 
-    private Long endTime;
+    private Long endTime; //考试结束时间
 
-    private Integer examPeriod;
+    private Integer examPeriod; //考试持续时长
 
-    private Integer singleQuantity;
+    private Integer singleQuantity; //当选题题数
 
-    private Integer multipleQuantity;
+    private Integer multipleQuantity; //多选题题数
 
-    private Integer passScore;
+    private Integer passScore; //及格分数
 
-    private Integer finish;
+    private Integer finish; //是否过期（-1：已结束；0：未开始；1：正在进行）
 
     public Integer getExamId() {
         return examId;

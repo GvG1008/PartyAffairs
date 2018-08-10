@@ -1,17 +1,17 @@
 package com.zqu.pa.entity.exam;
 
 public class ExamInfoReview {
-    private Integer examId;
+    private Integer examId; //考试ID
 
-    private Integer singleScore;
+    private Integer singleScore; //单选成绩
 
-    private Integer multipleScore;
+    private Integer multipleScore; //多选成绩
 
-    private Integer review;
+    private Integer review; //审核 0：未审核 1：已审核
 
-    private String createId;
+    private String createId; //创建人ID
 
-    private String reviewId;
+    private String reviewId; //审核人ID
 
     public Integer getExamId() {
         return examId;
