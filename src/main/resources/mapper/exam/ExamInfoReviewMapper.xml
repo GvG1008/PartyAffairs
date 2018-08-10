@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqu.pa.dao.exam.ExamInfoReviewMapper">
+  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.exam.ExamInfoReview">
+    <id column="exam_id" jdbcType="INTEGER" property="examId" />
+    <result column="single_score" jdbcType="INTEGER" property="singleScore" />
+    <result column="multiple_score" jdbcType="INTEGER" property="multipleScore" />
+    <result column="review" jdbcType="INTEGER" property="review" />
+    <result column="create_id" jdbcType="VARCHAR" property="createId" />
+    <result column="review_id" jdbcType="VARCHAR" property="reviewId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    exam_id, single_score, multiple_score, review, create_id, review_id
+  </sql>
+  <select id="selectByExample" parameterType="com.zqu.pa.entity.exam.ExamInfoReviewExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from exam_info_review
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from exam_info_review
+    where exam_id = #{examId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from exam_info_review
+    where exam_id = #{examId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zqu.pa.entity.exam.ExamInfoReviewExample">
+    delete from exam_info_review
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zqu.pa.entity.exam.ExamInfoReview">
+    insert into exam_info_review (exam_id, single_score, multiple_score, 
+      review, create_id, review_id
+      )
+    values (#{examId,jdbcType=INTEGER}, #{singleScore,jdbcType=INTEGER}, #{multipleScore,jdbcType=INTEGER}, 
+      #{review,jdbcType=INTEGER}, #{createId,jdbcType=VARCHAR}, #{reviewId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zqu.pa.entity.exam.ExamInfoReview">
+    insert into exam_info_review
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="examId != null">
+        exam_id,
+      </if>
+      <if test="singleScore != null">
+        single_score,
+      </if>
+      <if test="multipleScore != null">
+        multiple_score,
+      </if>
+      <if test="review != null">
+        review,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="reviewId != null">
+        review_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="examId != null">
+        #{examId,jdbcType=INTEGER},
+      </if>
+      <if test="singleScore != null">
+        #{singleScore,jdbcType=INTEGER},
+      </if>
+      <if test="multipleScore != null">
+        #{multipleScore,jdbcType=INTEGER},
+      </if>
+      <if test="review != null">
+        #{review,jdbcType=INTEGER},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewId != null">
+        #{reviewId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zqu.pa.entity.exam.ExamInfoReviewExample" resultType="java.lang.Long">
+    select count(*) from exam_info_review
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update exam_info_review
+    <set>
+      <if test="record.examId != null">
+        exam_id = #{record.examId,jdbcType=INTEGER},
+      </if>
+      <if test="record.singleScore != null">
+        single_score = #{record.singleScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.multipleScore != null">
+        multiple_score = #{record.multipleScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.review != null">
+        review = #{record.review,jdbcType=INTEGER},
+      </if>
+      <if test="record.createId != null">
+        create_id = #{record.createId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewId != null">
+        review_id = #{record.reviewId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update exam_info_review
+    set exam_id = #{record.examId,jdbcType=INTEGER},
+      single_score = #{record.singleScore,jdbcType=INTEGER},
+      multiple_score = #{record.multipleScore,jdbcType=INTEGER},
+      review = #{record.review,jdbcType=INTEGER},
+      create_id = #{record.createId,jdbcType=VARCHAR},
+      review_id = #{record.reviewId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zqu.pa.entity.exam.ExamInfoReview">
+    update exam_info_review
+    <set>
+      <if test="singleScore != null">
+        single_score = #{singleScore,jdbcType=INTEGER},
+      </if>
+      <if test="multipleScore != null">
+        multiple_score = #{multipleScore,jdbcType=INTEGER},
+      </if>
+      <if test="review != null">
+        review = #{review,jdbcType=INTEGER},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewId != null">
+        review_id = #{reviewId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where exam_id = #{examId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zqu.pa.entity.exam.ExamInfoReview">
+    update exam_info_review
+    set single_score = #{singleScore,jdbcType=INTEGER},
+      multiple_score = #{multipleScore,jdbcType=INTEGER},
+      review = #{review,jdbcType=INTEGER},
+      create_id = #{createId,jdbcType=VARCHAR},
+      review_id = #{reviewId,jdbcType=VARCHAR}
+    where exam_id = #{examId,jdbcType=INTEGER}
+  </update>
+</mapper>
