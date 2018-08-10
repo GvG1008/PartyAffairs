@@ -149,7 +149,7 @@
       #{activityEnd,jdbcType=BIGINT}, #{activityResult,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zqu.pa.entity.partyactivity.PartyActivity">
+  <insert id="insertSelective" parameterType="com.zqu.pa.entity.partyactivity.PartyActivity" useGeneratedKeys="true" keyProperty="activityId">
     insert into party_activity
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="activityId != null">
