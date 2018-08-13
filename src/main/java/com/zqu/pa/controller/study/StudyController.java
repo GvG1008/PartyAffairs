@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.zqu.pa.common.Const;
 import com.zqu.pa.common.ServerResponse;
+import com.zqu.pa.dao.study.StudyVideoRecordMapper;
 import com.zqu.pa.entity.study.StudyDocument;
 import com.zqu.pa.entity.study.StudyDocumentLabel;
 import com.zqu.pa.entity.study.StudyDocumentMust;
@@ -28,6 +29,7 @@ import com.zqu.pa.entity.study.StudyLabel;
 import com.zqu.pa.entity.study.StudyVideo;
 import com.zqu.pa.entity.study.StudyVideoLabel;
 import com.zqu.pa.entity.study.StudyVideoMust;
+import com.zqu.pa.entity.study.StudyVideoRecord;
 import com.zqu.pa.service.study.IStudyService;
 import com.zqu.pa.utils.FTPSSMLoad;
 import com.zqu.pa.utils.StringExtend;
@@ -45,6 +47,8 @@ public class StudyController {
 
     @Autowired
     private IStudyService iStudyService;
+    @Autowired
+    private StudyVideoRecordMapper studyVideoRecordMapper;
 
     private String getUserid() {
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
@@ -290,11 +294,55 @@ public class StudyController {
         return iStudyService.getStudyVideosPuton();
     }
     
+    /**
+     * 根据标签id获取视频学习资料(上架)
+     * 
+     * @param labelId
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "get_study_videos_by_label_id.do", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse getStudyVideosByLabelId(@RequestParam(value = "label_id") String[] labelId,
+            HttpSession session) {
+        HashSet<Integer> hashSet = Sets.newHashSet();
+        int idCount = labelId.length;
+        for (int i = 0; i < idCount; i++)
+            hashSet.add(Integer.parseInt(labelId[i]));
+        ArrayList<Integer> idList = Lists.newArrayList();
+        for (Integer labelid : hashSet) {
+            idList.add(labelid);
+        }
+        return iStudyService.getStudyVideosPutonByLabelId(idList);
+    }
     
+    /**
+     * 记录视频学习记录
+     * @param userId
+     * @param videoId
+     * @param schedule
+     */
+    @RequestMapping(value = "video_record.do", method = RequestMethod.GET)
+    public void videoRecord(String videoId,String schedule) {
+        String userId = this.getUserid();
+        int vid = Integer.parseInt(videoId);
+        float s = Float.parseFloat(schedule);
+        StudyVideoRecord record = new StudyVideoRecord(vid, userId, s, null);
+        if(studyVideoRecordMapper.update(record) == 0)
+            studyVideoRecordMapper.insert(record);
+    }
     
-    
-    
-    
+    /**
+     * 获取用户必学的视频资料
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "get_study_videos_must.do", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse getStudyVideoMust(HttpSession session) {
+        String userId = this.getUserid();
+        return iStudyService.getStudyVideoMust(userId);
+    }
     
     
     

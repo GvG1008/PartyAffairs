@@ -27,10 +27,12 @@ import com.zqu.pa.entity.study.StudyLabel;
 import com.zqu.pa.entity.study.StudyVideo;
 import com.zqu.pa.entity.study.StudyVideoLabel;
 import com.zqu.pa.entity.study.StudyVideoMust;
+import com.zqu.pa.entity.study.StudyVideoRecord;
 import com.zqu.pa.service.study.IStudyService;
 import com.zqu.pa.utils.DateToString;
 import com.zqu.pa.vo.study.StudyDocumentVO1;
 import com.zqu.pa.vo.study.StudyVideoVO1;
+import com.zqu.pa.vo.study.StudyVideoVO2;
 
 @Service("iStudyService")
 public class StudyServiceImpl implements IStudyService {
@@ -267,6 +269,43 @@ public class StudyServiceImpl implements IStudyService {
             List<StudyLabel> sls = studyLabelMapper.selectByVideoId(sv.getVideoId());
             StudyVideoVO1 svvo1 = new StudyVideoVO1(sv.getVideoId(), sv.getVideoTitle(), sv.getVideoIntroduction(), sv.getCoverImg(), sv.getVideoPath(), uploadUser, updateTime, sls);
             list.add(svvo1);
+        }
+        return ServerResponse.createBySuccess(list);
+    }
+    
+
+    @Override
+    @Transactional
+    public ServerResponse getStudyVideosPutonByLabelId(List<Integer> idList) {
+        List<StudyVideo> svl = studyVideoMapper.selectPutonByLabelId(idList);
+        int size = svl.size();
+        List<StudyVideoVO1> list = Lists.newArrayList();
+        for(int i=0;i<size;i++) {
+            StudyVideo sv = svl.get(i);
+            String updateTime = DateToString.getDateString("yyyy-MM-dd", sv.getUpdatetime());
+            String uploadUser = studyDocumentMapper.getUserNameByUserId(sv.getUserId());
+            List<StudyLabel> sls = studyLabelMapper.selectByVideoId(sv.getVideoId());
+            StudyVideoVO1 svvo1 = new StudyVideoVO1(sv.getVideoId(), sv.getVideoTitle(), sv.getVideoIntroduction(), sv.getCoverImg(), sv.getVideoPath(), uploadUser, updateTime, sls);
+            list.add(svvo1);
+        }
+        return ServerResponse.createBySuccess(list);
+    }
+    
+    @Override
+    @Transactional
+    public ServerResponse getStudyVideoMust(String userId) {
+        List<StudyVideo> svl = studyVideoMapper.selectMustPutonByUserId(userId);
+        int size = svl.size();
+        List<StudyVideoVO2> list = Lists.newArrayList();
+        for(int i=0;i<size;i++) {
+            StudyVideo sv = svl.get(i);
+            String updateTime = DateToString.getDateString("yyyy-MM-dd", sv.getUpdatetime());
+            String uploadUser = studyDocumentMapper.getUserNameByUserId(sv.getUserId());
+            List<StudyLabel> sls = studyLabelMapper.selectByVideoId(sv.getVideoId());
+            StudyVideoRecord svr = new StudyVideoRecord(sv.getVideoId(), userId, null, null);
+            float schedule = studyVideoMapper.selectScheduleByVideoIdAndUserId(svr);
+            StudyVideoVO2 svvo2 = new StudyVideoVO2(sv.getVideoId(), sv.getVideoTitle(), sv.getVideoIntroduction(), sv.getCoverImg(), sv.getVideoPath(), uploadUser, updateTime, sls,schedule);
+            list.add(svvo2);
         }
         return ServerResponse.createBySuccess(list);
     }

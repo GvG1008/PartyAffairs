@@ -18,9 +18,11 @@ public class UserApplyInfo {
     
     private Integer checkState; //审核状态：1审核通过，0未审核，-1审核不通过
     
-    private String checkInfo; //审核信息返回
+    private String checkInfo; //审核信息返回 
     
     private Integer allowDelete; //是否允许撤销审核，未审核时允许删除报名信息
+
+    private Integer isDelete; //该活动是否已被删除 1为已删除
 
     public String getUserId() {
         return userId;
@@ -98,4 +100,15 @@ public class UserApplyInfo {
         this.phoneNum = phoneNum;
     }
     
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        if(isDelete==1) {
+            checkInfo = "该活动已删除";
+            allowDelete = 1;
+        }
+        this.isDelete = isDelete;
+    }
 }

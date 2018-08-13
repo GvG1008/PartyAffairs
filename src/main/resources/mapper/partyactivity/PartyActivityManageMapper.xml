@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqu.pa.dao.partyactivity.PartyActivityManageMapper">
+  <select id="getActivityList" resultType="com.zqu.pa.vo.partyactivity.ActivityManageMenu">
+    SELECT pa.activity_id 'activityId' , pa.branch_id 'branchId' , pb.branch_name 'branchName' ,
+           pa.name ,  pa.create_id 'createId' , up.name 'createName' , pa.create_time 'createTime' , pa.num , 
+           COUNT(CASE WHEN (pau.check_state=1) THEN pau.user_id END) 'alreadyJoinNum' ,
+           COUNT(CASE WHEN (pau.check_state=0) THEN pau.user_id END) 'applyNum' ,
+           pa.registration_start 'registrationStart' , pa.registration_end 'registrationEnd',
+           pa.activity_start 'activityStart' , pa.activity_end 'activityEnd'
+    FROM party_activity pa
+    LEFT JOIN partybranch pb ON pa.branch_id = pb.branch_id
+    LEFT JOIN party_activity_user pau ON pa.activity_id = pau.activity_id
+    LEFT JOIN user_person_info up ON up.user_id = pa.create_id
+    WHERE pa.is_delete = 0
+    <if test="branchId!=0">
+        AND pa.branch_id = #{branchId}
+    </if>
+    GROUP BY pa.activity_id
+  </select>
+  
+  <insert id="insertAcRoleBatch">
+    insert into party_activity_role (activity_id, role_id)
+    values 
+    <foreach collection="roleIds" index="index" item="roleId" separator="), (" open="(" close=")">
+      #{activityId}, #{roleId}
+    </foreach>
+  </insert>
+</mapper>

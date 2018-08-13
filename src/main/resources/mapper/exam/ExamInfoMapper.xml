@@ -295,4 +295,13 @@
     from exam_info
     where exam_id = #{examId,jdbcType=INTEGER}
   </select>
+  
+  <insert id="insertExamInfo" useGeneratedKeys="true" keyProperty="examId" parameterType="com.zqu.pa.entity.exam.ExamInfo">
+    insert into exam_info (branch_id, exam_title, 
+      start_time, end_time, exam_period, 
+      single_quantity, multiple_quantity, pass_score)
+    values (#{branchId,jdbcType=INTEGER}, #{examTitle,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=BIGINT}, #{endTime,jdbcType=BIGINT}, #{examPeriod,jdbcType=INTEGER}, 
+      #{singleQuantity,jdbcType=INTEGER}, #{multipleQuantity,jdbcType=INTEGER}, #{passScore,jdbcType=INTEGER})
+  </insert>
 </mapper>

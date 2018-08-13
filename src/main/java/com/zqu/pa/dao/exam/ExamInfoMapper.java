@@ -30,4 +30,7 @@ public interface ExamInfoMapper {
     
     //查询某场考试及格分数线
     Integer selectPassScore(Integer examId);
+    
+    //插入考试信息后返回获取主键
+    int insertExamInfo(ExamInfo examInfo);
 }

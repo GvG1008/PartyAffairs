@@ -26,4 +26,6 @@ public interface IStudyService {
     
     public ServerResponse uploadStudyVideo(StudyVideo sv, List<StudyVideoLabel> svls, List<StudyVideoMust> svms);
     public ServerResponse getStudyVideosPuton();
+    public ServerResponse getStudyVideosPutonByLabelId(List<Integer> idList);
+    public ServerResponse getStudyVideoMust(String userId);
 }

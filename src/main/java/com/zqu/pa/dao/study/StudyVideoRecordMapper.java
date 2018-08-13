@@ -6,4 +6,6 @@ public interface StudyVideoRecordMapper {
     int insert(StudyVideoRecord record);
 
     int insertSelective(StudyVideoRecord record);
+    
+    int update(StudyVideoRecord record);
 }
