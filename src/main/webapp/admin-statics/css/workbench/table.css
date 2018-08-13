@@ -3,6 +3,10 @@
    display: block; 
    clear:both; 
 }
+.popup_box {
+    position: absolute;
+    top: 20%;
+}
 .container {
     background: #fff;
     float:left;
@@ -92,17 +96,31 @@ body {
 table.table.table-hover {
     text-align: center;
 }
-a.btn.os, .od,.ow{
+/* a.btn.os, .od,.ow{
     height: 23px;
     padding: 2px 8px;
     padding-right: 9px;
     font-size: 0.8rem;
+} */
+a.btn.os, .od, .ow {
+    height: 23px;
+    padding: 2px 6px;
+    padding-right: 6px;
+    font-size: 0.8rem;
 }
-i.fa.fa-pencil{
-    margin-right: 3px;
+i.fa.fa-pencil-square-o {
+    padding-left: 5px;
 }
-i.fa.fa-trash-o {
-	 margin-right: 3px;
+i.fa.fa-pencil, i.fa.fa-trash-o {
+    /* margin-right: 3px; */
+    padding-left: 6px;
+    padding-right: 0px;
+}
+button#btn_delete {
+    padding-left: 8px;
+}
+button#btn_look {
+    margin: 0 5px;
 }
  select,  .select {
        -webkit-appearance: menulist-button;
@@ -232,4 +250,36 @@ span.icon {
 }
 [v-cloak] {
     display: none !important;
+}
+.guoqi {
+    background: #d9534f;
+    color: #fff;
+    border-radius: 6px;
+    padding: 2px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.weikaishi {
+    background: #fbe751;
+    color: #fff;
+    border-radius: 6px;
+    padding: 2px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.doing {
+    background:#5cb85c;
+    color: #fff;
+    border-radius: 6px;
+    padding: 2px;
+    font-size: 12px;
+    font-weight: 600;
+}
+table.dataTable thead > tr > th {
+    vertical-align: middle;
+    text-align: center;
+}
+table.table-bordered tbody th, table.table-bordered tbody td {
+    vertical-align: middle;
+    text-align: center;
 }

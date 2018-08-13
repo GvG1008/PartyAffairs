@@ -12,9 +12,9 @@ $(function(){
 		var url = $(li).attr('funurl');
 		var title = $(this).text();
 		$('#mainFrameTabs').bTabsAdd(menuId,title,url);
-		alert(menuId);
+		/*alert(menuId);
 		alert(title);
-		alert(url);
+		alert(url);*/
 //		var margin =$("#close").css('marginLeft');
 		var height = $("#close").offset().top;
 		var width = $(".btab11").width();

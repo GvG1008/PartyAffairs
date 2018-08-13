@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>待审核信息</title>
+   <link rel="stylesheet" href="../../admin-statics/table/bootstrap.css" />
+   <link href="../../admin-statics/table/dataTables.bootstrap.css" rel="stylesheet">
+   <link href="../../admin-statics/table/dataTables.responsive.css" rel="stylesheet">
+   <link href="../../admin-statics/table/font-awesome.css" rel="stylesheet" />
+   <!-- <link href="../../admin-statics/table/style.css" rel="stylesheet" /> -->
+   <link href="../../admin-statics/table/style-responsive.css" rel="stylesheet" />
+   <link href="../../admin-statics/css/workbench/table.css" rel="stylesheet" >  
+   <link href="../../admin-statics/css/workbench/PaperInformation.css" rel="stylesheet" >  
+</head>
+<body>
+    <div class = "header">考试管理  > 待审核信息</div>
+    <div class="panel panel-default">
+ 
+                        <div class="panel-body">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="msg">
+                                <thead>
+                                    <tr>
+                                        <th><center><input type="checkbox"  name="all" id="all"></center></th>
+                                        <th>试卷标题</th>
+                                        <th>发布支部</th>
+                                        <th>开始时间</th>
+                                        <th>结束时间</th>
+                                        <th>考试时长（分钟）</th>
+                                        <th>单选题数</th>
+                                        <th>多选题数</th>
+                                        <th>及格标准</th>
+                                        <th>录入人</th>
+                                        <th>操作</th>
+                                    </tr>
+                                 </thead> 
+                                 <tbody>
+                                    <tr>
+                                        <td style="width:30px"><center><input type="checkbox"  name="all" id="all" :value="message.userId"></center></td>
+                                        <td ><center>第一次考试</center></td>
+                                        <td><center>软件工程专业党支部</center></td>
+                                        <td><center>2018-07-14      08:00:00</center></td>
+                                        <td><center>2018-07-14      10:00:00</center></td>
+                                        <td style="width:80px"><center>90</center></td>
+                                        <td style="width:50px"><center>30</center></td>
+                                        <td style="width:50px"><center>20</center></td>
+                                        <td style="width:50px"><center>60</center></td>
+                                        <td style="width:63px"><center>杨玉孟</center></td>
+                                        <td style="width:224px">
+                                        <center>
+                                            <a class="btn btn-success os btn-xs" :href="'#?id='+message.userId" title="修改">
+                                            编辑<i class="fa fa-pencil ticon" aria-hidden="true"></i>
+                                            </a>
+                                            <button class="btn btn-warning ow btn-xs" type="button" data-toggle="tooltip"  title="审核" id="btn_look" onclick="pass(this);">
+                                                                                                                              审核<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </button>
+                                            <button class="btn btn-danger bos btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);" aria-hidden="true">
+                                            删除<i class="fa fa-trash-o ticon" aria-hidden="true"></i>
+                                            </button>
+                                        </center>
+                                        </td>  
+                                    </tr>
+                                    <tr>
+                                        <td style="width:30px"><center><input type="checkbox"  name="all" id="all" :value="message.userId"></center></td>
+                                        <td><center>十九大党章专项训练测试</center></td>
+                                        <td><center>数据科学与大数据技术专业党支部</center></td>
+                                        <td><center>2018-07-14      08:00:00</center></td>
+                                        <td><center>2018-07-14      10:00:00</center></td>
+                                        <td style="width:80px"><center>90</center></td>
+                                        <td style="width:50px"><center>30</center></td>
+                                        <td style="width:50px"><center>20</center></td>
+                                        <td style="width:50px"><center>60</center></td>
+                                         <td style="width:63px"><center>杨玉孟</center></td>
+                                            <td style="width:224px">
+                                        <center>
+                                            <a class="btn btn-success os btn-xs" :href="'#?id='+message.userId" title="修改">
+                                            编辑<i class="fa fa-pencil ticon" aria-hidden="true"></i>
+                                            </a>
+                                            <button class="btn btn-warning ow btn-xs" type="button" data-toggle="tooltip"  title="审核" id="btn_look" onclick="pass(this);">
+                                                                                                                              审核<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </button>
+                                            <button class="btn btn-danger bos btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);" aria-hidden="true">
+                                            删除<i class="fa fa-trash-o ticon" aria-hidden="true"></i>
+                                            </button>
+                                        </center>
+                                        </td>  
+                                    </tr>
+                                    <tr>
+                                        <td style="width:30px"><center><input type="checkbox"  name="all" id="all" :value="message.userId"></center></td>
+                                        <td><center>第一次考试</center></td>
+                                        <td><center>计算机科学与技术专业党支部</center></td>
+                                        <td><center>2018-07-14      08:00:00</center></td>
+                                        <td><center>2018-07-14      10:00:00</center></td>
+                                        <td style="width:80px"><center>90</center></td>
+                                        <td style="width:50px"><center>30</center></td>
+                                        <td style="width:50px"><center>20</center></td>
+                                        <td style="width:50px"><center>60</center></td>
+                                        <td style="width:63px"><center>杨玉孟</center></td>
+                                           <td style="width:224px">
+                                        <center>
+                                            <a class="btn btn-success os btn-xs" :href="'#?id='+message.userId" title="修改">
+                                            编辑<i class="fa fa-pencil ticon" aria-hidden="true"></i>
+                                            </a>
+                                            <button class="btn btn-warning ow btn-xs" type="button" data-toggle="tooltip"  title="审核" id="btn_look" onclick="pass(this);">
+                                                                                                                              审核<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </button>
+                                            <button class="btn btn-danger btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);" aria-hidden="true">
+                                            删除<i class="fa fa-trash-o ticon"></i>
+                                            </button>
+                                        </center>
+                                        </td>   
+                                    </tr>
+                                 </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+            <div class="popup_de xycenter">
+            <div class="popup_box">
+                <span class="popup_close" value="关闭">×</span>
+                <span class="show_msg" id="show_msg"></span>
+                <div class="btn_box">
+                    <div class="popup_btn btn-danger" value="确定">确定</div>
+                    <div class="popup_btn btn_cancel" value="取消">取消</div>
+                </div>
+            </div>  
+            </div>
+             
+             <!-- 题库上传  Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">题库上传</h4>
+                  </div>
+                  <div class="modal-body">
+                     <div class="form-group">
+                     <input type="text" class="form-control" id="tikutitle" placeholder="请输入题库名称">
+                     <input type="file" accept="application/msexcel" name="file" id="chooseExam" class="Filebtn" onchange="console.log(this.value);">
+                     <input type="button" id="upload" value="浏览" onclick="document.getElementById('chooseExam').click()">
+                     </div>
+                     <span class="fl">（仅支持excel 格式文件）</span>
+                     <div class="form-group" id="select-group">
+                     <select id="mySelect" class="form-control">
+                          <option>请选择文件分类</option>
+                          <option>党章</option>
+                          <option>两学一做</option>
+                          <option>十九大</option>
+                     </select> 
+                     <input type="button" id="custom" value="自定义" onclick="custom()">
+                      </div>
+                     <div class="form-group" id="custom-group">
+                     <input id="sort" class="form-control" placeholder="请输入文件分类"/>
+                     <input type="button" id="custom" value="确定" onclick="addsort()">
+                     </div>                    
+                  </div>
+                  <div class="modal-footer">
+                    <a class="download" href="#">如需上传题库，请使用特定模板，点此处下载☚</a>
+                    <button type="button" disabled="disabled" class="btn btn-primary" id="mUploadbtn" >上传</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+             <!-- 题库预览  Modal -->
+            <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="previewModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">题库预览</h4>
+                  </div>
+                  <div class="modal-body">
+                      <div id="testArea">
+                      </div>   
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="sumbitExam" >确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+    
+    <script type="text/javascript" src="../../admin-statics/js/lib/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../admin-statics/table/js/bootstrap.min.js"></script>
+    <script src="../../admin-statics/table/js/jquery.dataTables.min.js"></script>
+    <script src="../../admin-statics/table/js/dataTables.bootstrap.min.js"></script>
+    <script src="../../admin-statics/table/js/dataTables.responsive.js"></script>
+    <script src="../../statics/js/vue.js"></script>
+    <script src="../../admin-statics/js/module/text.js"> </script>
+    <script src="../../admin-statics/js/module/PaperInfo_ApprovedList.js"> </script>
+    <script type="text/javascript">
+    $(function(){
+        //题型    1单选2多选3判断4填空5问答8论述题6完型填空7阅读理解
+        //json    格式参照data/test.json
+        //交卷    点击交卷后可查看对错
+        var test_id = 'get a test id';
+        test(test_id);
+    });
+    </script>
+</body>
+</html>

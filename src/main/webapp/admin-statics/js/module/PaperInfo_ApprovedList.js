@@ -1,7 +1,8 @@
-/*  new Vue({
+/*new Vue({
 		el : "#msg",
 	data: {
-		newMessages: []
+		newMessages: [],
+		num:[]
 	},
 	methods:{
 		loadNewMessages: function() {
@@ -9,15 +10,14 @@
 			var m = {};
 			$.ajax({
 				type:"get",
-				url: "",
+				url: "../../userManage/userCheckList",
 				async : false,
 				dataType: 'json',
 				success: function(result){
-					if (result.status == 0) {
+					if(result.status == 0)
 						app.newMessages = result.data;
-					}else{
+					else
 						alert(result.msg);
-					}
 				}
 			});
 		},
@@ -37,14 +37,25 @@
 		this.loadNewMessages();
 	}
 });*/
-  $(document).ready(function() {
+$(function(){
+    //弹出框取消按钮事件
+	$('.popup_de .btn_cancel').click(function(){
+		$('.popup_de').removeClass('bbox');
+	});
+	//弹出框关闭按钮事件
+	$('.popup_de .popup_close').click(function(){
+		$('.popup_de').removeClass('bbox');
+	})
+})
+
+$(document).ready(function() {
 	var table = $('#msg').DataTable({
         responsive: true,
         "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
         "bAutoWidth" : true, //是否自适应宽度  
         "aLengthMenu" : [5, 10, 20], //更改显示记录数选项 
         "iDisplayLength" : 5, //默认显示的记录数  
-        "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0,7 ] }],
+        "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0,10 ] }],
         "order": [[ 1, 'asc' ]],
         "sDom": '<"row" <"col-sm-8" <"#add">> <"col-sm-4" <"row" <"col-sm-6" l> <"col-sm-6" f>>>>t<"row" <"col-sm-6" i> <"col-sm-6" p>>',
         language: {
@@ -62,25 +73,20 @@
         },
         "fnDrawCallback": function() {
         	$(this).find('input[type=checkbox]').removeAttr('checked');
-		},
-        
-       
-		
-    });
-	
-	var button = "<button type='button' class='btn btn-success ts' onclick='window.parent.aclick()'><span class='glyphicon glyphicon-plus icon'></span><span class='caption'>添加文章</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
-		+"<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'><span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
-		+"<a class='btn btn-danger td' onclick='deleteall()'><span class='fa fa-trash-o icon'></span><span class='caption'>撤稿</span></a>";
+		}
+    });   
+	var button = "<a class='btn btn-warning tw' onclick='passall()'><span class='fa fa-pencil-square-o'></span><span class='caption' id='allpass'>审核通过</span></a> &nbsp;&nbsp;&nbsp;&nbsp;"
+				+"<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'><span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
+				+"<a class='btn btn-danger td' onclick='deleteall()'><span class='fa fa-trash-o icon'></span><span class='caption'>删除</span></a>";
 	document.getElementById("add").innerHTML = button;
 	$('#msg tbody').on( 'mouseenter', 'td', function () {
-	var colIdx = table.cell(this).index().column;
-	$( table.cells().nodes() ).removeClass( 'highlight' );
-	$( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+	    var colIdx = table.cell(this).index().column;
+	    $( table.cells().nodes() ).removeClass( 'highlight' );
+	    $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
 	} );
 	$("#all").click(function(){
-	$('[name=all]:checkbox').prop('checked',this.checked);//checked为true时为默认显示的状态
-	});
-	
+        $('[name=all]:checkbox').prop('checked',this.checked);//checked为true时为默认显示的状态
+    });
 
 });   
 function checkall(){
@@ -89,6 +95,9 @@ function checkall(){
 		all[i].checked=true;
 	}
 }
+function millisecondsToDateTime(ms){
+	return new Date(ms).toLocaleString();
+};
 function deleteall(){
 	var all = $('[name=all]:checkbox');
 	var str = "";
@@ -105,12 +114,9 @@ function deleteall(){
 		else{
 			alert("请至少选择一个账号");
 			$('.popup_de').removeClass('bbox');
-		}		
+		}
 	})
 }
-function millisecondsToDateTime(ms){
-	return new Date(ms).toLocaleString();
-};
 function deletemsg(obj){
 	var tds = $(obj).parent().parent().parent().find('td');
 	var center = tds.eq(1).find('center');
@@ -120,6 +126,36 @@ function deletemsg(obj){
 	$('.popup_de').addClass('bbox');
 	$('.popup_de .btn-danger').one('click',function(){
 		doDelete(rid);
+	})
+}
+function passall(){
+	var all = $('[name=all]:checkbox');
+	var str = "";
+	for(var i=1;i<all.length;i++){
+		if(all[i].checked)
+			str = str+"&"+all[i].value;
+	}
+	var text="是否审核通过所选账号吗?";
+	document.getElementById('show_msg').innerHTML=text;
+	$('.popup_de').addClass('bbox');
+	$('.popup_de .btn-danger').one('click',function(){
+		if(str!="")
+			doPass(str);
+		else{
+			alert("请至少选择一个账号");
+			$('.popup_de').removeClass('bbox');
+		}
+	})
+}
+function pass(obj){
+	var tds = $(obj).parent().parent().parent().find('td');
+	var center = tds.eq(1).find('center');
+	var rid = center.eq(0).text();
+	var text="是否审核通过该账号吗?";
+	document.getElementById('show_msg').innerHTML=text;
+	$('.popup_de').addClass('bbox');
+	$('.popup_de .btn-danger').one('click',function(){
+		doPass(rid);
 	})
 }
 function doDelete(data){
@@ -133,6 +169,20 @@ function doDelete(data){
         },
         error :function(){
         	alert("系统出错，删除失败！");
+        }
+   });
+}
+function doPass(data){
+	$.ajax({                            
+		type:'post',        
+        url:'../../userManage/batchCheckUserByBranch/'+data,   
+        dataType:'json',
+        success: function(result) {  
+			alert(result.msg);
+			location.reload();	
+        },
+        error :function(){
+        	alert("系统出错，审核通过失败！");
         }
    });
 }

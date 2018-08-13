@@ -1,0 +1,269 @@
+.header {
+    position: relative;
+}
+.panel-body {
+    margin-top: 0;
+}
+i.ticon {
+    margin-left: 5px;
+}
+span.fa.fa-clock-o.icon {
+    font-size: 14px;
+}
+/* a.btn.btn-success.os.btn-xs {
+    padding: 2px 10px;
+} */
+/* button#btn_delete {
+    padding: 1px 9px;
+    padding-left: 10px;
+    background:transparent;
+    border: transparent;
+} */
+tbody>tr>td>center {
+    font-size: 13px;
+}
+/* i.fa.fa-search.ticon {
+    color: #5bc0de;
+    font-size: 15px;
+}
+i.fa.fa-pencil.ticon {
+    color: #5cb85c;
+    padding-left: 8px;
+    font-size: 15px;
+}
+i.fa.fa-trash-o.ticon {
+    color: #d9534f;
+    font-size: 15px;
+} */
+a.btn.btn-success.os.btn-xs {
+    padding-right: 4px;
+    margin:0 5px;
+}
+a.btn.btn-info.os.btn-xs {
+    padding-right: 8px;
+}
+button#btn_delete {
+    padding-left: 8px;
+}
+button#btn_look {
+    margin-right: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+i.fa.fa-pencil-square-o {
+    padding-left: 5px;
+}
+h4#myModalLabel {
+    font-weight: 600;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 2px;
+    margin: auto 0px;
+        color: #333;
+}
+.close {
+    float: right;
+    font-weight: bold;
+    line-height: 1;
+    color: rgb(0, 0, 0);
+    text-shadow: rgb(255, 255, 255) 0px 1px 0px;
+    opacity: 0.2;
+}
+button.close {
+    -webkit-appearance: none;
+    cursor: pointer;
+    padding: 0px;
+    background: transparent;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+}
+.modal-header > button > span {
+    height: 20px;
+    font-size: 35px;
+    margin: auto 0px;
+}
+input#chooseExam {
+    width: 0px;
+    height: 0;
+    z-index:-1;
+    display: none;
+}
+label.l-btn.choose-btn {
+    width: 100px;
+    height: 30px;
+    background: #5cb85c;
+    vertical-align: middle;
+    text-align: center;
+    padding: 5px 0;
+    color: #fff;
+    font-size: 14px;
+}
+i.fa.fa-upload.uploadicon {
+    margin-right: 8px;
+}
+select#mySelect {
+    width: 255px;
+    padding: 0px 10px;
+    margin: 0;
+}
+.form-group {
+    display: flex;
+    width: fit-content;
+    margin: 15px auto;
+    margin-bottom: 5px;
+}
+span.fl {
+    text-align: center;
+    margin-left: 124px;
+}
+input#upload,input#custom {
+    /* background: #5cb85c; */
+    background: #337ab7;
+    width: 65px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    box-sizing: unset;
+    border: none;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-left: -2px;
+}
+input.form-control {
+    width: 255px;
+}
+#custom-group{
+	display:none;
+}
+div.modal-footer>button.btn {
+   width:80px;
+}
+div.modal-footer>button#mUploadbtn {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+}
+@media (min-width: 768px)
+.modal-dialog {
+    width: 600px;
+    margin: 65px auto;
+}
+.modal-dialog {
+    margin-top: 118px;
+}
+a.download {
+    float: left;
+    line-height: 3;
+    margin-left: 30px;
+}
+/*试卷预览css*/
+div#previewModal .modal-header {
+    padding: 10px 15px;
+    border-bottom: 1px solid #e5e5e5;
+}
+div#previewModal .modal-body {
+    padding-top: 0;
+    min-height: 305px;
+}
+.page-header {
+    margin: 0 auto;
+}
+h3.text-center {
+    margin: 15px auto 5px auto;
+    font-size: 22px;
+    text-align: unset;
+    font-weight: 500;
+    color: #555;
+}
+h4.tesTitle {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    font-weight: 800;
+}
+h4.jxz-title {
+    font-size: 16px;
+    line-height: 2;
+    letter-spacing: 0.02em;
+    text-indent: 33px;
+}
+.jxz-option.radio {
+    margin-left: 33px;
+    font-size: 15px;
+}
+.topic-answer {
+    margin-left: 33px;
+    font-size: 15px;
+    font-weight: 600;
+}
+div#dbclick {
+    cursor: pointer;
+}
+textarea.form-control.jxz-title {
+    text-indent: 28px;
+    width: 95%;
+    margin: 0;
+    padding-right: 0;
+    /* position: unset; */
+}
+
+span.closediv {
+    float: right;
+    height: 25px;
+    text-align: center;
+    font-size: 15px;
+    vertical-align: middle;
+    padding-top: 1px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: -66px;
+    padding-left: 5px;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-bottom-left-radius: 20px;
+    width: 26px;
+    background: #ccc;
+    color: #fff;
+}
+span.closediv:hover{
+	color: #808080;
+}
+.edittestCon {
+    border: 0.01em solid #ccc;
+    margin-bottom: 15px;
+    padding-top: 12px;
+    padding-left: 25px;
+    padding-right: 0;
+}
+h4.text-center {
+    font-size: 20px;
+    font-weight: 550;
+}
+.topic-answer {
+    margin-left: 33px;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    line-height: 2;
+    margin-bottom: 15px;
+}
+label.opl {
+    display: flex;
+}
+input.form-control.optiontext {
+    width: 465px;
+}
+span.opclosebtn {
+    font-size: 18px;
+    color: #ccc;
+    font-weight: 600;
+    margin-left: 5px;
+    margin-top: 2px;
+}
+span.opclosebtn:hover{
+	 color: #808080;
+}
+label.opl>input[type="radio"] {
+    margin-top: 11px;
+}
