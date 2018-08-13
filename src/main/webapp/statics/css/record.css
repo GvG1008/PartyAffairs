@@ -18,6 +18,10 @@
 	border-radius: 4px;
 }
 
+p{
+	cursor: default;
+}
+
 .list-header{
     border-bottom: 1px solid #e6e6e6;
     margin-bottom: 15px;
@@ -62,17 +66,24 @@
 	top: 5px;
 }
 
-.record-page{
+.rp-page,
+.le-page{
 	height: 50px;
 	margin-top: 400px;
 }
 
-.record-page p{
+.le-page{
+	margin-top: 365px;
+}
+
+.rp-page p,
+.le-page p{
 	margin-top: 20px;
 	text-align: right;
 }
 
-.record-page a{
+.rp-page a,
+.le-page a{
 	margin-right: 20px;
 	cursor: pointer;
 }
@@ -112,11 +123,54 @@
 	overflow: hidden;
 }
 
-.record-title a{
+.vr-title{
+	width: 250px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.record-title a,
+.vr-title a{
 	cursor: pointer;
 	color: black;
 }
 
-.record-title a:hover{
+.record-title a:hover,
+.vr-title a:hover{
 	text-decoration: none;
+	color: #37aaea;
+}
+
+#video-record,
+#docu-record{
+	position: absolute;
+	margin-top: 35px;
+	height: 400px;
+	width: 375px;
+}
+
+.record-class{
+	position: absolute;
+	height: 50px;
+	width: 375px;
+}
+
+#video,
+#docu{
+	color: #3365DA;
+	float: left;
+	height: 50px;
+	width: 185px;
+}
+
+#video{
+	color: red;
+	background-color: #E6E7EC;
+}
+
+.record-class p{
+	text-align: center;
+	margin-top: 10px;
+	font-size: 20px;
 }
