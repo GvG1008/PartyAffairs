@@ -172,8 +172,8 @@ public class StudyController {
      */
     @RequestMapping(value = "get_study_documents.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse getStudyDocuments(HttpSession session) {
-        return iStudyService.getStudyDocumentsPuton();
+    public ServerResponse getStudyDocuments(HttpSession session,String page,String pageNum) {
+        return iStudyService.getStudyDocumentsPuton(Integer.parseInt(page),Integer.parseInt(pageNum));
     }
 
     /**
@@ -186,7 +186,7 @@ public class StudyController {
     @RequestMapping(value = "get_study_documents_by_label_id.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse getStudyDocumentsByLabelId(@RequestParam(value = "label_id") String[] labelId,
-            HttpSession session) {
+            HttpSession session,String page,String pageNum) {
         HashSet<Integer> hashSet = Sets.newHashSet();
         int idCount = labelId.length;
         for (int i = 0; i < idCount; i++)
@@ -195,9 +195,33 @@ public class StudyController {
         for (Integer labelid : hashSet) {
             idList.add(labelid);
         }
-        return iStudyService.getStudyDocumentsPutonByLabelId(idList);
+        return iStudyService.getStudyDocumentsPutonByLabelId(idList,Integer.parseInt(page),Integer.parseInt(pageNum));
     }
 
+    /**
+     * 根据标签id获取必学文档学习资料(上架)
+     * @param labelId
+     * @param session
+     * @param page
+     * @param pageNum
+     * @return
+     */
+    @RequestMapping(value = "get_study_documents_must_by_label_id.do", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse getStudyDocumentsMustByLabelId(@RequestParam(value = "label_id") String[] labelId,
+            HttpSession session,String page,String pageNum) {
+        HashSet<Integer> hashSet = Sets.newHashSet();
+        int idCount = labelId.length;
+        for (int i = 0; i < idCount; i++)
+            hashSet.add(Integer.parseInt(labelId[i]));
+        ArrayList<Integer> idList = Lists.newArrayList();
+        for (Integer labelid : hashSet) {
+            idList.add(labelid);
+        }
+        String userId = this.getUserid();
+        return iStudyService.getStudyDocumentsMustPutonByLabelId(userId,idList,Integer.parseInt(page),Integer.parseInt(pageNum));
+    }
+    
     /**
      * 获取用户必学的文档资料
      * @param session
@@ -205,9 +229,9 @@ public class StudyController {
      */
     @RequestMapping(value = "get_study_documents_must.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse getStudyDocumentMust(HttpSession session) {
+    public ServerResponse getStudyDocumentMust(HttpSession session,String page,String pageNum) {
         String userId = this.getUserid();
-        return iStudyService.getStudyDocumentMust(userId);
+        return iStudyService.getStudyDocumentMust(userId,Integer.parseInt(page),Integer.parseInt(pageNum));
     }
     
     /**
@@ -290,8 +314,8 @@ public class StudyController {
      */
     @RequestMapping(value = "get_study_videos.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse getStudyVideos(HttpSession session) {
-        return iStudyService.getStudyVideosPuton();
+    public ServerResponse getStudyVideos(HttpSession session,String page,String pageNum) {
+        return iStudyService.getStudyVideosPuton(Integer.parseInt(page),Integer.parseInt(pageNum));
     }
     
     /**
@@ -304,7 +328,7 @@ public class StudyController {
     @RequestMapping(value = "get_study_videos_by_label_id.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse getStudyVideosByLabelId(@RequestParam(value = "label_id") String[] labelId,
-            HttpSession session) {
+            HttpSession session,String page,String pageNum) {
         HashSet<Integer> hashSet = Sets.newHashSet();
         int idCount = labelId.length;
         for (int i = 0; i < idCount; i++)
@@ -313,7 +337,7 @@ public class StudyController {
         for (Integer labelid : hashSet) {
             idList.add(labelid);
         }
-        return iStudyService.getStudyVideosPutonByLabelId(idList);
+        return iStudyService.getStudyVideosPutonByLabelId(idList,Integer.parseInt(page),Integer.parseInt(pageNum));
     }
     
     /**
@@ -339,9 +363,9 @@ public class StudyController {
      */
     @RequestMapping(value = "get_study_videos_must.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse getStudyVideoMust(HttpSession session) {
+    public ServerResponse getStudyVideoMust(HttpSession session,String page,String pageNum) {
         String userId = this.getUserid();
-        return iStudyService.getStudyVideoMust(userId);
+        return iStudyService.getStudyVideoMust(userId,Integer.parseInt(page),Integer.parseInt(pageNum));
     }
     
     

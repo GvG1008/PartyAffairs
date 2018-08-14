@@ -1,7 +1,9 @@
 package com.zqu.pa.dao.study;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.zqu.pa.entity.study.StudyVideo;
 import com.zqu.pa.entity.study.StudyVideoRecord;
@@ -15,11 +17,17 @@ public interface StudyVideoMapper {
 
     StudyVideo selectByPrimaryKey(Integer videoId);
     
-    List<StudyVideo> selectPutonByLabelId(List<Integer> list);
+    List<StudyVideo> selectPutonByLabelId(HashMap map);
     
-    List<StudyVideo> selectMustPutonByUserId(String userId);
+    int selectCountPutonByLabelId(List<Integer> list);
     
-    List<StudyVideo> selectPuton();
+    List<StudyVideo> selectMustPutonByUserId(@Param("index")int index,@Param("num")int num,@Param("userId")String userId);
+    
+    int selectCountMustPutonByUserId(String userId);
+    
+    List<StudyVideo> selectPuton(@Param("index")int index,@Param("num")int num);
+    
+    int selectCountPuton();
     
     float selectScheduleByVideoIdAndUserId(StudyVideoRecord record);
     

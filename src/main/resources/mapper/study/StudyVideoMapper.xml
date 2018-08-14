@@ -23,14 +23,24 @@
     from study_video
     where video_id = #{videoId,jdbcType=INTEGER}
   </select>
-  <select id="selectPutonByLabelId" resultType="com.zqu.pa.entity.study.StudyVideo" parameterType="java.util.List" >
+  <select id="selectPutonByLabelId" resultType="com.zqu.pa.entity.study.StudyVideo" parameterType="map" >
     SELECT * FROM study_video
+    WHERE video_id NOT IN(SELECT video_id FROM study_video_putoff) 
+    AND video_id IN (SELECT video_id FROM study_video_label WHERE label_id IN
+    <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+    </foreach> 
+    ) ORDER BY video_id
+    limit ${index},${num}
+  </select>
+  <select id="selectPutonByLabelId" resultType="int" parameterType="java.util.List" >
+    SELECT count(1) FROM study_video
     WHERE video_id NOT IN(SELECT video_id FROM study_video_putoff) 
     AND video_id IN (SELECT video_id FROM study_video_label WHERE label_id IN
     <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
         #{item}
     </foreach> 
-    ) ORDER BY video_id
+    )
   </select>
   <select id="selectMustPutonByUserId" resultType="com.zqu.pa.entity.study.StudyVideo" parameterType="string" >
     select *
@@ -38,9 +48,23 @@
     where video_id IN (select video_id from study_video_must where user_id = #{userId,jdbcType=VARCHAR})
     AND video_id NOT IN (select video_id from study_video_putoff)
     order by video_id
+    limit #{index},#{num}
+  </select>
+  <select id="selectCountMustPutonByUserId" resultType="int" parameterType="string" >
+    select count(1)
+    from study_video
+    where video_id IN (select video_id from study_video_must where user_id = #{userId,jdbcType=VARCHAR})
+    AND video_id NOT IN (select video_id from study_video_putoff)
+    order by video_id
   </select>
   <select id="selectPuton" resultType="com.zqu.pa.entity.study.StudyVideo">
     select * from study_video
+    where video_id NOT IN(select video_id from study_video_putoff)
+    order by video_id
+    limit #{index},#{num}
+  </select>
+  <select id="selectCountPuton" resultType="int">
+    select count(1) from study_video
     where video_id NOT IN(select video_id from study_video_putoff)
     order by video_id
   </select>

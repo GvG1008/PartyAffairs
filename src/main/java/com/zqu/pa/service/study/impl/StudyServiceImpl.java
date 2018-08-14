@@ -1,6 +1,8 @@
 package com.zqu.pa.service.study.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.dao.study.StudyDocumentLabelMapper;
 import com.zqu.pa.dao.study.StudyDocumentMapper;
@@ -115,8 +118,17 @@ public class StudyServiceImpl implements IStudyService {
 
     @Override
     @Transactional
-    public ServerResponse getStudyDocumentsPuton() {
-        List<StudyDocument> sdl = studyDocumentMapper.selectPutOn();
+    public ServerResponse getStudyDocumentsPuton(int page,int pageNum) {
+        int totalNum = studyDocumentMapper.selectCountPutOn();
+        int totalPage = (int)(totalNum+pageNum-1)/pageNum;
+        if(totalPage<page)
+            page = totalPage;
+        int index = (page-1)*pageNum;
+        Map map = Maps.newHashMap();
+        map.put("totalPage", totalPage);
+        map.put("page", page);
+        map.put("pageNum", pageNum);
+        List<StudyDocument> sdl = studyDocumentMapper.selectPutOn(index,pageNum);
         int size = sdl.size();
         List<StudyDocumentVO1> list = Lists.newArrayList();
         for (int i = 0; i < size; i++) {
@@ -128,7 +140,8 @@ public class StudyServiceImpl implements IStudyService {
             StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes,sls);
             list.add(sdvo1);
         }
-        return ServerResponse.createBySuccess(list);
+        map.put("list", list);
+        return ServerResponse.createBySuccess(map);
     }
 
     @Override
@@ -173,8 +186,21 @@ public class StudyServiceImpl implements IStudyService {
 
     @Override
     @Transactional
-    public ServerResponse getStudyDocumentsPutonByLabelId(List<Integer> idList) {
-        List<StudyDocument> sdl = studyDocumentMapper.selectPutonByLabelId(idList);
+    public ServerResponse getStudyDocumentsPutonByLabelId(List<Integer> idList,int page,int pageNum) {
+        int totalNum = studyDocumentMapper.selectCountPutonByLabelId(idList);
+        int totalPage = (int)(totalNum+pageNum-1)/pageNum;
+        if(totalPage<page)
+            page = totalPage;
+        int index = (page-1)*pageNum;
+        Map map = Maps.newHashMap();
+        map.put("totalPage", totalPage);
+        map.put("page", page);
+        map.put("pageNum", pageNum);
+        HashMap paramMap = Maps.newHashMap();
+        paramMap.put("index", index);
+        paramMap.put("num", pageNum);
+        paramMap.put("idList", idList);
+        List<StudyDocument> sdl = studyDocumentMapper.selectPutonByLabelId(paramMap);
         int size = sdl.size();
         List<StudyDocumentVO1> list = Lists.newArrayList();
         for (int i = 0; i < size; i++) {
@@ -186,13 +212,58 @@ public class StudyServiceImpl implements IStudyService {
             StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes,sls);
             list.add(sdvo1);
         }
-        return ServerResponse.createBySuccess(list);
+        map.put("list", list);
+        return ServerResponse.createBySuccess(map);
+    }
+    
+    @Override
+    @Transactional
+    public ServerResponse getStudyDocumentsMustPutonByLabelId(String userId,List<Integer> idList,int page,int pageNum) {
+        HashMap paramMap = Maps.newHashMap();
+        paramMap.put("idList", idList);
+        paramMap.put("userId", userId);
+        
+        int totalNum = studyDocumentMapper.selectCountMustPutonByLabelId(paramMap);
+        int totalPage = (int)(totalNum+pageNum-1)/pageNum;
+        if(totalPage<page)
+            page = totalPage;
+        int index = (page-1)*pageNum;
+        Map map = Maps.newHashMap();
+        map.put("totalPage", totalPage);
+        map.put("page", page);
+        map.put("pageNum", pageNum);
+        paramMap.put("index", index);
+        paramMap.put("num", pageNum);
+
+        List<StudyDocument> sdl = studyDocumentMapper.selectMustPutonByLabelId(paramMap);
+        int size = sdl.size();
+        List<StudyDocumentVO1> list = Lists.newArrayList();
+        for (int i = 0; i < size; i++) {
+            StudyDocument sd = sdl.get(i);
+            String updateTime = DateToString.getDateString("yyyy-MM-dd", sd.getUpdatetime());
+            String uploadUser = studyDocumentMapper.getUserNameByUserId(sd.getUserId());
+            int downloadTimes = studyDocumentStatisticsMapper.selectTimeSumByDocumentId(sd.getDocumentId());
+            List<StudyLabel> sls = studyLabelMapper.selectByDocumentId(sd.getDocumentId());
+            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes,sls);
+            list.add(sdvo1);
+        }
+        map.put("list", list);
+        return ServerResponse.createBySuccess(map);
     }
 
     @Override
     @Transactional
-    public ServerResponse getStudyDocumentMust(String userId) {
-        List<StudyDocument> sdl = studyDocumentMapper.selectMustPutonByUserId(userId);
+    public ServerResponse getStudyDocumentMust(String userId,int page,int pageNum) {
+        int totalNum = studyDocumentMapper.selectCountMustPutonByUserId(userId);
+        int totalPage = (int)(totalNum+pageNum-1)/pageNum;
+        if(totalPage<page)
+            page = totalPage;
+        int index = (page-1)*pageNum;
+        Map map = Maps.newHashMap();
+        map.put("totalPage", totalPage);
+        map.put("page", page);
+        map.put("pageNum", pageNum);
+        List<StudyDocument> sdl = studyDocumentMapper.selectMustPutonByUserId(index,pageNum,userId);
         int size = sdl.size();
         List<StudyDocumentVO1> list = Lists.newArrayList();
         for (int i = 0; i < size; i++) {
@@ -204,7 +275,8 @@ public class StudyServiceImpl implements IStudyService {
             StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes,sls);
             list.add(sdvo1);
         }
-        return ServerResponse.createBySuccess(list);
+        map.put("list", list);
+        return ServerResponse.createBySuccess(map);
     }
 
     @Override
@@ -258,8 +330,18 @@ public class StudyServiceImpl implements IStudyService {
     
     @Override
     @Transactional
-    public ServerResponse getStudyVideosPuton() {
-        List<StudyVideo> svl = studyVideoMapper.selectPuton();
+    public ServerResponse getStudyVideosPuton(int page,int pageNum) {
+        int totalNum = studyVideoMapper.selectCountPuton();
+        int totalPage = (int)(totalNum+pageNum-1)/pageNum;
+        if(totalPage<page)
+            page = totalPage;
+        int index = (page-1)*pageNum;
+        Map map = Maps.newHashMap();
+        map.put("totalPage", totalPage);
+        map.put("page", page);
+        map.put("pageNum", pageNum);
+        
+        List<StudyVideo> svl = studyVideoMapper.selectPuton(index,pageNum);
         int size = svl.size();
         List<StudyVideoVO1> list = Lists.newArrayList();
         for(int i=0;i<size;i++) {
@@ -270,14 +352,28 @@ public class StudyServiceImpl implements IStudyService {
             StudyVideoVO1 svvo1 = new StudyVideoVO1(sv.getVideoId(), sv.getVideoTitle(), sv.getVideoIntroduction(), sv.getCoverImg(), sv.getVideoPath(), uploadUser, updateTime, sls);
             list.add(svvo1);
         }
-        return ServerResponse.createBySuccess(list);
+        map.put("list", list);
+        return ServerResponse.createBySuccess(map);
     }
     
 
     @Override
     @Transactional
-    public ServerResponse getStudyVideosPutonByLabelId(List<Integer> idList) {
-        List<StudyVideo> svl = studyVideoMapper.selectPutonByLabelId(idList);
+    public ServerResponse getStudyVideosPutonByLabelId(List<Integer> idList,int page,int pageNum) {
+        int totalNum = studyVideoMapper.selectCountPutonByLabelId(idList);
+        int totalPage = (int)(totalNum+pageNum-1)/pageNum;
+        if(totalPage<page)
+            page = totalPage;
+        int index = (page-1)*pageNum;
+        Map map = Maps.newHashMap();
+        map.put("totalPage", totalPage);
+        map.put("page", page);
+        map.put("pageNum", pageNum);
+        HashMap paramMap = Maps.newHashMap();
+        paramMap.put("index", index);
+        paramMap.put("num",pageNum);
+        paramMap.put("idList", idList);
+        List<StudyVideo> svl = studyVideoMapper.selectPutonByLabelId(paramMap);
         int size = svl.size();
         List<StudyVideoVO1> list = Lists.newArrayList();
         for(int i=0;i<size;i++) {
@@ -288,13 +384,23 @@ public class StudyServiceImpl implements IStudyService {
             StudyVideoVO1 svvo1 = new StudyVideoVO1(sv.getVideoId(), sv.getVideoTitle(), sv.getVideoIntroduction(), sv.getCoverImg(), sv.getVideoPath(), uploadUser, updateTime, sls);
             list.add(svvo1);
         }
-        return ServerResponse.createBySuccess(list);
+        map.put("list", list);
+        return ServerResponse.createBySuccess(map);
     }
     
     @Override
     @Transactional
-    public ServerResponse getStudyVideoMust(String userId) {
-        List<StudyVideo> svl = studyVideoMapper.selectMustPutonByUserId(userId);
+    public ServerResponse getStudyVideoMust(String userId,int page,int pageNum) {
+        int totalNum = studyVideoMapper.selectCountMustPutonByUserId(userId);
+        int totalPage = (int)(totalNum+pageNum-1)/pageNum;
+        if(totalPage<page)
+            page = totalPage;
+        int index = (page-1)*pageNum;
+        Map map = Maps.newHashMap();
+        map.put("totalPage", totalPage);
+        map.put("page", page);
+        map.put("pageNum", pageNum);
+        List<StudyVideo> svl = studyVideoMapper.selectMustPutonByUserId(index,pageNum,userId);
         int size = svl.size();
         List<StudyVideoVO2> list = Lists.newArrayList();
         for(int i=0;i<size;i++) {
@@ -307,6 +413,7 @@ public class StudyServiceImpl implements IStudyService {
             StudyVideoVO2 svvo2 = new StudyVideoVO2(sv.getVideoId(), sv.getVideoTitle(), sv.getVideoIntroduction(), sv.getCoverImg(), sv.getVideoPath(), uploadUser, updateTime, sls,schedule);
             list.add(svvo2);
         }
-        return ServerResponse.createBySuccess(list);
+        map.put("list", list);
+        return ServerResponse.createBySuccess(map);
     }
 }
