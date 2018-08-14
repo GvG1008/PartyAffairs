@@ -33,7 +33,7 @@
     ) ORDER BY video_id
     limit ${index},${num}
   </select>
-  <select id="selectPutonByLabelId" resultType="int" parameterType="java.util.List" >
+  <select id="selectCountPutonByLabelId" resultType="int" parameterType="java.util.List" >
     SELECT count(1) FROM study_video
     WHERE video_id NOT IN(SELECT video_id FROM study_video_putoff) 
     AND video_id IN (SELECT video_id FROM study_video_label WHERE label_id IN
