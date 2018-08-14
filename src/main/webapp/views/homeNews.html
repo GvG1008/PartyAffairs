@@ -17,7 +17,7 @@
 				</ol>
 				<div class="carousel-inner" id="FocusNews">
 					<div v-for="(r,index) in news" :class="generateClass(index)">
-						<a :href="'#'+r.id" target="_blank">
+						<a :href="'home.html?location=djyw&id='+r.id" target="_blank">
 							<img class="car-img" :src="'../'+r.coverpath">
 							<div class="carousel-caption">{{r.title}}</div>
 						</a>
@@ -86,15 +86,15 @@
 					</p>
 				</div>
 				<table class="learn-list">
-					<tr v-for="(r,index) in learn" v-if="index % 2 == 1">
-						<td class="ll-name"><a :href="'#'+learn[index-1].id"><p :title="learn[index-1].title">{{learn[index-1].title}}</p></a></td>
-						<td class="ll-time"><p>{{learn[index-1].time}}</p></td>
-						<td class="ll-name"><a :href="'#'+learn[index].id"><p :title="learn[index].title">{{learn[index].title}}</p></a></td>
-						<td class="ll-time"><p>{{learn[index].time}}</p></td>
+					<tr v-for="(r,index) in learn" v-if="index % 2 == 1 && index<5">
+						<td class="ll-name"><a :href="'#'+learn[index-1].documentId"><p :title="learn[index-1].documentTitle">{{learn[index-1].documentTitle}}</p></a></td>
+						<td class="ll-time"><p>{{initTime(learn[index-1].updateTime)}}</p></td>
+						<td class="ll-name"><a :href="'#'+learn[index].documentId"><p :title="learn[index].documentTitle">{{learn[index].documentTitle}}</p></a></td>
+						<td class="ll-time"><p>{{initTime(learn[index-1].updateTime)}}</p></td>
 					</tr>
 					<tr v-else-if="index == learn.length-1">
-						<td class="ll-name"><a :href="'#'+learn[index].id"><p :title="learn[index].title">{{learn[index].title}}</p></a></td>
-						<td class="ll-time"><p>{{learn[index].time}}</p></td>
+						<td class="ll-name"><a :href="'#'+learn[index].documentId"><p :title="learn[index].documentTitle">{{learn[index].documentTitle}}</p></a></td>
+						<td class="ll-time"><p>{{initTime(learn[index-1].updateTime)}}</p></td>
 					</tr>
 				</table>
 			</div>
@@ -106,9 +106,9 @@
 					</p>
 				</div>
 				<table class="learn-list">
-					<tr v-for="r in download">
-						<td class="ll-name"><a href="'#'+r.id"><p :title="r.title">{{r.title}}</p></a></td>
-						<td class="ll-time"><p>{{r.time}}</p></td>
+					<tr v-for="(r,index) in download" v-if="index<4">
+						<td class="ll-name"><a :href="'#'+r.documentId"><p :title="r.documentTitle">{{r.documentTitle}}</p></a></td>
+						<td class="ll-time"><p>{{initTime(r.updateTime)}}</p></td>
 					</tr>
 				</table>
 			</div>

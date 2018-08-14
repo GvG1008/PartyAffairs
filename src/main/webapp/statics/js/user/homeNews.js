@@ -240,13 +240,22 @@ var Learning = new Vue({
 	created:function(){
 		var self = this;
 		$.ajax({
-			type:"get",
-			url:"../statics/json/image2.json",
+			type:"post",
+			url:"../study/get_study_documents.do",
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
-				self.learn = result.news;
+				if(result.status==0)
+					self.learn = result.data;
+				else{
+					alert(result.msg);
+				}
 			}
 		});
+	},
+	methods:{
+		initTime:function(time){
+			return time.substring(5,10);
+		}
 	}
 })
 var Download = new Vue({
@@ -257,12 +266,21 @@ var Download = new Vue({
 	created:function(){
 		var self = this;
 		$.ajax({
-			type:"get",
-			url:"../statics/json/image2.json",
+			type:"post",
+			url:"../study/get_study_documents.do",
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
-				self.download = result.news;
+				if(result.status==0)
+					self.download = result.data;
+				else{
+					alert(result.msg);
+				}
 			}
 		});
+	},
+	methods:{
+		initTime:function(time){
+			return time.substring(5,10);
+		}
 	}
 })
