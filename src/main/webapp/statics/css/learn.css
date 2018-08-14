@@ -115,3 +115,14 @@ input.labelauty+label {
 .data-list a:hover{
 	text-decoration: none;
 }
+
+.learn-page{
+	margin-top: 50px;
+	width: 360px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.learn-page input{
+	width: 50px;
+}
