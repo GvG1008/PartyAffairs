@@ -1,5 +1,6 @@
 package com.zqu.pa.controller.partyalbum;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +48,7 @@ public class PartyAlbumController {
     }
     
     /**
-     * 获取相册里的所有图片
+     * 获取相册里的所有图片和图片标题、描述
      * @param albumId 相册ID
      * @return
      */
@@ -55,14 +56,16 @@ public class PartyAlbumController {
     @RequestMapping(value = "/picture/{albumId}", method = RequestMethod.GET)
     public ServerResponse listAlbumPicture(@PathVariable Long albumId) {
         
-        List<PartyPicture> listPicture = null;
+        Map<String, Object> map = new HashMap<>();
         try {
-            listPicture = partyAlbumService.listAlbumPicture(albumId);
+            map = partyAlbumService.listAlbumPicture(albumId);
+            if (map == null) 
+                return ServerResponse.createByError();
         } catch(Exception e) {
             e.printStackTrace();
             return ServerResponse.createByError();
         }
-        return ServerResponse.createBySuccess(listPicture);
+        return ServerResponse.createBySuccess(map);
     }
     
     /**

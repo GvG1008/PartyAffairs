@@ -1,6 +1,7 @@
 package com.zqu.pa.service.partyalbum;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,7 +17,7 @@ public interface PartyAlbumService {
     List<PartyAlbum> listAlbum(Integer branchId);
     
     //根据相册ID获取某个相册下的所有图片
-    List<PartyPicture> listAlbumPicture(Long albumId);
+    Map<String, Object> listAlbumPicture(Long albumId);
     
     //相册浏览量加1
     void addPageviews(Long albumId);

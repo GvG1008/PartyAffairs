@@ -2,6 +2,7 @@ package com.zqu.pa.service.partyalbum.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -58,7 +59,17 @@ public class PartyAlbumServiceImpl implements PartyAlbumService {
     }
 
     @Override
-    public List<PartyPicture> listAlbumPicture(Long albumId) {
+    public Map<String, Object> listAlbumPicture(Long albumId) {
+        
+        PartyAlbumExample example1 = new PartyAlbumExample();
+        example1.createCriteria().andAlbumIdEqualTo(albumId);
+        PartyAlbum partyAblum = partyAlbumMapper.selectByPrimaryKey(albumId);
+        Map<String, Object> map = new HashMap<>();
+        if (partyAblum == null) {
+            return null;     
+        } 
+        map.put("albumTitle", partyAblum.getAlbumTitle());
+        map.put("description", partyAblum.getDescription());
         
         PartyPictureExample example = new PartyPictureExample();
         example.createCriteria().andAlbumIdEqualTo(albumId);
@@ -66,10 +77,10 @@ public class PartyAlbumServiceImpl implements PartyAlbumService {
         listPicture = partyPictureMapper.selectByExample(example);
         if (listPicture == null || listPicture.size() == 0) {
             logger.info("相册ID：" + albumId + " 下无图片");
-            return listPicture;
         }
+        map.put("pictures", listPicture);
         addPageviews(albumId);
-        return listPicture;
+        return map;
     }
 
     @Override
