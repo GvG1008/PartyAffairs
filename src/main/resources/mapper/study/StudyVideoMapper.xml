@@ -42,7 +42,7 @@
     </foreach> 
     )
   </select>
-  <select id="selectMustPutonByUserId" resultType="com.zqu.pa.entity.study.StudyVideo" parameterType="string" >
+  <select id="selectMustPutonByUserId" resultType="com.zqu.pa.entity.study.StudyVideo" >
     select *
     from study_video
     where video_id IN (select video_id from study_video_must where user_id = #{userId,jdbcType=VARCHAR})
