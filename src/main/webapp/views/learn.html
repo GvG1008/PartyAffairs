@@ -9,14 +9,14 @@
         	<div class="learn-lable">
         		<h2>学习资料</h2>
         	</div>
-        	<div class="lable-list">
+        	<div class="lable-list" id="lable-list">
         		<table>
         			<tr>
         				<td class="table-lable"><span>要求：</span></td>
         				<td>
         					<ul class="dowebok">
-        						<li><input type="radio" name="radio1" value="全部" data-labelauty="全部"></li>
-								<li><input type="radio" name="radio1" value="必须学习" data-labelauty="必须学习"></li>
+        						<li><input type="radio" name="radio1" value="0" data-labelauty="全部"></li>
+								<li><input type="radio" name="radio1" value="1" data-labelauty="必须学习"></li>
 							</ul>
         				</td>
         			</tr>
@@ -24,25 +24,8 @@
         				<td class="table-lable"><span>标签：</span></td>
         				<td colspan="2">
         					<ul class="dowebok">
-        						<li><input type="checkbox" name="checkbox" value="全部" data-labelauty="全部"></li>
-								<li><input type="checkbox" name="checkbox" value="1标签" data-labelauty="1标签"></li>
-								<li><input type="checkbox" name="checkbox" value="2标签" data-labelauty="2标签"></li>
-								<li><input type="checkbox" name="checkbox" value="3标签" data-labelauty="3标签"></li>
-								<li><input type="checkbox" name="checkbox" value="4标签" data-labelauty="4标签"></li>
-								<li><input type="checkbox" name="checkbox" value="5标签" data-labelauty="5标签"></li>
-								<li><input type="checkbox" name="checkbox" value="6标签" data-labelauty="6标签"></li>
-								<li><input type="checkbox" name="checkbox" value="1标签" data-labelauty="1标签"></li>
-								<li><input type="checkbox" name="checkbox" value="2标签" data-labelauty="2标签"></li>
-								<li><input type="checkbox" name="checkbox" value="3标签" data-labelauty="3标签"></li>
-								<li><input type="checkbox" name="checkbox" value="4标签" data-labelauty="4标签"></li>
-								<li><input type="checkbox" name="checkbox" value="5标签" data-labelauty="5标签"></li>
-								<li><input type="checkbox" name="checkbox" value="6标签" data-labelauty="6标签"></li>
-								<li><input type="checkbox" name="checkbox" value="1标签" data-labelauty="1标签"></li>
-								<li><input type="checkbox" name="checkbox" value="2标签" data-labelauty="2标签"></li>
-								<li><input type="checkbox" name="checkbox" value="3标签" data-labelauty="3标签"></li>
-								<li><input type="checkbox" name="checkbox" value="4标签" data-labelauty="4标签"></li>
-								<li><input type="checkbox" name="checkbox" value="5标签" data-labelauty="5标签"></li>
-								<li><input type="checkbox" name="checkbox" value="6标签" data-labelauty="6标签"></li>
+        						<li><input type="checkbox" name="checkbox" value="0" data-labelauty="全部"></li>
+								<li v-for="r in learn"><input type="checkbox" name="checkbox" :value="r.labelId" :data-labelauty="r.labelName"></li>								
 							</ul>
         				</td>
         			</tr>
@@ -50,8 +33,8 @@
         				<td class="table-lable"><span>类型：</span></td>
         				<td>
         					<ul class="dowebok">
-								<li><input type="radio" name="radio" value="视频学习" data-labelauty="视频学习"></li>
-								<li><input type="radio" name="radio" value="资料学习" data-labelauty="资料学习"></li>
+								<li><input type="radio" name="radio" value="1" data-labelauty="视频学习"></li>
+								<li><input type="radio" name="radio" value="2" data-labelauty="资料学习"></li>
 							</ul>
         				</td>
         				<td class="search-td">
