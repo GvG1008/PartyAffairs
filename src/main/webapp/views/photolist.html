@@ -34,16 +34,19 @@
                         <div class="collapse navbar-toggleable-md text-xs-center text-uppercase tm-navbar" id="tmNavbar">
                             <ul class="nav navbar-nav">
                                 <li class="nav-item active selected">
-                                    <a class="nav-link" href="#0" data-no="1">计算机科学与技术学生党支部<span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="#0" data-no="1">软件工程学生党支部<span class="sr-only">(current)</span></a>
                                 </li>                                
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#0" data-no="2">网络工程学生党支部</a>
+                                    <a class="nav-link" href="#0" data-no="2">计算机科学与技术学生党支部</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#0" data-no="3">软件工程学生党支部</a>
+                                    <a class="nav-link" href="#0" data-no="3">网络工程学生党支部</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#0" data-no="4">物联网学生党支部</a>
+                                </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" href="#0" data-no="5">数据科学与大数据技术学生党支部</a>
                                 </li>
                             </ul>
                         </div>                        
@@ -54,199 +57,38 @@
 
             <ul class="cd-hero-slider">
 
-                <!-- Page 1 Gallery One -->
-                <li class="selected">                    
+                <!-- Page 1 软件工程学生党支部 -->
+                <li class="selected" id="selected1">                    
                     <div class="cd-full-width">
                         <div class="container-fluid js-tm-page-content" data-page-no="1" data-page-type="gallery">
                             <div class="tm-img-gallery-container">
                                 <div class="tm-img-gallery gallery-one">
                                 <!-- Gallery One pop up connected with JS code below -->                                    
                                     <div class="tm-img-gallery-info-container">                                    
-                                        <h2 class="tm-text-title tm-gallery-title tm-white"><span class="tm-white">Multi Color Image Gallery</span></h2>
-                                        <p class="tm-text">This responsive HTML template includes three gallery pages. Multi color is designed by Tooplate. You may use this layout for your website.
+                                        <h2 class="tm-text-title tm-gallery-title tm-white"><span class="tm-white">软件工程学生党支部 </span></h2>
+                                        <p class="tm-text">这是软件工程学生党支部的活动相册
                                         </p>
                                     </div>
-                                    <div class="grid-item">
+                                    <div class="grid-item" v-for="r in datas">
                                         <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-01-tn.jpg" class="img-fluid tm-img">
+                                            <img :src="getImageUrl(r.coverImage)" class="img-fluid tm-img">
                                             <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>One</span></h2>
-                                                <p class="tm-figure-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <a href="photo.html?cl=1&id=1" target="_blank">View more</a>
+                                                <h2 class="tm-figure-title">{{r.albumTitle}}</h2>
+                                                <p class="tm-figure-description">{{r.description}}</p>
+                                                <a :href="'photo.html?cl='+r.branchId+'&id='+r.albumId" target="_blank">View more</a>
                                             </figcaption>           
                                         </figure>
                                     </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-02-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>Two</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-02.jpg">View more</a>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-03-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>Three</span></h2>
-                                                <p class="tm-figure-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <a href="img/tm-img-03.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-04-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>Four</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-04.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>  
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-05-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>Five</span></h2>
-                                                <p class="tm-figure-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <a href="img/tm-img-05.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-06-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>Six</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-06.jpg">View more</a>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-07-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>Seven</span></h2>
-                                                <p class="tm-figure-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <a href="img/tm-img-07.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-08-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>Eight</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-08.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>   
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-09-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>Nine</span></h2>
-                                                <p class="tm-figure-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <a href="img/tm-img-09.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-10-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>Ten</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-10.jpg">View more</a>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-11-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>Eleven</span></h2>
-                                                <p class="tm-figure-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <a href="img/tm-img-11.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-12-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>Twelve</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-12.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-13-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>Thirteen</span></h2>
-                                                <p class="tm-figure-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <a href="img/tm-img-13.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-14-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>Fourteen</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-14.jpg">View more</a>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-15-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>Fifteen</span></h2>
-                                                <p class="tm-figure-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <a href="img/tm-img-15.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-16-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Image <span>Sixteen</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-16.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>                                                                       
+                                                                                             
                                 </div>                                 
                             </div>
                         </div>                                                    
-                    </div>     
-                    
-                    <footer class="tm-footer">          
-	                	<div class="tm-social-icons-container text-xs-center">
-		                	<a href="#" class="tm-social-link"><i class=""><<</i></a>
-		                    <a href="#" class="tm-social-link"><i class="">1</i></a>
-		                    <a href="#" class="tm-social-link"><i class="">2</i></a>
-		                    <a href="#" class="tm-social-link"><i class="">3</i></a>
-		                    <a href="#" class="tm-social-link"><i class="">4</i></a>
-		                    <a href="#" class="tm-social-link"><i class="">5</i></a>
-		                    <a href="#" class="tm-social-link"><i class="">>></i></a>
-	               		</div>
-            		</footer>
+                    </div>                      
             		
                 </li>
                 
-                 <!-- Page 2 Gallery Two -->
-                <li>                    
+                <!-- Page 2 计算机科学与技术学生党支部 -->
+                <li id="selected2">                    
                     <div class="cd-full-width">
                         <div class="container-fluid js-tm-page-content" data-page-no="2" data-page-type="gallery">
                             <div class="tm-img-gallery-container">
@@ -254,138 +96,28 @@
                                 <!-- Gallery Two pop up connected with JS code below -->
                                     
                                     <div class="tm-img-gallery-info-container">                                    
-                                        <h2 class="tm-text-title tm-gallery-title"><span class="tm-white">Multi Two Gallery</span></h2>
-                                        <p class="tm-text"><span class="tm-white">Etiam gravida et elit vitae maximus. Pellentesque fringilla felis id feugiat consectetur. Sed quis commodo leo. Nunc aliquet auctor nunc, sit amet pharetra metus commodo ut.</span>
+                                        <h2 class="tm-text-title tm-gallery-title tm-white"><span class="tm-white">计算机科学与技术学生党支部 </span></h2>
+                                        <p class="tm-text">这是计算机科学与技术学生党支部的活动相册
                                         </p>
                                     </div>
-                                    <div class="grid-item">
+                                    <div class="grid-item" v-for="r in datas">
                                         <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-12-tn.jpg" alt="Image" class="img-fluid tm-img">
+                                            <img :src="getImageUrl(r.coverImage)" class="img-fluid tm-img">
                                             <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>One</span></h2>
-                                                <p class="tm-figure-description">Suspendisse id placerat risus. Mauris quis luctus risus.</p>
-                                                <a href="photo.html?cl=2&id=1">View more</a>
+                                                <h2 class="tm-figure-title">{{r.albumTitle}}</h2>
+                                                <p class="tm-figure-description">{{r.description}}</p>
+                                                <a :href="'photo.html?cl='+r.branchId+'&id='+r.albumId" target="_blank">View more</a>
                                             </figcaption>           
                                         </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-11-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Two</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-11.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-10-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Three</span></h2>
-                                                <p class="tm-figure-description">Suspendisse id placerat risus. Mauris quis luctus risus.</p>
-                                                <a href="img/tm-img-10.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-09-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Four</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-09.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-08-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Five</span></h2>
-                                                <p class="tm-figure-description">Suspendisse id placerat risus. Mauris quis luctus risus.</p>
-                                                <a href="img/tm-img-08.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-07-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Six</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-07.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>  
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-06-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Seven</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-06.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>  
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-05-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Eight</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-05.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>  
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-04-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Nine</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-04.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>  
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-03-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Ten</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-03.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>  
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-02-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Eleven</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-02.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>  
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-01-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Twelve</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-01.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>  
+                                    </div>                               
                                 </div>                                 
                             </div>
                         </div>                      
                     </div>
                 </li>
                 
-                <!-- Page 3 Gallery Three -->
-                <li>
+                <!-- Page 3 网络工程学生党支部 -->
+                <li id="selected3">
                     <div class="cd-full-width">
                         <div class="container-fluid js-tm-page-content" data-page-no="3" data-page-type="gallery">                        
                             <div class="tm-img-gallery-container">
@@ -393,98 +125,28 @@
                                 <!-- Gallery Two pop up connected with JS code below -->
                                     
                                     <div class="tm-img-gallery-info-container">                                    
-                                        <h2 class="tm-text-title tm-gallery-title"><span class="tm-white">Third Multi Gallery</span></h2>
-                                        <p class="tm-text"><span class="tm-white">Donec dapibus dui sed nisi fermentum, a sollicitudin lorem fringilla. Integer nec pharetra turpis, eu sagittis ipsum. Cras dignissim lacus dolor.</span>
-                                        </p>                                     
+                                        <h2 class="tm-text-title tm-gallery-title tm-white"><span class="tm-white">网络工程学生党支部 </span></h2>
+                                        <p class="tm-text">这是网络工程学生党支部的活动相册
+                                        </p>
                                     </div>
-                                    <div class="grid-item">
+                                    <div class="grid-item" v-for="r in datas">
                                         <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-01-tn.jpg" alt="Image" class="img-fluid tm-img">
+                                            <img :src="getImageUrl(r.coverImage)" class="img-fluid tm-img">
                                             <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>One</span></h2>
-                                                <p class="tm-figure-description">Suspendisse id placerat risus. Mauris quis luctus risus.</p>
-                                                <a href="photo.html?cl=3&id=1">View more</a>
+                                                <h2 class="tm-figure-title">{{r.albumTitle}}</h2>
+                                                <p class="tm-figure-description">{{r.description}}</p>
+                                                <a :href="'photo.html?cl='+r.branchId+'&id='+r.albumId" target="_blank">View more</a>
                                             </figcaption>           
                                         </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-06-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Two</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-06.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-13-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Three</span></h2>
-                                                <p class="tm-figure-description">Suspendisse id placerat risus. Mauris quis luctus risus.</p>
-                                                <a href="img/tm-img-13.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-12-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Four</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-12.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-05-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Five</span></h2>
-                                                <p class="tm-figure-description">Suspendisse id placerat risus. Mauris quis luctus risus.</p>
-                                                <a href="img/tm-img-05.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-09-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Six</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-09.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-11-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Seven</span></h2>
-                                                <p class="tm-figure-description">Suspendisse id placerat risus. Mauris quis luctus risus.</p>
-                                                <a href="img/tm-img-11.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-14-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Eight</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-14.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>                                                                                                 
+                                    </div>                                                                                                                   
                                 </div>                                 
                             </div> <!-- .tm-img-gallery-container -->
                         </div>         
                     </div>  
                 </li>
                 
-                  <!-- Page 4 Gallery Three -->
-                <li>
+                <!-- Page 4 物联网学生党支部 -->
+                <li id="selected4">
                     <div class="cd-full-width">
                         <div class="container-fluid js-tm-page-content" data-page-no="4" data-page-type="gallery">                        
                             <div class="tm-img-gallery-container">
@@ -492,96 +154,55 @@
                                 <!-- Gallery Two pop up connected with JS code below -->
                                     
                                     <div class="tm-img-gallery-info-container">                                    
-                                        <h2 class="tm-text-title tm-gallery-title"><span class="tm-white">Third Multi Gallery</span></h2>
-                                        <p class="tm-text"><span class="tm-white">Donec dapibus dui sed nisi fermentum, a sollicitudin lorem fringilla. Integer nec pharetra turpis, eu sagittis ipsum. Cras dignissim lacus dolor.</span>
-                                        </p>                                     
+                                        <h2 class="tm-text-title tm-gallery-title tm-white"><span class="tm-white">物联网学生党支部</span></h2>
+                                        <p class="tm-text">这是物联网学生党支部的活动相册
+                                        </p>
                                     </div>
-                                    <div class="grid-item">
+                                   <div class="grid-item" v-for="r in datas">
                                         <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-01-tn.jpg" alt="Image" class="img-fluid tm-img">
+                                            <img :src="getImageUrl(r.coverImage)" class="img-fluid tm-img">
                                             <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>One</span></h2>
-                                                <p class="tm-figure-description">Suspendisse id placerat risus. Mauris quis luctus risus.</p>
-                                                <a href="photo.html?cl=4&id=1">View more</a>
+                                                <h2 class="tm-figure-title">{{r.albumTitle}}</h2>
+                                                <p class="tm-figure-description">{{r.description}}</p>
+                                                <a :href="'photo.html?cl='+r.branchId+'&id='+r.albumId" target="_blank">View more</a>
                                             </figcaption>           
                                         </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-06-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Two</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-06.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-13-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Three</span></h2>
-                                                <p class="tm-figure-description">Suspendisse id placerat risus. Mauris quis luctus risus.</p>
-                                                <a href="img/tm-img-13.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-12-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Four</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-12.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-05-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Five</span></h2>
-                                                <p class="tm-figure-description">Suspendisse id placerat risus. Mauris quis luctus risus.</p>
-                                                <a href="img/tm-img-05.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-09-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Six</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-09.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-11-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Seven</span></h2>
-                                                <p class="tm-figure-description">Suspendisse id placerat risus. Mauris quis luctus risus.</p>
-                                                <a href="img/tm-img-11.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>
-                                    <div class="grid-item">
-                                        <figure class="effect-bubba">
-                                            <img src="../statics/photo/img/tm-img-14-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                            <figcaption>
-                                                <h2 class="tm-figure-title">Picture <span>Eight</span></h2>
-                                                <p class="tm-figure-description">Maecenas purus sem, lobortis id odio in sapien.</p>
-                                                <a href="img/tm-img-14.jpg">View more</a>
-                                            </figcaption>           
-                                        </figure>
-                                    </div>                                                                                                 
+                                    </div>                                                                                                                    
                                 </div>                                 
                             </div> <!-- .tm-img-gallery-container -->
                         </div>         
                     </div>  
                 </li>
 
+                <!-- Page 5 数据科学与大数据技术学生党支部 -->
+                <li id="selected5">
+                    <div class="cd-full-width">
+                        <div class="container-fluid js-tm-page-content" data-page-no="5" data-page-type="gallery">                        
+                            <div class="tm-img-gallery-container">
+                                <div class="tm-img-gallery gallery-three">
+                                <!-- Gallery Two pop up connected with JS code below -->
+                                    
+                                    <div class="tm-img-gallery-info-container">                                    
+                                        <h2 class="tm-text-title tm-gallery-title tm-white"><span class="tm-white">数据科学与大数据技术学生党支部</span></h2>
+                                        <p class="tm-text">这是数据科学与大数据技术学生党支部的活动相册
+                                        </p>
+                                    </div>
+                                   <div class="grid-item" v-for="r in datas">
+                                        <figure class="effect-bubba">
+                                            <img :src="getImageUrl(r.coverImage)" class="img-fluid tm-img">
+                                            <figcaption>
+                                                <h2 class="tm-figure-title">{{r.albumTitle}}</h2>
+                                                <p class="tm-figure-description">{{r.description}}</p>
+                                                <a :href="'photo.html?cl='+r.branchId+'&id='+r.albumId" target="_blank">View more</a>
+                                            </figcaption>           
+                                        </figure>
+                                    </div>                                                                                                          
+                                </div>                                 
+                            </div> <!-- .tm-img-gallery-container -->
+                        </div>         
+                    </div>  
+                </li>
+            
             </ul> <!-- .cd-hero-slider -->
             
                     
@@ -603,6 +224,8 @@
         <script src="../statics/photo/js/bootstrap.min.js"></script>             <!-- Bootstrap js (v4-alpha.getbootstrap.com/) -->
         <script src="../statics/photo/js/hero-slider-main.js"></script>          <!-- Hero slider (https://codyhouse.co/gem/hero-slider/) -->
         <script src="../statics/photo/js/jquery.magnific-popup.min.js"></script> <!-- Magnific popup (http://dimsemenov.com/plugins/magnific-popup/) -->
+        <script type="text/javascript" src="../statics/js/vue.js" ></script>
+        <script type="text/javascript" src="../statics/js/user/photolist.js" ></script>
         
         <script>
 

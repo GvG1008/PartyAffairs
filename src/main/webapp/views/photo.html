@@ -10,36 +10,32 @@
 			<p>相册详情</p>
 		</div>
 		
-		<div class="album-details">
-			<p class="album-title">
-				第一次活动
-			</p>
-			<p class="album-des">
-				不好玩不好玩不好玩不好玩不好玩不好玩不好玩不好玩
-				不好玩不好玩不好玩不好玩不好玩不好玩不好玩不好玩
-				不好玩不好玩不好玩不好玩不好玩不好玩不好玩不好玩
-			</p>
-		</div>
-		
-		<div id="demo" class="carousel slide" data-ride="carousel">
-  			<div class="carousel-inner">
-   				<div class="carousel-item active">
-      				<img src="../statics/img/1-1.jpg">
-    			</div>
-    			<div class="carousel-item">
-      				<img src="../statics/img/1-2.jpg">
-    			</div>
-    			<div class="carousel-item">
-      				<img src="../statics/img/1-4.jpg">
-    			</div>
-  			</div>
-  			
-  			<a class="carousel-control-prev" href="#demo" data-slide="prev">
-    			<span class="carousel-control-prev-icon"></span>
-  			</a>
- 			<a class="carousel-control-next" href="#demo" data-slide="next">
-    			<span class="carousel-control-next-icon"></span>
-  			</a>
+		<div id="photo">
+			<div class="album-details">
+				<p class="album-title">
+					第一次活动
+				</p>
+				<p class="album-des">
+					不好玩不好玩不好玩不好玩不好玩不好玩不好玩不好玩
+					不好玩不好玩不好玩不好玩不好玩不好玩不好玩不好玩
+					不好玩不好玩不好玩不好玩不好玩不好玩不好玩不好玩
+				</p>
+			</div>
+			
+			<div id="demo" class="carousel slide" data-ride="carousel">
+	  			<div class="carousel-inner">
+	   				<div v-for="(r,index) in photo" :class="initclass(index)">
+	      				<img :src="getImageUrl(r.image)">
+	    			</div>	    			
+	  			</div>
+	  			
+	  			<a class="carousel-control-prev" href="#demo" data-slide="prev">
+	    			<span class="carousel-control-prev-icon"></span>
+	  			</a>
+	 			<a class="carousel-control-next" href="#demo" data-slide="next">
+	    			<span class="carousel-control-next-icon"></span>
+	  			</a>
+			</div>
 		</div>
 		
 		<link rel="stylesheet" href="../statics/css/bootstrap.min.css" />
@@ -47,6 +43,7 @@
 		<script type="text/javascript" src="../statics/js/jquery-3.3.1.min.js" ></script>
   		<script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="../statics/photo/css/photo.css" />
+		  <script type="text/javascript" src="../statics/js/vue.js" ></script>
 		<script type="text/javascript" src="../statics/js/user/photo.js" ></script>
 	</body>
 </html> 

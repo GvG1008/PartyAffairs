@@ -792,7 +792,7 @@ figure.effect-bubba:hover p {
 
 	.tm-img-gallery-container { max-width: 1360px; }
 
-	.grid-item { width: 25%; }	
+	.grid-item { width: 325px; }	
 	.grid-item figure figcaption { padding: 1em; }	
 }
 
