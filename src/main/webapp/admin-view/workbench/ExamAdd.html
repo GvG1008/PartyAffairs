@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>发布考试</title>
+<link href="../../admin-statics/css/bootstrap/3.0.2/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<link href="../../admin-statics/css/font-awesome/4.7.0/font-awesome.css" rel="stylesheet">
+<link href="../../admin-statics/css/workbench/borain-timeChoice.css" rel="stylesheet" >
+<link href="../../admin-statics/css/workbench/ExamAdd.css" rel="stylesheet" >
+</head>
+<body>
+     <div class=container>
+         <!-- 头部    -->
+         <div class = "header">
+              <a href="PaperInformation.html">考试信息</a> > 发布考试
+              <!-- 工具栏  -->
+	          <div class=toolbar>
+	             <a class="btn btn-default op" id="send" href="#">
+	                <i class="fa fa-paper-plane op-icon"></i> 发布</a>
+	          </div>
+         </div>
+         
+         <!-- 左部分 --考试信息    -->
+         <div class="leftcontent">
+            <div class="form-group">
+	            <label class="lname">考试名称</label>
+	            <input type="text" class="form-control itext" placeholder="创建一场考试"/>
+            </div>
+            <div class="form-group">
+                 <label class="lname">题库选择</label>
+                 <!-- <button type="button" class="choose" id="tiku">
+                                                            题库选择<i class="fa fa-th-list"></i>
+                 </button> -->
+                 <select class="form-control itext" name="tk" id="tk">
+                 <option value="">两学一做</option>
+                 <option value="">党章</option>
+                 <option value="">十九大学习报告</option>
+                 <option value="">习总书记的重要讲话</option>
+                 </select>
+            </div>
+            <div class="form-group">
+                <label class="lname">考试时间</label>
+                <input class="starttime form-control iselect" type="text" value="" /><span class="dw">到</span> 
+                <input class="endtime form-control iselect" type="text" value="" />
+            </div>
+            <div class="form-group">
+                <label class="lname">答卷时长</label>
+                <input type="text" class="form-control inum" oninput = "value=value.replace(/[^\d]/g,'')"/><span class="dw">分钟</span> 
+            </div>
+            <div class="form-group">
+                <label class="lname">单选题数量</label>
+                <input type="text" class="form-control inum" oninput = "value=value.replace(/[^\d]/g,'')"/><span class="dw">道</span> 
+            </div>
+            <div class="form-group">
+                <label class="lname">多选题数量</label>
+                <input type="text" class="form-control inum" oninput = "value=value.replace(/[^\d]/g,'')"/><span class="dw">道</span> 
+            </div>
+            <div class="form-group">
+                <label class="lname">及格分数</label>
+                <input type="text" class="form-control inum" oninput = "value=value.replace(/[^\d]/g,'')"/>
+            </div>
+         </div>
+        
+    </div>
+         
+    
+    
+     
+        <script type="text/javascript" src="../../admin-statics/js/lib/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="../../admin-statics/js/extends/bootstrap/3.3.7/bootstrap.min.js"></script>
+        <script src="../../statics/js/vue.js"></script>
+        <script type="text/javascript" src="../../admin-statics/js/extends/borain-timeChoice.js"></script>
+        <script type="text/javascript" src="../../admin-statics/js/extends/bootstrap-treeview.js"></script>
+        <script src="../../admin-statics/js/module/ExamAdd.js"> </script>
+        <script>
+			//  level分为 YM YMD H HM 四个有效值，分别表示年月 年月日 年月日时 年月日时分,less表示是否不可小于当前时间。年-月-日 时:分 时为24小时制
+			//  为确保控件结构只出现一次，在有需要的时候进行一次调用。
+			    onLoadTimeChoiceDemo();
+			
+			    borainTimeChoice({
+			        start:".starttime",
+			        end:".endtime",
+			        level:"H",
+			        less:false
+			    });
+			    
+			  
+        </script>   
+</body>
+</html>

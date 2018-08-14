@@ -1,0 +1,141 @@
+.clearfix:after {
+   content:""; 
+   display: block; 
+   clear:both; 
+}
+.container {
+    float:left;
+    min-width:100%;
+    background: #fff;
+    padding:0px;
+}
+.header {
+    padding: 20px;
+    font-size: 22px;
+    color: #004d6f;
+    font-family: sans-serif;
+    font-weight: 800;
+    border-bottom-color: #69666685;
+    border-bottom: solid 0.5px #69666685;
+    background: #fff;
+    padding-left: 50px;
+}
+body{
+    background: #f1f1f5;
+    height:100%;
+}
+.header {
+    padding-right: 70px;
+}
+.op-icon{
+    color:#979797;
+}
+.toolbar {
+    float:right;
+}
+/* .leftcontent {
+    width: 43%;
+    float: left;
+    margin: 30px 45px;
+} */
+.leftcontent {
+    width: fit-content;
+    float: left;
+    margin: 30px 24px;
+}
+.rightcontent {
+    float: inherit;
+    width: 70%;
+    margin-top: 35px;
+}
+/* .rightcontent {
+    float: right;
+    width: 50%;
+    margin-top: 35px;
+} */
+span.rtitle {
+    font-size: 150%;
+    font-weight: 600;
+    padding: 8px;
+    border-left: 6px solid #337ab7;
+    padding-left: 15px;
+        width: 65%;
+}
+div#previewArea {
+    border-radius: 5px;
+    border: 0.5px solid #ccc;
+    width: 87%;
+    min-height: 520px; 
+    margin-top: 12px;
+    margin-bottom: 50px;
+    margin-left: 15px;
+}
+button.btn-op {
+    background: #fff;
+    border: 1px solid #337ab7;
+    color: #337ab7;
+    border-radius: 3px;
+    width: 88px;
+    height: 35px;
+    margin-right: 20px;
+    margin-top: 5px;
+}
+button.btn-op:hover{
+	background: #337ab7;
+	color: #fff;
+}
+i.fa.fa-edit, i.fa.fa-trash-o {
+    margin-right: 3px;
+}
+.ztree * {font-size: 10pt;font-family:"Microsoft Yahei",Verdana,Simsun,"Segoe UI Web Light","Segoe UI Light","Segoe UI Web Regular","Segoe UI","Segoe UI Symbol","Helvetica Neue",Arial}
+.ztree li ul{ margin:0; padding:0}
+.ztree li {line-height:30px;}
+.ztree li a {width:200px;height:30px;padding-top: 0px;}
+.ztree li a:hover {text-decoration:none; background-color: #E7E7E7;}
+.ztree li a span.button.switch {visibility:hidden}
+.ztree.showIcon li a span.button.switch {visibility:visible}
+.ztree li a.curSelectedNode {background-color:#D4D4D4;border:0;height:30px;}
+.ztree li span {line-height:30px;}
+.ztree li span.button {margin-top: -7px;}
+.ztree li span.button.switch {width: 16px;height: 16px;}
+
+.ztree li a.level0 span {font-size: 150%;font-weight: bold;}
+.ztree li span.button {background-image:url("./left_menuForOutLook.png"); *background-image:url("./left_menuForOutLook.gif")}
+.ztree li span.button.switch.level0 {width: 20px; height:20px}
+.ztree li span.button.switch.level1 {width: 20px; height:20px}
+.ztree li span.button.noline_open {background-position: 0 0;}
+.ztree li span.button.noline_close {background-position: -18px 0;}
+.ztree li span.button.noline_open.level0 {background-position: 0 -18px;}
+.ztree li span.button.noline_close.level0 {background-position: -18px -18px;}
+
+ul#treeDemo_1_ul {
+    margin-top: 12px;
+}
+a#treeDemo_1_a {
+    margin-top: 9px;
+}
+button.saveedit {
+    background: #337ab7;
+    border: 1px solid transparent;
+    float: right;
+    margin-top: -38px;
+    height: 35px;
+    width: 88px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 600;
+}
+button.saveedit:hover{
+	 background: #31708f;
+}
+.rtoolbar {
+    width: 94%;
+}
+i.fa.fa-save {
+    padding-right: 5px;
+}
+div#previewArea {
+    padding: 10px;
+    padding: 12px 30px;
+    /* overflow:scroll;  */
+}

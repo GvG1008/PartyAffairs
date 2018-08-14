@@ -69,7 +69,7 @@
     });
 	
 	var button = "<a class='btn btn-info ts' onclick='addlibary()'><span class='fa fa-upload icon'></span><span class='caption'>上传题库</span></a> &nbsp;&nbsp;&nbsp;&nbsp;"
-		+"<a class='btn btn-success ts' id='addexam'><span class='glyphicon glyphicon-plus icon'></span><span class='caption'>发布考试</span></a> &nbsp;&nbsp;&nbsp;&nbsp;"
+		+"<a class='btn btn-success ts' id='addexam' href='../../admin-view/workbench/ExamAdd.html'><span class='glyphicon glyphicon-plus icon'></span><span class='caption'>发布考试</span></a> &nbsp;&nbsp;&nbsp;&nbsp;"
 		+"<button type='button' class='btn btn-warning tp' id='historyexam'><span class='fa fa-clock-o icon'></span><span class='caption'>历史题库</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
 		+"<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'><span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
 		+"<a class='btn btn-danger td' onclick='deleteall()'><span class='fa fa-trash-o icon'></span><span class='caption'>删除</span></a>";
@@ -82,7 +82,9 @@
 	$("#all").click(function(){
 	$('[name=all]:checkbox').prop('checked',this.checked);//checked为true时为默认显示的状态
 	});
-	
+	$("#historyexam").click(function(){
+		window.location.href="../../admin-view/workbench/HistoricalTestLibrary.html";
+	})
 
 });   
 function checkall(){
