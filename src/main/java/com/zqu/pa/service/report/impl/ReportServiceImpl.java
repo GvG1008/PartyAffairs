@@ -74,8 +74,10 @@ public class ReportServiceImpl implements ReportService {
         pageOfReport.setPageNum(page);
         
         //limit index,num  从第index+1条记录开始，num条记录
-        int index = (page-1)*num;
-        pageOfReport.setList(reportMapper.getPageOfReportListLimited(userId,index, num));
+        if(page>=1){
+        	 int index = (page-1)*num;
+             pageOfReport.setList(reportMapper.getPageOfReportListLimited(userId,index, num));
+        }
         
         return pageOfReport;
 	}

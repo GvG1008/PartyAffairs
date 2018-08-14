@@ -61,8 +61,8 @@ public class ReportController {
         	
         	return ServerResponse.createByErrorMessage("获取失败");
         	
-        }else if(pageOfReport.getList()==null||pageOfReport.getPageNum()<=0||pageOfReport.getPageNum()<=0
-                ||pageOfReport.getPageNum()<=0){
+        }else if(pageOfReport.getList()==null||pageOfReport.getPageNum()<=0
+        		||pageOfReport.getTotalInfoNum()<=0||pageOfReport.getTotalPageNum()<=0){
         	
         	return ServerResponse.createByErrorMessage("获取失败");
         }
