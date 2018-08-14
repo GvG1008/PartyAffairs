@@ -1,5 +1,7 @@
 package com.zqu.pa.controller.vote;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +55,24 @@ public class VoteInfoController {
     public ServerResponse<ResponseVoteInfo> getVote(@PathVariable Long voteId) {
         
         return voteInfoService.getVote(voteId);
+    }
+    
+    /**
+     * 用户获取正在进行中的投票列表（用户未投过票的）
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/votinglist", method = RequestMethod.GET)
+    public ServerResponse<List<VoteInfo>> getVoteList() {
+        
+        List<VoteInfo> listVoteInfo = new ArrayList<>();
+        try {
+            voteInfoService.updateVoteStatus();
+            listVoteInfo = voteInfoService.listVote();            
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.createByError();
+        }
+        return ServerResponse.createBySuccess(listVoteInfo);
     }
 }
