@@ -1,19 +1,4 @@
 $(document).ready(function(){
-	/*
-	 * 报名弹窗位置
-	 */
-	$(".sign-btn").click(function(){
-		var width = document.body.clientWidth;
-		var height = document.body.clientHeight;
-		var awidth = document.getElementById("activity-list").clientWidth;
-		var aheight = document.getElementById("activity-list").clientHeight;
-		var left = (width-500)/2-(width-awidth)/2;
-		var top = (height-330)/2-(height-aheight)/2;
-		//alert(width+" "+height+" "+left+" "+top+" "+awidth+" "+aheight);
-		document.getElementById("asign-up").style.left=left+"px";
-		document.getElementById("asign-up").style.top=top+"px";
-		$(".sign-up").show();
-	})
 	
 	$("#cancal").click(function(){
 		$(".sign-up").hide();
@@ -31,11 +16,12 @@ $(document).ready(function(){
 		}
 		else{
 			activity.enroll();
-			location.reload();
+			//location.reload();
 		}
 	})
 	
 })
+
 var activity = new Vue({
 	el :'#activity-list',
 	data :{
@@ -44,7 +30,19 @@ var activity = new Vue({
 		"phone":[]
 	},
 	created :function(){
-		
+		var self = this;
+		$.ajax({
+			type:"get",
+			url:"../partyActivity/menu/1/1000",
+			dataType: "json", // 数据类型可以为 text xml json script jsonp
+			success: function(result) { 
+				if(result.status==0)
+					self.list = result.data.list;
+				else{
+					alert(result.msg);
+				}
+			}
+		});
 	},
 	methods :{
 		getInfo :function(id){//获取活动报名详情
@@ -52,6 +50,19 @@ var activity = new Vue({
 		},
 		enroll :function(){//报名
 			doEnroll();
+		},
+		details :function(activityId){
+			doGetInfo(activityId);
+			var width = document.body.clientWidth;
+			var height = document.body.clientHeight;
+			var awidth = document.getElementById("activity-list").clientWidth;
+			var aheight = document.getElementById("activity-list").clientHeight;
+			var left = (width-500)/2-(width-awidth)/2;
+			var top = (height-330)/2-(height-aheight)/2;
+			//alert(width+" "+height+" "+left+" "+top+" "+awidth+" "+aheight);
+			document.getElementById("asign-up").style.left=left+"px";
+			document.getElementById("asign-up").style.top=top+"px";
+			$(".sign-up").show();
 		}
 	}
 })
@@ -59,7 +70,7 @@ var activity = new Vue({
 function doGetInfo(id){
 	$.ajax({
 		type:"GET",
-		url: "../activity/"+id, 
+		url: "../partyActivity/info/"+id, 
 		dataType: "json",
 		success: function(result) { 
 			if(result.status == 0)
@@ -70,41 +81,19 @@ function doGetInfo(id){
 	})
 }
 
+
 function doEnroll(){
-	/*$.ajax({
+	$.ajax({
 		type:"post",
-		url: "../activity", 
+		url: "../partyActivity/apply", 
 		data:{
-			"phone":activity.phone,
-			"id":info.id
+			"phoneNum":activity.phone,
+			"activityId":activity.info.activityId
 		},
 		dataType: "json",
 		success: function(result) { 
-			if(result.status == 0)
-				alert("报名成功，请等待报名结果！");
-			else
-				alert(result.msg);
+			alert(result.msg);
+			$(".sign-up").hide();
 		}	
-	})*/
-	alert("报名成功，请等待报名结果！");
+	})
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
