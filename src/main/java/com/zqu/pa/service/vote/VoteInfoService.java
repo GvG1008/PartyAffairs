@@ -17,4 +17,13 @@ public interface VoteInfoService {
     
     //获取投票信息
     VoteInfo getVoteInfo(Long voteId);
+    
+    //获取用户需要进行投票的投票列表
+    List<VoteInfo> listVote();
+    
+    //判断用户是否投过票（true：已经投过票；false：未投过票）
+    boolean existVoteResult(Long voteId, String userId);
+    
+    //根据时间更新投票状态
+    void updateVoteStatus();
 }

@@ -1,5 +1,6 @@
 package com.zqu.pa.service.vote.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -14,10 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.dao.vote.VoteChoiceMapper;
 import com.zqu.pa.dao.vote.VoteInfoMapper;
+import com.zqu.pa.dao.vote.VoteResultMapper;
 import com.zqu.pa.dao.vote.VoteUserMapper;
 import com.zqu.pa.entity.vote.VoteChoice;
 import com.zqu.pa.entity.vote.VoteChoiceExample;
 import com.zqu.pa.entity.vote.VoteInfo;
+import com.zqu.pa.entity.vote.VoteInfoExample;
+import com.zqu.pa.entity.vote.VoteResult;
+import com.zqu.pa.entity.vote.VoteResultExample;
 import com.zqu.pa.entity.vote.VoteUserExample;
 import com.zqu.pa.entity.vote.VoteUserKey;
 import com.zqu.pa.service.vote.VoteInfoService;
@@ -38,6 +43,9 @@ public class VoteInfoServiceImpl implements VoteInfoService {
     
     @Autowired
     private VoteUserMapper voteUserMapper;
+    
+    @Autowired
+    private VoteResultMapper voteResultMapper;
     
     @Transactional
     @Override
@@ -166,6 +174,76 @@ public class VoteInfoServiceImpl implements VoteInfoService {
         VoteChoiceExample example = new VoteChoiceExample();
         example.createCriteria().andVoteIdEqualTo(voteId);
         return voteChoiceMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<VoteInfo> listVote() {
+        
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if (basicInfo == null) {
+            logger.error("用户未登录");
+            return new ArrayList<VoteInfo>();
+        }    
+        String userId = basicInfo.getUserId();
+        
+        //查询用户能参与的投票
+        VoteUserExample example = new VoteUserExample();
+        example.createCriteria().andUserIdEqualTo(userId);
+        List<VoteUserKey> listVoteUser = voteUserMapper.selectByExample(example);
+        List<Long> listVoteId = new ArrayList<>();
+        for (VoteUserKey voteUser : listVoteUser) {
+            Long voteId = voteUser.getVoteId();
+            //筛选出用户未投过票的voteId
+            if (!existVoteResult(voteId, userId))
+                listVoteId.add(voteId);
+        }
+        
+        VoteInfoExample example1 = new VoteInfoExample();
+        //投票正在进行
+        int status = 1;
+        example1.createCriteria().andStatusEqualTo(status).andVoteIdIn(listVoteId);
+        List<VoteInfo> listVoteInfo = new ArrayList<>();
+        listVoteInfo = voteInfoMapper.selectByExample(example1);
+        for (VoteInfo voteInfo : listVoteInfo) {
+            voteInfo.setStringStartTime(DateUtil.formatTime(voteInfo.getStartTime()));
+            voteInfo.setStringEndTime(DateUtil.formatTime(voteInfo.getEndTime()));
+        }
+        return listVoteInfo;
+    }
+
+    @Override
+    public boolean existVoteResult(Long voteId, String userId) {
+        
+        VoteResultExample example = new VoteResultExample();
+        example.createCriteria().andVoteIdEqualTo(voteId).andUserIdEqualTo(userId);
+        List<VoteResult> listVoteResult = voteResultMapper.selectByExample(example);
+        if (listVoteResult == null || listVoteResult.size() == 0)
+            return false;
+        return true;
+    }
+
+    @Override
+    public void updateVoteStatus() {
+        
+        VoteInfoExample example = new VoteInfoExample();
+        //投票已结束（不改变状态）
+        int status = -1;
+        example.createCriteria().andStatusNotEqualTo(status);
+        List<VoteInfo> listVoteInfo = voteInfoMapper.selectByExample(example);
+        for (VoteInfo voteInfo : listVoteInfo) {
+            Long nTime = new Date().getTime();
+            if (nTime > voteInfo.getEndTime()) {
+                //投票结束
+                status = -1;
+                voteInfo.setStatus(status);
+                voteInfoMapper.updateByPrimaryKeySelective(voteInfo);
+            } else if (nTime >= voteInfo.getStartTime() && nTime <= voteInfo.getEndTime() && voteInfo.getStatus() == 0) {
+                //投票正在进行
+                status = 1;
+                voteInfo.setStatus(status);
+                voteInfoMapper.updateByPrimaryKeySelective(voteInfo);
+            }
+        }     
     }
     
 }
