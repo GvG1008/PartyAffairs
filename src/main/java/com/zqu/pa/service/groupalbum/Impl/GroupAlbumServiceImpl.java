@@ -2,6 +2,7 @@ package com.zqu.pa.service.groupalbum.Impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +62,17 @@ public class GroupAlbumServiceImpl implements GroupAlbumService {
     }
 
     @Override
-    public List<GroupPicture> listAlbumPicture(Long albumId) {
+    public Map<String, Object> listAlbumPicture(Long albumId) {
+        
+        GroupAlbumExample example1 = new GroupAlbumExample();
+        example1.createCriteria().andAlbumIdEqualTo(albumId);
+        GroupAlbum groupAblum = groupAlbumMapper.selectByPrimaryKey(albumId);
+        Map<String, Object> map = new HashMap<>();
+        if (groupAblum == null) {
+            return null;     
+        } 
+        map.put("albumTitle", groupAblum.getAlbumTitle());
+        map.put("description", groupAblum.getDescription());
         
         GroupPictureExample example = new GroupPictureExample();
         example.createCriteria().andAlbumIdEqualTo(albumId);
@@ -69,10 +80,10 @@ public class GroupAlbumServiceImpl implements GroupAlbumService {
         listPicture = groupPictureMapper.selectByExample(example);
         if (listPicture == null || listPicture.size() == 0) {
             logger.info("团相册ID：" + albumId + " 下无图片");
-            return listPicture;
         }
+        map.put("pictures", listPicture);
         addPageviews(albumId);
-        return listPicture;
+        return map;
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.zqu.pa.controller.groupalbum;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,7 +47,7 @@ public class GroupAlbumController {
     }
     
     /**
-     * 获取相册里的所有图片
+     * 获取相册里的所有图片和图片标题、描述
      * @param albumId 相册ID
      * @return
      */
@@ -53,14 +55,16 @@ public class GroupAlbumController {
     @RequestMapping(value = "/picture/{albumId}", method = RequestMethod.GET)
     public ServerResponse listAlbumPicture(@PathVariable Long albumId) {
         
-        List<GroupPicture> listPicture = null;
+        Map<String, Object> map = new HashMap<>();
         try {
-            listPicture = groupAlbumService.listAlbumPicture(albumId);
+            map = groupAlbumService.listAlbumPicture(albumId);
+            if (map == null) 
+                return ServerResponse.createByError();
         } catch(Exception e) {
             e.printStackTrace();
             return ServerResponse.createByError();
         }
-        return ServerResponse.createBySuccess(listPicture);
+        return ServerResponse.createBySuccess(map);
     }
     
     /**
