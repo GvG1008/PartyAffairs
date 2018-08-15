@@ -2,17 +2,17 @@ package com.zqu.pa.vo.exam;
 
 public class ResponseExamList {
 
-    private Integer examId;
+    private Integer examId; //考试ID
     
-    private String examTitle;
+    private String examTitle; //考试标题
     
-    private Integer score;
+    private Integer score; //考生成绩
     
-    private Integer pass = -1;
+    private Integer pass = -1; //考试是否及格（-1：未参加考试；0：不及格；1：及格）
     
-    private String startTime;
+    private String startTime; //考试开始时间
     
-    private String endTime;
+    private String endTime; //考试结束时间
 
     public Integer getExamId() {
         return examId;
