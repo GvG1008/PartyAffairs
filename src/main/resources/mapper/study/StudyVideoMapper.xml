@@ -33,6 +33,17 @@
     ) ORDER BY video_id
     limit ${index},${num}
   </select>
+  <select id="selectPutonMustByLabelId" resultType="com.zqu.pa.entity.study.StudyVideo" parameterType="map" >
+    SELECT * FROM study_video
+    WHERE video_id NOT IN(SELECT video_id FROM study_video_putoff) 
+    AND video_id IN (SELECT video_id FROM study_video_label WHERE label_id IN
+    <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+    </foreach> 
+    ) AND video_id IN(select video_id from study_video_must where user_id = ${userId})
+    ORDER BY video_id
+    limit ${index},${num}
+  </select>
   <select id="selectCountPutonByLabelId" resultType="int" parameterType="java.util.List" >
     SELECT count(1) FROM study_video
     WHERE video_id NOT IN(SELECT video_id FROM study_video_putoff) 
@@ -41,6 +52,16 @@
         #{item}
     </foreach> 
     )
+  </select>
+  <select id="selectCountPutonMustByLabelId" resultType="int" parameterType="map" >
+    SELECT count(1) FROM study_video
+    WHERE video_id NOT IN(SELECT video_id FROM study_video_putoff) 
+    AND video_id IN (SELECT video_id FROM study_video_label WHERE label_id IN
+    <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+    </foreach> 
+    ) 
+    AND video_id IN(SELECT video_id from study_video_must where user_id = ${userId})
   </select>
   <select id="selectMustPutonByUserId" resultType="com.zqu.pa.entity.study.StudyVideo" >
     select *

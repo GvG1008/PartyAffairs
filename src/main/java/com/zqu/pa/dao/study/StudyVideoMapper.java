@@ -19,7 +19,11 @@ public interface StudyVideoMapper {
     
     List<StudyVideo> selectPutonByLabelId(HashMap map);
     
+    List<StudyVideo> selectPutonMustByLabelId(HashMap map);
+    
     int selectCountPutonByLabelId(List<Integer> list);
+    
+    int selectCountPutonMustByLabelId(HashMap map);
     
     List<StudyVideo> selectMustPutonByUserId(@Param("index")int index,@Param("num")int num,@Param("userId")String userId);
     

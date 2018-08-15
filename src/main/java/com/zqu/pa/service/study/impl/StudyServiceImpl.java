@@ -416,4 +416,36 @@ public class StudyServiceImpl implements IStudyService {
         map.put("list", list);
         return ServerResponse.createBySuccess(map);
     }
+    
+    @Override
+    @Transactional
+    public ServerResponse getStudyVideosMustPutonByLabelId(String userId,List<Integer> idList,int page,int pageNum) {
+        HashMap paramMap = Maps.newHashMap();
+        paramMap.put("idList", idList);
+        paramMap.put("userId", userId);
+        int totalNum = studyVideoMapper.selectCountPutonMustByLabelId(paramMap);
+        int totalPage = (int)(totalNum+pageNum-1)/pageNum;
+        if(totalPage<page)
+            page = totalPage;
+        int index = (page-1)*pageNum;
+        Map map = Maps.newHashMap();
+        map.put("totalPage", totalPage);
+        map.put("page", page);
+        map.put("pageNum", pageNum);
+        paramMap.put("index", index);
+        paramMap.put("num",pageNum);
+        List<StudyVideo> svl = studyVideoMapper.selectPutonByLabelId(paramMap);
+        int size = svl.size();
+        List<StudyVideoVO1> list = Lists.newArrayList();
+        for(int i=0;i<size;i++) {
+            StudyVideo sv = svl.get(i);
+            String updateTime = DateToString.getDateString("yyyy-MM-dd", sv.getUpdatetime());
+            String uploadUser = studyDocumentMapper.getUserNameByUserId(sv.getUserId());
+            List<StudyLabel> sls = studyLabelMapper.selectByVideoId(sv.getVideoId());
+            StudyVideoVO1 svvo1 = new StudyVideoVO1(sv.getVideoId(), sv.getVideoTitle(), sv.getVideoIntroduction(), sv.getCoverImg(), sv.getVideoPath(), uploadUser, updateTime, sls);
+            list.add(svvo1);
+        }
+        map.put("list", list);
+        return ServerResponse.createBySuccess(map);
+    }
 }

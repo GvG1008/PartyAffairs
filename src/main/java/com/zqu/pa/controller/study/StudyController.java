@@ -368,6 +368,28 @@ public class StudyController {
         return iStudyService.getStudyVideoMust(userId,Integer.parseInt(page),Integer.parseInt(pageNum));
     }
     
+    /**
+     * 根据标签id获取必学视频学习资料(上架)
+     * 
+     * @param labelId
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "get_study_videos_must_by_label_id.do", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse getStudyVideosMustByLabelId(@RequestParam(value = "label_id") String[] labelId,
+            HttpSession session,String page,String pageNum) {
+        HashSet<Integer> hashSet = Sets.newHashSet();
+        int idCount = labelId.length;
+        for (int i = 0; i < idCount; i++)
+            hashSet.add(Integer.parseInt(labelId[i]));
+        ArrayList<Integer> idList = Lists.newArrayList();
+        for (Integer labelid : hashSet) {
+            idList.add(labelid);
+        }
+        String userId = this.getUserid();
+        return iStudyService.getStudyVideosMustPutonByLabelId(userId, idList, Integer.parseInt(page), Integer.parseInt(pageNum));
+    }
     
     
     
