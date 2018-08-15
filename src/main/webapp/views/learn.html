@@ -43,50 +43,34 @@
         			</tr>
         		</table>
         	</div>
-        	<div class="data-list">
-        		<ul>
-        			<li>
-        				<a href="home.html?location=video&id=1">
-        					<div class="data-img" style="background-image: url(../statics/img/6.jpg);"></div>
-        					<p class="data-des" title="gghdfsdhfjsdbjfkbdsjkfjsdhlfjdslflksdjlfhldsnvlnxlnslfndfsf">gghdfsdhfjsdbjfkbdsjkfjsdhlfjdslflksdjlfhldsnvlnxlnslfndfsf</p>
+        	<div class="data-list" id="data">
+        		<ul v-if="studyflag==1">
+        			<li v-for="r in list">
+        				<a :href="'home.html?location=video&id='+r.videoId">
+        					<div class="data-img" :style="'background-image: url('+r.coverImg+');'"></div>
+        					<p class="data-des" :title="r.videoTitle">{{r.videoTitle}}</p>
         				</a>
-        			</li>
-        			<li>
-        				<a href="home.html?location=docu&id=2">
-        					<div class="data-img" style="background-image: url(../statics/img/6.jpg);"></div>
-        					<p class="data-des" title="gghdfsdfsf">gghdfsdfsf</p>
-        				</a>
-        			</li>
-        			<li>
-        				<a href="#">
-        					<div class="data-img" style="background-image: url(../statics/img/6.jpg);"></div>
-        					<p class="data-des" title="gghdfsdfsf">gghdfsdfsf</p>
-        				</a>
-        			</li>
-        			<li>
-        				<a href="#">
-        					<div class="data-img" style="background-image: url(../statics/img/6.jpg);"></div>
-        					<p class="data-des" title="gghdfsdfsf">gghdfsdfsf</p>
-        				</a>
-        			</li>
-        			<li>
-        				<a href="#">
-        					<div class="data-img" style="background-image: url(../statics/img/6.jpg);"></div>
-        					<p class="data-des" title="gghdfsdfsf">gghdfsdfsf</p>
-        				</a>
-        			</li>
+        			</li>      			
         		</ul>
+        		<ul v-if="studyflag==2">
+                    <li v-for="r in list">
+                        <a :href="'home.html?location=docu&id='+r.documentId">
+                            <div class="data-img" :style="'background-image: url('+r.coverImg+');'"></div>
+                            <p class="data-des" :title="r.documentTitle">{{r.documentTitle}}</p>
+                        </a>
+                    </li>               
+                </ul>
         		<div class="learn-page">
-        			<button>首页</button>
-        			<button>上一页</button>
+        			<button @click="pageto(1)">首页</button>
+                    <button v-if="currentNum!=1" @click="pageto(currentNum-1)">上一页</button>
         			<p style="display: inline;">
-        				<span id="nowpage">1</span>/
-        				<span id="pagenum">25</span>
+        				<span id="nowpage">{{currentNum}}</span>/
+        				<span id="pagenum">{{totalPage}}</span>
         			</p>
-        			<button>下一页</button>
-        			<button>尾页</button>
-        			<button>转到</button>
-        			<input type="text"/>
+        			<button v-if="currentNum!=totalPage" @click="pageto(currentNum+1)">下一页</button>
+                    <button @click="pageto(totalPage)">尾页</button>
+                    <button @click="pageto(pagetoNum)">转到</button>
+                    <input type="text" id="aimspage" v-model="pagetoNum"/>
         		</div>
         	</div>
        	</div>
@@ -94,6 +78,7 @@
        	<link rel="stylesheet" href="../statics/css/learn.css" />
        	<link rel="stylesheet" href="../statics/css/jquery-labelauty.css" />
        	<script type="text/javascript" src="../statics/js/jquery-labelauty.js" ></script>
+       	<script src="../statics/js/vue.js"></script>
        	<script type="text/javascript" src="../statics/js/user/learn.js" ></script>
 	</body>
 </html>

@@ -1,3 +1,8 @@
+var geturl = "../study/get_study_videos.do?page=1&pageNum=9";
+var lables = new Array();//标签
+lables[0] = 0;
+var gtype = 1;//类型
+var gclaim = 0;//要求
 $(document).ready(function(){
 	
 	$(function() {
@@ -8,12 +13,9 @@ $(document).ready(function(){
 		var lable = document.getElementsByName("checkbox");
 		var type = document.getElementsByName("radio");
 		var claim = document.getElementsByName("radio1");
-		var lables = new Array();
-		lables[0] = 0;
 		var y=0;
-		var gtype = 1;//类型
-		var gclaim = 0;//要求
 		
+		lables = new Array();//标签
 		for(var i=0;i<lable.length;i++){
 			if(lable[i].checked){
 				lables[y++] = lable[i].value;
@@ -29,18 +31,7 @@ $(document).ready(function(){
 				gclaim = claim[i].value;
 			}
 		}
-		
-		var geturl = "";
-		if(gclaim == 0 && gtype == 1 && lables[0] == 0){
-			geturl = "../study/get_study_videos.do";
-		}else if(gclaim == 0 && gtype == 2 && lables[0] == 0){
-			geturl = "../study/get_study_documents.do";
-		}else if(gclaim == 1 && gtype == 1 && lables[0] == 0){
-			geturl = "../study/get_study_videos_must.do";
-		}else if(gclaim == 1 && gtype == 2 && lables[0] == 0){
-			geturl = "../study/get_study_documents_must.do";
-		}
-		alert(geturl);
+		doPageto(1);
 	})
 })
 var Learning = new Vue({
@@ -62,8 +53,64 @@ var Learning = new Vue({
 				}
 			}
 		});
-	},
-	methods:{
-		
 	}
 })
+var limit = 9;//每页显示条数
+var DataList = new Vue({
+	el: '#data',
+	data:{
+		"list":[],
+		"currentNum":1,
+		"totalPage":[],
+		"pagetoNum":[],
+		"studyflag":1
+	},
+	created:function(){
+		doPageto(1);		
+	},
+	methods :{
+		pageto : function(currentNum) {
+			doPageto(currentNum);
+		}
+	}
+})
+function doPageto(currentNum){
+	if(gclaim == 0 && gtype == 1 && lables[0] == 0){//要求全部；标签全部；类型视频
+		geturl = "../study/get_study_videos.do?page="+currentNum+"&pageNum="+limit;
+	}else if(gclaim == 0 && gtype == 2 && lables[0] == 0){//要求全部；标签全部；类型资料
+		geturl = "../study/get_study_documents.do?page="+currentNum+"&pageNum="+limit;
+	}else if(gclaim == 1 && gtype == 1 && lables[0] == 0){//要求必学；标签全部；类型视频
+		geturl = "../study/get_study_videos_must.do?page="+currentNum+"&pageNum="+limit;
+	}else if(gclaim == 1 && gtype == 2 && lables[0] == 0){//要求必学；标签全部；类型资料
+		geturl = "../study/get_study_documents_must.do?page="+currentNum+"&pageNum="+limit;
+	}else if(gclaim == 0 && gtype == 2 && lables[0] != 0){//要求全部；标签自选；类型资料
+		geturl = "../study/get_study_documents_by_label_id.do?label_id="+lables+"&page="+currentNum+"&pageNum="+limit;
+	}else if(gclaim == 1 && gtype == 2 && lables[0] != 0){//要求必学；标签自选；类型资料
+		geturl = "../study/get_study_documents_must_by_label_id.do?label_id="+lables+"&page="+currentNum+"&pageNum="+limit;
+	}else if(gclaim == 0 && gtype == 1 && lables[0] != 0){//要求全部；标签自选；类型视频
+		geturl = "../study/get_study_videos_by_label_id.do?label_id="+lables+"&page="+currentNum+"&pageNum="+limit;
+	}else if(gclaim == 1 && gtype == 1 && lables[0] != 0){//要求必学；标签自选；类型视频
+		geturl = "../study/get_study_videos_must_by_label_id.do?label_id="+lables+"&page="+currentNum+"&pageNum="+limit;
+	}
+	
+	alert(geturl);
+	$.ajax({
+		type:"post",
+		url:geturl,
+		dataType: "json", // 数据类型可以为 text xml json script jsonp
+		success: function(result) { 
+			if(result.status==0){
+				DataList.list = result.data.list;
+				DataList.currentNum = result.data.page;
+				DataList.totalPage = result.data.totalPage;
+				if(gtype == 1){
+					DataList.studyflag=1;
+				}else{
+					DataList.studyflag=2;
+				}
+			} else{
+				alert(result.msg);
+			}
+		}
+	});
+}
