@@ -191,4 +191,23 @@ public class ExamInfoServiceImpl implements ExamInfoService {
         return ServerResponse.createByError();
     }
 
+    @Transactional
+    @Override
+    public ServerResponse removeExamInfo(Integer examId) {
+        
+        try {
+            //删除exam_info_review表中的考试信息
+            examInfoReviewMapper.deleteByPrimaryKey(examId);
+            //TODO 删除其他表中的考试信息
+            
+            //删除exam_info表中的考试信息
+            examInfoMapper.deleteByPrimaryKey(examId);
+            logger.info("已删除考试信息examId：" + examId);   
+        } catch(Exception e) {
+            e.printStackTrace();
+            return ServerResponse.createByError();
+        }
+        return ServerResponse.createBySuccess();
+    }
+
 }

@@ -75,4 +75,16 @@ public class ExamInfoController {
         return examInfoService.reviewExamInfo(examId);
     }
     
+    /**
+     * 删除考试信息（当前只删除exam_info和exam_info_category表）
+     * @param examId 要删除的考试ID
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/{examId}", method = RequestMethod.DELETE)
+    public ServerResponse removeExamInfo(@PathVariable Integer examId) {
+
+        return examInfoService.removeExamInfo(examId);
+    }
+    
 }

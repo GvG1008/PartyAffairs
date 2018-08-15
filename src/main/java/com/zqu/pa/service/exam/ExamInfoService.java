@@ -19,4 +19,7 @@ public interface ExamInfoService {
     
     //考试通过审核
     ServerResponse reviewExamInfo(Integer examId);
+    
+    //根据考试ID删除考试
+    ServerResponse removeExamInfo(Integer examId);
 }
