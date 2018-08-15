@@ -448,4 +448,27 @@ public class StudyServiceImpl implements IStudyService {
         map.put("list", list);
         return ServerResponse.createBySuccess(map);
     }
+
+    @Override
+    @Transactional
+    public ServerResponse getStudyDcumentDetails(int documentId) {
+        StudyDocument sd = studyDocumentMapper.selectByPrimaryKey(documentId);
+        String updateTime = DateToString.getDateString("yyyy-MM-dd", sd.getUpdatetime());
+        String uploadUser = studyDocumentMapper.getUserNameByUserId(sd.getUserId());
+        int downloadTimes = studyDocumentStatisticsMapper.selectTimeSumByDocumentId(sd.getDocumentId());
+        List<StudyLabel> sls = studyLabelMapper.selectByDocumentId(sd.getDocumentId());
+        StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(documentId, sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes, sls);
+        return ServerResponse.createBySuccess(sdvo1);
+    }
+    
+    @Override
+    @Transactional
+    public ServerResponse getStudyVideoDetails(int videoId) {
+        StudyVideo sv = studyVideoMapper.selectByPrimaryKey(videoId);
+        String updateTime = DateToString.getDateString("yyyy-MM-dd", sv.getUpdatetime());
+        String uploadUser = studyDocumentMapper.getUserNameByUserId(sv.getUserId());
+        List<StudyLabel> sls = studyLabelMapper.selectByVideoId(sv.getVideoId());
+        StudyVideoVO1 svvo1 = new StudyVideoVO1(sv.getVideoId(), sv.getVideoTitle(), sv.getVideoIntroduction(), sv.getCoverImg(), sv.getVideoPath(), uploadUser, updateTime, sls);
+        return ServerResponse.createBySuccess(svvo1);
+    }
 }

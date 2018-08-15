@@ -24,6 +24,7 @@ public interface IStudyService {
     public ServerResponse getStudyDocumentsMustPutonByLabelId(String userId,List<Integer> idList,int page,int pageNum);
     public ServerResponse getStudyDocumentMust(String userId,int page,int pageNum);
     public ServerResponse statisticsDownload(String userId,String url);
+    public ServerResponse getStudyDcumentDetails(int documentId);
     
     
     public ServerResponse uploadStudyVideo(StudyVideo sv, List<StudyVideoLabel> svls, List<StudyVideoMust> svms);
@@ -31,4 +32,5 @@ public interface IStudyService {
     public ServerResponse getStudyVideosPutonByLabelId(List<Integer> idList,int page,int pageNum);
     public ServerResponse getStudyVideosMustPutonByLabelId(String userId,List<Integer> idList,int page,int pageNum);
     public ServerResponse getStudyVideoMust(String userId,int page,int pageNum);
+    public ServerResponse getStudyVideoDetails(int videoId);
 }

@@ -254,6 +254,16 @@ public class StudyController {
         return iStudyService.statisticsDownload(userId, downloadURL);
     }
 
+    /**
+     * 根据文档id获取文档资料详情
+     * @param documentId
+     * @return
+     */
+    @RequestMapping(value = "get_study_document_details.do")
+    @ResponseBody
+    public ServerResponse getStudyDocumentDetails(@RequestParam(value = "document_id", required = true) String documentId) {
+        return iStudyService.getStudyDcumentDetails(Integer.parseInt(documentId));
+    }
     
     
     
@@ -391,6 +401,16 @@ public class StudyController {
         return iStudyService.getStudyVideosMustPutonByLabelId(userId, idList, Integer.parseInt(page), Integer.parseInt(pageNum));
     }
     
+    /**
+     * 根据视频id获取视频学习资料详情
+     * @param videoId
+     * @return
+     */
+    @RequestMapping(value = "get_study_video_details.do")
+    @ResponseBody
+    public ServerResponse getStudyVideoDetails(@RequestParam(value = "video_id", required = true) String videoId) {
+        return iStudyService.getStudyVideoDetails(Integer.parseInt(videoId));
+    }
     
     
     
