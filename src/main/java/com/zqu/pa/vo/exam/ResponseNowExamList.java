@@ -2,23 +2,23 @@ package com.zqu.pa.vo.exam;
 
 public class ResponseNowExamList extends ResponseExamList {
 
-    private String startTime;
+    private String startTime; //考试开始时间
     
-    private String endTime;
+    private String endTime; //考试结束时间
     
-    private Integer status;
+    private Integer status; //考试状态（-1：考试已过期；0：考试还未开始；1：考试正在进行）
     
-    private Integer passScore;
+    private Integer passScore; //及格分数
     
-    private Integer examPeriod;
+    private Integer examPeriod; //考试时长
 
-    private Integer singleQuantity;
+    private Integer singleQuantity; //单选题数量
 
-    private Integer multipleQuantity;
+    private Integer multipleQuantity; //多选题数量
     
-    private Integer singleScore;
+    private Integer singleScore; //单选题分数
     
-    private Integer multipleScore;
+    private Integer multipleScore; //多选题分数
 
     public Integer getSingleScore() {
         return singleScore;
