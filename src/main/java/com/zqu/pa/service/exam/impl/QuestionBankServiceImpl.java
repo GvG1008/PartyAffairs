@@ -66,6 +66,7 @@ public class QuestionBankServiceImpl implements QuestionBankService {
         ResponseQuestionBank rqb = new ResponseQuestionBank();
         List<QuestionContent> singleQuestion = new ArrayList<QuestionContent>();
         List<QuestionContent> multipleQuestion = new ArrayList<QuestionContent>();
+        rqb.setCategoryId(categoryId);
         
         try {
             //in = new FileInputStream(excelFile);

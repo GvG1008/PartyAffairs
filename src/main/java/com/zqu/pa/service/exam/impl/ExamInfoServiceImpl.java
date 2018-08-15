@@ -11,11 +11,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zqu.pa.common.ServerResponse;
+import com.zqu.pa.dao.exam.ExamInfoCategoryMapper;
 import com.zqu.pa.dao.exam.ExamInfoMapper;
 import com.zqu.pa.dao.exam.ExamInfoReviewMapper;
 import com.zqu.pa.dao.exam.ExamUserMapper;
 import com.zqu.pa.dao.perinfo.UserPersonInfoMapper;
 import com.zqu.pa.entity.exam.ExamInfo;
+import com.zqu.pa.entity.exam.ExamInfoCategoryKey;
 import com.zqu.pa.entity.exam.ExamInfoExample;
 import com.zqu.pa.entity.exam.ExamInfoReview;
 import com.zqu.pa.entity.exam.ExamInfoReviewExample;
@@ -26,6 +28,7 @@ import com.zqu.pa.entity.perinfo.UserPersonInfoExample;
 import com.zqu.pa.service.exam.ExamInfoService;
 import com.zqu.pa.utils.DateUtil;
 import com.zqu.pa.vo.exam.AdminExamInfoList;
+import com.zqu.pa.vo.exam.CreateExamBean;
 import com.zqu.pa.vo.exam.ResponseNowExamList;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
 
@@ -46,9 +49,12 @@ public class ExamInfoServiceImpl implements ExamInfoService {
     @Autowired
     private UserPersonInfoMapper userPersonInfoMapper;
     
+    @Autowired
+    private ExamInfoCategoryMapper examInfoCategoryMapper;
+    
     @Transactional
     @Override
-    public ServerResponse createExamInfo(ExamInfo examInfo, ExamInfoReview examInfoReview) {
+    public ServerResponse createExamInfo(CreateExamBean createExamBean) {
         
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
         if (basicInfo == null) {
@@ -59,16 +65,41 @@ public class ExamInfoServiceImpl implements ExamInfoService {
         int branchId = basicInfo.getBranchId();
         int roleId = basicInfo.getRoleId();
         
+        ExamInfo examInfo = createExamBean.getExamInfo();
+        ExamInfoReview examInfoReview = createExamBean.getExamInfoReview();
+        List<String> listUserID = createExamBean.getUserID();
+        Integer categoryID = createExamBean.getCategoryID();
+        
+        //插入考试基本信息
         examInfo.setBranchId(branchId);
         int i = examInfoMapper.insertExamInfo(examInfo);
         if (i <= 0)
             return ServerResponse.createByError();
         Integer examId = examInfo.getExamId();
+        //插入考试单选题/多选题分数
         examInfoReview.setExamId(examId);
         examInfoReview.setCreateId(userId);
         i = examInfoReviewMapper.insertSelective(examInfoReview);
         if (i <= 0)
             return ServerResponse.createByError();
+        //插入考试参考人员
+        for (String uID : listUserID) {
+            ExamUserKey examUser = new ExamUserKey();
+            examUser.setExamId(examId);
+            examUser.setUserId(uID);
+            i = examUserMapper.insert(examUser);
+            if (i <= 0) {
+                return ServerResponse.createByError();
+            }
+        }
+        //插入考试ID对应题库分类ID
+        ExamInfoCategoryKey e = new ExamInfoCategoryKey();
+        e.setExamId(examId);
+        e.setCategoryId(categoryID);
+        i = examInfoCategoryMapper.insert(e);
+        if (i <= 0) {
+            return ServerResponse.createByError();
+        }
         
         return ServerResponse.createBySuccess();
     }

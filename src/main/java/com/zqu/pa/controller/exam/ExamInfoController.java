@@ -1,10 +1,12 @@
 package com.zqu.pa.controller.exam;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +16,7 @@ import com.zqu.pa.entity.exam.ExamInfo;
 import com.zqu.pa.entity.exam.ExamInfoReview;
 import com.zqu.pa.service.exam.ExamInfoService;
 import com.zqu.pa.vo.exam.AdminExamInfoList;
+import com.zqu.pa.vo.exam.CreateExamBean;
 import com.zqu.pa.vo.exam.ResponseNowExamList;
 
 @Controller
@@ -25,17 +28,16 @@ public class ExamInfoController {
     
     /**
      * 创建一场考试信息
-     * @param examInfo 考试基本信息
-     * @param examInfoReview 单/多选题分数
+     * @param createExamBean 
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ServerResponse createExamInfo(ExamInfo examInfo, ExamInfoReview examInfoReview) {
+    public ServerResponse createExamInfo(@RequestBody CreateExamBean createExamBean) {
         
         ServerResponse result = null;
         try {
-            result = examInfoService.createExamInfo(examInfo, examInfoReview);
+            result = examInfoService.createExamInfo(createExamBean);
         } catch (Exception e) {
             e.printStackTrace();
             return ServerResponse.createByError();
