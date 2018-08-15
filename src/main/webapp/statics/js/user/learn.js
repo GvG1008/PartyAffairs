@@ -16,6 +16,7 @@ $(document).ready(function(){
 		var y=0;
 		
 		lables = new Array();//标签
+		lables[0] = 0;
 		for(var i=0;i<lable.length;i++){
 			if(lable[i].checked){
 				lables[y++] = lable[i].value;
@@ -93,7 +94,7 @@ function doPageto(currentNum){
 		geturl = "../study/get_study_videos_must_by_label_id.do?label_id="+lables+"&page="+currentNum+"&pageNum="+limit;
 	}
 	
-	alert(geturl);
+	//alert(geturl);
 	$.ajax({
 		type:"post",
 		url:geturl,

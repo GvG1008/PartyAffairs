@@ -87,13 +87,13 @@
 				</div>
 				<table class="learn-list">
 					<tr v-for="(r,index) in learn" v-if="index % 2 == 1 && index<5">
-						<td class="ll-name"><a :href="'#'+learn[index-1].documentId"><p :title="learn[index-1].documentTitle">{{learn[index-1].documentTitle}}</p></a></td>
+						<td class="ll-name"><a :href="'home.html?location=docu&id='+learn[index-1].documentId"><p :title="learn[index-1].documentTitle">{{learn[index-1].documentTitle}}</p></a></td>
 						<td class="ll-time"><p>{{initTime(learn[index-1].updateTime)}}</p></td>
-						<td class="ll-name"><a :href="'#'+learn[index].documentId"><p :title="learn[index].documentTitle">{{learn[index].documentTitle}}</p></a></td>
+						<td class="ll-name"><a :href="'home.html?location=docu&id='+learn[index].documentId"><p :title="learn[index].documentTitle">{{learn[index].documentTitle}}</p></a></td>
 						<td class="ll-time"><p>{{initTime(learn[index-1].updateTime)}}</p></td>
 					</tr>
 					<tr v-else-if="index == learn.length-1">
-						<td class="ll-name"><a :href="'#'+learn[index].documentId"><p :title="learn[index].documentTitle">{{learn[index].documentTitle}}</p></a></td>
+						<td class="ll-name"><a :href="'home.html?location=docu&id='+learn[index].documentId"><p :title="learn[index].documentTitle">{{learn[index].documentTitle}}</p></a></td>
 						<td class="ll-time"><p>{{initTime(learn[index-1].updateTime)}}</p></td>
 					</tr>
 				</table>

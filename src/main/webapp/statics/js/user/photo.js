@@ -31,7 +31,9 @@ $(document).ready(function(){
 var photo = new Vue({
 	el :'#photo',
 	data :{
-		"photo":[]
+		"photo":[],
+		"title":[],
+		"description":[]
 	},
 	created:function(){
 		var self = this;
@@ -41,7 +43,9 @@ var photo = new Vue({
 			dataType : "json",// 数据类型可以为 text xml json script jsonp
 			success : function(result) {// 返回的参数就是 action里面所有的有get和set方法的参数
 				if (result.status == 0) {
-					self.photo = result.data;
+					self.photo = result.data.pictures;
+					self.title = result.data.albumTitle;
+					self.description = result.data.description;
 				} else {
 					alert(result.msg);
 				}

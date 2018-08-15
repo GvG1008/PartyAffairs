@@ -241,11 +241,11 @@ var Learning = new Vue({
 		var self = this;
 		$.ajax({
 			type:"post",
-			url:"../study/get_study_documents.do",
+			url:"../study/get_study_documents.do?page=1&pageNum=5",
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
 				if(result.status==0)
-					self.learn = result.data;
+					self.learn = result.data.list;
 				else{
 					alert(result.msg);
 				}
@@ -267,11 +267,11 @@ var Download = new Vue({
 		var self = this;
 		$.ajax({
 			type:"post",
-			url:"../study/get_study_documents.do",
+			url:"../study/get_study_documents.do?page=1&pageNum=5",
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
 				if(result.status==0)
-					self.download = result.data;
+					self.download = result.data.list;
 				else{
 					alert(result.msg);
 				}
