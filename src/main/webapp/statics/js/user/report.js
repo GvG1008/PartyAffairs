@@ -42,7 +42,7 @@ function sendfile(file){
          data:formData, 
          processData: false,
          contentType: false,
-         dataType:'json', //请求成功后，后台返回图片访问地址字符串，故此以text格式获取，而不是json格式
+         dataType:'json',
          success: function(picture) {  
         	 if(picture.status == 0){
         		 $('#summernote').summernote('insertImage',ftpurl+picture.data.uri); 
@@ -52,4 +52,47 @@ function sendfile(file){
             alert("上传失败");                                                     
          } 
     });
+}
+function submit(){
+	if(typename == "rp"){
+		rpsubmit();
+	}
+	else if(typename == "fb"){
+		fbsubmit();
+	}
+}
+function rpsubmit(){
+	var title = $("#title").val();
+	var content = $('#summernote').summernote('code');
+	var select = $('#selected').val();
+	$.ajax({
+		type:'post',        
+        url:'../report/insertReport',
+        data: JSON.stringify({
+        	"title":title,
+        	"content":content
+        }),
+        contentType: "application/json;charset=utf-8",
+        dataType:'json',
+        success: function(result){			
+			alert(result.msg);
+		}
+	})
+}
+function fbsubmit(){
+	var title = $("#title").val();
+	var content = $('#summernote').summernote('code');
+	$.ajax({
+		type:'post',        
+		url:'../report/insertReport',
+	    data: JSON.stringify({
+	        "title":title,
+	        "content":content
+	    }),
+	    contentType: "application/json;charset=utf-8",
+        dataType:'json',
+        success: function(result){			
+			alert(result.msg);
+		}
+	})
 }

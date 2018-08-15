@@ -13,11 +13,11 @@
         		<div class="rp-matter">
         			<p>
         				<span>标题：</span>
-        				<input type="text" class="rp-heading" />
+        				<input type="text" class="rp-heading" id="title"/>
         			</p>
         			<p id="type">
         				<span>类型：</span>
-        				<select>
+        				<select id="selected">
         					<option value="1">1</option>
         					<option value="2">2</option>
         					<option value="3">3</option>
@@ -27,7 +27,7 @@
         		<div id="summernote"></div>
         	</div>
         	<div class="rp-footer">
-        		<button class="rp-btn">提交</button>
+        		<button class="rp-btn" onclick="submit()">提交</button>
         	</div>
        	</div>
 		<link rel="stylesheet" href="../statics/dist/summernote.css" />
