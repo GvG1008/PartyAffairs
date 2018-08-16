@@ -18,11 +18,11 @@
          
          <!-- 工具栏  -->
             <div class=toolbar>
-                 <a class="btn btn-default op" id="save" href="#">
+                <!--  <a class="btn btn-default op" id="save" href="#">
                                 <i class="fa fa-hourglass op-icon"></i> 暂存</a>
                  <a class="btn btn-default op" id="preview" href="#">
-                                <i class="fa fa-eye op-icon"></i> 预览</a>
-                 <a class="btn btn-default op" id="send" href="#">
+                                <i class="fa fa-eye op-icon"></i> 预览</a> -->
+                 <a class="btn btn-default op" id="send" onclick="sendarticle()" >
                                 <i class="fa fa-paper-plane op-icon"></i> 发布</a>
             </div>
           <!--   <div class="clearfix"></div> -->
@@ -66,7 +66,7 @@
 	        <div class="content-area">
 	            <!-- 标题  -->
 	            <div class="textareawrap">
-	                <textarea type="text" class="title" id="title" placeholder="请填写标题" maxlength="32" autocomplete="off" onkeypress="loft.m.longpostpublish.g.handleEnter(this,event);" style="height:50px;" wrap="hard"></textarea>
+	                <textarea type="text" class="title" id="title" placeholder="请填写标题" maxlength="32" autocomplete="off" style="height:50px;resize:none;" wrap="hard"></textarea>
 	            </div>
 	            <!-- 文章投递  -->
 	            <div class="articleposition">
@@ -112,7 +112,12 @@
 	            <div class="editorWrap">
 	                <div id="summernote"></div>
 	            </div>
+	            <div class="editorWrap">
+                    <a class="btn btn-default op" id="send" onclick="sendarticle()" >
+                    <i class="fa fa-paper-plane op-icon"></i> 发布</a>
+                </div>
 	        </div>
+	        
          </form>
    </div>
    

@@ -1,53 +1,83 @@
  
  //加载编辑器及自定义配置 
-        $(document).ready(function() {  
-            $('#summernote').summernote({  
-                height: 800,//初始化默认高度    
-                width:630,
-                minHeight: null, //最小高度             
-                maxHeight: null, //最大高度
-                focus: true,//是否定位
-                lang:'zh-CN',//注意这里，若要设置语言，则需要引入该语言配置js
-                placeholder:"请在这里写下您的内容",
-                fontSize:"16",
-                toolbar: [
-                    ['color', ['color']],
-                    ['fontsize', ['fontsize']],
-                    ['para', ['paragraph']],
-                    ['style', ['bold','underline', 'clear']],
-                    ['insert', ['picture', 'link']],
-                    ['table', ['table']],
-                    ['view',['codeview','fullscreen']],
-                ]//配置工具栏
-                //查看更多配置(https://summernote.org/deep-dive/)
-                //下面重写上传图片方法
-               /* callbacks: {
-                    onImageUpload: function(files) {
-                        //由于summernote上传图片上传的是二进制数据
-                        //所以这里可以自己重新上传图片方法
-                       var formData = new FormData();
-                        formData.append('file',files[0]); 
-                    }; 
-                        /* $.ajax({
-                            url : baseurl+"/upload/", //后台文件上传接口
-                            type : 'POST',
-                            data : formData,
-                            processData : false,
-                            contentType : false,
-                            success : function(data) {
-                                var imgJson = eval('(' + data + ')');
-                                var imgStr = ' '+baseurl+imgJson.file_url;
-                                //设置到编辑器中
-                                $('#summernote').summernote('insertImage',imgStr,'img');
-                            },
-                            error:function(){
-                                alert("上传失败...");
-                            }
-                        }); 
-                    }
-                }*/
-            });
-        });
+$(document).ready(function() {  
+    $('#summernote').summernote({  
+        height: 400,//初始化默认高度    
+        width:630,
+        focus: true,//是否定位
+        lang:'zh-CN',//注意这里，若要设置语言，则需要引入该语言配置js
+        placeholder:"请在这里写下您的内容",
+        fontSize:"16",
+        toolbar: [
+            ['color', ['color']],
+            ['fontsize', ['fontsize']],
+            ['para', ['paragraph']],
+            ['style', ['bold','underline', 'clear']],
+            ['insert', ['picture', 'link']],
+            ['table', ['table']],
+            ['view',['codeview','fullscreen']],
+        ],//配置工具栏      
+        callbacks: {  
+            onImageUpload: function(file) {  //图片默认以二进制的形式存储到数据库，调用此方法将请求后台将图片存储到服务器，返回图片请求地址到前端
+            	sendfile(file);           	
+            }  
+        }
+    });
+});
+function sendfile(file){
+	//将图片放入Formdate对象中                                         
+    var formData = new FormData();  
+    formData.append("uploadIMG", file[0]); 
+    $.ajax({                            
+         type:'post',        
+         url:'../../publicityManage/uploadIMG',                        
+         cache: false,
+         data:formData, 
+         processData: false,
+         contentType: false,
+         dataType:'json',
+         success: function(picture) { 
+        	 //console.log(picture);
+        	 if(picture.status == 0){        		
+        		 $('#summernote').summernote('insertImage',picture.data); 
+        	 }
+         },  
+         error:function(){                                                  
+            alert("上传失败");                                                     
+         } 
+    });
+}
+function sendarticle(){
+	var formData = new FormData();
+	var sendFile = $('#file-upload').get(0).files[0];
+	if (typeof (sendFile) != "undefined") {
+		formData.append("coverpath", sendFile);
+	}
+	var title = $('#title').val();
+	var content = $('#summernote').summernote('code');
+	formData.append("title", title);
+	formData.append("content", content);
+	formData.append("source", "计算机学院");
+	var url = "../../publicityManage/insertNews";
+	submit(formData,url);
+}
+function submit(data,url){
+	$.ajax({
+		type : 'post',
+		url : url,
+		cache : false,
+		data : data,
+		processData : false,
+		contentType : false,
+		dataType : 'json', //请求成功后，后台返回图片访问地址字符串，故此以text格式获取，而不是json格式
+		success : function(data) {
+			alert(data.msg);
+		},
+		error : function() {
+			alert("发布失败");
+		}
+	});
+}
 window.onload=function(){
      var imgArea=document.getElementById("imgArea");
      imgArea.ondragenter=function(){
