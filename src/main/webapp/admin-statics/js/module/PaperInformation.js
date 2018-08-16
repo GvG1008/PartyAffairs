@@ -162,11 +162,11 @@ function addsort(){
 $(function() {
 	
 	$('#tikutitle').bind("change",function(){	
-	    /*console.log("$('#tikutitle') was clicked");*/
+	    console.log("$('#tikutitle') was clicked");
 		checkisnull();
 	});
 	$("#chooseExam").change(function(){
-		/*var filename = $(this).val().substring($(this).val().lastIndexOf("\\")+1);*/
+		var filename = $(this).val().substring($(this).val().lastIndexOf("\\")+1);
 		//检测上传文件的类型 
 	
 		var file = $(this).val();
@@ -191,7 +191,7 @@ $(function() {
 		    
 	});
 	$("#mySelect").bind("change",function(){
-        /*console.log("$('#mySelect') was clicked");*/
+        console.log("$('#mySelect') was clicked");
         checkisnull();
     });
 	//检查输入框是否为空
@@ -200,10 +200,10 @@ $(function() {
 		var select = $("#mySelect").val();
 		var file =$("#chooseExam").val();
 		
-		/*console.log("$('#tikutitle').val():"+title+":"
+		console.log("$('#tikutitle').val():"+title+":"
 			    +"$('#chooseExam').val():"+file+":"
 			    +"$('#mySelect').val():"+select
-			   );*/
+			   );
 		
 		if(title&&select!="请选择文件分类"&&file){
 			$('#mUploadbtn').attr('disabled', false);
@@ -225,14 +225,14 @@ $(function() {
 		$(this).removeData("bs.modal");
 		})
 		
-   $("tbody tr").on('click' , function(){
+   /*$("tbody tr").on('click' , function(){
 	var check = $(this).find("input[type='checkbox']");
 	if ($(check).is(':checked')) {
 		$(check).prop('checked', false);
 	} else {
 		$(check).prop('checked', true);
 	}
-    })
+    })*/
     
     
     //文件上传限制
@@ -241,8 +241,8 @@ $(function() {
 		var fileName = document.all.up_file.value;
 		     var ext,idx;   
 		    if (fileName == ''){  
-		       /*document.all.submit_upload.disabled=true; 
-		        alert("请选择需要上传的文件!"); */ 
+		       document.all.submit_upload.disabled=true; 
+		        alert("请选择需要上传的文件!");  
 		        return; 
 		    } else {   
 		        idx = fileName.lastIndexOf(".");   
@@ -262,7 +262,7 @@ $(function() {
 		    }
 		    
 		    //检测上传文件的大小        
-		   /* var isIE = /msie/i.test(navigator.userAgent) && !window.opera;  
+		    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;  
 		    var fileSize = 0;           
 		    if (isIE && !target.files){       
 		        var filePath = target.value;       
@@ -280,8 +280,7 @@ $(function() {
 		        alert("文件大小不能超过200KB");   
 		    }else{
 		    document.all.submit_upload.disabled=false;
-		    }    */
+		    }    
 		}     
 	
 });
- 

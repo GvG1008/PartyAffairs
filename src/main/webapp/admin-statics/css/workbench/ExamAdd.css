@@ -92,3 +92,43 @@ span.dw {
 select#tk {
     width: 400px;
 }
+input#citySel {
+    width: 299px;
+    height: 30px;
+}
+input#key{
+	width: 200px;
+    height: 25px;
+        margin: 5px 0;
+    margin-top: 15px;
+    
+}
+div#menuContent>label>p {
+    height: 35px;
+    line-height: 4;
+    margin-left: 10px;
+}
+ul#ztree{
+	margin-top:0; width:180px; height: 300px;padding: 5px 12px;
+}
+div#menuContent {
+    background: #fff;
+    width: 300px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    height: 295px;
+    overflow: scroll;
+}
+button.zTreeSelect {
+    background: #fff;
+    border: 1px solid #337ab7;
+    height: 30px;
+    width: 90px;
+    border-radius: 5px;
+    margin-left: 15px;
+    color:#337ab7;
+}
+i.fa.fa-list {
+    padding-right: 5px;
+}

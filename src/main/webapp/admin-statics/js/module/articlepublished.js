@@ -261,21 +261,14 @@ window.onload=function(){
                tags: ['0']
            },
            {
-               text: '组织架构',
-               href: '#unit',
-               tags: ['2'],
-               nodes:[
-            	   {
-            		   text: '院组织架构',
-                       href: '#yunit',
-                       tags: ['0'] 
-            	   },
-            	   {
-            		   text: '党支部组织架构',
-                       href: '#djunit',
-                       tags: ['0'] 
-            	   }
-               ]
+                text: '院组织架构',
+                href: '#yunit',
+                tags: ['0'] 
+           },
+           {
+            	text: '党支部组织架构',
+                href: '#djunit',
+               tags: ['0'] 
             }
          ]
        }

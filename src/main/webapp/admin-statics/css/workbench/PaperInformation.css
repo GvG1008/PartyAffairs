@@ -22,6 +22,9 @@ span.fa.fa-clock-o.icon {
 tbody>tr>td>center {
     font-size: 13px;
 }
+.row {
+    margin-right: -3px;
+}
 /* i.fa.fa-search.ticon {
     color: #5bc0de;
     font-size: 15px;
@@ -266,4 +269,34 @@ span.opclosebtn:hover{
 }
 label.opl>input[type="radio"] {
     margin-top: 11px;
+}
+a.btn.btn-success.os.btn-xs {
+    padding-right: 3px;
+    margin: 0 5px;
+}
+i.ticon {
+    margin-left: 4px;
+}
+i.fa.fa-pencil, i.fa.fa-trash-o {
+    /* margin-right: 3px; */
+    padding-left: 5px;
+    padding-right: 0px;
+}
+i.fa.fa-trash-o.ticon {
+    margin-left: 1px;
+}
+
+/*审核列表*/
+a.os1, .ow1 {
+    padding-left: 1px;
+}
+button#btn_look1,#btn_delete1 {
+    padding-left: 2px;
+}
+button#btn_delete1 {
+    padding-right: 7px;
+    padding-left: 3px;
+}
+button#btn_look1 {
+    margin: 0 5px;
 }

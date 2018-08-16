@@ -1,0 +1,53 @@
+.clearfix:after {
+   content:""; 
+   display: block; 
+   clear:both; 
+}
+.header {
+    padding: 20px;
+    font-size: 22px;
+    color: #004d6f;
+    font-family: sans-serif;
+    font-weight: 800;
+    border-bottom-color: #69666685;
+    border-bottom: solid 0.5px #69666685;
+    background: #fff;
+    padding-left: 50px;
+    padding-right: 75px;
+}
+body{
+    background: #fff;
+    height:100%;
+}
+.content {
+    display: grid;
+    grid-template-rows: repeat(auto-fit, 190px);
+    grid-template-columns: repeat(auto-fit, minmax(245px,1fr));
+    grid-column-gap: 35px;
+    margin: 50px;
+    grid-row-gap: 35px;
+}
+.ExamBox {
+    padding: 15px;
+border: 1px solid #ccc;
+    border-radius: 5px;
+}
+a.ExamBox_a {
+    display: flex;
+    flex-direction: column;
+}
+a.ExamBox_a:hover {
+    outline: unset;
+    text-decoration: unset;
+}
+span.Examname {
+    color: #555;
+    font-size: 18px;
+    font-weight: 600;
+        margin-top: 15px;
+}
+span.time {
+    font-size: 16px;
+    line-height: 4;
+    color: #555;
+}

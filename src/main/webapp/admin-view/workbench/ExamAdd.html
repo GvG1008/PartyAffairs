@@ -8,6 +8,7 @@
 <link href="../../admin-statics/css/bootstrap/3.0.2/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="../../admin-statics/css/font-awesome/4.7.0/font-awesome.css" rel="stylesheet">
 <link href="../../admin-statics/css/workbench/borain-timeChoice.css" rel="stylesheet" >
+<link href="../../admin-statics/css/workbench/zTreeStyle.css" rel="stylesheet">
 <link href="../../admin-statics/css/workbench/ExamAdd.css" rel="stylesheet" >
 </head>
 <body>
@@ -39,6 +40,19 @@
                  <option value="">十九大学习报告</option>
                  <option value="">习总书记的重要讲话</option>
                  </select>
+            </div>
+            <div class="form-group">
+                 <label class="lname">考试对象</label>
+                 <input id="citySel" class="form-control" type="text" readonly value="" onclick="showMenu();" />
+                 <button class="zTreeSelect" onclick="showMenu(); return false;">
+                 <i class="fa fa-list"></i>选择对象
+                 </button>
+                 <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+				  <label style="display:flex">  
+				     <p>搜索：</p><input type="text" id="key" value="" class="empty form-control"/>
+				  </label> 
+				     <ul id="treeDemo" class="ztree"></ul>
+				 </div>
             </div>
             <div class="form-group">
                 <label class="lname">考试时间</label>
@@ -73,6 +87,9 @@
         <script src="../../statics/js/vue.js"></script>
         <script type="text/javascript" src="../../admin-statics/js/extends/borain-timeChoice.js"></script>
         <script type="text/javascript" src="../../admin-statics/js/extends/bootstrap-treeview.js"></script>
+        <script type="text/javascript" src="../../admin-statics/js/extends/jquery.ztree.all.js"></script>
+                <script type="text/javascript" src="../../admin-statics/js/extends/jquery.ztree.exhide.js"></script>
+        <script type="text/javascript" src="../../admin-statics/js/extends/fuzzysearch.js"></script>
         <script src="../../admin-statics/js/module/ExamAdd.js"> </script>
         <script>
 			//  level分为 YM YMD H HM 四个有效值，分别表示年月 年月日 年月日时 年月日时分,less表示是否不可小于当前时间。年-月-日 时:分 时为24小时制
