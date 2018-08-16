@@ -14,11 +14,11 @@ public interface PublicityManageService {
     //添加未审核的公示，返回结果信息
     String InsertNotices(Notices notices);
 
-    //返回新闻的列表信息,根据参数返回是否审核
-    List<PublicityInfo> getNewsList(int state);
+    //返回全部新闻的列表信息，包括审核未审核
+    List<PublicityInfo> getNewsList();
 
-    //返回公示的列表信息，根据参数返回相应的公示类型，审核状态
-    List<PublicityInfo> getNotices(int type, int state);
+    //返回全部公示的列表信息，根据参数返回相应的公示类型，包括审核未审核
+    List<PublicityInfo> getNotices(int type);
 
     //批量审核新闻
     String checkNewsByBatch(String newsId);

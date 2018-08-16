@@ -3,22 +3,22 @@
 <mapper namespace="com.zqu.pa.dao.newsnotices.PublicityManageMapper">
   <select id="getNewsManageList" resultType="com.zqu.pa.vo.newsnotices.PublicityInfo">
     SELECT 
-        news_id 'id', title , date , source , creator_id 'creatorId' , state , last_time 'lastTime' , click , coverpath 
+        n.news_id 'id', n.title , n.date , n.source , u.name 'creator' , n.state , n.last_time 'lastTime' , n.click , n.coverpath 
     FROM 
-        news
-    WHERE
-        state = #{state}
+        news n
+    LEFT JOIN
+        user_person_info u ON n.creator_id = u.user_id
     ORDER BY
-        date Desc
+        n.date Desc
   </select>
   <select id="getNoticesManageList" resultType="com.zqu.pa.vo.newsnotices.PublicityInfo">
     SELECT
-        notices_id 'id', title, date, creator_id 'creatorId' , state , last_time 'lastTime' , click , coverpath
+        n.notices_id 'id', n.title, n.date, u.name 'creator' , n.state , n.last_time 'lastTime' , n.click , n.coverpath
     FROM
-        notices
+        notices n
+    LEFT JOIN
+        user_person_info u ON n.creator_id = u.user_id
     WHERE
-        state = #{state}
-    AND
         type = #{type}
     ORDER BY
         date Desc

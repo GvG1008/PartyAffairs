@@ -226,7 +226,7 @@ public class PublicityManageController {
     }
     
     /**
-     * 返回管理员端管理新闻的列表信息,已审核
+     * 返回管理员端管理新闻的列表信息,包括已审核未审核
      * @return
      */
     @ResponseBody
@@ -234,8 +234,8 @@ public class PublicityManageController {
     public ServerResponse<List<PublicityInfo>> getNewsList() {
         List<PublicityInfo> listInfo = null;
         
-        //获取新闻列表,1表示已审核
-        listInfo  = publicityManageService.getNewsList(1);
+        //获取新闻列表
+        listInfo  = publicityManageService.getNewsList();
         
         if(listInfo==null)
             return ServerResponse.createByErrorMessage("获取列表信息失败!");
@@ -243,7 +243,7 @@ public class PublicityManageController {
     }
     
     /**
-     * 返回管理员端管理通知公示的列表信息,已审核
+     * 返回管理员端管理通知公示的列表信息,包括已审核未审核
      * @return
      */
     @ResponseBody
@@ -251,8 +251,8 @@ public class PublicityManageController {
     public ServerResponse<List<PublicityInfo>> getPublicNoticesList() {
         List<PublicityInfo> listInfo = null;
         
-        //获取公示列表,第一个参数0表示获取类型为通知公示,第二个参数1表示已审核
-        listInfo  = publicityManageService.getNotices(0,1);
+        //获取公示列表,参数0表示获取类型为通知公示
+        listInfo  = publicityManageService.getNotices(0);
         
         if(listInfo==null)
             return ServerResponse.createByErrorMessage("获取列表信息失败!");
@@ -260,7 +260,7 @@ public class PublicityManageController {
     }
     
     /**
-     * 返回管理员端管理党内公示的列表信息,已审核
+     * 返回管理员端管理党内公示的列表信息,包括已审核未审核
      * @return
      */
     @ResponseBody
@@ -268,59 +268,8 @@ public class PublicityManageController {
     public ServerResponse<List<PublicityInfo>> getPartyNoticesList() {
         List<PublicityInfo> listInfo = null;
         
-        //获取公示列表,第一个参数0表示获取类型为通知公示,第二个参数1表示已审核
-        listInfo  = publicityManageService.getNotices(1,1);
-        
-        if(listInfo==null)
-            return ServerResponse.createByErrorMessage("获取列表信息失败!");
-        return ServerResponse.createBySuccess(listInfo);
-    }
-    
-    /**
-     * 返回管理员端管理新闻的列表信息,未审核
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value="/newsCheckList",method=RequestMethod.GET)
-    public ServerResponse<List<PublicityInfo>> getNewsCheckList() {
-        List<PublicityInfo> listInfo = null;
-        
-        //获取新闻列表,0表示未审核
-        listInfo  = publicityManageService.getNewsList(0);
-        
-        if(listInfo==null)
-            return ServerResponse.createByErrorMessage("获取列表信息失败!");
-        return ServerResponse.createBySuccess(listInfo);
-    }
-    
-    /**
-     * 返回管理员端管理通知公示的列表信息,未审核
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value="/publicNoticesCheckList",method=RequestMethod.GET)
-    public ServerResponse<List<PublicityInfo>> getPublicNoticesCheckList() {
-        List<PublicityInfo> listInfo = null;
-        
-        //获取公示列表,第一个参数0表示获取类型为通知公示,第二个参数0表示未审核
-        listInfo  = publicityManageService.getNotices(0,0);
-        
-        if(listInfo==null)
-            return ServerResponse.createByErrorMessage("获取列表信息失败!");
-        return ServerResponse.createBySuccess(listInfo);
-    }
-    
-    /**
-     * 返回管理员端管理党内公示的列表信息,未审核
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value="/partyNoticesCheckList",method=RequestMethod.GET)
-    public ServerResponse<List<PublicityInfo>> getPartyNoticesCheckList() {
-        List<PublicityInfo> listInfo = null;
-        
-        //获取公示列表,第一个参数0表示获取类型为通知公示,第二个参数1表示已审核
-        listInfo  = publicityManageService.getNotices(1,0);
+        //获取公示列表,参数0表示获取类型为通知公示
+        listInfo  = publicityManageService.getNotices(1);
         
         if(listInfo==null)
             return ServerResponse.createByErrorMessage("获取列表信息失败!");

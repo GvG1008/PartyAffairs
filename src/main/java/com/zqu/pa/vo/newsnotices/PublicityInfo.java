@@ -16,6 +16,8 @@ public class PublicityInfo {
     
     private String creatorId;
     
+    private String creator; //录入人名字
+
     private int state;
     
     private String lastTime;
@@ -62,6 +64,14 @@ public class PublicityInfo {
 
     public void setCreatorId(String creatorId) {
         this.creatorId = creatorId;
+    }
+    
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
     public int getState() {

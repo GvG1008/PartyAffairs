@@ -73,15 +73,15 @@ public class PublicityManageServiceImpl implements PublicityManageService {
     }
 
     @Override
-    public List<PublicityInfo> getNewsList(int state) {
+    public List<PublicityInfo> getNewsList() {
 
-        return publicityManageDao.getNewsManageList(state);
+        return publicityManageDao.getNewsManageList();
     }
 
     @Override
-    public List<PublicityInfo> getNotices(int type, int state) {
+    public List<PublicityInfo> getNotices(int type) {
         
-        return publicityManageDao.getNoticesManageList(type, state);
+        return publicityManageDao.getNoticesManageList(type);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class PublicityManageServiceImpl implements PublicityManageService {
             //进行更新审核状态
             result=publicityManageDao.updateCheckNewsByBatch(Ids);
         }catch (Exception e) {
-            e.printStackTrace();
+            return "审核失败!";
         }
         if(result==0)
             return "审核失败!";
