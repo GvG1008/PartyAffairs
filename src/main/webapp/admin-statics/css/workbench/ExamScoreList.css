@@ -21,16 +21,22 @@ body{
 }
 .content {
     display: grid;
-    grid-template-rows: repeat(auto-fit, 190px);
-    grid-template-columns: repeat(auto-fit, minmax(245px,1fr));
+    grid-template-rows: repeat(auto-fit, 165px);
+    grid-template-columns: repeat(auto-fit, minmax(253px,1fr));
     grid-column-gap: 35px;
     margin: 50px;
     grid-row-gap: 35px;
+        margin-top: 30px;
 }
 .ExamBox {
     padding: 15px;
-border: 1px solid #ccc;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    border-top: 5px solid #337ab7;
+}
+.ExamBox:hover{
+	    box-shadow: 0 10px 11px 0 rgba(0,0,0,0.19);
+    top: -10px;
 }
 a.ExamBox_a {
     display: flex;
@@ -50,4 +56,9 @@ span.time {
     font-size: 16px;
     line-height: 4;
     color: #555;
+}
+span.detail {
+    /* float: right; */
+    text-align: right;
+    margin-right: 5px;
 }

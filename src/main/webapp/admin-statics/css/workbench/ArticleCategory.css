@@ -1,0 +1,73 @@
+.clearfix:after {
+   content:""; 
+   display: block; 
+   clear:both; 
+}
+.container {
+    float:left;
+    min-width:100%;
+    background: #fff;
+    padding:0px;
+}
+.header {
+    padding: 20px;
+    font-size: 22px;
+    color: #004d6f;
+    font-family: sans-serif;
+    font-weight: 800;
+    border-bottom-color: #69666685;
+    border-bottom: solid 0.5px #69666685;
+    background: #fff;
+    padding-left: 50px;
+}
+body{
+    background: #fff;
+    height:100%;
+}
+.content {
+    display: grid;
+    grid-template-rows: repeat(auto-fit, 139px);
+    grid-template-columns: repeat(auto-fit, minmax(195px,1fr));
+    grid-column-gap: 35px;
+    margin: 50px;
+    grid-row-gap: 35px;
+    margin-top: 30px;
+}
+.btnCard {
+    /* width: 252.25px; */
+    height: 139px;
+    border: 1px solid #eee;
+    font-size: 20px;
+        cursor: pointer;
+}
+a.btnCard_a {
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 50px;
+    padding-bottom: 0px;
+}
+a.btnCard_a:hover{
+	outline:unset;
+	text-decoration: unset;
+}
+i.icon {
+    text-align: center;
+    font-size: 190%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+div.btnCard:hover i.icon {
+    color: #004d6f;
+} 
+ div.btnCard:hover>a>span.lname {
+    color: #004d6f;
+} 
+div.btnCard:hover {
+    color: #555;
+    box-shadow: 0 10px 11px 0 rgba(0,0,0,0.19);
+    top: -10px;
+}
+span.lname {
+    text-align: center;
+}
