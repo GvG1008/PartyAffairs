@@ -30,6 +30,8 @@ public class NoticesServiceImpl implements NoticesService{
 
     @Override
     public PageOfList getMenuInfo(int page, int num, int type) {
+        if(num==0)
+            return null;
         PageOfList info = new PageOfList();
         
         NoticesExample example = new NoticesExample();

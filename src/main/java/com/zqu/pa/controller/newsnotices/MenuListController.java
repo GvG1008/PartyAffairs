@@ -3,6 +3,8 @@ package com.zqu.pa.controller.newsnotices;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,10 +40,7 @@ public class MenuListController {
         //传入跳转的页数与当前显示的条数,page为页数，num为每页条数
         info = newsService.getMenuInfo(page,num);
         
-        if(page==0)
-            return ServerResponse.createByErrorMessage("404notfound");
-        else if(info.getList()==null||info.getPageNum()<=0||info.getPageNum()<=0
-                ||info.getPageNum()<=0)
+        if(info==null||info.getList()==null)
             return ServerResponse.createByErrorMessage("获取失败");
         return ServerResponse.createBySuccess("获取新闻列表", info);
     }
@@ -59,10 +58,7 @@ public class MenuListController {
         //传入跳转的页数与当前显示的条数,page为页数，num为每页条数
         info = noticesService.getMenuInfo(page,num,0);
 
-        if(page==0)
-            return ServerResponse.createByErrorMessage("404notfound");
-        else if(info.getList()==null||info.getPageNum()<=0||info.getPageNum()<=0
-                ||info.getPageNum()<=0)
+        if(info==null||info.getList()==null)
             return ServerResponse.createByErrorMessage("获取失败");
         return ServerResponse.createBySuccess("获取列表成功", info);
     }
@@ -80,10 +76,7 @@ public class MenuListController {
         //传入跳转的页数与当前显示的条数,page为页数，num为每页条数
         info = noticesService.getMenuInfo(page,num,1);
 
-        if(page==0)
-            return ServerResponse.createByErrorMessage("404notfound");
-        else if(info.getList()==null||info.getPageNum()<=0||info.getPageNum()<=0
-                ||info.getPageNum()<=0)
+        if(info==null||info.getList()==null)
             return ServerResponse.createByErrorMessage("获取失败");
         return ServerResponse.createBySuccess("获取列表成功", info);
     }
