@@ -289,13 +289,13 @@ window.onload=function(){
             	   console.log("length:"+node.nodes.length);
             	   if (!node.nodes[x].nodes) {
             		   //通过节点数组长度判断当前所选节点为全选还是组织结构节点，为4是全选，2为组织架构
-            		   if(node.nodes.length==2){
+            		  /* if(node.nodes.length==2){
             			   $("#"+node.nodes[x].nodeId).detach();
                 		   $('#checkable-output').prepend('<li id='+node.nodes[x].nodeId+'> <b>当前站点 </b>下的  <b>组织架构</b>下的   <b>'+ node.nodes[x].text + '</b> 栏目 </li>');
-                       }else{
+                       }else{*/
 	            		   $("#"+node.nodes[x].nodeId).detach();
 	            		   $('#checkable-output').prepend('<li id='+node.nodes[x].nodeId+'> <b>当前站点 </b>下的  <b>'+ node.nodes[x].text + '</b> 栏目 </li>');
-                       }
+                       /*}*/
             		   console.log("if(!!node.nodes[x].nodes)::"+node.nodes[x].text );
             	   }
             	   if (node.nodes[x].nodes) {
@@ -424,19 +424,11 @@ window.onload=function(){
     	 $('#ppp').empty();
     	 for(x in vnode){
     		 console.log("x["+x+"]");
-    		 if(vnode[x].text!="当前站点"&&vnode[x].text!="组织架构"){
-    		   if(vnode[x].text=="院组织架构"){
-    			   $('#ppp').prepend(
-    	                     '<label class="position" id=x['+x+']><i class="fa fa-circle"></i>当前站点    —— 组织架构   —— <span class="ptext">'+vnode[x].text+'</span><span class="minusbtn"></span></label>');
-    	    		
-    		   }else if(vnode[x].text=="党支部组织架构"){
-    			   $('#ppp').prepend(
-  	                     '<label class="position" id=x['+x+']><i class="fa fa-circle"></i>当前站点    —— 组织架构   —— <span class="ptext">'+vnode[x].text+'</span><span class="minusbtn"></span></label>');
-  	    		
-  		      }else{
+    		 if(vnode[x].text!="当前站点"){
+    		 
     		   $('#ppp').prepend(
                      '<label class="position" id=x['+x+']><i class="fa fa-circle"></i>当前站点    ——  <span class="ptext">'+vnode[x].text+'</span><span class="minusbtn"></span></label>');
-    		   }
+    		  
     		}
     	     console.log("treeview-node:"+vnode[x].text);
          }
