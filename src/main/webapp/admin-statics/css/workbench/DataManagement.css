@@ -1,0 +1,92 @@
+.clearfix:after {
+   content:""; 
+   display: block; 
+   clear:both; 
+}
+.header {
+    padding: 20px;
+    font-size: 22px;
+    color: #004d6f;
+    font-family: sans-serif;
+    font-weight: 800;
+    border-bottom-color: #69666685;
+    border-bottom: solid 0.5px #69666685;
+    background: #fff;
+    padding-left: 50px;
+    padding-right: 75px;
+}
+body{
+    background: #fff;
+    height:100%;
+}
+.EnterDiv {
+    width: 180px;
+    height: 180px;
+    border: 3px solid #004d6f;
+    border-radius: 100px;
+    margin: 0 100px;
+    display: flex;
+    flex-direction: column;
+        cursor: pointer;
+}
+.EnterDiv:hover i.dicon{
+	display:none;
+}
+.EnterDiv:hover span.lname{
+    display:none;
+}
+.EnterDiv:hover span.Entertext{
+	color:#fff;
+    display:block;
+}
+span.Entertext {
+    display: none;
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 70px;
+    font-size: 25px;
+    font-weight: 800;
+}
+.EnterDiv:hover{
+	background:#004d6f;
+	box-shadow: 0 10px 11px 0 rgba(0,0,0,0.19);
+    top: -10px;
+}
+i.dicon {
+    font-size: 415%;
+    width: 50px;
+    margin: 0 auto;
+    margin-top: 40px;
+    color: #004d6f;
+}
+.content {
+    display: flex;
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+span.lname {
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #004d6f;
+}
+a.EnterDiv_a{
+	    display: flex;
+    flex-direction: column;
+	
+}
+a.EnterDiv_a:hover {
+    outline: unset;
+    text-decoration: unset;
+}
+
+
+
+
+
+
+

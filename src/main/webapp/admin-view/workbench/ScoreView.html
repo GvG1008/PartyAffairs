@@ -7,12 +7,14 @@
    <link href="../../admin-statics/table/dataTables.bootstrap.css" rel="stylesheet">
    <link href="../../admin-statics/table/dataTables.responsive.css" rel="stylesheet">
    <link href="../../admin-statics/table/font-awesome.css" rel="stylesheet" />
+    <link href="../../admin-statics/table/sb-admin-2.css" rel="stylesheet">
    <link href="../../admin-statics/table/style-responsive.css" rel="stylesheet" />
+   <link href="../../admin-statics/table/style.css" rel="stylesheet" />
    <link href="../../admin-statics/css/workbench/table.css" rel="stylesheet" >  
    <link href="../../admin-statics/css/workbench/PaperInformation.css" rel="stylesheet" >
 </head>
 <body>
- <div class = "header">考试管理  > 成绩查看</div>
+ <div class = "header"><a href="ExamScoreList.html">成绩查看</a>  > 成绩详情</div>
     <div class="panel panel-default">
  
                         <div class="panel-body">
@@ -20,84 +22,33 @@
                                 <thead>
                                     <tr>
                                         <th><center><input type="checkbox"  name="all" id="all"></center></th>
-                                        <th>试卷标题</th>
-                                        <th>发布支部</th>
-                                        <th>开始时间</th>
-                                        <th>结束时间</th>
-                                        <th>考试时长（分钟）</th>
-                                        <th>单选题数</th>
-                                        <th>多选题数</th>
-                                        <th>及格标准</th>
-                                        <th>状态</th>
+                                        <th>学号</th>
+                                        <th>姓名</th>
+                                        <th>专业</th>
+                                        <th>班级</th>
+                                        <th>政治面貌</th>
+                                        <th>考试名称</th>
+                                        <th>分数</th>
                                         <th>操作</th>
                                     </tr>
                                  </thead> 
                                  <tbody>
                                     <tr>
-                                        <td style="width:30px"><center><input type="checkbox"  name="all" id="all" :value="message.userId"></center></td>
-                                        <td ><center>第一次考试</center></td>
-                                        <td><center>软件工程专业党支部</center></td>
-                                        <td><center>2018-07-14      08:00:00</center></td>
-                                        <td><center>2018-07-14      10:00:00</center></td>
-                                        <td style="width:80px"><center>90</center></td>
-                                        <td style="width:50px"><center>30</center></td>
-                                        <td style="width:50px"><center>20</center></td>
-                                        <td style="width:50px"><center>60</center></td>
-                                        <td style="width:50px"><center  class="guoqi">已过期</center></td>
-                                        <td style="width:160px">
-                                        <center>
-                                            <a class="btn btn-success os btn-xs" :href="'#?id='+message.userId" title="修改">
-                                            编辑<i class="fa fa-pencil ticon" aria-hidden="true"></i>
-                                            </a>
-                                            <button class="btn btn-danger bos btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);" aria-hidden="true">
-                                            删除<i class="fa fa-trash-o ticon" aria-hidden="true"></i>
-                                            </button>
-                                        </center>
-                                        </td>  
-                                    </tr>
-                                    <tr>
-                                        <td style="width:30px"><center><input type="checkbox"  name="all" id="all" :value="message.userId"></center></td>
-                                        <td><center>十九大党章专项训练测试</center></td>
-                                        <td><center>数据科学与大数据技术专业党支部</center></td>
-                                        <td><center>2018-07-14      08:00:00</center></td>
-                                        <td><center>2018-07-14      10:00:00</center></td>
-                                        <td style="width:80px"><center>90</center></td>
-                                        <td style="width:50px"><center>30</center></td>
-                                        <td style="width:50px"><center>20</center></td>
-                                        <td style="width:50px"><center>60</center></td>
-                                        <td style="width:50px"><center  class="weikaishi">未开始</center></td>
-                                            <td style="width:160px">
-                                        <center>
-                                            <a class="btn btn-success os btn-xs" :href="'#?id='+message.userId" title="修改">
-                                            编辑<i class="fa fa-pencil ticon" aria-hidden="true"></i>
-                                            </a>
-                                            <button class="btn btn-danger bos btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);" aria-hidden="true">
-                                            删除<i class="fa fa-trash-o ticon" aria-hidden="true"></i>
-                                            </button>
-                                        </center>
-                                        </td>  
-                                    </tr>
-                                    <tr>
-                                        <td style="width:30px"><center><input type="checkbox"  name="all" id="all" :value="message.userId"></center></td>
+                                        <td><center><input type="checkbox"  name="all" id="all" :value="message.userId"></center></td>
+                                        <td><center>201524133200</center></td>
+                                        <td><center>陈独秀</center></td>
+                                        <td><center>软件工程专业</center></td>
+                                        <td><center>15软件2班</center></td>
+                                        <td><center>预备党员</center></td>
                                         <td><center>第一次考试</center></td>
-                                        <td><center>计算机科学与技术专业党支部</center></td>
-                                        <td><center>2018-07-14      08:00:00</center></td>
-                                        <td><center>2018-07-14      10:00:00</center></td>
-                                        <td style="width:80px"><center>90</center></td>
-                                        <td style="width:50px"><center>30</center></td>
-                                        <td style="width:50px"><center>20</center></td>
-                                        <td style="width:50px"><center>60</center></td>
-                                        <td style="width:50px"><center  class="doing">进行中</center></td>
-                                           <td style="width:160px">
+                                        <td><center>50</center></td>
+                                        <td>
                                         <center>
-                                            <a class="btn btn-success os btn-xs" :href="'#?id='+message.userId" title="修改">
-                                            编辑<i class="fa fa-pencil ticon" aria-hidden="true"></i>
-                                            </a>
-                                            <button class="btn btn-danger btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);" aria-hidden="true">
-                                            删除<i class="fa fa-trash-o ticon"></i>
+                                            <button class="btn btn-info bos btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);" aria-hidden="true">
+                                           通知<i class="fa fa-bell-o ticon" aria-hidden="true"></i>
                                             </button>
                                         </center>
-                                        </td>   
+                                        </td>  
                                     </tr>
                                  </tbody>
                             </table>
@@ -125,5 +76,7 @@
     <script src="../../admin-statics/table/js/dataTables.bootstrap.min.js"></script>
     <script src="../../admin-statics/table/js/dataTables.responsive.js"></script>
     <script src="../../statics/js/vue.js"></script>
+    <script type="text/javascript" src="../../admin-statics/js/module/ScoreView.js"> </script>
+   
 </body>
 </html>
