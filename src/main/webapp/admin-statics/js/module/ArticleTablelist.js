@@ -1,29 +1,44 @@
-/*  new Vue({
-		el : "#msg",
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return decodeURI(r[2]); return null; 
+}
+var type=getUrlParam('type');//文章类型
+var datatype;
+new Vue({
+	el : "#msg",
 	data: {
-		newMessages: []
+		datas: [],
+		datatype:[]
 	},
 	methods:{
 		loadNewMessages: function() {
+			var url;
+			if(type=="news"){
+				url = "../../publicityManage/newsList";
+				datatype = 1;
+			}else if(type=="public"){
+				url = "../../publicityManage/publicNoticesList";
+				datatype = 2;
+			}else if(type=="party"){
+				url = "../../publicityManage/partyNoticesList";
+				datatype = 3;
+			}
 			var app = this;
-			var m = {};
 			$.ajax({
 				type:"get",
-				url: "",
+				url: url,
 				async : false,
 				dataType: 'json',
 				success: function(result){
 					if (result.status == 0) {
-						app.newMessages = result.data;
+						app.datas = result.data;
+						app.datatype = datatype;
 					}else{
 						alert(result.msg);
 					}
 				}
 			});
-		},
-		timeFormat: function(ms){
-			// 毫秒转日期时间
-			return millisecondsToDateTime(ms);
 		},
 		titleFormat: function(msg){
 			// 长度超过12，截取12个字符
@@ -36,7 +51,7 @@
 	created: function () {
 		this.loadNewMessages();
 	}
-});*/
+});
   $(document).ready(function() {
 	var table = $('#msg').DataTable({
         responsive: true,
@@ -68,9 +83,10 @@
 		
     });
 	
-	var button = "<button type='button' class='btn btn-success ts' onclick='window.parent.aclick()'><span class='glyphicon glyphicon-plus icon'></span><span class='caption'>添加文章</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
+	var button = "<button type='button' class='btn btn-success tp' onclick='window.parent.aclick()'><span class='glyphicon glyphicon-plus icon'></span><span class='caption'>添加文章</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
 		+"<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'><span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
-		+"<a class='btn btn-danger td' onclick='deleteall()'><span class='fa fa-trash-o icon'></span><span class='caption'>撤稿</span></a>";
+		+"<a class='btn btn-danger td' onclick='deleteall()'><span class='fa fa-trash-o icon'></span><span class='caption'>撤稿</span></a> &nbsp;&nbsp;&nbsp;&nbsp;"
+		+"<a class='btn btn-warning tw' onclick='passall()'><span class='fa fa-pencil-square-o'></span><span class='caption' id='allpass'>审核通过</span></a>";
 	document.getElementById("add").innerHTML = button;
 	$('#msg tbody').on( 'mouseenter', 'td', function () {
 	var colIdx = table.cell(this).index().column;
@@ -78,16 +94,50 @@
 	$( table.column( colIdx ).nodes() ).addClass( 'highlight' );
 	} );
 	$("#all").click(function(){
-	$('[name=all]:checkbox').prop('checked',this.checked);//checked为true时为默认显示的状态
+		$('[name=all]:checkbox').prop('checked',this.checked);//checked为true时为默认显示的状态
 	});
-	
 
 });   
+function cancel(){
+	$('.popup_de').removeClass('bbox');
+}
 function checkall(){
 	var all = $('[name=all]:checkbox');
 	for(var i=0;i<all.length;i++){
-		all[i].checked=true;
+		all[i].checked=!all[i].checked;
 	}
+}
+function passall(){
+	var all = $('[name=all]:checkbox');
+	var str = "";
+	for(var i=1;i<all.length;i++){
+		if(all[i].checked)
+			str = str+"&"+all[i].value;
+	}
+	var text="是否审核通过所选文章吗?";
+	document.getElementById('show_msg').innerHTML=text;
+	$('.popup_de').addClass('bbox');
+	$('.popup_de .btn-danger').one('click',function(){
+		if(str!=""){
+			alert(str);
+			doPass(str);
+		}
+		else{
+			alert("请至少选择一个文章");
+			$('.popup_de').removeClass('bbox');
+		}
+	})
+}
+function pass(obj){
+	var tds = $(obj).parent().parent().parent().find('td');
+	var label = tds.eq(1).find('label');
+	var sid = label.eq(0).text();
+	var text="是否审核通过该文章吗?";
+	document.getElementById('show_msg').innerHTML=text;
+	$('.popup_de').addClass('bbox');
+	$('.popup_de .btn-danger').one('click',function(){
+		doPass(sid);
+	})
 }
 function deleteall(){
 	var all = $('[name=all]:checkbox');
@@ -96,14 +146,14 @@ function deleteall(){
 		if(all[i].checked)
 			str = str+"&"+all[i].value;
 	}
-	var text="确定要删除所选账号吗?";
+	var text="确定要撤稿所选文章吗?";
 	document.getElementById('show_msg').innerHTML=text;
 	$('.popup_de').addClass('bbox');
 	$('.popup_de .btn-danger').one('click',function(){
 		if(str!="")
 			doDelete(str);
 		else{
-			alert("请至少选择一个账号");
+			alert("请至少选择一篇文章");
 			$('.popup_de').removeClass('bbox');
 		}		
 	})
@@ -113,19 +163,27 @@ function millisecondsToDateTime(ms){
 };
 function deletemsg(obj){
 	var tds = $(obj).parent().parent().parent().find('td');
-	var center = tds.eq(1).find('center');
-	var rid = center.eq(0).text();
-	var text="确定要删除该账号吗?";
+	var label = tds.eq(1).find('label');
+	var sid = label.eq(0).text();
+	var text="确定要撤稿该文章吗?";
 	document.getElementById('show_msg').innerHTML=text;
 	$('.popup_de').addClass('bbox');
 	$('.popup_de .btn-danger').one('click',function(){
-		doDelete(rid);
+		doDelete(sid);
 	})
 }
 function doDelete(data){
+	var url;
+	if(type=="news"){
+		url = "../../publicityManage/deleteNews/";
+	}else if(type=="public"){
+		url = "../../publicityManage/deleteNotices/public/";
+	}else if(type=="party"){
+		url = "../../publicityManage/deleteNotices/party/";
+	}
 	$.ajax({                            
 		type:'post',        
-        url:'../../userManage/deleteUserByBranch/'+data, 
+        url:url+data, 
         dataType:'json',
         success: function(result) {  
 			alert(result.msg);
@@ -133,6 +191,28 @@ function doDelete(data){
         },
         error :function(){
         	alert("系统出错，删除失败！");
+        }
+   });
+}
+function doPass(data){
+	var url;
+	if(type=="news"){
+		url = "../../publicityManage/checkNews/";
+	}else if(type=="public"){
+		url = "../../publicityManage/checkNotices/public/";
+	}else if(type=="party"){
+		url = "../../publicityManage/checkNotices/party/";
+	}
+	$.ajax({                            
+		type:'post',        
+        url:url+data,   
+        dataType:'json',
+        success: function(result) {  
+			alert(result.msg);
+			//location.reload();	
+        },
+        error :function(){
+        	alert("系统出错，审核通过失败！");
         }
    });
 }

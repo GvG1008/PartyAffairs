@@ -52,14 +52,47 @@ function sendarticle(){
 	var sendFile = $('#file-upload').get(0).files[0];
 	if (typeof (sendFile) != "undefined") {
 		formData.append("coverpath", sendFile);
+	}else{
+		formData.append("coverpath", "");
 	}
-	var title = $('#title').val();
-	var content = $('#summernote').summernote('code');
+	var title = null;
+	var content = null;
+	title = $('#title').val();
+	content = $('#summernote').summernote('code');
+	if(title == ""){
+		alert("标题不能为空！");
+		return;
+	}
+	if(content == "<p><br></p>"){
+		alert("内容不能为空！");
+		return;
+	}
 	formData.append("title", title);
 	formData.append("content", content);
 	formData.append("source", "计算机学院");
 	var url = "../../publicityManage/insertNews";
-	submit(formData,url);
+	var temp = $(".position");
+	if(temp.length==0){
+		alert("请选择文章投递位置");
+	}
+	for(var i=0;i<temp.length;i++){
+		var label=document.getElementById(temp[i].id);
+		if(label.innerText=="当前站点 —— 通知公示"){
+			url = "../../publicityManage/insertPublicNotices";
+			submit(formData,url);
+		}else if(label.innerText=="当前站点 —— 党内要闻"){
+			url = "../../publicityManage/insertNews";
+			submit(formData,url);
+		}else if(label.innerText=="当前站点 —— 党内公示"){
+			url = "../../publicityManage/insertPartyNotices";
+			submit(formData,url);
+		}else if(label.innerText=="当前站点 —— 院组织架构"){
+			url = "../../publicityManage/insertNews";
+		}else if(label.innerText=="当前站点 —— 党支部组织架构"){
+			url = "../../publicityManage/insertNews";
+		}
+	}
+	//submit(formData,url);
 }
 function submit(data,url){
 	$.ajax({
