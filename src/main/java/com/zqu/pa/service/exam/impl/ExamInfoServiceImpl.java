@@ -105,7 +105,7 @@ public class ExamInfoServiceImpl implements ExamInfoService {
     }
 
     @Override
-    public List<AdminExamInfoList> unreviewExamInfo() {
+    public List<AdminExamInfoList> listExamInfo(Integer review) {
         
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
         if (basicInfo == null) {
@@ -115,9 +115,10 @@ public class ExamInfoServiceImpl implements ExamInfoService {
         int branchId = basicInfo.getBranchId();
         
         ExamInfoReviewExample example = new ExamInfoReviewExample();
-        //未审核
-        int review = 0;
-        example.createCriteria().andReviewEqualTo(review);
+        //-1获取全部信息
+        if (review != -1) {
+            example.createCriteria().andReviewEqualTo(review);
+        }
         List<ExamInfoReview> listExamInfoReview = examInfoReviewMapper.selectByExample(example);
         if (listExamInfoReview == null || listExamInfoReview.size() == 0) {
             logger.debug("未审核的考试为空");

@@ -46,16 +46,38 @@ public class ExamInfoController {
     }
     
     /**
+     * 取出登录管理员账号相同党支部的所有考试信息
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/lists", method = RequestMethod.GET)
+    public ServerResponse<List<AdminExamInfoList>> listExamInfo() {
+        
+        List<AdminExamInfoList> result = null;
+        try {
+            //所有考试信息
+            Integer review = -1;
+            result = examInfoService.listExamInfo(review);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.createByError();
+        }
+        return ServerResponse.createBySuccess(result);
+    }
+    
+    /**
      * 取出登录管理员账号相同党支部的未审核的考试信息
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/unreview", method = RequestMethod.GET)
+    @RequestMapping(value = "/lists/unreview", method = RequestMethod.GET)
     public ServerResponse<List<AdminExamInfoList>> unreviewExamInfo() {
         
         List<AdminExamInfoList> result = null;
         try {
-            result = examInfoService.unreviewExamInfo();
+            //未审核考试信息
+            Integer review = 0;
+            result = examInfoService.listExamInfo(review);
         } catch (Exception e) {
             e.printStackTrace();
             return ServerResponse.createByError();

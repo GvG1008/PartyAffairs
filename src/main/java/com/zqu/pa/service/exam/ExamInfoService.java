@@ -14,8 +14,8 @@ public interface ExamInfoService {
     //创建一场考试
     ServerResponse createExamInfo(CreateExamBean createExamBean);
     
-    //获取未审核的考试信息列表
-    List<AdminExamInfoList> unreviewExamInfo();
+    //管理员获取考试信息列表（-1：全部；0：未审核考试信息）
+    List<AdminExamInfoList> listExamInfo(Integer review);
     
     //考试通过审核
     ServerResponse reviewExamInfo(List<Integer> listExamId);
