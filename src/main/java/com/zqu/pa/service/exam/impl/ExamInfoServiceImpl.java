@@ -107,6 +107,13 @@ public class ExamInfoServiceImpl implements ExamInfoService {
     @Override
     public List<AdminExamInfoList> unreviewExamInfo() {
         
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if (basicInfo == null) {
+            logger.error("用户未登录");
+            return null;
+        }
+        int branchId = basicInfo.getBranchId();
+        
         ExamInfoReviewExample example = new ExamInfoReviewExample();
         //未审核
         int review = 0;
@@ -122,7 +129,13 @@ public class ExamInfoServiceImpl implements ExamInfoService {
             AdminExamInfoList unreviewList = new AdminExamInfoList();
             Integer examId = e.getExamId();
             //考试基本信息
-            ExamInfo examInfo = examInfoMapper.selectByPrimaryKey(examId);
+            ExamInfoExample examExample = new ExamInfoExample();
+            //查出与登录管理员账号党支部相同的考试信息
+            examExample.createCriteria().andExamIdEqualTo(examId).andBranchIdEqualTo(branchId);
+            List<ExamInfo> temp = examInfoMapper.selectByExample(examExample);
+            if (temp == null || temp.size() == 0)
+                break;
+            ExamInfo examInfo = temp.get(0);
             unreviewList.setExamId(examId);
             unreviewList.setExamTitle(examInfo.getExamTitle());
             unreviewList.setStartTime(DateUtil.formatTime(examInfo.getStartTime()));
@@ -167,8 +180,6 @@ public class ExamInfoServiceImpl implements ExamInfoService {
 
             listResult.add(unreviewList);
         }
-        
-        
         return listResult;
     }
 

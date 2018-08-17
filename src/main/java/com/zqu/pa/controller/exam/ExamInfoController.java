@@ -46,7 +46,7 @@ public class ExamInfoController {
     }
     
     /**
-     * 取出所有未审核通过的考试信息
+     * 取出登录管理员账号相同党支部的未审核的考试信息
      * @return
      */
     @ResponseBody
