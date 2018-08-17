@@ -34,22 +34,26 @@
 	                                </tr>
                                  </thead> 
                                  <tbody>
-                                    <tr>
-                                        <td><center><input type="checkbox"  name="all" id="all" :value="message.userId"></center></td>
-                                        <td><center>我校组织百名博士教授上山下乡　助推德庆乡村振兴</center></td>
-                                        <td><center>党内要闻</center></td>
-                                        <td><center>2018-07-14      08:24:22</center></td>
-                                        <td><center>发布</center></td>
-                                        <td><center>50</center></td>
-                                        <td><center>花城</center></td>
+                                    <tr v-for="r in datas">
+                                        <td><center><input type="checkbox"  name="all" id="all" :value="r.id"></center></td>
+                                        <td><center>{{titleFormat(r.title)}}</center><label hidden="hidden">{{r.id}}</label></td>
+                                        <td v-if="datatype==1"><center>党内要闻</center></td>
+                                        <td v-else-if="datatype==2"><center>通知公示</center></td>
+                                        <td v-else-if="datatype==3"><center>党内公示</center></td>
+                                        <td><center>{{r.date}}</center></td>
+                                        <td v-if="r.state==1"><center>已审核</center></td>
+                                        <td v-else><center>未审核</center></td>
+                                        <td><center>{{r.click}}</center></td>
+                                        <td><center>{{r.creator}}</center></td>
                                          <td>
                                         <center>
-                                            <a class="btn btn-success os btn-xs" :href="'#?id='+message.userId">
+                                            <a class="btn btn-success os btn-xs" :href="'#?id='+r.id">
                                                                                                                                      预览<i class="fa fa-search ticon" aria-hidden="true"></i>
                                             </a>
-                                            <button class="btn btn-danger btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);">
+                                            <button class="btn btn-danger ow btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);">
                                                                                                                                      撤稿<i class="fa fa-trash-o ticon"></i>
                                             </button>
+                                            <button class="btn btn-warning ow btn-xs" type="button" data-toggle="tooltip"  title="审核" id="btn_look" onclick="pass(this);">审核<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                         </center>
                                         </td> 
                                     </tr>
@@ -60,11 +64,11 @@
 
             <div class="popup_de xycenter">
             <div class="popup_box">
-                <span class="popup_close" value="关闭">×</span>
+                <span class="popup_close" value="关闭" onclick="cancel()">×</span>
                 <span class="show_msg" id="show_msg"></span>
                 <div class="btn_box">
                     <div class="popup_btn btn-danger" value="确定">确定</div>
-                    <div class="popup_btn btn_cancel" value="取消">取消</div>
+                    <div class="popup_btn btn_cancel" value="取消" onclick="cancel()">取消</div>
                 </div>
             </div>  
             </div>
