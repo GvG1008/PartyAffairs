@@ -183,8 +183,9 @@ public class ExamInfoServiceImpl implements ExamInfoService {
         return listResult;
     }
 
+    @Transactional
     @Override
-    public ServerResponse reviewExamInfo(Integer examId) {
+    public ServerResponse reviewExamInfo(List<Integer> listExamId) {
         
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
         if (basicInfo == null) {
@@ -192,14 +193,16 @@ public class ExamInfoServiceImpl implements ExamInfoService {
             return ServerResponse.createByErrorMessage("用户未登录");
         }
         String userId = basicInfo.getUserId();
-        ExamInfoReview examInfoReview = new ExamInfoReview();
-        examInfoReview.setExamId(examId);
-        examInfoReview.setReviewId(userId);
-        examInfoReview.setReview(1);
-        int i = examInfoReviewMapper.updateByPrimaryKeySelective(examInfoReview);
-        if (i > 0)
-            return ServerResponse.createBySuccess();
-        return ServerResponse.createByError();
+        for (Integer examId : listExamId) {
+            ExamInfoReview examInfoReview = new ExamInfoReview();
+            examInfoReview.setExamId(examId);
+            examInfoReview.setReviewId(userId);
+            examInfoReview.setReview(1);
+            int i = examInfoReviewMapper.updateByPrimaryKeySelective(examInfoReview);
+            if (i <= 0)
+                return ServerResponse.createByError();
+        }
+        return ServerResponse.createBySuccess();
     }
 
     @Transactional

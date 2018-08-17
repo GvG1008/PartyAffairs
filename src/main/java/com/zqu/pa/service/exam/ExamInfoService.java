@@ -18,7 +18,7 @@ public interface ExamInfoService {
     List<AdminExamInfoList> unreviewExamInfo();
     
     //考试通过审核
-    ServerResponse reviewExamInfo(Integer examId);
+    ServerResponse reviewExamInfo(List<Integer> listExamId);
     
     //根据考试ID删除考试
     ServerResponse removeExamInfo(Integer examId);

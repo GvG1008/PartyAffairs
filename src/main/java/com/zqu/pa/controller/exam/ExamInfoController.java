@@ -65,14 +65,14 @@ public class ExamInfoController {
     
     /**
      * 考试审核通过，将字段review置为1
-     * @param examId 考试ID
+     * @param listExamId 考试ID数组
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/{examId}", method = RequestMethod.PUT)
-    public ServerResponse reviewExamInfo(@PathVariable Integer examId) {
+    @RequestMapping(value = "/review", method = RequestMethod.PUT)
+    public ServerResponse reviewExamInfo(@RequestBody List<Integer> listExamId) {
 
-        return examInfoService.reviewExamInfo(examId);
+        return examInfoService.reviewExamInfo(listExamId);
     }
     
     /**
