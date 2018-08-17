@@ -364,7 +364,7 @@ $(function(){
 		               + '<textarea  class = " form-control jxz-title">'+sq.questionContent +'</textarea>'
 		               + '<span class="closediv" onclick="closediv(this)">X</span>'+option_box
 			  		   + '<div class="topic-answer">正确答案：<input type="text" class="form-control answer_op" value="'+answer_op+'"/>' 
-			  		   + '</div></div>';
+			  		   + '</div><span class="savediv" onclick="savediv(this)"><i class="check"></i></span></div>';
 		             
 		        });
 		       
@@ -400,9 +400,9 @@ $(function(){
 		                
 		                mqtopic_box += '<div class = "edittestCon"  data-type = "sq" data-answer="'+answer_op+'">'
 		                + '<textarea  class = " form-control jxz-title">'+mq.questionContent +'</textarea>'
-		                + '<span class="closediv" onclick="closediv(this)">X</span>'+option_box
+		                + '<span class="closediv" title="删除" onclick="closediv(this)">X</span>'+option_box
 		 	  		    + '<div class="topic-answer">正确答案：<input type="text" class="form-control answer_op" value="'+answer_op+'"/>' 
-				  		   + '</div></div>';
+				  		   + '</div><span class="savediv "title="保存" onclick="savediv(this)"><i class="check"></i></span></div>';
 		     
 		          });
 		          test_box+='<div class="jxz-box"><h4 class="tesTitle">单项选择题</h4 >'+sqtopic_box 
@@ -411,10 +411,17 @@ $(function(){
 		                   +'</div>';
 		          
 		          var test_html='<div class="page-header"><h3 class="text-center">'+ titleB +'</h3>'
-		                     +'<button type="button" class="saveedit"><i class="fa fa-save"></i>保存修改</button></div>'
+		                     +'<div class="btngroup">'
+		                     +'<button type="button" class="return"><i class="fa fa-sign-out"></i>退出修改</button>'
+		                     +'<button type="button" class="saveedit"><i class="fa fa-save"></i>保存修改</button></div></div>'
 		                     +'<div class="test-form-box" >'+test_box+'</div>';
 		            $('#previewArea').html(test_html)
-		            }else{alert("试题获取失败！");}
+		            
+		          }else{alert("试题获取失败！");}
+		    
+		    $(".return").click(function(){
+	        	 test1(titleB,data);
+	    	 });
 		 } 
 		function test1(test_id,data) {
 		    if (test_id != "") {
