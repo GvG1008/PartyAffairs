@@ -203,6 +203,10 @@ public class UserInfoServiceImpl implements UserInfoService {
         int i=0;
         for( ; i<userId.length(); i++) {
             if(userId.substring(i, i+1).equals("&")) {
+                if(i==0) {
+                    index = i+1;
+                    continue;
+                }
                 userIds.add(userId.substring(index, i));
                 index = i+1;
             }
