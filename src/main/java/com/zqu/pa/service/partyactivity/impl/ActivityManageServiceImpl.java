@@ -1,18 +1,25 @@
 package com.zqu.pa.service.partyactivity.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.dao.partyactivity.PartyActivityManageMapper;
 import com.zqu.pa.dao.partyactivity.PartyActivityMapper;
 import com.zqu.pa.dao.partyactivity.PartyActivityRoleMapper;
 import com.zqu.pa.entity.partyactivity.PartyActivity;
 import com.zqu.pa.service.partyactivity.ActivityManageService;
+import com.zqu.pa.utils.StringTimeToLong;
+import com.zqu.pa.vo.partyactivity.ActivityInfo;
 import com.zqu.pa.vo.partyactivity.ActivityManageMenu;
+import com.zqu.pa.vo.partyactivity.ApplyMsg;
+import com.zqu.pa.vo.userInfo.UserBasicInfo;
 
 @Service
 public class ActivityManageServiceImpl implements ActivityManageService {
@@ -69,6 +76,108 @@ public class ActivityManageServiceImpl implements ActivityManageService {
             return "创建活动成功";
         else 
             throw new RuntimeException();
+    }
+
+    @Override
+    public ServerResponse<String> deleteActivityBatch(String activityId) {
+        //获取当前session里的当前用户所属党支部
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if(basicInfo==null)
+            return ServerResponse.createByErrorMessage("无法获取当前session信息");
+        
+        List<Integer> Ids = this.StringToListId(activityId);
+        if(Ids==null||Ids.size()==0)
+            return ServerResponse.createByErrorMessage("删除失败!");
+        int result=0;
+        try {
+            result = partyActivityManageDao.deleteActivityBatch(basicInfo.getBranchId(),Ids);
+        }catch (Exception e) {
+            return ServerResponse.createByErrorMessage("删除失败!");
+        }
+        if(result==0)
+            return ServerResponse.createByErrorMessage("删除失败!");
+        return ServerResponse.createBySuccessMessage("成功删除"+result+"个，失败"+(Ids.size()-result)+"个");
+    }
+
+    /**
+     * 根据Id字符串返回Id的list
+     * @param Id
+     * @return
+     */
+    public List<Integer> StringToListId(String Id) {
+        if(Id==null||Id.equals(""))
+            return null;
+        
+        List<Integer> Ids = new ArrayList<>();
+        
+        try {
+            int index=0;
+            int i=0;
+            for( ; i<Id.length() ; i++) {
+                if(Id.substring(i, i+1).equals("&")) {
+                    Ids.add(Integer.parseInt(Id.substring(index, i)));
+                    index = i+1;
+                }
+            }
+            if(i>index)
+                Ids.add(Integer.parseInt(Id.substring(index, i)));
+        } catch (NumberFormatException x) {
+            return null;
+        }
+        return Ids;
+    }
+
+    @Override
+    public ServerResponse<String> updateActivityInfo(ActivityInfo info) {
+        if(info.getActivityId()==null)
+            return ServerResponse.createByErrorMessage("修改失败!");
+        
+        PartyActivity pa = new PartyActivity();
+        pa.setActivityId(info.getActivityId());
+        pa.setName(info.getName());
+        pa.setContent(info.getContent());
+        pa.setAddress(info.getAddress());
+        pa.setNum(info.getNum());
+        pa.setReleaseUnit(info.getUnit());
+        
+        Long registrationStart = StringTimeToLong.convertTimeToLong(info.getRegistrationStart());//将时间"yyyy-MM-dd hh:mm:ss"字符串转换为long型
+        Long registrationEnd = StringTimeToLong.convertTimeToLong(info.getRegistrationEnd());
+        Long activityStart = StringTimeToLong.convertTimeToLong(info.getActivityStart());
+        Long activityEnd = StringTimeToLong.convertTimeToLong(info.getActivityEnd());
+        if(registrationStart.longValue()==0L)
+            registrationStart=null;
+        if(registrationEnd.longValue()==0L)
+            registrationEnd=null;
+        if(activityStart.longValue()==0L)
+            activityStart=null;
+        if(activityEnd.longValue()==0L)
+            activityEnd=null;
+        pa.setRegistrationStart(registrationStart);
+        pa.setRegistrationEnd(registrationEnd);
+        pa.setActivityStart(activityStart);
+        pa.setActivityEnd(activityEnd);
+        
+        int result = 0;
+        try {
+            result = partyActivityDao.updateByPrimaryKeySelective(pa);
+        }catch (Exception e) {
+            return ServerResponse.createByErrorMessage("修改失败!");
+        }
+        if(result==0)
+            return ServerResponse.createByErrorMessage("修改失败!");
+        return ServerResponse.createBySuccessMessage("修改成功!");
+    }
+
+    @Override
+    public ServerResponse<List<ApplyMsg>> getactivityApplyList(Integer activityId, Integer checkState) {
+        
+        List<ApplyMsg> listInfo = partyActivityManageDao.getActivityApply(activityId,checkState);
+        if(listInfo==null)
+            return ServerResponse.createByErrorMessage("获取列表失败");
+        if(listInfo.size()==0)
+            return ServerResponse.createBySuccess("获取列表为空", listInfo);
+        
+        return ServerResponse.createBySuccess("获取列表成功", listInfo);
     }
 
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zqu.pa.dao.partyactivity.PartyActivityManageMapper">
   <select id="getActivityList" resultType="com.zqu.pa.vo.partyactivity.ActivityManageMenu">
-    SELECT pa.activity_id 'activityId' , pa.branch_id 'branchId' , pb.branch_name 'branchName' ,
+    SELECT pa.activity_id 'activityId' ,pa.name 'name', pa.branch_id 'branchId' , pb.branch_name 'branchName' ,
            pa.name ,  pa.create_id 'createId' , up.name 'createName' , pa.create_time 'createTime' , pa.num , 
            COUNT(CASE WHEN (pau.check_state=1) THEN pau.user_id END) 'alreadyJoinNum' ,
            COUNT(CASE WHEN (pau.check_state=0) THEN pau.user_id END) 'applyNum' ,
@@ -19,6 +19,28 @@
     GROUP BY pa.activity_id
   </select>
   
+  <select id="getActivityApply" resultType="com.zqu.pa.vo.partyactivity.ApplyMsg">
+    SELECT a.user_id 'userId',  upa.name 'name', r.role_name 'roleName' , pb.branch_name 'branchName' ,
+           a.phone_num 'phoneNum', a.submit_time 'applyTime' , a.check_time 'checkTime', upaa.name 'checkName' , 
+           a.check_state 'checkState'
+    FROM party_activity_user a
+    LEFT JOIN user_party_info upa ON a.user_id = upa.user_id
+    LEFT JOIN user_login ul ON a.user_id = ul.user_id
+    LEFT JOIN role r ON r.role_id = ul.role_id
+    LEFT JOIN partybranch pb ON pb.branch_id = upa.branch_id
+    LEFT JOIN user_party_info upaa ON a.check_id = upaa.user_id
+    <if test="activityId != null">
+        WHERE a.activity_id = #{activityId}
+    </if>
+    <if test="checkState != null and activityId == null">
+        WHERE a.check_state = #{checkState}
+    </if>
+        <if test="checkState != null and activityId != null ">
+        AND a.check_state = #{checkState}
+    </if>
+    ORDER BY ABS(a.check_state) ASC , a.submit_time DESC
+  </select>
+  
   <insert id="insertAcRoleBatch">
     insert into party_activity_role (activity_id, role_id)
     values 
@@ -26,4 +48,16 @@
       #{activityId}, #{roleId}
     </foreach>
   </insert>
+  
+  <delete id="deleteActivityBatch">
+    UPDATE party_activity
+    SET is_delete = 1
+    WHERE activity_id IN
+    <foreach collection="activityIds" index="index" item="activityId" separator="," open="(" close=")">
+      #{activityId}
+    </foreach>
+    <if test="branchId !=0 ">
+        AND branch_id = #{branchId}
+    </if>
+  </delete>
 </mapper>

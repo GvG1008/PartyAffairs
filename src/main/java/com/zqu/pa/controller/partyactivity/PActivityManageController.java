@@ -3,9 +3,11 @@ package com.zqu.pa.controller.partyactivity;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +18,9 @@ import com.zqu.pa.entity.partyactivity.PartyActivity;
 import com.zqu.pa.service.partyactivity.ActivityManageService;
 import com.zqu.pa.utils.DateUtil;
 import com.zqu.pa.utils.StringTimeToLong;
+import com.zqu.pa.vo.partyactivity.ActivityInfo;
 import com.zqu.pa.vo.partyactivity.ActivityManageMenu;
+import com.zqu.pa.vo.partyactivity.ApplyMsg;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
 
 @Controller
@@ -115,5 +119,56 @@ public class PActivityManageController {
         }
         
         return ServerResponse.createBySuccessMessage(Msg);
+    }
+    
+    /**
+     * 管理员批量删除活动，只能删除相应所属党支部活动（除了branchId=0）
+     * 返回成功信息显示成功和失败个数
+     * @param activityId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/delete/{activityId}")
+    public ServerResponse<String> deleteActivity(@PathVariable(value="activityId")String activityId) {
+        if(StringUtils.isBlank(activityId))
+            return ServerResponse.createByErrorMessage("活动ID为空");
+        
+        return activityManageService.deleteActivityBatch(activityId);
+    }
+
+    /**
+     * 获取活动信息：UserActivityController.java接口
+     * /partyActivity/info/{activityId}
+     */
+    
+
+    /**
+     * 修改活动信息
+     * 只能修改上面获取的活动信息属性
+     * @param info
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/update")
+    public ServerResponse<String> updateActivityInfo(ActivityInfo info) {
+        if(info==null)
+            return ServerResponse.createByErrorMessage("活动信息为空!");
+        
+        return activityManageService.updateActivityInfo(info);
+    }
+    
+    /**
+     * 管理员获取活动对应的审核人员列表
+     * @param activityId
+     * @param checkState 为null表示查询所有状态
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="/checkList",method=RequestMethod.POST)
+    public ServerResponse<List<ApplyMsg>> getCheckList(Integer activityId,Integer checkState) {
+        if(activityId==null)
+            return ServerResponse.createByErrorMessage("活动ID为空!");
+        
+        return activityManageService.getactivityApplyList(activityId,checkState);
     }
 }
