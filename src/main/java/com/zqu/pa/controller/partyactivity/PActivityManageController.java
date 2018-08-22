@@ -124,7 +124,7 @@ public class PActivityManageController {
     /**
      * 管理员批量删除活动，只能删除相应所属党支部活动（除了branchId=0）
      * 返回成功信息显示成功和失败个数
-     * @param activityId
+     * @param activityId   字符串格式以&分隔id
      * @return
      */
     @ResponseBody

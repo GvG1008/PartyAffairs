@@ -459,7 +459,7 @@ public class PublicityManageController {
     
     /**
      * 批量删除新闻
-     * @param newsId 一串newsId的字符串"newsId1&newsId2&newsId3.."
+     * @param newsId 一串newsId的字符串"&newsId1&newsId2&newsId3.."
      * @return
      */
     @ResponseBody
@@ -494,7 +494,7 @@ public class PublicityManageController {
     
     /**
      * 批量删除党内公示
-     * @param noticesId 一串noticesId的字符串"noticesId1&noticesId2&noticesId3.."
+     * @param noticesId 一串noticesId的字符串"&noticesId1&noticesId2&noticesId3.."
      * @return
      */
     @ResponseBody

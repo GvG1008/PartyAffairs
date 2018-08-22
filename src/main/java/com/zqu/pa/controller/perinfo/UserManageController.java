@@ -209,7 +209,7 @@ public class UserManageController {
     
     /**
      * 批量审核人员
-     * userId字符串格式："userId1&userId2&userId3"..
+     * userId字符串格式："&userId1&userId2&userId3"..
      * @param userId
      * @return
      */

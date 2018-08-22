@@ -115,6 +115,10 @@ public class ActivityManageServiceImpl implements ActivityManageService {
             int i=0;
             for( ; i<Id.length() ; i++) {
                 if(Id.substring(i, i+1).equals("&")) {
+                    if(i==0) {
+                        index = i+1;
+                        continue;
+                    }
                     Ids.add(Integer.parseInt(Id.substring(index, i)));
                     index = i+1;
                 }
