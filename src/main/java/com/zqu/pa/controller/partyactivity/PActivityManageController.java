@@ -171,4 +171,21 @@ public class PActivityManageController {
         
         return activityManageService.getactivityApplyList(activityId,checkState);
     }
+    
+    /**
+     * 批量审核活动报名申请人员
+     * @param activityId
+     * @param userId 字符串格式"&userId1&userId2.."
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="/checkUser/{activityId}/{userIds}",method=RequestMethod.GET)
+    public ServerResponse<String> checkApplyByBatch(@PathVariable(value="activityId")Integer activityId,
+            @PathVariable(value="userId")String userId) {
+        if(activityId==null||StringUtils.isBlank(userId)) {
+            return ServerResponse.createByErrorMessage("参数出错");
+        }
+        
+        return activityManageService.checkApply(activityId,userId);
+    }
 }

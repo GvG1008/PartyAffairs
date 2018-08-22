@@ -184,4 +184,37 @@ public class ActivityManageServiceImpl implements ActivityManageService {
         return ServerResponse.createBySuccess("获取列表成功", listInfo);
     }
 
+    @Override
+    public ServerResponse<String> checkApply(Integer activityId, String userId) {
+        //获取userId的list
+        List<String> userIds = new ArrayList<>();
+        int index = 0;
+        int i=0;
+        for( ; i<userId.length(); i++) {
+            if(userId.substring(i, i+1).equals("&")) {
+                if(i==0) {
+                    index = i+1;
+                    continue;
+                }
+                userIds.add(userId.substring(index, i));
+                index = i+1;
+            }
+        }
+        if(i>index)
+            userIds.add(userId.substring(index, i));
+        
+        if(userIds==null||userIds.size()==0)
+            return ServerResponse.createByErrorMessage("用户ID出错");
+        
+        //获取当前session用户的ID
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if(basicInfo==null||basicInfo.getUserId()==null)
+            return ServerResponse.createByErrorMessage("无法获取当前session信息用户ID");
+        String checkId = basicInfo.getUserId();
+        
+        int result = partyActivityManageDao.passApplyByBatch(checkId, activityId, userIds);
+        
+        return ServerResponse.createBySuccessMessage("成功审核"+result+",失败"+(userIds.size()-result));
+    }
+
 }

@@ -20,4 +20,7 @@ public interface PartyActivityManageMapper {
 
     //批量删除活动
     int deleteActivityBatch(@Param(value="branchId")Integer branchId, @Param(value="activityIds")List<Integer> activityIds);
+    
+    //批量审核人员
+    int passApplyByBatch(@Param(value="checkId")String checkId, @Param(value="activityId")Integer activityId,@Param(value="userIds")List<String> userIds);
 }
