@@ -1,10 +1,12 @@
 package com.zqu.pa.service.exam;
 
 import java.io.File;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import com.zqu.pa.common.ServerResponse;
+import com.zqu.pa.vo.exam.Paper;
 import com.zqu.pa.vo.exam.ResponseQuestionBank;
 
 public interface QuestionBankService {
@@ -21,4 +23,7 @@ public interface QuestionBankService {
     
     //将题库信息存入数据库
     Integer saveQuestionBank(ResponseQuestionBank responseQuestionBank);
+    
+    //获取某题库分类ID下的所有题目信息
+    Paper getQuestionBank(Integer categoryId);
 }

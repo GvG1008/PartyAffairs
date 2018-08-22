@@ -27,8 +27,12 @@ import com.zqu.pa.dao.exam.QuestionExamCategoryMapper;
 import com.zqu.pa.entity.exam.Answer;
 import com.zqu.pa.entity.exam.Choice;
 import com.zqu.pa.entity.exam.QuestionBank;
+import com.zqu.pa.entity.exam.QuestionBankExample;
 import com.zqu.pa.entity.exam.QuestionExamCategoryKey;
+import com.zqu.pa.service.exam.ExamPaperService;
 import com.zqu.pa.service.exam.QuestionBankService;
+import com.zqu.pa.vo.exam.Paper;
+import com.zqu.pa.vo.exam.Question;
 import com.zqu.pa.vo.exam.QuestionContent;
 import com.zqu.pa.vo.exam.ResponseQuestionBank;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
@@ -49,6 +53,9 @@ public class QuestionBankServiceImpl implements QuestionBankService {
     
     @Autowired
     private QuestionExamCategoryMapper questionExamCategoryMapper;
+    
+    @Autowired
+    private ExamPaperService examPaperService;
     
     @Override
     public ResponseQuestionBank getUploadQuestion(MultipartFile file, Integer categoryId) {
@@ -221,5 +228,70 @@ public class QuestionBankServiceImpl implements QuestionBankService {
             }
         }
         return 1;
+    }
+
+    @Override
+    public Paper getQuestionBank(Integer categoryId) {
+        
+        Paper paper = new Paper();
+        List<Integer> category = new ArrayList<>();
+        category.add(categoryId);
+        //找出此次考试所有分类下的所有question_id
+        List<Integer> listQuestionId = examPaperService.listCategoryQuestionId(category);
+        if(listQuestionId == null || listQuestionId.size() == 0) {
+            logger.info("考试题库分类ID为" + categoryId + " 下没有题目或无此题库");
+            return null;
+        }
+        
+        //type = 0:单选题
+        //type = 1:多选题
+        Integer type = 0;
+        paper.setSingleQuestion(getQuestion(type, listQuestionId));
+        type = 1;
+        paper.setMultipleQuestion(getQuestion(type, listQuestionId));
+        return paper;
+    }
+    
+    //获取对应ID和类型的题目
+    public List<Question> getQuestion(Integer type, List<Integer> listQuestionId) {
+
+        List<Question> question = new ArrayList<Question>();
+        //随机选择获得题库信息
+        QuestionBankExample example = new QuestionBankExample();
+        example.createCriteria().andQuestionTypeEqualTo(type).andQuestionIdIn(listQuestionId);
+        List<QuestionBank> listQuestionBank = questionBankMapper.selectByExample(example);
+        //获取的题目ID集合
+        List<Integer> listQuestionID = new ArrayList<Integer>();
+        for (int i = 0; i < listQuestionBank.size(); i++)
+            listQuestionID.add(listQuestionBank.get(i).getQuestionId());
+        //根据题目ID集合查找选项集合
+        List<Choice> choice = examPaperService.listChoice(listQuestionID);
+        //根据题目ID集合查找答案集合
+        List<Answer> answer = examPaperService.listAnswer(listQuestionID);
+        
+        //将题目集合、选项集合、答案集合根据题目ID合并成Question类集合
+        Integer questionID = 0;
+        for (int i = 0; i < listQuestionBank.size(); i++) {
+            questionID = listQuestionBank.get(i).getQuestionId();
+            List<String> listChoice = new ArrayList<String>();
+            List<Integer> listAnswer = new ArrayList<Integer>();
+            for (int j = 0; j < choice.size(); j++) {              
+                if (questionID == choice.get(j).getQuestionId())
+                    listChoice.add(choice.get(j).getChoiceContent());
+            }
+            for (int k = 0; k < answer.size(); k++) {               
+                if (questionID == answer.get(k).getQuestionId())
+                    listAnswer.add(answer.get(k).getChoice());
+            }
+            Question q = new Question();
+            q.setQuestionId(questionID);
+            q.setQuestionContent(listQuestionBank.get(i).getQuestionContent());
+            q.setChoice(listChoice);
+            q.setAnswer(listAnswer);
+            question.add(q);
+           
+        }
+      
+        return question;
     }
 }

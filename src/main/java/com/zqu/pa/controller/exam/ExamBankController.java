@@ -19,6 +19,7 @@ import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.dao.exam.QuestionBankMapper;
 import com.zqu.pa.service.exam.QuestionBankService;
 import com.zqu.pa.utils.FTPUtil;
+import com.zqu.pa.vo.exam.Paper;
 import com.zqu.pa.vo.exam.ResponseQuestionBank;
 
 @Controller
@@ -61,6 +62,28 @@ public class ExamBankController {
             return ServerResponse.createBySuccess();
         else
             return ServerResponse.createByError();                 
+    }
+    
+    /**
+     * 根据考试题库分类ID获取下面所有题目信息
+     * @param categoryId 考试题库分类ID
+     * @return Paper
+     */
+    @ResponseBody
+    @RequestMapping(value = "/{categoryId}", method = RequestMethod.GET)
+    public ServerResponse<Paper> getQuestionBank(@PathVariable Integer categoryId) {
+        
+        Paper paper = new Paper();
+        try {
+            paper = questionBankService.getQuestionBank(categoryId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.createByError();
+        }
+        if (paper == null) {
+            return ServerResponse.createByError();
+        }
+        return ServerResponse.createBySuccess(paper);
     }
 
 }
