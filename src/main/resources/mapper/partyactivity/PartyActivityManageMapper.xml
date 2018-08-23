@@ -59,7 +59,18 @@
       #{userId}
     </foreach>
   </update>
-  
+
+  <update id="revokeApplyByBatch">
+    UPDATE party_activity_user
+    SET check_state = -1, check_id = #{checkId}, check_time = now()
+    WHERE activity_id = #{activityId}
+    AND (check_state = 0 or check_state = 1)
+    AND user_id IN
+    <foreach collection="userIds" index="index" item="userId" separator="," open="(" close=")">
+      #{userId}
+    </foreach>
+  </update>
+
   <delete id="deleteActivityBatch">
     UPDATE party_activity
     SET is_delete = 1

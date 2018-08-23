@@ -76,16 +76,16 @@ public class ApplyMsg {
         return checkName;
     }
 
-    public void setCheckName(Date checkName) {
-        this.checkName = DateToString.getDateString("yyyy-MM-dd hh:mm:ss", checkName);
+    public void setCheckName(String checkName) {
+        this.checkName = checkName;
     }
 
     public String getCheckTime() {
         return checkTime;
     }
 
-    public void setCheckTime(String checkTime) {
-        this.checkTime = checkTime;
+    public void setCheckTime(Date checkTime) {
+        this.checkTime = DateToString.getDateString("yyyy-MM-dd hh:mm:ss", checkTime);
     }
 
     public Integer getCheckState() {

@@ -25,7 +25,10 @@ public interface ActivityManageService {
     //返回活动对应的审核列表
     ServerResponse<List<ApplyMsg>> getactivityApplyList(Integer activityId, Integer checkState);
 
-    //批量审核人员
+    //批量审核人员通过
     ServerResponse<String> checkApply(Integer activityId, String userId);
+
+    //批量审核人员不通过
+    ServerResponse<String> revokeApply(Integer activityId, String userId);
 
 }

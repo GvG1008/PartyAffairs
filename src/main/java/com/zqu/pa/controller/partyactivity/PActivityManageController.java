@@ -173,13 +173,13 @@ public class PActivityManageController {
     }
     
     /**
-     * 批量审核活动报名申请人员
+     * 批量审核通过活动报名申请人员
      * @param activityId
      * @param userId 字符串格式"&userId1&userId2.."
      * @return
      */
     @ResponseBody
-    @RequestMapping(value="/checkUser/{activityId}/{userIds}",method=RequestMethod.GET)
+    @RequestMapping(value="/checkUser/{activityId}/{userId}",method=RequestMethod.GET)
     public ServerResponse<String> checkApplyByBatch(@PathVariable(value="activityId")Integer activityId,
             @PathVariable(value="userId")String userId) {
         if(activityId==null||StringUtils.isBlank(userId)) {
@@ -187,5 +187,22 @@ public class PActivityManageController {
         }
         
         return activityManageService.checkApply(activityId,userId);
+    }
+    
+    /**
+     * 批量审核不通过活动报名申请人员
+     * @param activityId
+     * @param userId 字符串格式"&userId1&userId2.."
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="/revokeApply/{activityId}/{userId}",method=RequestMethod.GET)
+    public ServerResponse<String> RevokeApply(@PathVariable(value="activityId")Integer activityId,
+            @PathVariable(value="userId")String userId) {
+        if(activityId==null||StringUtils.isBlank(userId)) {
+            return ServerResponse.createByErrorMessage("参数出错");
+        }
+        
+        return activityManageService.revokeApply(activityId,userId);
     }
 }

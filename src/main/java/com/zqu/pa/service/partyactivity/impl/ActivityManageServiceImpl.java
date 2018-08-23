@@ -13,7 +13,12 @@ import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.dao.partyactivity.PartyActivityManageMapper;
 import com.zqu.pa.dao.partyactivity.PartyActivityMapper;
 import com.zqu.pa.dao.partyactivity.PartyActivityRoleMapper;
+import com.zqu.pa.dao.partyactivity.PartyActivityUserMapper;
 import com.zqu.pa.entity.partyactivity.PartyActivity;
+import com.zqu.pa.entity.partyactivity.PartyActivityExample;
+import com.zqu.pa.entity.partyactivity.PartyActivityUser;
+import com.zqu.pa.entity.partyactivity.PartyActivityUserExample;
+import com.zqu.pa.entity.partyactivity.PartyActivityUserExample.Criteria;
 import com.zqu.pa.service.partyactivity.ActivityManageService;
 import com.zqu.pa.utils.StringTimeToLong;
 import com.zqu.pa.vo.partyactivity.ActivityInfo;
@@ -32,6 +37,9 @@ public class ActivityManageServiceImpl implements ActivityManageService {
     
     @Autowired
     PartyActivityRoleMapper partyActivityRoleDao;
+    
+    @Autowired
+    PartyActivityUserMapper partyActivityUserDao;
     
     @Override
     public List<ActivityManageMenu> getActivityMenuList(int branchId) {
@@ -172,6 +180,7 @@ public class ActivityManageServiceImpl implements ActivityManageService {
         return ServerResponse.createBySuccessMessage("修改成功!");
     }
 
+    @Transactional
     @Override
     public ServerResponse<List<ApplyMsg>> getactivityApplyList(Integer activityId, Integer checkState) {
         
@@ -206,6 +215,27 @@ public class ActivityManageServiceImpl implements ActivityManageService {
         if(userIds==null||userIds.size()==0)
             return ServerResponse.createByErrorMessage("用户ID出错");
         
+        //验证当前活动是否未结束
+        PartyActivity partyActivity = partyActivityDao.selectByPrimaryKey(activityId);
+        Long nowTime = new Date().getTime();
+        if(partyActivity==null) {
+            return ServerResponse.createByErrorMessage("该活动不存在");
+        }else if(partyActivity.getIsDelete()==1) {
+            return ServerResponse.createByErrorMessage("该活动已取消");
+        }else if(partyActivity.getActivityEnd().longValue()<=nowTime.longValue()) {
+            return ServerResponse.createByErrorMessage("该活动已结束");
+        }
+        
+        //验证活动人数是否已经满员
+        PartyActivityUserExample example = new PartyActivityUserExample();
+        Criteria criteria = example.createCriteria();
+        criteria.andActivityIdEqualTo(activityId);
+        criteria.andCheckStateEqualTo(1);
+        int activityCount = (int)partyActivityUserDao.countByExample(example);
+        if(activityCount+userIds.size()>partyActivity.getNum()) {
+            return ServerResponse.createByErrorMessage("活动人数超出,审核失败");
+        }
+        
         //获取当前session用户的ID
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
         if(basicInfo==null||basicInfo.getUserId()==null)
@@ -213,6 +243,51 @@ public class ActivityManageServiceImpl implements ActivityManageService {
         String checkId = basicInfo.getUserId();
         
         int result = partyActivityManageDao.passApplyByBatch(checkId, activityId, userIds);
+        
+        return ServerResponse.createBySuccessMessage("成功审核"+result+",失败"+(userIds.size()-result));
+    }
+
+    @Transactional
+    @Override
+    public ServerResponse<String> revokeApply(Integer activityId, String userId) {
+        //获取userId的list
+        List<String> userIds = new ArrayList<>();
+        int index = 0;
+        int i=0;
+        for( ; i<userId.length(); i++) {
+            if(userId.substring(i, i+1).equals("&")) {
+                if(i==0) {
+                    index = i+1;
+                    continue;
+                }
+                userIds.add(userId.substring(index, i));
+                index = i+1;
+            }
+        }
+        if(i>index)
+            userIds.add(userId.substring(index, i));
+        
+        if(userIds==null||userIds.size()==0)
+            return ServerResponse.createByErrorMessage("用户ID出错");
+        
+        //验证当前活动是否未结束
+        PartyActivity partyActivity = partyActivityDao.selectByPrimaryKey(activityId);
+        Long nowTime = new Date().getTime();
+        if(partyActivity==null) {
+            return ServerResponse.createByErrorMessage("该活动不存在");
+        }else if(partyActivity.getIsDelete()==1) {
+            return ServerResponse.createByErrorMessage("该活动已取消");
+        }else if(partyActivity.getActivityEnd().longValue()<=nowTime.longValue()) {
+            return ServerResponse.createByErrorMessage("该活动已结束");
+        }
+        
+        //获取当前session用户的ID
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if(basicInfo==null||basicInfo.getUserId()==null)
+            return ServerResponse.createByErrorMessage("无法获取当前session信息用户ID");
+        String checkId = basicInfo.getUserId();
+        
+        int result = partyActivityManageDao.revokeApplyByBatch(checkId, activityId, userIds);
         
         return ServerResponse.createBySuccessMessage("成功审核"+result+",失败"+(userIds.size()-result));
     }
