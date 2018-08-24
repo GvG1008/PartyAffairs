@@ -41,6 +41,25 @@
     ORDER BY ABS(a.check_state) ASC , a.submit_time DESC
   </select>
   
+  <select id="getActivityUserTableInfo" resultType="com.zqu.pa.vo.partyactivity.ExcelUserInfo">
+    SELECT a.user_id 'userId',  upa.name 'name', upa.sex 'sex', pb.branch_name 'branchName',
+        r.role_name 'roleName' , upe.class_name 'className', a.phone_num 'phoneNum'
+    FROM party_activity_user a
+    LEFT JOIN user_party_info upa ON a.user_id = upa.user_id
+    LEFT JOIN user_login ul ON a.user_id = ul.user_id
+    LEFT JOIN role r ON r.role_id = ul.role_id
+    LEFT JOIN partybranch pb ON pb.branch_id = upa.branch_id
+    LEFT JOIN user_person_info upe ON a.user_id = upe.user_id
+    WHERE a.activity_id = #{activityId}
+    AND a.check_state = 1
+  </select>
+  
+  <select id="getActivityTableName" resultType="String">
+    SELECT CONCAT(name,'_时间_',from_unixtime(activity_start/1000,'%Y-%m-%d'),'_',from_unixtime(activity_end/1000,'%Y-%m-%d')) as tableName
+    FROM party_activity
+    WHERE activity_id = #{activityId}
+  </select>
+  
   <insert id="insertAcRoleBatch">
     insert into party_activity_role (activity_id, role_id)
     values 

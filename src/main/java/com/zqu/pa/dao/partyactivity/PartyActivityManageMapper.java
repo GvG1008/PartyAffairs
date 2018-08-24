@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.zqu.pa.vo.partyactivity.ActivityManageMenu;
 import com.zqu.pa.vo.partyactivity.ApplyMsg;
+import com.zqu.pa.vo.partyactivity.ExcelUserInfo;
 
 public interface PartyActivityManageMapper {
 
@@ -26,4 +27,10 @@ public interface PartyActivityManageMapper {
 
     //批量审核人员，不通过
     int revokeApplyByBatch(@Param(value="checkId")String checkId, @Param(value="activityId")Integer activityId,@Param(value="userIds")List<String> userIds);
+
+    //导出活动人员名单
+    List<ExcelUserInfo> getActivityUserTableInfo(@Param(value="activityId")Integer activityId);
+    
+    //导出excel表名
+    String getActivityTableName(@Param(value="activityId")Integer activityId);
 }

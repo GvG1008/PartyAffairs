@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,12 @@ import com.zqu.pa.entity.partyactivity.PartyActivityUser;
 import com.zqu.pa.entity.partyactivity.PartyActivityUserExample;
 import com.zqu.pa.entity.partyactivity.PartyActivityUserExample.Criteria;
 import com.zqu.pa.service.partyactivity.ActivityManageService;
+import com.zqu.pa.utils.ExcelUtil;
 import com.zqu.pa.utils.StringTimeToLong;
 import com.zqu.pa.vo.partyactivity.ActivityInfo;
 import com.zqu.pa.vo.partyactivity.ActivityManageMenu;
 import com.zqu.pa.vo.partyactivity.ApplyMsg;
+import com.zqu.pa.vo.partyactivity.ExcelUserInfo;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
 
 @Service
@@ -290,6 +293,45 @@ public class ActivityManageServiceImpl implements ActivityManageService {
         int result = partyActivityManageDao.revokeApplyByBatch(checkId, activityId, userIds);
         
         return ServerResponse.createBySuccessMessage("成功审核"+result+",失败"+(userIds.size()-result));
+    }
+
+    @Override
+    public HSSFWorkbook getExcelTable(Integer activityId) {
+        if(activityId==null)
+            return null;
+        
+        //excel列头项：
+        String[] title = {"学号","姓名","性别","所属党支部","身份","班级","联系方式"};
+
+        
+        //获取sheet名
+        String sheetName = partyActivityManageDao.getActivityTableName(activityId);
+        //限制长度
+        sheetName = sheetName.substring(0, 30);
+        
+        //获取Excel列表内容
+        List<ExcelUserInfo> list = partyActivityManageDao.getActivityUserTableInfo(activityId); 
+
+        String[][]content = {};
+        if(list.size()!=0) {
+            content = new String[list.size()][title.length];
+            for (int i = 0; i < list.size(); i++) {
+                content[i] = new String[title.length];
+                ExcelUserInfo obj = list.get(i);
+                content[i][0] = obj.getUserId();
+                content[i][1] = obj.getName();
+                content[i][2] = obj.getSex();
+                content[i][3] = obj.getBranchName();
+                content[i][4] = obj.getRoleName();
+                content[i][5] = obj.getClassName();
+                content[i][6] = obj.getPhoneNum();
+            }
+        }
+        
+        //创建HSSFWorkbook 
+        HSSFWorkbook wb = ExcelUtil.getHSSFWorkbook(sheetName, title, content, null);
+
+        return wb;
     }
 
 }

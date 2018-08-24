@@ -1,9 +1,14 @@
 package com.zqu.pa.controller.partyactivity;
 
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.partyactivity.PartyActivity;
 import com.zqu.pa.service.partyactivity.ActivityManageService;
-import com.zqu.pa.utils.DateUtil;
 import com.zqu.pa.utils.StringTimeToLong;
 import com.zqu.pa.vo.partyactivity.ActivityInfo;
 import com.zqu.pa.vo.partyactivity.ActivityManageMenu;
@@ -204,5 +208,41 @@ public class PActivityManageController {
         }
         
         return activityManageService.revokeApply(activityId,userId);
+    }
+
+    @RequestMapping(value="/downLoad/{activityId}",method=RequestMethod.GET)
+    public void downLoad(@PathVariable(value="activityId")Integer activityId, HttpServletResponse response) {
+        
+        HSSFWorkbook wb = activityManageService.getExcelTable(activityId);
+        
+        String fileName = activityId+"活动人员信息表-"+System.currentTimeMillis()+".xls";
+        //响应到客户端
+        try {
+            this.setResponseHeader(response, fileName);
+            OutputStream os = response.getOutputStream();
+            wb.write(os);
+            os.flush();
+            os.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    //发送响应流方法
+    public void setResponseHeader(HttpServletResponse response, String fileName) {
+        try {
+            try {
+                fileName = new String(fileName.getBytes(),"ISO8859-1");
+            } catch (UnsupportedEncodingException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            response.setContentType("application/octet-stream;charset=ISO8859-1");
+            response.setHeader("Content-Disposition", "attachment;filename="+ fileName);
+            response.addHeader("Pargam", "no-cache");
+            response.addHeader("Cache-Control", "no-cache");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

@@ -2,6 +2,8 @@ package com.zqu.pa.service.partyactivity;
 
 import java.util.List;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.partyactivity.PartyActivity;
 import com.zqu.pa.vo.partyactivity.ActivityInfo;
@@ -30,5 +32,8 @@ public interface ActivityManageService {
 
     //批量审核人员不通过
     ServerResponse<String> revokeApply(Integer activityId, String userId);
+
+    //获取活动审核通过人员excel表
+    HSSFWorkbook getExcelTable(Integer activityId);
 
 }
