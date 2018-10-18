@@ -5,7 +5,11 @@ body{
 	margin: 0;
 	padding: 0;
 }
-
+body{
+	/* background-image: url(../img/bodybg.png);
+    background-size:100%;
+    background-repeat:no-repeat; */
+}
 .loading{
 	z-index: 1002;
 	position: fixed;
@@ -17,18 +21,20 @@ body{
 header{
 	width: 100%;
 	height: 200px;
-	background-image: url(../img/2.jpg);
-	background-size: 100% 100%;
+	background-image: url(../img/headbg.png);
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+	/* background-image: url(../img/2.jpg); */
 }
 
 a{
 	text-decoration:none;
 }
 
-.name{
+/* .name{
 	width: 300px;
 	height: 45px;
-}
+} */
 
 .header{
 	width: 100%;
@@ -318,4 +324,118 @@ footer{
 
 .user-a:hover{
 	text-decoration:none;
+}
+
+
+
+/*2018-10-18修改*/
+img.name {
+    width: 57%;
+    height: 80%;
+}
+header{
+    height: 250px;
+    border-bottom: 5px solid #e6231d;
+}
+.header {
+    width: 100%;
+    height: 60px;
+    line-height: 4;
+}
+html {
+    background: #f3f3f3;
+}
+img.img-logo {
+    width: 50%;
+    height: 50%;
+    /* margin: auto 0; */
+    /* line-height: 24; */
+    /* margin-top: 72px; */
+}
+.logopic {
+    width: fit-content;
+    margin: 0 auto;
+    padding-top: 6%;
+    display: block;
+    text-align: center;
+}
+.banner-line {
+    background: url(../img/footer-bg.png);
+    background-size:100%;
+    background-repeat:round;
+    height: 30px;
+    margin-bottom: 35px;
+}
+footer {
+    width: 100%;
+    top: 70px;
+    backgroud:#fff;
+}
+div#frame {
+    background: #fff;
+    box-shadow: 0 3px 2px 2px #e9e9e9;
+    padding: 0 50px;
+    padding-top: 20px;
+    border-top: 2px solid #e9e9e9;
+    min-height: 1140px;
+}
+div#myCarousel {
+    width: 55%;
+}
+div#Learning {
+    width: 60%;
+}
+/*菜单栏*/
+i.iconfont {
+    /* color: #ef4f00; */
+    color:#d92b1f;
+    font-size: 3.5em;
+}
+.nav-li:hover>div>a>p{
+    color: #a6150a;
+}
+.nav-li:hover>div>a>p>i.iconfont {
+    color: #a6150a;
+}
+.nav {
+    top: 35px;
+}
+ul.nav-ul {
+    width: 80%;
+    margin: 0 auto;
+    border-left: 1px solid #ccc;
+    height: 68px;
+}
+.nav-li {
+    /* height: 68px; */
+    height: 96px;
+    border-right: 1px solid #ccc;
+    /* border-left: 1px solid #ccc; */
+    padding: 0px 18px;
+}
+.news, .test, .party, .league, .info, .meeting, .organ {
+    position: absolute;
+    top: 365px;
+    width: 11.5%;
+}
+
+@media screen and (min-width:1400px){
+	div#frame {
+	   width:1580px;
+	}
+	div#myCarousel {
+    width: 65%;
+    }
+    .bottom-right {
+    width: 75%;
+    }
+    div#Download {
+    width: 31%;
+    }
+	.nav-li {
+	    padding: 0 4%;
+	}
+	.news, .test, .party, .league, .info, .meeting, .organ {
+    width: 11.5%;
+    }
 }

@@ -284,3 +284,19 @@ body{
 	left: 820px;
 	z-index: 5;
 }
+/*20181008修改*/
+.learn-list td.ll-name {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 35px;
+}
+.ll-name p {
+    width: 100%;
+}
+.bottom-right {
+    width: 70%;
+    margin-right: 20px;
+}
+.clear{
+	clear:both
+}

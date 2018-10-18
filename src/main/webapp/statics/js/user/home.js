@@ -69,7 +69,8 @@ $(document).ready(function(){
 	 */
 	$("#news").mouseenter(function(){
 		var left = document.getElementById("news").getBoundingClientRect().left;
-		var tleft = left+25;
+//		var tleft = left+25;
+		var tleft = left-22;
 		document.getElementById("anews").style.left = tleft+"px";
 		$(".news").show();
 	});
@@ -85,7 +86,8 @@ $(document).ready(function(){
 	
 	$("#party").mouseenter(function(){
 		var left = document.getElementById("party").getBoundingClientRect().left;
-		var tleft = left+25;
+//		var tleft = left+25;
+		var tleft = left-22;
 		document.getElementById("aparty").style.left = tleft+"px";
 		$(".party").show();
 	});
@@ -101,7 +103,8 @@ $(document).ready(function(){
 	
 	$("#league").mouseenter(function(){
 		var left = document.getElementById("league").getBoundingClientRect().left;
-		var tleft = left+25;
+//		var tleft = left+25;
+		var tleft = left-22;
 		document.getElementById("aleague").style.left = tleft+"px";
 		$(".league").show();
 	});
@@ -117,7 +120,8 @@ $(document).ready(function(){
 	
 	$("#organ").mouseenter(function(){
 		var left = document.getElementById("organ").getBoundingClientRect().left;
-		var tleft = left+25;
+//		var tleft = left+25;
+		var tleft = left-22;
 		document.getElementById("aorgan").style.left = tleft+"px";
 		$(".organ").show();
 	});

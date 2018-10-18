@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<link rel="stylesheet" href="../statics/css/homeNews.css" />
 	</head>
 	<body>
 		<!--内容-->
@@ -98,6 +99,7 @@
 					</tr>
 				</table>
 			</div>
+
 			<div class="middle-right" id="Download">
 				<div class="list-head">
 					<p>
@@ -112,8 +114,8 @@
 					</tr>
 				</table>
 			</div>
+			<div class="clear"></div><!-- 清除浮动 -->
 		</div>
-		
 		<div class="bottom">
 			<div class="bottom-left">
 				<div class="list-head">
@@ -126,6 +128,7 @@
 					<p v-for="r in branch" @click="MienTo(r.id)">{{r.BranchName}}</p>
 				</div>
 			</div>
+	
 			<div class="bottom-right" id="mien" >
 				<div class="pic1 pic" v-for="r in image" :style="'background-image: url('+r.image+');'"></div>
 				<!--<div class="pic2 pic" style="background-image: url(img/1-2.jpg);"></div>
@@ -133,6 +136,7 @@
 				<div class="pic4 pic" style="background-image: url(img/1-4.jpg);"></div>
 				<div class="pic5 pic" style="background-image: url(img/1-5.jpg);"></div>-->
 			</div>
+			<div class="clear"></div><!-- 清除浮动 -->
 		</div>
 		<!--友情链接-->
 		<div class="link">
@@ -150,6 +154,6 @@
 		<!--脚本-->
 		<script type="text/javascript" src="../statics/js/vue.js" ></script>
 		<script type="text/javascript" src="../statics/js/user/homeNews.js" ></script>
-		<link rel="stylesheet" href="../statics/css/homeNews.css" />
+		
 	</body>
 </html>
