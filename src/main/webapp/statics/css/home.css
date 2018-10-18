@@ -413,10 +413,20 @@ ul.nav-ul {
     /* border-left: 1px solid #ccc; */
     padding: 0px 18px;
 }
-.news, .test, .party, .league, .info, .meeting, .organ {
+/* .news, .test, .party, .league, .info, .meeting, .organ {
     position: absolute;
     top: 365px;
     width: 11.5%;
+} */
+.news, .test, .party, .league, .meeting, .organ {
+    position: absolute;
+    top: 365px;
+    width: 11.5%;
+}
+.info{
+	 position: relative;
+	 top:0;
+	 
 }
 
 @media screen and (min-width:1400px){

@@ -300,3 +300,7 @@ body{
 .clear{
 	clear:both
 }
+.carousel-caption {
+    width: 100%;
+    position: absolute;
+}
