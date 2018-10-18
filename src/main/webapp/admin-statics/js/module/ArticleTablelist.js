@@ -119,7 +119,7 @@ function passall(){
 	$('.popup_de').addClass('bbox');
 	$('.popup_de .btn-danger').one('click',function(){
 		if(str!=""){
-			alert(str);
+			//alert(str);
 			doPass(str);
 		}
 		else{
@@ -209,7 +209,7 @@ function doPass(data){
         dataType:'json',
         success: function(result) {  
 			alert(result.msg);
-			//location.reload();	
+			location.reload();	
         },
         error :function(){
         	alert("系统出错，审核通过失败！");

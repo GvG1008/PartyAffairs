@@ -8,7 +8,7 @@
    <link href="../../admin-statics/table/dataTables.bootstrap.css" rel="stylesheet">
    <link href="../../admin-statics/table/dataTables.responsive.css" rel="stylesheet">
    <link href="../../admin-statics/table/font-awesome.css" rel="stylesheet" />
-    <link href="../../admin-statics/table/sb-admin-2.css" rel="stylesheet">
+   <link href="../../admin-statics/table/sb-admin-2.css" rel="stylesheet">
    <link href="../../admin-statics/table/style.css" rel="stylesheet" />
    <link href="../../admin-statics/table/style-responsive.css" rel="stylesheet" />
    <link href="../../admin-statics/css/workbench/table.css" rel="stylesheet" >  
@@ -29,27 +29,37 @@
                                         <th>结束时间</th>
                                         <th>考试时长（分钟）</th>
                                         <th>单选题数</th>
+                                        <th>单选分数</th>
                                         <th>多选题数</th>
+                                        <th>多选分数</th>
                                         <th>及格标准</th>
                                         <th>状态</th>
                                         <th>操作</th>
                                     </tr>
                                  </thead> 
                                  <tbody>
-                                    <tr>
-                                        <td style="width:30px"><center><input type="checkbox"  name="all" id="all" :value="message.userId"></center></td>
-                                        <td ><center>第一次考试</center></td>
-                                        <td><center>软件工程专业党支部</center></td>
-                                        <td style="width:9.5%"><center>2018-07-14      08:00:00</center></td>
-                                        <td style="width:9.5%"><center>2018-07-14      10:00:00</center></td>
-                                        <td style="width:7%"><center>90</center></td>
-                                        <td style="width:9.5%"><center>30</center></td>
-                                        <td style="width:9.5%"><center>20</center></td>
-                                        <td style="width:9.5%"><center>60</center></td>
-                                        <td style="width:7%"><center  class="guoqi">已过期</center></td>
+                                    <tr v-for="r in datas" v-cloak>
+                                        <td style="width:30px"><center><input type="checkbox"  name="all" id="all" :value="r.examId"></center></td>
+                                        <td style="width:9.5%"><center>{{titleFormat(r.examTitle)}}</center></td>
+                                        <td style="width:9.5%" v-if="r.branchId==1"><center>软件工程专业党支部</center></td>
+                                        <td style="width:9.5%" v-else-if="r.branchId==2"><center>计算机科学与技术专业党支部</center></td>
+                                        <td style="width:9.5%" v-else-if="r.branchId==3"><center>网络工程专业党支部</center></td>
+                                        <td style="width:9.5%" v-else-if="r.branchId==4"><center>物联网工程专业党支部</center></td>
+                                        <td style="width:9.5%" v-else-if="r.branchId==5"><center>数据科学与大数据技术专业党支部</center></td>
+                                        <td style="width:9.5%"><center>{{r.startTime}}</center></td>
+                                        <td style="width:9.5%"><center>{{r.endTime}}</center></td>
+                                        <td style="width:7%"><center>{{r.examPeriod}}</center></td>
+                                        <td style="width:9.5%"><center>{{r.singleQuantity}}</center></td>
+                                        <td style="width:9.5%"><center>{{r.singleScore}}分</center></td>
+                                        <td style="width:9.5%"><center>{{r.multipleQuantity}}</center></td>
+                                        <td style="width:9.5%"><center>{{r.multipleScore}}分</center></td>
+                                        <td style="width:9.5%"><center>{{r.passScore}}</center></td>
+                                        <td style="width:7%" v-if="r.status==-1"><center  class="guoqi">已过期</center></td>
+                                        <td style="width:7%" v-else-if="r.status==0"><center  class="weikaishi">未开始</center></td>
+                                        <td style="width:7%" v-else-if="r.status==1"><center  class="doing">进行中</center></td>
                                         <td style="width:13%">
                                         <center>
-                                            <a class="btn btn-success os btn-xs" :href="'#?id='+message.userId" title="修改">
+                                            <a class="btn btn-success os btn-xs" :href="'#?id='+r.examId" title="修改">
                                             编辑<i class="fa fa-pencil ticon" aria-hidden="true"></i>
                                             </a>
                                             <button class="btn btn-danger bos btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);" aria-hidden="true">
@@ -57,50 +67,6 @@
                                             </button>
                                         </center>
                                         </td>  
-                                    </tr>
-                                    <tr>
-                                        <td style="width:30px"><center><input type="checkbox"  name="all" id="all" :value="message.userId"></center></td>
-                                        <td><center>十九大党章专项训练测试</center></td>
-                                        <td><center>数据科学与大数据技术专业党支部</center></td>
-                                        <td><center>2018-07-14      08:00:00</center></td>
-                                        <td><center>2018-07-14      10:00:00</center></td>
-                                        <td style="width:80px"><center>90</center></td>
-                                        <td style="width:50px"><center>30</center></td>
-                                        <td style="width:50px"><center>20</center></td>
-                                        <td style="width:50px"><center>60</center></td>
-                                        <td style="width:50px"><center  class="weikaishi">未开始</center></td>
-                                            <td style="width:160px">
-                                        <center>
-                                            <a class="btn btn-success os btn-xs" :href="'#?id='+message.userId" title="修改">
-                                            编辑<i class="fa fa-pencil ticon" aria-hidden="true"></i>
-                                            </a>
-                                            <button class="btn btn-danger bos btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);" aria-hidden="true">
-                                            删除<i class="fa fa-trash-o ticon" aria-hidden="true"></i>
-                                            </button>
-                                        </center>
-                                        </td>  
-                                    </tr>
-                                    <tr>
-                                        <td style="width:30px"><center><input type="checkbox"  name="all" id="all" :value="message.userId"></center></td>
-                                        <td><center>第一次考试</center></td>
-                                        <td><center>计算机科学与技术专业党支部</center></td>
-                                        <td><center>2018-07-14      08:00:00</center></td>
-                                        <td><center>2018-07-14      10:00:00</center></td>
-                                        <td style="width:80px"><center>90</center></td>
-                                        <td style="width:50px"><center>30</center></td>
-                                        <td style="width:50px"><center>20</center></td>
-                                        <td style="width:50px"><center>60</center></td>
-                                        <td style="width:50px"><center  class="doing">进行中</center></td>
-                                           <td style="width:160px">
-                                        <center>
-                                            <a class="btn btn-success os btn-xs" :href="'#?id='+message.userId" title="修改">
-                                            编辑<i class="fa fa-pencil ticon" aria-hidden="true"></i>
-                                            </a>
-                                            <button class="btn btn-danger btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);" aria-hidden="true">
-                                            删除<i class="fa fa-trash-o ticon"></i>
-                                            </button>
-                                        </center>
-                                        </td>   
                                     </tr>
                                  </tbody>
                             </table>
@@ -135,10 +101,8 @@
                      <span class="fl">（仅支持excel 格式文件）</span>
                      <div class="form-group" id="select-group">
                      <select id="mySelect" class="form-control">
-	                      <option>请选择文件分类</option>
-						  <option>党章</option>
-						  <option>两学一做</option>
-						  <option>十九大</option>
+                          <option>请选择文件分类</option>
+                          <option v-for="r in select" :value="r.categoryId">{{r.categoryName}}</option>                          
                      </select> 
                      <input type="button" id="custom" value="自定义" onclick="custom()">
                       </div>
@@ -169,7 +133,7 @@
                       </div>   
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="sumbitExam" >确定</button>
+                    <button type="button" class="btn btn-primary" id="sumbitExam" onclick="submitExam()">确定</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                   </div>
                 </div>
@@ -196,3 +160,5 @@
     </script>
 </body>
 </html>
+<!-- <td style="width:50px"><center  class="weikaishi">未开始</center></td>
+<td style="width:50px"><center  class="doing">进行中</center></td> -->

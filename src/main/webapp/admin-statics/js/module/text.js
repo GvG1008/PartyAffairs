@@ -1,4 +1,4 @@
-var data = {    
+/*var data = {    
 		        "branchId": null,
 		        "categoryId": 1,
 		        "userId": null,
@@ -55,7 +55,7 @@ var data = {
 			            }
 			          ]
 		           
-};
+};*/
 
 function edittest(test_id) {
     if (test_id != "") {
@@ -146,7 +146,7 @@ function edittest(test_id) {
             $('#testArea').html(test_html)
             }else{alert("试题获取失败！");}
  } 
-function test(test_id) {
+function test(test_id,data) {
     if (test_id != "") {
         console.log(data);
         var titleB = data.categoryId;

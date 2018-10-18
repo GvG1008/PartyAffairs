@@ -300,3 +300,6 @@ button#btn_delete1 {
 button#btn_look1 {
     margin: 0 5px;
 }
+[v-cloak] {
+    display: none !important;
+}
