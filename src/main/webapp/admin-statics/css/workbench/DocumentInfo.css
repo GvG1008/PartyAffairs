@@ -1,0 +1,73 @@
+body, div, p, ul, ol, dl, dt, dd, li, form, input, table, img, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+.clearfix:after {
+    content:""; 
+    display: block; 
+    clear:both; 
+ }
+ .header {
+     padding: 20px;
+     font-size: 22px;
+     color: #004d6f;
+     font-family: sans-serif;
+     font-weight: 800;
+     border-bottom-color: #69666685;
+     border-bottom: solid 0.5px #69666685;
+     background: #fff;
+     padding-left: 50px;
+     padding-right: 75px;
+ }
+.big_title {
+    font-size: 36px;
+    color: #333;
+    font-weight: bold;
+    margin-top: 30px;
+    font-family: "微软雅黑";
+}
+.small_title {
+    font-size: 24px;
+    font-weight: normal;
+    color: #333;
+    margin-top: 25px;
+}
+.title_bottom {
+    width: 100%;
+    border-bottom: 1px solid #e7d6c3;
+    height: 48px;
+    line-height: 48px;
+    margin-top: 22px;
+}
+ .title_bottom .fenxiang {
+    background: url(../../images/edit.png) no-repeat left 0px;
+    display: block;
+    float: right;
+    line-height: 20px;
+    padding-left: 25px;
+    margin-top: 13px;
+    font-size: 14px;
+    color: #333;
+    margin-left: 22px;
+    width: 53px;
+}
+.title_bottom .dayin {
+    background: url(http://p5.img.cctvpic.com/photoAlbum/templet/common/DEPA1459234622428414/Printer.png) no-repeat left center;
+    display: block;
+    float: right;
+    line-height: 20px;
+    padding-left: 28px;
+    margin-top: 13px;
+    font-size: 14px;
+    color: #333;
+    margin-left: 30px;
+}
+em, b, i {
+    font-style: normal;
+}
+body,span,a {
+    color: #333;
+}
+article.content {
+    margin: 29px 50px;
+}

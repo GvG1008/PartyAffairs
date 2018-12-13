@@ -1,0 +1,63 @@
+body, div, p, ul, ol, dl, dt, dd, li, form, input, table, img, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+.clearfix:after {
+    content:""; 
+    display: block; 
+    clear:both; 
+ }
+ .header {
+     padding: 20px;
+     font-size: 22px;
+     color: #004d6f;
+     font-family: sans-serif;
+     font-weight: 800;
+     border-bottom-color: #69666685;
+     border-bottom: solid 0.5px #69666685;
+     background: #fff;
+     padding-left: 50px;
+     padding-right: 75px;
+ }
+ .big_title{
+    font-size: 36px;
+    color: #333;
+    font-weight: bold;
+    margin-top: 30px;
+    font-family: "微软雅黑";
+}
+.big_title>a{
+    color: #333;
+}
+.back_ad{
+ width: 60%;
+ height: 300px;
+
+
+}.shipin_kankan h3 {
+    font-size: 24px;
+    font-family: "微软雅黑";
+    color: #292929;
+    font-weight: 500;
+    padding-bottom: 14px;
+}
+.kankan {
+    background: url(http://p5.img.cctvpic.com/photoAlbum/templet/common/DEPA1467795228701387/dyw407_kanbg.jpg) no-repeat left bottom;
+}
+.shipin_kankan .ul_list {
+    clear: both;
+    margin-top: 30px;
+}
+.column_wrapper_1200 {
+    margin: 0 auto;
+    width: 1200px;
+    text-align: left;
+    clear: both;
+}
+.com_400 {
+    width: 35%;
+}
+article.content {
+    display: flex;
+    width: 100%;
+}
