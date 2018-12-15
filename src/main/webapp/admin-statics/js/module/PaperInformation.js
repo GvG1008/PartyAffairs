@@ -227,7 +227,11 @@ function custom(){
 function addsort(){//添加自定义分类
 	customGroup.style.display="none";
 	selectGroup.style.display="flex";
-	var sort = $('#sort').val();
+	var sort = $.trim($('#sort').val());
+	if(sort == ""){
+		alert("不能为空");
+		return;
+	}
 	$.ajax({
 		type:'post',        
         url:'../../examcategory/'+sort, 
@@ -237,7 +241,7 @@ function addsort(){//添加自定义分类
         	
         },
         error :function(){
-        	alert("系统出错，删除失败！");
+        	alert("系统出错，添加失败！");
         }
 	});
 	mySelect.loadExamcategory();

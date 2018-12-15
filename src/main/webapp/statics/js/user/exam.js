@@ -231,3 +231,8 @@ function updataExam(){
 	}
 	app.submit = 1;
 }
+var port = "http://localhost:8080/";
+//退出考试
+function exit(){
+	window.location.href = port+"PartyAffairs/views/home.html";
+}
