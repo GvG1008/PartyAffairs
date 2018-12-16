@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqu.pa.dao.role.roleMapper">
+  <select id="selectRole" resultType="com.zqu.pa.entity.role.Role">
+    Select role_id as roleId , role_name as roleName
+    From role
+    Order by role_id
+  </select>
+  
+  <select id="getUserRole" resultType="com.zqu.pa.entity.role.Role">
+    Select r.role_id as roleId , r.role_name as roleName
+    from user_login u
+    Left Join role r ON r.role_id = u.role_id
+    Where u.user_id = #{userId}
+  </select>
+  
+  <insert id="insertRole">
+    Insert into role(role_name)
+    Values(#{roleName})
+  </insert>
+  
+  <delete id="deleteRole">
+    Delete From role
+    Where role_id = #{roleId}
+  </delete>
+  
+  <update id="updateRole">
+    Update user_login 
+    Set role_id = #{newRole}
+    Where role_id = #{oldRole}
+  </update>
+  
+  <update id="updateUserRole">
+    Update user_login 
+    Set role_id = #{roleId}
+    Where user_id = #{userId}
+  </update>
+</mapper>

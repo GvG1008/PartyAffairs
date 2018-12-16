@@ -37,9 +37,13 @@
                 /login=anon
                 <!-- 请求该地址，shiro去清除session -->
                 /doLogout=logout
-                /**=anon
+                <!-- 自定义权限配置 -->
+                <!-- /admin-view/**=anon 无权限即可访问管理员后台， /admin-view/**=perms["role:admin"] 需要有role:admin权限-->
+                <!-- /admin-view/**=anon -->
+                /admin-view/**=perms["role:admin"]
+                /views/**=anon
                 <!--所有的请求(除去配置的静态资源请求或请求地址为anon的请求)都要通过登录验证,如果未登录则跳到/login -->
-                <!--  /**= authc -->
+                /**= anon
             </value>
         </property>
     </bean>

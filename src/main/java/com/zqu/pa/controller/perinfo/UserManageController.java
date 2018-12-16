@@ -75,7 +75,7 @@ public class UserManageController {
      */
     @ResponseBody
     @RequestMapping(value="/PartyInfo/{userId}", method=RequestMethod.GET)
-    public ServerResponse<UserPartyInfo> getDesignatedPartyInfo(@PathVariable String userId){
+    public ServerResponse<UserPartyInfo> getDesignatedPartyInfo(@PathVariable(value="userId") String userId){
         
         if(userId==null)
             return ServerResponse.createByErrorMessage("获取指定用户个人信息失败");

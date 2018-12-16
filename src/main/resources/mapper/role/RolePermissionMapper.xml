@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqu.pa.dao.role.RolePermissionMapper">
+  <select id="selectPermission">
+    Select rm.permission_id 'permissionId', rm.permission_name 'permissionName', description
+    From role_permission rp
+    Left Join permission_menu rm on rm.permission_id = rp.permission
+    Where rp.role_id = #{roleId}
+  </select>
+  
+  <select id="selectAllPermission">
+    Select permission_id 'permissionId', permission_name 'permissionName', description
+    From permission_menu
+  </select>
+  
+  <delete id="deleteRolePermissions">
+    Delete from role_permission
+    Where role_id = #{roleId}
+  </delete>
+  
+  <insert id="insertRolePermissions">
+    Insert into role_permission(role_id, permission)
+    Values
+    <foreach collection="permissions" index="index" item="permission" separator="," open="(" close=")">
+      #{roleId}, permission
+    </foreach>
+  </insert>
+</mapper>
