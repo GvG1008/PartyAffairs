@@ -1,5 +1,6 @@
 package com.zqu.pa.service.exam.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import com.zqu.pa.dao.exam.ExamCategoryMapper;
 import com.zqu.pa.entity.exam.ExamCategory;
 import com.zqu.pa.entity.exam.ExamCategoryExample;
 import com.zqu.pa.service.exam.ExamCategoryService;
+import com.zqu.pa.vo.exam.ResponseExamCategory;
 
 @Service
 public class ExamCategoryServiceImpl implements ExamCategoryService {
@@ -25,9 +27,22 @@ public class ExamCategoryServiceImpl implements ExamCategoryService {
     }
 
     @Override
-    public List<ExamCategory> getExamCategory() {
+    public List<ResponseExamCategory> getExamCategory() {
         
         ExamCategoryExample example = new ExamCategoryExample();
-        return examCategoryMapper.selectByExample(example);
+        List<ExamCategory> listExamCategory = examCategoryMapper.selectByExample(example);
+        List<ResponseExamCategory> result = new ArrayList<>();
+        int singleQuantity = 0, multipleQuantity = 0;
+        for (ExamCategory ec : listExamCategory) {
+            singleQuantity = examCategoryMapper.sumSingleQuantity(ec);
+            multipleQuantity = examCategoryMapper.sumMultipleQuantity(ec);
+            ResponseExamCategory rec = new ResponseExamCategory();
+            rec.setCategoryId(ec.getCategoryId());
+            rec.setCategoryName(ec.getCategoryName());
+            rec.setSingleQuantity(singleQuantity);
+            rec.setMultipleQuantity(multipleQuantity);
+            result.add(rec);
+        }
+        return result;
     } 
 }
