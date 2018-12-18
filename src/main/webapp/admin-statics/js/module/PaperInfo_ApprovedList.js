@@ -1,52 +1,41 @@
-/*new Vue({
-		el : "#msg",
-	data: {
-		newMessages: [],
-		num:[]
+new Vue({
+	el : "#msg",
+	data : {
+		datas : []
 	},
-	methods:{
-		loadNewMessages: function() {
+	methods : {
+		loadNewMessages : function() {
 			var app = this;
-			var m = {};
 			$.ajax({
-				type:"get",
-				url: "../../userManage/userCheckList",
+				type : "get",
+				url : "../../examinfo/lists/unreview",
 				async : false,
-				dataType: 'json',
-				success: function(result){
-					if(result.status == 0)
-						app.newMessages = result.data;
-					else
+				dataType : 'json',
+				success : function(result) {
+					if (result.status == 0) {
+						app.datas = result.data;
+					} else {
 						alert(result.msg);
+					}
 				}
 			});
 		},
-		timeFormat: function(ms){
+		timeFormat : function(ms) {
 			// 毫秒转日期时间
 			return millisecondsToDateTime(ms);
 		},
-		titleFormat: function(msg){
+		titleFormat : function(msg) {
 			// 长度超过12，截取12个字符
-			if(msg.length<=12){
+			if (msg.length <= 12) {
 				return msg;
-			}				
-			return msg.substr(0,11)+"···";
+			}
+			return msg.substr(0, 11) + "···";
 		}
 	},
-	created: function () {
+	created : function() {
 		this.loadNewMessages();
 	}
-});*/
-$(function(){
-    //弹出框取消按钮事件
-	$('.popup_de .btn_cancel').click(function(){
-		$('.popup_de').removeClass('bbox');
-	});
-	//弹出框关闭按钮事件
-	$('.popup_de .popup_close').click(function(){
-		$('.popup_de').removeClass('bbox');
-	})
-})
+});
 
 $(document).ready(function() {
 	var table = $('#msg').DataTable({
@@ -75,8 +64,8 @@ $(document).ready(function() {
         	$(this).find('input[type=checkbox]').removeAttr('checked');
 		}
     });   
-	var button = "<a class='btn btn-warning tw' onclick='passall()'><span class='fa fa-pencil-square-o'></span><span class='caption' id='allpass'>审核通过</span></a> &nbsp;&nbsp;&nbsp;&nbsp;"
-				+"<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'><span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
+	var button = "<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'><span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
+				+"<a class='btn btn-warning tw' onclick='passall()'><span class='fa fa-pencil-square-o'></span><span class='caption' id='allpass'>审核通过</span></a> &nbsp;&nbsp;&nbsp;&nbsp;"
 				+"<a class='btn btn-danger td' onclick='deleteall()'><span class='fa fa-trash-o icon'></span><span class='caption'>删除</span></a>";
 	document.getElementById("add").innerHTML = button;
 	$('#msg tbody').on( 'mouseenter', 'td', function () {
@@ -87,12 +76,20 @@ $(document).ready(function() {
 	$("#all").click(function(){
         $('[name=all]:checkbox').prop('checked',this.checked);//checked为true时为默认显示的状态
     });
+	//弹出框取消按钮事件
+	$('.popup_de .btn_cancel').click(function(){
+		$('.popup_de').removeClass('bbox');
+	});
+	//弹出框关闭按钮事件
+	$('.popup_de .popup_close').click(function(){
+		$('.popup_de').removeClass('bbox');
+	})
 
 });   
-function checkall(){
+function checkall(){//全选设置
 	var all = $('[name=all]:checkbox');
 	for(var i=0;i<all.length;i++){
-		all[i].checked=true;
+		all[i].checked=!all[i].checked;
 	}
 }
 function millisecondsToDateTime(ms){
@@ -105,84 +102,127 @@ function deleteall(){
 		if(all[i].checked)
 			str = str+"&"+all[i].value;
 	}
-	var text="确定要删除所选账号吗?";
+	var text="确定要删除所选考试吗？";
 	document.getElementById('show_msg').innerHTML=text;
 	$('.popup_de').addClass('bbox');
 	$('.popup_de .btn-danger').one('click',function(){
-		if(str!="")
-			doDelete(str);
+		if(str!=""){
+			var falg=1;
+			for(var i=1;i<all.length;i++){
+				if(all[i].checked){
+					var result = doDelete(all[i].value);
+					if(result!=0){
+						falg=0;
+						alert("删除失败");
+						location.reload();
+						break;
+					}
+				}			
+			}
+			if(falg){
+				alert("删除成功");
+				location.reload();
+			}
+		}		
 		else{
-			alert("请至少选择一个账号");
+			alert("请至少选择一场考试");
 			$('.popup_de').removeClass('bbox');
-		}
+		}		
 	})
 }
-function deletemsg(obj){
+function deletemsg(obj){//删除一场
 	var tds = $(obj).parent().parent().parent().find('td');
-	var center = tds.eq(1).find('center');
-	var rid = center.eq(0).text();
-	var text="确定要删除该账号吗?";
+	var input = tds.eq(0).find('input');
+	var rid = input.val();
+	var text="确定要删除该场考试吗?";
 	document.getElementById('show_msg').innerHTML=text;
 	$('.popup_de').addClass('bbox');
 	$('.popup_de .btn-danger').one('click',function(){
-		doDelete(rid);
+		//alert(rid);
+		var result = doDelete(rid);
+		//alert(result);
+		if(result==0){
+			alert("删除成功");
+			location.reload();
+		}else{
+			alert("系统出错，删除失败！");
+			location.reload();
+		}
+		
 	})
 }
-function passall(){
+function passall(){//审核所选考试
 	var all = $('[name=all]:checkbox');
+	var passArray = new Array();
 	var str = "";
 	for(var i=1;i<all.length;i++){
-		if(all[i].checked)
-			str = str+"&"+all[i].value;
+		if(all[i].checked){
+			//str = str+"&"+all[i].value;
+			passArray.push(all[i].value);
+		}			
 	}
-	var text="是否审核通过所选账号吗?";
+	var text="是否审核通过所选考试吗?";
 	document.getElementById('show_msg').innerHTML=text;
 	$('.popup_de').addClass('bbox');
 	$('.popup_de .btn-danger').one('click',function(){
-		if(str!="")
-			doPass(str);
-		else{
-			alert("请至少选择一个账号");
+		if(passArray === undefined || passArray.length == 0){
+			alert("请至少选择一场考试");
 			$('.popup_de').removeClass('bbox');
-		}
+		}		
+		else{
+			doPass(passArray);
+		}		
 	})
 }
-function pass(obj){
+function pass(obj){//审核一场考试
 	var tds = $(obj).parent().parent().parent().find('td');
-	var center = tds.eq(1).find('center');
-	var rid = center.eq(0).text();
-	var text="是否审核通过该账号吗?";
+	var input = tds.eq(0).find('input');
+	var rid = input.val();
+	var passArray = new Array();
+	passArray.push(rid);
+	var text="是否审核通过该场考试吗?";
 	document.getElementById('show_msg').innerHTML=text;
 	$('.popup_de').addClass('bbox');
 	$('.popup_de .btn-danger').one('click',function(){
-		doPass(rid);
+			doPass(passArray);
 	})
 }
-function doDelete(data){
+function doDelete(data){//提交删除
+	var DataResult=100;
 	$.ajax({                            
-		type:'post',        
-        url:'../../userManage/deleteUserByBranch/'+data, 
+		type:'delete',        
+        url:'../../examinfo/'+data, 
         dataType:'json',
+        async : false,
         success: function(result) {  
-			alert(result.msg);
-			location.reload();	
-        },
+			//alert(result.msg);
+			//location.reload();
+        	DataResult=result.status;
+        }/*,
         error :function(){
         	alert("系统出错，删除失败！");
-        }
+        }*/
    });
+	return DataResult;
 }
-function doPass(data){
+function doPass(array){
 	$.ajax({                            
-		type:'post',        
-        url:'../../userManage/batchCheckUserByBranch/'+data,   
+		type:'PUT',        
+        url:'../../examinfo/review', 
+        data : JSON.stringify(array),
+        contentType : 'application/json;charset=utf-8',
         dataType:'json',
+        async : false,
         success: function(result) {  
-			alert(result.msg);
-			location.reload();	
+			//alert(result.msg);
+			//location.reload();        	
+        	if(result.status == 0){
+        		alert("审核通过！");
+        		location.reload();
+        	}        	
         },
         error :function(){
-        	alert("系统出错，审核通过失败！");
+        	alert("系统出错，审核失败！");
         }
    });
 }

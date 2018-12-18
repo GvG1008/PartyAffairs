@@ -226,7 +226,7 @@ span.wait {
             line-height:30px;
         }
         .popup_de .popup_close:hover{
-            background-color: #1ab394;
+            background-color: red;
             color:#fff;
         }
         .popup_de .btn_submit{

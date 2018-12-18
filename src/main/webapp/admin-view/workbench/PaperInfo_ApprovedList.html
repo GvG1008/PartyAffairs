@@ -36,20 +36,24 @@
                                     </tr>
                                  </thead> 
                                  <tbody>
-                                    <tr>
-                                        <td style="width:30px"><center><input type="checkbox"  name="all" id="all" :value="message.userId"></center></td>
-                                        <td ><center>第一次考试</center></td>
-                                        <td><center>软件工程专业党支部</center></td>
-                                        <td style="width:9.5%"><center>2018-07-14      08:00:00</center></td>
-                                        <td style="width:9.5%"><center>2018-07-14      10:00:00</center></td>
-                                        <td style="width:7%"><center>90</center></td>
-                                        <td style="width:9.5%"><center>30</center></td>
-                                        <td style="width:9.5%"><center>20</center></td>
-                                        <td style="width:9.5%"><center>60</center></td>
-                                        <td style="width:8%"><center>杨玉孟</center></td>
+                                    <tr v-for="r in datas" v-cloak>
+                                        <td style="width:30px"><center><input type="checkbox"  name="all" id="all" :value="r.examId"></center></td>
+                                        <td style="width:9.5%"><center>{{titleFormat(r.examTitle)}}</center></td>
+                                        <td style="width:9.5%" v-if="r.branchId==1"><center>软件工程专业党支部</center></td>
+                                        <td style="width:9.5%" v-else-if="r.branchId==2"><center>计算机科学与技术专业党支部</center></td>
+                                        <td style="width:9.5%" v-else-if="r.branchId==3"><center>网络工程专业党支部</center></td>
+                                        <td style="width:9.5%" v-else-if="r.branchId==4"><center>物联网工程专业党支部</center></td>
+                                        <td style="width:9.5%" v-else-if="r.branchId==5"><center>数据科学与大数据技术专业党支部</center></td>
+                                        <td style="width:9.5%"><center>{{r.startTime}}</center></td>
+                                        <td style="width:9.5%"><center>{{r.endTime}}</center></td>
+                                        <td style="width:7%"><center>{{r.examPeriod}}</center></td>
+                                        <td style="width:9.5%"><center>{{r.singleQuantity}}</center></td>                                      
+                                        <td style="width:9.5%"><center>{{r.multipleQuantity}}</center></td>                                      
+                                        <td style="width:9.5%"><center>{{r.passScore}}</center></td>
+                                        <td style="width:8%"><center>{{r.createName}}</center></td>
                                         <td style="width:11%">
                                          <center>
-                                            <a class="btn btn-success os1 btn-xs" :href="'#?id='+message.userId" title="修改">
+                                            <a class="btn btn-success os1 btn-xs" :href="'#?id='+r.examId" title="修改">
                                             <i class="fa fa-pencil ticon1" aria-hidden="true"></i>
                                             </a>
                                             <button class="btn btn-warning ow btn-xs" type="button" data-toggle="tooltip"  title="审核" id="btn_look1" onclick="pass(this);">
@@ -60,57 +64,7 @@
                                             </button>
                                         </center>
                                         </td>  
-                                    </tr>
-                                    <tr>
-                                        <td style="width:30px"><center><input type="checkbox"  name="all" id="all" :value="message.userId"></center></td>
-                                        <td><center>十九大党章专项训练测试</center></td>
-                                        <td><center>数据科学与大数据技术专业党支部</center></td>
-                                        <td style="width:9.5%"><center>2018-07-14      08:00:00</center></td>
-                                        <td style="width:9.5%"><center>2018-07-14      10:00:00</center></td>
-                                        <td style="width:7%"><center>90</center></td>
-                                        <td style="width:9.5%"><center>30</center></td>
-                                        <td style="width:9.5%"><center>20</center></td>
-                                        <td style="width:9.5%"><center>60</center></td>
-                                        <td style="width:8%"><center>杨玉孟</center></td>
-                                        <td style="width:11%">
-                                        <center>
-                                            <a class="btn btn-success os1 btn-xs" :href="'#?id='+message.userId" title="修改">
-                                            <i class="fa fa-pencil ticon1" aria-hidden="true"></i>
-                                            </a>
-                                            <button class="btn btn-warning ow btn-xs" type="button" data-toggle="tooltip"  title="审核" id="btn_look1" onclick="pass(this);">
-                                                                                                                              <i class="fa fa-pencil-square-o ticon1" aria-hidden="true"></i>
-                                            </button>
-                                            <button class="btn btn-danger bos btn-xs" id="btn_delete1" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);" aria-hidden="true">
-                                            <i class="fa fa-trash-o ticon1" aria-hidden="true"></i>
-                                            </button>
-                                        </center>
-                                        </td>  
-                                    </tr>
-                                    <tr>
-                                        <td style="width:30px"><center><input type="checkbox"  name="all" id="all" :value="message.userId"></center></td>
-                                        <td><center>第一次考试</center></td>
-                                        <td><center>计算机科学与技术专业党支部</center></td>
-                                        <td style="width:9.5%"><center>2018-07-14      08:00:00</center></td>
-                                        <td style="width:9.5%"><center>2018-07-14      10:00:00</center></td>
-                                        <td style="width:7%"><center>90</center></td>
-                                        <td style="width:9.5%"><center>30</center></td>
-                                        <td style="width:9.5%"><center>20</center></td>
-                                        <td style="width:9.5%"><center>60</center></td>
-                                        <td style="width:8%"><center>杨玉孟</center></td>
-                                        <td style="width:11%">
-                                           <center>
-                                            <a class="btn btn-success os1 btn-xs" :href="'#?id='+message.userId" title="修改">
-                                            <i class="fa fa-pencil ticon1" aria-hidden="true"></i>
-                                            </a>
-                                            <button class="btn btn-warning ow btn-xs" type="button" data-toggle="tooltip"  title="审核" id="btn_look1" onclick="pass(this);">
-                                                                                                                              <i class="fa fa-pencil-square-o ticon1" aria-hidden="true"></i>
-                                            </button>
-                                            <button class="btn btn-danger bos btn-xs" id="btn_delete1" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);" aria-hidden="true">
-                                            <i class="fa fa-trash-o ticon1" aria-hidden="true"></i>
-                                            </button>
-                                        </center>
-                                        </td>   
-                                    </tr>
+                                    </tr>                        
                                  </tbody>
                             </table>
                         </div>
