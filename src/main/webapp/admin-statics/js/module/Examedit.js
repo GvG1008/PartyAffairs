@@ -372,7 +372,21 @@ function release(){
 		userID:userID,
 		categoryID:categoryID
 	};
-	console.log(temp);
+	//console.log(temp);
+	//先删除
+	$.ajax({                            
+		type:'delete',        
+        url:'../../examinfo/'+examId, 
+        dataType:'json',
+        async : false,
+        success: function(result) {  
+        	
+        },
+        error :function(){
+        	alert("系统出错！");
+        }
+   });
+	//再插入
 	$.ajax({		
 		type : "post",// 请求方式
 		url : "../../examinfo",
@@ -381,9 +395,9 @@ function release(){
 		dataType : "json",
 		success : function(result) {
 			if(result.status==0){
-				alert("发布成功");
+				alert("修改成功");
 			}else{
-				alert("发布失败,请检查填写数据是否完整");
+				alert("修改失败,请检查填写数据是否完整");
 			}
 		}
 	});

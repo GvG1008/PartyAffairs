@@ -59,7 +59,7 @@
                                         <td style="width:7%" v-else-if="r.status==1"><center  class="doing">进行中</center></td>
                                         <td style="width:13%">
                                         <center>
-                                            <a class="btn btn-success os btn-xs" :href="'Examedit.html?id='+r.examId" title="修改">
+                                            <a v-if="r.status!=1" class="btn btn-success os btn-xs" :href="'Examedit.html?id='+r.examId" title="修改">
                                             编辑<i class="fa fa-pencil ticon" aria-hidden="true"></i>
                                             </a>
                                             <button class="btn btn-danger bos btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);" aria-hidden="true">
