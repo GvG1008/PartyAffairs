@@ -15,6 +15,7 @@ import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.exam.ExamInfo;
 import com.zqu.pa.entity.exam.ExamInfoReview;
 import com.zqu.pa.service.exam.ExamInfoService;
+import com.zqu.pa.service.exam.ExamListService;
 import com.zqu.pa.vo.exam.AdminExamInfoList;
 import com.zqu.pa.vo.exam.CreateExamBean;
 import com.zqu.pa.vo.exam.ResponseNowExamList;
@@ -25,6 +26,9 @@ public class ExamInfoController {
 
     @Autowired
     private ExamInfoService examInfoService;
+    
+    @Autowired
+    private ExamListService examListService;
     
     /**
      * 创建一场考试信息
@@ -52,7 +56,8 @@ public class ExamInfoController {
     @ResponseBody
     @RequestMapping(value = "/lists", method = RequestMethod.GET)
     public ServerResponse<List<AdminExamInfoList>> listExamInfo() {
-        
+        //判断考试是否过期
+        examListService.setExamFinish();
         List<AdminExamInfoList> result = null;
         try {
             //所有考试信息
