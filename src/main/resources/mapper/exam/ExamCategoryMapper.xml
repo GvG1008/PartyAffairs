@@ -162,4 +162,14 @@
     set category_name = #{categoryName,jdbcType=VARCHAR}
     where category_id = #{categoryId,jdbcType=INTEGER}
   </update>
+  <select id="sumSingleQuantity" parameterType="com.zqu.pa.entity.exam.ExamCategory" resultType="java.lang.Integer">
+    select count(a.question_id) 
+    from question_exam_category a, question_bank b
+    where a.category_id = #{categoryId,jdbcType=INTEGER} and a.question_id = b.question_id and b.question_type=0   
+  </select>
+  <select id="sumMultipleQuantity" parameterType="com.zqu.pa.entity.exam.ExamCategory" resultType="java.lang.Integer">
+    select count(a.question_id) 
+    from question_exam_category a, question_bank b
+    where a.category_id = #{categoryId,jdbcType=INTEGER} and a.question_id = b.question_id and b.question_type=1   
+  </select>
 </mapper>

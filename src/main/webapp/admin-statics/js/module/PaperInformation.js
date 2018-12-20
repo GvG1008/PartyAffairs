@@ -163,7 +163,7 @@ function deleteall(){//全选删除选择
 			}
 		}		
 		else{
-			alert("请至少选择一个账号");
+			alert("请至少选择一场考试");
 			$('.popup_de').removeClass('bbox');
 		}		
 	})

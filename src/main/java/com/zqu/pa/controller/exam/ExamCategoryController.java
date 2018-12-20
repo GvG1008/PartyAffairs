@@ -20,7 +20,7 @@ public class ExamCategoryController {
     
     /**
      * 获取全部题库分类
-     * @return ExamCategory类集合
+     * @return ResponseExamCategory类集合
      */
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.GET)

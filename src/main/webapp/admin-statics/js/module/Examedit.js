@@ -1,3 +1,9 @@
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return decodeURI(r[2]); return null; 
+}
+var examId = getUrlParam('id');
 $(function() {
 	var setting = {
 		check : {
@@ -274,10 +280,12 @@ function onBodyDown(event) {
 var ExamContent = new Vue({
 	el:"#ExamContent",
 	data:{
-		select:[]
+		select:[],
+		examInfo:[]
 	},
 	created:function(){
 		this.loadExamcategory();
+		this.getExamInfo();
 	},
 	methods : {
 		loadExamcategory:function(){
@@ -290,6 +298,22 @@ var ExamContent = new Vue({
 				success : function(result) {
 					if (result.status == 0) {
 						self.select = result.data;
+					} else {
+						alert(result.msg);
+					}
+				}
+			})
+		},
+		getExamInfo:function(){
+			var self = this;
+			$.ajax({
+				type : "get",
+				url : "../../examlist/"+examId,
+				async : false,
+				dataType : 'json',
+				success : function(result) {
+					if (result.status == 0) {
+						self.examInfo = result.data;
 					} else {
 						alert(result.msg);
 					}
@@ -348,7 +372,21 @@ function release(){
 		userID:userID,
 		categoryID:categoryID
 	};
-	console.log(temp);
+	//console.log(temp);
+	//先删除
+	$.ajax({                            
+		type:'delete',        
+        url:'../../examinfo/'+examId, 
+        dataType:'json',
+        async : false,
+        success: function(result) {  
+        	
+        },
+        error :function(){
+        	alert("系统出错！");
+        }
+   });
+	//再插入
 	$.ajax({		
 		type : "post",// 请求方式
 		url : "../../examinfo",
@@ -357,9 +395,9 @@ function release(){
 		dataType : "json",
 		success : function(result) {
 			if(result.status==0){
-				alert("发布成功");
+				alert("修改成功");
 			}else{
-				alert("发布失败,请检查填写数据是否完整");
+				alert("修改失败,请检查填写数据是否完整");
 			}
 		}
 	});

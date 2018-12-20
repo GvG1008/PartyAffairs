@@ -3,6 +3,7 @@ package com.zqu.pa.service.exam;
 import java.util.List;
 
 import com.zqu.pa.entity.exam.ExamCategory;
+import com.zqu.pa.vo.exam.ResponseExamCategory;
 
 public interface ExamCategoryService {
 
@@ -10,5 +11,5 @@ public interface ExamCategoryService {
     int createCategory(String categoryName);
     
     //获取全部题库分类
-    List<ExamCategory> getExamCategory();
+    List<ResponseExamCategory> getExamCategory();
 }

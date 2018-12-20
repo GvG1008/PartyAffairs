@@ -59,7 +59,7 @@
                                         <td style="width:7%" v-else-if="r.status==1"><center  class="doing">进行中</center></td>
                                         <td style="width:13%">
                                         <center>
-                                            <a class="btn btn-success os btn-xs" :href="'#?id='+r.examId" title="修改">
+                                            <a v-if="r.status!=1" class="btn btn-success os btn-xs" :href="'Examedit.html?id='+r.examId" title="修改">
                                             编辑<i class="fa fa-pencil ticon" aria-hidden="true"></i>
                                             </a>
                                             <button class="btn btn-danger bos btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);" aria-hidden="true">
@@ -74,14 +74,14 @@
                     </div>
 
             <div class="popup_de xycenter">
-            <div class="popup_box">
-                <span class="popup_close" value="关闭">×</span>
-                <span class="show_msg" id="show_msg"></span>
-                <div class="btn_box">
-                    <div class="popup_btn btn-danger" value="确定">确定</div>
-                    <div class="popup_btn btn_cancel" value="取消">取消</div>
-                </div>
-            </div>  
+	            <div class="popup_box">
+	                <span class="popup_close" value="关闭">×</span>
+	                <span class="show_msg" id="show_msg"></span>
+	                <div class="btn_box">
+	                    <div class="popup_btn btn-danger" value="确定">确定</div>
+	                    <div class="popup_btn btn_cancel" value="取消">取消</div>
+	                </div>
+	            </div>  
             </div>
              
              <!-- 题库上传  Modal -->

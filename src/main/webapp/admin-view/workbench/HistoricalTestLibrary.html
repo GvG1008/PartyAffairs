@@ -5,114 +5,142 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>历史题库</title>
-<link href="../../admin-statics/css/bootstrap/3.0.2/bootstrap.css" rel="stylesheet" type="text/css" media="all">
-<link href="../../admin-statics/css/font-awesome/4.7.0/font-awesome.css" rel="stylesheet">
-<link href="../../admin-statics/css/workbench/zTreeStyle.css" rel="stylesheet">
-<link href="../../admin-statics/css/workbench/PaperInformation.css" rel="stylesheet" > 
-<link href="../../admin-statics/css/workbench/HistoricalTestLibrary.css" rel="stylesheet" >
+<link href="../../admin-statics/css/bootstrap/3.0.2/bootstrap.css"
+	rel="stylesheet" type="text/css" media="all">
+<link href="../../admin-statics/css/font-awesome/4.7.0/font-awesome.css"
+	rel="stylesheet">
+<link href="../../admin-statics/css/workbench/zTreeStyle.css"
+	rel="stylesheet">
+<link href="../../admin-statics/css/workbench/PaperInformation.css"
+	rel="stylesheet">
+<link href="../../admin-statics/css/workbench/HistoricalTestLibrary.css"
+	rel="stylesheet">
 </head>
 <body>
-     <div class=container>
-         <!-- 头部    -->
-         <div class = "header">
-              <a href="PaperInformation.html">考试信息</a> > 历史题库
-              <!-- 工具栏  -->
-              <div class=toolbar>
-                 <a class="btn btn-default op" id="upload" href="#">
-                    <i class="fa fa-paper-plane op-icon"></i> 上传题库</a>
-              </div>
-         </div>
-         
-         <!-- 左部分 --题库信息    -->
-         <div class="leftcontent">
-            <div class="zTreeDemoBackground left">
-		        <ul id="treeDemo" class="ztree"></ul>
-		    </div>
-         </div>
-         <!-- 右部分 --预览信息    -->
-         <div class="rightcontent">
-            <div class="rtoolbar" style="display:flex">
-                <span class="rtitle">题库预览</span>
-                <button class="btn-op" id="edit" title="编辑名称" onclick="return false;"><i class="fa fa-edit"></i>修改名称</button>
-                <button class="btn-op" id="remove" title="删除节点" onclick="return false;"><i class="fa fa-trash-o"></i>删除题库</button>
-            </div>
-            <div id="previewArea"></div>
-         </div>
-    </div>
-     <!-- 题库上传  Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">题库上传</h4>
-                  </div>
-                  <div class="modal-body">
-                     <div class="form-group">
-                     <input type="text" class="form-control" id="tikutitle" placeholder="请输入题库名称">
-                     <input type="file" accept="application/msexcel" name="file" id="chooseExam" class="Filebtn" onchange="console.log(this.value);">
-                     <input type="button" id="upload" value="浏览" onclick="document.getElementById('chooseExam').click()">
-                     </div>
-                     <span class="fl">（仅支持excel 格式文件）</span>
-                     <div class="form-group" id="select-group">
-                     <select id="mySelect" class="form-control">
-                          <option>请选择文件分类</option>
-                          <option>党章</option>
-                          <option>两学一做</option>
-                          <option>十九大</option>
-                     </select> 
-                     <input type="button" id="custom" value="自定义" onclick="custom()">
-                      </div>
-                     <div class="form-group" id="custom-group">
-                     <input id="sort" class="form-control" placeholder="请输入文件分类"/>
-                     <input type="button" id="custom" value="确定" onclick="addsort()">
-                     </div>                    
-                  </div>
-                  <div class="modal-footer">
-                    <a class="download" href="#">如需上传题库，请使用特定模板，点此处下载☚</a>
-                    <button type="button" disabled="disabled" class="btn btn-primary" id="mUploadbtn" >上传</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-             <!-- 题库预览  Modal -->
-            <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="previewModalLabel">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">题库预览</h4>
-                  </div>
-                  <div class="modal-body">
-                      <div id="testArea">
-                      </div>   
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="sumbitExam" >确定</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-         
-    
-    
-     
-        <script type="text/javascript" src="../../admin-statics/js/lib/jquery/1.12.4/jquery.min.js"></script>
-        <script type="text/javascript" src="../../admin-statics/js/extends/bootstrap/3.3.7/bootstrap.min.js"></script>
-        <script src="../../statics/js/vue.js"></script>
-        <script type="text/javascript" src="../../admin-statics/js/extends/jquery.ztree.core.js"></script>
-        <script type="text/javascript" src="../../admin-statics/js/extends/jquery.ztree.excheck.js"></script>
-        <script type="text/javascript" src="../../admin-statics/js/extends/jquery.ztree.exedit.js"></script>
-        <script type="text/javascript" src="../../admin-statics/js/extends/jquery.ztree.all.js"></script>
-        <script src="../../admin-statics/js/module/text.js"> </script>
-        <script src="../../admin-statics/js/module/HistoricalTestLibrary.js"> </script>
-        <script type="text/javascript">
+	<div class=container>
+		<!-- 头部    -->
+		<div class="header">
+			<a href="PaperInformation.html">考试信息</a> > 历史题库
+			<!-- 工具栏  -->
+			<div class=toolbar>
+				<a class="btn btn-default op" id="upload" href="#" onclick='addlibary()'> <i
+					class="fa fa-paper-plane op-icon"></i> 上传题库
+				</a>
+			</div>
+		</div>
+
+		<!-- 左部分 --题库信息    -->
+		<div class="leftcontent">
+			<div class="zTreeDemoBackground left">
+				<ul id="treeDemo" class="ztree"></ul>
+			</div>
+		</div>
+		<!-- 右部分 --预览信息    -->
+		<div class="rightcontent">
+			<div class="rtoolbar" style="display: flex">
+				<span class="rtitle">题库预览</span>
+				<button class="btn-op" id="edit" title="编辑名称"
+					onclick="return false;">
+					<i class="fa fa-edit"></i>修改名称
+				</button>
+				<button class="btn-op" id="remove" title="删除节点"
+					onclick="return false;">
+					<i class="fa fa-trash-o"></i>删除题库
+				</button>
+			</div>
+			<div id="previewArea"></div>
+		</div>
+	</div>
+	<!-- 题库上传  Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">题库上传</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<input type="text" class="form-control" id="tikutitle"
+							placeholder="请输入题库名称"> <input type="file"
+							accept="application/msexcel" name="file" id="chooseExam"
+							class="Filebtn" onchange="console.log(this.value);"> <input
+							type="button" id="upload" value="浏览"
+							onclick="document.getElementById('chooseExam').click()">
+					</div>
+					<span class="fl">（仅支持excel 格式文件）</span>
+					<div class="form-group" id="select-group">
+						<select id="mySelect" class="form-control">
+							<option>请选择文件分类</option>
+							<option v-for="r in select" :value="r.categoryId">{{r.categoryName}}</option>
+						</select> <input type="button" id="custom" value="自定义" onclick="custom()">
+					</div>
+					<div class="form-group" id="custom-group">
+						<input id="sort" class="form-control" placeholder="请输入文件分类" /> <input
+							type="button" id="custom" value="确定" onclick="addsort()">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<a class="download" href="#">如需上传题库，请使用特定模板，点此处下载☚</a>
+					<button type="button" disabled="disabled" class="btn btn-primary"
+						id="mUploadbtn">上传</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 题库预览  Modal -->
+	<div class="modal fade" id="previewModal" tabindex="-1" role="dialog"
+		aria-labelledby="previewModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">题库预览</h4>
+				</div>
+				<div class="modal-body">
+					<div id="testArea"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="sumbitExam"
+						onclick="submitExam()">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script type="text/javascript"
+		src="../../admin-statics/js/lib/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="../../admin-statics/js/extends/bootstrap/3.3.7/bootstrap.min.js"></script>
+	<script src="../../statics/js/vue.js"></script>
+	<script type="text/javascript"
+		src="../../admin-statics/js/extends/jquery.ztree.core.js"></script>
+	<script type="text/javascript"
+		src="../../admin-statics/js/extends/jquery.ztree.excheck.js"></script>
+	<script type="text/javascript"
+		src="../../admin-statics/js/extends/jquery.ztree.exedit.js"></script>
+	<script type="text/javascript"
+		src="../../admin-statics/js/extends/jquery.ztree.all.js"></script>
+	<script src="../../admin-statics/js/module/text.js"> </script>
+	<script src="../../admin-statics/js/module/PaperInformation.js"> </script>
+	<script src="../../admin-statics/js/module/HistoricalTestLibrary.js"> </script>
+	<script type="text/javascript">
         $(function(){
             var test_id = 'get a test id';
-            test(test_id);
+            //test(test_id);
         });
         </script>
 </body>

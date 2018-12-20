@@ -27,4 +27,10 @@ public interface ExamCategoryMapper {
     int updateByPrimaryKeySelective(ExamCategory record);
 
     int updateByPrimaryKey(ExamCategory record);
+    
+    //统计某题库的单选题总数
+    int sumSingleQuantity(ExamCategory record);
+    
+    //统计某题库的单选题总数
+    int sumMultipleQuantity(ExamCategory record);
 }
