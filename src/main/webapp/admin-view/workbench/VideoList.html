@@ -3,18 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <title>资料管理</title>
- <link rel="stylesheet" href="../../admin-statics/table/bootstrap.css" />
-   <link href="../../admin-statics/table/font-awesome.css" rel="stylesheet" />  
-   <link href="../../admin-statics/css/workbench/DataManagement.css" rel="stylesheet" >
+   <link rel="stylesheet" href="../../admin-statics/table/bootstrap.css" />
+		<link href="../../admin-statics/table/font-awesome.css" rel="stylesheet" />
+		<link href="../../admin-statics/css/workbench/Cardstyle.css" rel="stylesheet" />
+   <link rel="stylesheet" type="text/css" href="../../admin-statics/css/workbench/VideoList.css"/>
 </head>
 <body>
-   <div class = "header"><a href="DataManagement.html">资料管理</a>  > 学习视频</div>
-   <div class = "content">
-      
+   <div class = "header">
+   	<a href="DataManagement.html">资料管理</a>  > 学习视频
+   <a href="VideoPublished.html" style="float: right;"><i class="fa fa-plus-circle icon"></i>学习视频上传</a>
    </div>
+   
+   <div id="fenlei_labels" class="classification">
+			<div class="classification-left">
+				<span class="span-label">分类：</span>
+			</div>
+			<div class="classification-right">
+				<span class="span-em active" @click="refresh">全部<em></em></span>
+				<span class="span-em" @click="change" :data-id="item.labelId" v-for="item in labels">{{item.labelName}}</span>
+			</div>
+		</div>
+		<div class="div-toolbar">
+			<div class="div-toolbar-left">
+				<a class="btn btn-default op" id="choose" href="#"><i class="fa fa-square-o op-icon"></i> 选择</a>
+				<a class="btn btn-default op" id="allcheck" href="#"><i class="fa fa-check-square op-icon"></i> 全选</a>
+				<a class="btn btn-default op" id="delete"><i class="fa fa-trash op-icon"></i> 删除
+				</a>
+			</div>
+			<div class="div-toolbar-right">
+				<label class="label-search"><input type="text" class="search"/><i class="fa fa-search"></i
+        ></label>
+			</div>
+		</div>
+
+		<div id="video_content">
+
+			<div class="content">
+				<div class="box" v-for="item in content">
+					<div class="div-checkbox" style="display:none"><input type="checkbox" :value="item.videoId" name="checks" class="js-in-checkbox in-checkbox" /></div>
+					<article class="card">
+						<header class="card__thumb" :title="item.videoTitle">
+							<a :href="'../../admin-view/workbench/VideoInfo.html?id='+item.videoId"><img :src="item.coverImg" /></a>
+						</header>
+						<div class="card__body">
+							<div class="card__category">
+								<a href="#">照片</a>
+							</div>
+							<h2 class="card__title">
+              <a :href="'../../admin-view/workbench/VideoInfo.html?id='+item.videoId" :title="item.videoTitle"
+                >{{item.videoTitle}}</a
+              >
+            </h2>
+							<div class="card__subtitle"></div>
+							<p class="card__description">
+								正文的详细内容描述：{{item.videoIntroduction}}
+							</p>
+						</div>
+
+						<footer class="card__footer">
+							发布时间：{{item.updateTime}}
+							<a class="inssuer" href="#" :title="item.uploadUser">
+								发布人：{{item.uploadUser}}</a>
+						</footer>
+					</article>
+				</div>
+
+			</div>
+			<div class="clearup_down"></div>
+			<div id="pagination" class="cpnt_noselect">
+				<!-- <span class="pagination-start"><span>上一页</span></span> -->
+				<a class="pagination-start" @click="pageTo(page-1)" v-if="page > 1"><span>上一页<span></span></span>
+				</a>
+				<!--<span class="pagination-curr">1</span>
+            <a class="pagination-spec" data-page="2" href="#">2</a>-->
+				<a class="pagination-spec" @click="pageTo(num1)" v-for="num1 in page" v-if="num1>page-4"><span>{{num1}}<span></span></span>
+				</a>
+				<a class="pagination-spec" @click="pageTo(num2)" v-for="num2 in page+4" v-if="num2<page+5&&num2>page&&num2<totalpage"><span>{{num2}}<span></span></span>
+				</a>
+				<a class="pagination-next" @click="pageTo(page+1)" v-if="page < totalpage"><span>下一页<span></span></span>
+				</a>
+			</div>
+			<div class="div-footer"></div>
+		</div>
+
 
     <script type="text/javascript" src="../../admin-statics/js/lib/jquery/1.12.4/jquery.min.js"></script>
     <script src="../../admin-statics/table/js/bootstrap.min.js"></script>
     <script src="../../statics/js/vue.js"></script>
+    <script type="text/javascript" src="../../admin-statics/js/module/VideoList.js" ></script>
 </body>
 </html>

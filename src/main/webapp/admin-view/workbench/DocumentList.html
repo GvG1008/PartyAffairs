@@ -1,242 +1,95 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>学习文档</title>
-    <link rel="stylesheet" href="../../admin-statics/table/bootstrap.css" />
-    <link href="../../admin-statics/table/font-awesome.css" rel="stylesheet" />
-    <link
-      href="../../admin-statics/css/workbench/Cardstyle.css"
-      rel="stylesheet"
-    />
-    <link
-      href="../../admin-statics/css/workbench/DocumentList.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="header">
-      <a href="DataManagement.html">资料管理</a> > 学习文档
-    </div>
-    <div class="classification">
-      <div class="classification-left">
-        <span class="span-label">分类：</span>
-      </div>
-      <div class="classification-right">
-        <span class="span-em active">全部<em></em></span>
-        <span class="span-em ">党史</span>
-        <span class="span-em ">十九大精神</span>
-        <span class="span-em">两学一做</span>
-        <span class="span-em ">党规党章</span>
-        <span class="span-em ">思想理论</span>
-        <span class="span-em">先进典型</span>
-        <span class="span-em ">观摩交流</span>
-        <span class="span-em ">十九大精神</span>
-        <span class="span-em">党建研究</span>
-        <span class="span-em ">榜样</span> <span class="span-em ">新时代</span>
-        <span class="span-em">习近平重要讲话</span>
-        <span class="span-em">邓小平理论</span>
-        <span class="span-em ">心得体会</span>
-        <span class="span-em ">习近平新时代中国特色社会主义思想</span>
-        <span class="span-em">示范培训</span>
-        <span class="span-em ">组织工作</span>
-        <span class="span-em ">先锋文汇</span>
-      </div>
-    </div>
-    <div class="div-toolbar">
-      <div class="div-toolbar-left">
-        <a class="btn btn-default op" id="choose" href="#"
-          ><i class="fa fa-square-o op-icon"></i> 选择</a
-        >
-        <a class="btn btn-default op" id="allcheck" href="#"
-          ><i class="fa fa-check-square op-icon"></i> 全选</a
-        >
-        <a class="btn btn-default op" id="delete"
-          ><i class="fa fa-trash op-icon"></i> 删除
-        </a>
-      </div>
-      <div class="div-toolbar-right">
-        <label class="label-search"
-          ><input type="text" class="search"/><i class="fa fa-search"></i
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>学习文档</title>
+		<link rel="stylesheet" href="../../admin-statics/table/bootstrap.css" />
+		<link href="../../admin-statics/table/font-awesome.css" rel="stylesheet" />
+		<link href="../../admin-statics/css/workbench/Cardstyle.css" rel="stylesheet" />
+		<link href="../../admin-statics/css/workbench/DocumentList.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div class="header">
+			<a href="DataManagement.html">资料管理</a> > 学习文档
+			<a href="DocumentPublished.html" style="float: right;"><i class="fa fa-plus-circle icon"></i>文档上传</a>
+		</div>
+		<div id="fenlei_labels" class="classification">
+			<div class="classification-left">
+				<span class="span-label">分类：</span>
+			</div>
+			<div class="classification-right">
+				<span class="span-em active" @click="refresh">全部<em></em></span>
+				<span class="span-em" @click="change" :data-id="item.labelId" v-for="item in labels">{{item.labelName}}</span>
+			</div>
+		</div>
+		<div class="div-toolbar">
+			<div class="div-toolbar-left">
+				<a class="btn btn-default op" id="choose" href="#"><i class="fa fa-square-o op-icon"></i> 选择</a>
+				<a class="btn btn-default op" id="allcheck" href="#"><i class="fa fa-check-square op-icon"></i> 全选</a>
+				<a class="btn btn-default op" id="delete"><i class="fa fa-trash op-icon"></i> 删除
+				</a>
+			</div>
+			<div class="div-toolbar-right">
+				<label class="label-search"><input type="text" class="search"/><i class="fa fa-search"></i
         ></label>
-      </div>
-    </div>
-    <div class="content">
-      <div class="box">
-        <div class="div-checkbox" style="display:none"><input type="checkbox" class="js-in-checkbox in-checkbox"/></div>
-        <article class="card" >
-          <header class="card__thumb" title="关于在全体党员中开展“两学一做”学习教育方案">
-            <a href="../../admin-view/workbench/DocumentInfo.html"
-              ><img src="../../admin-statics/images/workbench/1.jpg"
-            /></a>
-          </header>
-          <div class="card__body">
-            <div class="card__category"><a href="#">照片</a></div>
-            <h2 class="card__title">
-              <a href="../../admin-view/workbench/DocumentInfo.html" title="关于在全体党员中开展“两学一做”学习教育方案"
-                >关于在全体党员中开展“两学一做”学习教育方案</a
+			</div>
+		</div>
+
+		<div id="content_box">
+
+			<div class="content">
+				<div class="box" v-for="item in contents">
+					<div class="div-checkbox" style="display:none"><input type="checkbox" :value="item.documentId" name="checks" class="js-in-checkbox in-checkbox" /></div>
+					<article class="card">
+						<header class="card__thumb" :title="item.documentTitle">
+							<a :href="'../../admin-view/workbench/DocumentInfo.html?id='+item.documentId"><img :src="item.coverImg" /></a>
+						</header>
+						<div class="card__body">
+							<div class="card__category">
+								<a href="#">照片</a>
+							</div>
+							<h2 class="card__title">
+              <a :href="'../../admin-view/workbench/DocumentInfo.html?id='+item.documentId" :title="item.documentTitle"
+                >{{item.documentTitle}}</a
               >
             </h2>
-            <div class="card__subtitle"></div>
-            <p class="card__description">
-              正文的详细内容描述：为深入学习贯彻习近平总书记系列重要讲话精神，
-              推动全面从严治党向基层延伸，巩固拓展党的群众路线教育实践活动和
-              “三严三实”专题教育成果，进一步解决党员队伍在思想、组织、作风、
-              纪律等方面存在的问题，保持发展党的先进性和纯洁性，党中央决定，
-              2016年在全体党员中开展“学党章党规、学系列讲话，做合格党员”学
-              习教育（以下简称“两学一做”学习教育）。
-            </p>
-          </div>
+							<div class="card__subtitle"></div>
+							<p class="card__description">
+								正文的详细内容描述：{{item.documentIntroduction}}
+							</p>
+						</div>
 
-          <footer class="card__footer">
-            发布时间：2018-11-11 18:00:00
-            <a class="inssuer" href="#" title="慕容雪达科莹巴达拉">
-              发布人：慕容雪达科莹巴达拉</a
-            >
-          </footer>
-        </article>
-      </div>
-      <div class="box">
-            <div class="div-checkbox" style="display:none"><input type="checkbox" class="js-in-checkbox in-checkbox"/></div>
-        <article class="card">
-          <header class="card__thumb">
-            <a href="#"
-              ><img
-                src="http://dangjian.people.com.cn/NMediaFile/2018/0903/MAIN201809031340303017809793461.jpg"
-            /></a>
-          </header>
-          <div class="card__body">
-            <div class="card__category"><a href="#">照片</a></div>
-            <h2 class="card__title">
-              <a href="#" title="【十九大·理论新视野】动漫：“伟大工程”如何造就"
-                >【十九大·理论新视野】动漫：“伟大工程”如何造就</a
-              >
-            </h2>
-            <div class="card__subtitle"></div>
-            <p class="card__description">
-              全党必须牢记，为什么人的问题，是检验一个政党、一个政权性质的试金石。带领人民创造美好生活，是我们党始终不渝的奋斗目标。
-            </p>
-          </div>
+						<footer class="card__footer">
+							发布时间：{{item.updateTime}}
+							<a class="inssuer" href="#" :title="item.uploadUser">
+								发布人：{{item.uploadUser}}</a>
+						</footer>
+					</article>
+				</div>
 
-          <footer class="card__footer">
-            <span class="icon ion-clock"></span> 发布时间：2018-11-11 18:00:00
-            <span class="icon ion-chatbox"></span
-            ><a class="inssuer" href="#" title="许莹">
-              发布人：中国共产党新闻网</a
-            >
-          </footer>
-        </article>
-      </div>
-      <div class="box">
-            <div class="div-checkbox" style="display:none"><input type="checkbox" class="js-in-checkbox"/></div>
-        <article class="card">
-          <header class="card__thumb">
-            <a href="#"
-              ><img
-                src="http://dangjian.people.com.cn/NMediaFile/2018/0828/MAIN201808281406181468988558080.jpg"
-            /></a>
-          </header>
-          <div class="card__body">
-            <div class="card__category"><a href="#">照片</a></div>
-            <h2 class="card__title">
-              <a
-                href="#"
-                title="【十九大·理论新视野】动漫：如何改善民生提升百姓“获得感”"
-                >【十九大·理论新视野】动漫：如何改善民生提升百姓“获得感”</a
-              >
-            </h2>
-            <div class="card__subtitle"></div>
-            <p class="card__description">
-              为深入宣传以习近平同志为核心的党中央治国理政新理念、新思想、新战略，栏目通过10集动漫和10集视频短片相结合的可视化方式，清晰勾勒并生动呈现中国共产党的执政图景。
-            </p>
-          </div>
+			</div>
+			<div class="clearup_down"></div>
+			<div id="pagination" class="cpnt_noselect">
+				<!-- <span class="pagination-start"><span>上一页</span></span> -->
+				<a class="pagination-start" @click="pageTo(page-1)" v-if="page > 1"><span>上一页<span></span></span>
+				</a>
+				<!--<span class="pagination-curr">1</span>
+            <a class="pagination-spec" data-page="2" href="#">2</a>-->
+				<a class="pagination-spec" @click="pageTo(num1)" v-for="num1 in page" v-if="num1>page-4"><span>{{num1}}<span></span></span>
+				</a>
+				<a class="pagination-spec" @click="pageTo(num2)" v-for="num2 in page+4" v-if="num2<page+5&&num2>page&&num2<totalpage"><span>{{num2}}<span></span></span>
+				</a>
+				<a class="pagination-next" @click="pageTo(page+1)" v-if="page < totalpage"><span>下一页<span></span></span>
+				</a>
+			</div>
+			<div class="div-footer"></div>
+		</div>
+		<script type="text/javascript" src="../../admin-statics/js/lib/jquery/1.9.1/jquery.min.js"></script>
+		<script src="../../admin-statics/table/js/bootstrap.min.js"></script>
+		<script src="../../statics/js/vue.js"></script>
+		<script src="../../statics/js/DocumentList.js"></script>
+	</body>
 
-          <footer class="card__footer">
-            <span class="icon ion-clock"></span> 发布时间：2018-11-11 18:00:00
-            <span class="icon ion-chatbox"></span>
-            <a class="inssuer" href="#"> 发布人：许莹</a>
-          </footer>
-        </article>
-      </div>
-      <div class="box">
-            <div class="div-checkbox" style="display:none"><input type="checkbox" class="js-in-checkbox"/></div>
-        <article class="card">
-          <header class="card__thumb">
-            <a href="#"
-              ><img
-                src="http://dangjian.people.com.cn/NMediaFile/2018/0201/MAIN201802011516381152426574578.jpg"
-            /></a>
-          </header>
-          <div class="card__body">
-            <div class="card__category"><a href="#">照片</a></div>
-            <h2 class="card__title">
-              <a
-                href="#"
-                title="【十九大·理论新视野】为什么强调“构建人类命运共同体”？"
-                >【十九大·理论新视野】为什么强调“构建人类命运共同体”？</a
-              >
-            </h2>
-            <div class="card__subtitle"></div>
-            <p class="card__description">
-              为深入宣传以习近平同志为核心的党中央治国理政新理念、新思想、新战略，栏目通过10集动漫和10集视频短片相结合的可视化方式，清晰勾勒并生动呈现中国共产党的执政图景。
-            </p>
-          </div>
-
-          <footer class="card__footer">
-            <span class="icon ion-clock"></span> 发布时间：2018-11-11 18:00:00
-            <span class="icon ion-chatbox"></span
-            ><a class="inssuer" href="#"> 发布人：许莹</a>
-          </footer>
-        </article>
-      </div>
-      <div class="box">
-            <div class="div-checkbox" style="display:none"><input type="checkbox" class="js-in-checkbox"/></div>
-        <article class="card">
-          <header class="card__thumb">
-            <a href="#"
-              ><img
-                src="http://dangjian.people.com.cn/NMediaFile/2018/0705/MAIN201807051729294895662932649.jpg"
-            /></a>
-          </header>
-          <div class="card__body">
-            <div class="card__category"><a href="#">照片</a></div>
-            <h2 class="card__title">
-              <a
-                href="#"
-                title="【十九大·理论新视野】为什么说中国特色社会主义进入“新时代”？"
-                >【十九大·理论新视野】为什么说中国特色社会主义进入“新时代”？</a
-              >
-            </h2>
-            <div class="card__subtitle"></div>
-            <p class="card__description">
-              经过长期努力，中国特色社会主义进入了新时代，这是我国发展新的历史方位。……中国特色社会主义进入新时代，在中华人民共和国发展史上、中华民族发展史上具有重大意义。
-            </p>
-          </div>
-
-          <footer class="card__footer">
-            <span class="icon ion-clock"></span> 发布时间：2018-11-11 18:00:00
-            <span class="icon ion-chatbox"></span
-            ><a class="inssuer" href="#"> 发布人：中国共产党新闻网</a>
-          </footer>
-        </article>
-      </div> 
-    </div>
-    <div class="clearup_down"></div>
-    <div id="pagination" class="cpnt_noselect">
-            <!-- <span class="pagination-start"><span>上一页</span></span> -->
-            <a class="pagination-start" href="#"><span>上一页<span></span></span></a>
-            <span class="pagination-curr">1</span>
-            <a class="pagination-spec" data-page="2" href="#">2</a>
-            <span class="pagination-break">...</span>
-            <a class="pagination-next" href="#"><span>下一页<span></span></span></a>
-          </div>
-    <div class="div-footer"></div>
-    <script
-      type="text/javascript"
-      src="../../admin-statics/js/lib/jquery/1.12.4/jquery.min.js"
-    ></script>
-    <script src="../../admin-statics/table/js/bootstrap.min.js"></script>
-    <script src="../../statics/js/vue.js"></script>
-    <script src="../../statics/js/DocumentList.js"></script>
-  </body>
 </html>

@@ -1,0 +1,295 @@
+.clearfix:after {
+   content:""; 
+   display: block; 
+   clear:both; 
+}
+.header {
+    padding: 20px;
+    font-size: 22px;
+    color: #004d6f;
+    font-family: sans-serif;
+    font-weight: 800;
+    border-bottom-color: #69666685;
+    border-bottom: solid 0.5px #69666685;
+    background: #fff;
+    padding-left: 50px;
+    padding-right: 75px;
+}
+body{
+    background: #fff;
+    height:100%;
+}
+img {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+}
+.op-icon{
+    color:#979797;
+}
+.toolbar {
+   /*  margin: 40px 20px 20px 40px; */
+    float:right;
+}
+.content {
+    margin: 50px;
+    margin-top: 30px;
+
+    /**  
+     *   20181130 香嘉修改
+     *   原因：网格布局会溢出,修改为自动换行的flex布局
+     *
+    display: grid;
+    grid-template-rows: repeat(auto-fit, 139px);
+    grid-template-columns: repeat(auto-fit, minmax(195px,1fr));
+    grid-column-gap: 35px;
+    grid-row-gap: 35px; 
+
+    */
+    display:flex;
+    flex-wrap: wrap;
+
+}
+.card__body {
+    height: 90px;
+}
+.card__title {
+    overflow: hidden;
+}
+
+p.card__description {
+    position: unset;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+}
+.card:hover .card__body {
+    height: 250px;
+}
+.div-checkbox {
+    position: fixed;
+    border-radius: 50%;
+    width: 33px;
+    height: 25px;
+    padding-bottom: 25px;
+    text-align: center;
+    color: #000;
+    font-weight: 800;
+    padding-top: 2px;
+    margin-top: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    background: #5555;
+    border: 3px solid #fff;
+    z-index: 1;
+}
+.div-checkbox:hover, .div-checkbox:active ,.div-checkbox:focus{
+    background: #ff7f50;
+}
+.div-checkbox input{
+    opacity: 1;
+    height: 20px;
+    width: 20px;
+    z-index:2
+}
+.div-checkbox i.fa.fa-check{
+    display: fixed;
+    color:#fff;
+}
+
+
+
+
+
+.div-toolbar {
+    padding: 20px;
+    padding-left: 50px;
+    padding-right: 75px;
+}
+.classification {
+    padding: 20px;
+    padding-left: 50px;
+    padding-right: 75px;
+   /*  margin-bottom: 20px; */
+    display:flex;
+    
+}
+span.span-em {
+    padding: 2px 10px;
+    margin:2px 0;
+    cursor: pointer;
+}
+.classification-left {
+    width: 5%;
+    line-height: 2;
+    padding-top: 5px;
+}
+.classification-right {
+    width: 95%;
+    line-height: 2;
+}
+span.span-em.active {
+    background: #ff9309;
+    color: #fff;
+    border-radius:10px
+}
+.op {
+    border: none;
+}
+/*
+ *  20181130 香嘉添加css样式：
+ */
+ /*卡片落款时间*/
+.card__footer {
+    position: relative;
+    left: 20px;
+    right: 20px;
+    font-size: 11px;
+    color: #A3A9A2;
+}
+/* .card:hover .card__footer {
+    margin-bottom: 10px;
+} */
+footer.card__footer {
+    margin-bottom: 20px;
+    display: flex;
+}
+.box{
+   margin-left: 0;
+   margin-right: 15px;
+}
+
+.card {
+    width: 350px;
+}
+a.inssuer {
+    display:block;
+    width:125px;
+    margin-left: 10px;
+
+    /*单行文本溢出省略*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+ 
+}
+.classification-right{
+    /*标签排列*/
+    display: flex;
+    flex-wrap: wrap;
+}
+
+span.span-em:hover {
+    background: #ff9309;
+    color: #fff;
+    border-radius: 10px;
+}
+.div-toolbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 0 10px 0;
+    margin-left: 40px;
+    margin-right: 95px;
+    font-size: 16px;
+    border-bottom: 1px solid #bebebe;
+}
+.op{  
+    font-size: 16px;
+}
+.op:hover,.op:active,.op:focus{  
+    background: #ff9309;
+    color: #fff;
+    border-radius:10px
+}
+.op:hover .op-icon{
+   color: #fff;
+}
+.op:focus .op-icon{
+    color: #fff;
+ }
+input.search {
+    text-decoration: none;
+    border: none;
+    outline: none;
+}
+i.fa.fa-search{
+    cursor: pointer;
+}
+label.label-search {
+    border: 1px solid #99999987;
+    padding: 5px;
+    padding-right: 15px;
+    color: #777;
+    margin-right: 12px;
+    border-radius: 7px;
+}
+label.label-search:hover,label.label-search:focus  {
+    /* border: 1px solid #ce352c; */
+    border: 1px solid #ff9309;
+}
+/* label.label-search:hover i.fa.fa-search,label.label-search:focus i.fa.fa-search{
+    color: #ff9309
+} */
+i.fa.fa-search:hover,i.fa.fa-search:focus,i.fa.fa-search:active{
+    color: #ff9309;
+}
+.card__title a {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden; 
+}
+
+/*隔离上下模块动态牵扯问题*/
+.card:hover .card__description {
+    line-height: 27px;
+}
+.card__description {
+    line-height: 0;
+}
+/* .clearup_down{
+   height:50px;
+} */
+
+/*页数*/
+div#pagination {
+    margin: 50px auto 10px;
+    height: 21px;
+    text-align: center;
+    font-size: 14px;
+}
+ #pagination .pagination-prev, #pagination .pagination-start {
+    padding-left: 15px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+#pagination .pagination-end,  #pagination .pagination-next {
+    padding-right: 15px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+#pagination .pagination-curr,#pagination a:hover, #pagination a:hover span {
+    color: #fff;
+    background: #ff5400;
+}
+#pagination .pagination-break, #pagination .pagination-curr, #pagination .pagination-spec {
+    position: relative;
+    margin-right: -1px;
+    padding: 10px 15px;
+    border: 1px solid #eee;
+    cursor: pointer;
+}
+#pagination a, #pagination span {
+    color: #333;
+    background: #fff;
+    
+}
+#pagination .pagination-end, #pagination .pagination-next, #pagination .pagination-prev,#pagination .pagination-start {
+    margin-right: -1px;
+    padding: 10px;
+    border: 1px solid #eee;
+    cursor: pointer;
+}
+#pagination a {
+    text-decoration: none;
+}

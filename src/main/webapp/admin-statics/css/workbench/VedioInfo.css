@@ -19,45 +19,100 @@ body, div, p, ul, ol, dl, dt, dd, li, form, input, table, img, h1, h2, h3, h4, h
      padding-left: 50px;
      padding-right: 75px;
  }
- .big_title{
+.big_title {
     font-size: 36px;
     color: #333;
     font-weight: bold;
     margin-top: 30px;
     font-family: "微软雅黑";
 }
-.big_title>a{
+.small_title {
+    font-size: 24px;
+    font-weight: normal;
+    color: #333;
+    margin-top: 25px;
+}
+.title_bottom {
+    width: 100%;
+    border-bottom: 1px solid #e7d6c3;
+    height: 48px;
+    line-height: 48px;
+    margin-top: 22px;
+}
+ .title_bottom .fenxiang {
+    background: url(../../images/edit.png) no-repeat left 0px;
+    display: block;
+    float: right;
+    line-height: 20px;
+    padding-left: 25px;
+    margin-top: 13px;
+    font-size: 14px;
+    color: #333;
+    margin-left: 22px;
+    width: 53px;
+}
+.title_bottom .dayin {
+    background: url(http://p5.img.cctvpic.com/photoAlbum/templet/common/DEPA1459234622428414/Printer.png) no-repeat left center;
+    display: block;
+    float: right;
+    line-height: 20px;
+    padding-left: 28px;
+    margin-top: 13px;
+    font-size: 14px;
+    color: #333;
+    margin-left: 30px;
+}
+em, b, i {
+    font-style: normal;
+}
+body,span,a {
     color: #333;
 }
-.back_ad{
- width: 60%;
- height: 300px;
-
-
-}.shipin_kankan h3 {
-    font-size: 24px;
-    font-family: "微软雅黑";
-    color: #292929;
-    font-weight: 500;
-    padding-bottom: 14px;
-}
-.kankan {
-    background: url(http://p5.img.cctvpic.com/photoAlbum/templet/common/DEPA1467795228701387/dyw407_kanbg.jpg) no-repeat left bottom;
-}
-.shipin_kankan .ul_list {
-    clear: both;
-    margin-top: 30px;
-}
-.column_wrapper_1200 {
-    margin: 0 auto;
-    width: 1200px;
-    text-align: left;
-    clear: both;
-}
-.com_400 {
-    width: 35%;
-}
 article.content {
-    display: flex;
-    width: 100%;
+    margin: 29px 50px;
+}
+
+
+.dvideo{
+	width: 100%;
+}
+
+#my-video{
+	margin-top: 20px;
+	height: 400px;
+	width: 960px;
+	margin-left: 180px;
+}
+
+.video-title{
+	width: 100%;
+}
+
+.video-title p{
+	width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+video::-webkit-media-controls-enclosure{ 
+	overflow: hidden; 
+}
+
+video::-webkit-media-controls-panel{
+	width: calc(100% + 30px);
+}
+
+.play,
+.pause{
+	z-index: 10;
+	position: absolute;
+	top: 70px;
+	left: 130px;
+	background-color: white;
+	width: 950px;
+	height: 365px;
+	background-color: rgba(255,255,255,0);
 }
