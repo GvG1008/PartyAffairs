@@ -33,6 +33,7 @@ body{
     border: 1px solid #ccc;
     border-radius: 5px;
     border-top: 5px solid #337ab7;
+    height: 235px;
 }
 .ExamBox:hover{
 	    box-shadow: 0 10px 11px 0 rgba(0,0,0,0.19);
@@ -41,6 +42,7 @@ body{
 a.ExamBox_a {
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 a.ExamBox_a:hover {
     outline: unset;
