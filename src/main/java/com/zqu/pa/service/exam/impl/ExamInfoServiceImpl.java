@@ -14,6 +14,7 @@ import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.dao.exam.ExamInfoCategoryMapper;
 import com.zqu.pa.dao.exam.ExamInfoMapper;
 import com.zqu.pa.dao.exam.ExamInfoReviewMapper;
+import com.zqu.pa.dao.exam.ExamScoreMapper;
 import com.zqu.pa.dao.exam.ExamUserMapper;
 import com.zqu.pa.dao.perinfo.UserPersonInfoMapper;
 import com.zqu.pa.entity.exam.ExamInfo;
@@ -21,6 +22,7 @@ import com.zqu.pa.entity.exam.ExamInfoCategoryKey;
 import com.zqu.pa.entity.exam.ExamInfoExample;
 import com.zqu.pa.entity.exam.ExamInfoReview;
 import com.zqu.pa.entity.exam.ExamInfoReviewExample;
+import com.zqu.pa.entity.exam.ExamScore;
 import com.zqu.pa.entity.exam.ExamUserExample;
 import com.zqu.pa.entity.exam.ExamUserKey;
 import com.zqu.pa.entity.perinfo.UserPersonInfo;
@@ -51,6 +53,9 @@ public class ExamInfoServiceImpl implements ExamInfoService {
     
     @Autowired
     private ExamInfoCategoryMapper examInfoCategoryMapper;
+    
+    @Autowired
+    private ExamScoreMapper examScoreMapper;
     
     @Transactional
     @Override
@@ -91,6 +96,17 @@ public class ExamInfoServiceImpl implements ExamInfoService {
             if (i <= 0) {
                 return ServerResponse.createByError();
             }
+            
+            //初始化所有参考人员成绩为-1
+            int initScore = -1; //未参加考试
+            ExamScore es = new ExamScore();
+            es.setExamId(examId);
+            es.setUserId(uID);
+            es.setScore(initScore);
+            if (examScoreMapper.insert(es) <= 0) {
+                return ServerResponse.createByErrorMessage("初始化参考人员成绩为-1失败");
+            }
+            
         }
         //插入考试ID对应题库分类ID
         ExamInfoCategoryKey e = new ExamInfoCategoryKey();

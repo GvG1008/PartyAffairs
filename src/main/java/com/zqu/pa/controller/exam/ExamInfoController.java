@@ -46,6 +46,9 @@ public class ExamInfoController {
             e.printStackTrace();
             return ServerResponse.createByError();
         }
+        //XXX 应该做个定时任务刷新考试状态
+        examListService.setExamFinish();
+        
         return result;
     }
     

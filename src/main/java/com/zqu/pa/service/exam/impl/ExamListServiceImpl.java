@@ -136,8 +136,9 @@ public class ExamListServiceImpl implements ExamListService {
         examScoreKey.setExamId(examId);
         examScoreKey.setUserId(userId);
         ExamScore examScore = examScoreMapper.selectByPrimaryKey(examScoreKey);
+        int score = -1; //未参加考试
         //返回-1表示没参加考试，1表示及格，0表示不及格
-        if (examScore == null) {
+        if (examScore == null || examScore.getScore() == score) {
             return -1;
         }
         if (examScore.getScore() >= passScore)
@@ -153,7 +154,8 @@ public class ExamListServiceImpl implements ExamListService {
         examScoreKey.setExamId(examId);
         examScoreKey.setUserId(userId);
         ExamScore examScore = examScoreMapper.selectByPrimaryKey(examScoreKey);
-        if (examScore == null)
+        int score = -1; //未参加考试
+        if (examScore == null || examScore.getScore() == score)
             return null;
         return examScore.getScore();
     }

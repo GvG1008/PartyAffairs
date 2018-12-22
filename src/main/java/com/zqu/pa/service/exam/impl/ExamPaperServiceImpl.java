@@ -217,7 +217,7 @@ public class ExamPaperServiceImpl implements ExamPaperService {
         }
         Integer topScore = getPaperScore(examId, userId);
         //查无成绩，说明第一次考试，保存成绩和试卷
-        if(topScore == null) {
+        if(topScore == null) { //此处作废，正常不会为null
             topScore = score;      
             if (insertExamPaper(examPaper) > 0) {
                 //System.out.println("插入试卷成功");
@@ -229,6 +229,20 @@ public class ExamPaperServiceImpl implements ExamPaperService {
             } else {
               //TODO 插入成绩失败处理
             }          
+        }
+        //第一次考试，保存成绩和试卷
+        else if (topScore == -1) {
+            topScore = score;      
+            if (insertExamPaper(examPaper) > 0) {
+                //System.out.println("插入试卷成功");
+            } else {
+                //TODO 插入试卷失败处理
+            }
+            if (updateExamScore(score, examId, userId) > 0) {
+                //System.out.println("更新成绩成功");
+            } else {
+                //TODO 更新成绩失败处理
+            } 
         }
         //本次考试高于历史考试最高分，更新最高成绩和对应试卷
         //低于等于历史考试最高分，不更新成绩和试卷（即此次考试不保存）
