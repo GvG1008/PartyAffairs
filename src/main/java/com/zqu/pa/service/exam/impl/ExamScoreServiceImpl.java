@@ -18,10 +18,17 @@ import com.zqu.pa.entity.exam.ExamInfo;
 import com.zqu.pa.entity.exam.ExamInfoExample;
 import com.zqu.pa.entity.exam.ExamInfoReview;
 import com.zqu.pa.entity.exam.ExamInfoReviewExample;
+import com.zqu.pa.entity.exam.ExamScore;
 import com.zqu.pa.entity.exam.ExamScoreExample;
+import com.zqu.pa.entity.exam.ExamScoreKey;
 import com.zqu.pa.entity.exam.ExamUserExample;
+import com.zqu.pa.entity.exam.ExamUserKey;
+import com.zqu.pa.entity.perinfo.UserPartyInfo;
+import com.zqu.pa.entity.perinfo.UserPersonInfo;
 import com.zqu.pa.service.exam.ExamScoreService;
+import com.zqu.pa.service.perinfo.UserInfoService;
 import com.zqu.pa.utils.DateUtil;
+import com.zqu.pa.vo.exam.ExamScoreDetail;
 import com.zqu.pa.vo.exam.ExamScoreList;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
 
@@ -41,6 +48,9 @@ public class ExamScoreServiceImpl implements ExamScoreService {
     
     @Autowired
     private ExamScoreMapper examScoreMapper;
+    
+    @Autowired
+    private UserInfoService userInfoService;
     
     @Override
     public ServerResponse<List<ExamScoreList>> listExamScore() {
@@ -110,6 +120,46 @@ public class ExamScoreServiceImpl implements ExamScoreService {
             result.add(esl);
         }
         
+        return ServerResponse.createBySuccess(result);
+    }
+
+    @Override
+    public ServerResponse<List<ExamScoreDetail>> listExamScoreDetail(Integer examID) {
+        
+        ExamUserExample examUserExample = new ExamUserExample();
+        examUserExample.createCriteria().andExamIdEqualTo(examID);
+        List<ExamUserKey> listExamUser = examUserMapper.selectByExample(examUserExample);
+        List<ExamScoreDetail> result = new ArrayList<>();
+        for (ExamUserKey eu : listExamUser) {
+            ExamScoreDetail esd = new ExamScoreDetail();
+            String userID = eu.getUserId();
+            
+            UserPartyInfo upi = userInfoService.getUserPartyInfo(userID);
+            esd.setUserId(userID);
+            esd.setBranchId(upi.getBranchId());
+            esd.setName(upi.getName());
+            esd.setPoliticalStatus(upi.getPoliticalStatus());
+            esd.setProfessional(upi.getProfessional());
+            
+            UserPersonInfo upi2 = userInfoService.getUserPersonInfo(userID);
+            esd.setClassName(upi2.getClassName());
+            
+            ExamInfo ei = examInfoMapper.selectByPrimaryKey(examID);
+            esd.setExamTitle(ei.getExamTitle());
+            
+            ExamScoreKey key = new ExamScoreKey();
+            key.setExamId(examID);
+            key.setUserId(userID);
+            ExamScore es = examScoreMapper.selectByPrimaryKey(key);
+            if (es == null) {
+                int score = -1; //未参加考试
+                esd.setScore(score);
+            }
+            else
+                esd.setScore(es.getScore());
+            
+            result.add(esd);
+        }
         return ServerResponse.createBySuccess(result);
     }
 
