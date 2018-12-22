@@ -141,42 +141,12 @@ $(function() {
 				$.each(data,function(index,item){
 					//alert(item.userId);
 					if(item.roleId!=0){
-						if(item.branchId==1){
-							parentId = item.branchId*10+item.roleId;					
-							zNodes.push({
-				                id:item.userId,  //本身id
-				                pId:parentId, //父级id
-				                name:item.realName//显示的名称
-				            });	
-						}else if(item.branchId==2){
-							parentId = item.branchId*10+item.roleId;
-							zNodes.push({
-				                id:item.userId,  //本身id
-				                pId:item.parentId, //父级id
-				                name:item.realName//显示的名称
-				            });	
-						}else if(item.branchId==3){
-							parentId = item.branchId*10+item.roleId;
-							zNodes.push({
-				                id:item.userId,  //本身id
-				                pId:item.parentId, //父级id
-				                name:item.realName//显示的名称
-				            });	
-						}else if(item.branchId==4){
-							parentId = item.branchId*10+item.roleId;
-							zNodes.push({
-				                id:item.userId,  //本身id
-				                pId:item.parentId, //父级id
-				                name:item.realName//显示的名称
-				            });	
-						}else if(item.branchId==5){
-							parentId = item.branchId*10+item.roleId;
-							zNodes.push({
-				                id:item.userId,  //本身id
-				                pId:item.parentId, //父级id
-				                name:item.realName//显示的名称
-				            });	
-						}
+						parentId = item.branchId*10+item.roleId;					
+						zNodes.push({
+			                id:item.userId,  //本身id
+			                pId:parentId, //父级id
+			                name:item.realName//显示的名称
+			            });	
 					}
 				})
 				      
