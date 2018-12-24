@@ -65,7 +65,6 @@ var mySelect = new Vue({
 			this.$nextTick(function () {
 				var length = $('#mySelect').find("option").length;
 				$('#mySelect').get(0).selectedIndex=length-1;
-				$('#mUploadbtn').attr('disabled', false);
               })
 		}
 	}
@@ -246,9 +245,7 @@ function addsort(){//添加自定义分类
 	});
 	mySelect.loadExamcategory();
 	mySelect.setSelect();
-	/*var length = $('#mySelect').find("option").length;
-	alert(length);
-	$('#mySelect').get(0).selectedIndex=1;*/
+	checkisnull();
 };
 var ExamData;
 function submitExam(){	
@@ -319,7 +316,7 @@ $(function() {
 			    +"$('#mySelect').val():"+select
 			   );
 		
-		if(title&&select!="请选择文件分类"&&file){
+		if(title || select!="请选择文件分类" || file){
 			$('#mUploadbtn').attr('disabled', false);
 		}else{
 		    $('#mUploadbtn').attr('disabled', true);
