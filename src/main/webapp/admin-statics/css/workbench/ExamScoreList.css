@@ -1,3 +1,6 @@
+[v-cloak] {
+  display: none;
+}
 .clearfix:after {
    content:""; 
    display: block; 

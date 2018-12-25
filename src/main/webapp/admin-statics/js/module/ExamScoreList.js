@@ -4,22 +4,22 @@
 var ExamContent = new Vue({
 	el:"#ExamContent",
 	data:{
-		ExamContentList:[]
+		examContentList:[]
 	},
 	created : function() {
-		//this.loadNewList();
+		this.loadNewList();
 	},
 	methods : {
 		loadNewList:function(){
 			var self = this;
 			$.ajax({
 				type : "get",
-				url : "../../examinfo/lists",
+				url : "../../examscore",
 				async : false,
 				dataType : 'json',
 				success : function(result) {
 					if (result.status == 0) {
-						app.datas = result.data;
+						self.examContentList = result.data;
 					} else {
 						alert(result.msg);
 					}

@@ -1,20 +1,25 @@
-/*  new Vue({
-		el : "#msg",
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return decodeURI(r[2]); return null; 
+}
+var examId = getUrlParam('id');
+var examInfo = new Vue({
+		el : "#examInfo",
 	data: {
-		newMessages: []
+		examInfoList: []
 	},
 	methods:{
-		loadNewMessages: function() {
+		loadExamInfoList: function() {
 			var app = this;
-			var m = {};
 			$.ajax({
 				type:"get",
-				url: "",
+				url: "../../examscore/"+examId,
 				async : false,
 				dataType: 'json',
 				success: function(result){
 					if (result.status == 0) {
-						app.newMessages = result.data;
+						app.examInfoList = result.data;
 					}else{
 						alert(result.msg);
 					}
@@ -34,9 +39,9 @@
 		}
 	},
 	created: function () {
-		this.loadNewMessages();
+		this.loadExamInfoList();
 	}
-});*/
+});
   $(document).ready(function() {
 	var table = $('#msg').DataTable({
         responsive: true,
@@ -68,40 +73,47 @@
 		
     });
 	
-	/*var button = "<button type='button' class='btn btn-success ts' onclick='window.parent.aclick()'><span class='glyphicon glyphicon-plus icon'></span><span class='caption'>添加文章</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
-		+"<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'><span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
-		+"<a class='btn btn-danger td' onclick='deleteall()'><span class='fa fa-trash-o icon'></span><span class='caption'>撤稿</span></a>";
-	document.getElementById("add").innerHTML = button;*/
+	var button = "<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'><span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
+		+"<a class='btn btn-info td' onclick='noticeAll()'><span class='fa fa-bell-o ticon'></span><span class='caption'>通知</span></a>";
+	document.getElementById("add").innerHTML = button;
 	$('#msg tbody').on( 'mouseenter', 'td', function () {
-	var colIdx = table.cell(this).index().column;
-	$( table.cells().nodes() ).removeClass( 'highlight' );
-	$( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+		var colIdx = table.cell(this).index().column;
+		$( table.cells().nodes() ).removeClass( 'highlight' );
+		$( table.column( colIdx ).nodes() ).addClass( 'highlight' );
 	} );
 	$("#all").click(function(){
-	$('[name=all]:checkbox').prop('checked',this.checked);//checked为true时为默认显示的状态
+        $('[name=all]:checkbox').prop('checked',this.checked);//checked为true时为默认显示的状态
+    });
+	//弹出框取消按钮事件
+	$('.popup_de .btn_cancel').click(function(){
+		$('.popup_de').removeClass('bbox');
 	});
+	//弹出框关闭按钮事件
+	$('.popup_de .popup_close').click(function(){
+		$('.popup_de').removeClass('bbox');
+	})
 	
 
 });   
 function checkall(){
 	var all = $('[name=all]:checkbox');
 	for(var i=0;i<all.length;i++){
-		all[i].checked=true;
+		all[i].checked=!all[i].checked;
 	}
 }
-function deleteall(){
+function noticeAll(){
 	var all = $('[name=all]:checkbox');
 	var str = "";
 	for(var i=1;i<all.length;i++){
 		if(all[i].checked)
 			str = str+"&"+all[i].value;
 	}
-	var text="确定要删除所选账号吗?";
+	var text="确定要通知所选账号吗?";
 	document.getElementById('show_msg').innerHTML=text;
 	$('.popup_de').addClass('bbox');
 	$('.popup_de .btn-danger').one('click',function(){
 		if(str!="")
-			doDelete(str);
+			doNotice(str);
 		else{
 			alert("请至少选择一个账号");
 			$('.popup_de').removeClass('bbox');
@@ -111,19 +123,26 @@ function deleteall(){
 function millisecondsToDateTime(ms){
 	return new Date(ms).toLocaleString();
 };
-function deletemsg(obj){
+function notice(obj){
 	var tds = $(obj).parent().parent().parent().find('td');
-	var center = tds.eq(1).find('center');
-	var rid = center.eq(0).text();
-	var text="确定要删除该账号吗?";
+	var input = tds.eq(0).find('input');
+	var rid = input.val();
+	var text="确定要通知该账号吗?";
 	document.getElementById('show_msg').innerHTML=text;
 	$('.popup_de').addClass('bbox');
 	$('.popup_de .btn-danger').one('click',function(){
-		doDelete(rid);
+		doNotice(rid);
 	})
 }
-function doDelete(data){
-	$.ajax({                            
+function doNotice(data){
+	$('.popup_de').removeClass('bbox');
+	var text="功能尚未开放";
+	document.getElementById('show_msg').innerHTML=text;
+	$('.popup_de').addClass('bbox');
+	$('.popup_de .btn-danger').one('click',function(){
+		$('.popup_de').removeClass('bbox');
+	})
+	/*$.ajax({                            
 		type:'post',        
         url:'../../userManage/deleteUserByBranch/'+data, 
         dataType:'json',
@@ -132,7 +151,7 @@ function doDelete(data){
 			location.reload();	
         },
         error :function(){
-        	alert("系统出错，删除失败！");
+        	alert("系统出错，通知异常！");
         }
-   });
+   });*/
 }
