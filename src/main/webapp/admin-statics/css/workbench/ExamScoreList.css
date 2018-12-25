@@ -24,7 +24,7 @@ body{
 }
 .content {
     display: grid;
-    grid-template-rows: repeat(auto-fit, 165px);
+    grid-template-rows: repeat(auto-fit, 200px);
     grid-template-columns: repeat(auto-fit, minmax(253px,1fr));
     grid-column-gap: 35px;
     grid-row-gap: 35px; 
@@ -36,7 +36,6 @@ body{
     border: 1px solid #ccc;
     border-radius: 5px;
     border-top: 5px solid #337ab7;
-    height: 200px;
 }
 .ExamBox:hover{
 	box-shadow: 0 10px 11px 0 rgba(0,0,0,0.19);
