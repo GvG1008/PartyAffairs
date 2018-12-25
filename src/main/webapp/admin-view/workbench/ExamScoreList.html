@@ -12,13 +12,21 @@
    <div class = "content" id="ExamContent">
         <div class="ExamBox" v-for="r in examContentList" v-cloak>
              <a class="ExamBox_a" :href="'ScoreView.html?id='+r.examId">
-             <span class="Examname">{{r.examTitle}}</span>
-             <span class="time">{{r.stringStartTime}} 至  {{r.stringEndTime}}</span>
-             <span class="la">及格分数: {{r.passScore}}</span>
-             <span class="la">考试人数: {{r.examNumbers}}</span>
-             <span class="la">及格人数: {{r.passNumbers}}</span>
-             <span class="la">未参考人数: {{r.notTakeExamNumbers}}</span>
+             <div class="ExamBox_header">
+	             <span class="Examname">{{r.examTitle}}</span>
+	             <span class="time">{{r.stringStartTime}} 至  {{r.stringEndTime}}</span>
+             </div>
+             <div class="ExamBox_examstatus">
+                 <span class="la">及格分数: {{r.passScore}}</span>
+                 <span class="la">及格人数: {{r.passNumbers}}</span>
+             </div>
+             <div class="ExamBox_examstatus">
+	             <span class="la">考试人数: {{r.examNumbers}}</span>
+	             <span class='la'>未参考人数: {{r.notTakeExamNumbers}}</span>
+             </div>
+             <div class="ExamBox_footer">
              <span class="detail">点击查看详情</span>
+             </div>
              </a>
         </div>
    </div>

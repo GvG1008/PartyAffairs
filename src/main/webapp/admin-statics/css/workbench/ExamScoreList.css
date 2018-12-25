@@ -27,20 +27,33 @@ body{
     grid-template-rows: repeat(auto-fit, 165px);
     grid-template-columns: repeat(auto-fit, minmax(253px,1fr));
     grid-column-gap: 35px;
-    margin: 50px;
-    grid-row-gap: 35px;
-        margin-top: 30px;
+    grid-row-gap: 35px; 
+    margin: 30px 50px 50px 50px;
+   
 }
 .ExamBox {
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     border-top: 5px solid #337ab7;
-    height: 235px;
+    height: 200px;
 }
 .ExamBox:hover{
-	    box-shadow: 0 10px 11px 0 rgba(0,0,0,0.19);
+	box-shadow: 0 10px 11px 0 rgba(0,0,0,0.19);
     top: -10px;
+}
+.ExamBox_header {
+	display: flex;
+	flex-direction: column;
+ }
+ .ExamBox_examstatus {
+    display: flex;
+    margin-top: 10px;
+    color: #555;
+}
+.ExamBox_footer {
+    text-align: right;
+    padding-top: 20px;
 }
 a.ExamBox_a {
     display: flex;
@@ -55,15 +68,22 @@ span.Examname {
     color: #555;
     font-size: 18px;
     font-weight: 600;
-        margin-top: 15px;
+    margin-top: 15px;
 }
 span.time {
-    font-size: 16px;
-    line-height: 4;
+    font-size: 12px;
+    line-height: 3;
     color: #555;
 }
+span.la {
+    display: block;
+    width: 115px;
+}	
 span.detail {
     /* float: right; */
     text-align: right;
     margin-right: 5px;
+}
+span.detail:hover {
+    text-decoration: underline;
 }
