@@ -21,34 +21,34 @@ $(function() {
 	/*
 	 * 输入框失去焦点进行校验
 	 */
-	$(".form-input").blur(function() {
-		var id = $(this).attr("id");//获取当前输入框的id
-		if(id!=""){
-		var funName = "validate" + id.substring(0,1).toUpperCase() + id.substring(1) + "()";//得到对应的校验函数名
-		eval(funName);//执行函数调用
-		}
-	});
+//	$(".form-input").blur(function() {
+//		var id = $(this).attr("id");//获取当前输入框的id
+//		if(id!=""){
+//		var funName = "validate" + id.substring(0,1).toUpperCase() + id.substring(1) + "()";//得到对应的校验函数名
+//		eval(funName);//执行函数调用
+//		}
+//	});
 	
-	$("#submit").click(function() {
-		if($("#detailadd-tip").text==""&&$("#telephone-tip").text==""&&$("#realname-tip").text==""&&$("#idcard-tip").text==""&&$("#famiback-tip").text==""&&$("#graduate-tip").text=="")
-	    {
-	        /*window.location.href="#";*/
-			 alert('保存成功！'); 
-	       
-	    }
-		else{
-			
-	        alert('存在信息验证有误，请重新输入！！！');
-	        eval(validateDetailadd());
-			eval(validateTelephone());
-			eval(validateRealname());
-			eval(validateGraduate());
-			eval(validateIdcard());
-			eval(validateFamiback());
-			
-		}
-			
-	});
+//	$("#submit").click(function() {
+//		if($("#detailadd-tip").text==""&&$("#telephone-tip").text==""&&$("#realname-tip").text==""&&$("#idcard-tip").text==""&&$("#famiback-tip").text==""&&$("#graduate-tip").text=="")
+//	    {
+//	        /*window.location.href="#";*/
+//			 alert('保存成功！'); 
+//	       
+//	    }
+//		else{
+//			
+//	        alert('存在信息验证有误，请重新输入！！！');
+//	        eval(validateDetailadd());
+//			eval(validateTelephone());
+//			eval(validateRealname());
+//			eval(validateGraduate());
+//			eval(validateIdcard());
+//			eval(validateFamiback());
+//			
+//		}
+//			
+//	});
 });
 
 function validateDetailadd() {

@@ -417,5 +417,23 @@ public class AllUserInfo {
     public void setCheckId(String checkId) {
         this.checkId = checkId;
     }
+
+	@Override
+	public String toString() {
+		return "AllUserInfo [userId=" + userId + ", password=" + password + ", roleId=" + roleId + ", branchId="
+				+ branchId + ", name=" + name + ", nameFormer=" + nameFormer + ", sex=" + sex + ", national=" + national
+				+ ", nativePlace=" + nativePlace + ", birthPlace=" + birthPlace + ", placeRegistered=" + placeRegistered
+				+ ", homeAddress=" + homeAddress + ", tel=" + tel + ", familyBackground=" + familyBackground
+				+ ", birthDate=" + birthDate + ", politicalStatus=" + politicalStatus + ", idCard=" + idCard
+				+ ", maritalStatus=" + maritalStatus + ", organizationUnit=" + organizationUnit + ", personalIdentity="
+				+ personalIdentity + ", educationalBackground=" + educationalBackground + ", professional="
+				+ professional + ", graduateSchool=" + graduateSchool + ", timeApplicationforparty="
+				+ timeApplicationforparty + ", timeIntoparty=" + timeIntoparty + ", timePositive=" + timePositive
+				+ ", typeDevelopment=" + typeDevelopment + ", totot=" + totot + ", outUnit=" + outUnit + ", nickname="
+				+ nickname + ", grade=" + grade + ", className=" + className + ", imgHead=" + imgHead + ", profile="
+				+ profile + ", email=" + email + ", birthday=" + birthday + ", createTime=" + createTime + ", lastTime="
+				+ lastTime + ", checkState=" + checkState + ", createId=" + createId + ", checkId=" + checkId + "]";
+	}
+    
     
 }

@@ -14,6 +14,7 @@ new Vue({
 				async : false,
 				dataType: 'json',
 				success: function(result){
+					console.log(result)
 					if(result.status == 0)
 						app.newMessages = result.data;
 					else

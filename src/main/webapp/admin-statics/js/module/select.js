@@ -15,7 +15,7 @@ $(document).ready(function() {
     for ( var i=0;i<nations.length;i++) {
         var a=nations[i];
         console.log(nations[i]);
-        nation.append("<option value='nations[i]'>"+a+"</option>");
+        nation.append("<option value='"+nations[i]+"'>"+a+"</option>");
     }
 
 })

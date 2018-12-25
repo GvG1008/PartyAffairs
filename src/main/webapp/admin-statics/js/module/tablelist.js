@@ -72,10 +72,10 @@ $(document).ready(function() {
             }
         },
         "fnDrawCallback": function() {
-        	$(this).find('input[type=checkbox]').removeAttr('checked');
+        	$(this).find('input[type=checkbox]').removeProp('checked');
 		}
     });   
-	var button = "<a class='btn btn-success ts'><span class='glyphicon glyphicon-plus icon'></span><span class='caption'>录入</span></a> &nbsp;&nbsp;&nbsp;&nbsp;"
+	var button = "<a href='EntryInformation.html' class='btn btn-success ts'><span class='glyphicon glyphicon-plus icon'></span><span class='caption'>录入</span></a> &nbsp;&nbsp;&nbsp;&nbsp;"
 				+"<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'><span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
 				+"<a class='btn btn-danger td' onclick='deleteall()'><span class='fa fa-trash-o icon'></span><span class='caption'>删除</span></a>";
 	document.getElementById("add").innerHTML = button;

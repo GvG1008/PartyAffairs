@@ -35,7 +35,8 @@
         }
         var defaults = {
             /*dataUrl:'http://passer-by.com/data_location/list.json',*/     //数据库地址
-        	dataUrl:'http://172.21.95.5:19091/list.json',
+        	//dataUrl:'http://172.21.95.5:19091/list.json',
+        	dataUrl:'http://localhost:8080/PartyAffairs/admin-statics/json/list.json',
         	crossDomain: true,        //是否开启跨域
             dataType:'json',          //数据库类型:'json'或'jsonp'
             provinceField:'province', //省份字段名

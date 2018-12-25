@@ -354,7 +354,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         userPersonInfo.setName(user.getName());
         userPersonInfo.setNickname(null);
         userPersonInfo.setClassName(user.getClassName());
-        userPersonInfo.setBirthday(null);//生日：xxxx/xx/xx
+        userPersonInfo.setBirthday(user.getBirthDate());//生日：xxxx/xx/xx
         userPersonInfo.setGrade(user.getGrade());
         if(user.getSex()==null)
             userPersonInfo.setImgHead(null);//头像路径
@@ -404,8 +404,12 @@ public class UserInfoServiceImpl implements UserInfoService {
         
         int result1,result2,result3;
         result1 = userManageDao.insertUserLoginInfo(userLoginInfo);
+        System.out.println(result1);
         result2 = userPartyInfoDao.insert(userPartyInfo);
+        System.out.println(result2);
         result3 = userPersonInfoDao.insert(userPersonInfo);
+        System.out.println(result3);
+        System.out.println("打印插入结果："+result1+result2+result3);
         if(result1==0||result2==0||result3==0)
             throw new RuntimeException("未添加新用户");
         

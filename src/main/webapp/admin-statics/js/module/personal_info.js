@@ -19,7 +19,8 @@ var info = new Vue({
 			url: "../../userManage/PartyInfo/"+info_id,
 			async : false,
 			dataType: 'json',
-			success: function(result){				
+			success: function(result){	
+				console.log(result)
 				self.info = result.data;
 				self.init();
 			}

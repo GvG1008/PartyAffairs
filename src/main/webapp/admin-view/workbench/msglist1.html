@@ -49,7 +49,7 @@
                                         <td v-else-if="message.branchId==3"><center>网络工程专业党支部</center></td>
                                         <td v-else-if="message.branchId==4"><center>物联网工程专业党支部</center></td>
                                         <td v-else-if="message.branchId==5"><center>数据科学与大数据技术专业党支部</center></td>
-                                        <td style="width:85px"><center>陈独秀</center></td>
+                                        <td style="width:85px"><center>{{message.createName}}</center></td>
                                         <td style="width:186px">
                                         <center>
                                             <a class="btn btn-success os btn-xs" :href="'UserPartyProfile_Approved.html?id='+message.userId">编辑<i class="fa fa-pencil" aria-hidden="true"></i></a>
