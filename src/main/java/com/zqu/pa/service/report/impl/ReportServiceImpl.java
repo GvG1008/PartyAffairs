@@ -1,5 +1,7 @@
 package com.zqu.pa.service.report.impl;
 
+import java.util.List;
+
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,7 @@ public class ReportServiceImpl implements ReportService {
 		 //获取当前用户userId
         String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
         if(userId==null)
-            return "无法获取当前session信息";
+            return "无法获取当前用户信息";
         
         //设置思想报告人
         report.setUserId(userId);
@@ -83,7 +85,7 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public Report getReportInfo(int report_id) {
+	public Report getReportDetailById(int report_id) {
 		String userId = null;
 		try{
 			//获取当前用户userId
@@ -103,5 +105,28 @@ public class ReportServiceImpl implements ReportService {
 		
 		return reportMapper.getReportInfo(userId,report_id);
 	}
+
+	@Override
+	public List<Report> queryReport(Report report) {
+		
+		ReportExample example = new ReportExample();
+		Criteria criteria = example.createCriteria();
+		
+		if(report.getTitle() !=null && !report.getTitle().equals("")){
+			criteria.andTitleLike(report.getTitle());
+		}
+		if(report.getReportId() !=null ){
+			criteria.andReportIdEqualTo(report.getReportId());
+		}
+		if (report.getUserId()!=null) {
+			criteria.andUserIdEqualTo(report.getUserId());
+		}
+		
+		List<Report> list = reportMapper.selectByExample(example);
+		return list;
+	}
+	
+	
+	
 
 }

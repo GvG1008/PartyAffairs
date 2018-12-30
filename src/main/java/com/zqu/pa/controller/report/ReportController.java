@@ -1,6 +1,8 @@
 package com.zqu.pa.controller.report;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,18 @@ public class ReportController {
 	
 	@Autowired
 	ReportService reportService;
+	
+	/**
+	 * 根据条件查询所有的报告
+	 * */
+	@ResponseBody
+    @RequestMapping(value="/queryReports",method=RequestMethod.GET)
+    public ServerResponse selectReport(@RequestBody Report report) {
+
+		List<Report> lists = reportService.queryReport(report);
+		return ServerResponse.createBySuccess("查询成功", lists);
+		
+	}
 	
 	/**
 	 * 添加思想汇报
@@ -48,7 +62,7 @@ public class ReportController {
 	 * */
 	 @ResponseBody
     @RequestMapping(value="/myReports/{pageNum}/{num}")
-    public ServerResponse<PageOfReport> getReportsList(@PathVariable(value="pageNum") int page,@PathVariable(value="num") int num) {
+    public ServerResponse<PageOfReport> getPersonalReportsList(@PathVariable(value="pageNum") int page,@PathVariable(value="num") int num) {
 		PageOfReport pageOfReport = null;
 	        
         //传入的页数与当前页显示的条数,page为页数，num为每页条数
@@ -77,9 +91,9 @@ public class ReportController {
 	     */
 	    @ResponseBody
 	    @RequestMapping("/detail/{report_id}")
-	    public ServerResponse<Report> getAllNewsInfo(@PathVariable int report_id){
+	    public ServerResponse<Report> getReportDetailById(@PathVariable int report_id){
 	        
-	        Report report = reportService.getReportInfo(report_id);
+	        Report report = reportService.getReportDetailById(report_id);
 	        
 	        if(report!=null)
 	            return ServerResponse.createBySuccess("获取思想汇报成功", report);

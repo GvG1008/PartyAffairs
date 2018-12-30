@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<input type="file" name="file" id="file" />
+	<input type="submit" value="Submit" onclick="subImages()" />
+
+
+	<img id="testImg" src="">
+	
+	
+	<input type="file" name="file0" id="file0" />
+	<input type="submit" value="Submit" onclick="subFile()" />
+	<a id="textFile" href="">文件</a>
+	
+	<script type="text/javascript" src="../statics/js/jquery-3.3.1.min.js"></script>
+
+	<script>
+		function subImages() {
+			var formData = new FormData();
+			formData.append("file", $("#file")[0].files[0]);
+			$.ajax({
+				url : "./../pic/upload",
+				type : "POST",
+				data : formData,
+				contentType : false,
+				processData : false,//这个很有必要，不然不行
+				dataType : "json",
+				mimeType : "multipart/form-data",
+				success : function(data) {
+					console.log(data);
+					if(data.status==0){
+						$("#testImg").attr("src", "./../pic/item?imagePath="+data.data.path);
+					}else{
+						alert(data.msg);
+					}
+					
+				},
+				fail : function(data) {
+					console.log(data);
+				}
+
+			});
+
+		}
+		
+		function subFile() {
+			var formData = new FormData();
+			formData.append("file", $("#file0")[0].files[0]);
+			$.ajax({
+				url : "./../file/upload",
+				type : "POST",
+				data : formData,
+				contentType : false,
+				processData : false,//这个很有必要，不然不行
+				dataType : "json",
+				mimeType : "multipart/form-data",
+				success : function(data) {
+					console.log(data);
+					if(data.status==0){
+						alert(data.data.path);
+						$("#textFile").attr("href","./../file/download?path="+data.data.path);
+					}else{
+						alert(data.msg);
+					}
+					
+				},
+				fail : function(data) {
+					console.log(data);
+				}
+
+			});
+
+		}
+	</script>
+</body>
+</html>
