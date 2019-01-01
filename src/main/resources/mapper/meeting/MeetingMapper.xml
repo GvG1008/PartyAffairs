@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqu.pa.dao.meeting.MeetingMapper">
+  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.meeting.Meeting">
+    <id column="meeting_id" jdbcType="INTEGER" property="meetingId" />
+    <result column="branch_id" jdbcType="INTEGER" property="branchId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="creator_id" jdbcType="VARCHAR" property="creatorId" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="last_time" jdbcType="TIMESTAMP" property="lastTime" />
+    <result column="click" jdbcType="INTEGER" property="click" />
+    <result column="coverpath" jdbcType="VARCHAR" property="coverpath" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zqu.pa.entity.meeting.Meeting">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    meeting_id, branch_id, title, date, creator_id, state, last_time, click, coverpath
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.zqu.pa.entity.meeting.MeetingExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from meeting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.zqu.pa.entity.meeting.MeetingExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from meeting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from meeting
+    where meeting_id = #{meetingId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from meeting
+    where meeting_id = #{meetingId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zqu.pa.entity.meeting.MeetingExample">
+    delete from meeting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zqu.pa.entity.meeting.Meeting">
+    insert into meeting (branch_id, title, 
+      date, creator_id, state, 
+      last_time, coverpath, 
+      content)
+    values (#{branchId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+       now() , #{creatorId,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+       now() ,  #{coverpath,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zqu.pa.entity.meeting.Meeting">
+    insert into meeting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="meetingId != null">
+        meeting_id,
+      </if>
+      <if test="branchId != null">
+        branch_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="creatorId != null">
+        creator_id,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="lastTime != null">
+        last_time,
+      </if>
+      <if test="click != null">
+        click,
+      </if>
+      <if test="coverpath != null">
+        coverpath,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="meetingId != null">
+        #{meetingId,jdbcType=INTEGER},
+      </if>
+      <if test="branchId != null">
+        #{branchId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="lastTime != null">
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="click != null">
+        #{click,jdbcType=INTEGER},
+      </if>
+      <if test="coverpath != null">
+        #{coverpath,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zqu.pa.entity.meeting.MeetingExample" resultType="java.lang.Long">
+    select count(*) from meeting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update meeting
+    <set>
+      <if test="record.meetingId != null">
+        meeting_id = #{record.meetingId,jdbcType=INTEGER},
+      </if>
+      <if test="record.branchId != null">
+        branch_id = #{record.branchId,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatorId != null">
+        creator_id = #{record.creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastTime != null">
+        last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.click != null">
+        click = #{record.click,jdbcType=INTEGER},
+      </if>
+      <if test="record.coverpath != null">
+        coverpath = #{record.coverpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update meeting
+    set meeting_id = #{record.meetingId,jdbcType=INTEGER},
+      branch_id = #{record.branchId,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=TIMESTAMP},
+      creator_id = #{record.creatorId,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=INTEGER},
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      click = #{record.click,jdbcType=INTEGER},
+      coverpath = #{record.coverpath,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update meeting
+    set meeting_id = #{record.meetingId,jdbcType=INTEGER},
+      branch_id = #{record.branchId,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=TIMESTAMP},
+      creator_id = #{record.creatorId,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=INTEGER},
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      click = #{record.click,jdbcType=INTEGER},
+      coverpath = #{record.coverpath,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zqu.pa.entity.meeting.Meeting">
+    update meeting
+    <set>
+      <if test="branchId != null">
+        branch_id = #{branchId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null">
+        creator_id = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="lastTime != null">
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="click != null">
+        click = #{click,jdbcType=INTEGER},
+      </if>
+      <if test="coverpath != null">
+        coverpath = #{coverpath,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where meeting_id = #{meetingId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zqu.pa.entity.meeting.Meeting">
+    update meeting
+    set branch_id = #{branchId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP},
+      creator_id = #{creatorId,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
+      click = #{click,jdbcType=INTEGER},
+      coverpath = #{coverpath,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where meeting_id = #{meetingId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zqu.pa.entity.meeting.Meeting">
+    update meeting
+    set branch_id = #{branchId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP},
+      creator_id = #{creatorId,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
+      click = #{click,jdbcType=INTEGER},
+      coverpath = #{coverpath,jdbcType=VARCHAR}
+    where meeting_id = #{meetingId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 自定义 -->
+  <select id="getMenuListLimit" resultType="com.zqu.pa.vo.newsnotices.HomeList">
+    select meeting_id 'id' , title , date , coverpath
+    from meeting
+    where state = 1
+    <if test="branchId != 0">
+    and branch_id = #{branchId}
+    </if>
+    order by date DESC
+    limit #{index},#{num}
+  </select>
+  <select id="getMeetingManageList" resultType="com.zqu.pa.vo.newsnotices.MeetingInfo">
+    SELECT 
+        m.meeting_id 'id', m.branch_id 'branchId',  m.title , m.date , u.name 'creator' , m.state , m.last_time 'lastTime' , m.click , m.coverpath 
+    FROM 
+        meeting m
+    LEFT JOIN
+        user_person_info u ON m.creator_id = u.user_id
+    ORDER BY
+        m.date Desc
+  </select>
+  <update id="updateCheckMeetingByBatch">
+    UPDATE meeting
+    SET state = 1
+    WHERE meeting_id IN
+    <foreach collection="meetingIds" index="index" item="meetingId" separator="," open="(" close=")">
+      #{meetingId}
+    </foreach>
+    AND state = 0
+  </update>
+    <delete id="deleteMeetingByBatch">
+    DELETE FROM meeting
+    WHERE meeting_id IN
+    <foreach collection="meetingIds" index="index" item="meetingId" separator="," open="(" close=")">
+      #{meetingId}
+    </foreach>
+  </delete>
+</mapper>
