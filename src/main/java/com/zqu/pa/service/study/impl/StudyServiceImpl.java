@@ -471,4 +471,27 @@ public class StudyServiceImpl implements IStudyService {
         StudyVideoVO1 svvo1 = new StudyVideoVO1(sv.getVideoId(), sv.getVideoTitle(), sv.getVideoIntroduction(), sv.getCoverImg(), sv.getVideoPath(), uploadUser, updateTime, sls);
         return ServerResponse.createBySuccess(svvo1);
     }
+    
+    public ServerResponse deleteStudyDocument(Integer[] documentId) {
+    	int j=0;
+    	for(int i = 0; i < documentId.length; i++) {
+    		int k = studyDocumentMapper.deleteByPrimaryKey(documentId[i]);
+    		j = j+k;
+    	}
+    	if(j == documentId.length)
+    		return ServerResponse.createBySuccessMessage("所选文档删除成功");
+    	return ServerResponse.createBySuccessMessage("删除文档成功");
+    }
+    
+    public ServerResponse deleteStudyVideo(Integer[] videoId) {
+    	int j=0;
+    	for(int i = 0; i < videoId.length; i++) {
+    		int k = studyVideoMapper.deleteByPrimaryKey(videoId[i]);
+    		j = j+k;
+    	}
+    	if(j == videoId.length)
+    		return ServerResponse.createBySuccessMessage("所选视频删除成功");
+    	return ServerResponse.createBySuccessMessage("删除视频成功");
+    }
+    
 }

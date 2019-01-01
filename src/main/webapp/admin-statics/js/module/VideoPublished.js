@@ -76,9 +76,9 @@ function sendarticle(){
 		return;
 	}
 	formData.append("label_id",checkedLabelID);
-	formData.append("document_title", title);
-	formData.append("document_introduction", content);
-	var url = "../../study/upload_study_document.do";
+	formData.append("video_title", title);
+	formData.append("video_introduction", content);
+	var url = "../../study/upload_study_video.do";
 	submit(formData,url);
 }
 function submit(data,url){
@@ -91,10 +91,11 @@ function submit(data,url){
 		contentType : false,
 		dataType : 'json', //请求成功后，后台返回图片访问地址字符串，故此以text格式获取，而不是json格式
 		success : function(res) {
-			if(res.status == 0){
-				alert(res.data);
+			if(res.status == 0)
+				{
+					alert(res.data);
 				location.reload();
-			}
+}
 		},
 		error : function() {
 			alert("发布失败");

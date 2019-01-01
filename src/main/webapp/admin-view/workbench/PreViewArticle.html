@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../admin-statics/table/bootstrap.css" />
+    <link href="../../admin-statics/table/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../../admin-statics/table/dataTables.responsive.css" rel="stylesheet">
+<!--    <link href="../../admin-statics/table/sb-admin-2.css" rel="stylesheet">
+-->    <link href="../../admin-statics/table/font-awesome.css" rel="stylesheet" />
+    <!--<link href="../../admin-statics/table/style.css" rel="stylesheet" />
+    <link href="../../admin-statics/table/style-responsive.css" rel="stylesheet" />-->
+		    <link href="../../admin-statics/css/workbench/table.css" rel="stylesheet" >
+	</head>
+	<body>
+		
+		<div class="publicity" id="publicity">
+			<div class = "header"><a href="ArticleCategory.html">所有文章</a>  > <a href="javascript:history.go(-1)">文章列表</a>
+				  > 文章预览
+			</div>
+        	<div class="publicity-header">
+        		<div class="title">
+        			<h2>{{datas.title}}</h2>
+        		</div>
+        		<div class="matter">
+        			<p>
+        				<span>新闻来源：{{datas.source}}</span>
+        				<span>发布时间：{{datas.date}}</span>
+        				<span>浏览量：{{datas.click}}次</span>
+        			</p>
+        		</div>
+        	</div>
+        	<div class="publicity-content">
+        		<div class="details" id="details">
+        		</div>
+        	</div>
+       	</div>
+		
+		<link rel="stylesheet" href="../../statics/css/publicity.css" />
+		<script type="text/javascript" src="../../admin-statics/js/lib/jquery/1.9.1/jquery.js" ></script>
+        <script src="../../statics/js/vue.js"></script>
+        <script type="text/javascript" src="../../admin-statics/js/module/PreViewArticle.js"></script>
+	</body>
+</html>

@@ -210,12 +210,33 @@ $(function(){
     );
     
     //删除
+    var documentId = new Array();
     var checks = document.getElementsByName("checks");
     $("#delete").click(function(){
     	for(var i = 0; i < checks.length; i++){
     		if(checks[i].checked)
-    		console.log(checks[i].value);
+    		//console.log(checks[i].value);
+    		documentId.push(checks[i].value);
     	}
+    	console.log(documentId)
+    	$.ajax({
+    		type:"post",
+    		data:{
+    			documentId:documentId
+    		},
+    		traditional:true,
+    		url:"../../study/delete_study_document_by_documentId",
+    		async:true,
+    		success:function(res){
+    			if(res.status == 0){
+    				alert(res.msg)
+    				location.reload();
+    			}
+    		},
+    		error:function(){
+    			alert("删除出错")
+    		}
+    	});
     })
    
  })

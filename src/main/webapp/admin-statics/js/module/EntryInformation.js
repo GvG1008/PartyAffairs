@@ -1,6 +1,8 @@
 $(document).ready(function(){
 	$("#submit").click(function(){
 		var userId = $("#userId").val();
+		var grade = $("#grade").val();
+		var className = $("#className").val();
 		var name = $("#realname").val();
 		var nameFormer = $("#nameFormer").val();
 		var sex = $("#gender").val();
@@ -28,7 +30,7 @@ $(document).ready(function(){
 		var addrxian = $("#addrxian").val();
 		var addrzhen = $("#addrzhen").val();
 		var detailadd = $("#detailadd").val();
-		var homeAddress = addrsheng+addrshi+addrxian+addrzhen;
+		var homeAddress = addrsheng+addrshi+addrxian+addrzhen+detailadd;
 		var educationalBackground = $("#xl").val();
 		var professional = $("#zy").val();
 		var graduateSchool = $("#graduate").val();
@@ -41,6 +43,8 @@ $(document).ready(function(){
 		var totot = $("#totot").val();
 		var outUnit = $("#outUnit").val();
 		var usermessage = {
+			className:className,
+			grade:grade,
 			userId:userId,
 			name:name,
 			nameFormer:nameFormer,
@@ -76,7 +80,13 @@ $(document).ready(function(){
 			url:"../../userManage/insertUser",
 			async:true,
 			success:function(res){
-				console.log(res)
+				if(res.status == 0){
+					alert("录入信息成功")
+					window.location.reload();
+				}
+				else{
+					alert("请确保信息录入正确")
+				}
 			}
 		});
 		

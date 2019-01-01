@@ -38,6 +38,7 @@ function getDocumentDetails(documentID){
 			console.log(res)
 			if(res.status == 0){
 				contents.content = res.data;
+				$("#neirong").html(res.data.documentIntroduction)
 			}
 		}
 	});

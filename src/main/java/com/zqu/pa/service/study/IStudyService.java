@@ -33,4 +33,7 @@ public interface IStudyService {
     public ServerResponse getStudyVideosMustPutonByLabelId(String userId,List<Integer> idList,int page,int pageNum);
     public ServerResponse getStudyVideoMust(String userId,int page,int pageNum);
     public ServerResponse getStudyVideoDetails(int videoId);
+    
+    public ServerResponse deleteStudyDocument(Integer[] documentId);
+    public ServerResponse deleteStudyVideo(Integer[] videoId);
 }

@@ -147,12 +147,32 @@ $(function(){
     );
     
     //删除
+    var videoId = new Array();
     var checks = document.getElementsByName("checks");
     $("#delete").click(function(){
     	for(var i = 0; i < checks.length; i++){
     		if(checks[i].checked)
-    		console.log(checks[i].value);
+    		//console.log(checks[i].value);
+    		videoId.push(checks[i].value);
     	}
+    	$.ajax({
+    		type:"post",
+    		data:{
+    			videoId:videoId
+    		},
+    		traditional:true,
+    		url:"../../study/delete_study_video_by_videoId",
+    		async:true,
+    		success:function(res){
+    			if(res.status == 0){
+    				alert(res.msg)
+    				location.reload();
+    			}
+    		},
+    		error:function(){
+    			alert("删除出错")
+    		}
+    	});
     })
    
  })

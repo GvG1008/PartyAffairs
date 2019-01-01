@@ -17,7 +17,7 @@
 			<div class=container>
 				<div class="header">
 					<a href="DataManagement.html">资料管理</a> >
-					<a href="DataManagement.html"> 学习文档 </a> > 文档上传
+					<a href="DocumentList.html"> 学习文档 </a> > 文档上传
 
 					<!-- 工具栏  -->
 					<div class=toolbar>
@@ -80,29 +80,10 @@
 						<textarea type="text" class="title" id="title" placeholder="请填写标题" maxlength="32" autocomplete="off" style="height:50px;resize:none;" wrap="hard"></textarea>
 					</div>
 					
-					<div class="label_block">
+					<div id="lebel_block" class="label_block">
 						<p>请选择文档标签：</p>
-						<span class="span-em active">11213212</span>
-						<span class="span-em">11213212</span>
-						<span class="span-em">1</span>
-						<span class="span-em active">1</span>
-						<span class="span-em">112132121</span>
-						<span class="span-em">1</span>
-						<span class="span-em active">1</span>
-						<span class="span-em">1</span>
-						<span class="span-em">1</span>
-						<span class="span-em active">1</span>
-						<span class="span-em">1</span>
-						<span class="span-em">1</span>
-						<span class="span-em active">1</span>
-						<span class="span-em">1</span>
-						<span class="span-em">1</span>
-						<span class="span-em">112132121</span>
-						<span class="span-em">1</span>
-						<span class="span-em active">1</span>
-						<span class="span-em">1</span>
-						<span class="span-em">1</span>
-						<span class="span-em active">1</span>
+						<span v-for="item in labels" @click="change" :data-id = "item.labelId" class="span-em">{{item.labelName}}</span>
+						
 					</div>
 					<br />
 					
@@ -124,11 +105,13 @@
 		<script type="text/javascript" src="../../admin-statics/js/extends/bootstrap/3.3.7/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../../admin-statics/js/extends/summernote.js"></script>
 		<script type="text/javascript" src="../../admin-statics/js/extends/bootstrap-treeview.js"></script>
+		<script type="text/javascript" src="../../statics/js/vue.js" ></script>
 		<script type="text/javascript" src="../../admin-statics/js/module/DocumentPublished.js"></script>
 
 		<script type="text/javascript">
 			$('input[id=lefile]').change(function() {
 				$('#photoCover').val($(this).val());
+				console.log($("#lefile").val())
 			});
 		</script>
 

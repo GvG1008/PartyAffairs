@@ -346,7 +346,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         Md5Hash md5Hash = new Md5Hash(password,password,1);
         password = md5Hash.toString();
         userLoginInfo.setPassword(password);
-        userLoginInfo.setRoleId(user.getRoleId());
+        userLoginInfo.setRoleId(1);
         userLoginInfo.setState(0);
         
         //注入个人信息表

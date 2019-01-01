@@ -12,7 +12,7 @@
 		<link href="../../admin-statics/css/workbench/cropper.min.css" rel="stylesheet">
 		<link href="../../admin-statics/css/workbench/cropbox.css" rel="stylesheet">
 
-		<link href="../../admin-statics/css/workbench/profiles.css" rel="stylesheet">
+		<link href="../../admin-statics/css/workbench/EntryInformation.css" rel="stylesheet">
 
 	</head>
 
@@ -88,6 +88,23 @@
 									<option value="女">女</option>
 								</select>
 							</div>
+							
+							<div class="form-item a">
+										<label class="labelname">学号</label>
+										<input class="form-control form-input" type="text" id="userId" name="userId" value="">
+										<label class="tip" id="userId-tip"></label>
+							</div>
+							<div class="form-item b">
+								<label class="labelname">所属年级</label>
+								<input class="form-control form-input" type="text" id="grade" name="grade" value="">
+								<label class="tip" id="grade-tip"></label>
+							</div>
+							<div class="form-item c">
+								<label class="labelname">所属班级</label>
+								<input class="form-control form-input" id="className" type="text" name="className" value="">
+								<label class="tip" id="className-tip"></label>
+							</div>
+							
 							<div class="form-item er">
 								<label class="labelname">民族</label>
 								<select class="form-control " name="mz" id="mz">
@@ -132,11 +149,6 @@
 									</select>
 									<select class="form-control " name="area" id="jiguanxian">
 									</select>
-									<div style="margin-top: -24px;margin-left: 210px;">
-										<label class="labelname">学号</label>
-										<input class="form-control form-input" type="text" id="userId" name="userId" value="">
-										<label class="tip" id="userId-tip"></label>
-									</div>
 								</div>
 							</div>
 
@@ -162,6 +174,9 @@
 									</select>
 								</div>
 							</div>
+							
+							
+							
 						</div>
 						<!-- 通讯信息  -->
 						<div class="info-title"><span class="info-title-content">通讯信息</span></div>

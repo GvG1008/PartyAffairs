@@ -47,13 +47,20 @@
                                         <td><center>{{r.creator}}</center></td>
                                          <td>
                                         <center>
-                                            <a class="btn btn-success os btn-xs" :href="'#?id='+r.id">
+                                            <a class="btn btn-success os btn-xs" v-if="datatype==1" :href="'PreViewArticle.html?location=djyw&id='+r.id">
+                                                                                                                                     预览<i class="fa fa-search ticon" aria-hidden="true"></i>
+                                            </a>
+                                            <a class="btn btn-success os btn-xs" v-else-if="datatype==2" :href="'PreViewArticle.html?location=tzgs&id='+r.id">
+                                                                                                                                     预览<i class="fa fa-search ticon" aria-hidden="true"></i>
+                                            </a>
+                                            <a class="btn btn-success os btn-xs" v-else-if="datatype==3" :href="'PreViewArticle.html?location=dngs&id='+r.id">
                                                                                                                                      预览<i class="fa fa-search ticon" aria-hidden="true"></i>
                                             </a>
                                             <button class="btn btn-danger ow btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);">
                                                                                                                                      撤稿<i class="fa fa-trash-o ticon"></i>
                                             </button>
-                                            <button class="btn btn-warning ow btn-xs" type="button" data-toggle="tooltip"  title="审核" id="btn_look" onclick="pass(this);">审核<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                            <button v-if="r.state==1" disabled="true" class="btn btn-warning ow btn-xs" type="button" title="已审核">已审核<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                            <button v-else class="btn btn-warning ow btn-xs" type="button" data-toggle="tooltip"  title="审核" id="btn_look" onclick="pass(this);">审核<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                         </center>
                                         </td> 
                                     </tr>
