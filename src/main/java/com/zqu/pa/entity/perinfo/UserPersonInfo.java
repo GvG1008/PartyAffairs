@@ -128,7 +128,7 @@ public class UserPersonInfo {
     }
 
     public void setLastTime(Date lastTime) {
-        this.lastTime = DateToString.getDateString("yyyy/MM/dd HH/mm/ss", lastTime);
+        this.lastTime = DateToString.getDateString("yyyy/MM/dd HH:mm:ss", lastTime);
     }
 
     public Integer getCheckState() {
