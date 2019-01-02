@@ -14,6 +14,8 @@ public class MeetingInfo {
     
     private String date;
     
+    private String type;
+    
     private String creatorId;
     
     private String creator; //录入人名字
@@ -115,5 +117,15 @@ public class MeetingInfo {
     public void setVideo(String video) {
         this.video = video;
     }
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+    
+    
 }
 

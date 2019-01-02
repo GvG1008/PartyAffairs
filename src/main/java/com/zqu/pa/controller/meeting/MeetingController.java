@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +27,8 @@ import com.zqu.pa.vo.userInfo.UserBasicInfo;
 
 @Controller
 public class MeetingController {
-
+	private Logger logger = LoggerFactory.getLogger(MeetingController.class);
+	
     @Autowired
     MeetingService meetingService;
     
@@ -37,9 +40,15 @@ public class MeetingController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("/meetingMenu_1/{branchId}/{pageNum}/{num}")
-    public ServerResponse<PageOfList> getMeetingMenuOne(@PathVariable(value="branchId")Integer branchId,@PathVariable(value="pageNum") int page,@PathVariable(value="num") int num){
-        PageOfList info = new PageOfList();
+    @RequestMapping("/meetingMenu_1/{pageNum}/{num}")
+    public ServerResponse<PageOfList> getMeetingMenuOne(@PathVariable(value="pageNum") int page,@PathVariable(value="num") int num){
+    	UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if (basicInfo == null) {
+            logger.debug("用户未登录");
+            return ServerResponse.createByErrorMessage("用户未登录");
+        }
+        int branchId = basicInfo.getBranchId();
+    	PageOfList info = new PageOfList();
         
         //传入跳转的页数与当前显示的条数,page为页数，num为每页条数
         info = meetingService.getMenuInfo(branchId,page,num);
@@ -169,7 +178,7 @@ public class MeetingController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value="/mentingList",method=RequestMethod.GET)
+    @RequestMapping(value="/meetingList",method=RequestMethod.GET)
     public ServerResponse<List<MeetingInfo>> getMeetingList() {
         List<MeetingInfo> listInfo = null;
         

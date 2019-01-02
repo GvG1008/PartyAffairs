@@ -358,7 +358,7 @@
     
   <!-- 自定义 -->
   <select id="getMenuListLimit" resultType="com.zqu.pa.vo.newsnotices.HomeList">
-    select meeting_id 'id' , title , date , coverpath
+    select meeting_id 'id' , title , date , type , coverpath ,video
     from meeting
     where state = 1
     <if test="branchId != 0">
@@ -369,7 +369,7 @@
   </select>
   <select id="getMeetingManageList" resultType="com.zqu.pa.vo.newsnotices.MeetingInfo">
     SELECT 
-        m.meeting_id 'id', m.branch_id 'branchId',  m.title , m.date , u.name 'creator' , m.state , m.last_time 'lastTime' , m.click , m.coverpath ,m.video 
+        m.meeting_id 'id', m.branch_id 'branchId',  m.title , m.date , m.type ,u.name 'creator' , m.state , m.last_time 'lastTime' , m.click , m.coverpath ,m.video 
     FROM 
         meeting m
     LEFT JOIN

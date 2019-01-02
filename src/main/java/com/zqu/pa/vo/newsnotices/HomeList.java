@@ -12,7 +12,11 @@ public class HomeList {
     
     private String date;
     
+    private String type;
+    
     private String coverpath;
+    
+    private String video;
 
     public Integer getId() {
         return id;
@@ -45,5 +49,23 @@ public class HomeList {
     public void setCoverpath(String coverpath) {
         this.coverpath = coverpath;
     }
+
+	public String getVideo() {
+		return video;
+	}
+
+	public void setVideo(String video) {
+		this.video = video;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+    
+    
 
 }

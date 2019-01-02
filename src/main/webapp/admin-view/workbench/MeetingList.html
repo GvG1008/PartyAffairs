@@ -36,49 +36,24 @@
 						<th>所属党支部</th>
 						<th>发起人</th>
 						<th>发布时间</th>
-						<th>状态</th>
 						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
-					<!-- <tr v-for="r in datas">
+									
+					<tr v-for="r in datas" v-if="r.state==1">
 						<td><center>
 								<input type="checkbox" name="all" id="all" :value="r.id">
 							</center></td>
-						<td><center>{{titleFormat(r.title)}}</center>
-							<label hidden="hidden">{{r.id}}</label></td>
-						<td v-if="datatype==1"><center>党内要闻</center></td>
-						<td v-else-if="datatype==2"><center>通知公示</center></td>
-						<td v-else-if="datatype==3"><center>党内公示</center></td>
-						<td><center>{{r.date}}</center></td>
-						<td v-if="r.state==1"><center>已审核</center></td>
-						<td v-else><center>未审核</center></td>
-						<td><center>{{r.click}}</center></td>
+						<td><center>{{r.title}}</center></td>
+						<td><center>{{r.type}}</center></td>
+						<td v-if="r.branchId==1"><center>软件工程专业党支部</center></td>
+	        			<td v-else-if="r.branchId==2"><center>计算机科学与技术专业党支部</center></td>
+	        			<td v-else-if="r.branchId==3"><center>网络工程专业党支部</center></td>
+	        			<td v-else-if="r.branchId==4"><center>物联网工程专业党支部</center></td>
+	        			<td v-else-if="r.branchId==5"><center>数据科学与大数据技术专业党支部</center></td>
 						<td><center>{{r.creator}}</center></td>
-						<td>
-							<center>
-								<a class="btn btn-success os btn-xs" title="详情":href="'#?id='+r.id">
-									详情<i class="fa fa-search ticon" aria-hidden="true"></i>
-								</a>
-								<button class="btn btn-danger ow btn-xs" id="btn_delete" 
-									data-toggle="tooltip" title="取消" onclick="deletemsg(this);">
-									取消<i class="fa fa-trash-o ticon"></i>
-								</button>
-							</center>
-						</td>
-					</tr> -->
-					
-					<!-- 假数据 -->
-					<tr>
-						<td><center>
-								<input type="checkbox" name="all" id="all">
-							</center></td>
-						<td><center>党支部转正大会</center></td>
-						<td><center>支部党员大会</center></td>
-						<td><center>软件工程专业党支部</center></td>
-						<td><center>陈小荣</center></td>
-						<td><center>2018-12-31 08：00</center></td>
-						<td><center>未进行</center></td>
+						<td><center>{{r.date}}</center></td>
 						<td>
 							<center>
 								<a class="btn btn-success os btn-xs" title="详情">
@@ -91,7 +66,7 @@
 							</center>
 						</td>
 					</tr>
-					<!-- 假数据 -->
+
 				</tbody>
 			</table>
 		</div>
