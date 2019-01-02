@@ -24,6 +24,8 @@ public class Meeting {
     private String coverpath;
 
     private String content;
+    
+    private String video;
 
     public Integer getMeetingId() {
         return meetingId;
@@ -103,5 +105,13 @@ public class Meeting {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+    
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video == null ? null : video.trim();
     }
 }

@@ -115,6 +115,7 @@ public class MeetingController {
     @ResponseBody
     @RequestMapping(value="/insertMeeting",method=RequestMethod.POST)
     public ServerResponse InsertMeeting(@RequestParam(value="coverpath",required = false) MultipartFile cover,
+            @RequestParam(value="video",required = false) MultipartFile video,
             @RequestParam(value="title") String title, @RequestParam(value="branchId")Integer branchId, 
             @RequestParam(value="content")String content,HttpServletRequest request) {
         Meeting meeting = new Meeting();
@@ -136,6 +137,17 @@ public class MeetingController {
             meeting.setCoverpath(fileMap.get("http_url").toString());
         }else
             meeting.setCoverpath(null);
+        
+        //视频上传
+        if(!video.isEmpty()) {
+            //判断是否为视频文件
+            //。。
+            //FTP上传
+            Map fileMap = FTPSSMLoad.upload(video, request, "/meeting/video/");
+            //存储路径
+            meeting.setVideo(fileMap.get("http_url").toString());
+        }else
+            meeting.setVideo(null);
         
         String Msg;
         try {
@@ -195,6 +207,7 @@ public class MeetingController {
     @ResponseBody
     @RequestMapping("/updateMeeting")
     public ServerResponse updateMeeting(@RequestParam(value="coverpath",required = false) MultipartFile cover,
+            @RequestParam(value="video",required = false) MultipartFile video,
             @RequestParam(value="meetingId")Integer meetingId,
             @RequestParam(value="title") String title,
             @RequestParam(value="content")String content,HttpServletRequest request) {
@@ -222,6 +235,17 @@ public class MeetingController {
             meeting.setCoverpath(fileMap.get("http_url").toString());
         }else
             meeting.setCoverpath(null);
+        
+        //修改视频地址，上传视频
+        if(!video.isEmpty()) {
+            //判断是否为视频
+            //。。
+            //FTP上传
+            Map fileMap = FTPSSMLoad.upload(video, request, "/meeting/video/");
+            //存储路径
+            meeting.setVideo(fileMap.get("http_url").toString());
+        }else
+            meeting.setVideo(null);
         
         if(meetingService.updateMeeting(meeting)==0)
             return ServerResponse.createByErrorMessage("修改会议信息失败!");

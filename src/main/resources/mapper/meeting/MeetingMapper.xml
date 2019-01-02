@@ -11,6 +11,7 @@
     <result column="last_time" jdbcType="TIMESTAMP" property="lastTime" />
     <result column="click" jdbcType="INTEGER" property="click" />
     <result column="coverpath" jdbcType="VARCHAR" property="coverpath" />
+    <result column="video" jdbcType="VARCHAR" property="video" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zqu.pa.entity.meeting.Meeting">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -74,7 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    meeting_id, branch_id, title, date, creator_id, state, last_time, click, coverpath
+    meeting_id, branch_id, title, date, creator_id, state, last_time, click, coverpath, 
+    video
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -131,11 +133,11 @@
     insert into meeting (branch_id, title, 
       date, creator_id, state, 
       last_time, coverpath, 
-      content)
+      content, video)
     values (#{branchId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
        now() , #{creatorId,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
        now() ,  #{coverpath,jdbcType=VARCHAR}, 
-      #{content,jdbcType=LONGVARCHAR})
+      #{content,jdbcType=LONGVARCHAR},#{video,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zqu.pa.entity.meeting.Meeting">
     insert into meeting
@@ -166,6 +168,9 @@
       </if>
       <if test="coverpath != null">
         coverpath,
+      </if>
+      <if test="video != null">
+        video,
       </if>
       <if test="content != null">
         content,
@@ -198,6 +203,9 @@
       </if>
       <if test="coverpath != null">
         #{coverpath,jdbcType=VARCHAR},
+      </if>
+      <if test="video != null">
+        #{video,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
         #{content,jdbcType=LONGVARCHAR},
@@ -240,6 +248,9 @@
       <if test="record.coverpath != null">
         coverpath = #{record.coverpath,jdbcType=VARCHAR},
       </if>
+      <if test="record.video != null">
+        video = #{record.video,jdbcType=VARCHAR},
+      </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
@@ -259,6 +270,7 @@
       last_time = #{record.lastTime,jdbcType=TIMESTAMP},
       click = #{record.click,jdbcType=INTEGER},
       coverpath = #{record.coverpath,jdbcType=VARCHAR},
+      video = #{record.video,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -274,7 +286,8 @@
       state = #{record.state,jdbcType=INTEGER},
       last_time = #{record.lastTime,jdbcType=TIMESTAMP},
       click = #{record.click,jdbcType=INTEGER},
-      coverpath = #{record.coverpath,jdbcType=VARCHAR}
+      coverpath = #{record.coverpath,jdbcType=VARCHAR},
+      video = #{record.video,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -306,6 +319,9 @@
       <if test="coverpath != null">
         coverpath = #{coverpath,jdbcType=VARCHAR},
       </if>
+      <if test="video != null">
+        video = #{video,jdbcType=VARCHAR},
+      </if>
       <if test="content != null">
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -322,6 +338,7 @@
       last_time = #{lastTime,jdbcType=TIMESTAMP},
       click = #{click,jdbcType=INTEGER},
       coverpath = #{coverpath,jdbcType=VARCHAR},
+      video = #{video,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR}
     where meeting_id = #{meetingId,jdbcType=INTEGER}
   </update>
@@ -334,10 +351,11 @@
       state = #{state,jdbcType=INTEGER},
       last_time = #{lastTime,jdbcType=TIMESTAMP},
       click = #{click,jdbcType=INTEGER},
-      coverpath = #{coverpath,jdbcType=VARCHAR}
+      coverpath = #{coverpath,jdbcType=VARCHAR},
+      video = #{video,jdbcType=VARCHAR}
     where meeting_id = #{meetingId,jdbcType=INTEGER}
   </update>
-  
+    
   <!-- 自定义 -->
   <select id="getMenuListLimit" resultType="com.zqu.pa.vo.newsnotices.HomeList">
     select meeting_id 'id' , title , date , coverpath
@@ -351,7 +369,7 @@
   </select>
   <select id="getMeetingManageList" resultType="com.zqu.pa.vo.newsnotices.MeetingInfo">
     SELECT 
-        m.meeting_id 'id', m.branch_id 'branchId',  m.title , m.date , u.name 'creator' , m.state , m.last_time 'lastTime' , m.click , m.coverpath 
+        m.meeting_id 'id', m.branch_id 'branchId',  m.title , m.date , u.name 'creator' , m.state , m.last_time 'lastTime' , m.click , m.coverpath ,m.video 
     FROM 
         meeting m
     LEFT JOIN

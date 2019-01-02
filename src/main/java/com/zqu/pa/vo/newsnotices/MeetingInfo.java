@@ -25,6 +25,8 @@ public class MeetingInfo {
     private int click;
     
     private String coverpath;
+    
+    private String video;
 
     public int getId() {
         return id;
@@ -106,5 +108,12 @@ public class MeetingInfo {
         this.coverpath = coverpath;
     }
     
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
 }
 

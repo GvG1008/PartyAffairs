@@ -674,6 +674,76 @@ public class MeetingExample {
             addCriterion("coverpath not between", value1, value2, "coverpath");
             return (Criteria) this;
         }
+
+        public Criteria andVideoIsNull() {
+            addCriterion("video is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoIsNotNull() {
+            addCriterion("video is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoEqualTo(String value) {
+            addCriterion("video =", value, "video");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoNotEqualTo(String value) {
+            addCriterion("video <>", value, "video");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoGreaterThan(String value) {
+            addCriterion("video >", value, "video");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoGreaterThanOrEqualTo(String value) {
+            addCriterion("video >=", value, "video");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoLessThan(String value) {
+            addCriterion("video <", value, "video");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoLessThanOrEqualTo(String value) {
+            addCriterion("video <=", value, "video");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoLike(String value) {
+            addCriterion("video like", value, "video");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoNotLike(String value) {
+            addCriterion("video not like", value, "video");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoIn(List<String> values) {
+            addCriterion("video in", values, "video");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoNotIn(List<String> values) {
+            addCriterion("video not in", values, "video");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoBetween(String value1, String value2) {
+            addCriterion("video between", value1, value2, "video");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoNotBetween(String value1, String value2) {
+            addCriterion("video not between", value1, value2, "video");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

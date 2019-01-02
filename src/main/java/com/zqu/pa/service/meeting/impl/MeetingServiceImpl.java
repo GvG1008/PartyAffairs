@@ -70,7 +70,7 @@ public class MeetingServiceImpl implements MeetingService {
             if(meeting.getState()==0)
                 return null;
             else {
-                //查看该条新闻信息页面，此新闻click+1
+                //查看该条会议页面，此会议信息click+1
                 Meeting meeting2 = new  Meeting();
                 meeting2.setMeetingId(meeting.getMeetingId());
                 meeting2.setClick(meeting.getClick()+1);
