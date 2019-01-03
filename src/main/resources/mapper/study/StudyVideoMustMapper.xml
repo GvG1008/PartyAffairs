@@ -8,10 +8,21 @@
                 javaType="java.lang.Integer" />
             <arg column="user_id" jdbcType="VARCHAR"
                 javaType="java.lang.String" />
+            <arg column="already" jdbcType="INTEGER"
+                javaType="java.lang.Integer" />
         </constructor>
     </resultMap>
     <insert id="insert" parameterType="com.zqu.pa.entity.study.StudyVideoMust" >
     insert into study_video_must (video_id, user_id)
     values (#{videoId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR})
   </insert>
+  <select id="selectIsAlready">
+    select already from study_video_must where user_id = #{userId}
+    and video_id = #{videoId}
+  </select>
+  <update id="setVideoMustAlready">
+    update study_video_must
+    set already = 1
+    where video_id = #{videoId} and user_id = #{userId} and already = 0
+  </update>
 </mapper>

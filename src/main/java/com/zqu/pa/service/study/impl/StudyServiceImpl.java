@@ -34,8 +34,10 @@ import com.zqu.pa.entity.study.StudyVideoRecord;
 import com.zqu.pa.service.study.IStudyService;
 import com.zqu.pa.utils.DateToString;
 import com.zqu.pa.vo.study.StudyDocumentVO1;
+import com.zqu.pa.vo.study.StudyDocumentVO2;
 import com.zqu.pa.vo.study.StudyVideoVO1;
 import com.zqu.pa.vo.study.StudyVideoVO2;
+import com.zqu.pa.vo.study.StudyVideoVO3;
 
 @Service("iStudyService")
 public class StudyServiceImpl implements IStudyService {
@@ -237,15 +239,16 @@ public class StudyServiceImpl implements IStudyService {
 
         List<StudyDocument> sdl = studyDocumentMapper.selectMustPutonByLabelId(paramMap);
         int size = sdl.size();
-        List<StudyDocumentVO1> list = Lists.newArrayList();
+        List<StudyDocumentVO2> list = Lists.newArrayList();
         for (int i = 0; i < size; i++) {
             StudyDocument sd = sdl.get(i);
             String updateTime = DateToString.getDateString("yyyy-MM-dd", sd.getUpdatetime());
             String uploadUser = studyDocumentMapper.getUserNameByUserId(sd.getUserId());
             int downloadTimes = studyDocumentStatisticsMapper.selectTimeSumByDocumentId(sd.getDocumentId());
             List<StudyLabel> sls = studyLabelMapper.selectByDocumentId(sd.getDocumentId());
-            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes,sls);
-            list.add(sdvo1);
+            int already = studyDocumentMustMapper.selectIsAlready(userId, sd.getDocumentId());
+            StudyDocumentVO2 sdvo2 = new StudyDocumentVO2(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes,sls,already);
+            list.add(sdvo2);
         }
         map.put("list", list);
         return ServerResponse.createBySuccess(map);
@@ -265,15 +268,16 @@ public class StudyServiceImpl implements IStudyService {
         map.put("pageNum", pageNum);
         List<StudyDocument> sdl = studyDocumentMapper.selectMustPutonByUserId(index,pageNum,userId);
         int size = sdl.size();
-        List<StudyDocumentVO1> list = Lists.newArrayList();
+        List<StudyDocumentVO2> list = Lists.newArrayList();
         for (int i = 0; i < size; i++) {
             StudyDocument sd = sdl.get(i);
             String updateTime = DateToString.getDateString("yyyy-MM-dd", sd.getUpdatetime());
             String uploadUser = studyDocumentMapper.getUserNameByUserId(sd.getUserId());
             int downloadTimes = studyDocumentStatisticsMapper.selectTimeSumByDocumentId(sd.getDocumentId());
             List<StudyLabel> sls = studyLabelMapper.selectByDocumentId(sd.getDocumentId());
-            StudyDocumentVO1 sdvo1 = new StudyDocumentVO1(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes,sls);
-            list.add(sdvo1);
+            int already = studyDocumentMustMapper.selectIsAlready(userId, sd.getDocumentId());
+            StudyDocumentVO2 sdvo2 = new StudyDocumentVO2(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes,sls,already);
+            list.add(sdvo2);
         }
         map.put("list", list);
         return ServerResponse.createBySuccess(map);
@@ -402,16 +406,17 @@ public class StudyServiceImpl implements IStudyService {
         map.put("pageNum", pageNum);
         List<StudyVideo> svl = studyVideoMapper.selectMustPutonByUserId(index,pageNum,userId);
         int size = svl.size();
-        List<StudyVideoVO2> list = Lists.newArrayList();
+        List<StudyVideoVO3> list = Lists.newArrayList();
         for(int i=0;i<size;i++) {
             StudyVideo sv = svl.get(i);
             String updateTime = DateToString.getDateString("yyyy-MM-dd", sv.getUpdatetime());
             String uploadUser = studyDocumentMapper.getUserNameByUserId(sv.getUserId());
             List<StudyLabel> sls = studyLabelMapper.selectByVideoId(sv.getVideoId());
             StudyVideoRecord svr = new StudyVideoRecord(sv.getVideoId(), userId, null, null);
-            float schedule = studyVideoMapper.selectScheduleByVideoIdAndUserId(svr);
-            StudyVideoVO2 svvo2 = new StudyVideoVO2(sv.getVideoId(), sv.getVideoTitle(), sv.getVideoIntroduction(), sv.getCoverImg(), sv.getVideoPath(), uploadUser, updateTime, sls,schedule);
-            list.add(svvo2);
+/*            float schedule = studyVideoMapper.selectScheduleByVideoIdAndUserId(svr);*/
+            Integer already = studyVideoMustMapper.selectIsAlready(userId, sv.getVideoId());
+            StudyVideoVO3 svvo3 = new StudyVideoVO3(sv.getVideoId(), sv.getVideoTitle(), sv.getVideoIntroduction(), sv.getCoverImg(), sv.getVideoPath(), uploadUser, updateTime, sls,already);
+            list.add(svvo3);
         }
         map.put("list", list);
         return ServerResponse.createBySuccess(map);
@@ -436,14 +441,15 @@ public class StudyServiceImpl implements IStudyService {
         paramMap.put("num",pageNum);
         List<StudyVideo> svl = studyVideoMapper.selectPutonByLabelId(paramMap);
         int size = svl.size();
-        List<StudyVideoVO1> list = Lists.newArrayList();
+        List<StudyVideoVO3> list = Lists.newArrayList();
         for(int i=0;i<size;i++) {
             StudyVideo sv = svl.get(i);
             String updateTime = DateToString.getDateString("yyyy-MM-dd", sv.getUpdatetime());
             String uploadUser = studyDocumentMapper.getUserNameByUserId(sv.getUserId());
             List<StudyLabel> sls = studyLabelMapper.selectByVideoId(sv.getVideoId());
-            StudyVideoVO1 svvo1 = new StudyVideoVO1(sv.getVideoId(), sv.getVideoTitle(), sv.getVideoIntroduction(), sv.getCoverImg(), sv.getVideoPath(), uploadUser, updateTime, sls);
-            list.add(svvo1);
+            Integer already = studyVideoMustMapper.selectIsAlready(userId, sv.getVideoId());
+            StudyVideoVO3 svvo3 = new StudyVideoVO3(sv.getVideoId(), sv.getVideoTitle(), sv.getVideoIntroduction(), sv.getCoverImg(), sv.getVideoPath(), uploadUser, updateTime, sls,already);
+            list.add(svvo3);
         }
         map.put("list", list);
         return ServerResponse.createBySuccess(map);
@@ -492,6 +498,56 @@ public class StudyServiceImpl implements IStudyService {
     	if(j == videoId.length)
     		return ServerResponse.createBySuccessMessage("所选视频删除成功");
     	return ServerResponse.createBySuccessMessage("删除视频成功");
+    }
+
+
+    //GvG
+    @Override
+    public ServerResponse getStudyDocumentMustAlreadyState(String userId, Integer documentId) {
+        Integer already = studyDocumentMustMapper.selectIsAlready(userId, documentId);
+        if(already==null)
+            return ServerResponse.createByErrorMessage("对于当前用户，该文档不是必学文档");
+        Map map = Maps.newHashMap();
+        map.put("already", already);
+        return ServerResponse.createBySuccess("查询文档学习状态成功", map);
+    }
+
+    @Override
+    public ServerResponse setStudyDocumentMustState(String userId, Integer documentId) {
+        Integer already = studyDocumentMustMapper.selectIsAlready(userId, documentId);
+        if(already == null) {
+            return ServerResponse.createByErrorMessage("该文档非当前用户必学文档");
+        }else if(already == 1) {
+            return ServerResponse.createBySuccessMessage("已学习");
+        }
+        int result = studyDocumentMustMapper.setDocumentMustAlready(userId, documentId);
+        if(result > 0)
+            return ServerResponse.createBySuccessMessage("已学习");
+        return ServerResponse.createByErrorMessage("操作失败");
+    }
+
+    @Override
+    public ServerResponse getStudyVideoMustAlreadyState(String userId, Integer videoId) {
+        Integer already = studyVideoMustMapper.selectIsAlready(userId, videoId);
+        if(already==null)
+            return ServerResponse.createByErrorMessage("对于当前用户，该视频不是必学");
+        Map map = Maps.newHashMap();
+        map.put("already", already);
+        return ServerResponse.createBySuccess("查询视频学习状态成功", map);
+    }
+
+    @Override
+    public ServerResponse setStudyVideoMustState(String userId, Integer videoId) {
+        Integer already = studyVideoMustMapper.selectIsAlready(userId, videoId);
+        if(already == null) {
+            return ServerResponse.createByErrorMessage("该视频非当前用户必学视频");
+        }else if(already == 1) {
+            return ServerResponse.createBySuccessMessage("已学习");
+        }
+        int result = studyVideoMustMapper.setVideoMustAlready(userId, videoId);
+        if(result > 0)
+            return ServerResponse.createBySuccessMessage("已学习");
+        return ServerResponse.createByErrorMessage("操作失败");
     }
     
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -265,8 +266,41 @@ public class StudyController {
         return iStudyService.getStudyDcumentDetails(Integer.parseInt(documentId));
     }
     
+    /*GvG*/
+    /**
+     * 在用户查看文档时，该接口可查询返回该文档是否已学，根据此显示点击已学按钮
+     * @param documentId
+     * @return
+     */
+    @RequestMapping(value = "get_study_document_already_state/{documentId}", method = RequestMethod.GET)
+    @ResponseBody
+    public ServerResponse getStudyDocumentMustState(@PathVariable(value = "documentId") Integer documentId) {
+        String userId = this.getUserid();
+        if(userId == null)
+            return ServerResponse.createByErrorMessage("无法获取当前登录信息");
+        if(documentId == null)
+            return ServerResponse.createByErrorMessage("文档ID错误");
+        return iStudyService.getStudyDocumentMustAlreadyState(userId,documentId);
+    }
     
+    /**
+     * 用户点击已学，将用户该文档学习状态改为已学
+     * @param documentId
+     * @return
+     */
+    @RequestMapping(value = "set_study_document_already/{documentId}", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse setStudyDocumentMustState(@PathVariable(value = "documentId") Integer documentId) {
+        String userId = this.getUserid();
+        if(userId == null)
+            return ServerResponse.createByErrorMessage("无法获取当前登录信息");
+        if(documentId == null)
+            return ServerResponse.createByErrorMessage("文档ID错误");
+        return iStudyService.setStudyDocumentMustState(userId,documentId);
+        
+    }
     
+    /*GvG*/
     
     
     
@@ -436,4 +470,38 @@ public class StudyController {
     	return iStudyService.deleteStudyVideo(videoId);
     }
     
+    /* GvG */
+    /**
+     * 在用户查看视频时，该接口可查询返回该视频是否已学，根据此显示点击已学按钮
+     * @param videoId
+     * @return
+     */
+    @RequestMapping(value = "get_study_video_already_state/{videoId}", method = RequestMethod.GET)
+    @ResponseBody
+    public ServerResponse getStudyVideoMustState(@PathVariable(value = "videoId") Integer videoId) {
+        String userId = this.getUserid();
+        if(userId == null)
+            return ServerResponse.createByErrorMessage("无法获取当前登录信息");
+        if(videoId == null)
+            return ServerResponse.createByErrorMessage("视频ID错误");
+        return iStudyService.getStudyVideoMustAlreadyState(userId,videoId);
+    }
+    
+    /**
+     * 用户点击已学，将用户该视频学习状态改为已学
+     * @param videoId
+     * @return
+     */
+    @RequestMapping(value = "set_study_video_already/{videoId}", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse setStudyVideoMustState(@PathVariable(value = "videoId") Integer videoId) {
+        String userId = this.getUserid();
+        if(userId == null)
+            return ServerResponse.createByErrorMessage("无法获取当前登录信息");
+        if(videoId == null)
+            return ServerResponse.createByErrorMessage("视频ID错误");
+        return iStudyService.setStudyVideoMustState(userId,videoId);
+        
+    }
+    /* GvG */
 }

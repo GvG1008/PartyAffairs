@@ -8,13 +8,24 @@
 				javaType="java.lang.Integer" />
 			<arg column="user_id" jdbcType="VARCHAR"
 				javaType="java.lang.String" />
+            <arg column="already" jdbcType="INTEGER"
+                javaType="java.lang.Integer" />
 		</constructor>
 	</resultMap>
 	<insert id="insert" parameterType="com.zqu.pa.entity.study.StudyDocumentMust" >
     insert into study_document_must (document_id, user_id)
     values (#{documentId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR})
   </insert>
+  <select id="selectIsAlready">
+  select already from study_document_must where user_id = #{userId}
+  and document_id = #{documentId}
+  </select>
   <select id="selectDocumentIdByUserId" parameterType="string" resultType="int">
   select document_id from study_document_must where user_id = #{userId,jdbcType=VARCHAR}
   </select>
+  <update id="setDocumentMustAlready">
+  update study_document_must
+  set already = 1
+  where document_id = #{documentId} and user_id = #{userId} and already = 0
+  </update>
 </mapper>

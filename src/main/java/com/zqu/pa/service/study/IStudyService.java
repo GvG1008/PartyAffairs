@@ -36,4 +36,9 @@ public interface IStudyService {
     
     public ServerResponse deleteStudyDocument(Integer[] documentId);
     public ServerResponse deleteStudyVideo(Integer[] videoId);
+    
+    public ServerResponse getStudyDocumentMustAlreadyState(String userId, Integer documentId);
+    public ServerResponse setStudyDocumentMustState(String userId, Integer documentId);
+    public ServerResponse getStudyVideoMustAlreadyState(String userId, Integer videoId);
+    public ServerResponse setStudyVideoMustState(String userId, Integer videoId);
 }
