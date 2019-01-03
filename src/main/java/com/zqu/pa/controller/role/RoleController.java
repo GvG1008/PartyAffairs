@@ -104,7 +104,7 @@ public class RoleController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value="/permission/{roleId}")
+    @RequestMapping(value="/permission/{roleId}",method=RequestMethod.GET)
     public ServerResponse getRolePermissionList(@PathVariable(value="roleId") Integer roleId) {
         if(roleId == null)
             return ServerResponse.createByErrorMessage("参数错误");

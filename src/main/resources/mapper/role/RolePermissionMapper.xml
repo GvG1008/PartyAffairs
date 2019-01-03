@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zqu.pa.dao.role.RolePermissionMapper">
-  <select id="selectPermission">
+  <select id="selectPermission" resultType="com.zqu.pa.entity.role.Permission">
     Select rm.permission_id 'permissionId', rm.permission_name 'permissionName', description
     From role_permission rp
     Left Join permission_menu rm on rm.permission_id = rp.permission
     Where rp.role_id = #{roleId}
   </select>
   
-  <select id="selectAllPermission">
+  <select id="selectAllPermission" resultType="com.zqu.pa.entity.role.Permission">
     Select permission_id 'permissionId', permission_name 'permissionName', description
     From permission_menu
   </select>
