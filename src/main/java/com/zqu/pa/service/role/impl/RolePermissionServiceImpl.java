@@ -16,6 +16,7 @@ import com.zqu.pa.entity.role.Permission;
 import com.zqu.pa.entity.role.Role;
 import com.zqu.pa.realm.UserRealm;
 import com.zqu.pa.service.role.RolePermissionService;
+import com.zqu.pa.vo.role.RoleInfo;
 
 @Service
 public class RolePermissionServiceImpl implements RolePermissionService {
@@ -34,7 +35,7 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     
     @Override
     public ServerResponse getRoleList() {
-        List<Role> roleList = roleDao.selectRole();
+        List<RoleInfo> roleList = roleDao.selectRole();
         if(roleList == null || roleList.size()==0) {
             return ServerResponse.createByErrorMessage("获取失败");
         }

@@ -29,7 +29,7 @@ public class RoleController {
     RolePermissionService rolePermissionService;
     
     /**
-     * 获取所有身份列表
+     * 获取所有身份列表，以及对应人数
      * @return
      */
     @ResponseBody

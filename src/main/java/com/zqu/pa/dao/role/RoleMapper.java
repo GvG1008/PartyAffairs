@@ -5,10 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.zqu.pa.entity.role.Role;
+import com.zqu.pa.vo.role.RoleInfo;
 
 public interface RoleMapper {
     
-    List<Role> selectRole();
+    List<RoleInfo> selectRole();
     
     Role getUserRole(@Param("userId")String userId);
     
