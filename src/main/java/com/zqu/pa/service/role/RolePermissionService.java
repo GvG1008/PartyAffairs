@@ -1,5 +1,7 @@
 package com.zqu.pa.service.role;
 
+import java.util.List;
+
 import com.zqu.pa.common.ServerResponse;
 
 public interface RolePermissionService {
@@ -21,5 +23,8 @@ public interface RolePermissionService {
 
     //获取指定身份的所有权限列表
     ServerResponse getRolePermissionList(Integer roleId);
+
+    //修改权限列表
+    ServerResponse updateRolePermissionList(Integer roleId, List<Integer> permissionList);
 
 }

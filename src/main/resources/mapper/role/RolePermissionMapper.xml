@@ -25,4 +25,5 @@
       #{roleId}, permission
     </foreach>
   </insert>
+  
 </mapper>

@@ -90,4 +90,21 @@ public class RolePermissionServiceImpl implements RolePermissionService {
         return ServerResponse.createBySuccess("获取权限列表成功", permissionList);
     }
 
+    @Transactional
+    @Override
+    public ServerResponse updateRolePermissionList(Integer roleId, List<Integer> permissionList) {
+        //删除所有权限
+        boolean result = permissionDao.deleteRolePermissions(roleId)>=0;
+        //添加新的所有权限
+        if(!result)
+            return ServerResponse.createByErrorMessage("操作失败");
+        if(permissionList.size()!=0) {
+            result = permissionDao.insertRolePermissions(roleId, permissionList)>0;
+            if(!result) {
+                throw new RuntimeException("操作失败，回滚");
+            }
+        }
+        return ServerResponse.createBySuccessMessage("修改权限成功");
+    }
+
 }

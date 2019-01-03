@@ -11,6 +11,7 @@ import java.util.UUID;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -90,12 +91,15 @@ public class PublicityManageController {
      * @param news
      * @return
      */
+    @RequiresPermissions("party_notices:add")
     @ResponseBody
     @RequestMapping(value="/insertNews",method=RequestMethod.POST)
     public ServerResponse InsertNews(@RequestParam(value="coverpath",required = false) MultipartFile cover,
             @RequestParam(value="title") String title, @RequestParam(value="source")String source, 
             @RequestParam(value="content")String content,HttpServletRequest request) {
 
+        
+        
         News news = new News();
         if(title==null)
             return ServerResponse.createByErrorMessage("标题不能为空");
