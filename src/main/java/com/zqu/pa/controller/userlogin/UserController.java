@@ -11,6 +11,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -119,6 +120,24 @@ public class UserController {
             return ServerResponse.createByErrorMessage("用户名或密码错误");
         }
     }
+
+    /**
+     * 最高权限管理员重置用户密码，默认密码为用户id
+     * @param userId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="/resetPassword/{userId}",method=RequestMethod.GET)
+    public ServerResponse ResetPassword(@PathVariable(value = "userId")String userId) {
+        UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        //获取当前登录人的身份
+        Integer role = basicInfo.getRoleId();
+        if(role!=0) {
+            return ServerResponse.createByErrorMessage("只有最高权限管理员才可以重置用户密码");
+        }
+        return userService.resetPassword(userId);
+    }
+    
     
     /**
      * 保留测试

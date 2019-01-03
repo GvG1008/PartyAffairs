@@ -86,4 +86,16 @@
       #{userId,jdbcType=VARCHAR}
     </foreach>
   </delete>
+  
+  <update id="updatePassword">
+    UPDATE user_login
+    SET password = #{newPassword}
+    WHERE user_id = #{userId}
+    and password = #{oldPassword}
+  </update>
+  
+  <select id="checkPassword" resultType="int">
+  SELECT count(*) from user_login
+  WHERE user_id = #{userId} and password = #{password}
+  </select>
 </mapper>

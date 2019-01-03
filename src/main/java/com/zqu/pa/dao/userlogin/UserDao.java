@@ -29,4 +29,6 @@ public interface UserDao {
     PartyBranch getPartyBranch(String userId);
  */
     UserBasicInfo getUserBasicInfo(@Param("userId")String userId);
+    
+    int updatePassword(@Param("userId")String userId,@Param("password")String password);
 }

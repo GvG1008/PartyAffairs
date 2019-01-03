@@ -36,4 +36,10 @@
        LEFT JOIN user_person_info pe ON l.user_id = pe.user_id
        where l.user_id = #{userId}
 	</select>
+	
+	<update id="updatePassword">
+	   update user_login
+	   set password = #{password}
+	   where user_id = #{userId}
+	</update>
 </mapper>

@@ -10,6 +10,7 @@ import java.util.UUID;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -190,6 +191,30 @@ public class PersonalController {
             e.printStackTrace();
             return ServerResponse.createByErrorMessage("修改失败");
         }
+    }
+    
+    /**
+     * 登录用户修改自己的密码
+     * @param old_password
+     * @param new_password
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="/update_mine_password", method = RequestMethod.POST)
+    public ServerResponse updateMinePassword(
+            @RequestParam(value="old_password")String old_password, @RequestParam(value="new_password")String new_password) {
+        if(StringUtils.isBlank(old_password)||StringUtils.isBlank(new_password)) {
+            return ServerResponse.createByErrorMessage("输入密码为空！");
+        }
+        if(new_password.contains(" ")) {
+            return ServerResponse.createByErrorMessage("输入密码含有空格！");
+        }
+        //其他判断密码是否合法
+        //。。
+
+        //获取当前session里的userId
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        return userInfoService.updatePassword(userId,old_password,new_password);
     }
     
     /**

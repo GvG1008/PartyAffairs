@@ -2,7 +2,7 @@ package com.zqu.pa.service.userlogin;
 
 import java.util.List;
 
-
+import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.partybranch.PartyBranch;
 import com.zqu.pa.entity.userlogin.User;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
@@ -28,5 +28,8 @@ public interface UserService {
     PartyBranch getPartyBranch(String userId);
     */
     UserBasicInfo getUserBasicInfo(String userId);
+    
+    //管理员重置用户密码，默认密码
+    ServerResponse resetPassword(String userId);
 
 }

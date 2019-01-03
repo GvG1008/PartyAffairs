@@ -1,12 +1,17 @@
 package com.zqu.pa.test;
 
 import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 
 public class MD5Test {
     public static void main(String[] args){
-        //MD5：盐+密码+次数
-        Md5Hash md5Hash = new Md5Hash("789","789",1);
-        String psw_MD5 = md5Hash.toString();
-        System.out.println(psw_MD5);
+
+        String hashAlgorithmName = "MD5"; //方法
+        String credentials = "10011"; //加密前密码
+        int hashIterations = 1;  //次数
+        ByteSource credentialsSalt = ByteSource.Util.bytes("10010"); //盐值
+        Object obj = new SimpleHash(hashAlgorithmName, credentials, credentialsSalt, hashIterations);
+        System.out.println(obj);
     }
 }

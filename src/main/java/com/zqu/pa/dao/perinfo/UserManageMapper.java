@@ -25,4 +25,9 @@ public interface UserManageMapper {
     int deleteUserPersonInfo(@Param("userIds")List<String> userIds);
     //批量删除用户党员信息
     int deleteUserPartyInfo(@Param("userIds")List<String> userIds);
+    
+    //用户修改自己密码
+    int updatePassword(@Param("userId")String userId, @Param("oldPassword")String old_password,  @Param("newPassword")String new_password);
+    //判断输入的密码是否正确
+    int checkPassword(@Param("userId")String userId, @Param("password")String password);
 }

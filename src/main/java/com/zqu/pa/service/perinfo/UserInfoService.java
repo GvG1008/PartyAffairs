@@ -2,6 +2,7 @@ package com.zqu.pa.service.perinfo;
 
 import java.util.List;
 
+import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.perinfo.UserPartyInfo;
 import com.zqu.pa.entity.perinfo.UserPersonInfo;
 import com.zqu.pa.vo.perinfo.AllUserInfo;
@@ -56,4 +57,7 @@ public interface UserInfoService {
 
     //更新头像
     int updateImgHead(String fullPath, String userId);
+
+    //修改密码
+    ServerResponse updatePassword(String userId, String old_password, String new_password);
 }

@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.crypto.hash.Md5Hash;
-import org.mybatis.generator.codegen.mybatis3.model.ExampleGenerator;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.test.annotation.Rollback;
@@ -342,9 +342,10 @@ public class UserInfoServiceImpl implements UserInfoService {
             //密码初始为账号id
             password = user.getUserId();
         }
-        //MD5：盐+密码+次数
-        Md5Hash md5Hash = new Md5Hash(password,password,1);
-        password = md5Hash.toString();
+        //MD5加密：盐为userId
+        //盐
+        ByteSource credentialsSalt = ByteSource.Util.bytes(user.getUserId());
+        password = new SimpleHash("MD5", password, credentialsSalt, 1).toString();
         userLoginInfo.setPassword(password);
         userLoginInfo.setRoleId(1);
         userLoginInfo.setState(0);
@@ -441,5 +442,24 @@ public class UserInfoServiceImpl implements UserInfoService {
         info.setUserId(userId);
         info.setImgHead(fullPath);
         return userPersonInfoDao.updateByPrimaryKeySelective(info);
+    }
+
+    @Override
+    public ServerResponse updatePassword(String userId, String old_password, String new_password) {
+
+        //MD5加密：盐为userId
+        //盐
+        ByteSource credentialsSalt = ByteSource.Util.bytes(userId);
+        new_password = new SimpleHash("MD5", new_password, credentialsSalt, 1).toString();
+        old_password = new SimpleHash("MD5", old_password, credentialsSalt, 1).toString();
+
+        int num = userManageDao.checkPassword(userId, old_password);
+        if(num == 0) {
+            return ServerResponse.createByErrorMessage("密码输入失败");
+        }
+        boolean result = userManageDao.updatePassword(userId,old_password,new_password)>0;
+        if(!result)
+            return ServerResponse.createByErrorMessage("修改失败");
+        return ServerResponse.createBySuccessMessage("修改成功");
     }
 }

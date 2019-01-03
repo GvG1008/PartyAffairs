@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.management.RuntimeErrorException;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import com.zqu.pa.dao.role.RoleMapper;
 import com.zqu.pa.dao.role.RolePermissionMapper;
 import com.zqu.pa.entity.role.Permission;
 import com.zqu.pa.entity.role.Role;
+import com.zqu.pa.realm.UserRealm;
 import com.zqu.pa.service.role.RolePermissionService;
 
 @Service
@@ -20,6 +22,9 @@ public class RolePermissionServiceImpl implements RolePermissionService {
 
     //默认身份roleId:1 普通党员
     public static final int DEFAULT_ROLE = 1;
+    
+    @Autowired 
+    private UserRealm userRealm;
     
     @Autowired
     RoleMapper roleDao;
@@ -58,6 +63,13 @@ public class RolePermissionServiceImpl implements RolePermissionService {
         if(!result1||!result2) {
             throw new RuntimeException();
         }
+        /**
+         * 在权限修改后
+         * 在service调用此方法UserRealm.clearCached()
+         * 可以及时清空用户缓存
+         * 达到权限修改立即生效的目的
+         */
+        userRealm.clearCached();
         return ServerResponse.createBySuccessMessage("删除成功");
     }
 
@@ -104,6 +116,14 @@ public class RolePermissionServiceImpl implements RolePermissionService {
                 throw new RuntimeException("操作失败，回滚");
             }
         }
+
+        /**
+         * 在权限修改后
+         * 在service调用此方法UserRealm.clearCached()
+         * 可以及时清空用户缓存
+         * 达到权限修改立即生效的目的
+         */
+        userRealm.clearCached();
         return ServerResponse.createBySuccessMessage("修改权限成功");
     }
 
