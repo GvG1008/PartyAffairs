@@ -4,8 +4,7 @@
 new Vue({
 	el : "#msg",
 	data: {
-		datas: [],
-		datatype:[]
+		datas: []
 	},
 	methods:{
 		loadNewMessages: function() {
@@ -13,13 +12,12 @@ new Vue({
 			var app = this;
 			$.ajax({
 				type:'get',
-				url:'',//TODO 接口缺失
+				url:'../../meetingList',
 				async : false,
 				dataType: 'json',
 				success: function(result){
 					if (result.status == 0) {
 						app.datas = result.data;
-						app.datatype = datatype;
 					}else{
 						alert(result.msg);
 					}
@@ -45,7 +43,7 @@ new Vue({
         "bAutoWidth" : true, //是否自适应宽度  
         "aLengthMenu" : [5, 10, 20], //更改显示记录数选项 
         "iDisplayLength" : 5, //默认显示的记录数  
-        "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0,7 ] }],
+        "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0,6 ] }],
         "order": [[ 1, 'asc' ]],
         "sDom": '<"row" <"col-sm-8" <"#add">> <"col-sm-4" <"row" <"col-sm-6" l> <"col-sm-6" f>>>>t<"row" <"col-sm-6" i> <"col-sm-6" p>>',
         language: {
@@ -157,7 +155,7 @@ function deletemsg(obj){
 	var tds = $(obj).parent().parent().parent().find('td');
 	var label = tds.eq(1).find('label');
 	var sid = label.eq(0).text();
-	var text="确定要取消该文章吗?";
+	var text="确定要取消该会议吗?";
 	document.getElementById('show_msg').innerHTML=text;
 	$('.popup_de').addClass('bbox');
 	$('.popup_de .btn-danger').one('click',function(){
@@ -165,9 +163,9 @@ function deletemsg(obj){
 	})
 }
 function doDelete(data){
-	var url;
+	var url = "../../deleteMeeting/";
 	
-	$.ajax({  //TODO 接口缺失                          
+	$.ajax({                       
 		type:'post',        
         url:url+data, 
         dataType:'json',
@@ -176,14 +174,15 @@ function doDelete(data){
 			location.reload();	
         },
         error :function(){
-        	alert("系统出错，取消会议失败！");
+        	alert("系统出错，删除失败！");
+        	$('.popup_de').removeClass('bbox');
         }
    });
 }
 function doPass(data){
-	var url;
-	
-	$.ajax({   //TODO 接口缺失                         
+	var url = "../../checkMeeting/";
+	//alert(url+data);
+	$.ajax({                                   
 		type:'post',        
         url:url+data,   
         dataType:'json',
@@ -193,6 +192,7 @@ function doPass(data){
         },
         error :function(){
         	alert("系统出错，审核通过失败！");
+        	$('.popup_de').removeClass('bbox');
         }
    });
 }

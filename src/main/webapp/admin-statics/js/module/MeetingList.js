@@ -12,7 +12,7 @@ new Vue({
 			var app = this;
 			$.ajax({
 				type:'get',
-				url:'../../meetingList',//TODO 不明接口
+				url:'../../meetingList',
 				async : false,
 				dataType: 'json',
 				success: function(result){
@@ -129,9 +129,9 @@ function deletemsg(obj){
 	})
 }
 function doDelete(data){
-	var url;
+	var url = "../../deleteMeeting/";
 	
-	$.ajax({   //TODO 接口缺失                        
+	$.ajax({                       
 		type:'post',        
         url:url+data, 
         dataType:'json',
@@ -146,9 +146,9 @@ function doDelete(data){
    });
 }
 function doPass(data){
-	var url;
+	var url = "../../checkMeeting/";
 	
-	$.ajax({  //TODO 接口缺失                                     
+	$.ajax({                                   
 		type:'post',        
         url:url+data,   
         dataType:'json',

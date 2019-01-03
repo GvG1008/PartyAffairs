@@ -137,7 +137,7 @@ public class MeetingController {
         meeting.setContent(content);
         
       //封面图上传
-        if(!cover.isEmpty()) {
+        if(cover!=null && !cover.isEmpty()) {
             //判断是否为图片
             //。。
             //FTP上传
@@ -148,7 +148,7 @@ public class MeetingController {
             meeting.setCoverpath(null);
         
         //视频上传
-        if(!video.isEmpty()) {
+        if(video!=null && !video.isEmpty()) {
             //判断是否为视频文件
             //。。
             //FTP上传

@@ -45,7 +45,7 @@
 						<td><center>
 								<input type="checkbox" name="all" id="all" :value="r.id">
 							</center></td>
-						<td><center>{{r.title}}</center></td>
+						<td><center>{{r.title}}</center><label hidden="hidden">{{r.id}}</label></td>
 						<td><center>{{r.type}}</center></td>
 						<td v-if="r.branchId==1"><center>软件工程专业党支部</center></td>
 	        			<td v-else-if="r.branchId==2"><center>计算机科学与技术专业党支部</center></td>
