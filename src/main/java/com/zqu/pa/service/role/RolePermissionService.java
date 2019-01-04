@@ -26,5 +26,7 @@ public interface RolePermissionService {
 
     //修改权限列表
     ServerResponse updateRolePermissionList(Integer roleId, List<Integer> permissionList);
-
+    
+    //获取所有权限列表
+    ServerResponse getAllPermissionList();
 }

@@ -128,4 +128,15 @@ public class RolePermissionServiceImpl implements RolePermissionService {
         return ServerResponse.createBySuccessMessage("修改权限成功");
     }
 
+	@Override
+	public ServerResponse getAllPermissionList() {
+
+		List<Permission> permissionList = permissionDao.selectAllPermission();
+		if(permissionList == null || permissionList.size()==0) {
+			return ServerResponse.createByErrorMessage("获取失败");
+	    }
+
+		return ServerResponse.createBySuccess(permissionList);
+	}
+
 }
