@@ -16,7 +16,7 @@
     insert into study_video_must (video_id, user_id)
     values (#{videoId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR})
   </insert>
-  <select id="selectIsAlready">
+  <select id="selectIsAlready" resultType="integer">
     select already from study_video_must where user_id = #{userId}
     and video_id = #{videoId}
   </select>
