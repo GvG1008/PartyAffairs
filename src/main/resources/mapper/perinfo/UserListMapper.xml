@@ -23,7 +23,7 @@
     LEFT JOIN role r ON r.role_id = ul.role_id
     LEFT JOIN user_person_info upe ON upe.user_id = upa.user_id
     WHERE upe.check_state = #{checkState}
-    <if test="branchId==0">
+    <if test="branchId!=0">
     AND ul.role_id not in (SELECT rp.role_id from role_permission rp left join permission_menu pm ON pm.permission_id = rp.permission
                             WHERE permission_name = 'role:admin')
     </if>
@@ -45,7 +45,7 @@
     LEFT JOIN user_person_info upe ON upe.user_id = upa.user_id
     LEFT JOIN user_person_info upee ON upee.user_id = upe.create_id
     WHERE upe.check_state = 0
-    <if test="branchId==0">
+    <if test="branchId!=0">
     AND ul.role_id not in (SELECT rp.role_id from role_permission rp left join permission_menu pm ON pm.permission_id = rp.permission
                             WHERE permission_name = 'role:admin')
     </if>
