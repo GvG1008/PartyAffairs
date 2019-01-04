@@ -21,7 +21,7 @@
   <insert id="insertRolePermissions">
     Insert into role_permission(role_id, permission)
     Values
-    <foreach collection="permissions" index="index" item="permission" separator="," open="(" close=")">
+    <foreach collection="permissions" index="index" item="permission" separator="),(" open="(" close=")">
       #{roleId}, 
       #{permission}
     </foreach>
