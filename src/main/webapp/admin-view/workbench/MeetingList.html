@@ -34,6 +34,7 @@
 						<th>标题</th>
 						<th>会议类型</th>
 						<th>所属党支部</th>
+						<th>点击数</th>
 						<th>发起人</th>
 						<th>发布时间</th>
 						<th>操作</th>
@@ -52,11 +53,12 @@
 	        			<td v-else-if="r.branchId==3"><center>网络工程专业党支部</center></td>
 	        			<td v-else-if="r.branchId==4"><center>物联网工程专业党支部</center></td>
 	        			<td v-else-if="r.branchId==5"><center>数据科学与大数据技术专业党支部</center></td>
+						<td><center>{{r.click}}</center></td>
 						<td><center>{{r.creator}}</center></td>
 						<td><center>{{r.date}}</center></td>
 						<td>
 							<center>
-								<a class="btn btn-success os btn-xs" title="详情">
+								<a class="btn btn-success os btn-xs" title="详情" :href="'PreViewMeeting.html?id='+r.id">
 									详情<i class="fa fa-search ticon" aria-hidden="true"></i>
 								</a>
 								<button class="btn btn-danger ow btn-xs" id="btn_delete" 

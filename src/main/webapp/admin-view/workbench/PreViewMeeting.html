@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <link rel="stylesheet" href="../../admin-statics/table/bootstrap.css" />
+    <link href="../../admin-statics/table/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../../admin-statics/table/dataTables.responsive.css" rel="stylesheet">
+<!--    <link href="../../admin-statics/table/sb-admin-2.css" rel="stylesheet">
+-->    <link href="../../admin-statics/table/font-awesome.css" rel="stylesheet" />
+    <!--<link href="../../admin-statics/table/style.css" rel="stylesheet" />
+    <link href="../../admin-statics/table/style-responsive.css" rel="stylesheet" />-->
+            <link href="../../admin-statics/css/workbench/table.css" rel="stylesheet" >
+    </head>
+    <body>
+        
+        <div class="publicity" id="publicity">
+            <div class = "header"><a href="javascript:history.go(-1)">会议列表</a>
+                  > 会议详情
+            </div>
+            <div class="publicity-header">
+                <div class="title">
+                    <h2>{{datas.title}}</h2>
+                </div>
+                <div class="matter">
+                    <p>
+                        <span v-if="datas.branchId==1">发布党支部：软件工程专业党支部</span>
+                        <span v-else-if="datas.branchId==2">发布党支部：计算机科学与技术专业党支部</span>
+                        <span v-else-if="datas.branchId==3">发布党支部：网络工程专业党支部</span>
+                        <span v-else-if="datas.branchId==4">发布党支部：物联网工程专业党支部</span>
+                        <span v-else-if="datas.branchId==5">发布党支部：数据科学与大数据技术专业党支部</span>
+                        <span v-else>发布党支部：未知</span>
+                        <span>发布时间：{{datas.date}}</span>
+                        <span v-if="datas.click">浏览量：{{datas.click}}次</span>
+                        <span v-else>浏览量：无</span>
+                    </p>
+                </div>
+            </div>
+            <div class="publicity-content">
+                <div class="details" id="details">
+                </div>
+            </div>
+        </div>
+        
+        <link rel="stylesheet" href="../../statics/css/publicity.css" />
+        <script type="text/javascript" src="../../admin-statics/js/lib/jquery/1.9.1/jquery.js" ></script>
+        <script src="../../statics/js/vue.js"></script>
+        <script type="text/javascript" src="../../admin-statics/js/module/PreViewMeeting.js"></script>
+    </body>
+</html>

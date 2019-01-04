@@ -43,7 +43,7 @@ new Vue({
         "bAutoWidth" : true, //是否自适应宽度  
         "aLengthMenu" : [5, 10, 20], //更改显示记录数选项 
         "iDisplayLength" : 5, //默认显示的记录数  
-        "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0,6 ] }],
+        "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0,7 ] }],
         "order": [[ 1, 'asc' ]],
         "sDom": '<"row" <"col-sm-8" <"#add">> <"col-sm-4" <"row" <"col-sm-6" l> <"col-sm-6" f>>>>t<"row" <"col-sm-6" i> <"col-sm-6" p>>',
         language: {
@@ -67,10 +67,7 @@ new Vue({
 		
     });
 	
-	var button = "<button type='button' class='btn btn-success tp' onclick='window.parent.aclick()'>" 
-		+"<span class='glyphicon glyphicon-plus icon'></span><span class='caption'>发起会议</span></button> " 
-	    +"&nbsp;&nbsp;&nbsp;&nbsp;"
-		+"<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'>" 
+	var button = "<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'>" 
 		+"<span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> " 
 		+"&nbsp;&nbsp;&nbsp;&nbsp;"
 		+"<a class='btn btn-danger td' onclick='deleteall()'><span class='fa fa-trash-o icon'></span>" 

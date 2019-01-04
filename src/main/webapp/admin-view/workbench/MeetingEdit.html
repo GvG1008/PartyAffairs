@@ -27,7 +27,7 @@
 </head>
 <body>
     <form>
-    <div class=container>
+    <div class="container">
          <div class = "header">
                             <a href="MeetingApprovedList.html">会议管理</a>   > 发布会议
          
@@ -105,11 +105,11 @@
                       <div class="modal-body">
                          <h5><b>请在以下列表选择发起会议的党支部</b></h5>
                          <div id="branch">
-	                         <div class="radio" v-for="r in branch">
-							    <label>
-							        <input type="radio" name="optionsRadios" :id="r.id" :value="r.BranchName"> {{r.BranchName}}
-							    </label>
-							</div>
+                             <div class="radio" v-for="r in branch">
+                                <label>
+                                    <input type="radio" name="optionsRadios" :id="r.id" :value="r.BranchName"> {{r.BranchName}}
+                                </label>
+                            </div>
                          </div>                        
                       </div>
                       <div class="modal-footer">
@@ -127,13 +127,13 @@
                 
                 <!-- 视频上传  -->
                 <div class="textareawrap">
-				    <!-- <div align="left">				 
-				        <span class="btn btn-success fileinput-button">
-				            <span>视频上传</span>
-				            <input type="file">
-				        </span>
-				    </div> -->
-				    <button type="button" class="btn btn-default" disabled="disabled">视频上传(功能尚未开放)</button>
+                    <!-- <div align="left">              
+                        <span class="btn btn-success fileinput-button">
+                            <span>视频上传</span>
+                            <input type="file">
+                        </span>
+                    </div> -->
+                    <button type="button" class="btn btn-default" disabled="disabled">视频上传(功能尚未开放)</button>
                 </div>
                 
                 <div class="editorWrap">
