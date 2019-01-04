@@ -71,6 +71,19 @@ function sendarticle(){
 		alert("标题不能为空！");
 		return;
 	}
+	
+	
+	//获取所选的用户id
+	var userID = new Array();
+	var zTree = $.fn.zTree.getZTreeObj("treeDemo"), nodes = zTree
+	.getCheckedNodes(true), v = "";
+	for(var i=0;i<nodes.length;i++){
+		if(nodes[i].check_Child_State == -1 && nodes[i].id >=100){//可能存在的bug
+			userID.push(nodes[i].id);
+		}       
+    }
+	
+	
 	if(content == "<p><br></p>"){
 		alert("内容不能为空！");
 		return;
@@ -257,227 +270,6 @@ window.onload=function(){
 	
  });
 
- $(".positionbtn").click(function(){
-	$("#pModal").modal('show');
- });
- 
- $(function() {
-
-     var defaultData = [
-       {
-         text: '当前站点',
-         href: '#source',
-         tags: ['4'],
-         nodes: [
-           {
-             text: '通知公示',
-             href: '#notice',
-             tags: ['0']
-           },
-           {
-             text: '党内要闻',
-             href: '#news',
-             tags: ['0']
-           },
-           {
-               text: '党内公示',
-               href: '#news',
-               tags: ['0']
-           },
-           {
-                text: '院组织架构',
-                href: '#yunit',
-                tags: ['0'] 
-           },
-           {
-            	text: '党支部组织架构',
-                href: '#djunit',
-               tags: ['0'] 
-            }
-         ]
-       }
-     ];
-
-     var $checkableTree = $('#treeview-checkable').treeview({
-       data: defaultData,
-       showIcon: false,
-       showCheckbox: true,
-       onNodeChecked: function(event, node) {
-    	   var selectNodes = getChildNodeIdArr(node); //获取所有子节点
-    	   var flag = 1;
-           if (selectNodes) { //子节点不为空，则选中所有子节点
-               $('#treeview-checkable').treeview('checkNode', [selectNodes, { silent: true }]);
-               
-               for (x in node.nodes) {
-            	   flag=0;
-            	   console.log("length:"+node.nodes.length);
-            	   if (!node.nodes[x].nodes) {
-            		   //通过节点数组长度判断当前所选节点为全选还是组织结构节点，为4是全选，2为组织架构
-            		  /* if(node.nodes.length==2){
-            			   $("#"+node.nodes[x].nodeId).detach();
-                		   $('#checkable-output').prepend('<li id='+node.nodes[x].nodeId+'> <b>当前站点 </b>下的  <b>组织架构</b>下的   <b>'+ node.nodes[x].text + '</b> 栏目 </li>');
-                       }else{*/
-	            		   $("#"+node.nodes[x].nodeId).detach();
-	            		   $('#checkable-output').prepend('<li id='+node.nodes[x].nodeId+'> <b>当前站点 </b>下的  <b>'+ node.nodes[x].text + '</b> 栏目 </li>');
-                       /*}*/
-            		   console.log("if(!!node.nodes[x].nodes)::"+node.nodes[x].text );
-            	   }
-            	   if (node.nodes[x].nodes) {
-                       var getNodeDieDai = node.nodes[x];
-                       for (j in getNodeDieDai.nodes) {
-                    	   console.log("if(node.nodes[x].nodes)::"+getNodeDieDai.nodes[j].text );
-                    	   $("#"+node.nodes[x].nodes[j].nodeId).detach();
-                    	   $('#checkable-output').prepend('<li id='+node.nodes[x].nodes[j].nodeId+'> <b>当前站点 </b>下的  <b>'+ node.nodes[x].text +'</b>下的<b> '+getNodeDieDai.nodes[j].text + '</b> 栏目 </li>');
-                    	    
-                       }
-                   }  
-               }
-               if(flag==1){
-            	   console.log("node:"+node.nodeId+":"+node.text); 
-            	   $("#"+node.nodeId).detach();
-            	   $("#n["+node.nodeId+"]").detach();
-            	   $('#checkable-output').prepend('<li id='+node.nodeId+'> <b>当前站点 </b>下的  <b>'+ node.text + '</b> 栏目 </li>');
-            	  
-               }
-            }
-           var parentNode = $("#treeview-checkable").treeview("getNode", node.parentId);
-           setParentNodeCheck(node);
-           
-       },
-       onNodeUnchecked: function (event, node) {
-    	   var selectNodes = getChildNodeIdArr(node); //获取所有子节点
-    	   var flag = 1;
-           if (selectNodes) { //子节点不为空，则取消选中所有子节点
-               $('#treeview-checkable').treeview('uncheckNode', [selectNodes, { silent: true }]);
-               
-               for (x in node.nodes) {
-            	   flag=0;
-            	  if (!node.nodes[x].nodes) {
-            		   $("#"+node.nodes[x].nodeId).detach();
-                   }
-            	   if (node.nodes[x].nodes) {
-                       var getNodeDieDai = node.nodes[x];
-                       for (j in getNodeDieDai.nodes) {
-                    	    $("#"+node.nodes[x].nodes[j].nodeId).detach();
-                       }
-                   }  
-               }
-               if(flag==1){
-            	   console.log("node:"+node.nodeId+":"+node.text);  
-            	   $("#"+node.nodeId).detach();
-               }
-           }
-       }
-     });
-
-    
-    
-     // Check/uncheck/toggle nodes
-     $('#input-check-node').on('keyup', function (e) {
-       checkableNodes = findCheckableNodess();
-       $('.check-node').prop('disabled', !(checkableNodes.length >= 1));
-     });
-
-     $('#positionbtn').on('click', function (e) {
-    	 $(".ptext").each(function() {
-
-    	   var checkableNodes = $checkableTree.treeview('search', [$(this).text(), { ignoreCase: false, exactMatch: false } ]);
-    	   $checkableTree.treeview('checkNode', [ checkableNodes, { silent: $('#chk-check-silent').is(':checked') }]);
-	       
-		    
-    	 } );
-    });
-
-     $('#btn-uncheck-node.check-node').on('click', function (e) {
-       $checkableTree.treeview('uncheckNode', [ checkableNodes, { silent: $('#chk-check-silent').is(':checked') }]);
-     });
-
-     $('#btn-toggle-checked.check-node').on('click', function (e) {
-       $checkableTree.treeview('toggleNodeChecked', [ checkableNodes, { silent: $('#chk-check-silent').is(':checked') }]);
-     });
-
-     // Check/uncheck all
-     $('#btn-check-all').on('click', function (e) {
-       $checkableTree.treeview('checkAll', { silent: $('#chk-check-silent').is(':checked') });
-     });
-
-     $('#btn-uncheck-all').on('click', function (e) {
-       $checkableTree.treeview('uncheckAll', { silent: $('#chk-check-silent').is(':checked') });
-     });
-     
-     function getChildNodeIdArr(node) {
-         var ts = [];
-         if (node.nodes) {
-             for (x in node.nodes) {
-                 ts.push(node.nodes[x].nodeId);
-                 if (node.nodes[x].nodes) {
-                     var getNodeDieDai = getChildNodeIdArr(node.nodes[x]);
-                     for (j in getNodeDieDai) {
-                         ts.push(getNodeDieDai[j]);
-                     }
-                 }
-             }
-         } else {
-             ts.push(node.nodeId);
-         }
-         
-         return ts;
-     }
-
-     function setParentNodeCheck(node) {
-         var parentNode = $("#treeview-checkable").treeview("getNode", node.parentId);
-         if (parentNode.nodes) {
-             var checkedCount = 0;
-             for (x in parentNode.nodes) {
-                 if (parentNode.nodes[x].state.checked) {
-                     checkedCount ++;
-                 } else {
-                     break;
-                 }
-             }
-             if (checkedCount === parentNode.nodes.length) {
-                 $("#treeview-checkable").treeview("checkNode", parentNode.nodeId);
-                 setParentNodeCheck(parentNode);
-             }
-         }
-     }
-     
-     $("#modalbtn").click(function(){
-    	 /*console.log("#modalbtn");*/
-    	 var vnode = $('#treeview-checkable').treeview('getChecked');
-    	 $('#ppp').empty();
-    	 for(x in vnode){
-    		 console.log("x["+x+"]");
-    		 if(vnode[x].text!="当前站点"){
-    		 
-    		   $('#ppp').prepend(
-                     '<label class="position" id=x['+x+']><i class="fa fa-circle"></i>当前站点    ——  <span class="ptext">'+vnode[x].text+'</span><span class="minusbtn"></span></label>');
-    		  
-    		}
-    	     console.log("treeview-node:"+vnode[x].text);
-         }
-     });
-     
-     $("#modalclose").click(function(){
-    	 $checkableTree.treeview('uncheckAll', { silent: $('#chk-check-silent').is(':checked') });
-     });
-     
-    /*$("span.minusbtn").each(function(){
-    	
-        $(this).click(function(){
-        	$(this).parent("label").detach();
-    	 });
-     });*/
-     $("#ppp").on("click",".minusbtn", function() {
-         //do something here
-    	 $(this).parent("label").detach();
-     });
-     
-     
-
-});
-
-
 var labels = new Vue({
 	el:"#lebel_block",
 	data:{
@@ -525,5 +317,243 @@ function changeLabelState(e){
 		checkedLabelID.splice($.inArray(e.target.dataset.id,checkedLabelID),1);
 	}
 	console.log(checkedLabelID,checkedLabelID.length)
+}
+
+
+$(function() {
+	var setting = {
+		check : {
+			enable : true,
+		/* chkboxType: {"Y":"", "N":""} */
+		},
+		view : {
+			dblClickExpand : false,
+			nameIsHTML : true, // 允许name支持html
+			selectedMulti : false
+		},
+		data : {
+			simpleData : {
+				enable : true
+			}
+		},
+		callback : {
+			beforeClick : beforeClick,
+			onCheck : onCheck
+		}
+	};
+	
+	var zNodes = [ {
+		id : 1,
+		pId : 0,
+		name : "软件工程专业党支部",
+		open : true
+	}, {
+		id : 2,
+		pId : 0,
+		name : "计算机科学与技术专业党支部",
+		open : true
+	}, {
+		id : 3,
+		pId : 0,
+		name : "网络工程专业党支部",
+		open : true
+	}, {
+		id : 4,
+		pId : 0,
+		name : "物联网专业党支部",
+		open : true
+	}, {
+		id : 5,
+		pId : 0,
+		name : "数据科学与大数据技术专业党支部",
+		open : true
+	}, {
+		id : 11,
+		pId : 1,
+		name : "正式党员"
+	}, {
+		id : 12,
+		pId : 1,
+		name : "预备党员"
+	}, {
+		id : 13,
+		pId : 1,
+		name : "发展对象"
+	}, {
+		id : 14,
+		pId : 1,
+		name : "积极分子"
+	}, {
+		id : 21,
+		pId : 2,
+		name : "正式党员"
+	}, {
+		id : 22,
+		pId : 2,
+		name : "预备党员"
+	}, {
+		id : 23,
+		pId : 2,
+		name : "发展对象"
+	}, {
+		id : 24,
+		pId : 2,
+		name : "积极分子"
+	}, {
+		id : 31,
+		pId : 3,
+		name : "正式党员"
+	}, {
+		id : 32,
+		pId : 3,
+		name : "预备党员"
+	}, {
+		id : 33,
+		pId : 3,
+		name : "发展对象"
+	}, {
+		id : 34,
+		pId : 3,
+		name : "积极分子"
+	}, {
+		id : 41,
+		pId : 4,
+		name : "正式党员"
+	}, {
+		id : 42,
+		pId : 4,
+		name : "预备党员"
+	}, {
+		id : 43,
+		pId : 4,
+		name : "发展对象"
+	}, {
+		id : 44,
+		pId : 4,
+		name : "积极分子"
+	}, {
+		id : 51,
+		pId : 5,
+		name : "正式党员"
+	}, {
+		id : 52,
+		pId : 5,
+		name : "预备党员"
+	}, {
+		id : 53,
+		pId : 5,
+		name : "发展对象"
+	}, {
+		id : 54,
+		pId : 5,
+		name : "积极分子"
+	}, 
+
+	];
+	
+	$.ajax({
+		type : "get",
+		url : "../../userManage/userListByBranch",
+		async : false,
+		dataType : 'json',
+		success : function(result) {
+			if (result.status == 0) {
+				data = result.data;
+				//alert("查询成功");
+				$.each(data,function(index,item){
+					//alert(item.userId);
+					if(item.roleId!=0){
+						parentId = item.branchId*10+item.roleId;					
+						zNodes.push({
+			                id:item.userId,  //本身id
+			                pId:parentId, //父级id
+			                name:item.realName//显示的名称
+			            });	
+					}
+				})
+				      
+			} else {
+				alert(result.msg);
+			}
+		}
+	});
+
+	$(document).ready(function() {
+		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		fuzzySearch('treeDemo', '#key', null, true); // 初始化模糊搜索方法
+
+	});
+	
+})
+
+function beforeClick(treeId, treeNode) {
+	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+	zTree.checkNode(treeNode, !treeNode.checked, null, true);
+	return false;
+}
+
+function onCheck(e, treeId, treeNode) {
+	var zTree = $.fn.zTree.getZTreeObj("treeDemo"), nodes = zTree
+			.getCheckedNodes(true), v = "";
+	var parentId = -1;
+	var flag = 0;
+	/*console.log(nodes.length + ":" + nodes[0].name + ":"+ nodes[nodes.length - 1].name);*/
+
+	for (var i = 0, l = nodes.length; i < l; i++) {
+		/*console.log("nodes[i]：" + nodes[i].name + "::::" + i);
+		console.log("nodes[i].check_Child_State：" + nodes[i].check_Child_State);*/
+		if (nodes[i].level == 0) {
+			flag = 0;
+		}
+		if (nodes[i].check_Child_State == 2) {// 子节点全被选中
+
+			//console.log("node[" + i + "].getParentNode():"+ nodes[i].getParentNode());
+			if (nodes[i].level == 0) {
+				v += nodes[i].name + ",";
+				flag = 1;
+			}
+
+			if (flag == 1) {
+				parentId = i;
+			} else {
+				v += nodes[i].name + ",";
+				parentId = i;
+			}
+
+		} else if (nodes[i].check_Child_State == -1) {// 子节点没被选中
+			if (nodes[parentId] != nodes[i].getParentNode())
+				v += nodes[i].name + ",";
+		} else if (nodes[i].check_Child_State == 1) {
+			v += nodes[i].name + ",";
+
+		}
+	}
+	if (v.length > 0)
+		v = v.substring(0, v.length - 1);
+	var cityObj = $("#citySel");
+	cityObj.attr("value", v);
+}
+
+function showMenu() {
+	var cityObj = $("#citySel");
+	var cityOffset = $("#citySel").offset();
+	$("#menuContent").css({
+		left : cityOffset.left + "px",
+		top : cityOffset.top + cityObj.outerHeight() + "px",
+		"z-index" : 99999
+	}).slideDown("fast");
+
+	$("body").bind("mousedown", onBodyDown);
+}
+function hideMenu() {
+	$("#menuContent").fadeOut("fast");
+	$("body").unbind("mousedown", onBodyDown);
+}
+function onBodyDown(event) {
+	if (!(event.target.id == "menuBtn" || event.target.id == "citySel"
+			|| event.target.id == "menuContent" || $(event.target).parents(
+			"#menuContent").length > 0)) {
+		hideMenu();
+	}
 }
        

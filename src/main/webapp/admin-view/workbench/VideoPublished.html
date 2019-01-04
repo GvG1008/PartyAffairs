@@ -7,8 +7,10 @@
 		<link href="../../admin-statics/css/bootstrap/3.0.2/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 		<link href="../../admin-statics/css/font-awesome/4.7.0/font-awesome.css" rel="stylesheet">
 		<link href="../../admin-statics/css/workbench/summernote.css" rel="stylesheet">
-
+		<link href="../../admin-statics/css/workbench/borain-timeChoice.css" rel="stylesheet" >
+		<link href="../../admin-statics/css/workbench/zTreeStyle.css" rel="stylesheet">
 		<link href="../../admin-statics/css/workbench/DocumentPublished.css" rel="stylesheet">
+		<link href="../../admin-statics/css/workbench/ExamAdd.css" rel="stylesheet" >
 
 	</head>
 
@@ -81,11 +83,28 @@
 					</div>
 					
 					<div id="lebel_block" class="label_block">
-						<p>请选择文档标签：</p>
+						<p>请选择视频标签：</p>
 						<span v-for="item in labels" @click="change" :data-id = "item.labelId" class="span-em">{{item.labelName}}</span>
 						
 					</div>
 					<br />
+					
+					<!-- 必学对象 -->
+					<div class="textareawrap">
+						<div class="form-group">
+			                 <label class="lname">选择必学对象</label>
+			                 <input id="citySel" class="form-control" type="text" readonly value="" onclick="showMenu();" />
+			                 <button class="zTreeSelect" onclick="showMenu(); return false;">
+			                 <i class="fa fa-list"></i>选择对象
+			                 </button>
+			                 <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+							  <label style="display:flex">  
+							     <p>搜索：</p><input type="text" id="key" value="" class="empty form-control"/>
+							  </label> 
+							     <ul id="treeDemo" class="ztree"></ul>
+							 </div>
+			            </div>
+		            </div>
 					
 
 					<!-- 编辑器  -->
@@ -104,8 +123,12 @@
 		<script type="text/javascript" src="../../admin-statics/js/lib/jquery/1.12.4/jquery.min.js"></script>
 		<script type="text/javascript" src="../../admin-statics/js/extends/bootstrap/3.3.7/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../../admin-statics/js/extends/summernote.js"></script>
-		<script type="text/javascript" src="../../admin-statics/js/extends/bootstrap-treeview.js"></script>
 		<script type="text/javascript" src="../../statics/js/vue.js" ></script>
+		<script type="text/javascript" src="../../admin-statics/js/extends/borain-timeChoice.js"></script>
+        <script type="text/javascript" src="../../admin-statics/js/extends/bootstrap-treeview.js"></script>
+        <script type="text/javascript" src="../../admin-statics/js/extends/jquery.ztree.all.js"></script>
+        <script type="text/javascript" src="../../admin-statics/js/extends/jquery.ztree.exhide.js"></script>
+        <script type="text/javascript" src="../../admin-statics/js/extends/fuzzysearch.js"></script>
 		<script type="text/javascript" src="../../admin-statics/js/module/VideoPublished.js"></script>
 
 		<script type="text/javascript">
