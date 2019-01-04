@@ -18,6 +18,10 @@
         	<div class="document-matter">
         		<a :href="document.filePath">下载链接>></a>
         	</div>
+        	<div id="" style="float: right;">
+        		<button v-if="state == 1" type="button" disabled="true">已学习</button>
+        		<button v-else type="button" @click="learned()">学习后请点击</button>
+        	</div>
        	</div>
        	
        

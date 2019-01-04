@@ -11,7 +11,8 @@ var dvideo = new Vue({
 	el :'#dvideo',
 	data :{
 		dvideo:[],
-		url:[]
+		url:[],
+		state:-1
 	},
 	created:function(){
 		var self = this;
@@ -28,7 +29,17 @@ var dvideo = new Vue({
 					alert(result.msg);
 				}
 			}
-		})
+		});
+		$.ajax({
+			type:"get",
+			url:"../study/get_study_video_already_state/"+id,
+			async:true,
+			success:function(res){
+				if(res.status == 0){
+					self.state = res.data.already
+				}
+			}
+		});
 	},
 	methods: {
         loadUrl: function(path){
@@ -36,7 +47,18 @@ var dvideo = new Vue({
 			this.$nextTick(function () {
 				self.url = path;				
               })
-        }
+        },
+        learned:function(){
+			var that = this;
+			$.ajax({
+				type:"post",
+				url:"../study/set_study_video_already/"+id,
+				async:true,
+				success:function(res){
+					location.reload();
+				}
+			});
+		}
       }
 })
 $(document).ready(function(){

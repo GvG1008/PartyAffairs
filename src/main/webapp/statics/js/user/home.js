@@ -137,7 +137,9 @@ $(document).ready(function(){
 	
 	$("#info").mouseenter(function(){
 		var left = document.getElementById("info").getBoundingClientRect().left;
+		var top = document.getElementById("info").getBoundingClientRect().top;
 		document.getElementById("ainfo").style.left = left+"px";
+		document.getElementById("ainfo").style.top = top+"55px";
 		$(".info").show();
 	});
 	$("#ainfo").mouseenter(function(){
@@ -148,6 +150,23 @@ $(document).ready(function(){
 	});
 	$("#ainfo").mouseleave(function(){
 		$(".info").hide();
+	});
+	
+	$("#manager").mouseenter(function(){
+		var left = document.getElementById("manager").getBoundingClientRect().left;
+		var top = document.getElementById("manager").getBoundingClientRect().top;
+		document.getElementById("amanager").style.left = left+"px";
+		document.getElementById("amanager").style.top = top+"55px";
+		$(".manager").show();
+	});
+	$("#amanager").mouseenter(function(){
+		$(".manager").show();
+	});
+	$("#manager").mouseleave(function(){
+		$(".manager").hide();
+	});
+	$("#amanager").mouseleave(function(){
+		$(".manager").hide();
 	});
 	
 	/*
@@ -208,6 +227,7 @@ var head = new Vue({
 			url: "../loginInfo", 
 			dataType: "json",
 			success: function(result) { 
+				console.log(result)
 				self.user = result.data;
 			}			
 		})

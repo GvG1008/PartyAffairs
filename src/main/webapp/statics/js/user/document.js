@@ -10,7 +10,8 @@ var id=getUrlParam('id');//资料id
 var document = new Vue({
 	el :'#document',
 	data :{
-		document:[]
+		document:[],
+		state:-1
 	},
 	created:function(){
 		var self = this;
@@ -25,6 +26,29 @@ var document = new Vue({
 					alert(result.msg);
 				}
 			}
-		})
+		});
+		$.ajax({
+			type:"get",
+			url:"../study/get_study_document_already_state/"+id,
+			async:true,
+			success:function(res){
+				if(res.status == 0){
+					self.state = res.data.already
+				}
+			}
+		});
+	},
+	methods:{
+		learned:function(){
+			var that = this;
+			$.ajax({
+				type:"post",
+				url:"../study/set_study_document_already/"+id,
+				async:true,
+				success:function(res){
+					location.reload();
+				}
+			});
+		}
 	}
 })

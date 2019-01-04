@@ -138,7 +138,7 @@ public class StudyController {
             @RequestParam(value = "upload_img") MultipartFile img, HttpServletRequest request, HttpSession session,
             @RequestParam(value = "document_title") String title,
             @RequestParam(value = "document_introduction") String introduction,
-            @RequestParam(value = "label_id") String[] labelId) {
+            @RequestParam(value = "label_id") String[] labelId,@RequestParam(value = "userId") String[] userId) {
         // TODO 判断是否登录，通过登录用户验证身份权限
         // TODO 校验参数的格式
         String userID = this.getUserid();
@@ -148,18 +148,18 @@ public class StudyController {
         StudyDocument sd = new StudyDocument(null, title, introduction, imgMap.get("http_url").toString(),
                 fileMap.get("download_url").toString(), userID, null, null);
         int labelCount = labelId.length;
-       // int userCount = userId.length;
+        int userCount = userId.length;
         ArrayList<StudyDocumentLabel> studyDocumentLabelList = Lists.newArrayList();
         ArrayList<StudyDocumentMust> studyDocumentMustList = Lists.newArrayList();
         for (String lid : labelId) {
             StudyDocumentLabel sdl = new StudyDocumentLabel(null, null, Integer.parseInt(lid));
             studyDocumentLabelList.add(sdl);
         }
-        //for (String uid : userId) {
+        for (String uid : userId) {
             StudyDocumentMust sdm = new StudyDocumentMust();
             sdm.setUserId(userID);
             studyDocumentMustList.add(sdm);
-       // }
+        }
         System.out.println(sd);
         System.out.println(studyDocumentLabelList);
         return iStudyService.uploadStudyDocument(sd, studyDocumentLabelList,studyDocumentMustList);
@@ -326,7 +326,7 @@ public class StudyController {
             @RequestParam(value = "upload_img") MultipartFile img, HttpServletRequest request, HttpSession session,
             @RequestParam(value = "video_title") String title,
             @RequestParam(value = "video_introduction") String introduction,
-            @RequestParam(value = "label_id") String[] labelId) {
+            @RequestParam(value = "label_id") String[] labelId,@RequestParam(value = "userId") String[] userId) {
         // TODO 判断是否登录，通过登录用户验证身份权限
         // TODO 校验参数的格式
         String userID = this.getUserid();
@@ -335,18 +335,18 @@ public class StudyController {
         Map imgMap = FTPSSMLoad.upload(img, request, "/video/");
         StudyVideo sv = new StudyVideo(null, title, introduction, imgMap.get("http_url").toString(), fileMap.get("http_url").toString(), userID, null, null);
         int labelCount = labelId.length;
-        //int userCount = userId.length;
+        int userCount = userId.length;
         ArrayList<StudyVideoLabel> studyVideoLabelList = Lists.newArrayList();
         ArrayList<StudyVideoMust> studyVideoMustList = Lists.newArrayList();
         for(String lid : labelId) {
             StudyVideoLabel svl = new StudyVideoLabel(null, null, Integer.parseInt(lid));
             studyVideoLabelList.add(svl);
         }
-       // for(String uid : userId) {
+        for(String uid : userId) {
             StudyVideoMust svm = new StudyVideoMust();
             svm.setUserId(userID);
             studyVideoMustList.add(svm);
-       // }
+        }
         return iStudyService.uploadStudyVideo(sv, studyVideoLabelList, studyVideoMustList);
     }
     

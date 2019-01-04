@@ -15,6 +15,10 @@
 			<div class="play" id="play"></div>
 			<div class="pause" id="pause"></div>
 			<div>{{dvideo.videoIntroduction}}{{dvideo.videoPath}}</div><!-- 简介已经放好，改位置和样式 -->
+			<div id="" style="float: right;">
+        		<button v-if="state == 1" type="button" disabled="true">已学习</button>
+        		<button v-else type="button" @click="learned()">学习后请点击</button>
+        	</div>
 		</div>
 		
 		<link rel="stylesheet" href="../statics/css/video.css" />
