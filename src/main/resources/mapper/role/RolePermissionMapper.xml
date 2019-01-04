@@ -45,4 +45,14 @@
      #{roleId}
     </foreach>
   </select>
+  
+  <select id="getAllbranch" resultType="com.zqu.pa.vo.perinfo.Branch">
+  SELECT * from partybranch
+  </select>
+  <select id="getRoleList" resultType="com.zqu.pa.vo.perinfo.Role">
+    SELECT role_id , role_name
+    FROM role
+    where role_id  in (SELECT rp.role_id from role_permission rp left join permission_menu pm ON pm.permission_id = rp.permission
+                            WHERE permission_name = 'role:admin')
+  </select>
 </mapper>
