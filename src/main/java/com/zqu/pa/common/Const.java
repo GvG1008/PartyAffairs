@@ -8,4 +8,6 @@ public class Const {
     public static final String HTTP_PREFIX = "http://47.106.223.234:19091";//ftp服务器资源访问前缀
     // TODO 下载文档接口要修改IP
     public static final String DOWN_INTERFACE = "http://localhost:8080/PartyAffairs/study/download_document.do?";//下载文档接口
+    //管理员账号权限字段
+    public static final String ADMIN_PERMISSION_NAME = "role:admin";
 }

@@ -29,4 +29,7 @@ public interface RolePermissionService {
     
     //获取所有权限列表
     ServerResponse getAllPermissionList();
+
+    //获取所有管理权限的账号列表
+    ServerResponse getAdminUserList();
 }

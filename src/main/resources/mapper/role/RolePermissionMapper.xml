@@ -27,4 +27,22 @@
     </foreach>
   </insert>
   
+  <select id="selectAdminRoleIdList" resultType="Integer">
+    SELECT role_id
+    FROM role_permission
+    WHERE permission in (SELECT permission_id FROM permission_menu WHERE permission_name = #{permissionName})
+  </select>
+  
+  <select id="selectAdminUserList" resultType="com.zqu.pa.vo.userInfo.AdminUserInfo">
+    SELECT up.name 'name', ul.user_id 'userId' , ul.password 'password', r.role_name 'roleName', pb.branch_name 'branchName'
+    FROM user_login ul
+    LEFT JOIN role r ON r.role_id = ul.role_id 
+    LEFT JOIN user_person_info up ON up.user_id = ul.user_id
+    LEFT JOIN user_party_info upi ON upi.user_id = ul.user_id
+    LEFT JOIN partybranch pb ON pb.branch_id = upi.branch_id
+    WHERE r.role_id IN
+    <foreach collection="roleIds" index="index" item="roleId" separator="," open="(" close=")">
+     #{roleId}
+    </foreach>
+  </select>
 </mapper>

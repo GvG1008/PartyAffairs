@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zqu.pa.common.Const;
 import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.dao.role.RoleMapper;
 import com.zqu.pa.dao.role.RolePermissionMapper;
@@ -17,6 +18,7 @@ import com.zqu.pa.entity.role.Role;
 import com.zqu.pa.realm.UserRealm;
 import com.zqu.pa.service.role.RolePermissionService;
 import com.zqu.pa.vo.role.RoleInfo;
+import com.zqu.pa.vo.userInfo.AdminUserInfo;
 
 @Service
 public class RolePermissionServiceImpl implements RolePermissionService {
@@ -138,5 +140,25 @@ public class RolePermissionServiceImpl implements RolePermissionService {
 
 		return ServerResponse.createBySuccess(permissionList);
 	}
+
+    @Override
+    public ServerResponse getAdminUserList() {
+        //获取拥有管理权限字段的角色ID
+        List<Integer> roleIds = permissionDao.selectAdminRoleIdList(Const.ADMIN_PERMISSION_NAME);
+        if(roleIds == null ) {
+            return ServerResponse.createByErrorMessage("查询失败");
+        }
+        if(roleIds.size()==0) {
+            return ServerResponse.createByErrorMessage("管理员为空");
+        }
+        List<AdminUserInfo> info = permissionDao.selectAdminUserList(roleIds);
+        if(info == null) {
+            return ServerResponse.createByErrorMessage("查询失败");
+        }
+        if(info.size()==0) {
+            ServerResponse.createBySuccessMessage("管理员账号为空");
+        }
+        return ServerResponse.createBySuccess("获取成功", info);
+    }
 
 }
