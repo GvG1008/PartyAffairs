@@ -16,14 +16,14 @@
     insert into study_document_must (document_id, user_id)
     values (#{documentId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR})
   </insert>
-  <select id="selectIsAlready">
+  <select id="selectIsAlready" resultType="integer">
   select already from study_document_must where user_id = #{userId}
   and document_id = #{documentId}
   </select>
   <select id="selectDocumentIdByUserId" parameterType="string" resultType="int">
   select document_id from study_document_must where user_id = #{userId,jdbcType=VARCHAR}
   </select>
-  <update id="setDocumentMustAlready" resultType="int">
+  <update id="setDocumentMustAlready">
   update study_document_must
   set already = 1
   where document_id = #{documentId} and user_id = #{userId} and already = 0
