@@ -1,28 +1,37 @@
 package com.zqu.pa.service.role.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.management.RuntimeErrorException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zqu.pa.common.Const;
 import com.zqu.pa.common.ServerResponse;
+import com.zqu.pa.common.UserInfoDefault;
 import com.zqu.pa.dao.role.RoleMapper;
 import com.zqu.pa.dao.role.RolePermissionMapper;
+import com.zqu.pa.entity.perinfo.UserPartyInfo;
+import com.zqu.pa.entity.perinfo.UserPersonInfo;
 import com.zqu.pa.entity.role.Permission;
-import com.zqu.pa.entity.role.Role;
 import com.zqu.pa.realm.UserRealm;
 import com.zqu.pa.service.role.RolePermissionService;
+import com.zqu.pa.vo.perinfo.Branch;
+import com.zqu.pa.vo.perinfo.Role;
 import com.zqu.pa.vo.role.RoleInfo;
 import com.zqu.pa.vo.userInfo.AdminUserInfo;
+import com.zqu.pa.vo.userInfo.UserLoginInfo;
 
 @Service
 public class RolePermissionServiceImpl implements RolePermissionService {
-
+    
     //默认身份roleId:1 普通党员
     public static final int DEFAULT_ROLE = 1;
     
@@ -159,6 +168,100 @@ public class RolePermissionServiceImpl implements RolePermissionService {
             ServerResponse.createBySuccessMessage("管理员账号为空");
         }
         return ServerResponse.createBySuccess("获取成功", info);
+    }
+
+    @Override
+    public ServerResponse getBranchList() {
+        List<Branch> list = permissionDao.getAllbranch();
+        if(list == null || list.size()==0)
+            return ServerResponse.createByErrorMessage("获取党支部列表失败");
+        
+        return ServerResponse.createBySuccess("获取成功", list);
+    }
+
+    @Override
+    public ServerResponse getAdminRoleList() {
+        List<Role> list = permissionDao.getAdminRoleList();
+        if(list == null || list.size()==0)
+            return ServerResponse.createByErrorMessage("获取管理员角色列表失败");
+        
+        return ServerResponse.createBySuccess("获取成功", list);
+    }
+
+    @Transactional
+    @Override
+    public ServerResponse insertAdmin(String userId, String password, Integer roleId, Integer branchId, String name) {
+        userId = userId.trim();
+        name = name.trim();
+        if(StringUtils.isEmpty(name))
+            return ServerResponse.createByErrorMessage("名称不能为空");
+        if(StringUtils.isEmpty(userId))
+            return ServerResponse.createByErrorMessage("账号不能为空");
+        
+        //检测账号是否存在
+        Integer checkResult = permissionDao.CheckUserIdSure(userId);
+        if(checkResult==null || checkResult>0)
+            return ServerResponse.createByErrorMessage("账号ID已存在");
+        
+        if(password==null||StringUtils.isEmpty(password)) {
+            //设置默认密码
+            password = userId;
+        }else
+            password = password.trim();
+        
+        //MD5加密：盐为userId
+        //盐
+        ByteSource credentialsSalt = ByteSource.Util.bytes(userId);
+        password = new SimpleHash("MD5", password, credentialsSalt, 1).toString();
+        
+        List<Branch> branchlist = permissionDao.getAllbranch();
+        List<Role> rolelist = permissionDao.getAdminRoleList();
+        
+        //判断branchId合法性
+        boolean flag = false;
+        for(Branch branch : branchlist) {
+            if(branch.getBranchId()==branchId)
+                flag = true;
+        }
+        if(!flag)
+            return ServerResponse.createByErrorMessage("党支部ID不合法");
+        
+        //判断roleId合法性
+        flag = false;
+        for(Role role : rolelist) {
+            if(role.getRoleId()==roleId)
+                flag = true;
+        }
+        if(!flag)
+            return ServerResponse.createByErrorMessage("角色身份ID不合法");
+        
+        UserLoginInfo ulInfo = new UserLoginInfo();
+        UserPartyInfo upaInfo = new UserPartyInfo();
+        UserPersonInfo upeInfo = new UserPersonInfo();
+        ulInfo.setUserId(userId);
+        ulInfo.setPassword(password);
+        ulInfo.setRoleId(roleId);
+        ulInfo.setState(1);
+        
+        upaInfo.setUserId(userId);
+        upaInfo.setBranchId(branchId);
+        upaInfo.setName(name);
+        
+        upeInfo.setName(name);
+        upeInfo.setUserId(userId);
+        upeInfo.setGrade("");
+        upeInfo.setClassName("");
+        String imgHead = UserInfoDefault.IMG_HEAD_ADMIN;
+        upeInfo.setImgHead(imgHead);
+        
+        boolean result1 = permissionDao.insertAdminUserLoginInfo(ulInfo)>0;
+        boolean result2 = permissionDao.insertAdminUserPartyInfo(upaInfo)>0;
+        boolean result3 = permissionDao.insertAdminUserPersonInfo(upeInfo)>0;
+        System.out.println("result1:"+result1+";"+result2+";"+result3);
+        if(!result1||!result2||!result3) {
+            throw new RuntimeException("录入管理员账号失败");
+        }
+        return ServerResponse.createBySuccessMessage("录入成功");
     }
 
 }

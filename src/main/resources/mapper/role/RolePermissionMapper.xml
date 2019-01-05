@@ -49,7 +49,7 @@
   <select id="getAllbranch" resultType="com.zqu.pa.vo.perinfo.Branch">
   SELECT * from partybranch
   </select>
-  <select id="getRoleList" resultType="com.zqu.pa.vo.perinfo.Role">
+  <select id="getAdminRoleList" resultType="com.zqu.pa.vo.perinfo.Role">
     SELECT role_id , role_name
     FROM role
     where role_id  in (SELECT rp.role_id from role_permission rp left join permission_menu pm ON pm.permission_id = rp.permission
@@ -95,7 +95,7 @@
     SELECT 
       #{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
        #{grade,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR},
-       #{img_head,jdbcType=VARCHAR}
+       #{imgHead,jdbcType=VARCHAR}
     FROM DUAL
        WHERE NOT EXISTS (
             SELECT * 
@@ -107,7 +107,13 @@
       name = #{name,jdbcType=VARCHAR},  
       grade = #{grade,jdbcType=VARCHAR}, 
       class_name = #{className,jdbcType=VARCHAR}, 
-      img_head = #{img_head,jdbcType=VARCHAR},
+      img_head = #{imgHead,jdbcType=VARCHAR},
       is_delete = 0
   </insert>
+  <select id="CheckUserIdSure" resultType="Integer">
+    Select count(*)
+    From user_login
+    Where user_id = #{userId}
+    and state = 1
+  </select>
 </mapper>

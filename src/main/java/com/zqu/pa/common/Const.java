@@ -10,4 +10,5 @@ public class Const {
     public static final String DOWN_INTERFACE = "http://localhost:8080/PartyAffairs/study/download_document.do?";//下载文档接口
     //管理员账号权限字段
     public static final String ADMIN_PERMISSION_NAME = "role:admin";
+    public static final String ADMIN_PERMISSION_UPDATE_NAME = "permission:update";
 }

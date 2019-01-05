@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.zqu.pa.entity.role.Role;
+import com.zqu.pa.vo.perinfo.Role;
 import com.zqu.pa.vo.role.RoleInfo;
 
 public interface RoleMapper {

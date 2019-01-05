@@ -32,4 +32,13 @@ public interface RolePermissionService {
 
     //获取所有管理权限的账号列表
     ServerResponse getAdminUserList();
+
+    //在录入管理员账号时获取党支部选项
+    ServerResponse getBranchList();
+
+    //在录入管理员账号时获取管理员角色选项
+    ServerResponse getAdminRoleList();
+
+    //录入管理员
+    ServerResponse insertAdmin(String userId, String password, Integer roleId, Integer branchId, String name);
 }
