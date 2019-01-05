@@ -91,7 +91,6 @@ public class PublicityManageController {
      * @param news
      * @return
      */
-    @RequiresPermissions("party_notices:add")
     @ResponseBody
     @RequestMapping(value="/insertNews",method=RequestMethod.POST)
     public ServerResponse InsertNews(@RequestParam(value="coverpath",required = false) MultipartFile cover,
