@@ -284,6 +284,7 @@ public class PublicityManageController {
      * @param newsId
      * @return
      */
+    @RequiresPermissions("article:approve")
     @ResponseBody
     @RequestMapping("/checkNews/{newsId}")
     public ServerResponse checkNews(@PathVariable String newsId) {
@@ -302,6 +303,7 @@ public class PublicityManageController {
      * @param noticesId
      * @return
      */
+    @RequiresPermissions("article:approve")
     @ResponseBody
     @RequestMapping("/checkNotices/public/{noticesId}")
     public ServerResponse checkPublicNotices(@PathVariable String noticesId) {
@@ -320,6 +322,7 @@ public class PublicityManageController {
      * @param noticesId
      * @return
      */
+    @RequiresPermissions("article:approve")
     @ResponseBody
     @RequestMapping("/checkNotices/party/{noticesId}")
     public ServerResponse checkPartyNotices(@PathVariable String noticesId) {
@@ -338,6 +341,7 @@ public class PublicityManageController {
      * @param news
      * @return
      */
+    @RequiresPermissions("article:update")
     @ResponseBody
     @RequestMapping("/updateNews")
     public ServerResponse updateNews(@RequestParam(value="coverpath",required = false) MultipartFile cover,
@@ -383,6 +387,7 @@ public class PublicityManageController {
      * @param notices
      * @return
      */
+    @RequiresPermissions("article:update")
     @ResponseBody
     @RequestMapping("/updateNotices/public")
     public ServerResponse updatePublicNotices(@RequestParam(value="coverpath",required = false) MultipartFile cover,
@@ -424,6 +429,7 @@ public class PublicityManageController {
      * @param notices
      * @return
      */
+    @RequiresPermissions("article:update")
     @ResponseBody
     @RequestMapping("/updateNotices/party")
     public ServerResponse updatePartyNotices(@RequestParam(value="coverpath",required = false) MultipartFile cover,
@@ -465,6 +471,7 @@ public class PublicityManageController {
      * @param newsId 一串newsId的字符串"&newsId1&newsId2&newsId3.."
      * @return
      */
+    @RequiresPermissions("article:delete")
     @ResponseBody
     @RequestMapping("/deleteNews/{newsId}")
     public ServerResponse deleteNews(@PathVariable String newsId) {
@@ -483,6 +490,7 @@ public class PublicityManageController {
      * @param noticesId 一串noticesId的字符串"noticesId1&noticesId2&noticesId3.."
      * @return
      */
+    @RequiresPermissions("article:delete")
     @ResponseBody
     @RequestMapping("/deleteNotices/public/{noticesId}")
     public ServerResponse deletePublicNotices(@PathVariable String noticesId) {
@@ -500,6 +508,7 @@ public class PublicityManageController {
      * @param noticesId 一串noticesId的字符串"&noticesId1&noticesId2&noticesId3.."
      * @return
      */
+    @RequiresPermissions("article:delete")
     @ResponseBody
     @RequestMapping("/deleteNotices/party/{noticesId}")
     public ServerResponse deletePartyNotices(@PathVariable String noticesId) {

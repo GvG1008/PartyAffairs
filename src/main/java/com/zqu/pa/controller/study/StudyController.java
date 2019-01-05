@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -132,6 +133,7 @@ public class StudyController {
      * @param labels
      * @return
      */
+    @RequiresPermissions("document:add")
     @RequestMapping(value = "upload_study_document.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse uploadStudyDocument(@RequestParam(value = "upload_file") MultipartFile file,
@@ -320,6 +322,7 @@ public class StudyController {
      * @param userId
      * @return
      */
+    @RequiresPermissions("video:add")
     @RequestMapping(value = "upload_study_video.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse uploadStudyVideo(@RequestParam(value = "upload_file") MultipartFile file,
@@ -452,6 +455,7 @@ public class StudyController {
      * @param documentId
      * @return
      */
+    @RequiresPermissions("document:delete")
     @RequestMapping(value="delete_study_document_by_documentId")
     @ResponseBody
     public ServerResponse deleteStudyDocument(@RequestParam(value = "documentId") Integer[] documentId) {
@@ -464,6 +468,7 @@ public class StudyController {
      * @param videoId
      * @return
      */
+    @RequiresPermissions("video:delete")
     @RequestMapping(value="delete_study_video_by_videoId")
     @ResponseBody
     public ServerResponse deleteStudyVideo(@RequestParam(value = "videoId") Integer[] videoId) {
