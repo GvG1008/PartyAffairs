@@ -40,7 +40,8 @@
     LEFT JOIN user_person_info up ON up.user_id = ul.user_id
     LEFT JOIN user_party_info upi ON upi.user_id = ul.user_id
     LEFT JOIN partybranch pb ON pb.branch_id = upi.branch_id
-    WHERE r.role_id IN
+    WHERE ul.state = 1
+    and r.role_id IN
     <foreach collection="roleIds" index="index" item="roleId" separator="," open="(" close=")">
      #{roleId}
     </foreach>
