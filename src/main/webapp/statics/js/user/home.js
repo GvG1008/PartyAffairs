@@ -212,6 +212,7 @@ var head = new Vue({
 		"username":123,
 		"password":123,
 		"permission":0,
+		"realName":""
 	},
 	methods:{
 		Login : function(){
@@ -228,8 +229,11 @@ var head = new Vue({
 			url: "../loginInfo", 
 			dataType: "json",
 			success: function(result) { 
-				console.log(result)
-				self.user = result.data;
+				//console.log(result)				
+				if (result.status == 0){
+					self.realName = result.data.realName;
+					self.user = result.data;
+				}
 			}			
 		});
 		$.ajax({

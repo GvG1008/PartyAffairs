@@ -76,11 +76,17 @@ public class PartyAlbumController {
      */
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ServerResponse createAlbum(PartyAlbum partyAlbum, 
-            @RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
+    public ServerResponse createAlbum( @RequestParam(value="albumTitle") String albumTitle,
+            @RequestParam("description") String description,
+            @RequestParam("files") MultipartFile[] files,
+            HttpServletRequest request) {
         
         ServerResponse result = null;
+        PartyAlbum partyAlbum;
         try {
+            partyAlbum = new PartyAlbum();
+            partyAlbum.setAlbumTitle(albumTitle);
+            partyAlbum.setDescription(description);
             result = partyAlbumService.createAlbum(partyAlbum, files, request);
         } catch(Exception e) {
             e.printStackTrace();
