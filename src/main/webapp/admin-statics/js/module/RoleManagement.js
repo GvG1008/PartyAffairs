@@ -187,6 +187,22 @@ var modal = new Vue({
 	}
 })
 
+var modalTwo = new Vue({
+	el:"#myModalTwo",
+	data:{
+		contentTwo:[],
+		roleId:null
+	},
+	methods:{
+		ToSubmitCheckBox:function(roleId){
+			ToSubmitCheckBox(roleId);
+		}
+	},
+	created:function(){
+		
+	}
+})
+
 /**
  * 查看权限
  */
@@ -198,6 +214,46 @@ function checkPermission(roleId){
 		success:function(res){
 			console.log(res);
 			modal.content = res.data;
+		}
+	});
+}
+
+function updatePermission(roleId){
+	$.ajax({
+		type:"get",
+		url:"../../permission/list",
+		async:true,
+		success:function(res){
+			//console.log(res)
+			modalTwo.contentTwo = res.data;
+			modalTwo.roleId = roleId;
+		}
+	});
+	
+}
+
+function ToSubmitCheckBox(roleId){
+	var all = $('[name=permissionId]:checkbox');
+	var permissionId = new Array();
+	for(var i=1;i<all.length;i++){
+		if(all[i].checked){
+			var x = parseInt(all[i].value);
+			permissionId.push(x);
+		}
+	}
+	console.log(permissionId)
+	$.ajax({
+		type:"post",
+		data:{
+			roleId:roleId,
+			permissionId:permissionId
+		},
+		traditional:true,
+		url:"../../role/update_role_permission",
+		async:true,
+		success:function(res){
+			//console.log(res)
+			location.reload();
 		}
 	});
 }

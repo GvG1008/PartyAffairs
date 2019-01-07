@@ -9,11 +9,12 @@ new Vue({
 			var m = {};
 			$.ajax({
 				type:"get",
-				url: "../../role/list",
+				url: "../../adminManager/userlist",
 				async : false,
 				dataType: 'json',
 				success: function(result){
 					if (result.status == 0) {
+						console.log(result)
 						app.newMessages = result.data;
 					}else{
 						alert(result.msg);
@@ -37,6 +38,9 @@ new Vue({
 		},
 		checkPermission:function(roleId){
 			checkPermission(roleId);
+		},
+		resetpwd:function(userId){
+			resetpwd(userId);
 		}
 	},
 	created: function () {
@@ -81,7 +85,7 @@ $(document).ready(function() {
         	$(this).find('input[type=checkbox]').removeProp('checked');
 		}
     });   
-	var button = "<button onclick='addInfo()' class='btn btn-success ts'><span class='glyphicon glyphicon-plus icon'></span><span class='caption'>录入</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
+	var button = "<button data-toggle='modal' data-target='#myModal' class='btn btn-success ts'><span class='glyphicon glyphicon-plus icon'></span><span class='caption'>录入</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
 				+"<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'><span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
 				+"<a class='btn btn-danger td' onclick='deleteall()'><span class='fa fa-trash-o icon'></span><span class='caption'>删除</span></a>";
 	document.getElementById("add").innerHTML = button;
@@ -135,7 +139,7 @@ function deletemsg(obj){
 function doDelete(data){
 	$.ajax({                            
 		type:'post',        
-        url:'../../role/delete?roleId='+data, 
+        url:'../../userManage/deleteUserByBranch/'+data, 
         dataType:'json',
         success: function(result) {  
 			alert(result.msg);
@@ -147,40 +151,79 @@ function doDelete(data){
    });
 }
 
-function addInfo(){
-	var text="<input type='text' placeholder='请输入角色名称' name='roleName' id='roleName' />";
-	document.getElementById('show_msg').innerHTML=text;
-	$('.popup_de').addClass('bbox');
-	$('.popup_de .btn-danger').one('click',function(){
-		var name = $("#roleName").val();
+var modal = new Vue({
+	el:"#myModal",
+	data:{
+		branchlist:[],
+		rolelist:[]
+	},
+	methods:{
+		addAdminInfo:function(){
+			addAdminInfo();
+		}
+	},
+	created:function(){
+		var that = this;
 		$.ajax({
-			type:"post",
-			data:{
-				roleName:name
-			},
-			url:"../../role/insert",
+			type:"get",
+			url:"../../adminManager/getBranchList",
 			async:true,
 			success:function(res){
 				if(res.status == 0){
-					alert(res.msg)
-					location.reload();
+					that.branchlist = res.data;
 				}
-				
 			}
 		});
-	})
-}
+		$.ajax({
+			type:"get",
+			url:"../../adminManager/getRoleList",
+			async:true,
+			success:function(res){
+				if(res.status == 0){
+					that.rolelist = res.data;
+				}
+			}
+		});
+	}
+})
 
-/**
- * 查看权限
- */
-function checkPermission(roleId){
+function addAdminInfo(){
+	var name = $("#name").val();
+	var userId = $("#userId").val();
+	var password1 = $("#password").val();
+	var branchId = $("#branchId").val();
+	var roleId = $("#roleId").val();
 	$.ajax({
-		type:"get",
-		url:"../../role/permission/"+roleId,
+		type:"post",
+		data:{
+			name:name,
+			userId:userId,
+			password:password1,
+			branchId:branchId,
+			roleId:roleId
+		},
+		url:"../../adminManager/insert",
 		async:true,
 		success:function(res){
 			console.log(res);
+			if(res.status == 0){
+				alert(res.msg);
+				location.reload();
+			}
 		}
 	});
 }
+
+function resetpwd(userId){
+	$.ajax({
+		type:"get",
+		url:"../../resetPassword/"+userId,
+		async:true,
+		success:function(res){
+			if(res.status == 0){
+				alert(res.msg)
+			}
+		}
+	});
+}
+

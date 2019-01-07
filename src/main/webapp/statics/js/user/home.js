@@ -210,7 +210,8 @@ var head = new Vue({
 	data :{
 		"user":[],
 		"username":123,
-		"password":123
+		"password":123,
+		"permission":0,
 	},
 	methods:{
 		Login : function(){
@@ -230,7 +231,17 @@ var head = new Vue({
 				console.log(result)
 				self.user = result.data;
 			}			
-		})
+		});
+		$.ajax({
+			type:"get",
+			url:"../adminManager/checkAdmin",
+			async:true,
+			success:function(res){
+				if(res.status == 0){
+					self.permission = res.data;
+				}
+			}
+		});
 	}
 })
 function doLogin(){

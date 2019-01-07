@@ -79,9 +79,10 @@ function sendarticle(){
 	.getCheckedNodes(true), v = "";
 	for(var i=0;i<nodes.length;i++){
 		if(nodes[i].check_Child_State == -1 && nodes[i].id >=100){//可能存在的bug
-			userID.push(nodes[i].id);
+			userID.push(parseInt(nodes[i].id));
 		}       
     }
+	formData.append("userId",userID)
 	
 	
 	if(content == "<p><br></p>"){

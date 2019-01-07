@@ -347,7 +347,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         ByteSource credentialsSalt = ByteSource.Util.bytes(user.getUserId());
         password = new SimpleHash("MD5", password, credentialsSalt, 1).toString();
         userLoginInfo.setPassword(password);
-        userLoginInfo.setRoleId(1);
+        userLoginInfo.setRoleId(user.getRoleId());
         userLoginInfo.setState(0);
         
         //注入个人信息表

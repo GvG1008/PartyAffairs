@@ -39,13 +39,13 @@
 						</button>
 						<span class="user-a">欢迎，{{user.realName}}</span>
 						<li class="user-li"><span class="user-a" id="info">个人信息</span></li>
-						<li class="user-li" v-if="user.roleId == 0"><span class="user-a" id="manager">管理端</span></li>
+						<li class="user-li" v-if="permission != 0"><span class="user-a" id="manager">管理端</span></li>
 						<li class="user-li">
 							<span class="user-a" id="message">消息</span>
 							<div class="message" id="dis-message"></div>
 						</li>
 						<li class="user-li"><span class="user-a" id="change">修改密码</span></li>
-						<li class="user-li"><a class="user-a" id="manager" href="../doLogout">注销</a></li>
+						<li class="user-li"><a class="user-a" id="x" href="../doLogout">注销</a></li>
 					</ul>
 				</div>
 			</div>
@@ -60,8 +60,8 @@
 			</aside>
 			<aside class="manager" id="amanager" style="display: none;">
 				<ul class="info-ul">
-					<li class="info-li"><a class="info-a" id="" href="../admin-view/index.html">工作台</a></li>
-					<li class="info-li"><a class="info-a" id="" href="../admin-view/workbench/Manager.html">权限管理</a></li>
+					<li class="info-li" v-if="permission == 2 || permission == 1"><a class="info-a" id="" href="../admin-view/index.html">工作台</a></li>
+					<li class="info-li" ><a class="info-a" id="" href="../admin-view/workbench/Manager.html">权限管理</a></li>
 				</ul>
 			</aside>
 			<div class="logopic"><img class="img-logo" src="../statics/img/logo.png"></div>

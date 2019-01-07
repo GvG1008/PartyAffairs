@@ -270,8 +270,10 @@ var Download = new Vue({
 			url:"../study/get_study_documents.do?page=1&pageNum=5",
 			dataType: "json", // 数据类型可以为 text xml json script jsonp
 			success: function(result) { 
-				if(result.status==0)
+				if(result.status==0){
 					self.download = result.data.list;
+					//console.log(result)
+				}
 				else{
 					alert(result.msg);
 				}
