@@ -252,7 +252,7 @@ function doLogin(){
 		dataType: "json", // 数据类型可以为 text xml json script jsonp
 		success: function(result) { 
 			if(result.status==0){
-				alert(result.msg);
+				//alert(result.msg);
 				head.user = result.data;
 				location.reload();				
 			}else{

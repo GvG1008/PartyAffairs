@@ -109,7 +109,7 @@
 				</div>
 				<table class="learn-list">
 					<tr v-for="(r,index) in download" v-if="index<4">
-						<td class="ll-name"><a :href="filePath"><p :title="r.documentTitle">{{r.documentTitle}}</p></a></td>
+						<td class="ll-name"><a :href="r.filePath"><p :title="r.documentTitle">{{r.documentTitle}}</p></a></td>
 						<td class="ll-time"><p>{{initTime(r.updateTime)}}</p></td>
 					</tr>
 				</table>
