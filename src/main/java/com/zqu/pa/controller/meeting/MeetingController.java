@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -195,6 +196,7 @@ public class MeetingController {
      * @param meetingId
      * @return
      */
+    @RequiresPermissions("meeting:approve")
     @ResponseBody
     @RequestMapping("/checkMeeting/{meetingId}")
     public ServerResponse checkMeeting(@PathVariable String meetingId) {
@@ -267,6 +269,7 @@ public class MeetingController {
      * @param meetingId 一串meetingId的字符串"&meetingId1&meetingId2&meetingId3.."
      * @return
      */
+    @RequiresPermissions("meeting:delete")
     @ResponseBody
     @RequestMapping("/deleteMeeting/{meetingId}")
     public ServerResponse deleteMeeting(@PathVariable String meetingId) {

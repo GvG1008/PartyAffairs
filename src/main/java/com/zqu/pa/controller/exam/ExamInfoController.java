@@ -3,6 +3,7 @@ package com.zqu.pa.controller.exam;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -98,6 +99,7 @@ public class ExamInfoController {
      * @param listExamId 考试ID数组
      * @return
      */
+    @RequiresPermissions("exam:approve")
     @ResponseBody
     @RequestMapping(value = "/review", method = RequestMethod.PUT)
     public ServerResponse reviewExamInfo(@RequestBody List<Integer> listExamId) {
@@ -110,6 +112,7 @@ public class ExamInfoController {
      * @param examId 要删除的考试ID
      * @return
      */
+    @RequiresPermissions("exam:delete")
     @ResponseBody
     @RequestMapping(value = "/{examId}", method = RequestMethod.DELETE)
     public ServerResponse removeExamInfo(@PathVariable Integer examId) {
