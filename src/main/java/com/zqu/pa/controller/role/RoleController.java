@@ -123,8 +123,6 @@ public class RoleController {
     @RequestMapping(value="/update_role_permission")
     public ServerResponse getRolePermissionList(@RequestParam(value = "roleId")Integer roleId,
             @RequestParam(value = "permissionId") Integer[] permissionId) {
-        if(permissionId == null|| roleId == null )
-            return ServerResponse.createByErrorMessage("参数错误");
         if(roleId == 0)
             return ServerResponse.createByErrorMessage("最高权限的权限不可修改");
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
@@ -134,16 +132,7 @@ public class RoleController {
             return ServerResponse.createByErrorMessage("无法获取当前登录信息");
         List<Integer> permissionList = new ArrayList<Integer>();
         for(Integer p : permissionId) {
-            if(p != 1) {
-                permissionList.add(p);
-            }
-            else if( p == 1 ){ //p==1为[身份权限修改]的权限
-                //判断当前登录身份是否为最高权限
-                if(role==0)
-                    permissionList.add(p);
-                else
-                    return ServerResponse.createByErrorMessage("只有最高权限身份才可以赋予[身份权限修改]的权限");
-            }
+            permissionList.add(p);
         }
 
         return rolePermissionService.updateRolePermissionList(roleId,permissionList);
