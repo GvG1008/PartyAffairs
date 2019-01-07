@@ -33,7 +33,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="item in newMessages">
+						<tr v-for="item in newMessages" v-if="item.roleId!=0">
 							<td>
 								<center><input type="checkbox" name="all" id="all" :value="item.roleId"></center>
 							</td>
@@ -45,20 +45,28 @@
 							</td>
 							<td>
 								<center>
-									<button class="btn btn-success os btn-xs">
-                                                                                                                            修改角色名称<i class="fa fa-pencil" aria-hidden="true"></i>
-                                           </button> &nbsp;&nbsp;&nbsp;&nbsp;									
-                                           <button @click="checkPermission(item.roleId)" class="btn btn-success os btn-xs" data-toggle="modal" data-target="#myModal">
-                                              	查看权限<i class="fa fa-pencil" aria-hidden="true"></i>
-                                           </button> &nbsp;&nbsp;&nbsp;&nbsp;
-                                           <button @click="updatePermission(item.roleId)" class="btn btn-success os btn-xs" data-toggle="modal" data-target="#myModalTwo">
-                                              	修改权限<i class="fa fa-pencil" aria-hidden="true"></i>
-                                            </button>
-									<button class="btn btn-danger btn-xs" id="btn_delete" data-toggle="tooltip" title="删除" @click="deletemsg(item.roleId);">
-							                                                   删除<i class="fa fa-trash-o "></i>
-						                    </button>
-						                    
-								</center>
+								<button class="btn btn-success os btn-xs" disabled="true">
+									修改角色名称<i class="fa fa-pencil" aria-hidden="true"></i>
+								</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<button @click="checkPermission(item.roleId)"
+									class="btn btn-success os btn-xs" data-toggle="modal"
+									data-target="#myModal">
+									查看权限<i class="fa fa-pencil" aria-hidden="true"></i>
+								</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<button @click="updatePermission(item.roleId)"
+									class="btn btn-success os btn-xs" data-toggle="modal"
+									data-target="#myModalTwo">
+									修改权限<i class="fa fa-pencil" aria-hidden="true"></i>
+								</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<button class="btn btn-danger btn-xs" id="btn_delete"
+									data-toggle="tooltip" title="删除"
+									@click="deletemsg(item.roleId);">
+									删除<i class="fa fa-trash-o "></i>
+								</button>
+							</center>
 							</td>
 						</tr>
 					</tbody>
@@ -92,7 +100,7 @@
 		            </div>
 		            <div class="modal-footer">
 		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		                <button type="button" class="btn btn-primary">确定</button>
+		                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
 		            </div>
 		        </div><!-- /.modal-content -->
 		    </div><!-- /.modal -->
@@ -105,11 +113,16 @@
 		                <h4 class="modal-title" id="myModalLabel">修改权限</h4>
 		            </div>
 		            <div class="modal-body">
-		            	<ul style="display: flex;flex-wrap: wrap;">
-		            		<li v-for="it in contentTwo" style="width:100px; padding-right: 10px;">
-		            			<input type="checkbox" name="permissionId" id="permissionId" :value="it.permissionId">{{it.description}}
-		            		</li>
-		            	<ul>
+		            	<div>
+			            	<ul style="display: flex;flex-wrap: wrap;">
+			            		<li v-for="it in contentTwo" style="width:100px; padding-right: 10px;">
+			            			<input type="checkbox" name="permissionId" id="permissionId" :value="it.permissionId">{{it.description}}
+			            		</li>
+			            	<ul>
+		            	</div>
+		            	<div>
+		            		<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='selectall()'><span class='fa fa-check-square-o icon'></span><span class='caption'>全选/反选</span></button>
+		            	</div>
 		            </div>
 		            <div class="modal-footer">
 		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

@@ -84,7 +84,7 @@ $(document).ready(function() {
         	$(this).find('input[type=checkbox]').removeProp('checked');
 		}
     });   
-	var button = "<button onclick='addInfo()' class='btn btn-success ts'><span class='glyphicon glyphicon-plus icon'></span><span class='caption'>录入</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
+	var button = "<button onclick='addInfo()' class='btn btn-success ts'><span class='glyphicon glyphicon-plus icon'></span><span class='caption'>新增角色</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
 				+"<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'><span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
 				+"<a class='btn btn-danger td' onclick='deleteall()'><span class='fa fa-trash-o icon'></span><span class='caption'>删除</span></a>";
 	document.getElementById("add").innerHTML = button;
@@ -101,7 +101,7 @@ $(document).ready(function() {
 function checkall(){
 	var all = $('[name=all]:checkbox');
 	for(var i=0;i<all.length;i++){
-		all[i].checked=true;
+		all[i].checked=!all[i].checked;
 	}
 }
 function deleteall(){
@@ -155,7 +155,11 @@ function addInfo(){
 	document.getElementById('show_msg').innerHTML=text;
 	$('.popup_de').addClass('bbox');
 	$('.popup_de .btn-danger').one('click',function(){
-		var name = $("#roleName").val();
+		var name = $.trim($("#roleName").val());
+		if(name == ""){
+			alert("角色名称不能为空");
+			return;
+		}
 		$.ajax({
 			type:"post",
 			data:{
@@ -256,4 +260,10 @@ function ToSubmitCheckBox(roleId){
 			location.reload();
 		}
 	});
+}
+function selectall(){
+	var all = $('[name=permissionId]:checkbox');
+	for(var i=0;i<all.length;i++){
+		all[i].checked=!all[i].checked;
+	}
 }
