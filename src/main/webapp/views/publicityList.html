@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<link rel="stylesheet" href="../statics/css/publicityList.css" />
 	</head>
 	<body>
 		<div class="publicity-list" id="list">
@@ -10,12 +11,18 @@
         		<p id="list-title"></p>
         	</div>
         	<div class="list-content">
-        		<table class="list-table">
+        		<table class="list-table" v-if="downloadFalg == 1">
 					<tr v-for="r in datas">
-                        <td class="publicity-title"><a :href="'home.html?location='+type+'&id='+r.id" target="_blank"><p :title="r.title">{{r.title}}</p></ a></td>
+                        <td class="publicity-title"><a :href="'home.html?location='+type+'&id='+r.id" target="_blank"><p :title="r.title">{{r.title}}</p></a></td>
                         <td class="publicity-time">{{r.date}}</td>
-                    </tr>   					
+                    </tr>                      					
 				</table>
+				<table class="list-table" v-else>                   
+                    <tr v-for="r in downloadDatas">
+                        <td class="publicity-title"><a :href="r.filePath" target="_blank"><p :title="r.documentTitle">{{r.documentTitle}}</p></a></td>
+                        <td class="publicity-time">{{r.updateTime}}</td>
+                    </tr>                       
+                </table>
         	</div>
         	<div class="list-footer">
         		<div class="page">
@@ -34,6 +41,5 @@
        	</div>
        	<script src="../statics/js/vue.js"></script>
 		<script type="text/javascript" src="../statics/js/user/publicityList.js" ></script>
-		<link rel="stylesheet" href="../statics/css/publicityList.css" />
 	</body>
 </html>
