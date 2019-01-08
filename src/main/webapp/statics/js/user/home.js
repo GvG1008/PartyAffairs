@@ -226,7 +226,8 @@ var head = new Vue({
 		var self = this;
 		$.ajax({
 			type:"GET",
-			url: "../loginInfo", 
+			url: "../loginInfo",
+			async:true,
 			dataType: "json",
 			success: function(result) { 
 				//console.log(result)				

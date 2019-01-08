@@ -75,7 +75,7 @@ public class PartyAlbumController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "createAlbum", method = RequestMethod.POST)
     public ServerResponse createAlbum( @RequestParam(value="albumTitle") String albumTitle,
             @RequestParam("description") String description,
             @RequestParam("files") MultipartFile[] files,

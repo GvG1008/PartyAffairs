@@ -16,7 +16,7 @@
 	</head>
 
 	<body>
-		<div class="header"><a href="#"> 管理</a> > 管理员账号</div>
+		<div class="header"><a href="BranchCategory.html"> 党支部列表管理</a> > 相册管理</div>
 
 		<div class="panel panel-default">
 			<div class="panel-body">
@@ -27,36 +27,40 @@
 							<th>
 								<center><input type="checkbox" name="all" id="all"></center>
 							</th>
-							<th>账号全称</th>
-							<th>账号</th>
-							<th>角色</th>
-							<th>隶属党支部</th>
+							<th>党支部</th>
+							<th>相册名</th>
+							<th>浏览量</th>
+							<th>创建时间</th>
 							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr v-for="item in newMessages">
 							<td>
-								<center><input type="checkbox" name="all" id="all" :value="item.userId"></center>
+								<center><input type="checkbox" name="all" id="all" :value="item.albumId"></center>
 							</td>
 							<td>
-								<center>{{item.name}}</center>
+								<center v-if="item.branchId == 1">软件工程党支部</center>
+								<center v-if="item.branchId == 2">计算机科学与技术专业党支部</center>
+								<center v-if="item.branchId == 3">网络工程专业党支部</center>
+								<center v-if="item.branchId == 4">物联网工程专业党支部</center>
+								<center v-if="item.branchId == 5">数据科学与大数据技术专业党支部</center>
 							</td>
 							<td>
-								<center>{{item.userId}}</center>
+								<center>{{item.albumTitle}}</center>
 							</td>
 							<td>
-								<center>{{item.roleName}}</center>
+								<center>{{item.pageviews}}</center>
 							</td>
 							<td>
-								<center>{{item.branchName}}</center>
+								<center>{{item.stringCreateDate}}</center>
 							</td>
 							<td>
-								<center>								
-                                           <button class="btn btn-success os btn-xs" @click="resetpwd(item.userId)">
-                                              	重置密码<i class="fa fa-pencil" aria-hidden="true"></i>
-                                           </button> &nbsp;&nbsp;&nbsp;&nbsp;
-									<button class="btn btn-danger btn-xs" id="btn_delete" data-toggle="tooltip" title="删除" @click="deletemsg(item.userId);">
+								<center>
+									<a :href="'Photoviews.html?id='+item.albumId" class="btn btn-success os btn-xs">
+                                              	查看<i class="fa fa-pencil" aria-hidden="true"></i>
+                                           </a> &nbsp;&nbsp;&nbsp;&nbsp;
+									<button class="btn btn-danger btn-xs" id="btn_delete" data-toggle="tooltip" title="删除" @click="deletemsg(item.albumId);">
 							                                                   删除<i class="fa fa-trash-o "></i>
 						                    </button>
 						                    
@@ -68,44 +72,6 @@
 			</div>
 		</div>
 		
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		    <div class="modal-dialog">
-		        <div class="modal-content">
-		            <div class="modal-header">
-		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                <h4 class="modal-title" id="myModalLabel">新增管理员</h4>
-		            </div>
-		            <div class="modal-body">
-		            	账号名称:<input type="text" name="name" id="name" />&nbsp;&nbsp;&nbsp;&nbsp;
-		            	账号： <input type="text" name="userId" id="userId" />&nbsp;&nbsp;&nbsp;&nbsp;
-		            	密码：<input type="password" name="password" id="password" />
-		            	<br /><br />
-		            	<table>
-		            		<tr>
-		            			<td>
-		            				<label class="labelname">选择所属党支部</label>
-						<select id="branchId" class="form-control">
-							<option v-for="item1 in branchlist" :value="item1.branchId">{{item1.branchName}}</option>
-						</select>
-		            			</td>
-		            			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		            			<td>
-		            				<label class="labelname">匹配权限角色</label>
-						<select id="roleId" class="form-control">
-							<option v-for="item2 in rolelist" :value="item2.roleId">{{item2.roleName}}</option>
-						</select>
-		            			</td>
-		            		</tr>
-		            	</table>
-		            </div>
-		            <div class="modal-footer">
-		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		                <button type="button" class="btn btn-primary" @click="addAdminInfo()">确定</button>
-		            </div>
-		        </div><!-- /.modal-content -->
-		    </div><!-- /.modal -->
-		</div>
-
 		<div class="popup_de xycenter">
 			<div class="popup_box">
 				<span class="popup_close" value="关闭">×</span>
@@ -125,7 +91,7 @@
 		<script src="../../admin-statics/table/js/dataTables.responsive.js"></script>
 		<script src="../../admin-statics/table/js/sb-admin-2.js"></script>
 		<script src="../../statics/js/vue.js"></script>
-		<script src="../../admin-statics/js/module/CountManagement.js">
+		<script src="../../admin-statics/js/module/AlbumManagement.js">
 		</script>
 
 	</body>

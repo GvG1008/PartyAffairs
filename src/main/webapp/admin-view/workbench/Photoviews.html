@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>相册详情</title>
+		<link rel="stylesheet" href="../../admin-statics/table/bootstrap.css" />
+   <link href="../../admin-statics/table/font-awesome.css" rel="stylesheet" />  
+   <link href="../../admin-statics/css/workbench/DataManagement.css" rel="stylesheet" >
+	</head>
+	<body>
+		   <div class = "header"><a href="javascript:history.go(-1)">返回</a></div>
+
+		<div id="photo">
+			<div class="album-details">
+				<p style="color: black;" class="album-title">
+					{{title}}
+				</p>
+				<p style="color: black;" class="album-des">
+					{{description}}
+				</p>
+			</div>
+			
+			<div id="demo" class="carousel slide" data-ride="carousel">
+	  			<div class="carousel-inner">
+	   				<div v-for="(r,index) in photo" :class="initclass(index)">
+	      				<img :src="getImageUrl(r.image)">
+	    			</div>	    			
+	  			</div>
+	  			
+	  			<a class="carousel-control-prev" href="#demo" data-slide="prev">
+	    			<span class="carousel-control-prev-icon"></span>
+	  			</a>
+	 			<a class="carousel-control-next" href="#demo" data-slide="next">
+	    			<span class="carousel-control-next-icon"></span>
+	  			</a>
+			</div>
+		</div>
+		
+		<link rel="stylesheet" href="../../statics/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+		<script type="text/javascript" src="../../statics/js/jquery-3.3.1.min.js" ></script>
+  		<script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="../../statics/photo/css/photo.css" />
+		  <script type="text/javascript" src="../../statics/js/vue.js" ></script>
+		<script type="text/javascript" src="../../admin-statics/js/module/PhotoViews.js" ></script>
+	</body>
+</html> 

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<!-- release v4.5.0, copyright 2014 - 2018 Kartik Visweswaran -->
+<!--suppress JSUnresolvedLibraryURL -->
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>相册上传</title>
+
+<!--<script src="../fileinput/js/bootstrap-table.js"></script>-->
+<script src="../../fileinput/js/jquery/jquery.min.js"></script>
+<link href="../../fileinput/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+<script src="../../fileinput/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+<link type="text/css" rel="stylesheet" href="../../fileinput/css/fileinput/fileinput.css" />  
+<link type="text/css" rel="stylesheet" href="../../fileinput/css/fileinput/fileinput.min.css" />  
+<script type="text/javascript" src="../../fileinput/js/fileinput/fileinput.js"></script>  
+<script type="text/javascript" src="../../fileinput/js/fileinput/fileinput_locale_zh.js"></script>
+<link rel="stylesheet" href="../../admin-statics/table/bootstrap.css" />
+   <link href="../../admin-statics/table/font-awesome.css" rel="stylesheet" />  
+   <link href="../../admin-statics/css/workbench/DataManagement.css" rel="stylesheet" >
+<style>
+        body {
+            font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+            background-color: #EBF5F3;
+        }
+        * {
+            margin: 0;
+        }
+        html, body {
+            height: 100%;
+        }
+        .navbar-custom {
+            /*color: #FFFFFF;*/
+            background-color: #56b9ab;
+        }
+        .navbar-brand,
+        .navbar-nav li a {
+            line-height: 55px;
+            height: 55px;
+            padding-top: 0px;
+            font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+        }
+        .navbar-default .navbar-nav > li > a {
+            color: #ffffff;
+        }
+        .navbar-default .navbar-nav > li > a:hover {
+            color: #175A94;
+        }
+        .page-header {
+            font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+            /* border-bottom: 1px solid #bbb;*/
+        }
+        hr {
+            border-bottom: 1px solid #bbb;
+        }
+        .img_border {
+            border: 1px solid #bbb;
+        }
+        @media screen and (min-width: 900px) {
+            .container {
+                width: 900px;
+            }
+        }
+        @media screen and (min-width: 800px) {
+            .center_toaster {
+                right: 35%;
+                width: 30%;
+            }
+        }
+        @media screen and (min-width: 400px) and (max-width: 799px) {
+            .center_toaster {
+                right: 25%;
+                width: 50%;
+            }
+        }
+        @media screen and (min-width: 200px ) and (max-width: 399px) {
+            .center_toaster {
+                right: 10%;
+                width: 80%;
+            }
+        }
+        .row a {
+            text-decoration: none;
+        }
+        .row a:hover {
+            text-decoration: none;
+        }
+        .addMaigin {
+            margin-bottom: 30px;
+        }
+        .change_font {
+            font-size: 1.5em;
+        }
+        .button_width {
+            width: 4em;
+        }
+        .button_width2 {
+            width: 4em;
+        }
+        .wrapper {
+            min-height: 100%;
+            height: auto !important;
+            height: 100%;
+            margin: 0 auto -6em;
+        }
+        .push {
+            height: 6em;
+        }
+        .footer, {
+            height: 4em;
+        }
+        .color_white{
+            background: #ffffff;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class = "header" style="background-color:#EBF5F3;"><a href="javascript:history.go(-1)">返回</a></div>
+<div class="wrapper">
+ <!-- 文件拖拽上传 -->
+    <div class="container kv-main">
+        <div class="row ">
+            <div style="padding:10px; ">
+                <form enctype="multipart/form-data" id="here">
+                    <input id="file-0a" class="file" name="files" type="file" multiple data-min-file-count="1">
+                    <br>
+
+                 </form>
+            </div>
+        </div>
+        <div class="row" id="">
+        	相册标题：<input type="text" name="title" id="title" class="form-control" value="" />
+        </div>
+        <div class="row" id="">
+        	相册描述：<textarea rows="5" cols="120" name="description" id="description"></textarea>    
+        </div>
+       <button id="tt" class="btn btn-primary btn-lg btn-block" >确定上传</button>
+     </div>
+    <div class="push"></div>
+</div>
+
+</body>
+<!-- /.container -->
+
+<script>
+  $('#file-0a').fileinput({
+        language: 'zh',
+        uploadUrl: '../../partyalbum/createAlbum',
+        showUpload: true, 
+        allowedPreviewTypes : ['image']
+    });
+      $('#file-0a').on('fileuploaderror', function(event, data, previewId, index) {
+        var form = data.form, files = data.files, extra = data.extra,
+                response = data.response, reader = data.reader;
+        console.log(data);
+        console.log('File upload error');
+    });
+    $('#file-0a').on('fileerror', function(event, data) {
+        console.log(data.id);
+        console.log(data.index);
+        console.log(data.file);
+        console.log(data.reader);
+        console.log(data.files);
+    });
+    $('#file-0a').on('fileuploaded', function(event, data, previewId, index) {
+        var form = data.form, files = data.files, extra = data.extra,
+                response = data.response, reader = data.reader;
+        console.log('File uploaded triggered');
+        console.log(event);
+        console.log(data);
+        });
+        
+   $("#tt").click(function(){
+//	var f = document.getElementById("here");
+//	console.log(f)
+	var form = new FormData(document.getElementById("here"));
+	//form.append("files",f);
+	var title = $("#title").val();
+	var description = $("#description").val();
+	form.append("albumTitle",title);
+	form.append("description",description)
+   	//console.log(form);
+   	$.ajax({
+   		type:"post",
+   		url:"../../partyalbum/createAlbum",
+   		data:form,
+   		processData:false,
+        contentType:false,
+        success:function(res){
+        	if(res.status == 0){
+        		alert("创建相册成功");
+        		location.href="javascript:history.go(-1)"
+        	}
+        }
+   	})
+   })
+</script>
+
+</html>
