@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqu.pa.dao.feedback.FeedbackMapper">
+  <resultMap id="BaseResultMap" type="com.zqu.pa.entity.feedback.Feedback">
+    <id column="feedback_id" jdbcType="INTEGER" property="feedbackId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="feedback_type" jdbcType="INTEGER" property="feedbackType" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zqu.pa.entity.feedback.Feedback">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  
+  <resultMap id="TypeResultMap" type="com.zqu.pa.entity.feedback.FeedbackType">
+    <id column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+  </resultMap>
+  
+  <insert id="insertFeedback" parameterType="com.zqu.pa.entity.feedback.Feedback">
+  	insert into feedback
+  	(
+  		user_id,
+  		title,
+  		date,
+  		feedback_type,
+  		content
+  	)
+  	values
+  	(
+  		#{userId,jdbcType=VARCHAR},
+  		#{title,jdbcType=VARCHAR},
+  		#{date,jdbcType=TIMESTAMP},
+  		#{feedbackType,jdbcType=INTEGER},
+  		#{content,jdbcType=LONGVARCHAR}
+  	)
+  </insert>
+  
+  <select id="getFeedbackType" resultMap="TypeResultMap">
+  	select 
+  		type_id,
+  		type_name
+  	from
+  		feedback_type
+  </select>
+  
+  <select id="getFeedbackList" resultType="com.zqu.pa.vo.feedback.FeedbackInfo">
+  	SELECT
+		f.feedback_id 'feedbackId',
+		u.branch_id 'branchId',
+		f.user_id 'userId',
+		u. NAME 'userName',
+		f.title,
+		f.date,
+		t.type_name 'feedbackName'
+	FROM
+		feedback f
+	INNER JOIN 
+		user_party_info u ON f.user_id = u.user_id
+	INNER JOIN 
+		feedback_type t ON f.feedback_type = t.type_id
+	WHERE
+		1 = 1 
+	<if test="branchId != null and branchId != 0">
+		AND u.branch_id = #{branchId}
+	</if>
+	ORDER BY
+		f.date DESC
+  </select>
+  
+  
+</mapper>
