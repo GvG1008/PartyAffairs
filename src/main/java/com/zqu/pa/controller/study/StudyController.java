@@ -509,4 +509,41 @@ public class StudyController {
         
     }
     /* GvG */
+    
+    
+    /**
+	 *
+	 * @Description: 根据用户id获取该用户必学文档
+	 *
+	 * @param: pageNum 页数
+	 * @param: pageSize 页大小
+	 * @return:
+	 * @author: huanrong.chen
+	 * @date: 2019/1/9
+	 */
+    @RequestMapping(value = "get_study_documents_must_byUserId.do", method = RequestMethod.GET)
+    @ResponseBody
+    public ServerResponse getStudyDocumentMustByUserId(@RequestParam(value = "userId") String userId,
+    		@RequestParam(value = "pageNum") String pageNum,
+    		@RequestParam(value = "pageSize") String pageSize) {
+    	return iStudyService.getStudyDocumentMust(userId,Integer.parseInt(pageNum),Integer.parseInt(pageSize));
+    }
+    
+    /**
+	 *
+	 * @Description: 根据用户id获取该用户必学视频
+	 *
+	 * @param: pageNum 页数
+	 * @param: pageSize 页大小
+	 * @return:
+	 * @author: huanrong.chen
+	 * @date: 2019/1/9
+	 */
+   @RequestMapping(value = "get_study_video_must_byUserId.do", method = RequestMethod.GET)
+   @ResponseBody
+   public ServerResponse getStudyVideoMustByUserId(@RequestParam(value = "userId") String userId,
+   		@RequestParam(value = "pageNum") String pageNum,
+   		@RequestParam(value = "pageSize") String pageSize) {
+   	return iStudyService.getStudyVideoMust(userId,Integer.parseInt(pageNum),Integer.parseInt(pageSize));
+   }
 }

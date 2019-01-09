@@ -258,4 +258,28 @@
       date = #{date,jdbcType=TIMESTAMP}
     where report_id = #{reportId,jdbcType=INTEGER}
   </update>
+  
+  <select id="getReportInfoList" resultType="com.zqu.pa.vo.report.ReportInfo">
+  	select 
+  		r.report_id 'reportId',
+  		u.branch_id 'branchId',
+  		r.user_id 'userId',
+  		u.name 'userName',
+  		r.title ,
+  		r.date
+  	FROM 
+  		report r
+  	INNER JOIN 
+  		user_party_info u
+ 	ON 
+ 		r.user_id = u.user_id
+  	where 1 = 1
+  	<if test="branchId != null and branchId != 0">
+  		and u.branch_id = #{branchId}
+  	</if>
+	ORDER BY
+      r.date desc 	
+  </select>
+  
+  
 </mapper>

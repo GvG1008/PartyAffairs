@@ -1,8 +1,11 @@
 package com.zqu.pa.service.report.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +15,13 @@ import com.zqu.pa.entity.report.ReportExample;
 import com.zqu.pa.entity.report.ReportExample.Criteria;
 import com.zqu.pa.service.report.ReportService;
 import com.zqu.pa.vo.report.PageOfReport;
+import com.zqu.pa.vo.report.ReportInfo;
 
 @Service("reportService")
 public class ReportServiceImpl implements ReportService {
+	
+	//获取日志记录器Logger，名字为本类类名
+    private static Logger log = LoggerFactory.getLogger(ReportService.class);
 	
 	@Autowired
 	ReportMapper reportMapper;
@@ -124,6 +131,17 @@ public class ReportServiceImpl implements ReportService {
 		
 		List<Report> list = reportMapper.selectByExample(example);
 		return list;
+	}
+
+	@Override
+	public List<ReportInfo> getReportInfoList(int branchId) {
+		List<ReportInfo> reportInfoList = new ArrayList<ReportInfo>();
+		try {
+			reportInfoList = reportMapper.getReportInfoList(branchId);
+		} catch (Exception e) {
+			log.error("获取思想汇报列表失败", e);
+		}
+		return reportInfoList;
 	}
 	
 	

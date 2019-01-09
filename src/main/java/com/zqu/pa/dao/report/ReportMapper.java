@@ -2,6 +2,7 @@ package com.zqu.pa.dao.report;
 
 import com.zqu.pa.entity.report.Report;
 import com.zqu.pa.entity.report.ReportExample;
+import com.zqu.pa.vo.report.ReportInfo;
 import com.zqu.pa.vo.report.ReportList;
 
 import java.util.List;
@@ -39,4 +40,15 @@ public interface ReportMapper {
 	List<ReportList> getPageOfReportListLimited(@Param("userId") String userId, @Param("index") int index , @Param("num") int num);
 	//查询思想汇报详情
 	Report getReportInfo(@Param("userId") String userId, @Param("report_id") int report_id);
+	
+	/**
+	 *
+	 * @Description: 获取思想报告列表
+	 *
+	 * @param:
+	 * @return:
+	 * @author: huanrong.chen
+	 * @date: 2019/1/9
+	 */
+	List<ReportInfo> getReportInfoList(@Param("branchId") int branchId);
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.zqu.pa.entity.report.Report;
 import com.zqu.pa.vo.report.PageOfReport;
+import com.zqu.pa.vo.report.ReportInfo;
 
 public interface ReportService {
 	
@@ -15,5 +16,16 @@ public interface ReportService {
 	Report getReportDetailById(int report_id);
 	//根据条件查询思想报告
 	List<Report> queryReport(Report report);
+	
+	/**
+	 *
+	 * @Description: 获取思想报告列表
+	 *
+	 * @param: branchId 管理员党支部id
+	 * @return:
+	 * @author: huanrong.chen
+	 * @date: 2019/1/9
+	 */
+	List<ReportInfo> getReportInfoList(int branchId);
 
 }
