@@ -52,7 +52,8 @@
 		u. NAME 'userName',
 		f.title,
 		f.date,
-		t.type_name 'feedbackName'
+		t.type_name 'feedbackName',
+		f.feedback_type 'feedbackTypeId'
 	FROM
 		feedback f
 	INNER JOIN 
@@ -68,5 +69,65 @@
 		f.date DESC
   </select>
   
+  
+  <select id="getFeedbackById" resultType="com.zqu.pa.vo.feedback.FeedbackInfo">
+    SELECT
+        f.feedback_id 'feedbackId',
+        u.branch_id 'branchId',
+        f.user_id 'userId',
+        u. NAME 'userName',
+        f.title,
+        f.date,
+        t.type_name 'feedbackName',
+        f.feedback_type 'feedbackTypeId'
+    FROM
+        feedback f
+    INNER JOIN 
+        user_party_info u ON f.user_id = u.user_id
+    INNER JOIN 
+        feedback_type t ON f.feedback_type = t.type_id
+    WHERE
+        1 = 1 
+    <if test="feedbackId != null">
+        AND f.feedback_id = #{feedbackId}
+    </if>
+  </select>
+  
+  <select id="getTotalFeedbackByUserId" resultType="Integer">
+    select 
+        COUNT(*)
+    from
+        feedback
+    where 1=1
+    <if test="userId != null">
+        and user_id = #{userId}
+    </if>
+  </select>
+  
+  <select id="getPageOfFeedbackListLimited" resultType="com.zqu.pa.vo.feedback.FeedbackInfo">
+    SELECT
+        f.feedback_id 'feedbackId',
+        u.branch_id 'branchId',
+        f.user_id 'userId',
+        u. NAME 'userName',
+        f.title,
+        f.date,
+        t.type_name 'feedbackName',
+        f.feedback_type 'feedbackTypeId'
+    FROM
+        feedback f
+    INNER JOIN 
+        user_party_info u ON f.user_id = u.user_id
+    INNER JOIN 
+        feedback_type t ON f.feedback_type = t.type_id
+    WHERE
+        1 = 1 
+    <if test="userId != null">
+        and user_id = #{userId}
+    </if>
+    order by
+        f.date DESC
+    limit #{index},#{num}
+  </select>
   
 </mapper>

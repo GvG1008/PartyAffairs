@@ -11,10 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.feedback.Feedback;
+import com.zqu.pa.entity.feedback.FeedbackType;
 import com.zqu.pa.service.feedback.FeedbackService;
 import com.zqu.pa.vo.feedback.FeedbackInfo;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
@@ -31,11 +33,11 @@ public class FeedbackController {
     FeedbackService feedbackService;
     
     /**
-	 * 添加思想汇报
+	 * 管理员获取本支部用户的思想反馈列表
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/listFeedback", method = RequestMethod.GET)
-	public ServerResponse InsertReport() {
+	public ServerResponse getFeedbackList() {
 		UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
         if (basicInfo == null) {
             log.error("用户未登录");
@@ -53,5 +55,54 @@ public class FeedbackController {
 
 		return ServerResponse.createBySuccess("获取思想反馈列表成功",feedbackInfoList);
 	}
-
+	
+	/**
+	 * 添加思想反馈
+	 */
+	@ResponseBody
+    @RequestMapping(value = "/insertFeedback", method = RequestMethod.POST)
+	public ServerResponse insertFeedback(@RequestBody Feedback feedback) {
+	    UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if (basicInfo == null) {
+            log.error("用户未登录");
+            return ServerResponse.createByErrorMessage("用户未登录");
+        }
+        feedback.setUserId(basicInfo.getUserId());
+        try {          
+            feedbackService.insertFeedback(feedback);           
+        } catch (Exception e) {
+            return ServerResponse.createByErrorMessage("添加思想反馈失败!");
+        }
+        return ServerResponse.createBySuccessMessage("添加思想反馈成功!");
+	}
+	
+	/**
+	 * 获取反馈类型
+	 */
+	@ResponseBody
+    @RequestMapping(value = "/getFeedbackType", method = RequestMethod.GET)
+	public ServerResponse getFeedbackTypeList() {
+	    List<FeedbackType> feedbackTypeList = new ArrayList<FeedbackType>();
+	    try {          
+	        feedbackTypeList = feedbackService.getFeedbackTypeList();           
+        } catch (Exception e) {
+            return ServerResponse.createByErrorMessage("获取思想反馈类型失败!");
+        }
+        return ServerResponse.createBySuccess("获取思想反馈类型成功!",feedbackTypeList);
+	}
+	
+	/**
+     * 根据id获取思想反馈详细信息
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getFeedbackById", method = RequestMethod.GET)
+    public ServerResponse getFeedbackById(@RequestParam(value = "feedbackId") int feedbackId) {
+        FeedbackInfo feedbackInfo = new FeedbackInfo();
+        try {
+            feedbackInfo = feedbackService.getFeedback(feedbackId);
+        } catch (Exception e) {
+            return ServerResponse.createByErrorMessage("获取思想反馈详细信息失败!");
+        }
+        return ServerResponse.createBySuccess("获取思想反馈类型成功!",feedbackInfo);
+    }
 }

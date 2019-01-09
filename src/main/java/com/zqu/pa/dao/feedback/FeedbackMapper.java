@@ -15,4 +15,10 @@ public interface FeedbackMapper {
 	List<FeedbackInfo> getFeedbackList(@Param("branchId") int branchId);
 	
 	List<FeedbackType> getFeedbackType();
+	
+	FeedbackInfo getFeedbackById(@Param("feedbackId") int feedbackId);
+	
+	Integer getTotalFeedbackByUserId(@Param("userId") int userId);
+	
+	List<FeedbackInfo> getPageOfFeedbackListLimited(@Param("userId") String userId, @Param("index") int index , @Param("num") int num);
 }

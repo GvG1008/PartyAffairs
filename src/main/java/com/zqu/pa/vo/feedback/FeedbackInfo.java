@@ -18,6 +18,8 @@ public class FeedbackInfo {
 	private String date;
 	
 	private String feedbackName;
+	
+	private String feedbackTypeId;
 
 	public int getFeedbackId() {
 		return feedbackId;
@@ -74,5 +76,15 @@ public class FeedbackInfo {
 	public void setFeedbackName(String feedbackName) {
 		this.feedbackName = feedbackName;
 	}
+
+    public String getFeedbackTypeId() {
+        return feedbackTypeId;
+    }
+
+    public void setFeedbackTypeId(String feedbackTypeId) {
+        this.feedbackTypeId = feedbackTypeId;
+    }
+	
+	
 	
 }

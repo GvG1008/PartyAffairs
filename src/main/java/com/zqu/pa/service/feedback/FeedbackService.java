@@ -12,4 +12,6 @@ public interface FeedbackService {
 	List<FeedbackInfo> getFeedbackInfoList(int branchId);
 	
 	List<FeedbackType> getFeedbackTypeList();
+	
+	FeedbackInfo getFeedback(int feedbackId);
 }

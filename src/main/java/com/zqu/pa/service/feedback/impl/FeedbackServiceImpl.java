@@ -25,8 +25,11 @@ public class FeedbackServiceImpl implements FeedbackService{
 
 	@Override
 	public void insertFeedback(Feedback feedback) {
-		// TODO Auto-generated method stub
-		
+	    try {
+            feedbackMapper.insertFeedback(feedback);
+        } catch (Exception e) {
+            log.error("添加思想反馈失败", e);
+        }
 	}
 
 	@Override
@@ -42,8 +45,24 @@ public class FeedbackServiceImpl implements FeedbackService{
 
 	@Override
 	public List<FeedbackType> getFeedbackTypeList() {
-		// TODO Auto-generated method stub
-		return null;
+	    List<FeedbackType> feedbackTypeList = new ArrayList<FeedbackType>();
+	    try {
+	        feedbackTypeList = feedbackMapper.getFeedbackType();
+        } catch (Exception e) {
+            log.error("获取思想反馈类型失败", e);
+        }
+		return feedbackTypeList;
 	}
+
+    @Override
+    public FeedbackInfo getFeedback(int feedbackId) {
+        FeedbackInfo feedbackInfo = new FeedbackInfo();
+        try {
+            feedbackInfo = feedbackMapper.getFeedbackById(feedbackId);
+        } catch (Exception e) {
+            log.error("获取思想反馈详细信息失败", e);
+        }
+        return feedbackInfo;
+    }
 
 }
