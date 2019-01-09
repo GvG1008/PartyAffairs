@@ -159,7 +159,7 @@ public class StudyController {
         }
         for (String uid : userId) {
             StudyDocumentMust sdm = new StudyDocumentMust();
-            sdm.setUserId(userID);
+            sdm.setUserId(uid);
             studyDocumentMustList.add(sdm);
         }
         System.out.println(sd);
@@ -347,7 +347,7 @@ public class StudyController {
         }
         for(String uid : userId) {
             StudyVideoMust svm = new StudyVideoMust();
-            svm.setUserId(userID);
+            svm.setUserId(uid);
             studyVideoMustList.add(svm);
         }
         return iStudyService.uploadStudyVideo(sv, studyVideoLabelList, studyVideoMustList);
