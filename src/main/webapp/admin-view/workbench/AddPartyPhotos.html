@@ -190,7 +190,8 @@
         success:function(res){
         	if(res.status == 0){
         		alert("创建相册成功");
-        		location.href="javascript:history.go(-1)"
+        		location.href="javascript:";
+        		self.location=document.referrer;
         	}
         }
    	})

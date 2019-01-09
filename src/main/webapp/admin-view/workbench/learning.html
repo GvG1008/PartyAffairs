@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-    <title>员工管理</title>
+    <title>学习情况</title>
 	<link rel="stylesheet" href="../../admin-statics/table/bootstrap.css" />
     <link href="../../admin-statics/table/dataTables.bootstrap.css" rel="stylesheet">
     <link href="../../admin-statics/table/dataTables.responsive.css" rel="stylesheet">
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-   <div class = "header">党员管理  > 党员档案</div>
+   <div class = "header"><a href="LearningSituation.html">返回</a> 学习情况</div>
            
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -24,48 +24,32 @@
                                 <thead>
                                     <tr>
                                         <th><center><input type="checkbox"  name="all" id="all"></center></th>
-                                        <th>学号</th>
-										<th>姓名</th>
-										<th>性别</th>
-										<th>专业</th>
-										<th>个人身份</th>
-										<th>隶属党支部</th>
-										<th>操作</th>
+                                        <th v-if="tp == 1">视频名</th>
+                                        <th v-if="tp == 2">文档名</th>
+										<th>上传人</th>
+										<th>上传时间</th>
+										<th>学习状态</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                      <tr v-for="message in newMessages">
-                                        <td><center><input type="checkbox"  name="all" id="all" :value="message.userId"></center></td>
-                                        <td><center>{{message.userId}}</center></td>
-					                    <td><center>{{message.realName}}</center></td>
-					                    <td><center>{{message.sex}}</center></td>
-					                    <td><center>{{message.professional}}</center></td>
-					        			<td><center>{{message.roleName}}</center></td>
-					        			<td v-if="message.branchId==0"><center></center></td>
-					        			<td v-if="message.branchId==1"><center>软件工程专业党支部</center></td>
-					        			<td v-else-if="message.branchId==2"><center>计算机科学与技术专业党支部</center></td>
-					        			<td v-else-if="message.branchId==3"><center>网络工程专业党支部</center></td>
-					        			<td v-else-if="message.branchId==4"><center>物联网工程专业党支部</center></td>
-					        			<td v-else-if="message.branchId==5"><center>数据科学与大数据技术专业党支部</center></td>
+                                        <td v-if="tp == 1"><center><input type="checkbox"  name="all" id="all" :value="message.videoId"></center></td>
+                                        <td v-if="tp == 2"><center><input type="checkbox"  name="all" id="all" :value="message.documentId"></center></td>
+                                        <td v-if="tp == 1"><center>{{message.videoTitle}}</center></td>
+                                        <td v-if="tp == 2"><center>{{message.documentTitle}}</center></td>
+					                    <td><center>{{message.uploadUser}}</center></td>
+					                    <td><center>{{message.updateTime}}</center></td>
 					                    <td>
 					                    <center>
-						                    <a class="btn btn-success os btn-xs" :href="'UserPartyProfile.html?id='+message.userId">
-                                                                                                                            编辑<i class="fa fa-pencil" aria-hidden="true"></i>
-                                            </a>
-						                    &nbsp;&nbsp;&nbsp;&nbsp;
-						                    <button class="btn btn-danger btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" onclick="deletemsg(this);">
-							                                                   删除<i class="fa fa-trash-o "></i>
-						                    </button>
-						                    &nbsp;&nbsp;&nbsp;&nbsp;
-						                    <button class="btn btn-danger btn-xs" @click="resetpwd(message.userId)">
-							                                                   重置密码<i class="fa fa-trash-o "></i>
-						                    </button>
+						                    <p v-if="message.already == 1">已学</p>
+						                    <p v-else>未学习</p>
 						                </center>
 					                    </td> 
                                     </tr>
                                 </tbody>
-                            </table>
+                            </table>    
                         </div>
+                        
                     </div>
            
             <div class="popup_de xycenter">
@@ -87,7 +71,7 @@
     <script src="../../admin-statics/table/js/dataTables.responsive.js"></script>
     <script src="../../admin-statics/table/js/sb-admin-2.js"></script>
     <script src="../../statics/js/vue.js"></script>
-    <script src="../../admin-statics/js/module/tablelist.js"> </script>
+    <script src="../../admin-statics/js/module/learning.js"> </script>
 
 </body>
 </html>

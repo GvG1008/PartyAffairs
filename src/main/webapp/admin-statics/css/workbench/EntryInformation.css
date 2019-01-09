@@ -280,6 +280,11 @@ span.info-title-content {
     grid-column:3/4;
     
 }
+.yy9{
+    grid-row:3/4;
+    grid-column:4/5;
+    
+}
 label.labelname {
     font-size: 12px;
     color: #555;

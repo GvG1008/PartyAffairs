@@ -9,7 +9,7 @@ new Vue({
 			var m = {};
 			$.ajax({
 				type:"get",
-				url: "../../userManage/userList",
+				url: "../../report/list",
 				async : false,
 				dataType: 'json',
 				success: function(result){
@@ -33,8 +33,11 @@ new Vue({
 			}				
 			return msg.substr(0,11)+"···";
 		},
-		resetpwd:function(userId){
-			resetpwd(userId);
+		deletemsg:function(obj){
+			deletemsg(obj);
+		},
+		see:function(id){
+			see(id);
 		}
 	},
 	created: function () {
@@ -59,7 +62,7 @@ $(document).ready(function() {
         "bAutoWidth" : true, //是否自适应宽度  
         "aLengthMenu" : [5, 10, 20], //更改显示记录数选项 
         "iDisplayLength" : 5, //默认显示的记录数  
-        "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0,7 ] }],
+        "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0,5 ] }],
         "order": [[ 1, 'asc' ]],
         "sDom": '<"row" <"col-sm-8" <"#add">> <"col-sm-4" <"row" <"col-sm-6" l> <"col-sm-6" f>>>>t<"row" <"col-sm-6" i> <"col-sm-6" p>>',
         language: {
@@ -79,7 +82,7 @@ $(document).ready(function() {
         	$(this).find('input[type=checkbox]').removeProp('checked');
 		}
     });   
-	var button = "<a href='EntryInformation.html' class='btn btn-success ts'><span class='glyphicon glyphicon-plus icon'></span><span class='caption'>录入</span></a> &nbsp;&nbsp;&nbsp;&nbsp;"
+	var button = "<button data-toggle='modal' data-target='#myModal' class='btn btn-success ts'><span class='glyphicon glyphicon-plus icon'></span><span class='caption'>录入</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
 				+"<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'><span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
 				+"<a class='btn btn-danger td' onclick='deleteall()'><span class='fa fa-trash-o icon'></span><span class='caption'>删除</span></a>";
 	document.getElementById("add").innerHTML = button;
@@ -122,20 +125,18 @@ function millisecondsToDateTime(ms){
 	return new Date(ms).toLocaleString();
 };
 function deletemsg(obj){
-	var tds = $(obj).parent().parent().parent().find('td');
-	var center = tds.eq(1).find('center');
-	var rid = center.eq(0).text();
+	
 	var text="确定要删除该账号吗?";
 	document.getElementById('show_msg').innerHTML=text;
 	$('.popup_de').addClass('bbox');
 	$('.popup_de .btn-danger').one('click',function(){
-		doDelete(rid);
+		doDelete(obj);
 	})
 }
 function doDelete(data){
 	$.ajax({                            
 		type:'post',        
-        url:'../../userManage/deleteUserByBranch/'+data, 
+        url:''+data, 
         dataType:'json',
         success: function(result) {  
 			alert(result.msg);
@@ -147,15 +148,6 @@ function doDelete(data){
    });
 }
 
-function resetpwd(userId){
-	$.ajax({
-		type:"get",
-		url:"../../resetPassword/"+userId,
-		async:true,
-		success:function(res){
-			if(res.status == 0){
-				alert(res.msg)
-			}
-		}
-	});
+function see(id){
+	alert("查看id"+id+"的思想反馈")
 }

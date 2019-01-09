@@ -14,7 +14,6 @@ new Vue({
 				dataType: 'json',
 				success: function(result){
 					if (result.status == 0) {
-						console.log(result)
 						app.newMessages = result.data;
 					}else{
 						alert(result.msg);
@@ -32,9 +31,6 @@ new Vue({
 				return msg;
 			}				
 			return msg.substr(0,11)+"···";
-		},
-		resetpwd:function(userId){
-			resetpwd(userId);
 		}
 	},
 	created: function () {
@@ -79,10 +75,7 @@ $(document).ready(function() {
         	$(this).find('input[type=checkbox]').removeProp('checked');
 		}
     });   
-	var button = "<a href='EntryInformation.html' class='btn btn-success ts'><span class='glyphicon glyphicon-plus icon'></span><span class='caption'>录入</span></a> &nbsp;&nbsp;&nbsp;&nbsp;"
-				+"<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'><span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> &nbsp;&nbsp;&nbsp;&nbsp;"
-				+"<a class='btn btn-danger td' onclick='deleteall()'><span class='fa fa-trash-o icon'></span><span class='caption'>删除</span></a>";
-	document.getElementById("add").innerHTML = button;
+
 	$('#msg tbody').on( 'mouseenter', 'td', function () {
 	    var colIdx = table.cell(this).index().column;
 	    $( table.cells().nodes() ).removeClass( 'highlight' );
@@ -93,69 +86,6 @@ $(document).ready(function() {
     });
 
 });   
-function checkall(){
-	var all = $('[name=all]:checkbox');
-	for(var i=0;i<all.length;i++){
-		all[i].checked=true;
-	}
-}
-function deleteall(){
-	var all = $('[name=all]:checkbox');
-	var str = "";
-	for(var i=1;i<all.length;i++){
-		if(all[i].checked)
-			str = str+"&"+all[i].value;
-	}
-	var text="确定要删除所选账号吗?";
-	document.getElementById('show_msg').innerHTML=text;
-	$('.popup_de').addClass('bbox');
-	$('.popup_de .btn-danger').one('click',function(){
-		if(str!="")
-			doDelete(str);
-		else{
-			alert("请至少选择一个账号");
-			$('.popup_de').removeClass('bbox');
-		}		
-	})
-}
 function millisecondsToDateTime(ms){
 	return new Date(ms).toLocaleString();
 };
-function deletemsg(obj){
-	var tds = $(obj).parent().parent().parent().find('td');
-	var center = tds.eq(1).find('center');
-	var rid = center.eq(0).text();
-	var text="确定要删除该账号吗?";
-	document.getElementById('show_msg').innerHTML=text;
-	$('.popup_de').addClass('bbox');
-	$('.popup_de .btn-danger').one('click',function(){
-		doDelete(rid);
-	})
-}
-function doDelete(data){
-	$.ajax({                            
-		type:'post',        
-        url:'../../userManage/deleteUserByBranch/'+data, 
-        dataType:'json',
-        success: function(result) {  
-			alert(result.msg);
-			location.reload();	
-        },
-        error :function(){
-        	alert("系统出错，删除失败！");
-        }
-   });
-}
-
-function resetpwd(userId){
-	$.ajax({
-		type:"get",
-		url:"../../resetPassword/"+userId,
-		async:true,
-		success:function(res){
-			if(res.status == 0){
-				alert(res.msg)
-			}
-		}
-	});
-}

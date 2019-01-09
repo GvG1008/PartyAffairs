@@ -42,6 +42,7 @@ $(document).ready(function(){
 		var timePositive = $("#timePositive").val();
 		var totot = $("#totot").val();
 		var outUnit = $("#outUnit").val();
+		var zzsf = $("#zzsf").val();//组织身份,后端未提供对应元素
 		var usermessage = {
 			className:className,
 			grade:grade,
