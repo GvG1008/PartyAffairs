@@ -1,5 +1,6 @@
 package com.zqu.pa.service.study.impl;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -258,6 +259,14 @@ public class StudyServiceImpl implements IStudyService {
     @Transactional
     public ServerResponse getStudyDocumentMust(String userId,int page,int pageNum) {
         int totalNum = studyDocumentMapper.selectCountMustPutonByUserId(userId);
+        if (totalNum == 0){
+        	Map<String, Serializable> map = Maps.newHashMap();
+            map.put("totalPage", 0);
+            map.put("page", page);
+            map.put("pageNum", pageNum);
+            map.put("list", Lists.newArrayList());
+        	return ServerResponse.createBySuccess(map);
+        }
         int totalPage = (int)(totalNum+pageNum-1)/pageNum;
         if(totalPage<page)
             page = totalPage;
@@ -396,6 +405,14 @@ public class StudyServiceImpl implements IStudyService {
     @Transactional
     public ServerResponse getStudyVideoMust(String userId,int page,int pageNum) {
         int totalNum = studyVideoMapper.selectCountMustPutonByUserId(userId);
+        if (totalNum == 0){
+        	Map<String, Serializable> map = Maps.newHashMap();
+            map.put("totalPage", 0);
+            map.put("page", page);
+            map.put("pageNum", pageNum);
+            map.put("list", Lists.newArrayList());
+        	return ServerResponse.createBySuccess(map);
+        }
         int totalPage = (int)(totalNum+pageNum-1)/pageNum;
         if(totalPage<page)
             page = totalPage;
@@ -404,6 +421,7 @@ public class StudyServiceImpl implements IStudyService {
         map.put("totalPage", totalPage);
         map.put("page", page);
         map.put("pageNum", pageNum);
+        //System.out.println("----------------------------------"+index+"            "+pageNum+"           "+userId);
         List<StudyVideo> svl = studyVideoMapper.selectMustPutonByUserId(index,pageNum,userId);
         int size = svl.size();
         List<StudyVideoVO3> list = Lists.newArrayList();

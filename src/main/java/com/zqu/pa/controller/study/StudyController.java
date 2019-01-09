@@ -541,9 +541,13 @@ public class StudyController {
 	 */
    @RequestMapping(value = "get_study_video_must_byUserId.do", method = RequestMethod.GET)
    @ResponseBody
-   public ServerResponse getStudyVideoMustByUserId(@RequestParam(value = "userId") String userId,
+   public ServerResponse getStudyVideoMustByUserId(HttpSession session,
+		@RequestParam(value = "userId") String userId,
    		@RequestParam(value = "pageNum") String pageNum,
    		@RequestParam(value = "pageSize") String pageSize) {
-   	return iStudyService.getStudyVideoMust(userId,Integer.parseInt(pageNum),Integer.parseInt(pageSize));
+	   
+	   	String Id = userId;
+   		return iStudyService.getStudyVideoMust(Id,Integer.parseInt(pageNum),Integer.parseInt(pageSize));
+   	
    }
 }
