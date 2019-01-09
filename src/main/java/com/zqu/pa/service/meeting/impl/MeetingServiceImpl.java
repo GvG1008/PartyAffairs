@@ -14,6 +14,7 @@ import com.zqu.pa.entity.meeting.Meeting;
 import com.zqu.pa.entity.meeting.MeetingExample;
 import com.zqu.pa.entity.meeting.MeetingExample.Criteria;
 import com.zqu.pa.service.meeting.MeetingService;
+import com.zqu.pa.vo.meeting.MeetingInfo2;
 import com.zqu.pa.vo.newsnotices.MeetingInfo;
 import com.zqu.pa.vo.newsnotices.PageOfList;
 
@@ -58,12 +59,21 @@ public class MeetingServiceImpl implements MeetingService {
 
     
     @Override
-    public Meeting getMeetingInfo(int meeting_id, int type) {
+    public MeetingInfo2 getMeetingInfo(int meeting_id, int type) {
         
         Meeting meeting = new Meeting();
         meeting = meetingDao.selectByPrimaryKey(meeting_id);
+        
         if(meeting==null)
             return null;
+        
+        MeetingInfo2 meetingInfo = new MeetingInfo2();
+        meetingInfo.setMeeting(meeting);
+        //获取其他相关信息
+        meetingInfo.setCreatorName(meetingDao.selectUserName(meeting.getCreatorId()));
+        meetingInfo.setHeadImg(meetingDao.selectUserHeadImg(meeting.getCreatorId()));
+        meetingInfo.setBranchName(meetingDao.selectBranchName(meeting.getBranchId()));
+        
         //获取通过审核的
         if(type==1) {
             //若未通过审核，返回null
@@ -78,13 +88,12 @@ public class MeetingServiceImpl implements MeetingService {
                     return null;
                 meeting.setClick(meeting.getClick()+1);
                 //显示在公众页面,删除多余信息
-                meeting.setBranchId(null);
-                meeting.setCreatorId(null);
-                meeting.setLastTime(null);
-                meeting.setState(null);
+                meetingInfo.setBranchId(null);
+                meetingInfo.setCreatorId(null);
+                meetingInfo.setState(null);
             }
         }
-        return meeting;
+        return meetingInfo;
     }
 
 

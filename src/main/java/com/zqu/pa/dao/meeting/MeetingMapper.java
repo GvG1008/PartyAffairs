@@ -53,4 +53,11 @@ public interface MeetingMapper {
     
     //批量删除会议
     int deleteMeetingByBatch(@Param("meetingIds")List<Integer> meetingIds);
+    
+    String selectUserName(@Param("userId")String userId);
+    
+    String selectUserHeadImg(@Param("userId")String userId);
+    
+    String selectBranchName(@Param("branchId")Integer branchId);
+    
 }
