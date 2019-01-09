@@ -3,6 +3,7 @@ package com.zqu.pa.service.meeting;
 import java.util.List;
 
 import com.zqu.pa.entity.meeting.Meeting;
+import com.zqu.pa.vo.meeting.MeetingInfo2;
 import com.zqu.pa.vo.newsnotices.MeetingInfo;
 import com.zqu.pa.vo.newsnotices.PageOfList;
 
@@ -12,7 +13,7 @@ public interface MeetingService {
     PageOfList getMenuInfo(int branchId, int page, int num);
 
     //根据id返回此会议所有信息
-    Meeting getMeetingInfo(int meeting_id, int type);
+    MeetingInfo2 getMeetingInfo(int meeting_id, int type);
 
     //添加未审核的会议信息,返回结果消息
     String InsertMeeting(Meeting meeting);

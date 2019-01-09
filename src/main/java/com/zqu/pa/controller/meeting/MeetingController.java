@@ -22,6 +22,7 @@ import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.meeting.Meeting;
 import com.zqu.pa.service.meeting.MeetingService;
 import com.zqu.pa.utils.FTPSSMLoad;
+import com.zqu.pa.vo.meeting.MeetingInfo2;
 import com.zqu.pa.vo.newsnotices.MeetingInfo;
 import com.zqu.pa.vo.newsnotices.PageOfList;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
@@ -90,9 +91,9 @@ public class MeetingController {
      */
     @ResponseBody
     @RequestMapping("/meeting/{meeting_id}")
-    public ServerResponse<Meeting> getMeetingInfo(@PathVariable int meeting_id){
+    public ServerResponse<MeetingInfo2> getMeetingInfo(@PathVariable int meeting_id){
         
-        Meeting meeting = meetingService.getMeetingInfo(meeting_id,1);
+        MeetingInfo2 meeting = meetingService.getMeetingInfo(meeting_id,1);
         
         if(meeting!=null)
             return ServerResponse.createBySuccess("获取会议信息成功", meeting);
@@ -107,9 +108,9 @@ public class MeetingController {
      */
     @ResponseBody
     @RequestMapping("/meeting_all/{meeting_id}")
-    public ServerResponse<Meeting> getAllMeetingInfo(@PathVariable int meeting_id){
+    public ServerResponse<MeetingInfo2> getAllMeetingInfo(@PathVariable int meeting_id){
         
-        Meeting meeting = meetingService.getMeetingInfo(meeting_id,0);
+        MeetingInfo2 meeting = meetingService.getMeetingInfo(meeting_id,0);
         
         if(meeting!=null)
             return ServerResponse.createBySuccess("获取会议信息成功", meeting);

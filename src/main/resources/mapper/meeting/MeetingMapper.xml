@@ -393,4 +393,22 @@
       #{meetingId}
     </foreach>
   </delete>
+  <select id="selectUserName" resultType="String">
+   SELECT name
+   from user_person_info
+   where user_id = #{userId}
+   Limit 1
+  </select>
+  <select id="selectUserHeadImg" resultType="String">
+   SELECT img_head
+   from user_person_info
+   where user_id = #{userId}
+   Limit 1
+  </select>
+  <select id="selectBranchName" resultType="String">
+   SELECT branch_name
+   From partybranch
+   where branch_id = #{branchId}
+   Limit 1
+  </select>
 </mapper>
