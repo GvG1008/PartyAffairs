@@ -57,7 +57,7 @@ li{
 
 .school{
 	color: white;
-	padding: 10 50px;
+	padding: 10px 50px;
 	float: left;
 	position: absolute;
 	left: 150px;
@@ -93,28 +93,6 @@ li{
 #manager{
 	color: white;
 	text-decoration: none;
-}
-
-.search{
-	position: relative;
-	left: 4px;
-	outline: none;
-	font-size: 15px;
-	height: 27px;
-	width: 150px;
-	line-height: 27px;
-	border: 0;
-	border-bottom-left-radius: 5px;
-	border-top-left-radius: 5px;
-}
-
-.search-btn{
-	outline: none;
-	height: 27px;
-	line-height: 27px;
-	border: 0;
-	border-bottom-right-radius: 5px;
-	border-top-right-radius: 5px;
 }
 
 .nav-a{
@@ -250,7 +228,7 @@ footer{
   	position: absolute;
 }
 
-#content-p{
+.content-p{
 	font-size: 20px;
 	text-align: center;
 	position: relative;
@@ -356,9 +334,6 @@ html {
 img.img-logo {
     width: 50%;
     height: 50%;
-    /* margin: auto 0; */
-    /* line-height: 24; */
-    /* margin-top: 72px; */
 }
 .logopic {
     width: fit-content;
@@ -392,6 +367,13 @@ div#myCarousel {
 }
 div#Learning {
     width: 60%;
+}
+/*头部样式*/
+i.iconfont .top-icon {
+	color: #fff;
+}
+i.iconfont .search-btn {
+	color: #ccc;
 }
 /*菜单栏*/
 i.iconfont {
@@ -442,6 +424,50 @@ ul.nav-ul {
 	 top:0;
 	 
 }
+.label-btn {
+	display: flex;
+	width: 160px;
+	height: 29px;
+	line-height: 29px!important;
+	font-size: 12px;
+	border-radius: 15px;
+	padding: 0 0 0 17px;
+	margin: 0;
+	border: 1px solid rgba(255,255,255,.5);
+	background: 0 0;
+	box-sizing: border-box;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-ms-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+	transition: all .2s ease-in-out;
+}
+label.label-btn:hover {
+	border: 1px solid #fff;
+	color: #fff;
+}
+
+.label-btn input:hover{
+	outline: unset;
+	background: transparent;
+	border: transparent;
+}
+
+.label-btn input{
+	width: 114px;
+	outline: unset;
+	background: transparent;
+	border: transparent;
+	color: #ccc;
+}
+i.i-search-btn {
+	color: #ccc;
+	font-size: 15px;
+}
+
+.user-a {
+	line-height: 0;
+}
 
 @media screen and (min-width:1400px){
 	div#frame {
@@ -462,4 +488,12 @@ ul.nav-ul {
 	.news, .test, .party, .league, .info,.manager, .meeting, .organ {
     width: 11.5%;
     }
+
+	.user-a {
+		line-height: 0px;
+	}
+
+	.user-li, .nav-li {
+		height: 100%;
+	}
 }
