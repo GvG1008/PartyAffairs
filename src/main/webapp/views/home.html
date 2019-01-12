@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title>肇庆学院党务系统</title>
         <link rel="stylesheet" href="../statics/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="//at.alicdn.com/t/font_878977_73xlzwltb1u.css"/>
+        <link rel="stylesheet" href="//at.alicdn.com/t/font_878977_oaoo7bk9e3g.css"/>
         <link rel="stylesheet" href="../statics/css/home.css" />
 	</head>
 	<body>
@@ -12,56 +12,56 @@
 		<div class="loading"></div>
 		<!--头部-->
 		<header>
-		    <div class="header" v-if="realName==''">
+		    <div class="header">
                 <div class="school">
                     <img class="name" src="../statics/img/name.png" />
                 </div>
                 <div class="user">
-                    <ul class="user-ul">
-                        <input type="text" class="search" id="search" placeholder="站内搜索*" />
-                        <button class="search-btn" id="search-btn">
-                            <img src="../statics/img/搜索.png" />
-                        </button>
+					<label  class="form_search">
+						<input type="text" class="s_input" id="search" placeholder="站内搜索*" @keyup.enter="search"/>
+						<i class="iconfont icon-sousuo5 input_enter_icon"  id="search-btn"></i>
+					</label>
+					<!-- 判断登录信息 -->
+					<ul class="user-ul"  v-if="realName===''">
                         <span class="user-a">欢迎，游客</span>
                         <li class="user-li"><span class="user-a" id="login">登录</span></li>                       
                     </ul>
-                </div>
-            </div>
-			<div class="header" v-else>
-				<div class="school">
-					<img class="name" src="../statics/img/name.png" />
-				</div>
-				<div class="user">
-					<ul class="user-ul">
-						<input type="text" class="search" id="search" placeholder="站内搜索*" @keyup.enter="search" />
-						<button class="search-btn" id="search-btn">
-							<img src="../statics/img/搜索.png" />
-						</button>
+					<ul class="user-ul"   v-else>
 						<span class="user-a">欢迎，{{user.realName}}</span>
-						<li class="user-li"><span class="user-a" id="info">个人信息</span></li>
-						<li class="user-li" v-if="permission != 0"><span class="user-a" id="manager">管理端</span></li>
-						<li class="user-li">
+						<li class="user-li"><span class="user-a" id="info">个人信息<em>▼</em></span></li>
+						<li class="user-li" v-if="permission != 0"><span class="user-a" id="manager">
+                            管理端<em>▼</em></span></li>
+						<!-- 本版本“消息”功能暂不实现 -->
+						<li class="user-li" style="display: none">
 							<span class="user-a" id="message">消息</span>
 							<div class="message" id="dis-message"></div>
 						</li>
-						<li class="user-li"><span class="user-a" id="change">修改密码</span></li>
-						<li class="user-li"><a class="user-a" id="x" href="../doLogout">注销</a></li>
+						<li class="user-li">
+							<a class="user-a" id="logout" href="../doLogout" title="注销">
+								<i class="iconfont icon-tuichu top-icon"></i></a>
+						</li>
 					</ul>
-				</div>
-			</div>
-			<aside class="info" id="ainfo" style="display: none;">
+                </div>
+            </div>
+
+			<aside class="dropdown-menu info" id="ainfo" style="display: none;">
 				<ul class="info-ul">
 					<li class="info-li"><a class="info-a" id="file" href="home.html?location=info">党员档案</a></li>
 					<li class="info-li"><a class="info-a" id="collection" href="home.html?location=coll">我的收藏</a></li>
 					<li class="info-li"><a class="info-a" id="feedback" href="home.html?location=fb">我要反馈</a></li>
 					<li class="info-li"><a class="info-a" id="report" href="home.html?location=rp">思想汇报</a></li>
 					<li class="info-li"><a class="info-a" id="learnrecord" href="home.html?location=record">历史学习记录</a></li>
+					<!-- TODO 修改密码功能未实现 -->
+					<li class="info-li"><a class="info-a" id="change">修改密码</a></li>
 				</ul>
 			</aside>
-			<aside class="manager" id="amanager" style="display: none;">
+
+			<aside class="dropdown-menu manager" id="amanager" style="display: none;">
 				<ul class="info-ul">
-					<li class="info-li" v-if="permission >0 && permission <=2"><a class="info-a" id="" href="../admin-view/index.html">工作台</a></li>
-					<li class="info-li" ><a class="info-a" id="" href="../admin-view/workbench/Manager.html">权限管理</a></li>
+					<li class="info-li" v-if="permission >0 && permission <=2">
+						<a class="info-a" href="../admin-view/index.html">工作台</a>
+					</li>
+					<li class="info-li" ><a class="info-a" href="../admin-view/workbench/Manager.html">权限管理</a></li>
 				</ul>
 			</aside>
 			<div class="logopic"><img class="img-logo" src="../statics/img/logo.png"></div>
@@ -69,7 +69,7 @@
 		
 		<div class="aside" id="laside" style="display: none;">
         	<aside class="login" id="alogin">
-        		<p id="content-p"><strong>请输入您的账号和密码</strong></p>
+        		<p class="content-p"><strong>请输入您的账号和密码</strong></p>
         		<input class="content-input" type="text" id="username" placeholder="账号*" v-model="username"/><br />
         		<input class="content-input" type="password" id="password" placeholder="密码*" v-model="password"/><br />
         		<input type="button" class="content-button" id="login-btn" value="登录" @click="Login()"/>
@@ -80,7 +80,7 @@
         
         <div class="aside" id="caside" style="display: none;">
         	<aside class="change" id="achange">
-        		<p id="content-p"><strong>修改密码</strong></p>
+        		<p class="content-p"><strong>修改密码</strong></p>
         		<input class="content-input" type="password" id="oldpass" placeholder="旧密码*" /><br />
         		<input class="content-input" type="password" id="newpass" placeholder="新密码*" /><br />
         		<input class="content-input" type="password" id="repass" placeholder="确认密码*" /><br />
@@ -88,76 +88,21 @@
         		<input type="button" class="content-button" value="取消"/>
        	 	</aside>
         </div>
-		
-		<!--导航-->
-		<!-- <div class="nav">
-			<ul class="nav-ul">
-				<li class="nav-li">
-					<div class="nav-a" id="news">
-						<a id="home-a" href="home.html">
-							<p><img src="../statics/img/首页.png" /></p>	
-							<p class="a-span">首页</p>
-						</a>
-					</div>
-				</li>
-				<li class="nav-li">
-					<div class="nav-a" id="meeting">
-						<a id="meeting-a" href="home.html?location=meeting" target="_blank">
-							<p><img src="../statics/img/会议.png" /></p>
-							<p class="a-span">三会一课</p>
-						</a>
-					</div>
-				</li>
-				<li class="nav-li">
-					<div class="nav-a">
-						<a id="learn-a" href="home.html?location=learn">
-							<p><img src="../statics/img/考试.png" /></p>
-							<p class="a-span">e起学习</p>
-						</a>
-					</div>
-				</li>
-				<li class="nav-li">
-					<div class="nav-a">
-						<a id="test-a" href="home.html?location=test" target="_blank">
-							<p><img src="../statics/img/考试.png" /></p>
-							<p class="a-span">e起考试</p>
-						</a>
-					</div>
-				</li>
-				<li class="nav-li">
-					<div class="nav-a" id="party">
-						<p><img src="../statics/img/党.png" /></p>
-						<p class="a-span">e网党建</p>
-					</div>
-				</li>
-				<li class="nav-li">
-					<div class="nav-a" id="league">
-						<p><img src="../statics/img/团.png" /></p>
-						<p class="a-span">e网团建</p>
-					</div>
-				</li>
-				<li class="nav-li">
-					<div class="nav-a" id="organ">
-						<p><img src="../statics/img/组织.png" /></p>
-						<p class="a-span">组织建设</p>
-					</div>
-				</li>
-			</ul>
-		</div> -->
+
 		<div class="nav">
             <ul class="nav-ul">
                 <li class="nav-li">
                     <div class="nav-a" id="news">
                         <a id="home-a" href="home.html">
-                            <p><i class="iconfont icon-shouye"></i></p>  
+                            <p><i class="iconfont icon-shouye menu-icon"></i></p>
                             <p class="a-span">首页</p>
                         </a>
                     </div>
                 </li>
                 <li class="nav-li">
                     <div class="nav-a" id="meeting">
-                        <a id="meeting-a" href="home.html?location=meeting" target="_blank">
-                            <p><i class="iconfont icon-bhjmeeting"></i></p>
+                        <a id="meeting-a" href="home.html?location=meeting">
+                            <p><i class="iconfont icon-bhjmeeting menu-icon"></i></p>
                             <p class="a-span">三会一课</p>
                         </a>
                     </div>
@@ -165,34 +110,34 @@
                 <li class="nav-li">
                     <div class="nav-a">
                         <a id="learn-a" href="home.html?location=learn">
-                            <p><i class="iconfont icon-zaixianxuexi"></i></p>
+                            <p><i class="iconfont icon-zaixianxuexi menu-icon"></i></p>
                             <p class="a-span">e起学习</p>
                         </a>
                     </div>
                 </li>
                 <li class="nav-li">
                     <div class="nav-a">
-                        <a id="test-a" href="home.html?location=test" target="_blank">
-                            <p><i class="iconfont icon-kaoshizhongxinon"></i></p>
+                        <a id="test-a" href="home.html?location=test">
+                            <p><i class="iconfont icon-kaoshizhongxinon menu-icon"></i></p>
                             <p class="a-span">e起考试</p>
                         </a>
                     </div>
                 </li>
                 <li class="nav-li">
                     <div class="nav-a" id="party">
-                        <p><i class="iconfont icon-dangwugongkai"></i></p>
+                        <p><i class="iconfont icon-dangwugongkai menu-icon"></i></p>
                         <p class="a-span">e网党建</p>
                     </div>
                 </li>
                 <li class="nav-li">
                     <div class="nav-a" id="league">
-                        <p><i class="iconfont icon-iconhuodong"></i></p>
+                        <p><i class="iconfont icon-iconhuodong menu-icon"></i></p>
                         <p class="a-span">e网团建</p>
                     </div>
                 </li>
                 <li class="nav-li">
                     <div class="nav-a" id="organ">
-                        <p><i class="iconfont icon-zuzhiguanli"></i></p>
+                        <p><i class="iconfont icon-zuzhiguanli menu-icon"></i></p>
                         <p class="a-span">组织建设</p>
                     </div>
                 </li>

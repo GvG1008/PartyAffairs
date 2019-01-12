@@ -5,11 +5,6 @@ body{
 	margin: 0;
 	padding: 0;
 }
-body{
-	/* background-image: url(../img/bodybg.png);
-    background-size:100%;
-    background-repeat:no-repeat; */
-}
 .loading{
 	z-index: 1002;
 	position: fixed;
@@ -30,17 +25,11 @@ header{
 a{
 	text-decoration:none;
 }
-
-/* .name{
-	width: 300px;
-	height: 45px;
-} */
-
 .header{
 	width: 100%;
 	height: 50px;
 	background-color: rgba(0,0,0,0.7);
-	position: fixed;
+	position: absolute;
 	z-index: 1001;
 }
 
@@ -56,17 +45,16 @@ li{
 }
 
 .school{
+    position: absolute;
 	color: white;
-	padding: 10 50px;
-	float: left;
-	position: absolute;
-	left: 150px;
-	height: 50px;
+	height: 60px;
 }
 
 .user{
-	padding: 0 50px;
 	float: right;
+	display: flex;
+	align-items: center;
+	height: 60px;
 }
 
 .user-li,
@@ -76,7 +64,6 @@ li{
 	padding: 0;
 	display:inline-block;
 	text-align: center;
-    height: 50px;
 }
 
 .nav-li{
@@ -90,31 +77,13 @@ li{
 	margin: 0;
 }
 
+.user-a em {
+    font-size: 0.1em;
+}
+
 #manager{
 	color: white;
 	text-decoration: none;
-}
-
-.search{
-	position: relative;
-	left: 4px;
-	outline: none;
-	font-size: 15px;
-	height: 27px;
-	width: 150px;
-	line-height: 27px;
-	border: 0;
-	border-bottom-left-radius: 5px;
-	border-top-left-radius: 5px;
-}
-
-.search-btn{
-	outline: none;
-	height: 27px;
-	line-height: 27px;
-	border: 0;
-	border-bottom-right-radius: 5px;
-	border-top-right-radius: 5px;
 }
 
 .nav-a{
@@ -314,6 +283,8 @@ footer{
 .organ-a{
 	text-decoration:none;
 	color: black;
+    diplay:block;
+    height: 100%;
 }
 	
 .news-a:hover,
@@ -339,7 +310,7 @@ footer{
 /*2018-10-18修改*/
 img.name {
     width: 57%;
-    height: 80%;
+    height: 65%;
 }
 header{
     height: 250px;
@@ -347,18 +318,16 @@ header{
 }
 .header {
     width: 100%;
+    padding: 0 50px;
     height: 60px;
     line-height: 4;
 }
 html {
-    background: #f3f3f3;
+    background: #fff;
 }
 img.img-logo {
     width: 50%;
     height: 50%;
-    /* margin: auto 0; */
-    /* line-height: 24; */
-    /* margin-top: 72px; */
 }
 .logopic {
     width: fit-content;
@@ -394,7 +363,7 @@ div#Learning {
     width: 60%;
 }
 /*菜单栏*/
-i.iconfont {
+.menu-icon {
     /* color: #ef4f00; */
     color:#d92b1f;
     font-size: 3.5em;
@@ -405,14 +374,22 @@ i.iconfont {
 .nav-li:hover>div>a>p>i.iconfont {
     color: #a6150a;
 }
+.nav-li:hover>div>p{
+    color: #a6150a;
+}
+.nav-li:hover>div>p>i.iconfont {
+    color: #a6150a;
+}
 .nav {
     top: 35px;
 }
 ul.nav-ul {
     width: 80%;
     margin: 0 auto;
-    border-left: 1px solid #ccc;
     height: 68px;
+}
+.nav-li:first-child {
+    border-left: 1px solid #ccc;
 }
 .nav-li {
     /* height: 68px; */
@@ -434,13 +411,55 @@ ul.nav-ul {
 .info{
 	 position: relative;
 	 top:0;
-	 
 }
 
 .manager{
 	 position: relative;
 	 top:0;
-	 
+}
+
+/*首页头部*/
+.form_search {
+	/* height: 0; */
+	position: relative;
+	color: #999;
+}
+
+.form_search .input_enter_icon {
+	position: absolute;
+	right: 11px;
+	top: 16px;
+	line-height: 25px;
+	font-size: 18px;
+	cursor: pointer;
+	color: rgba(255,255,255,.5);
+}
+
+.form_search .s_input {
+	width: 160px;
+	height: 29px;
+	line-height: 29px!important;
+	font-size: 12px;
+	border-radius: 15px;
+	padding: 0 35px 0 17px;
+	border: 1px solid rgba(255,255,255,.5);
+	background: 0 0;
+	box-sizing: border-box;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-ms-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+	transition: all .2s ease-in-out;
+	outline: none;
+}
+
+.form_search .s_input:hover {
+	border: 1px solid #fff;
+}
+
+.top-icon {
+	font-size: 20px;
+	color: #fff;
 }
 
 @media screen and (min-width:1400px){

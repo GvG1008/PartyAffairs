@@ -138,8 +138,8 @@ $(document).ready(function(){
 	$("#info").mouseenter(function(){
 		var left = document.getElementById("info").getBoundingClientRect().left;
 		var top = document.getElementById("info").getBoundingClientRect().top;
-		document.getElementById("ainfo").style.left = left+"px";
-		document.getElementById("ainfo").style.top = top+"55px";
+		document.getElementById("ainfo").style.left = left-2+"px";
+		document.getElementById("ainfo").style.top = top+55+"px";
 		$(".info").show();
 	});
 	$("#ainfo").mouseenter(function(){
@@ -155,8 +155,8 @@ $(document).ready(function(){
 	$("#manager").mouseenter(function(){
 		var left = document.getElementById("manager").getBoundingClientRect().left;
 		var top = document.getElementById("manager").getBoundingClientRect().top;
-		document.getElementById("amanager").style.left = left+"px";
-		document.getElementById("amanager").style.top = top+"55px";
+		document.getElementById("amanager").style.left = left+-2+"px";
+		document.getElementById("amanager").style.top = top+55+"px";
 		$(".manager").show();
 	});
 	$("#amanager").mouseenter(function(){
