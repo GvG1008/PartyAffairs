@@ -18,7 +18,7 @@ public interface FeedbackMapper {
 	
 	FeedbackInfo getFeedbackById(@Param("feedbackId") int feedbackId);
 	
-	Integer getTotalFeedbackByUserId(@Param("userId") int userId);
+	Integer getTotalFeedbackByUserId(@Param("userId") String userId);
 	
 	List<FeedbackInfo> getPageOfFeedbackListLimited(@Param("userId") String userId, @Param("index") int index , @Param("num") int num);
 }

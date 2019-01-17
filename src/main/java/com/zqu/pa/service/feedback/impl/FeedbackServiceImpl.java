@@ -13,6 +13,7 @@ import com.zqu.pa.entity.feedback.Feedback;
 import com.zqu.pa.entity.feedback.FeedbackType;
 import com.zqu.pa.service.feedback.FeedbackService;
 import com.zqu.pa.vo.feedback.FeedbackInfo;
+import com.zqu.pa.vo.feedback.PageOfFeedback;
 
 @Service("feedbackService")
 public class FeedbackServiceImpl implements FeedbackService{
@@ -29,6 +30,7 @@ public class FeedbackServiceImpl implements FeedbackService{
             feedbackMapper.insertFeedback(feedback);
         } catch (Exception e) {
             log.error("添加思想反馈失败", e);
+            throw e;
         }
 	}
 
@@ -39,6 +41,7 @@ public class FeedbackServiceImpl implements FeedbackService{
 			feedbackInfoList = feedbackMapper.getFeedbackList(branchId);
 		} catch (Exception e) {
 			log.error("获取思想反馈列表失败", e);
+			throw e;
 		}
 		return feedbackInfoList;
 	}
@@ -50,6 +53,7 @@ public class FeedbackServiceImpl implements FeedbackService{
 	        feedbackTypeList = feedbackMapper.getFeedbackType();
         } catch (Exception e) {
             log.error("获取思想反馈类型失败", e);
+            throw e;
         }
 		return feedbackTypeList;
 	}
@@ -61,8 +65,44 @@ public class FeedbackServiceImpl implements FeedbackService{
             feedbackInfo = feedbackMapper.getFeedbackById(feedbackId);
         } catch (Exception e) {
             log.error("获取思想反馈详细信息失败", e);
+            throw e;
         }
         return feedbackInfo;
     }
+
+	@Override
+	public PageOfFeedback getPageOfFeedback(int page, int num, String userId) {
+		PageOfFeedback pageOfFeedback = new PageOfFeedback();
+		
+		try {
+			// 总记录数
+			int totalInfoNum = feedbackMapper.getTotalFeedbackByUserId(userId);
+			pageOfFeedback.setTotalInfoNum(totalInfoNum);
+			// 总页数
+	        int totalPageNum = (int)(totalInfoNum+num-1)/num;
+	        pageOfFeedback.setTotalPageNum(totalPageNum);
+	        
+	        if(totalPageNum<page)
+	            page = totalPageNum;
+	        pageOfFeedback.setPageNum(page);
+	        
+	        List<FeedbackInfo> list = new ArrayList<FeedbackInfo>();
+	        if (totalInfoNum <=0) {
+	        	pageOfFeedback.setList(list);
+	        	return pageOfFeedback;
+	        }
+	        
+	        //limit index,num  从第index+1条记录开始，num条记录
+	        if(page>=1){
+	        	 int index = (page-1)*num;
+	        	 pageOfFeedback.setList(feedbackMapper.getPageOfFeedbackListLimited(userId, index, totalPageNum));
+	        }
+		} catch (Exception e) {			
+			log.error("获取个人思想反馈列表失败", e);
+			throw e;
+		}
+		
+		return pageOfFeedback;
+	}
 
 }
