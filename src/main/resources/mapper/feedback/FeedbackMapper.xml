@@ -57,9 +57,9 @@
 		f.feedback_type 'feedbackTypeId'
 	FROM
 		feedback f
-	INNER JOIN 
+	left JOIN 
 		user_party_info u ON f.user_id = u.user_id
-	INNER JOIN 
+	left JOIN 
 		feedback_type t ON f.feedback_type = t.type_id
 	WHERE
 		1 = 1 
