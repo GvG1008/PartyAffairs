@@ -14,6 +14,8 @@ public class FeedbackInfo {
 	private String userName;
 
 	private String title;
+	
+	private String content;
 
 	private String date;
 	
@@ -83,6 +85,14 @@ public class FeedbackInfo {
 
     public void setFeedbackTypeId(String feedbackTypeId) {
         this.feedbackTypeId = feedbackTypeId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 	
 	

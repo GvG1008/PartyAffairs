@@ -10,7 +10,7 @@ import com.zqu.pa.vo.feedback.FeedbackInfo;
 
 public interface FeedbackMapper {
 	
-	void insertFeedback(@Param("feedback") Feedback feedback);
+	void insertFeedback(Feedback feedback);
 	
 	List<FeedbackInfo> getFeedbackList(@Param("branchId") int branchId);
 	

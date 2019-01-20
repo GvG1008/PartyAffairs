@@ -1,6 +1,7 @@
 package com.zqu.pa.service.feedback.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -27,6 +28,7 @@ public class FeedbackServiceImpl implements FeedbackService{
 	@Override
 	public void insertFeedback(Feedback feedback) {
 	    try {
+	        feedback.setDate(new Date());
             feedbackMapper.insertFeedback(feedback);
         } catch (Exception e) {
             log.error("添加思想反馈失败", e);

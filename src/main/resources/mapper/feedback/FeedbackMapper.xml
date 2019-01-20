@@ -51,6 +51,7 @@
 		f.user_id 'userId',
 		u. NAME 'userName',
 		f.title,
+		f.content,
 		f.date,
 		t.type_name 'feedbackName',
 		f.feedback_type 'feedbackTypeId'
@@ -77,6 +78,7 @@
         f.user_id 'userId',
         u. NAME 'userName',
         f.title,
+        f.content,
         f.date,
         t.type_name 'feedbackName',
         f.feedback_type 'feedbackTypeId'

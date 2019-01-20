@@ -104,7 +104,7 @@ public class FeedbackController {
 		} catch (Exception e) {
 			return ServerResponse.createByErrorMessage("获取思想反馈详细信息失败!");
 		}
-		return ServerResponse.createBySuccess("获取思想反馈类型成功!", feedbackInfo);
+		return ServerResponse.createBySuccess("获取思想反馈详细信息成功!", feedbackInfo);
 	}
 
 	/**
