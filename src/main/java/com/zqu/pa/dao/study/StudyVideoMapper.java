@@ -27,7 +27,11 @@ public interface StudyVideoMapper {
     
     List<StudyVideo> selectMustPutonByUserId(@Param("index")int index,@Param("num")int num,@Param("userId")String userId);
     
+    List<StudyVideo> selectStudiedMustByUserId(@Param("index")int index,@Param("num")int num,@Param("userId")String userId);
+    
     int selectCountMustPutonByUserId(String userId);
+    
+    int selectCountStudiedByUserId(String userId);
     
     List<StudyVideo> selectPuton(@Param("index")int index,@Param("num")int num);
     

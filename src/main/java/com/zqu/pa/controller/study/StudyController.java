@@ -550,4 +550,39 @@ public class StudyController {
    		return iStudyService.getStudyVideoMust(Id,Integer.parseInt(pageNum),Integer.parseInt(pageSize));
    	
    }
+   
+   
+   /**
+    * 
+    * @Description: 获取用户已学的视频资料
+    * @param session
+    * @param page
+    * @param pageNum
+    * @return
+    * @author: huanrong.chen
+	* @date: 2019/1/22
+    */
+   @RequestMapping(value = "get_studied_videos.do", method = RequestMethod.POST)
+   @ResponseBody
+   public ServerResponse getStudiedVideo(HttpSession session,String page,String pageNum) {
+       String userId = this.getUserid();
+       return iStudyService.getStudiedVideo(userId,Integer.parseInt(page),Integer.parseInt(pageNum));
+   }
+   
+   /**
+    * 
+    * @Description: 获取用户已学的文档资料
+    * @param session
+    * @param page
+    * @param pageNum
+    * @return
+    * @author: huanrong.chen
+	* @date: 2019/1/22
+    */
+   @RequestMapping(value = "get_studied_documents.do", method = RequestMethod.POST)
+   @ResponseBody
+   public ServerResponse getStudiedDocument(HttpSession session,String page,String pageNum) {
+       String userId = this.getUserid();
+       return iStudyService.getStudiedDocument(userId,Integer.parseInt(page),Integer.parseInt(pageNum));
+   }
 }

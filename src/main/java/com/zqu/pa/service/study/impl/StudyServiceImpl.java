@@ -567,5 +567,79 @@ public class StudyServiceImpl implements IStudyService {
             return ServerResponse.createBySuccessMessage("已学习");
         return ServerResponse.createByErrorMessage("操作失败");
     }
+
+	@Override
+	public ServerResponse getStudiedVideo(String userId, int page, int pageNum) {
+		int totalNum = studyVideoMapper.selectCountStudiedByUserId(userId);
+        if (totalNum == 0){
+        	Map<String, Serializable> map = Maps.newHashMap();
+            map.put("totalPage", 0);
+            map.put("page", page);
+            map.put("pageNum", pageNum);
+            map.put("list", Lists.newArrayList());
+        	return ServerResponse.createBySuccess(map);
+        }
+        int totalPage = (int)(totalNum+pageNum-1)/pageNum;
+        if(totalPage<page)
+            page = totalPage;
+        int index = (page-1)*pageNum;
+        Map map = Maps.newHashMap();
+        map.put("totalPage", totalPage);
+        map.put("page", page);
+        map.put("pageNum", pageNum);
+        //System.out.println("----------------------------------"+index+"            "+pageNum+"           "+userId);
+        List<StudyVideo> svl = studyVideoMapper.selectStudiedMustByUserId(index,pageNum,userId);
+        int size = svl.size();
+        List<StudyVideoVO3> list = Lists.newArrayList();
+        for(int i=0;i<size;i++) {
+            StudyVideo sv = svl.get(i);
+            String updateTime = DateToString.getDateString("yyyy-MM-dd", sv.getUpdatetime());
+            String uploadUser = studyDocumentMapper.getUserNameByUserId(sv.getUserId());
+            List<StudyLabel> sls = studyLabelMapper.selectByVideoId(sv.getVideoId());
+            StudyVideoRecord svr = new StudyVideoRecord(sv.getVideoId(), userId, null, null);
+/*            float schedule = studyVideoMapper.selectScheduleByVideoIdAndUserId(svr);*/
+            Integer already = studyVideoMustMapper.selectIsAlready(userId, sv.getVideoId());
+            StudyVideoVO3 svvo3 = new StudyVideoVO3(sv.getVideoId(), sv.getVideoTitle(), sv.getVideoIntroduction(), sv.getCoverImg(), sv.getVideoPath(), uploadUser, updateTime, sls,already);
+            list.add(svvo3);
+        }
+        map.put("list", list);
+        return ServerResponse.createBySuccess(map);
+	}
+
+	@Override
+	public ServerResponse getStudiedDocument(String userId, int page, int pageNum) {
+		int totalNum = studyDocumentMapper.selectCountStudiedByUserId(userId);
+        if (totalNum == 0){
+        	Map<String, Serializable> map = Maps.newHashMap();
+            map.put("totalPage", 0);
+            map.put("page", page);
+            map.put("pageNum", pageNum);
+            map.put("list", Lists.newArrayList());
+        	return ServerResponse.createBySuccess(map);
+        }
+        int totalPage = (int)(totalNum+pageNum-1)/pageNum;
+        if(totalPage<page)
+            page = totalPage;
+        int index = (page-1)*pageNum;
+        Map map = Maps.newHashMap();
+        map.put("totalPage", totalPage);
+        map.put("page", page);
+        map.put("pageNum", pageNum);
+        List<StudyDocument> sdl = studyDocumentMapper.selectStudiedMustByUserId(index,pageNum,userId);
+        int size = sdl.size();
+        List<StudyDocumentVO2> list = Lists.newArrayList();
+        for (int i = 0; i < size; i++) {
+            StudyDocument sd = sdl.get(i);
+            String updateTime = DateToString.getDateString("yyyy-MM-dd", sd.getUpdatetime());
+            String uploadUser = studyDocumentMapper.getUserNameByUserId(sd.getUserId());
+            int downloadTimes = studyDocumentStatisticsMapper.selectTimeSumByDocumentId(sd.getDocumentId());
+            List<StudyLabel> sls = studyLabelMapper.selectByDocumentId(sd.getDocumentId());
+            int already = studyDocumentMustMapper.selectIsAlready(userId, sd.getDocumentId());
+            StudyDocumentVO2 sdvo2 = new StudyDocumentVO2(sd.getDocumentId(), sd.getDocumentTitle(), sd.getDocumentIntroduction(), sd.getCoverImg(), sd.getFilePath(), updateTime, uploadUser, downloadTimes,sls,already);
+            list.add(sdvo2);
+        }
+        map.put("list", list);
+        return ServerResponse.createBySuccess(map);
+	}
     
 }

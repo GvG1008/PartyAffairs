@@ -41,4 +41,6 @@ public interface IStudyService {
     public ServerResponse setStudyDocumentMustState(String userId, Integer documentId);
     public ServerResponse getStudyVideoMustAlreadyState(String userId, Integer videoId);
     public ServerResponse setStudyVideoMustState(String userId, Integer videoId);
+	public ServerResponse getStudiedVideo(String userId,int page,int pageNum);
+	public ServerResponse getStudiedDocument(String userId,int page,int pageNum);
 }

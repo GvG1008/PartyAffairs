@@ -71,10 +71,25 @@
     order by video_id
     limit #{index},#{num}
   </select>
+  <select id="selectStudiedMustByUserId" resultType="com.zqu.pa.entity.study.StudyVideo" >
+    select *
+    from study_video
+    where video_id IN (select video_id from study_video_must where user_id = #{userId,jdbcType=VARCHAR} and already = 1)
+    AND video_id NOT IN (select video_id from study_video_putoff)
+    order by video_id
+    limit #{index},#{num}
+  </select>
   <select id="selectCountMustPutonByUserId" resultType="int" parameterType="string" >
     select count(1)
     from study_video
     where video_id IN (select video_id from study_video_must where user_id = #{userId,jdbcType=VARCHAR})
+    AND video_id NOT IN (select video_id from study_video_putoff)
+    order by video_id
+  </select>
+  <select id="selectCountStudiedByUserId" resultType="int" parameterType="string" >
+    select count(1)
+    from study_video
+    where video_id IN (select video_id from study_video_must where user_id = #{userId,jdbcType=VARCHAR} and already = 1)
     AND video_id NOT IN (select video_id from study_video_putoff)
     order by video_id
   </select>

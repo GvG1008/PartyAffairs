@@ -30,10 +30,23 @@
     AND document_id NOT IN (select document_id from study_document_putoff)
     limit #{index},#{num}
   </select>
+  <select id="selectStudiedMustByUserId" resultType="com.zqu.pa.entity.study.StudyDocument" >
+    select *
+    from study_document
+    where document_id IN (select document_id from study_document_must where user_id = #{userId,jdbcType=VARCHAR} and already = 1)
+    AND document_id NOT IN (select document_id from study_document_putoff)
+    limit #{index},#{num}
+  </select>
   <select id="selectCountMustPutonByUserId" resultType="int" parameterType="string" >
     select count(1)
     from study_document
     where document_id IN (select document_id from study_document_must where user_id = #{userId,jdbcType=VARCHAR})
+    AND document_id NOT IN (select document_id from study_document_putoff)
+  </select>
+  <select id="selectCountStudiedByUserId" resultType="int" parameterType="string" >
+    select count(1)
+    from study_document
+    where document_id IN (select document_id from study_document_must where user_id = #{userId,jdbcType=VARCHAR} and already = 1)
     AND document_id NOT IN (select document_id from study_document_putoff)
   </select>
   <select id="selectDocumentIdByFilePath" resultType="int" parameterType="string">

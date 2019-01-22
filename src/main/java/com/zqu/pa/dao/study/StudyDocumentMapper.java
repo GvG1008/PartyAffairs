@@ -20,7 +20,11 @@ public interface StudyDocumentMapper {
     
     List<StudyDocument> selectMustPutonByUserId(@Param("index")int index,@Param("num")int num,@Param("userId")String userId);
     
+    List<StudyDocument> selectStudiedMustByUserId(@Param("index")int index,@Param("num")int num,@Param("userId")String userId);
+    
     int selectCountMustPutonByUserId(String userId);
+    
+    int selectCountStudiedByUserId(String userId);
     
     List<StudyDocument> selectAll();
     
