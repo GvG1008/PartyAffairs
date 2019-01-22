@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,6 +48,9 @@ import com.zqu.pa.vo.userInfo.UserBasicInfo;
 @Controller
 @RequestMapping("/study/")
 public class StudyController {
+	
+	// 获取日志记录器Logger，名字为本类类名
+	private static Logger log = LoggerFactory.getLogger(StudyController.class);
 
     @Autowired
     private IStudyService iStudyService;
@@ -54,6 +59,9 @@ public class StudyController {
 
     private String getUserid() {
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
+        if (basicInfo == null) {
+        	return null;
+        }
         String userId = basicInfo.getUserId();
         return userId;
     }
@@ -144,7 +152,11 @@ public class StudyController {
         // TODO 判断是否登录，通过登录用户验证身份权限
         // TODO 校验参数的格式
         String userID = this.getUserid();
-        System.out.println(file.isEmpty() + " -- " + img.isEmpty());
+        if (userId == null || userId.equals("")) {
+			log.error("用户未登录");
+			return ServerResponse.createByErrorMessage("用户未登录");
+		}
+        //System.out.println(file.isEmpty() + " -- " + img.isEmpty());
         Map fileMap = FTPSSMLoad.upload(file, request, "/document/");
         Map imgMap = FTPSSMLoad.upload(img, request, "/document/");
         StudyDocument sd = new StudyDocument(null, title, introduction, imgMap.get("http_url").toString(),
@@ -162,8 +174,8 @@ public class StudyController {
             sdm.setUserId(uid);
             studyDocumentMustList.add(sdm);
         }
-        System.out.println(sd);
-        System.out.println(studyDocumentLabelList);
+        //System.out.println(sd);
+        //System.out.println(studyDocumentLabelList);
         return iStudyService.uploadStudyDocument(sd, studyDocumentLabelList,studyDocumentMustList);
     }
 
@@ -222,6 +234,10 @@ public class StudyController {
             idList.add(labelid);
         }
         String userId = this.getUserid();
+        if (userId == null || userId.equals("")) {
+			log.error("用户未登录");
+			return ServerResponse.createByErrorMessage("用户未登录");
+		}
         return iStudyService.getStudyDocumentsMustPutonByLabelId(userId,idList,Integer.parseInt(page),Integer.parseInt(pageNum));
     }
     
@@ -234,6 +250,10 @@ public class StudyController {
     @ResponseBody
     public ServerResponse getStudyDocumentMust(HttpSession session,String page,String pageNum) {
         String userId = this.getUserid();
+        if (userId == null || userId.equals("")) {
+			log.error("用户未登录");
+			return ServerResponse.createByErrorMessage("用户未登录");
+		}
         return iStudyService.getStudyDocumentMust(userId,Integer.parseInt(page),Integer.parseInt(pageNum));
     }
     
@@ -252,7 +272,11 @@ public class StudyController {
             String filename) {
         FTPSSMLoad.download(response, path, filename);
         String userId = this.getUserid();
-        System.out.println(userId);
+        if (userId == null || userId.equals("")) {
+			log.error("用户未登录");
+			return ServerResponse.createByErrorMessage("用户未登录");
+		}
+        //System.out.println(userId);
         String downloadURL = Const.DOWN_INTERFACE + "path=" + path + "&filename=" + filename;
         return iStudyService.statisticsDownload(userId, downloadURL);
     }
@@ -333,7 +357,11 @@ public class StudyController {
         // TODO 判断是否登录，通过登录用户验证身份权限
         // TODO 校验参数的格式
         String userID = this.getUserid();
-        System.out.println(file.isEmpty() + " -- " + img.isEmpty());
+        if (userId == null || userId.equals("")) {
+			log.error("用户未登录");
+			return ServerResponse.createByErrorMessage("用户未登录");
+		}
+        //System.out.println(file.isEmpty() + " -- " + img.isEmpty());
         Map fileMap = FTPSSMLoad.upload(file, request, "/video/");
         Map imgMap = FTPSSMLoad.upload(img, request, "/video/");
         StudyVideo sv = new StudyVideo(null, title, introduction, imgMap.get("http_url").toString(), fileMap.get("http_url").toString(), userID, null, null);
@@ -412,6 +440,10 @@ public class StudyController {
     @ResponseBody
     public ServerResponse getStudyVideoMust(HttpSession session,String page,String pageNum) {
         String userId = this.getUserid();
+        if (userId == null || userId.equals("")) {
+			log.error("用户未登录");
+			return ServerResponse.createByErrorMessage("用户未登录");
+		}
         return iStudyService.getStudyVideoMust(userId,Integer.parseInt(page),Integer.parseInt(pageNum));
     }
     
@@ -435,6 +467,10 @@ public class StudyController {
             idList.add(labelid);
         }
         String userId = this.getUserid();
+        if (userId == null || userId.equals("")) {
+			log.error("用户未登录");
+			return ServerResponse.createByErrorMessage("用户未登录");
+		}
         return iStudyService.getStudyVideosMustPutonByLabelId(userId, idList, Integer.parseInt(page), Integer.parseInt(pageNum));
     }
     
@@ -566,6 +602,10 @@ public class StudyController {
    @ResponseBody
    public ServerResponse getStudiedVideo(HttpSession session,String page,String pageNum) {
        String userId = this.getUserid();
+       if (userId == null || userId.equals("")) {
+			log.error("用户未登录");
+			return ServerResponse.createByErrorMessage("用户未登录");
+		}
        return iStudyService.getStudiedVideo(userId,Integer.parseInt(page),Integer.parseInt(pageNum));
    }
    
@@ -583,6 +623,10 @@ public class StudyController {
    @ResponseBody
    public ServerResponse getStudiedDocument(HttpSession session,String page,String pageNum) {
        String userId = this.getUserid();
+       if (userId == null || userId.equals("")) {
+			log.error("用户未登录");
+			return ServerResponse.createByErrorMessage("用户未登录");
+		}
        return iStudyService.getStudiedDocument(userId,Integer.parseInt(page),Integer.parseInt(pageNum));
    }
 }
