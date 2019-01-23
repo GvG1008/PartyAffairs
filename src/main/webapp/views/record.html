@@ -10,93 +10,28 @@
         		<p>学习记录</p>
         	</div>
         	<div class="list-content">
-        		<div class="rp-record">
+        		<div class="rp-record" id="rp_record">
         			<div class="record-name">
         				<p>思想汇报记录</p>
         			</div>
         			<table>
-        				<tr>
+        				<tr v-for="item in reportdata" :data-id = "item.id">
         					<td>
-        						<p class="record-title"><a href="#" title="第一次思想汇报第一次思想汇报第一次思想汇报">
-        							第一次思想汇报第一次思想汇报第一次思想汇报
+        						<p class="record-title"><a href="#" :title="item.title">
+        							{{item.title}}
         						</a></p>
         					</td>
-        					<td><p>2018-7-12</p></td>
+        					<td><p>{{item.date}}</p></td>
         				</tr>
-        				<tr>
-        					<td>
-        						<p class="record-title"><a href="#" title="第一次思想汇报">
-        							第一次思想汇报
-        						</a></p>
-        					</td>
-        					<td><p>2018-7-12</p></td>
-        				</tr>
-        				<tr>
-        					<td>
-        						<p class="record-title"><a href="#" title="第一次思想汇报">
-        							第一次思想汇报
-        						</a></p>
-        					</td>
-        					<td><p>2018-7-12</p></td>
-        				</tr>
-        				<tr>
-        					<td>
-        						<p class="record-title"><a href="#" title="第一次思想汇报">
-        							第一次思想汇报
-        						</a></p>
-        					</td>
-        					<td><p>2018-7-12</p></td>
-        				</tr>
-        				<tr>
-        					<td>
-        						<p class="record-title"><a href="#" title="第一次思想汇报">
-        							第一次思想汇报
-        						</a></p>
-        					</td>
-        					<td><p>2018-7-12</p></td>
-        				</tr>
-        				<tr>
-        					<td>
-        						<p class="record-title"><a href="#" title="第一次思想汇报">
-        							第一次思想汇报
-        						</a></p>
-        					</td>
-        					<td><p>2018-7-12</p></td>
-        				</tr>
-        				<tr>
-        					<td>
-        						<p class="record-title"><a href="#" title="第一次思想汇报">
-        							第一次思想汇报
-        						</a></p>
-        					</td>
-        					<td><p>2018-7-12</p></td>
-        				</tr>
-        				<tr>
-        					<td>
-        						<p class="record-title"><a href="#" title="第一次思想汇报">
-        							第一次思想汇报
-        						</a></p>
-        					</td>
-        					<td><p>2018-7-12</p></td>
-        				</tr>
-        				<tr>
-        					<td>
-        						<p class="record-title"><a href="#" title="第一次思想汇报">
-        							第一次思想汇报
-        						</a></p>
-        					</td>
-        					<td><p>2018-7-12</p></td>
-        				</tr>
-        				
         			</table>
         			<div class="rp-page">
         				<p>
-        					<a>&lt;&lt;上一页</a>
-        					<a>下一页>></a>
+        					<a v-if="repotPageNow > 1" @click="ReupPage()">&lt;&lt;上一页</a>
+        					<a v-if="reportTotalPage > repotPageNow" @click="RenextPage()">下一页>></a>
         				</p>
         			</div>
         		</div>
-        		<div class="le-record">
+        		<div class="le-record" id="le-record">
         			<div class="record-name">
         				<p>资料学习记录</p>
         			</div>
@@ -110,108 +45,55 @@
         			</div>
         			<div id="video-record">
         				<table>
-        					<tr>
+        					<tr v-for="item in videodata" v-if="item.already == 1">
         						<td>
-        							<p class="vr-title"><a href="#" title="第一次思想汇报第一次思想汇报第一次思想汇报">
-        								第一次思想汇报第一次思想汇报第一次思想汇报
+        							<p class="vr-title"><a :href="'home.html?location=video&id='+item.videoId" :title="item.videoTitle">
+        								{{item.videoTitle}}
         							</a></p>
         						</td>
-        						<td><p style="width: 70px;">2018-7-12</p></td>
-        						<td><p style="font-weight: bold;" title="学习进度">50%</p></td>
-        					</tr>
-        					<tr>
-        						<td>
-        							<p class="vr-title"><a href="#" title="第一次思想汇报">
-        								第一次思想汇报
-        							</a></p>
-        						</td>
-        						<td><p>2018-7-12</p></td>
-        						<td><p title="学习进度">50%</p></td>
-        					</tr>
-        					<tr>
-        						<td>
-        							<p class="vr-title"><a href="#" title="第一次思想汇报">
-        								第一次思想汇报
-        							</a></p>
-        						</td>
-        						<td><p>2018-7-12</p></td>
-        						<td><p title="学习进度">50%</p></td>
-        					</tr>
-        					<tr>
-        						<td>
-        							<p class="vr-title"><a href="#" title="第一次思想汇报">
-        								第一次思想汇报
-        							</a></p>
-        						</td>
-        						<td><p>2018-7-12</p></td>
-        						<td><p title="学习进度">50%</p></td>
+        						<td><p style="width: 70px;">{{item.updateTime}}</p></td>
+        						<!--<td><p style="font-weight: bold;" title="学习进度">50%</p></td>-->
         					</tr>
         				</table>
         				<div class="le-page">
         					<p>
-        						<a>&lt;&lt;上一页</a>
-        						<a>下一页>></a>
+        						<a v-if="videopageNow > 1" @click="ViupPage()">&lt;&lt;上一页</a>
+        						<a v-if="videoTotalPage > videopageNow" @click="VinextPage()">下一页>></a>
         					</p>
         				</div>
         			</div>
         			<div id="docu-record" style="display: none;">
         				<table>
-        					<tr>
+        					<!--
+                            	作者：17876253471@163.com
+                            	时间：2019-01-22
+                            	描述：already为1表示已学
+                            -->
+        					<tr v-for="item in docdata" v-if="item.already == 1">
         						<td>
-        							<p class="record-title"><a href="#" title="第一次思想汇报第一次思想汇报第一次思想汇报">
-        								第一次思想汇报第一次思想汇报第一次思想汇报
+        							<p class="record-title"><a href="'home.html?location=docu&id='+item.documentId" :title="item.documentTitle">
+        								{{item.documentTitle}}
         							</a></p>
         						</td>
-        						<td><p>2018-7-12</p></td>
-        					</tr>
-        					<tr>
-        						<td>
-        							<p class="record-title"><a href="#" title="第一次思想汇报">
-        								第一次思想汇报
-        							</a></p>
-        						</td>
-        						<td><p>2018-7-12</p></td>
-        					</tr>
-        					<tr>
-        						<td>
-        							<p class="record-title"><a href="#" title="第一次思想汇报">
-        								第一次思想汇报
-        							</a></p>
-        						</td>
-        						<td><p>2018-7-12</p></td>
-        					</tr>
-        					<tr>
-        						<td>
-        							<p class="record-title"><a href="#" title="第一次思想汇报">
-        								第一次思想汇报
-        							</a></p>
-        						</td>
-        						<td><p>2018-7-12</p></td>
-        					</tr>
-        					<tr>
-        						<td>
-        							<p class="record-title"><a href="#" title="第一次思想汇报">
-        								第一次思想汇报
-        							</a></p>
-        						</td>
-        						<td><p>2018-7-12</p></td>
+        						<td><p>{{item.updateTime}}</p></td>
         					</tr>
         				</table>
         				<div class="le-page">
         					<p>
-        						<a>&lt;&lt;上一页</a>
-        						<a>下一页>></a>
+        						<a v-if="docpageNow > 1" @click="docupPage()">&lt;&lt;上一页</a>
+        						<a v-if="docTotalPage > docpageNow" @click="docnextPage()">下一页>></a>
         					</p>
         				</div>
         			</div>
         		</div>
         	</div>
-        	<div class="list-footer">
+        	<!--<div class="list-footer">
         		<p>总学习时长：100：59：59</p>
-        	</div>
+        	</div>-->
        	</div>
        	
        	<link rel="stylesheet" href="../statics/css/record.css" />
+       	<script type="text/javascript" src="../statics/js/vue.js" ></script>
        	<script type="text/javascript" src="../statics/js/user/record.js" ></script>
 	</body>
 </html>

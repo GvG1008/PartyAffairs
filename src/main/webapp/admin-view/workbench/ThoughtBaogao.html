@@ -52,7 +52,7 @@
 							</td>
 							<td>
 								<center>								
-                                           <button data-toggle='modal' data-target='#myModal' class="btn btn-success os btn-xs" @click="see(item.feedbackId)">
+                                           <button data-toggle='modal' data-target='#myModal' class="btn btn-success os btn-xs" @click="see(item.reportId)">
                                               	查看<i class="fa fa-pencil" aria-hidden="true"></i>
                                            </button>
 								</center>
@@ -68,7 +68,7 @@
 		        <div class="modal-content">
 		            <div class="modal-header">
 		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                <h4 class="modal-title" id="myModalLabel">查看思想反馈</h4>
+		                <h4 class="modal-title" id="myModalLabel">查看思想汇报</h4>
 		            </div>
 		            <div class="modal-body" v-if="con != ''">
 				        	<div>
@@ -121,7 +121,7 @@
 		<script src="../../admin-statics/table/js/dataTables.responsive.js"></script>
 		<script src="../../admin-statics/table/js/sb-admin-2.js"></script>
 		<script src="../../statics/js/vue.js"></script>
-		<script src="../../admin-statics/js/module/ThoughtReport.js">
+		<script src="../../admin-statics/js/module/ThoughtBaogao.js">
 		</script>
 
 	</body>

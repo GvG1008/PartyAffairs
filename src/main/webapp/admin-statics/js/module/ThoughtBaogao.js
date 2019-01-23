@@ -9,7 +9,7 @@ new Vue({
 			var m = {};
 			$.ajax({
 				type:"get",
-				url: "../../feedback/listFeedback",
+				url: "../../report/list",
 				async : false,
 				dataType: 'json',
 				success: function(result){
@@ -157,10 +157,7 @@ var x = new Vue({
 function see(id){
 	$.ajax({
 		type:"get",
-		data:{
-			feedbackId:id
-		},
-		url:"../../feedback/getFeedbackById/",
+		url:"../../report/detail/"+id,
 		async:true,
 		success:function(res){
 			console.log(res)

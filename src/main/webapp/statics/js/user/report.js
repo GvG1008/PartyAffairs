@@ -7,7 +7,7 @@ function getUrlParam(name) {
     if (r != null) return decodeURI(r[2]); return null; 
 }
 var typename = getUrlParam('location');
-var ftpurl = "http://172.21.95.5:19091/";
+var ftpurl = "http://47.106.223.234:19091/";
 
 $(document).ready(function() {
 	$(function(){
@@ -84,7 +84,7 @@ function fbsubmit(){
 	var content = $('#summernote').summernote('code');
 	$.ajax({
 		type:'post',        
-		url:'../report/insertReport',
+		url:'../feedback/insertFeedback',
 	    data: JSON.stringify({
 	        "title":title,
 	        "content":content

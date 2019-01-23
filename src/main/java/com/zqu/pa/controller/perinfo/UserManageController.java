@@ -116,7 +116,7 @@ public class UserManageController {
      */
     @ResponseBody
     @RequestMapping(value="/update/partyInfo", method=RequestMethod.POST)
-    public ServerResponse updatePartyInfo(UserPartyInfo info) {
+    public ServerResponse updatePartyInfo(@RequestBody UserPartyInfo info) {
 
         if(info.getUserId()==null)
             return ServerResponse.createByErrorMessage("操作失败");

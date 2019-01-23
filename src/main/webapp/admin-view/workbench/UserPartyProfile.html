@@ -127,33 +127,33 @@
                <div class="form-item ba">
                    <label class="labelname">籍贯</label>
                    <div class="line citys" id="jiguan">
-                       <select class="form-control " name="province" id="sheng">
+                       <select class="form-control " name="province" id="jiguansheng">
                        </select>
-                       <select class="form-control " name="city" id="shi">
+                       <select class="form-control " name="city" id="jiguanshi">
                        </select>
-                       <select class="form-control " name="area" id="xian">
+                       <select class="form-control " name="area" id="jiguanxian">
                        </select>
                    </div>
                </div>
                <div class="form-item jiu">
                    <label class="labelname" >出生地</label>
                     <div class="line citys" id="birthplace">
-                       <select class="form-control " name="province" id="sheng">
+                       <select class="form-control " name="province" id="brsheng">
                        </select>
-                       <select class="form-control " name="city" id="shi">
+                       <select class="form-control " name="city" id="brshi">
                        </select>
-                       <select class="form-control " name="area" id="xian">
+                       <select class="form-control " name="area" id="brxian">
                        </select>
                    </div>
                </div>
                <div class="form-item shi">
                    <label class="labelname" >户口所在地</label>
                    <div class="line citys" id="hukou">
-                       <select class="form-control " name="province" id="sheng">
+                       <select class="form-control " name="province" id="hksheng">
                        </select>
-                       <select class="form-control " name="city" id="shi">
+                       <select class="form-control " name="city" id="hkshi">
                        </select>
-                       <select class="form-control " name="area" id="xian">
+                       <select class="form-control " name="area" id="hkxian">
                        </select>
                    </div>
                </div>
@@ -169,13 +169,13 @@
                <div class="form-item zz">
                    <label class="labelname">家庭住址</label>
                   <div class="line citys" id="address">
-                       <select class="form-control " name="province" id="sheng">
+                       <select class="form-control " name="province" id="addrsheng">
                        </select>
-                       <select class="form-control " name="city" id="shi">
+                       <select class="form-control " name="city" id="addrshi">
                        </select>
-                       <select class="form-control " name="area" id="xian">
+                       <select class="form-control " name="area" id="addrxian">
                        </select>
-                       <select class="form-control " name="town" id="zhen">
+                       <select class="form-control " name="town" id="addrzhen">
 	                   </select>
                    </div>
                    
@@ -225,7 +225,7 @@
               <div class="form-item yy3">
                    <label class="labelname">发展类型</label>
                    <select class="form-control " name="fz" id="fz" v-if="info.typeDevelopment=='团员推优'">
-                    <option value="团员推优" selected="selected">团员推优</option>
+                    <option value="团员推优" selected="selected">团员推优</option>x`
                     <option value="新入党">新入党</option>
                    </select>
                    <select class="form-control " name="fz" id="fz" v-else>
@@ -306,9 +306,9 @@
                     townFormat(info);
                 });
                 
-                $('#jiguan').citys({valueType:'name',province:'广东',city:'广州',area:'天河区'});
-                $('#birthplace').citys({valueType:'name',province:'广东',city:'广州',area:'天河区'});
-                $('#hukou').citys({valueType:'name',province:'广东',city:'广州',area:'天河区'});
+//              $('#jiguan').citys({valueType:'name',province:'广东',city:'广州',area:'天河区'});
+//              $('#birthplace').citys({valueType:'name',province:'广东',city:'广州',area:'天河区'});
+//              $('#hukou').citys({valueType:'name',province:'广东',city:'广州',area:'天河区'});
                 
             </script>
             
