@@ -34,7 +34,7 @@ public class VoteInfoController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ServerResponse createVote(VoteInfo voteInfo, 
             @RequestBody Map<String, Object> choice_user) {
-        
+
         ServerResponse result = null;
         try {
             result = voteInfoService.createVote(voteInfo, choice_user);

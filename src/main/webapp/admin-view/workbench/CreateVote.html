@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>投票发布</title>
+		<link href="../../admin-statics/css/bootstrap/3.0.2/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+		<link href="../../admin-statics/css/font-awesome/4.7.0/font-awesome.css" rel="stylesheet">
+		<link href="../../admin-statics/css/workbench/summernote.css" rel="stylesheet">
+		<link href="../../admin-statics/css/workbench/borain-timeChoice.css" rel="stylesheet">
+		<link href="../../admin-statics/css/workbench/zTreeStyle.css" rel="stylesheet">
+		<link href="../../admin-statics/css/workbench/DocumentPublished.css" rel="stylesheet">
+		<link href="../../admin-statics/css/workbench/ExamAdd.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<form>
+			<div class=container>
+				<div class="header">
+					投票管理 > 投票发布
+
+					<!-- 工具栏  -->
+					<div class=toolbar>
+						<!--  <a class="btn btn-default op" id="save" href="#">
+                                <i class="fa fa-hourglass op-icon"></i> 暂存</a>
+                 <a class="btn btn-default op" id="preview" href="#">
+                                <i class="fa fa-eye op-icon"></i> 预览</a> -->
+						<a class="btn btn-default op" id="send">
+							<i class="fa fa-paper-plane op-icon"></i> 发布</a>
+					</div>
+					<!--   <div class="clearfix"></div> -->
+				</div>
+
+				<div class="content-area">
+					<!-- 标题  -->
+					<div class="textareawrap">
+						<textarea type="text" class="title" id="title" placeholder="请填写标题" maxlength="32" autocomplete="off" style="height:50px;resize:none;" wrap="hard"></textarea>
+					</div>
+					<!-- 标题  -->
+					<div class="textareawrap">
+						<textarea type="text" class="title" id="description" placeholder="请填写投票描述（选填）" maxlength="32" autocomplete="off" style="height:70px;resize:none;" wrap="hard"></textarea>
+					</div>
+
+					<br />
+
+					<!-- 投票对象 -->
+					<div class="label_block">
+						<div class="form-group">
+							<label class="lname">选择参与对象</label>
+							<input id="citySel" class="form-control" type="text" readonly value="" onclick="showMenu();" />
+							<button class="zTreeSelect" onclick="showMenu(); return false;">
+			                 <i class="fa fa-list"></i>选择对象
+			                 </button>
+							<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+								<label style="display:flex">  
+							     <p>搜索：</p><input type="text" id="key" value="" class="empty form-control"/>
+							  </label>
+								<ul id="treeDemo" class="ztree"></ul>
+							</div>
+						</div>
+					</div>
+					<div class="label_block">
+						<label class="labelname">投票选项</label>
+						<input class="form-control" id="choices" type="text" placeholder="填写时以逗号分隔" value="" />
+					</div>
+					<br />
+					<div class="label_block">
+						<label class="labelname">投票类型</label>
+						<select class="form-control " name="type1" id="type1">
+							<option selected="selected" value="0">单选</option>
+							<option value="1">多选</option>
+							<option value="2">排序</option>
+						</select>
+					</div>
+					<br />
+					<div class="label_block" style="display: flex;flex-wrap: nowrap;justify-content: space-between;">
+						<div class="">
+							<label class="labelname">最少选择</label>
+							<input class="form-control" id="least" type="text" value="" />
+						</div>
+						<div class="">
+							<label class="labelname">最多选择</label>
+							<input class="form-control" id="most" type="text" value="" />
+						</div>
+					</div>
+					<br />
+					<div class="label_block" style="display: flex;flex-wrap: nowrap;justify-content: space-between;">
+						<div class="">
+							<label class="labelname">投票开始时间</label>
+							<input class="form-control" id="startTime" type="datetime-local" value="" />
+						</div>
+						<div class="">
+							<label class="labelname">投票结束时间</label>
+							<input class="form-control" id="endTime" type="datetime-local" value="" />
+						</div>
+					</div>
+					
+
+					<div class="editorWrap">
+						<a class="btn btn-default op" id="send">
+							<i class="fa fa-paper-plane op-icon"></i> 发布</a>
+					</div>
+				</div>
+
+			</div>
+		</form>
+
+		<script type="text/javascript" src="../../admin-statics/js/lib/jquery/1.12.4/jquery.min.js"></script>
+		<script type="text/javascript" src="../../admin-statics/js/extends/bootstrap/3.3.7/bootstrap.min.js"></script>
+				<script type="text/javascript" src="../../statics/js/vue.js" ></script>
+		<script type="text/javascript" src="../../admin-statics/js/extends/borain-timeChoice.js"></script>
+        <script type="text/javascript" src="../../admin-statics/js/extends/bootstrap-treeview.js"></script>
+        <script type="text/javascript" src="../../admin-statics/js/extends/jquery.ztree.all.js"></script>
+        <script type="text/javascript" src="../../admin-statics/js/extends/jquery.ztree.exhide.js"></script>
+        <script type="text/javascript" src="../../admin-statics/js/extends/fuzzysearch.js"></script>
+		<script type="text/javascript" src="../../admin-statics/js/module/CreateVote.js"></script>
+
+	</body>
+
+</html>
