@@ -26,4 +26,13 @@ public interface VoteInfoService {
     
     //根据时间更新投票状态
     void updateVoteStatus();
+    
+    //获取全部投票信息
+    List<ResponseVoteInfo> getAdminVote();
+    
+    //停止投票
+    ServerResponse suspendVote(Long voteId);
+    
+    //删除投票
+    ServerResponse removeVote(Long voteId);   
 }

@@ -75,4 +75,61 @@ public class VoteInfoController {
         }
         return ServerResponse.createBySuccess(listVoteInfo);
     }
+    
+    /**
+     * 管理员获取所有投票信息列表
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public ServerResponse<List<ResponseVoteInfo>> getAdminVoteList() {
+        
+        List<ResponseVoteInfo> listVoteInfo = new ArrayList<>();
+        try {
+            voteInfoService.updateVoteStatus();
+            listVoteInfo = voteInfoService.getAdminVote();         
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.createByError();
+        }
+        return ServerResponse.createBySuccess(listVoteInfo);
+    }
+    
+    /**
+     * 提前停止投票，将投票状态置为-1
+     * @param voteId 投票ID
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/{voteId}", method = RequestMethod.POST)
+    public ServerResponse suspendVote(@PathVariable Long voteId) {
+        
+        ServerResponse result = ServerResponse.createByError();
+        try {
+            result = voteInfoService.suspendVote(voteId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.createByError();
+        }
+        return result;
+    }
+    
+    /**
+     * 删除投票信息（暂时只删VoteInfo表）
+     * @param voteId 投票ID
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/{voteId}", method = RequestMethod.DELETE)
+    public ServerResponse removeVote(@PathVariable Long voteId) {
+        
+        ServerResponse result = ServerResponse.createByError();
+        try {
+            result = voteInfoService.removeVote(voteId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.createByError();
+        }
+        return result;
+    }
 }

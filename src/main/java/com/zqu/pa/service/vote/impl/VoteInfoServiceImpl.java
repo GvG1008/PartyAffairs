@@ -245,5 +245,53 @@ public class VoteInfoServiceImpl implements VoteInfoService {
             }
         }     
     }
+
+    @Override
+    public List<ResponseVoteInfo> getAdminVote() {
+        
+        List<ResponseVoteInfo> result = new ArrayList<>();
+        
+        VoteInfoExample example = new VoteInfoExample();
+        List<VoteInfo> listVoteInfo = voteInfoMapper.selectByExample(example);
+        for (VoteInfo voteInfo : listVoteInfo) {
+            ResponseVoteInfo responseVoteInfo = new ResponseVoteInfo();
+            List<VoteChoice> listVoteChoice = listVoteChoice(voteInfo.getVoteId());
+            voteInfo.setStringStartTime(DateUtil.formatTime(voteInfo.getStartTime()));
+            voteInfo.setStringEndTime(DateUtil.formatTime(voteInfo.getEndTime()));
+            responseVoteInfo.setVoteInfo(voteInfo);
+            responseVoteInfo.setChoice(listVoteChoice);
+            
+            result.add(responseVoteInfo);
+        }
+        return result;
+    }
+
+    @Override
+    public ServerResponse suspendVote(Long voteId) {
+        
+        VoteInfo voteInfo = voteInfoMapper.selectByPrimaryKey(voteId);
+        if (voteInfo == null) {
+            return ServerResponse.createByErrorMessage("不存在id为" + voteId + "的投票");
+        }
+        //投票已结束
+        int status = -1;
+        voteInfo.setStatus(status);
+        int i = voteInfoMapper.updateByPrimaryKeySelective(voteInfo);
+        if (i <= 0) {
+            return ServerResponse.createByErrorMessage("更新投票状态失败");
+        }
+        return ServerResponse.createBySuccess();
+    }
+
+    @Override
+    public ServerResponse removeVote(Long voteId) {
+                
+        int i = voteInfoMapper.deleteByPrimaryKey(voteId);
+        //TODO 删除其他表信息 （/软删除）
+        if (i <= 0) {
+            return ServerResponse.createByErrorMessage("删除投票失败");
+        }
+        return ServerResponse.createBySuccess();
+    }
     
 }
