@@ -26,7 +26,11 @@ $(document).ready(function(){
 			}
 		}
 		else if(name=="meeting"){
-			$("#frame").load("meetingList.html");
+            if(id==null){
+                $("#frame").load("meetingList.html");
+            }else{
+               $("#frame").load("meetingInfo.html");
+            }
 		}
 		else if(name=="test"){
 			$("#frame").load("examList.html");

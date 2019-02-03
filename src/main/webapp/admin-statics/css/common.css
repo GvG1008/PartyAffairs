@@ -1,0 +1,58 @@
+body, div, p, ul, ol, dl, dt, dd, li, form, input, table, img, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+.clearfix:after {
+    content:""; 
+    display: block; 
+    clear:both; 
+ }
+ .header {
+     padding: 20px;
+     font-size: 22px;
+     color: #004d6f;
+     font-family: sans-serif;
+     font-weight: 800;
+     border-bottom-color: #69666685;
+     border-bottom: solid 0.5px #69666685;
+     background: #fff;
+     padding-left: 50px;
+     padding-right: 75px;
+ }
+/*文档和会议详情页*/
+.big_title {
+    font-size: 36px;
+    color: #333;
+    font-weight: bold;
+    margin-top: 30px;
+    font-family: "微软雅黑";
+}
+.small_title {
+    font-size: 24px;
+    font-weight: normal;
+    color: #333;
+    margin-top: 25px;
+}
+.title-bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    margin-top: 22px;
+    padding: 0 10px;
+    border-bottom: 1px solid #e7d6c3;
+}
+.meeting-edit {
+    
+}
+
+em, b, i {
+    font-style: normal;
+}
+body,span,a {
+    color: #333;
+}
+article.content {
+    margin: 29px 50px;
+}
