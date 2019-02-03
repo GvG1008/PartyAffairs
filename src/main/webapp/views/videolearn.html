@@ -2,26 +2,35 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../statics/css/bootstrap.min.css"/>
 		<title></title>
 	</head>
 	<body>
-		<div class="dvideo" id="dvideo">
-			<div class="video-title">
-				<p>{{dvideo.videoTitle}}</p>
+		<div class="panel" id="dvideo">
+			<div class="panel-heading">
+				<h3 style="width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	font-size: 20px;
+	margin-bottom: 20px;">{{dvideo.videoTitle}}</h3>
 			</div>
-			<video id="my-video" controls="controls" :src="url">
+			<div class="panel-body">
+				<div style="display: flex;justify-content: center;">
+					<video id="my-video" width="60%" height="360" controls="controls" :src="url"></video>
+				</div>
+				<br /><br />
+				<div style="margin-left: 20%;margin-right: 20%" v-html="dvideo.videoIntroduction">
 				
-			</video>
-			<div class="play" id="play"></div>
-			<div class="pause" id="pause"></div>
-			<div>{{dvideo.videoIntroduction}}{{dvideo.videoPath}}</div><!-- 简介已经放好，改位置和样式 -->
+			</div>
 			<div id="" style="float: right;">
-        		<button v-if="state == 1" type="button" disabled="true">已学习</button>
+        		<span style="background-color: #878787;" v-if="state == 1" type="button" disabled="true">已学习</span>
         		<button v-else type="button" @click="learned()">学习后请点击</button>
         	</div>
+			</div>
 		</div>
-		
-		<link rel="stylesheet" href="../statics/css/video.css" />
+		<script type="text/javascript" src="../admin-statics/js/lib/jquery/1.9.1/jquery.js" ></script>
+		<script type="text/javascript" src="../admin-statics/js/extends/bootstrap/3.3.7/bootstrap.min.js" ></script>
 		<script type="text/javascript" src="../statics/js/user/video.js" ></script>
 	</body>
 </html>

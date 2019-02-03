@@ -17,8 +17,8 @@
 		<form>
 			<div class=container>
 				<div class="header">
-					投票管理 > 投票发布
-
+					
+					<a href="VoteManager.html"> 投票管理  </a> > 投票发布  
 					<!-- 工具栏  -->
 					<div class=toolbar>
 						<!--  <a class="btn btn-default op" id="save" href="#">
@@ -76,28 +76,28 @@
 					<div class="label_block" style="display: flex;flex-wrap: nowrap;justify-content: space-between;">
 						<div class="">
 							<label class="labelname">最少选择</label>
-							<input class="form-control" id="least" type="text" value="" />
+							<input class="form-control" id="least" oninput = "value=value.replace(/[^\d]/g,'')" type="text" value="" />
 						</div>
 						<div class="">
 							<label class="labelname">最多选择</label>
-							<input class="form-control" id="most" type="text" value="" />
+							<input class="form-control" id="most" oninput = "value=value.replace(/[^\d]/g,'')" type="text" value="" />
 						</div>
 					</div>
 					<br />
 					<div class="label_block" style="display: flex;flex-wrap: nowrap;justify-content: space-between;">
 						<div class="">
 							<label class="labelname">投票开始时间</label>
-							<input class="form-control" id="startTime" type="datetime-local" value="" />
+							<input class="starttime form-control iselect" type="text" value="" id="startTime"/>
 						</div>
 						<div class="">
 							<label class="labelname">投票结束时间</label>
-							<input class="form-control" id="endTime" type="datetime-local" value="" />
+							<input class="endtime form-control iselect" type="text" value="" id="endTime"/>
 						</div>
 					</div>
 					
 
 					<div class="editorWrap">
-						<a class="btn btn-default op" id="send">
+						<a class="btn btn-default op" id="sendsend">
 							<i class="fa fa-paper-plane op-icon"></i> 发布</a>
 					</div>
 				</div>
@@ -114,7 +114,20 @@
         <script type="text/javascript" src="../../admin-statics/js/extends/jquery.ztree.exhide.js"></script>
         <script type="text/javascript" src="../../admin-statics/js/extends/fuzzysearch.js"></script>
 		<script type="text/javascript" src="../../admin-statics/js/module/CreateVote.js"></script>
-
+		<script>
+			//  level分为 YM YMD H HM 四个有效值，分别表示年月 年月日 年月日时 年月日时分,less表示是否不可小于当前时间。年-月-日 时:分 时为24小时制
+			//  为确保控件结构只出现一次，在有需要的时候进行一次调用。
+			    onLoadTimeChoiceDemo();
+			
+			    borainTimeChoice({
+			        start:".starttime",
+			        end:".endtime",
+			        level:"H",
+			        less:false
+			    });
+			    
+			  
+        </script>
 	</body>
 
 </html>

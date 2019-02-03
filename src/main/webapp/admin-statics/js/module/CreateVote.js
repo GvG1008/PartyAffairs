@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#send").click(function() {
+	$("#send,#sendsend").click(function() {
 		var title = $("#title").val();
 		var description = $("#description").val();
 		var type1 = $("#type1").val();
@@ -44,7 +44,7 @@ $(document).ready(function() {
 				console.log(res)
 				if(res.status == 0) {
 					alert("发布成功")
-					location.reload();
+					location.href="VoteManager.html";
 				}
 			}
 		});

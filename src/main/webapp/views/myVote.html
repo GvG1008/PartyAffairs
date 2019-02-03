@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../statics/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../statics/css/myVote.css" />
+		<title></title>
+	</head>
+
+	<body>
+
+		<div class="panel" id="app">
+			<div class="panel-heading">
+				<h2 style="width: 700px;margin-left: auto;margin-right: auto;text-align: center;margin-bottom: 20px;">
+					我的投票
+				</h2>
+			</div>
+
+			<div class="panel-body container" style="display: flex;flex-wrap: wrap;" v-for="item in content">
+				<div class="" style="background-color: whitesmoke;height: 300px;width: 450px;border: 2px solid #D2D2D2;border-radius: 5px;margin:20px 60px;">
+					<div class="" style="display: flex;justify-content: center;padding: 0px 10px;">
+						<h2>{{item.title}}</h2>
+					</div>
+					<div class="" style="padding: 10px 10px;display: flex;justify-content: center;font-size: 18px;">
+						{{item.stringStartTime}}&nbsp;&nbsp; <span style="color: #C9302C;">To</span> &nbsp;&nbsp;{{item.stringEndTime}}
+					</div>
+					<div class="" style="display: flex;justify-content: center;">
+						<div class="" style="border: 1px solid #D2D2D2;width: 150px;height: 75px;border-radius: 5px;margin: 20px 0px;background-color: whitesmoke;">
+							<h2 style="display: flex;justify-content: center;color: #545B62;" v-if="item.type == 0">单选</h2>
+							<h2 style="display: flex;justify-content: center;color: #545B62;" v-if="item.type == 1">多选</h2>
+							<h2 style="display: flex;justify-content: center;color: #545B62;" v-if="item.type == 2">排序</h2>
+						</div>
+					</div>
+					<div class="" style="padding-top: 20px;display: flex;justify-content: center;">
+						<a :href="'home.html?location=votepage&id='+item.voteId" class="btn btn-info">进入投票</a>
+					</div>
+				</div>
+				
+				
+			</div>
+		</div>
+
+		<script type="text/javascript" src="../admin-statics/js/lib/jquery/1.9.1/jquery.js"></script>
+		<script type="text/javascript" src="../admin-statics/js/extends/bootstrap/3.3.7/bootstrap.min.js"></script>
+		
+		<script type="text/javascript" src="../statics/js/vue.js" ></script>
+		<script type="text/javascript" src="../statics/js/user/myVote.js" ></script>
+	</body>
+
+</html>

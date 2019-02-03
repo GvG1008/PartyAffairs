@@ -60,6 +60,12 @@ $(document).ready(function(){
 		else if(name=="record"){
 			$("#frame").load("record.html");
 		}
+		else if(name == "myvote"){
+			$("#frame").load("myVote.html");
+		}
+		else if(name == "votepage"){
+			$("#frame").load("votePage.html");
+		}
 		
 		$(".loading").fadeOut(500);
 	});
