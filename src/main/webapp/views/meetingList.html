@@ -4,14 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>门户-会议列表</title>
-    <link rel="stylesheet/less" href="../statics/less/meetingList.less"/>
+    <link rel="stylesheet/less" href="../statics/less/meetingList.less" />
 </head>
 
 <body>
     <div class="content">
         <!-- 左侧菜单 -->
         <ul class="meeting-menu">
-            <li role="presentation" class="meeting-item"><strong>会议列表</strong></li>
+            <li role="presentation" class="meeting-item">
+                <strong>会议列表</strong>
+            </li>
         </ul>
 
         <!-- 右侧内容 -->
@@ -22,10 +24,7 @@
                     <li>会议列表</li>
                 </ol> -->
                 <div class="tbody_con" id="tbodyCon">
-                    <input type="hidden" name="limit" value="10">
-                    <input type="hidden" name="page" value="1">
-                    <input type="hidden" name="content-length" id="list-length" value="639">
-                    <ul class="mod-list">
+                    <ul class="mod-list" v-if="content&&content.length">
                         <li v-for="it in content">
                             <div class="mixin">
                                 <a :href="'home.html?location=meeting&id='+it.id" target="_blank" class="mixin_img">
@@ -42,11 +41,11 @@
                             </div>
                         </li>
                     </ul>
-                    <div id="pagination"></div>
-                    <div class="loading-gif" v-show="!content||!content.length">
-                        <img src="../statics/img/loading.gif" width="200" height="120" alt="数据加载中...">
-                        <p>数据加载中...</p>
+                    <div class="content-empty" v-else>
+                        <i class="iconfont icon-wushuju1 empty-icon"></i>
+                        <span class="empty-tip"> 无相关数据 </span>
                     </div>
+                    <div id="pagination"></div>
                 </div>
             </div>
         </div>
