@@ -312,7 +312,7 @@ img.name {
     width: 57%;
     height: 65%;
 }
-header{
+.home-header{
     height: 250px;
     border-bottom: 5px solid #e6231d;
 }
