@@ -6,6 +6,9 @@ $(function(){
 	};
 	//菜单点击
 	$('a',$('#menuSideBar')).on('click', function(e) {
+        console.log(
+            "sdasdassd"
+        );
 		e.stopPropagation();
 		var li = $(this).closest('li');
 		var menuId = $(li).attr('mid');
@@ -222,5 +225,54 @@ $(function(){
 			   window.location.href='index.html';
 			    	
 			    }
-			});
+            });
+            
+
+            // iframe子页面-首页按钮打开新标签页
+function aclick (flag) {
+    //党员档案
+    if(flag==='info'){
+      $('#info').click();
+    }
+    //文章发布
+    if(flag==='ap'){
+      $('#ap').click();
+    }
+    //资料管理
+    if(flag==='data'){
+      $('#data').click();
+    }
+    //学习情况
+    if(flag==='study'){
+      $('#study').click();
+    }
+    //考卷信息
+    if(flag==='exam'){
+      $('#exam').click();
+    }
+    //成绩查看
+    if(flag==='score'){
+      $('#score').click();
+    }
+    //所有会议
+    if(flag==='meeting'){
+      $('#meeting').click();
+    }
+    //投票发布
+    if(flag==='vote'){
+      $('#vote').click();
+    }
+    //支部活动
+    if(flag==='branch'){
+      $('#branch').click();
+    }
+    //思想反馈
+    if(flag==='report'){
+      $('#report').click();
+    }
+}
 });
+
+
+
+

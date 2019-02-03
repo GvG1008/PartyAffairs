@@ -67,7 +67,10 @@ new Vue({
 		
     });
 	
-	var button = "<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'>" 
+	var button = "<a class='btn btn-success tp' href='../../admin-view/workbench/MeetingAdd.html'>" 
+		+"<span class='glyphicon glyphicon-plus icon'></span><span class='caption'>发起会议</span></a> " 
+	    +"&nbsp;&nbsp;&nbsp;&nbsp;"
+		+"<button type='button' class='btn btn-primary tp'  id='allcheck' onclick='checkall()'>" 
 		+"<span class='fa fa-check-square-o icon'></span><span class='caption'>全选</span></button> " 
 		+"&nbsp;&nbsp;&nbsp;&nbsp;"
 		+"<a class='btn btn-danger td' onclick='deleteall()'><span class='fa fa-trash-o icon'></span>" 
