@@ -24,24 +24,16 @@
         	<div class="history">
         		<fieldset>
         			<legend>历史会议</legend>
-        			<table class="list-table">
-						<tr>
-							<td class="meeting-title"><a href="#" target="_blank"><p title="2018-2019学年第一学期党建工作会议">2018-2019学年第一学期党建工作会议</p></a></td>
-							<td class="meeting-time">07-17</td>
-						</tr>
-						<tr>
-							<td class="meeting-title"><a href="#" target="_blank"><p title="学生党支部“学习十九大精神”会议">学生党支部“学习十九大精神”会议</p></a></td>
-							<td class="meeting-time">07-17</td>
-						</tr>
-						<tr>
-							<td class="meeting-title"><a href="#" target="_blank"><p title="“两学一做”支部风采展示活动之学习型服务型创新型基层党支部培育建设会议">“两学一做”支部风采展示活动之学习型服务型创新型基层党支部培育建设会议</p></a></td>
-							<td class="meeting-time">07-17</td>
+        			<table class="list-table" id="app">
+						<tr v-for="it in content">
+							<td class="meeting-title"><a :href="'home.html?location=meeting&id='+it.id" ><p :title="it.title">{{it.title}}</p></a></td>
+							<td class="meeting-time">{{it.date}}</td>
 						</tr>					
 					</table>
         		</fieldset>
         	</div>
        	</div>
-       	
-       	
+       	<script type="text/javascript" src="../statics/js/vue.js" ></script>
+       	<script type="text/javascript" src="../statics/js/user/meetingList.js" ></script>
 	</body>
 </html>

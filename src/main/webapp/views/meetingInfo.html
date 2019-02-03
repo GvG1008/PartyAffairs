@@ -12,7 +12,8 @@
             <a href="#">首页</a> >
             <a href="#">三会一课</a> > 会议详情 </h4>
     </header>
-    <h3 class="meeting-title">吴金印：“太行公仆”为人民服务永不退休</h3>
+    <div id="app">
+    <h3 class="meeting-title">{{content.title}}</h3>
     <article class="meeting-overview">
         <section class="meeting-overview-left">
             <!-- 视频 -->
@@ -25,7 +26,7 @@
                 <!-- v-else -->
                 <div class="vedio">
                     <video id="my-video" class="video-js" controls preload="auto" width="100%" data-setup="{}">
-                        <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+                        <source :src="content.video" type="video/mp4">
                     </video>
                 </div>
             </section>
@@ -42,14 +43,18 @@
                         <span class="empty-tip"> 无相关数据 </span>
                     </div> -->
                 <!-- v-else -->
-                <ul class="ul-box">
-                    <li class="li-item" title="点击可下载">
+                <ul class="ul-box"><!--待补充，暂无字段-->
+                    <!--<li class="li-item" title="点击可下载">
                         <span class="item-text" title="习近平总书记新年祝福语语录">习近平总书记新年祝福语语录</span>
                         <span class="item-time">2018-01-01 12:02</span>
                     </li>
                     <li class="li-item" title="点击可下载">
                         <span class="item-text" title="习近平总书记新年祝福语语录">习近平总书记新年祝福语语录</span>
                         <span class="item-time">2018-01-01 12:02</span>
+                    </li>-->
+                    <li class="li-item" title="暂无数据">
+                        <span class="item-text" title="暂无数据">暂无数据</span>
+                        <span class="item-time">xxxx-xx-xx xx:xx:xx</span>
                     </li>
                 </ul>
             </div>
@@ -62,17 +67,19 @@
             </h3>
             <div class="left-content">
                 <!-- v-if === null，显示空状态 -->
-                <div class="content-empty" v-show="">
+                <div class="content-empty" v-if="content.coverpath == null">
                     <i class="iconfont icon-wushuju1 empty-icon"></i>
                     <span class="empty-tip"> 无封面数据 </span>
                 </div>
                 <!-- v-else -->
-                <!-- <div class="cover-img">
-                      <img src="../statics/img/user-img.png">
-                  </div> -->
+                 <div class="cover-img" v-else>
+                      <img :src="content.coverpath">
+                  </div> 
                 <div class="content-desc">
                     <!-- 内容 -->
-                    <p>2017年《榜样2》专题节目由中央组织部、中央电视台联合录制，以“喜迎十九大、共圆中国梦，走近学习榜样、凝聚复兴力量”为主题，展现一代又一代共产党人不忘初心的执着坚守，彰显当代共产党人信仰坚定、心系群众、勇于担当、创新奉献的精神风貌，是开展党员教育培训的生动教材。</p>
+                    <div v-html="content.content">
+                    	
+                    </div>
                 </div>
             </div>
         </section>
@@ -83,21 +90,23 @@
             <div class="meeting-detail-author">
                 <!-- 当头像地址为null时为默认头像 -->
                 <div class="img-box">
-                    <img class="author-img" src="../statics/img/user-img.png" />
+                    <img class="author-img" :src="content.headImg" />
                     <!--<i class="author-img iconfont icon-dangwugongkai"></i>-->
                 </div>
                 <div class="info-box">
-                    <span class="author-intro" title="姓名">杨禹蒙</span>
-                    <span class="author-intro" title="所属党支部">软件工程党支部</span>
-                    <span class="author-intro" title="发布时间">2019年6月4日 11:40</span>
+                    <span class="author-intro" title="姓名">{{content.creatorName}}</span>
+                    <span class="author-intro" title="所属党支部">{{content.branchName}}</span>
+                    <span class="author-intro" title="发布时间">{{content.date}}</span>
                 </div>
             </div>
         </section>
     </footer>
+    </div>
 
     <script type="text/javascript" src="../statics/js/vue.js"></script>
     <script type="text/javascript" src="../statics/js/less.min.js"></script>
     <script type="text/javascript" src="../statics/js/video.js"></script>
+    <script type="text/javascript" src="../statics/js/user/meetingInfo.js" ></script>
 </body>
 
 </html>
