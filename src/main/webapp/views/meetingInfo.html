@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
-		<meta charset="UTF-8">
-        <title>门户-会议详情</title>
-        <link rel="stylesheet/less" href="../statics/less/meetingInfo.less" />
-        <link rel="stylesheet" href="../statics/css/video-js.css"  type="text/css">
-	</head>
-	<body>
-		<header class="meeting-header">
-			<h4 class="meeting-header-path"><a href="#">首页</a> > <a href="#">三会一课</a>  > 会议详情  </h4>
-        </header>
-        <h3 class="meeting-title">吴金印：“太行公仆”为人民服务永不退休</h3>
-	    <article class="meeting-overview">
-           <section class="meeting-overview-left">
-             <!-- 视频 -->
-             <section class="vedio-box">
+<meta charset="UTF-8">
+<title>门户-会议详情</title>
+<link rel="stylesheet/less" href="../statics/less/meetingInfo.less" />
+<link rel="stylesheet" href="../statics/css/video-js.min.css" type="text/css">
+</head>
+
+<body>
+    <header class="meeting-header">
+        <h4 class="meeting-header-path">
+            <a href="#">首页</a> >
+            <a href="#">三会一课</a> > 会议详情 </h4>
+    </header>
+    <h3 class="meeting-title">吴金印：“太行公仆”为人民服务永不退休</h3>
+    <article class="meeting-overview">
+        <section class="meeting-overview-left">
+            <!-- 视频 -->
+            <section class="vedio-box">
                 <!-- v-if 视频为null，显示空状态 -->
                 <!-- <div class="vedio-empty">
                     <i class="iconfont icon-shipin"></i>
@@ -21,79 +24,80 @@
                 </div> -->
                 <!-- v-else -->
                 <div class="vedio">
-                    <video id="my-video" class="video-js" controls preload="auto" width="960" height="400" poster="m.jpg" data-setup="{}">
-                    <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
-                    <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
-                    <source src="http://vjs.zencdn.net/v/oceans.ogv" type="video/ogg">
-                    <p class="vjs-no-js"> To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a> </p>
+                    <video id="my-video" class="video-js" controls preload="auto" width="100%" data-setup="{}">
+                        <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
                     </video>
                 </div>
-             </section>
-          </section> 
-		   <!-- 相关附件 -->
-           <section class="meeting-overview-right">
-                <div class="right-header">
-                    <span class="right-header-title">相关附件</span>
-                </div>
-                <div class="right-content">
-                    <!-- v-if === null，显示空状态 -->
-                    <!-- <div class="content-empty" v-show="">
+            </section>
+        </section>
+        <!-- 相关附件 -->
+        <section class="meeting-overview-right">
+            <div class="right-header">
+                <span class="right-header-title">相关附件</span>
+            </div>
+            <div class="right-content">
+                <!-- v-if === null，显示空状态 -->
+                <!-- <div class="content-empty" v-show="">
                         <i class="iconfont icon-wushuju1 empty-icon"></i>
                         <span class="empty-tip"> 无相关数据 </span>
                     </div> -->
-                    <!-- v-else -->
-                    <ul class="ul-box">
-                        <li class="li-item" title="点击可下载">
-                            <span class="item-text"
-                                  title="习近平总书记新年祝福语语录">习近平总书记新年祝福语语录</span>
-                            <span class="item-time">2018-01-01 12:02</span>
-                        </li> <li class="li-item" title="点击可下载">
-                            <span class="item-text"
-                                  title="习近平总书记新年祝福语语录">习近平总书记新年祝福语语录</span>
-                            <span class="item-time">2018-01-01 12:02</span>
-                        </li> 
-                    </ul>
+                <!-- v-else -->
+                <ul class="ul-box">
+                    <li class="li-item" title="点击可下载">
+                        <span class="item-text" title="习近平总书记新年祝福语语录">习近平总书记新年祝福语语录</span>
+                        <span class="item-time">2018-01-01 12:02</span>
+                    </li>
+                    <li class="li-item" title="点击可下载">
+                        <span class="item-text" title="习近平总书记新年祝福语语录">习近平总书记新年祝福语语录</span>
+                        <span class="item-time">2018-01-01 12:02</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </article>
+    <footer class="meeting-detail">
+        <section class="meeting-detail-left">
+            <h3 class="left-title">
+                <strong>会议详情</strong>
+            </h3>
+            <div class="left-content">
+                <!-- v-if === null，显示空状态 -->
+                <div class="content-empty" v-show="">
+                    <i class="iconfont icon-wushuju1 empty-icon"></i>
+                    <span class="empty-tip"> 无封面数据 </span>
                 </div>
-           </section>
-		</article>
-	    <footer class="meeting-detail">
-			<section class="meeting-detail-left">
-                <h3 class="left-title"><strong>会议详情</strong></h3>
-                <div class="left-content">
-                   <!-- v-if === null，显示空状态 -->
-                  <div class="content-empty" v-show="">
-                        <i class="iconfont icon-wushuju1 empty-icon"></i>
-                        <span class="empty-tip"> 无封面数据 </span>
-                  </div>  
-                  <!-- v-else --> 
-                  <!-- <div class="cover-img">
+                <!-- v-else -->
+                <!-- <div class="cover-img">
                       <img src="../statics/img/user-img.png">
                   </div> -->
-                  <div class="content-desc">
+                <div class="content-desc">
                     <!-- 内容 -->
                     <p>2017年《榜样2》专题节目由中央组织部、中央电视台联合录制，以“喜迎十九大、共圆中国梦，走近学习榜样、凝聚复兴力量”为主题，展现一代又一代共产党人不忘初心的执着坚守，彰显当代共产党人信仰坚定、心系群众、勇于担当、创新奉献的精神风貌，是开展党员教育培训的生动教材。</p>
-                  </div>
                 </div>
-            </section>
-			<section class="meeting-detail-right">
-                <h3 class="right-title"><strong>作者信息</strong></h3>
-				<div class="meeting-detail-author">
-					<!-- 当头像地址为null时为默认头像 -->
-					<div class="img-box">
-						<img class="author-img" src="../statics/img/user-img.png"/>
-						<!--<i class="author-img iconfont icon-dangwugongkai"></i>-->
-                    </div>
-                    <div class="info-box">
-                        <span class="author-intro" title="姓名">杨禹蒙</span>
-                        <span class="author-intro" title="所属党支部">软件工程党支部</span>
-                        <span class="author-intro" title="发布时间">2019年6月4日 11:40</span>
-                    </div>
-				</div>
-			</section>
-        </footer>
-        
-        <script type="text/javascript" src="../statics/js/vue.js" ></script>
-        <script type="text/javascript" src="../statics/js/less.min.js" ></script>
-        <script type="text/javascript" src="../statics/js/video.js"></script>
-	</body>
+            </div>
+        </section>
+        <section class="meeting-detail-right">
+            <h3 class="right-title">
+                <strong>作者信息</strong>
+            </h3>
+            <div class="meeting-detail-author">
+                <!-- 当头像地址为null时为默认头像 -->
+                <div class="img-box">
+                    <img class="author-img" src="../statics/img/user-img.png" />
+                    <!--<i class="author-img iconfont icon-dangwugongkai"></i>-->
+                </div>
+                <div class="info-box">
+                    <span class="author-intro" title="姓名">杨禹蒙</span>
+                    <span class="author-intro" title="所属党支部">软件工程党支部</span>
+                    <span class="author-intro" title="发布时间">2019年6月4日 11:40</span>
+                </div>
+            </div>
+        </section>
+    </footer>
+
+    <script type="text/javascript" src="../statics/js/vue.js"></script>
+    <script type="text/javascript" src="../statics/js/less.min.js"></script>
+    <script type="text/javascript" src="../statics/js/video.js"></script>
+</body>
+
 </html>
