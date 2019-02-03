@@ -11,12 +11,17 @@ var app = new Vue({
 	created:function(){
 		$.ajax({
 			type:"get",
-			url:"../meetingMenu_1/1/10",
+			url:"../meetingMenu_1/1/99",
 			async:true,
 			success:function(res){
-				app.pagenow = res.data.pageNum;
-				app.totalpage = res.data.totalPageNum;
-				app.content = res.data.list;
+                if (res.data){
+                    app.pagenow = res.data.pageNum;
+                    app.totalpage = res.data.totalPageNum;
+                    app.content = res.data.list;
+                }else{
+                    alert(res.msg);
+                }
+				
 			}
 		});
 	}

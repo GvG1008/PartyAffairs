@@ -1,0 +1,126 @@
+.content {
+    display: flex;
+    margin: 0 25px;
+
+    a:hover { 
+        text-decoration: none;
+    }
+
+    .meeting-menu{
+        margin: 40px 0 0 0;
+        width: 180px;
+        height: auto;
+        margin-right: 20px;
+        min-height: 10px;
+        background-color: #fafafa;
+
+        .meeting-item {
+            padding: 14px 0;
+
+            strong {
+                display: inline-block;
+                border-left: 6px solid #cf0000;
+                padding-left: 25px;
+                font-weight: normal;
+                font-size: 20px;
+                line-height: 22px;
+            }
+
+            a {
+                display: block;
+                border-left: 6px solid #fff;
+                line-height: 22px;
+                font-size: 20px;
+                padding-left: 25px;
+            }
+
+            a:hover { 
+                color: #b9a272;
+            }
+        }
+
+        .active a {
+            border-left: 6px solid #cf0000;
+            color: #b9a272;
+        }
+    }
+
+    .tab-content{
+        margin: 40px 0 0 0;
+        padding: 12px 0 0 0;
+        width: 800px;
+    }
+
+    .breadcrumb {
+        overflow: hidden;
+
+        li {
+            display: inline-block;
+            color: #aaa;
+            font-size: 18px;
+        }
+
+        li+li:before {
+            padding: 0 5px;
+            content: ">";
+        }
+    }
+
+    .mod-list {
+        margin-top: 15px;
+        overflow: hidden;
+
+        li {
+          border-top: 1px solid #eee;
+          padding: 28px 0;
+          margin-top: -1px;
+
+         .mixin {
+            overflow: hidden;
+
+            .mixin_img {
+                float: left;
+                width: 320px;
+                height: 213px;
+                margin-right: 20px;
+
+                img {
+                    height: 100%;
+                }
+            }
+            .mixin_title a, .mod-list .mixin_txt .mixin_title a:visited {
+                color: #000;
+            }
+            .mixin_txt .mixin_summary .mixin_date {
+                color: #444;
+                font-size: 16px;
+                line-height: 28px;
+            }
+
+            .mixin_txt {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .mixin_date{
+                color: #444;
+                margin: 20px 0 0 0;
+            }
+
+        }
+    }
+  }
+  .loading-gif {
+    text-align: center;
+
+    img {
+        border: 0 none;
+        vertical-align: middle;
+        -ms-interpolation-mode: bicubic;
+        max-width: 100%;
+    }
+    p {
+        color: #777;
+    }
+}
+}

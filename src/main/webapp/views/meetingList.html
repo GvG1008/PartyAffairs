@@ -1,39 +1,59 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<link rel="stylesheet" href="../statics/css/meetingList.css" />
-	</head>
-	<body>
-		<div class="meeting-list">
-        	<div class="ml-header">
-        		<div class="title">
-        			<h2>会议列表</h2>
-        		</div>
-        	</div>
-        	<div class="conduct">
-        		<fieldset>
-        			<legend>正在进行的会议</legend>
-        			<a href="#" >
-        				<img class="meetingpic" src="../statics/img/meeting.png"/>
-						<span><a id="conduct-name" href="home.html?location=meeting&id=111">2018年纪律教育学习活动月学习及动员会议</a></span>
-        			</a>
-        		</fieldset>
-        	</div>
-        	<div class="history">
-        		<fieldset>
-        			<legend>历史会议</legend>
-        			<table class="list-table" id="app">
-						<tr v-for="it in content">
-							<td class="meeting-title"><a :href="'home.html?location=meeting&id='+it.id" ><p :title="it.title">{{it.title}}</p></a></td>
-							<td class="meeting-time">{{it.date}}</td>
-						</tr>					
-					</table>
-        		</fieldset>
-        	</div>
-       	</div>
-       	<script type="text/javascript" src="../statics/js/vue.js" ></script>
-       	<script type="text/javascript" src="../statics/js/user/meetingList.js" ></script>
-	</body>
+
+<head>
+    <meta charset="UTF-8">
+    <title>门户-会议列表</title>
+    <link rel="stylesheet/less" href="../statics/less/meetingList.less"/>
+</head>
+
+<body>
+    <div class="content">
+        <!-- 左侧菜单 -->
+        <ul class="meeting-menu">
+            <li role="presentation" class="meeting-item"><strong>会议列表</strong></li>
+        </ul>
+
+        <!-- 右侧内容 -->
+        <div class="tab-content" id="app">
+            <div role="tabpanel" class="tab-pane active" id="meeting">
+                <!-- <ol class="breadcrumb" id="breadcrumb">
+                    <li>三会一课</li>
+                    <li>会议列表</li>
+                </ol> -->
+                <div class="tbody_con" id="tbodyCon">
+                    <input type="hidden" name="limit" value="10">
+                    <input type="hidden" name="page" value="1">
+                    <input type="hidden" name="content-length" id="list-length" value="639">
+                    <ul class="mod-list">
+                        <li v-for="it in content">
+                            <div class="mixin">
+                                <a :href="'home.html?location=meeting&id='+it.id" target="_blank" class="mixin_img">
+                                    <!-- if:封面图为null 显示默认图片 -->
+                                    <img src="../statics/img/flag.png">
+                                </a>
+                                <div class="mixin_txt">
+                                    <h3 class="mixin_title">
+                                        <a :href="'home.html?location=meeting&id='+it.id" target="_blank" :title="it.title">{{it.title}}</a>
+                                    </h3>
+                                    <!-- <p class="mixin_summary"></p> -->
+                                    <p class="mixin_date">发布时间：{{it.date}}</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div id="pagination"></div>
+                    <div class="loading-gif" v-show="!content||!content.length">
+                        <img src="../statics/img/loading.gif" width="200" height="120" alt="数据加载中...">
+                        <p>数据加载中...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../statics/js/vue.js"></script>
+    <script type="text/javascript" src="../statics/js/less.min.js"></script>
+    <script type="text/javascript" src="../statics/js/user/meetingList.js"></script>
+</body>
+
 </html>
