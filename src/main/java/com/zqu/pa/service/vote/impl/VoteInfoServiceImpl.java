@@ -128,7 +128,7 @@ public class VoteInfoServiceImpl implements VoteInfoService {
         
         if(existVoteUser(voteId, userId) == 0) {
             logger.debug("用户不能参与此投票");
-            return ServerResponse.createByError();
+            return ServerResponse.createByErrorMessage("用户不能参与此投票");
         }
         
         VoteInfo voteInfo = getVoteInfo(voteId);

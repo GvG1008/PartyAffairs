@@ -27,4 +27,8 @@ public interface VoteResultMapper {
     int updateByPrimaryKeySelective(VoteResult record);
 
     int updateByPrimaryKey(VoteResult record);
+    
+    long countVoteChoice(@Param("voteId")Long voteId, @Param("choiceId")Long choiceId);
+    
+    long countVoteSortChoice(@Param("voteId")Long voteId, @Param("choiceId")Long choiceId, @Param("sort")Integer sort);
 }

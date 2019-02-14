@@ -226,4 +226,14 @@
       sort = #{sort,jdbcType=INTEGER}
     where result_id = #{resultId,jdbcType=BIGINT}
   </update>
+  
+  <select id="countVoteChoice" resultType="java.lang.Long">
+    select count(*) from vote_result
+    where vote_id = #{voteId} and choice_id = #{choiceId} and abandon = 0
+  </select>
+  
+  <select id="countVoteSortChoice" resultType="java.lang.Long">
+    select count(*) from vote_result
+    where vote_id = #{voteId} and choice_id = #{choiceId} and abandon = 0 and sort = #{sort}
+  </select>
 </mapper>
