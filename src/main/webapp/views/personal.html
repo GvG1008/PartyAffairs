@@ -37,6 +37,7 @@
 					<td><span>邮箱：</span></td>
 					<td>
 						<input type="email" id="email" :value="personinfo.email" />
+						<input type="text" hidden="hidden" name="userId" id="userId" :value="personinfo.userId" />
 					</td>					
 				</tr>
 				<tr>
@@ -129,7 +130,7 @@
 			</table>
 			
 			<div class="save-btn">
-				<button id="save-btn">保存</button>
+				<button id="save-btn" @click="save()">保存</button>
 			</div>
        	</div>
        	

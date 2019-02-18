@@ -3,18 +3,26 @@ var app = new Vue({
 	data:{
 		content:[],
 		pagenow:[],
-		totalpage:[]
+		totalpage:[],
+		pagetoNum:""
 	},
 	methods:{
-		
+		pageto : function(currentNum) {
+			doPageto(currentNum);
+		}
 	},
 	created:function(){
-		$.ajax({
+		doPageto(1)
+	}
+})
+
+function doPageto(currentNum){
+	$.ajax({
 			type:"get",
-			url:"../meetingMenu_1/1/99",
+			url:"../meetingMenu_1/"+currentNum+"/2",
 			async:true,
 			success:function(res){
-                if (res.data){
+                if (res.status == 0){
                     app.pagenow = res.data.pageNum;
                     app.totalpage = res.data.totalPageNum;
                     app.content = res.data.list;
@@ -24,5 +32,4 @@ var app = new Vue({
 				
 			}
 		});
-	}
-})
+}

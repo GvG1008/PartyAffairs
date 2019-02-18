@@ -78,6 +78,12 @@ function sendfile(file){
 }
 function sendarticle(){
 	var formData = new FormData();
+	var video = $("#file-0a").get(0).files[0];
+	if (typeof (video) != "undefined") {
+		formData.append("video", video);
+	}else{
+		formData.append("video", "");
+	}
 	var sendFile = $('#file-upload').get(0).files[0];
 	if (typeof (sendFile) != "undefined") {
 		formData.append("coverpath", sendFile);

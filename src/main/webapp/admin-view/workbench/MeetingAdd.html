@@ -1,157 +1,329 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>文章发布</title> 
-<link href="../../admin-statics/css/bootstrap/3.0.2/bootstrap.css" rel="stylesheet" type="text/css" media="all">
-<link href="../../admin-statics/css/font-awesome/4.7.0/font-awesome.css" rel="stylesheet">
-<link href="../../admin-statics/css/workbench/summernote.css" rel="stylesheet" >
-<link href="../../admin-statics/css/workbench/articlepublished.css" rel="stylesheet" >
 
-<style>
-   /* .fileinput-button {
-       position: relative;
-       display: inline-block;
-       overflow: hidden;
-   }
+	<head>
+		<meta charset="UTF-8">
+		<title>文章发布</title>
+		<link href="../../admin-statics/css/bootstrap/3.0.2/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+		<link href="../../admin-statics/css/font-awesome/4.7.0/font-awesome.css" rel="stylesheet">
+		<link href="../../admin-statics/css/workbench/summernote.css" rel="stylesheet">
+		<link href="../../admin-statics/css/workbench/articlepublished.css" rel="stylesheet">
+		<script src="../../fileinput/js/jquery/jquery.min.js"></script>
+		<link href="../../fileinput/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+		<script src="../../fileinput/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="../../fileinput/css/fileinput/fileinput.css" />
+		<link type="text/css" rel="stylesheet" href="../../fileinput/css/fileinput/fileinput.min.css" />
+		<script type="text/javascript" src="../../fileinput/js/fileinput/fileinput.js"></script>
+		<script type="text/javascript" src="../../fileinput/js/fileinput/fileinput_locale_zh.js"></script>
+		<link rel="stylesheet" href="../../admin-statics/table/bootstrap.css" />
+		<link href="../../admin-statics/table/font-awesome.css" rel="stylesheet" />
+		<link href="../../admin-statics/css/workbench/DataManagement.css" rel="stylesheet">
+		<style>
+			body {
+				font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+				background-color: #EBF5F3;
+			}
+			
+			* {
+				margin: 0;
+			}
+			
+			html,
+			body {
+				height: 100%;
+			}
+			
+			.navbar-custom {
+				/*color: #FFFFFF;*/
+				background-color: #56b9ab;
+			}
+			
+			.navbar-brand,
+			.navbar-nav li a {
+				line-height: 55px;
+				height: 55px;
+				padding-top: 0px;
+				font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+			}
+			
+			.navbar-default .navbar-nav>li>a {
+				color: #ffffff;
+			}
+			
+			.navbar-default .navbar-nav>li>a:hover {
+				color: #175A94;
+			}
+			
+			.page-header {
+				font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+				/* border-bottom: 1px solid #bbb;*/
+			}
+			
+			hr {
+				border-bottom: 1px solid #bbb;
+			}
+			
+			.img_border {
+				border: 1px solid #bbb;
+			}
+			
+			@media screen and (min-width: 900px) {
+				.container {
+					width: 900px;
+				}
+			}
+			
+			@media screen and (min-width: 800px) {
+				.center_toaster {
+					right: 35%;
+					width: 30%;
+				}
+			}
+			
+			@media screen and (min-width: 400px) and (max-width: 799px) {
+				.center_toaster {
+					right: 25%;
+					width: 50%;
+				}
+			}
+			
+			@media screen and (min-width: 200px) and (max-width: 399px) {
+				.center_toaster {
+					right: 10%;
+					width: 80%;
+				}
+			}
+			
+			.row a {
+				text-decoration: none;
+			}
+			
+			.row a:hover {
+				text-decoration: none;
+			}
+			
+			.addMaigin {
+				margin-bottom: 30px;
+			}
+			
+			.change_font {
+				font-size: 1.5em;
+			}
+			
+			.button_width {
+				width: 4em;
+			}
+			
+			.button_width2 {
+				width: 4em;
+			}
+			
+			.wrapper {
+				min-height: 100%;
+				height: auto !important;
+				height: 100%;
+				margin: 0 auto -6em;
+			}
+			
+			.push {
+				height: 6em;
+			}
+			
+			.footer,
+			{
+				height: 4em;
+			}
+			
+			.color_white {
+				background: #ffffff;
+			}
+		</style>
+	</head>
 
-   .fileinput-button input{
-       position:absolute;
-       right: 0px;
-       top: 0px;
-       opacity: 0;
-       -ms-filter: 'alpha(opacity=0)';
-       font-size: 200px;
-   } */
-</style>
-</head>
-<body>
-    <form>
-    <div class=container>
-         <div class = "header">
-                            <a href="MeetingApprovedList.html">会议管理</a>   > 发布会议
-         
-         <!-- 工具栏  -->
-            <div class=toolbar>
-                <!--  <a class="btn btn-default op" id="save" href="#">
+	<body>
+		<form>
+			<div class="container">
+				<div class="header">
+					<a href="MeetingApprovedList.html">会议管理</a> > 发布会议
+
+					<!-- 工具栏  -->
+					<div class=toolbar>
+						<!--  <a class="btn btn-default op" id="save" href="#">
                                 <i class="fa fa-hourglass op-icon"></i> 暂存</a>
                  <a class="btn btn-default op" id="preview" href="#">
                                 <i class="fa fa-eye op-icon"></i> 预览</a> -->
-                 <a class="btn btn-default op" id="send" onclick="sendarticle()" >
-                                <i class="fa fa-paper-plane op-icon"></i> 发布</a>
-            </div>
-          <!--   <div class="clearfix"></div> -->
-         </div>
-  
-            <!-- 图片上传错误提示  Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">提示</h4>
-                  </div>
-                  <div class="modal-body">
-                                           图片不符合要求，请上传宽度不小于630px，高度不小于355px的图片 
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-    
-            <!-- 封面图   -->
-            <div class="coverimg" id="imgArea">
-                <img  src='' class="banner-pic" id="banner-pic">
-                <em class="icon-add " id="icon-add"></em>
-                <span id="dragContainer" class="dragContainer hovertip">拖拽或点击添加封面图</span>
-                <input title="未上传文件" type="file" name="" class="file-upload" id="file-upload" accept="image/jpeg, image/jpg, image/png">
-                
-                <div class="WriteCover-editWrapper" id="reloadbtn">
-                      <button title="更换" aria-label="更换" type="button" class="Button WriteCover-editButton WriteCover-uploadButton">
+						<a class="btn btn-default op" id="send" onclick="sendarticle()">
+							<i class="fa fa-paper-plane op-icon"></i> 发布</a>
+					</div>
+					<!--   <div class="clearfix"></div> -->
+				</div>
+
+				<!-- 图片上传错误提示  Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">提示</h4>
+							</div>
+							<div class="modal-body">
+								图片不符合要求，请上传宽度不小于630px，高度不小于355px的图片
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 封面图   -->
+				<div class="coverimg" id="imgArea">
+					<img src='' class="banner-pic" id="banner-pic">
+					<em class="icon-add " id="icon-add"></em>
+					<span id="dragContainer" class="dragContainer hovertip">拖拽或点击添加封面图</span>
+					<input title="未上传文件" type="file" name="" class="file-upload" id="file-upload" accept="image/jpeg, image/jpg, image/png">
+
+					<div class="WriteCover-editWrapper" id="reloadbtn">
+						<button title="更换" aria-label="更换" type="button" class="Button WriteCover-editButton WriteCover-uploadButton">
                       <i class=" icon-ic fa fa-camera"></i>
                       <input title="更换"  type="file" id="filebtn" class="WriteCover-uploadInput" name="upload_file" accept=".jpeg, .jpg, .png">
                       </button>
-                      <button title="删除" aria-label="删除" type="button" class="Button WriteCover-editButton WriteCover-deleteButton">
+						<button title="删除" aria-label="删除" type="button" class="Button WriteCover-editButton WriteCover-deleteButton">
                       <i class=" icon-ic fa fa-trash-o"></i>
                       </button>
-                </div>
-            </div>
-            <div class="content-area">
-                <!-- 标题  -->
-                <div class="textareawrap">
-                    <textarea type="text" class="title" id="title" placeholder="请填写标题" maxlength="32" autocomplete="off" style="height:50px;resize:none;" wrap="hard"></textarea>
-                </div>
-                
-                <!-- 文章投递  -->
-                <div class="articleposition">
-                    <button type="button" class="btn positionbtn" id="positionbtn">
+					</div>
+				</div>
+
+				<!-- 视频上传  -->
+				<div class="coverimg">
+					<form enctype="multipart/form-data" id="here">
+						<input id="file-0a" class="file" name="files" type="file" multiple data-min-file-count="1">
+						<br>
+
+					</form>
+				</div>
+
+				<div class="content-area">
+					<!-- 标题  -->
+					<div class="textareawrap">
+						<textarea type="text" class="title" id="title" placeholder="请填写标题" maxlength="32" autocomplete="off" style="height:50px;resize:none;" wrap="hard"></textarea>
+					</div>
+
+					<!-- 文章投递  -->
+					<div class="articleposition">
+						<button type="button" class="btn positionbtn" id="positionbtn">
                        <label class="plabel" id="branchSelect">发起会议的党支部</label>
                        <span class="addbtn"></span>
-                    </button>                  
-                   <div id="ppp">                  
-                   </div>                  
-                </div>
-                
-                <!-- 文章投递选择  Modal -->
-                <div class="modal fade" id="pModal" tabindex="-1" role="dialog" aria-labelledby="pModalLabel">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" id="modalclose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="pModalLabel">党支部列表</h4>
-                      </div>
-                      <div class="modal-body">
-                         <h5><b>请在以下列表选择发起会议的党支部</b></h5>
-                         <div id="branch">
-	                         <div class="radio" v-for="r in branch">
-							    <label>
+                    </button>
+						<div id="ppp">
+						</div>
+					</div>
+
+					<!-- 文章投递选择  Modal -->
+					<div class="modal fade" id="pModal" tabindex="-1" role="dialog" aria-labelledby="pModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" id="modalclose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="pModalLabel">党支部列表</h4>
+								</div>
+								<div class="modal-body">
+									<h5><b>请在以下列表选择发起会议的党支部</b></h5>
+									<div id="branch">
+										<div class="radio" v-for="r in branch">
+											<label>
 							        <input type="radio" name="optionsRadios" :id="r.id" :value="r.BranchName"> {{r.BranchName}}
 							    </label>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" id="modalbtn" class="btn btn-primary" data-dismiss="modal">确定</button>
+								</div>
 							</div>
-                         </div>                        
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" id="modalbtn" class="btn btn-primary" data-dismiss="modal">确定</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                
-                <!-- 编辑器  -->
-                <div class="editorWrap">
-                    <div id="summernote"></div>
-                </div>
-                
-                <!-- 视频上传  -->
-                <div class="textareawrap">
-				    <!-- <div align="left">				 
-				        <span class="btn btn-success fileinput-button">
-				            <span>视频上传</span>
-				            <input type="file">
-				        </span>
-				    </div> -->
-				    <button type="button" class="btn btn-default" disabled="disabled">视频上传(功能尚未开放)</button>
-                </div>
-                
-                <div class="editorWrap">
-                    <a class="btn btn-default op" id="send" onclick="sendarticle()" >
-                    <i class="fa fa-paper-plane op-icon"></i> 发布</a>
-                </div>
-            </div>
-        </div>    
-    </form>
-   
-   
-   <script type="text/javascript" src="../../admin-statics/js/lib/jquery/1.12.4/jquery.min.js"></script>
-   <script type="text/javascript" src="../../admin-statics/js/extends/bootstrap/3.3.7/bootstrap.min.js"></script>
-   <script type="text/javascript" src="../../admin-statics/js/extends/summernote.js"></script>
-   <script type="text/javascript" src="../../statics/js/vue.js" ></script>
-   <script type="text/javascript" src="../../admin-statics/js/module/MeetingAdd.js"></script>
-   
-   
-  
-</body>
+						</div>
+					</div>
+
+					<!-- 编辑器  -->
+					<div class="editorWrap">
+						<div id="summernote"></div>
+					</div>
+
+					<div class="editorWrap">
+						<a class="btn btn-default op" id="tt">
+							<i class="fa fa-paper-plane op-icon"></i> 发布</a>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<!--<script type="text/javascript" src="../../admin-statics/js/lib/jquery/1.12.4/jquery.min.js"></script>
+   <script type="text/javascript" src="../../admin-statics/js/extends/bootstrap/3.3.7/bootstrap.min.js"></script>-->
+		<script type="text/javascript" src="../../admin-statics/js/extends/summernote.js"></script>
+		<script type="text/javascript" src="../../statics/js/vue.js"></script>
+		<script type="text/javascript" src="../../admin-statics/js/module/MeetingAdd.js"></script>
+
+	</body>
+
+	<script>
+		$('#file-0a').fileinput({
+			language: 'zh',
+			uploadUrl: '../../partyalbum/createAlbum',
+			showUpload: true,
+			allowedPreviewTypes: ['video']
+		});
+		$('#file-0a').on('fileuploaderror', function(event, data, previewId, index) {
+			var form = data.form,
+				files = data.files,
+				extra = data.extra,
+				response = data.response,
+				reader = data.reader;
+			console.log(data);
+			console.log('File upload error');
+		});
+		$('#file-0a').on('fileerror', function(event, data) {
+			console.log(data.id);
+			console.log(data.index);
+			console.log(data.file);
+			console.log(data.reader);
+			console.log(data.files);
+		});
+		$('#file-0a').on('fileuploaded', function(event, data, previewId, index) {
+			var form = data.form,
+				files = data.files,
+				extra = data.extra,
+				response = data.response,
+				reader = data.reader;
+			console.log('File uploaded triggered');
+			console.log(event);
+			console.log(data);
+		});
+//
+//		$("#tt").click(function() {
+//			//	var f = document.getElementById("here");
+//			//	console.log(f)
+//			var form = new FormData(document.getElementById("here"));
+//			//form.append("files",f);
+//			var title = $("#title").val();
+//			var description = $("#description").val();
+//			form.append("albumTitle", title);
+//			form.append("description", description)
+//			//console.log(form);
+//			$.ajax({
+//				type: "post",
+//				url: "../../partyalbum/createAlbum",
+//				data: form,
+//				processData: false,
+//				contentType: false,
+//				success: function(res) {
+//					if(res.status == 0) {
+//						alert("创建相册成功");
+//						location.href = "javascript:";
+//						self.location = document.referrer;
+//					}
+//				}
+//			})
+//		})
+	</script>
+
 </html>

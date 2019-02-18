@@ -43,6 +43,9 @@ var info = new Vue({
 					}
 				}
 			});
+		},
+		save:function(){
+			save();
 		}
 	}
 })
@@ -50,13 +53,24 @@ function save(){
 	var email = $('#email').val();
 	var phonenum = $('#phonenum').val();
 	var profile = $('#profile').val();
+	var userId = $('#userId').val();
+	console.log(userId)
+	var info = {
+		email:email,
+		profile:profile,
+		userId:userId
+	};
 	$.ajax({
 		type:"post",
-		url: "../userInfo/partyInfo",
-		data: {"email":email,"profile":profile},
+		url: "../userInfo/updatePerson",
+		data: {"email":email,"profile":profile,"userId":userId},
+//		data:{
+//			info:info
+//		},
 		dataType: 'json',
 		success: function(result){
 			if (result.status == 0) {
+				console.log(result)
 				app.partyinfo = result.data;
 			}else{
 				alert(result.msg);

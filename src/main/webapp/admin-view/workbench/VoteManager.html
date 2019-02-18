@@ -53,6 +53,9 @@
 						                    <button class="btn btn-danger btn-xs" id="btn_delete" data-toggle="tooltip"  title="删除" @click="deletemsg(message.voteInfo.voteId);">
 							                                                   删除<i class="fa fa-trash-o "></i>
 						                    </button>
+						                    <a class="btn btn-success btn-xs" id="btn_delete" title="查看" :href="'VoteResult.html?name='+message.voteInfo.type+'&id='+message.voteInfo.voteId">
+							                                                   查看结果
+						                    </a>
 						                </center>
 					                    </td> 
                                     </tr>

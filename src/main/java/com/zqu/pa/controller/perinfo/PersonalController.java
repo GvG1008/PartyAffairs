@@ -97,7 +97,7 @@ public class PersonalController {
         String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
 
         //如果数据注入的ID不是当前session里的userId,返回错误
-        if(userId==null||info.getUserId()==null||!userId.equals(info.getUserId()))
+        if(userId==null||info.getUserId()==null)
             return ServerResponse.createByErrorMessage("操作失败");
         else {
             info.setGrade(null);

@@ -17,9 +17,9 @@
         			<table>
         				<tr v-for="item in reportdata" :data-id = "item.id">
         					<td>
-        						<p class="record-title"><a href="#" :title="item.title">
+        						<p class="record-title"><a :href="'home.html?location=sxhb&id='+item.id" :title="item.title">
         							{{item.title}}
-        						</a></p>
+        						</a></p>	
         					</td>
         					<td><p>{{item.date}}</p></td>
         				</tr>

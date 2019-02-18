@@ -16,7 +16,11 @@
 					我的投票
 				</h2>
 			</div>
-
+			
+			<div class="panel-body container" style="display: flex;flex-wrap: wrap;" v-if="content == ''">
+				<h3>暂无正进行的投票</h3>
+			</div>
+			
 			<div class="panel-body container" style="display: flex;flex-wrap: wrap;" v-for="item in content">
 				<div class="" style="background-color: whitesmoke;height: 300px;width: 450px;border: 2px solid #D2D2D2;border-radius: 5px;margin:20px 60px;">
 					<div class="" style="display: flex;justify-content: center;padding: 0px 10px;">

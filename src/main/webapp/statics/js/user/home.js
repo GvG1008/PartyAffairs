@@ -17,7 +17,7 @@ $(document).ready(function(){
 		if(name==null){
 			$("#frame").load("homeNews.html");
 		}
-		else if(name=="djyw"||name=="tzgs"||name=="dngs"||name=="xzzq"){
+		else if(name=="djyw"||name=="tzgs"||name=="dngs"||name=="xzzq"||name=="sxhb"){
 			if(id==null){
 				$("#frame").load("publicityList.html");
 			}
