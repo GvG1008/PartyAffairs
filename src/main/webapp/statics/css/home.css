@@ -252,6 +252,19 @@ footer{
 	width: 70px;
 }
 
+.content-button1{
+	color: white;
+	position: relative;
+	top: 50px;
+	left: 120px;
+	background-color: #37aaea;
+	border: 1px solid #37aaea;
+	box-shadow: 2px 2px 0 0 #9cb8d8;
+	padding: 7px;
+	border-radius: 4px;
+	width: 70px;
+}
+
 .forget{
 	cursor: pointer;
 	font-size: 10px;
