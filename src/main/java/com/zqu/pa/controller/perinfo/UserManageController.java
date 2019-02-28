@@ -37,6 +37,7 @@ import com.zqu.pa.vo.perinfo.Branch;
 import com.zqu.pa.vo.perinfo.GradeClassSortList;
 import com.zqu.pa.vo.perinfo.Role;
 import com.zqu.pa.vo.perinfo.UserCheckList;
+import com.zqu.pa.vo.perinfo.UserInfoAndHead;
 import com.zqu.pa.vo.perinfo.UserList;
 import com.zqu.pa.vo.perinfo.UserListInfo;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
@@ -55,14 +56,14 @@ public class UserManageController {
      */
     @ResponseBody
     @RequestMapping(value="/PersonInfo/{userId}", method=RequestMethod.GET)
-    public ServerResponse<UserPersonInfo> getDesignatedPersonInfo(@PathVariable String userId){
+    public ServerResponse<UserInfoAndHead> getDesignatedPersonInfo(@PathVariable String userId){
         
         if(userId==null)
             return ServerResponse.createByErrorMessage("获取指定用户个人信息失败");
         
-        UserPersonInfo info = new UserPersonInfo();
+        UserInfoAndHead info = new UserInfoAndHead();
         //通过id获取个人信息
-        info = userInfoService.getUserPersonInfo(userId);
+        info = userInfoService.getUserPartyInfo(userId);
 
         if(info==null)
             return ServerResponse.createByErrorMessage("获取指定用户个人信息失败");

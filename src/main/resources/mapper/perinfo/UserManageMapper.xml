@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zqu.pa.dao.perinfo.UserManageMapper">
+<resultMap id="ResultMap" type="com.zqu.pa.vo.perinfo.UserInfoAndHead">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="branch_id" jdbcType="INTEGER" property="branchId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="name_former" jdbcType="VARCHAR" property="nameFormer" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="national" jdbcType="VARCHAR" property="national" />
+    <result column="native_place" jdbcType="VARCHAR" property="nativePlace" />
+    <result column="img_head" jdbcType="VARCHAR" property="imgHead" />
+    <result column="birth_place" jdbcType="VARCHAR" property="birthPlace" />
+    <result column="place_registered" jdbcType="VARCHAR" property="placeRegistered" />
+    <result column="home_address" jdbcType="VARCHAR" property="homeAddress" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="family_background" jdbcType="VARCHAR" property="familyBackground" />
+    <result column="birth_date" jdbcType="VARCHAR" property="birthDate" />
+    <result column="political_status" jdbcType="VARCHAR" property="politicalStatus" />
+    <result column="id_card" jdbcType="CHAR" property="idCard" />
+    <result column="marital_status" jdbcType="VARCHAR" property="maritalStatus" />
+    <result column="organization_unit" jdbcType="VARCHAR" property="organizationUnit" />
+    <result column="personal_identity" jdbcType="VARCHAR" property="personalIdentity" />
+    <result column="educational_background" jdbcType="VARCHAR" property="educationalBackground" />
+    <result column="professional" jdbcType="VARCHAR" property="professional" />
+    <result column="graduate_school" jdbcType="VARCHAR" property="graduateSchool" />
+    <result column="time_applicationforparty" jdbcType="VARCHAR" property="timeApplicationforparty" />
+    <result column="time_intoparty" jdbcType="VARCHAR" property="timeIntoparty" />
+    <result column="time_positive" jdbcType="VARCHAR" property="timePositive" />
+    <result column="type_development" jdbcType="VARCHAR" property="typeDevelopment" />
+    <result column="totot" jdbcType="VARCHAR" property="totot" />
+    <result column="out_unit" jdbcType="VARCHAR" property="outUnit" />
+  </resultMap>
   <insert id="insertUserLoginInfo" parameterType="com.zqu.pa.vo.userInfo.UserLoginInfo">
     insert into user_login 
         (user_id ,
@@ -18,6 +48,17 @@
     role_id = #{roleId,jdbcType=INTEGER},
     state = 0
   </insert>
+  
+  <select id="getUserPartyInfoAndHeadById" resultMap="ResultMap">
+    select pa.user_id, pa.branch_id, pa.name, pa.name_former, pa.sex, pa.national, pa.native_place, pa.birth_place, 
+    pa.place_registered, pa.home_address, pa.tel, pa.family_background, pa.birth_date, pa.political_status, 
+    pa.id_card, pa.marital_status, pa.organization_unit, pa.personal_identity, pa.educational_background, 
+    pa.professional, pa.graduate_school, pa.time_applicationforparty, pa.time_intoparty, pa.time_positive, 
+    pa.type_development, pa.totot, pa.out_unit , pe.img_head
+    from user_party_info pa 
+    left join user_person_info pe ON pa.user_id = pe.user_id
+    where pa.user_id = #{userId}
+  </select>
   
   <select id="checkBranchByBatch" resultType="String">
     SELECT user_id

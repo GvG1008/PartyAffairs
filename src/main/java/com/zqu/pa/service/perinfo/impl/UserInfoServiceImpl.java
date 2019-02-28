@@ -32,6 +32,7 @@ import com.zqu.pa.vo.perinfo.Branch;
 import com.zqu.pa.vo.perinfo.GradeClassSortList;
 import com.zqu.pa.vo.perinfo.Role;
 import com.zqu.pa.vo.perinfo.UserCheckList;
+import com.zqu.pa.vo.perinfo.UserInfoAndHead;
 import com.zqu.pa.vo.perinfo.UserList;
 import com.zqu.pa.vo.perinfo.UserListInfo;
 import com.zqu.pa.vo.userInfo.UserBasicInfo;
@@ -62,10 +63,10 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public UserPartyInfo getUserPartyInfo(String userId) {
+    public UserInfoAndHead getUserPartyInfo(String userId) {
         
-        UserPartyInfo info = new UserPartyInfo();
-        info = userPartyInfoDao.selectByPrimaryKey(userId);
+        UserInfoAndHead info = new UserInfoAndHead();
+        info = userManageDao.getUserPartyInfoAndHeadById(userId);
         
         return info;
     }
