@@ -10,10 +10,6 @@ public class VoteChoice2 {
 
     private Integer status;
     
-    private Long count1 = 0L; //被选排名第一次数
-    
-    private Long count2 = 0L; //被选排名第二次数
-
     public Long getChoiceId() {
         return choiceId;
     }
@@ -46,19 +42,4 @@ public class VoteChoice2 {
         this.status = status;
     }
 
-    public Long getCount1() {
-        return count1;
-    }
-
-    public void setCount1(Long count1) {
-        this.count1 = count1;
-    }
-
-    public Long getCount2() {
-        return count2;
-    }
-
-    public void setCount2(Long count2) {
-        this.count2 = count2;
-    }
 }
