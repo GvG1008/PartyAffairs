@@ -72,8 +72,9 @@ public class UserServiceImpl implements UserService {
         ByteSource credentialsSalt = ByteSource.Util.bytes(userId);
         password = new SimpleHash("MD5", password, credentialsSalt, 1).toString();
         boolean result = userDao.updatePassword(userId, password)>0;
-        if(!result)
-            return ServerResponse.createByErrorMessage("重置失败");
+        if(!result) {
+        	return ServerResponse.createByErrorMessage("重置失败");
+        }           
         return ServerResponse.createBySuccessMessage("重置成功");
     }
 

@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.Lists;
-import com.mysql.fabric.Server;
 import com.zqu.pa.common.Const;
 import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.newsnotices.News;

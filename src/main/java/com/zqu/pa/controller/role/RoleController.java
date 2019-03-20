@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.druid.sql.dialect.oracle.ast.expr.OracleSizeExpr.Unit;
-import com.mysql.fabric.xmlrpc.base.Array;
 import com.zqu.pa.common.ServerResponse;
 import com.zqu.pa.entity.perinfo.UserPersonInfo;
 import com.zqu.pa.service.role.RolePermissionService;
