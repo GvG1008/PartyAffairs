@@ -1,7 +1,13 @@
 package com.zqu.pa.service.vote.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.HashMap;
 
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
@@ -147,6 +153,8 @@ public class VoteResultServiceImpl implements VoteResultService {
         }
         List<VoteChoice> choice = rvi.getChoice();
         List<VoteChoice2> choice2 = new ArrayList<>();
+        // 投票得分排序
+        Map<Long,Long> sortResult = new HashMap<Long,Long>();
         for (VoteChoice vc : choice) {
             VoteChoice2 vc2 = new VoteChoice2();           
             vc2.setVoteId(vc.getVoteId());
@@ -154,15 +162,33 @@ public class VoteResultServiceImpl implements VoteResultService {
             vc2.setChoiceContent(vc.getChoiceContent());
             vc2.setStatus(vc.getStatus());
             
-            //被选中排名第一次数
-            int sort = 1;
-            vc2.setCount1(voteResultMapper.countVoteSortChoice(vc.getVoteId(), vc.getChoiceId(), sort));
-            //被选中排名第二次数
-            sort = 2;
-            vc2.setCount1(voteResultMapper.countVoteSortChoice(vc.getVoteId(), vc.getChoiceId(), sort));
+            Long tatalScore = 0L;
+            
+            for(int i=0;i<choice.size();i++) {
+            	// 投票选取次数
+            	Long times = voteResultMapper.countVoteSortChoice(vc.getVoteId(), vc.getChoiceId(), i+1);
+            	// 投票得分
+            	Long score = times * (choice.size()-i);
+            	tatalScore += score;
+            }
+            sortResult.put(vc.getChoiceId(), tatalScore);           
             
             choice2.add(vc2);
         }
+        
+        //这里将map.entrySet()转换成list
+        List<Map.Entry<Long,Long>> list = new ArrayList<Map.Entry<Long,Long>>(sortResult.entrySet());
+        //然后通过比较器来实现排序
+        Collections.sort(list,new Comparator<Map.Entry<Long,Long>>() {
+            //升序排序
+            public int compare(Entry<Long, Long> o1,
+                    Entry<Long, Long> o2) {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+            
+        });
+               
+        result.setSortList(list);
         result.setVoteInfo(rvi.getVoteInfo());
         result.setChoice(choice2);
         return ServerResponse.createBySuccess(result);
@@ -191,4 +217,5 @@ public class VoteResultServiceImpl implements VoteResultService {
         responseVoteInfo.setChoice(listVoteChoice);
         return responseVoteInfo;
     }
+    
 }

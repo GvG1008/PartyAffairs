@@ -98,27 +98,27 @@ public class UserController {
         String password = from_user.getPassword();
         Subject subject = SecurityUtils.getSubject(); 
         UsernamePasswordToken token = new UsernamePasswordToken(userId, password); 
+        
         try { 
             subject.login(token);
             Session session=subject.getSession();
             session.setAttribute("subject", subject);
-            session.setAttribute("userId", userId);
-            
-            //获取个人信息
+            session.setAttribute("userId", userId);           
             //根据ID获取用户信息
             UserBasicInfo basicInfo = userService.getUserBasicInfo(userId);
-            if(basicInfo==null)
-                return ServerResponse.createByErrorMessage("获取个人信息失败");
-            else 
-                //将用户信息存储进session
+            if (basicInfo==null) {
+            	return ServerResponse.createByErrorMessage("获取个人信息失败");
+            }               
+            else {
+            	//将用户信息存储进session
                 session.setAttribute("basicInfo", basicInfo);
-            
-            return ServerResponse.createBySuccess("登录成功", basicInfo);
+            }                      
+            return ServerResponse.createBySuccess("登录成功", basicInfo);           
         } catch (UnknownAccountException ua) {
-            return ServerResponse.createByErrorMessage("用户名不存在");
+            return ServerResponse.createByErrorMessage("用户名不存在");          
         } catch (IncorrectCredentialsException ic) {
-            return ServerResponse.createByErrorMessage("用户名或密码错误");
-        }
+            return ServerResponse.createByErrorMessage("用户名或密码错误");           
+        }       
     }
 
     /**
@@ -132,7 +132,7 @@ public class UserController {
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
         //获取当前登录人的身份
         Integer role = basicInfo.getRoleId();
-        if(role!=0) {
+        if (role!=0) {
             return ServerResponse.createByErrorMessage("只有最高权限管理员才可以重置用户密码");
         }
         return userService.resetPassword(userId);
@@ -145,7 +145,7 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping("/loginInfo")
-    public ServerResponse<UserBasicInfo> getUserRealName(){
+    public ServerResponse<UserBasicInfo> getUserRealName() {
 
         //获取当前session
         Session session = SecurityUtils.getSubject().getSession();
@@ -153,12 +153,13 @@ public class UserController {
         String userId=(String)session.getAttribute("userId");
         //根据ID获取用户信息
         UserBasicInfo basicInfo = userService.getUserBasicInfo(userId);
-        if(basicInfo==null)
-            return ServerResponse.createByError();
-        else 
-            //将用户信息存储进session
+        if(basicInfo==null) {
+        	return ServerResponse.createByError();
+        }           
+        else {
+        	//将用户信息存储进session
             session.setAttribute("basicInfo", basicInfo);
-
+        }
         return ServerResponse.createBySuccess(basicInfo);
     }
 }
