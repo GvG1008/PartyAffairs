@@ -60,5 +60,5 @@ public interface UserInfoService {
     int updateImgHead(String fullPath, String userId);
 
     //修改密码
-    ServerResponse updatePassword(String userId, String old_password, String new_password);
+    int updatePassword(String userId, String old_password, String new_password);
 }

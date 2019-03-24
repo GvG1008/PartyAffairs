@@ -8,10 +8,14 @@ import org.springframework.stereotype.Component;
 public class Paper {
 
     private Integer singleQuantity;
+    
+    private Integer singleScore;
 
     private List<Question> singleQuestion;
     
     private Integer multipleQuantity;
+    
+    private Integer multipleScore;
     
     private List<Question> multipleQuestion;
     
@@ -56,4 +60,22 @@ public class Paper {
     public void setExamPeriod(Integer examPeriod) {
         this.examPeriod = examPeriod;
     }
+
+	public Integer getSingleScore() {
+		return singleScore;
+	}
+
+	public void setSingleScore(Integer singleScore) {
+		this.singleScore = singleScore;
+	}
+
+	public Integer getMultipleScore() {
+		return multipleScore;
+	}
+
+	public void setMultipleScore(Integer multipleScore) {
+		this.multipleScore = multipleScore;
+	}
+    
+    
 }

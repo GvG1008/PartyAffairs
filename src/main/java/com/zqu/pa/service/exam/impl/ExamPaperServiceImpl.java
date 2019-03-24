@@ -14,6 +14,7 @@ import com.zqu.pa.dao.exam.AnswerMapper;
 import com.zqu.pa.dao.exam.ChoiceMapper;
 import com.zqu.pa.dao.exam.ExamInfoCategoryMapper;
 import com.zqu.pa.dao.exam.ExamInfoMapper;
+import com.zqu.pa.dao.exam.ExamInfoReviewMapper;
 import com.zqu.pa.dao.exam.ExamPaperMapper;
 import com.zqu.pa.dao.exam.ExamScoreMapper;
 import com.zqu.pa.dao.exam.QuestionBankMapper;
@@ -25,6 +26,7 @@ import com.zqu.pa.entity.exam.ChoiceExample;
 import com.zqu.pa.entity.exam.ExamInfo;
 import com.zqu.pa.entity.exam.ExamInfoCategoryExample;
 import com.zqu.pa.entity.exam.ExamInfoCategoryKey;
+import com.zqu.pa.entity.exam.ExamInfoReview;
 import com.zqu.pa.entity.exam.ExamPaper;
 import com.zqu.pa.entity.exam.ExamPaperExample;
 import com.zqu.pa.entity.exam.ExamScore;
@@ -79,6 +81,9 @@ public class ExamPaperServiceImpl implements ExamPaperService {
     @Autowired
     private QuestionExamCategoryMapper questionExamCategoryMapper;
     
+    @Autowired
+    private ExamInfoReviewMapper examInfoReviewMapper;
+    
     @Override
     public Paper getExamPaper(Integer examId) {
         
@@ -109,6 +114,13 @@ public class ExamPaperServiceImpl implements ExamPaperService {
         paper.setSingleQuestion(getQuestion(branchId, singleQuantity, type, listQuestionId));
         type = 1;
         paper.setMultipleQuestion(getQuestion(branchId, multipleQuantity, type, listQuestionId));
+        
+        ExamInfoReview examInfoReview = new ExamInfoReview();
+        examInfoReview = examInfoReviewMapper.selectByPrimaryKey(examId);
+        if(examInfoReview != null) {
+        	paper.setSingleScore(examInfoReview.getSingleScore());
+        	paper.setMultipleScore(examInfoReview.getMultipleScore());
+        }
         
         return paper;
     }

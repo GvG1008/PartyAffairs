@@ -38,7 +38,7 @@ import com.zqu.pa.vo.newsnotices.PublicityInfo;
 public class PublicityManageController {
 
     @Autowired
-    PublicityManageService publicityManageService;
+    private PublicityManageService publicityManageService;
     
     /**
      * 富文本框插入图片上传接口,返回访问图片路径
