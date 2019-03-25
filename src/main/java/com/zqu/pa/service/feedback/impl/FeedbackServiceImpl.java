@@ -97,7 +97,7 @@ public class FeedbackServiceImpl implements FeedbackService{
 	        //limit index,num  从第index+1条记录开始，num条记录
 	        if(page>=1){
 	        	 int index = (page-1)*num;
-	        	 pageOfFeedback.setList(feedbackMapper.getPageOfFeedbackListLimited(userId, index, totalPageNum));
+	        	 pageOfFeedback.setList(feedbackMapper.getPageOfFeedbackListLimited(userId, index, num));
 	        }
 		} catch (Exception e) {			
 			log.error("获取个人思想反馈列表失败", e);

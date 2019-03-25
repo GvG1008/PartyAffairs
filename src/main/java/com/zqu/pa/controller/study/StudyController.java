@@ -422,6 +422,7 @@ public class StudyController {
      * @param schedule
      */
     @RequestMapping(value = "video_record.do", method = RequestMethod.GET)
+    @ResponseBody
     public void videoRecord(String videoId,String schedule) {
         String userId = this.getUserid();
         int vid = Integer.parseInt(videoId);
