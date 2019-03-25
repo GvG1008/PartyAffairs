@@ -22,7 +22,8 @@
             <div class="headimg">
                 <div class="img">
                 <a class="camera" href="#" data-toggle="modal" data-target="#myModal">
-                <img src="../../admin-statics/images/workbench/pic.png" class="img-circle" id="finalImg" >
+                <img v-if="info.imgHead != null && info.imgHead != '' "  :src="info.imgHead" class="img-circle" id="finalImg" >
+                <img v-else  src="../../admin-statics/images/workbench/pic.png" class="img-circle" id="finalImg" >
                 <span class=" glyphicon glyphicon-camera"></span></a>
                 </div>
                 <span id="name">{{info.name}}</span>  

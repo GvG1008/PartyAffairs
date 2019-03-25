@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import com.zqu.pa.common.ServerResponse;
+import com.zqu.pa.entity.perinfo.UserPersonInfo;
 import com.zqu.pa.service.newsnotices.NewsService;
 import com.zqu.pa.service.newsnotices.NoticesService;
 import com.zqu.pa.vo.newsnotices.MenuList;
@@ -71,7 +73,13 @@ public class MenuListController {
     @ResponseBody
     @RequestMapping("/noticesMenu/party/{pageNum}/{num}")
     public ServerResponse<PageOfList> getPartyMenu(@PathVariable(value="pageNum") int page,@PathVariable(value="num") int num){
-        PageOfList info = new PageOfList();
+        //此处获取session里用户userId
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        if(userId==null) {
+        	return ServerResponse.createBySuccess("success", null);
+        }   
+    	
+    	PageOfList info = new PageOfList();
         
         //传入跳转的页数与当前显示的条数,page为页数，num为每页条数
         info = noticesService.getMenuInfo(page,num,1);

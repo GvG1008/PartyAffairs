@@ -214,7 +214,14 @@ public class PersonalController {
 
         //获取当前session里的userId
         String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
-        return userInfoService.updatePassword(userId,old_password,new_password);
+        int result = userInfoService.updatePassword(userId,old_password,new_password);
+        if (result == 0) {
+        	return ServerResponse.createByErrorMessage("密码输入失败");
+        }else if (result == 1) {
+        	return ServerResponse.createByErrorMessage("修改失败");
+        }else {
+        	return ServerResponse.createBySuccessMessage("修改成功");
+        }
     }
     
     /**

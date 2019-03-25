@@ -18,7 +18,15 @@
 					<td><span>姓名：</span></td>
 					<td><span>{{personinfo.name}}</span></td>
 					<td rowspan="5" class="head-img">
-						<img src="../statics/img/3.jpg" />
+						<img style="height: 160px;width: 160px;" :src="headimg" />
+						
+						<div id="xblock">
+							<a href="javascript:;" class="a-upload">
+							    <input type="file" name="updateheadimg" id="updateheadimg">选择头像
+							</a>
+							<button type="button" class="a-upload" @click="saveimg()">更换</button>
+						</div>
+							
 					</td>
 				</tr>
 				<tr>

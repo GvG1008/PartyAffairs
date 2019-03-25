@@ -108,6 +108,7 @@ var mien = new Vue({
 				url: "../statics/json/image.json", // 地址，就是json文件的请求路径
 				dataType: "json", // 数据类型可以为 text xml json script jsonp
 				success: function(result) { 
+					console.log(result)
 					self.image = result.image;
 				}			
 			});

@@ -150,8 +150,10 @@ public class ExamInfoServiceImpl implements ExamInfoService {
             //查出与登录管理员账号党支部相同的考试信息
             examExample.createCriteria().andExamIdEqualTo(examId).andBranchIdEqualTo(branchId);
             List<ExamInfo> temp = examInfoMapper.selectByExample(examExample);
-            if (temp == null || temp.size() == 0)
-                break;
+            if (temp == null || temp.size() == 0) {
+            	continue;
+            }
+                
             ExamInfo examInfo = temp.get(0);
             unreviewList.setExamId(examId);
             unreviewList.setExamTitle(examInfo.getExamTitle());

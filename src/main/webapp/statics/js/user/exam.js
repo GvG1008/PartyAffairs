@@ -13,6 +13,8 @@ var app = new Vue({
 		RadioCount : [],
 		CheckboxDatas : [],
 		CheckboxCount : [],
+		singleScore : [],
+		multipleScore : [],
 		LeftTime : [],
 		datas : [],
 		submit : 0
@@ -29,6 +31,8 @@ var app = new Vue({
 					self.RadioCount = result.data.singleQuantity;
 					self.CheckboxDatas = result.data.multipleQuestion;
 					self.CheckboxCount = result.data.multipleQuantity;
+					self.singleScore = result.data.singleScore;
+					self.multipleScore = result.data.multipleScore;
 					self.datas = result.data;
 					maxtime = result.data.examPeriod;
 					self.CountDownTime();
@@ -126,7 +130,7 @@ function submit1() {//提交试卷
 			//alert("答案正确");
 			app.datas.singleQuestion[t].correct = true;
 			//alert(app.datas.singleQuestion[t].correct);
-			score += 1;
+			score += app.singleScore;
 		}else{
 			//alert("答案错误");
 			app.datas.singleQuestion[t].correct = false;
@@ -147,7 +151,7 @@ function submit1() {//提交试卷
 		app.datas.multipleQuestion[t].userAnswer = answer;
 		var correctanswer = app.datas.multipleQuestion[t].answer;
 		if(answer.sort().toString() == correctanswer.sort().toString()){
-			score += 2;
+			score += app.multipleScore;
 			app.datas.multipleQuestion[t].correct = true;
 		}else{
 			app.datas.multipleQuestion[t].correct = false;
@@ -174,11 +178,12 @@ function submit1() {//提交试卷
 				}else{
 					if(result.data.topScore>=score){
 						alert("恭喜你！此次考试及格！\n本次考试成绩为："+score+"\n历史最高分数是："+result.data.topScore+"\n不高于历史最高分数，不计入成绩！");
+						updataExam();
 					}else{
 						alert("恭喜你！此次考试及格！\n本次考试成绩为："+score+"\n历史最高分数是："+result.data.topScore+"\n高于历史最高分数，计入成绩！");
+						updataExam();
 					}
 				}
-				updataExam();
 				clearInterval(timer);
 			}else{
 				alert(result.msg);

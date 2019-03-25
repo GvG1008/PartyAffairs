@@ -47,7 +47,7 @@
 			<aside class="dropdown-menu info" id="ainfo" style="display: none;">
 				<ul class="info-ul">
 					<li class="info-li"><a class="info-a" id="file" href="home.html?location=info">党员档案</a></li>
-					<li class="info-li"><a class="info-a" id="collection" href="home.html?location=coll">我的收藏</a></li>
+					<!--<li class="info-li"><a class="info-a" id="collection" href="home.html?location=coll">我的收藏</a></li>-->
 					<li class="info-li"><a class="info-a" id="feedback" href="home.html?location=fb">我要反馈</a></li>
 					<li class="info-li"><a class="info-a" id="report" href="home.html?location=rp">思想汇报</a></li>
 					<li class="info-li"><a class="info-a" id="myvote" href="home.html?location=myvote">我的投票</a></li>
@@ -85,7 +85,7 @@
         		<input class="content-input" type="password" id="oldpass" placeholder="旧密码*" /><br />
         		<input class="content-input" type="password" id="newpass" placeholder="新密码*" /><br />
         		<input class="content-input" type="password" id="repass" placeholder="确认密码*" /><br />
-        		<input type="button" class="content-button" id="change-btn" value="修改"/>
+        		<input type="button" class="content-button1" id="change-btn" @click="changepwd()" value="修改"/>
         		<input type="button" class="content-button" value="取消"/>
        	 	</aside>
         </div>
@@ -156,19 +156,19 @@
 			<ul class="party-ul">
 				<a class="party-a" id="signup" href="home.html?location=activity" target="_blank"><li class="party-li">活动报名</li></a>
 				<a class="party-a" id="album" href="photolist.html" target="_blank"><li class="party-li">活动相册</li></a>
-				<a class="party-a" id="development" href="#" target="_blank"><li class="party-li">支部发展</li></a>
-				<a class="party-a" id="forum" href="#" target="_blank"><li class="party-li">党员论坛</li></a>
+				<a class="party-a" id="development" href="404.html" target="_blank"><li class="party-li">支部发展</li></a>
+				<a class="party-a" id="forum" href="404.html" target="_blank"><li class="party-li">党员论坛</li></a>
 			</ul>
 		</aside>
 		<aside class="league" id="aleague" style="display: none;">
 			<ul class="league-ul">
-				<a class="league-a" id="g-style" href="#" target="_blank"><li class="league-li">团支部风采</li></a>
+				<a class="league-a" id="g-style" href="404.html" target="_blank"><li class="league-li">团支部风采</li></a>
 			</ul>
 		</aside>
 		<aside class="organ" id="aorgan" style="display: none;">
 			<ul class="organ-ul">
-				<a class="organ-a" id="c-architecture" href="#" target="_blank"><li class="organ-li">学生党组织架构</li></a>
-				<a class="organ-a" id="p-architecture" href="#" target="_blank"><li class="organ-li">专业学生党支部组织架构</li></a>
+				<a class="organ-a" id="c-architecture" href="404.html" target="_blank"><li class="organ-li">学生党组织架构</li></a>
+				<a class="organ-a" id="p-architecture" href="404.html" target="_blank"><li class="organ-li">专业学生党支部组织架构</li></a>
 			</ul>
 		</aside>
 		</div>

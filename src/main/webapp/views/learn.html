@@ -61,15 +61,15 @@
                     </li>               
                 </ul>
         		<div class="learn-page">
-        			<button @click="pageto(1)">首页</button>
-                    <button v-if="currentNum!=1" @click="pageto(currentNum-1)">上一页</button>
+        			<button class="btn btn-info" @click="pageto(1)">首页</button>
+                    <button class="btn btn-info" v-if="currentNum!=1" @click="pageto(currentNum-1)">上一页</button>
         			<p style="display: inline;">
         				<span id="nowpage">{{currentNum}}</span>/
         				<span id="pagenum">{{totalPage}}</span>
         			</p>
-        			<button v-if="currentNum!=totalPage" @click="pageto(currentNum+1)">下一页</button>
-                    <button @click="pageto(totalPage)">尾页</button>
-                    <button @click="pageto(pagetoNum)">转到</button>
+        			<button class="btn btn-info" v-if="currentNum!=totalPage" @click="pageto(currentNum+1)">下一页</button>
+                    <button class="btn btn-info" @click="pageto(totalPage)">尾页</button>
+                    <button class="btn btn-success" @click="pageto(pagetoNum)">转到</button>
                     <input type="text" id="aimspage" v-model="pagetoNum"/>
         		</div>
         	</div>

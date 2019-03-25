@@ -1,6 +1,8 @@
 package com.zqu.pa.vo.vote;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import com.zqu.pa.entity.vote.VoteInfo;
 
@@ -9,6 +11,8 @@ public class ResponseVoteSortChoiceResult {
     private VoteInfo voteInfo;
     
     private List<VoteChoice2> choice;
+    
+    private List<Map.Entry<Long,Long>> sortList;
 
     public VoteInfo getVoteInfo() {
         return voteInfo;
@@ -25,4 +29,14 @@ public class ResponseVoteSortChoiceResult {
     public void setChoice(List<VoteChoice2> choice) {
         this.choice = choice;
     }
+
+	public List<Map.Entry<Long,Long>> getSortList() {
+		return sortList;
+	}
+
+	public void setSortList(List<Map.Entry<Long,Long>> sortList) {
+		this.sortList = sortList;
+	}
+    
+    
 }

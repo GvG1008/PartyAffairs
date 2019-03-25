@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.zqu.pa.vo.perinfo.UserInfoAndHead;
 import com.zqu.pa.vo.userInfo.UserLoginInfo;
 
 public interface UserManageMapper {
@@ -30,4 +31,6 @@ public interface UserManageMapper {
     int updatePassword(@Param("userId")String userId, @Param("oldPassword")String old_password,  @Param("newPassword")String new_password);
     //判断输入的密码是否正确
     int checkPassword(@Param("userId")String userId, @Param("password")String password);
+    
+    UserInfoAndHead getUserPartyInfoAndHeadById(@Param("userId")String userId);
 }

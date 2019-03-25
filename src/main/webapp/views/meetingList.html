@@ -48,17 +48,17 @@
                     <div id="pagination"></div>
                 </div>
             </div>
-        	<div class="list-footer">
+        	<div class="list-footer" style="margin-top: 20px;margin-left: 70px;">
         		<div class="page">
-        			<button @click="pageto(1)">首页</button>
-        			<button v-if="pagenow!=1" @click="pageto(pagenow-1)">上一页</button>
+        			<button class="btn btn-info" @click="pageto(1)">首页</button>
+        			<button class="btn btn-info" v-if="pagenow!=1" @click="pageto(pagenow-1)">上一页</button>
         			<p style="display: inline;">
         				<span id="nowpage">{{pagenow}}</span>/
         				<span id="pagenum">{{totalpage}}</span>
         			</p>
-        			<button v-if="pagenow!=totalpage" @click="pageto(pagenow+1)">下一页</button>
-        			<button @click="pageto(totalpage)">尾页</button>
-        			<button @click="pageto(pagetoNum)">转到</button>
+        			<button class="btn btn-info" v-if="pagenow!=totalpage" @click="pageto(pagenow+1)">下一页</button>
+        			<button class="btn btn-info" @click="pageto(totalpage)">尾页</button>
+        			<button class="btn btn-success" @click="pageto(pagetoNum)">转到</button>
         			<input type="text" id="aimspage" v-model="pagetoNum"/>
         		</div>
         	</div>

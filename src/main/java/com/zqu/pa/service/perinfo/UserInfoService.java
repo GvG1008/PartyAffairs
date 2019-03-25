@@ -10,6 +10,7 @@ import com.zqu.pa.vo.perinfo.Branch;
 import com.zqu.pa.vo.perinfo.GradeClassSortList;
 import com.zqu.pa.vo.perinfo.Role;
 import com.zqu.pa.vo.perinfo.UserCheckList;
+import com.zqu.pa.vo.perinfo.UserInfoAndHead;
 import com.zqu.pa.vo.perinfo.UserList;
 import com.zqu.pa.vo.perinfo.UserListInfo;
 
@@ -19,7 +20,7 @@ public interface UserInfoService {
     UserPersonInfo getUserPersonInfo(String userId);
     
     //根据id搜索该用户党员信息
-    UserPartyInfo getUserPartyInfo(String userId);
+    UserInfoAndHead getUserPartyInfo(String userId);
     
     //用户根据userId来修改个人信息
     int updateByUserPerson(UserPersonInfo info);
@@ -59,5 +60,5 @@ public interface UserInfoService {
     int updateImgHead(String fullPath, String userId);
 
     //修改密码
-    ServerResponse updatePassword(String userId, String old_password, String new_password);
+    int updatePassword(String userId, String old_password, String new_password);
 }

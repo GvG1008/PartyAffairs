@@ -219,8 +219,8 @@ var head = new Vue({
 	el : '#head',
 	data :{
 		"user":[],
-		"username":123,
-		"password":123,
+		"username":null,
+		"password":null,
 		"permission":0,
 		"realName":""
 	},
@@ -229,7 +229,10 @@ var head = new Vue({
 			doLogin();
 		},
 		search(){
-			alert("hhh");
+			alert("待开发");
+		},
+		changepwd:function(){
+			changepwd();
 		}
 	},
 	created: function(){
@@ -275,4 +278,34 @@ function doLogin(){
 			}
 		}
 	});
+}
+
+function changepwd(){
+	var old_password = $("#oldpass").val();
+	var newpass = $("#newpass").val();
+	var repass = $("#repass").val();
+	if(newpass == repass){
+		$.ajax({
+			type:"post",
+			url:"../userInfo/update_mine_password",
+			data:{
+				old_password:old_password,
+				new_password:repass
+			},
+			async:true,
+			success:function(res){
+				console.log(res)
+				if(res.status == 1){
+					alert(res.msg)
+				}else if(res.status == 0){
+					$("#laside").fadeOut(500);
+					$("#caside").fadeOut(500);
+					alert("修改成功，请重新登录")
+					location.href="../doLogout"
+				}
+			}
+		});
+	}else{
+		alert("请确认新密码")
+	}
 }
