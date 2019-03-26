@@ -161,7 +161,7 @@ public class VoteResultServiceImpl implements VoteResultService {
             vc2.setChoiceId(vc.getChoiceId());
             vc2.setChoiceContent(vc.getChoiceContent());
             vc2.setStatus(vc.getStatus());
-            
+            // 投票选项总分
             Long tatalScore = 0L;
             
             for(int i=0;i<choice.size();i++) {
@@ -171,11 +171,9 @@ public class VoteResultServiceImpl implements VoteResultService {
             	Long score = times * (choice.size()-i);
             	tatalScore += score;
             }
-            sortResult.put(vc.getChoiceId(), tatalScore);           
-            
+            sortResult.put(vc.getChoiceId(), tatalScore);                     
             choice2.add(vc2);
-        }
-        
+        }       
         //这里将map.entrySet()转换成list
         List<Map.Entry<Long,Long>> list = new ArrayList<Map.Entry<Long,Long>>(sortResult.entrySet());
         //然后通过比较器来实现排序

@@ -198,7 +198,7 @@ public class QuestionBankServiceImpl implements QuestionBankService {
             q.setCreateId(userId);
             q.setQuestionContent(qc.getQuestionContent());
             q.setQuestionType(type);
-            q.setReview(0);
+            q.setReview(1);
             questionBankMapper.inesertQuestion(q);
             //插入此题分类
             QuestionExamCategoryKey qeck = new QuestionExamCategoryKey();
@@ -275,13 +275,15 @@ public class QuestionBankServiceImpl implements QuestionBankService {
             questionID = listQuestionBank.get(i).getQuestionId();
             List<String> listChoice = new ArrayList<String>();
             List<Integer> listAnswer = new ArrayList<Integer>();
-            for (int j = 0; j < choice.size(); j++) {              
-                if (questionID == choice.get(j).getQuestionId())
-                    listChoice.add(choice.get(j).getChoiceContent());
+            for (int j = 0; j < choice.size(); j++) {     
+                if (questionID.equals(choice.get(j).getQuestionId())) {                	
+                	listChoice.add(choice.get(j).getChoiceContent());
+                }                    
             }
-            for (int k = 0; k < answer.size(); k++) {               
-                if (questionID == answer.get(k).getQuestionId())
-                    listAnswer.add(answer.get(k).getChoice());
+            for (int k = 0; k < answer.size(); k++) {    
+                if (questionID.equals(answer.get(k).getQuestionId())) {                	
+                	listAnswer.add(answer.get(k).getChoice());
+                }                   
             }
             Question q = new Question();
             q.setQuestionId(questionID);

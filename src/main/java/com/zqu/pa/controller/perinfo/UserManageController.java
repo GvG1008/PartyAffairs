@@ -47,7 +47,7 @@ import com.zqu.pa.vo.userInfo.UserBasicInfo;
 public class UserManageController {
     
     @Autowired
-    UserInfoService userInfoService;
+    private UserInfoService userInfoService;
     
     /**
      * 根据ID返回用户个人信息
@@ -58,15 +58,18 @@ public class UserManageController {
     @RequestMapping(value="/PersonInfo/{userId}", method=RequestMethod.GET)
     public ServerResponse<UserInfoAndHead> getDesignatedPersonInfo(@PathVariable String userId){
         
-        if(userId==null)
-            return ServerResponse.createByErrorMessage("获取指定用户个人信息失败");
+        if(userId==null) {
+        	return ServerResponse.createByErrorMessage("获取指定用户个人信息失败");
+        }       
         
         UserInfoAndHead info = new UserInfoAndHead();
         //通过id获取个人信息
         info = userInfoService.getUserPartyInfo(userId);
 
-        if(info==null)
-            return ServerResponse.createByErrorMessage("获取指定用户个人信息失败");
+        if(info==null) {
+        	return ServerResponse.createByErrorMessage("获取指定用户个人信息失败");
+        }
+            
         return ServerResponse.createBySuccess("获取指定用户个人信息成功", info);
     }
     
@@ -79,15 +82,18 @@ public class UserManageController {
     @RequestMapping(value="/PartyInfo/{userId}", method=RequestMethod.GET)
     public ServerResponse<UserPartyInfo> getDesignatedPartyInfo(@PathVariable(value="userId") String userId){
         
-        if(userId==null)
-            return ServerResponse.createByErrorMessage("获取指定用户个人信息失败");
+        if(userId==null) {
+        	 return ServerResponse.createByErrorMessage("获取指定用户个人信息失败");
+        }        
         
         UserPartyInfo info = new UserPartyInfo();
         //通过id获取党员信息
         info = userInfoService.getUserPartyInfo(userId);
 
-        if(info==null)
-            return ServerResponse.createByErrorMessage("获取指定用户个人信息失败");
+        if(info==null) {
+        	return ServerResponse.createByErrorMessage("获取指定用户个人信息失败");
+        }
+            
         return ServerResponse.createBySuccess("获取指定用户个人信息成功", info);
     }
     
@@ -100,12 +106,14 @@ public class UserManageController {
     @RequestMapping(value="/update/personInfo", method=RequestMethod.POST)
     public ServerResponse updatePersonInfo(UserPersonInfo info) {
         
-        if(info.getUserId()==null)
-            return ServerResponse.createByErrorMessage("操作失败");
-
+        if(info.getUserId()==null) {
+        	return ServerResponse.createByErrorMessage("操作失败");
+        }
+            
         //修改信息
-        if(userInfoService.updateByUserPerson(info)==0)
-            return ServerResponse.createByErrorMessage("修改个人信息失败");
+        if(userInfoService.updateByUserPerson(info)==0) {
+        	 return ServerResponse.createByErrorMessage("修改个人信息失败");
+        }       
         
         return ServerResponse.createBySuccessMessage("修改成功");
     }
@@ -119,19 +127,20 @@ public class UserManageController {
     @RequestMapping(value="/update/partyInfo", method=RequestMethod.POST)
     public ServerResponse updatePartyInfo(@RequestBody UserPartyInfo info) {
 
-        if(info.getUserId()==null)
-            return ServerResponse.createByErrorMessage("操作失败");
-
+        if(info.getUserId()==null) {
+        	 return ServerResponse.createByErrorMessage("操作失败");
+        }
+           
         //修改信息
-        if(userInfoService.updateByUserParty(info)==0)
-            return ServerResponse.createByErrorMessage("修改党员信息失败");
-
+        if(userInfoService.updateByUserParty(info)==0) {
+        	 return ServerResponse.createByErrorMessage("修改党员信息失败");
+        }
+           
         return ServerResponse.createBySuccessMessage("修改成功");
     }
     
     /**
-     * 获取党员档案列表
-     * 根据管理员所属党支部//党支部id为0表示所有
+     * 获取管理员所属党支部下的党员档案列表 (党支部id为0表示所有)
      * @return
      */
     @ResponseBody
@@ -140,15 +149,18 @@ public class UserManageController {
         
         //获取当前session里的当前用户所属党支部
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
-        if(basicInfo==null)
-            return ServerResponse.createByErrorMessage("无法获取当前session信息");
-        
+        if(basicInfo==null) {
+        	return ServerResponse.createByErrorMessage("无法获取当前session信息");
+        }
+                
         List<UserList> listInfo = null;
         //第一个参数党支部id，第四个参数1表示已审核
         listInfo = userInfoService.getUserList(basicInfo.getBranchId(),1);
         
-        if(listInfo==null)
-            return ServerResponse.createByErrorMessage("获取列表信息失败！");
+        if(listInfo==null) {
+        	 return ServerResponse.createByErrorMessage("获取列表信息失败！");
+        }
+         
         return ServerResponse.createBySuccess(listInfo);
     }
     
@@ -164,14 +176,15 @@ public class UserManageController {
         //第一个参数0表示所有党支部，第四个参数1表示已审核
         listInfo = userInfoService.getUserList(0,1);
         
-        if(listInfo==null)
-            return ServerResponse.createByErrorMessage("获取列表信息失败！");
+        if(listInfo==null) {
+        	return ServerResponse.createByErrorMessage("获取列表信息失败！");
+        }
+            
         return ServerResponse.createBySuccess(listInfo);
     }
     
     /**
-     * 获取待审核党员档案列表
-     * 根据管理员所属党支部//党支部id为0表示所有
+     * 获取管理员所属党支部下的待审核党员档案列表（党支部id为0表示所有）
      * @return
      */
     @ResponseBody
@@ -180,15 +193,18 @@ public class UserManageController {
         
         //获取当前session里的当前用户所属党支部
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
-        if(basicInfo==null)
-            return ServerResponse.createByErrorMessage("无法获取当前session信息");
-        
+        if(basicInfo==null) {
+        	 return ServerResponse.createByErrorMessage("无法获取当前session信息");        
+        }
+           
         List<UserCheckList> listInfo = null;
         //参数党支部id
         listInfo = userInfoService.getUserCheckList(basicInfo.getBranchId());
 
-        if(listInfo==null)
-            return ServerResponse.createByErrorMessage("获取列表信息失败！");
+        if(listInfo==null) {
+        	return ServerResponse.createByErrorMessage("获取列表信息失败！");
+        }
+            
         return ServerResponse.createBySuccess(listInfo);
     }
     
@@ -204,8 +220,10 @@ public class UserManageController {
         //参数0表示所有党支部
         listInfo = userInfoService.getUserCheckList(0);
 
-        if(listInfo==null)
-            return ServerResponse.createByErrorMessage("获取列表信息失败！");
+        if(listInfo==null) {
+        	return ServerResponse.createByErrorMessage("获取列表信息失败！");
+        }
+            
         return ServerResponse.createBySuccess(listInfo);
     }
     
@@ -218,17 +236,22 @@ public class UserManageController {
     @ResponseBody
     @RequestMapping("/batchCheckUserByBranch/{userId}")
     public ServerResponse checkUserByBatch(@PathVariable(value="userId") String userId){
-        if(userId==null)
-            return ServerResponse.createByErrorMessage("账号为空");
+        if(userId==null) {
+        	return ServerResponse.createByErrorMessage("账号为空");
+        }
+            
         //获取当前session里的当前用户所属党支部
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
-        if(basicInfo==null)
-            return ServerResponse.createByErrorMessage("无法获取当前session信息");
-
+        if(basicInfo==null) {
+        	return ServerResponse.createByErrorMessage("无法获取当前session信息");
+        }
+            
         //除了branchId==0外,只能审核和自己相同的党支部人员
         String Msg = userInfoService.checkUserByBatch(basicInfo.getBranchId(),userId);
-        if(Msg==null||!Msg.equals("审核成功!"))
-            return ServerResponse.createByErrorMessage(Msg);
+        if(Msg==null||!Msg.equals("审核成功!")) {
+        	return ServerResponse.createByErrorMessage(Msg);
+        }
+            
         return ServerResponse.createBySuccessMessage(Msg);
     }
 
@@ -241,17 +264,22 @@ public class UserManageController {
     @ResponseBody
     @RequestMapping("/deleteUserByBranch/{userId}")
     public ServerResponse deleteUserByBranch(@PathVariable(value="userId") String userId) {
-        if(userId==null)
-            return ServerResponse.createByErrorMessage("账号为空");
+        if(userId==null) {
+        	 return ServerResponse.createByErrorMessage("账号为空");
+        }
+           
         //获取当前session里的当前用户所属党支部
         UserBasicInfo basicInfo = (UserBasicInfo)SecurityUtils.getSubject().getSession().getAttribute("basicInfo");
-        if(basicInfo==null)
-            return ServerResponse.createByErrorMessage("无法获取当前session信息");
+        if(basicInfo==null) {
+        	return ServerResponse.createByErrorMessage("无法获取当前session信息");
+        }
         
         //除了branchId==0外,只能删除和自己相同的党支部人员
         String Msg = userInfoService.deleteUser(basicInfo.getBranchId(),userId);
-        if(Msg==null||!Msg.equals("删除成功!"))
-            return ServerResponse.createByErrorMessage(Msg);
+        if(Msg==null||!Msg.equals("删除成功!")) {
+        	return ServerResponse.createByErrorMessage(Msg);
+        }
+            
         return ServerResponse.createBySuccessMessage(Msg);
     }
     
@@ -270,10 +298,14 @@ public class UserManageController {
         }catch (Exception e) {
             return ServerResponse.createByErrorMessage("创建用户出错!");
         }
-        if(Msg==null)
-            return ServerResponse.createByErrorMessage("创建用户失败!");
-        if(!Msg.equals("创建用户成功!"))
-            return ServerResponse.createByErrorMessage(Msg);
+        if(Msg==null) {
+        	 return ServerResponse.createByErrorMessage("创建用户失败!");
+        }
+           
+        if(!Msg.equals("创建用户成功!")) {
+        	return ServerResponse.createByErrorMessage(Msg);
+        }
+            
         return ServerResponse.createBySuccessMessage(Msg);
     }
     

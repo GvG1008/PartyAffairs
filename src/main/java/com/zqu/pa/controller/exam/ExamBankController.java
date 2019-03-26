@@ -58,10 +58,12 @@ public class ExamBankController {
             e.printStackTrace();
             return ServerResponse.createByError();
         }
-        if (i == 1)
-            return ServerResponse.createBySuccess();
-        else
-            return ServerResponse.createByError();                 
+        if (i == 1) {
+        	return ServerResponse.createBySuccess();
+        }            
+        else {
+        	return ServerResponse.createByError();  
+        }                         
     }
     
     /**

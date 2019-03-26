@@ -446,7 +446,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public ServerResponse updatePassword(String userId, String old_password, String new_password) {
+    public int updatePassword(String userId, String old_password, String new_password) {
 
         //MD5加密：盐为userId
         //盐
@@ -456,11 +456,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 
         int num = userManageDao.checkPassword(userId, old_password);
         if(num == 0) {
-            return ServerResponse.createByErrorMessage("密码输入失败");
+            return 0;
         }
         boolean result = userManageDao.updatePassword(userId,old_password,new_password)>0;
-        if(!result)
-            return ServerResponse.createByErrorMessage("修改失败");
-        return ServerResponse.createBySuccessMessage("修改成功");
+        if(!result){
+        	return 1;
+        }           
+        return 2;
     }
 }
