@@ -173,12 +173,14 @@ public class ExamPaperServiceImpl implements ExamPaperService {
             List<String> listChoice = new ArrayList<String>();
             List<Integer> listAnswer = new ArrayList<Integer>();
             for (int j = 0; j < choice.size(); j++) {              
-                if (questionID == choice.get(j).getQuestionId())
-                    listChoice.add(choice.get(j).getChoiceContent());
+                if (questionID.equals(choice.get(j).getQuestionId())) {
+                	listChoice.add(choice.get(j).getChoiceContent());
+                }                    
             }
             for (int k = 0; k < answer.size(); k++) {               
-                if (questionID == answer.get(k).getQuestionId())
-                    listAnswer.add(answer.get(k).getChoice());
+                if (questionID.equals(answer.get(k).getQuestionId())) {
+                	listAnswer.add(answer.get(k).getChoice());
+                }                    
             }
             Question q = new Question();
             q.setQuestionId(questionID);
