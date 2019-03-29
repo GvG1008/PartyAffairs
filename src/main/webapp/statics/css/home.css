@@ -183,7 +183,7 @@ li{
 .frame{
 	position: relative;
 	top: 70px;
-	width: 1210px;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -400,6 +400,8 @@ ul.nav-ul {
     width: 80%;
     margin: 0 auto;
     height: 68px;
+    display:flex;
+    justify-content: center;
 }
 .nav-li:first-child {
     border-left: 1px solid #ccc;
@@ -477,7 +479,7 @@ ul.nav-ul {
 
 @media screen and (min-width:1400px){
 	div#frame {
-	   width:1580px;
+	   width:100%;
 	}
 	div#myCarousel {
     width: 65%;
