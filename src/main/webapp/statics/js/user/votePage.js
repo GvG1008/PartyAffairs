@@ -170,7 +170,7 @@ function abandon(id){
 			//console.log(res)
 			if(res.status == 0){
 				alert("提交完毕")
-				location.href="myVote.html"
+				location.href="home.html?location=myvote"
 			}
 		}
 	});
@@ -187,7 +187,7 @@ function sure(id,choice){
 			//console.log(res)
 			if(res.status == 0){
 				alert("提交完毕")
-				location.href="myVote.html"
+				location.href="home.html?location=myvote"
 			}
 		}
 	});
