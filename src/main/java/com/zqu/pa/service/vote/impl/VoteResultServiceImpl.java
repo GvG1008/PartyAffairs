@@ -154,7 +154,7 @@ public class VoteResultServiceImpl implements VoteResultService {
         List<VoteChoice> choice = rvi.getChoice();
         List<VoteChoice2> choice2 = new ArrayList<>();
         // 投票得分排序
-        Map<Long,Long> sortResult = new HashMap<Long,Long>();
+        Map<String,Long> sortResult = new HashMap<String,Long>();
         for (VoteChoice vc : choice) {
             VoteChoice2 vc2 = new VoteChoice2();           
             vc2.setVoteId(vc.getVoteId());
@@ -171,16 +171,16 @@ public class VoteResultServiceImpl implements VoteResultService {
             	Long score = times * (choice.size()-i);
             	tatalScore += score;
             }
-            sortResult.put(vc.getChoiceId(), tatalScore);                     
+            sortResult.put(vc.getChoiceContent(), tatalScore);                     
             choice2.add(vc2);
         }       
         //这里将map.entrySet()转换成list
-        List<Map.Entry<Long,Long>> list = new ArrayList<Map.Entry<Long,Long>>(sortResult.entrySet());
+        List<Map.Entry<String,Long>> list = new ArrayList<Map.Entry<String,Long>>(sortResult.entrySet());
         //然后通过比较器来实现排序
-        Collections.sort(list,new Comparator<Map.Entry<Long,Long>>() {
+        Collections.sort(list,new Comparator<Map.Entry<String,Long>>() {
             //升序排序
-            public int compare(Entry<Long, Long> o1,
-                    Entry<Long, Long> o2) {
+            public int compare(Entry<String, Long> o1,
+                    Entry<String, Long> o2) {
                 return o2.getValue().compareTo(o1.getValue());
             }
             

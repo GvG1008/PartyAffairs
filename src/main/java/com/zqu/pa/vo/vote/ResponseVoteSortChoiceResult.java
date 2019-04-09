@@ -12,7 +12,7 @@ public class ResponseVoteSortChoiceResult {
     
     private List<VoteChoice2> choice;
     
-    private List<Map.Entry<Long,Long>> sortList;
+    private List<Map.Entry<String,Long>> sortList;
 
     public VoteInfo getVoteInfo() {
         return voteInfo;
@@ -30,11 +30,11 @@ public class ResponseVoteSortChoiceResult {
         this.choice = choice;
     }
 
-	public List<Map.Entry<Long,Long>> getSortList() {
+	public List<Map.Entry<String,Long>> getSortList() {
 		return sortList;
 	}
 
-	public void setSortList(List<Map.Entry<Long,Long>> sortList) {
+	public void setSortList(List<Map.Entry<String,Long>> sortList) {
 		this.sortList = sortList;
 	}
     

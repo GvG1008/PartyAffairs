@@ -120,7 +120,7 @@ public class PublicityManageController {
         
         String Msg;
         try {
-            Msg = publicityManageService.InsertNews(news);
+            Msg = publicityManageService.insertNews(news);
             
         }catch (Exception e) {
             return ServerResponse.createByErrorMessage("添加新闻失败!");
@@ -167,7 +167,7 @@ public class PublicityManageController {
         try {
             //存储公示的类型为公共公示
             notices.setType(0);
-            Msg = publicityManageService.InsertNotices(notices);
+            Msg = publicityManageService.insertNotices(notices);
             
         }catch (Exception e) {
             return ServerResponse.createByErrorMessage("添加公示失败!");
@@ -214,7 +214,7 @@ public class PublicityManageController {
         try {
             //存储公示的类型为党内公示
             notices.setType(1);
-            Msg = publicityManageService.InsertNotices(notices);
+            Msg = publicityManageService.insertNotices(notices);
             
         }catch (Exception e) {
             return ServerResponse.createByErrorMessage("添加公示失败!");
