@@ -14,7 +14,7 @@
 			<a href="javascript:history.go(-1)" style="margin-left: 120px;font-size: 30px;">返回</a>
 		</div>
 		<div id="app" style="display: flex;justify-content:center;">
-			<div id="" v-if="info.type!=2">
+			<div>
 				<div>
 					<h1 style="display: flex;justify-content:center;">{{info.title}}</h1>
 					<h4 style="display: flex;justify-content:center;">{{info.description}}</h4>
@@ -22,11 +22,7 @@
 				<div id="main" style="width: 600px;height:400px;">
 				</div>
 			</div>
-			<div v-if="info.type == 2">
-				<div style="display: flex;justify-content:center;padding-top: 100px;">
-					<img src="../../admin-statics/images/workbench/待开发.png" />
-				</div>
-			</div>
+			
 		</div>
 		<script type="text/javascript" src="../../admin-statics/js/lib/jquery/1.9.1/jquery.js"></script>
 		<script type="text/javascript" src="../../statics/js/vue.js"></script>

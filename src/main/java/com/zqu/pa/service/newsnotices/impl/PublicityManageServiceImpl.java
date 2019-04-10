@@ -29,7 +29,7 @@ public class PublicityManageServiceImpl implements PublicityManageService {
     PublicityManageMapper publicityManageDao;
 
     @Override
-    public String InsertNews(News news) {
+    public String insertNews(News news) {
         
         //获取当前用户userId
         String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
@@ -51,7 +51,7 @@ public class PublicityManageServiceImpl implements PublicityManageService {
     }
 
     @Override
-    public String InsertNotices(Notices notices) {
+    public String insertNotices(Notices notices) {
         
         //获取当前用户userId
         String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");

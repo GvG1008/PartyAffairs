@@ -10,6 +10,16 @@ public class VoteChoice2 {
 
     private Integer status;
     
+    private Long score;
+    
+    public Long getScore() {
+        return score;
+    }
+
+    public void setScore(Long score) {
+        this.score = score;
+    }
+
     public Long getChoiceId() {
         return choiceId;
     }

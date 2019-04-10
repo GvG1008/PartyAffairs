@@ -27,13 +27,15 @@ var app = new Vue({
 			url:Url,
 			async:true,
 			success:function(res){
+				console.log(res)
 				if(res.status == 0){
 					app.info = res.data.voteInfo;
 					app.choice = res.data.choice;
-					if(app.info.type != 2)
+					if(app.info.type != 2){
 						showTheResult(app.choice);
+					}
 						else if(app.info.type == 2){
-							showanotherResult(app.choice)
+							showanotherResult(app.choice);
 						}
 				}
 			}
@@ -42,6 +44,7 @@ var app = new Vue({
 })
 
 function showTheResult(choice){
+	//console.log(choice)
 	var myChart = echarts.init(document.getElementById('main'));
 	var xdata = new Array();
 	var ydata = new Array();
@@ -67,5 +70,27 @@ function showTheResult(choice){
 }
 
 function showanotherResult(choice){
-	alert("排序投票统计待开发")
+	console.log(choice)
+	var myChart = echarts.init(document.getElementById('main'));
+	var xdata = new Array();
+	var ydata = new Array();
+	for(var i = 0; i <choice.length; i++){
+		xdata.push(choice[i].choiceContent);
+		ydata.push(parseInt(choice[i].score));
+	}
+	
+	option = {
+		xAxis: {
+			type: 'category',
+			data: xdata
+		},
+		yAxis: {
+			type: 'value'
+		},
+		series: [{
+			data: ydata,
+			type: 'bar'
+		}]
+	};
+	myChart.setOption(option);
 }

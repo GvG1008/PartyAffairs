@@ -9,10 +9,10 @@ import com.zqu.pa.vo.newsnotices.PublicityInfo;
 public interface PublicityManageService {
 
     //添加未审核的新闻,返回结果消息
-    String InsertNews(News news);
+    String insertNews(News news);
 
     //添加未审核的公示，返回结果信息
-    String InsertNotices(Notices notices);
+    String insertNotices(Notices notices);
 
     //返回全部新闻的列表信息，包括审核未审核
     List<PublicityInfo> getNewsList();
