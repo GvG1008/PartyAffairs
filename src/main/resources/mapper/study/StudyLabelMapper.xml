@@ -19,7 +19,7 @@
     where label_id = #{labelId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultType="com.zqu.pa.entity.study.StudyLabel">
-    select * from study_label order by label_id order by createtime desc
+    select * from study_label order by label_id
   </select>
   <select id="selectByDocumentId" resultType="com.zqu.pa.entity.study.StudyLabel" parameterType="java.lang.Integer">
     select * from study_label 
