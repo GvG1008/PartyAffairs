@@ -54,7 +54,7 @@
     where file_path = #{filePath,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultType="com.zqu.pa.entity.study.StudyDocument">
-    select * from study_document order by document_id
+    select * from study_document order by document_id order by createtime desc
   </select>
   <select id="getUserNameByUserId" resultType="string" parameterType="string">
     select `name` from user_party_info where user_id = #{userId,jdbcType=VARCHAR}
