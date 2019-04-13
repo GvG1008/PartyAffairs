@@ -3,19 +3,28 @@
 	"branch":[
 		{
 			"id":1,
-			"BranchName":"计算机科学与技术学生党支部"
+			"BranchName":"软件工程专业党支部"
 		},
 		{
 			"id":2,
-			"BranchName":"网络工程学生党支部"
+			"BranchName":"计算机科学与技术专业党支部"
 		},
 		{
 			"id":3,
-			"BranchName":"软件工程学生党支部"
+			"BranchName":"网络工程专业党支部"
 		},
 		{
 			"id":4,
-			"BranchName":"物联网学生党支部"
+			"BranchName":"物联网工程专业党支部"
+		},
+		{
+			"id":5,
+			"BranchName":"数据科学与大数据技术专业党支部"
+		}
+		,
+		{
+			"id":6,
+			"BranchName":"无所属党支部"
 		}
 	]
 }

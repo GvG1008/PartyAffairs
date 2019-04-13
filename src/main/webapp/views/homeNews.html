@@ -19,7 +19,7 @@
 				<div class="carousel-inner" id="FocusNews">
 					<div v-for="(r,index) in news" :class="generateClass(index)">
 						<a :href="'home.html?location=djyw&id='+r.id" target="_blank">
-							<img class="car-img" :src="r.coverpath">
+							<img style="width:100%;height:100%" class="car-img" :src="r.coverpath">
 							<div class="carousel-caption">{{r.title}}</div>
 						</a>
 					</div>
@@ -125,7 +125,7 @@
 					</p>
 				</div>
 				<div class="style-list" id="branch">
-					<p v-for="r in branch" @click="MienTo(r.id)">{{r.BranchName}}</p>
+					<p v-for="r in branch" v-if="r.id!=6" @click="MienTo(r.id)">{{r.BranchName}}</p>
 				</div>
 			</div>
 	

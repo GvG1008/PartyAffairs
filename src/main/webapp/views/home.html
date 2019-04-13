@@ -6,6 +6,10 @@
         <link rel="stylesheet" href="../statics/css/bootstrap.min.css" />
         <link rel="stylesheet" href="//at.alicdn.com/t/font_878977_gcku1jaymmm.css"/>
         <link rel="stylesheet" href="../statics/css/home.css" />
+        <script type="text/javascript" src="../statics/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="../statics/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="../statics/js/vue.js" ></script>
+		<script type="text/javascript" src="../statics/js/user/mousemove.js"></script>
 	</head>
 	<body>
 	   <div  id="head">
@@ -28,9 +32,9 @@
                     </ul>
 					<ul class="user-ul"   v-else>
 						<span class="user-a">欢迎，{{user.realName}}</span>
-						<li class="user-li"><span class="user-a" id="info">个人信息<em>▼</em></span></li>
-						<li class="user-li" v-if="permission != 0"><span class="user-a" id="manager">
-                            管理端<em>▼</em></span></li>
+						<li class="user-li"  onmouseover="showInfo()"><span class="user-a" id="info">个人信息</span></li>
+						<li class="user-li" v-if="permission != 0"  onmouseover="showManager()"><span class="user-a" id="manager">
+                            管理端</span></li>
 						<!-- 本版本“消息”功能暂不实现 -->
 						<li class="user-li" style="display: none">
 							<span class="user-a" id="message">消息</span>
@@ -44,7 +48,7 @@
                 </div>
             </div>
 
-			<aside class="dropdown-menu info" id="ainfo" style="display: none;">
+			<aside class="dropdown-menu info" id="ainfo" style="display: none;" onmouseout="hideInfo()" onmouseover="showInfo()">
 				<ul class="info-ul">
 					<li class="info-li"><a class="info-a" id="file" href="home.html?location=info">党员档案</a></li>
 					<!--<li class="info-li"><a class="info-a" id="collection" href="home.html?location=coll">我的收藏</a></li>-->
@@ -57,7 +61,7 @@
 				</ul>
 			</aside>
 
-			<aside class="dropdown-menu manager" id="amanager" style="display: none;">
+			<aside class="dropdown-menu manager" id="amanager" style="display: none;" onmouseout="hideManager()" onmouseover="showManager()">
 				<ul class="info-ul">
 					<li class="info-li" >
 						<a class="info-a" href="../admin-view/index.html">工作台</a>
@@ -184,10 +188,7 @@
 		
 		
 		<!--脚本-->
-
-		<script type="text/javascript" src="../statics/js/jquery-3.3.1.min.js" ></script>
-		<script type="text/javascript" src="../statics/js/bootstrap.min.js" ></script>
-		<script type="text/javascript" src="../statics/js/vue.js" ></script>
-		<script type="text/javascript" src="../statics/js/user/home.js" ></script>
+	<script type="text/javascript" src="../statics/js/user/home.js" ></script>
+		
 	</body>
 </html>

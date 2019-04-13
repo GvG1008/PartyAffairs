@@ -31,6 +31,7 @@ a{
 	background-color: rgba(0,0,0,0.7);
 	position: absolute;
 	z-index: 1001;
+	position: fixed;
 }
 
 ul{
@@ -423,15 +424,7 @@ ul.nav-ul {
     top: 365px;
     width: 11.5%;
 }
-.info{
-	 position: relative;
-	 top:0;
-}
 
-.manager{
-	 position: relative;
-	 top:0;
-}
 
 /*首页头部*/
 .form_search {
