@@ -147,8 +147,13 @@ public class ExamInfoServiceImpl implements ExamInfoService {
             Integer examId = e.getExamId();
             //考试基本信息
             ExamInfoExample examExample = new ExamInfoExample();
-            //查出与登录管理员账号党支部相同的考试信息
-            examExample.createCriteria().andExamIdEqualTo(examId).andBranchIdEqualTo(branchId);
+            if (branchId != 0) {
+              //查出与登录管理员账号党支部相同的考试信息
+                examExample.createCriteria().andExamIdEqualTo(examId).andBranchIdEqualTo(branchId);
+            }else {
+                examExample.createCriteria().andExamIdEqualTo(examId);
+            }
+            
             List<ExamInfo> temp = examInfoMapper.selectByExample(examExample);
             if (temp == null || temp.size() == 0) {
             	continue;
