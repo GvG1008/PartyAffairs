@@ -151,9 +151,10 @@ public class VoteResultServiceImpl implements VoteResultService {
         if (rvi.getVoteInfo().getType() != 2) {
             return ServerResponse.createByErrorMessage("投票类型非排序");
         }
+        
         List<VoteChoice> choice = rvi.getChoice();
+        // 排序投票结果
         List<VoteChoice2> choice2 = new ArrayList<>();
-        // 投票得分排序
 
         for (VoteChoice vc : choice) {
             VoteChoice2 vc2 = new VoteChoice2();           
@@ -161,7 +162,7 @@ public class VoteResultServiceImpl implements VoteResultService {
             vc2.setChoiceId(vc.getChoiceId());
             vc2.setChoiceContent(vc.getChoiceContent());
             vc2.setStatus(vc.getStatus());
-            // 投票选项总分
+            // 投票选项总得分
             Long tatalScore = 0L;
             
             for(int i=0;i<choice.size();i++) {
@@ -171,10 +172,10 @@ public class VoteResultServiceImpl implements VoteResultService {
             	Long score = times * (choice.size()-i);
             	tatalScore += score;
             }
-            vc2.setScore(tatalScore);
-                    
+            vc2.setScore(tatalScore);                    
             choice2.add(vc2);
-        }       
+        }
+        // 根据投票选择总得分降序排序
         choice2.sort(Comparator.comparingLong(VoteChoice2::getScore).reversed());
                
         result.setVoteInfo(rvi.getVoteInfo());
