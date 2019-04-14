@@ -43,7 +43,7 @@
 								<td class="rtlist-time"><p>{{r.date}}</p></td>
 							</tr>
 						</table>
-						<a class="more" href="home.html?location=djyw" target="_blank">更多内容>></a>
+						<a class="more" href="home.html?location=djyw" >更多内容>></a>
 					</div>
 				</div>
 				<div id="NoticePublicity">
@@ -54,7 +54,7 @@
 								<td class="rtlist-time"><p>{{r.date}}</p></td>
 							</tr>
 						</table>
-						<a class="more" href="home.html?location=tzgs" target="_blank">更多内容>></a>
+						<a class="more" href="home.html?location=tzgs" >更多内容>></a>
 					</div>
 				</div>
 				<div id="PartyPublicity">
@@ -65,7 +65,7 @@
 								<td class="rtlist-time"><p>{{r.date}}</p></td>
 							</tr>
 						</table>
-						<a class="more" href="home.html?location=dngs" target="_blank">更多内容>></a>
+						<a class="more" href="home.html?location=dngs" >更多内容>></a>
 					</div>
 					<div class="list" id="pp-list" style="display: none;" v-else>
                         <table class="rtlist-table">
@@ -83,7 +83,7 @@
 				<div class="list-head">
 					<p>
 						<strong>学习资料</strong>
-						<a class="more" href="home.html?location=learn" target="_blank">更多内容>></a>
+						<a class="more" href="home.html?location=learn" >更多内容>></a>
 					</p>
 				</div>
 				<table class="learn-list">
@@ -104,12 +104,12 @@
 				<div class="list-head">
 					<p>
 						<strong>下载专区</strong>
-						<a class="more" href="home.html?location=xzzq" target="_blank">更多内容>></a>
+						<a class="more" href="home.html?location=xzzq" >更多内容>></a>
 					</p>
 				</div>
 				<table class="learn-list">
 					<tr v-for="(r,index) in download" v-if="index<4">
-						<td class="ll-name"><a :href="r.filePath"><p :title="r.documentTitle">{{r.documentTitle}}</p></a></td>
+						<td class="ll-name"><a :href="r.filePath" @click="sendidtoserver(r.documentId)"><p :title="r.documentTitle">{{r.documentTitle}}</p></a></td>
 						<td class="ll-time"><p>{{initTime(r.updateTime)}}</p></td>
 					</tr>
 				</table>

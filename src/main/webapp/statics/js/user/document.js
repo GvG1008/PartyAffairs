@@ -49,6 +49,21 @@ var document = new Vue({
 					location.reload();
 				}
 			});
+		},
+		sendidtoserver:function(id){
+			$.ajax({
+				type:"post",
+			url:"../study/download_document.do?fileId="+id,
+			dataType: "json", // 数据类型可以为 text xml json script jsonp
+			success: function(result) { 
+				if(result.status==0){
+					location.reload;
+				}
+				else{
+					alert(result.msg);
+				}
+			}
+			});
 		}
 	}
 })
