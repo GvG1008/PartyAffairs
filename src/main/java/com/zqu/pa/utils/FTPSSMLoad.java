@@ -37,7 +37,7 @@ public class FTPSSMLoad {
             FTPUtil.uploadFile(remotePath,Lists.newArrayList(targetFile));
             targetFile.delete();
             //http://localhost:8080/PartyAffairs/study/download_document.do?path=/vodeo/&filename=1.jpg
-            String url = Const.DOWN_INTERFACE+"path="+remotePath+"&filename="+targetFile.getName();
+            String url = Const.HTTP_PREFIX+remotePath+targetFile.getName();
             String FTPurl = Const.FTP_PREFIX+remotePath+targetFile.getName();
             Map fileMap = Maps.newHashMap();
             fileMap.put("uri",targetFile.getName());

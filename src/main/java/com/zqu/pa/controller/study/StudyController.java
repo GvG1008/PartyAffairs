@@ -268,17 +268,16 @@ public class StudyController {
      */
     @RequestMapping(value = "download_document.do")
     @ResponseBody
-    public ServerResponse downDocument(HttpServletResponse response, HttpSession session, String path,
-            String filename) {
-        FTPSSMLoad.download(response, path, filename);
+    public ServerResponse downDocument(HttpServletResponse response, HttpSession session, String fileId) {
+//        FTPSSMLoad.download(response, path, filename);
         String userId = this.getUserid();
         if (userId == null || userId.equals("")) {
 			log.error("用户未登录");
 			return ServerResponse.createByErrorMessage("用户未登录");
 		}
         //System.out.println(userId);
-        String downloadURL = Const.DOWN_INTERFACE + "path=" + path + "&filename=" + filename;
-        return iStudyService.statisticsDownload(userId, downloadURL);
+//        String downloadURL = Const.DOWN_INTERFACE + "path=" + path + "&filename=" + filename;
+        return iStudyService.statisticsDownload(userId, fileId);
     }
 
     /**

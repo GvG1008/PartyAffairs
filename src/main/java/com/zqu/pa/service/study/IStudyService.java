@@ -23,7 +23,7 @@ public interface IStudyService {
     public ServerResponse getStudyDocumentsPutonByLabelId(List<Integer> idList,int page,int pageNum);
     public ServerResponse getStudyDocumentsMustPutonByLabelId(String userId,List<Integer> idList,int page,int pageNum);
     public ServerResponse getStudyDocumentMust(String userId,int page,int pageNum);
-    public ServerResponse statisticsDownload(String userId,String url);
+    public ServerResponse statisticsDownload(String userId,String fileID);
     public ServerResponse getStudyDcumentDetails(int documentId);
     
     

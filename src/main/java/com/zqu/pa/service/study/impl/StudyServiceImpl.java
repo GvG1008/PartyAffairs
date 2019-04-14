@@ -293,8 +293,9 @@ public class StudyServiceImpl implements IStudyService {
     }
 
     @Override
-    public ServerResponse statisticsDownload(String userId, String url) {
-        int documentId = studyDocumentMapper.selectDocumentIdByFilePath(url);
+    public ServerResponse statisticsDownload(String userId, String fileID) {
+//        int documentId = studyDocumentMapper.selectDocumentIdByFilePath(fileID);
+        int documentId = Integer.parseInt(fileID);
         StudyDocumentStatistics studyDocumentStatistics = new StudyDocumentStatistics();
         studyDocumentStatistics.setDocumentId(documentId);
         studyDocumentStatistics.setUserId(userId);
