@@ -54,7 +54,7 @@
     where file_path = #{filePath,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultType="com.zqu.pa.entity.study.StudyDocument">
-    select * from study_document order by document_id
+    select * from study_document order by updatetime desc
   </select>
   <select id="getUserNameByUserId" resultType="string" parameterType="string">
     select `name` from user_party_info where user_id = #{userId,jdbcType=VARCHAR}
@@ -62,7 +62,7 @@
   <select id="selectPutOn" resultType="com.zqu.pa.entity.study.StudyDocument">
     SELECT * FROM study_document
     WHERE document_id NOT IN(SELECT document_id FROM study_document_putoff)
-    ORDER BY document_id
+    ORDER BY updatetime desc
     limit #{index},#{num}
   </select>
   <select id="selectCountPutOn" resultType="int">
@@ -73,7 +73,7 @@
   <select id="selectPutOff" resultType="com.zqu.pa.entity.study.StudyDocument">
     SELECT * FROM study_document
     WHERE document_id IN(SELECT document_id FROM study_document_putoff)
-    ORDER BY document_id
+    ORDER BY updatetime desc
   </select>
   <select id="selectPutonByLabelId" resultType="com.zqu.pa.entity.study.StudyDocument" parameterType="map" >
     SELECT * FROM study_document
@@ -82,7 +82,7 @@
     <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
         #{item}
     </foreach> 
-    ) ORDER BY document_id
+    ) ORDER BY updatetime desc
     limit ${index},${num}
   </select>
   <select id="selectCountPutonByLabelId" resultType="int" parameterType="java.util.List" >
@@ -113,7 +113,7 @@
     </foreach> 
     ) 
     AND document_id IN(SELECT document_id from study_document_must where user_id = ${userId}) 
-    ORDER BY document_id
+    ORDER BY updatetime desc
     limit ${index},${num}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

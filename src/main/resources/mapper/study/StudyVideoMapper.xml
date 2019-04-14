@@ -30,7 +30,7 @@
     <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
         #{item}
     </foreach> 
-    ) ORDER BY video_id
+    ) ORDER BY updatetime desc
     limit ${index},${num}
   </select>
   <select id="selectPutonMustByLabelId" resultType="com.zqu.pa.entity.study.StudyVideo" parameterType="map" >
@@ -41,7 +41,7 @@
         #{item}
     </foreach> 
     ) AND video_id IN(select video_id from study_video_must where user_id = ${userId})
-    ORDER BY video_id
+    ORDER BY updatetime desc
     limit ${index},${num}
   </select>
   <select id="selectCountPutonByLabelId" resultType="int" parameterType="java.util.List" >
@@ -68,7 +68,7 @@
     from study_video
     where video_id IN (select video_id from study_video_must where user_id = #{userId,jdbcType=VARCHAR})
     AND video_id NOT IN (select video_id from study_video_putoff)
-    order by video_id
+    order by updatetime desc
     limit #{index},#{num}
   </select>
   <select id="selectStudiedMustByUserId" resultType="com.zqu.pa.entity.study.StudyVideo" >
@@ -76,7 +76,7 @@
     from study_video
     where video_id IN (select video_id from study_video_must where user_id = #{userId,jdbcType=VARCHAR} and already = 1)
     AND video_id NOT IN (select video_id from study_video_putoff)
-    order by video_id
+    order by updatetime desc
     limit #{index},#{num}
   </select>
   <select id="selectCountMustPutonByUserId" resultType="int" parameterType="string" >
@@ -96,7 +96,7 @@
   <select id="selectPuton" resultType="com.zqu.pa.entity.study.StudyVideo">
     select * from study_video
     where video_id NOT IN(select video_id from study_video_putoff)
-    order by video_id
+    order by updatetime desc
     limit #{index},#{num}
   </select>
   <select id="selectCountPuton" resultType="int">
