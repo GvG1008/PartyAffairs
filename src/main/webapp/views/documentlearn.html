@@ -10,13 +10,10 @@
         	<div class="document-title">
         		<p>{{document.documentTitle}}</p>
         	</div>
-        	<div class="document-content">
-        		<p>
-        		  {{document.documentIntroduction}}
-        		</p>
+        	<div class="document-content" v-html="document.documentIntroduction">
         	</div>
         	<div class="document-matter">
-        		<a :href="document.filePath">下载链接>></a>
+        		<a :href="document.filePath" @click="sendidtoserver(r.documentId)">下载链接>></a>
         	</div>
         	<div id="" style="float: right;">
         		<button v-if="state == 1" type="button" disabled="true">已学习</button>
