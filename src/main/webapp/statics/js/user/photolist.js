@@ -1,7 +1,7 @@
 /**
  * 活动相册列表
  */
-var ftpurl = "http://47.106.223.234:19091/";
+var ftpurl = "http://47.106.122.123:2019";
 var selected1 = new Vue({
 	el : '#selected1',
 	data :{

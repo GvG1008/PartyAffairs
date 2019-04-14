@@ -1,7 +1,7 @@
 /*
  * 取路径参数
  */
-var ftpurl = "http://47.106.223.234:19091/";
+var ftpurl = "http://47.106.122.123:2019";
 function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
