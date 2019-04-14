@@ -22,6 +22,7 @@ var dvideo = new Vue({
 			dataType:"json",
 			success: function(result){
 				if(result.status==0){
+					console.log(result)
 					self.dvideo = result.data;
 					self.loadUrl(result.data.videoPath);
 				}
