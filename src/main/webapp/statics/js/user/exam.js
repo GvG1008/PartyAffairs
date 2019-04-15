@@ -176,11 +176,11 @@ function submit1() {//提交试卷
 				if(result.data.passScore > score){
 					alert("很遗憾！此次考试不及格，再接再厉！\n本次考试成绩为："+score+"\n历史最高分数是："+result.data.topScore);
 				}else{
-					if(result.data.topScore>=score){
-						alert("恭喜你！此次考试及格！\n本次考试成绩为："+score+"\n历史最高分数是："+result.data.topScore+"\n不高于历史最高分数，不计入成绩！");
+					if(result.data.topScore>score){
+						alert("恭喜你！此次考试及格！\n本次考试成绩为："+score+"\n历史最高分数是："+result.data.topScore+"\n不是历史最高分数，不计入成绩！");
 						updataExam();
 					}else{
-						alert("恭喜你！此次考试及格！\n本次考试成绩为："+score+"\n历史最高分数是："+result.data.topScore+"\n高于历史最高分数，计入成绩！");
+						alert("恭喜你！此次考试及格！\n本次考试成绩为："+score+"\n历史最高分数是："+result.data.topScore+"\n是历史最高分数，计入成绩！");
 						updataExam();
 					}
 				}
